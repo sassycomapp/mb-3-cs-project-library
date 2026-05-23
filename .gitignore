@@ -26,3 +26,5 @@ build/
 # Secrets
 .env
 .env.*
+
+.opencode/

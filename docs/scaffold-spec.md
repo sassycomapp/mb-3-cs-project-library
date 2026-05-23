@@ -3,15 +3,22 @@
 **Vertical:** Consulting & Services
 **Platform:** Anvil.works with Material Design 3 (M3)
 **Schema:** 36 tables
-**Purpose:** Exact package, form, and module specifications for Anvil scaffolding
+**Purpose:** Exact package, form, module, and table specifications for Anvil scaffolding
+
+**Related Documents:**
+- `scaffold-workflow.md` — Step-by-step scaffolding instructions
+- `authoritative-schema.md` — Complete 36-table schema specifications
+- `phase-0-implementation.md` — Phase 0 implementation guide
 
 ---
 
 ## Overview
 
-This document specifies the exact package structure, forms, and modules to create in Anvil for the `mb-3-cs` app. Follow this specification precisely when scaffolding the app.
+This document specifies the exact package structure, forms, modules, and table definitions for the `mb-3-cs` app. Follow this specification precisely when scaffolding the app.
 
-**M3 Compliance:** All UI work uses Material Design 3 exclusively. No Anvil Extras components.
+**M3 Compliance:** All UI work uses Material Design 3 exclusively. Native M3 components from the theme dependency are fully supported. Custom composition is required for components not natively provided (Chips, Snackbar, Bottom Sheet, Tabs).
+
+**Note for Developers:** Use `scaffold-workflow.md` for step-by-step instructions. Use `authoritative-schema.md` for complete table specifications. Use `08-developer-task-list.md` for task instructions.
 
 ---
 
@@ -95,51 +102,28 @@ client_code/
 ├── bookings/
 │   ├── BookingCalendarForm/
 │   │   ├── form_template.yaml
-│   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   ├── tmpl_month_day_cell/
+│   │   │   ├── form_template.yaml
+│   │   │   └── __init__.py
+│   │   ├── tmpl_week_timeslot/
+│   │   │   ├── form_template.yaml
+│   │   │   └── __init__.py
+│   │   ├── tmpl_week_event/
+│   │   │   ├── form_template.yaml
+│   │   │   └── __init__.py
+│   │   └── tmpl_day_event/
+│   │   │   ├── form_template.yaml
+│   │   │   └── __init__.py
 │   ├── BookingListForm/
 │   │   ├── form_template.yaml
 │   │   └── __init__.py
 │   ├── BookingEditorForm/
 │   │   ├── form_template.yaml
 │   │   └── __init__.py
-│   ├── BookingViewerForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
 │   ├── AvailabilitySettingsForm/
 │   │   ├── form_template.yaml
 │   │   └── __init__.py
-│   └── TimeEntriesForm/
-│       ├── form_template.yaml
-│       └── __init__.py
-│
-├── crm/
-│   ├── ContactListForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   ├── ContactEditorForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   ├── ContactViewerForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   ├── SegmentManagerForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   ├── TaskListForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   ├── EmailCampaignListForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   ├── EmailCampaignEditorForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   ├── EmailBroadcastForm/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   └── LeadCaptureForm/
-│       ├── form_template.yaml
-│       └── __init__.py
 │
 ├── invoices/
 │   ├── InvoiceListForm/
@@ -202,60 +186,170 @@ client_code/
 
 ### Server Code Packages
 
+Note: Anvil automatically appends `.py` to server modules. Do NOT include `.py` in folder names when creating in Anvil Designer. Create folders named `server_auth`, `server_payments`, etc. — Anvil will treat them as Python modules.
+
 ```
 server_code/
 ├── server_auth/
-│   ├── service.py
-│   └── rbac.py
+│   ├── service
+│   └── rbac
 │
 ├── server_dashboard/
-│   └── service.py
+│   └── service
 │
 ├── server_settings/
-│   ├── service.py
-│   ├── encryption_service.py
-│   ├── vault_service.py
-│   └── vault_totp_service.py
+│   ├── service
+│   ├── encryption_service
+│   ├── vault_service
+│   └── vault_totp_service
 │
 ├── server_services/
-│   └── service.py
+│   └── service
 │
 ├── server_bookings/
-│   ├── service.py
-│   ├── availability_service.py
-│   ├── time_service.py
-│   └── metadata_service.py
+│   ├── service
+│   ├── availability_service
+│   ├── time_service
+│   └── metadata_service
 │
 ├── server_customers/
-│   ├── contact_service.py
-│   └── segment_service.py
+│   ├── contact_service
+│   └── segment_service
 │
 ├── server_marketing/
-│   ├── campaign_service.py
-│   ├── broadcast_service.py
-│   ├── task_service.py
-│   ├── lead_capture_service.py
-│   └── brevo_campaigns_integration.py
+│   ├── campaign_service
+│   ├── broadcast_service
+│   ├── task_service
+│   ├── lead_capture_service
+│   └── brevo_campaigns_integration
 │
 ├── server_payments/
-│   ├── stripe_service.py
-│   ├── paystack_service.py
-│   ├── paypal_service.py
-│   ├── invoice_service.py
-│   └── webhook_handlers.py
+│   ├── stripe_service
+│   ├── paystack_service
+│   ├── invoice_service
+│   └── webhook_handlers
 │
 ├── server_blog/
-│   └── service.py
+│   └── service
 │
 ├── server_analytics/
-│   └── reporting_service.py
+│   └── reporting_service
 │
 └── server_shared/
-    ├── utilities.py
-    ├── validators.py
-    ├── encryption.py
-    ├── config.py
-    └── constants.py
+    ├── utilities
+    ├── validators
+    ├── encryption_service
+    ├── config
+    └── constants
+```
+server_code/
+├── server_auth/
+│   ├── service
+│   └── rbac
+│
+├── server_dashboard/
+│   └── service
+│
+├── server_settings/
+│   ├── service
+│   ├── encryption_service
+│   ├── vault_service
+│   └── vault_totp_service
+│
+├── server_services/
+│   └── service
+│
+├── server_bookings/
+│   ├── service
+│   ├── availability_service
+│   ├── time_service
+│   └── metadata_service
+│
+├── server_customers/
+│   ├── contact_service
+│   └── segment_service
+│
+├── server_marketing/
+│   ├── campaign_service
+│   ├── broadcast_service
+│   ├── task_service
+│   ├── lead_capture_service
+│   └── brevo_campaigns_integration
+│
+├── server_payments/
+│   ├── stripe_service
+│   ├── paystack_service
+│   ├── invoice_service
+│   └── webhook_handlers
+│
+├── server_blog/
+│   └── service
+│
+├── server_analytics/
+│   └── reporting_service
+│
+└── server_shared/
+    ├── utilities
+    ├── validators
+    ├── encryption_service
+    ├── config
+    └── constants
+```
+server_code/
+├── server_auth/
+│   ├── service
+│   └── rbac
+│
+├── server_dashboard/
+│   └── service
+│
+├── server_settings/
+│   ├── service
+│   ├── encryption_service
+│   ├── vault_service
+│   └── vault_totp_service
+│
+├── server_services/
+│   └── service
+│
+├── server_bookings/
+│   ├── service
+│   ├── availability_service
+│   ├── time_service
+│   └── metadata_service
+│
+├── server_customers/
+│   ├── contact_service
+│   └── segment_service
+│
+├── server_marketing/
+│   ├── campaign_service
+│   ├── broadcast_service
+│   ├── task_service
+│   ├── lead_capture_service
+│   └── brevo_campaigns_integration
+│
+├── server_payments/
+│   ├── stripe_service
+│   ├── paystack_service
+│   ├── invoice_service
+│   └── webhook_handlers
+│
+├── server_blog/
+│   └── service
+│
+├── server_analytics/
+│   └── reporting_service
+│
+└── server_shared/
+    ├── utilities
+    ├── validators
+    ├── encryption	
+    ├── encryption_service
+    ├── exceptions
+    ├── vault-service
+    ├── config
+    └── constants
 ```
 
 ---
@@ -315,17 +409,18 @@ Create the following 36 tables in Anvil Data Tables with the exact specification
    - `file_version` (string)
 
 6. **payment_config**
-   - `active_gateway` (string)
-   - `stripe_publishable_key` (string)
-   - `stripe_connected` (bool)
-   - `stripe_connected_at` (datetime)
-   - `paystack_connected` (bool)
-   - `paystack_connected_at` (datetime)
-   - `paypal_client_id` (string)
-   - `paypal_connected` (bool)
-   - `paypal_connected_at` (datetime)
-   - `test_mode` (bool)
-   - `configured_at` (datetime)
+    - `active_gateway` (string) — "stripe" or "paystack"
+    - `stripe_publishable_key` (string)
+    - `stripe_connected` (bool)
+    - `stripe_connected_at` (datetime)
+    - `paystack_connected` (bool)
+    - `paystack_connected_at` (datetime)
+    - `test_mode` (bool)
+    - `configured_at` (datetime)
+
+**Note:** Secret keys stored in Vault table only. PayPal removed from V1 scope (deferred to V2).
+
+**Note:** Secret keys stored in Vault table only. PayPal removed from V1 scope (deferred to V2).
 
 7. **rate_limits**
    - `identifier` (string, indexed)
@@ -668,16 +763,30 @@ Create the following 36 tables in Anvil Data Tables with the exact specification
 
 **List Forms:**
 - Heading (headline-large) for page title
-- LinearPanel (horizontal) header with search TextBox and filter DropdownMenu
+- FlowPanel (horizontal) header with search TextBox and filter DropdownMenu
 - Filled Button for primary action
+- Outlined Button for secondary action (e.g., "Calendar View" in BookingListForm)
 - DataGrid for list body with IconButton row actions
+
+**Bookings List Form:**
+- Heading (headline-large) for page title
+- FlowPanel (horizontal) header with search TextBox and filter DropdownMenu
+- Filled Button for "+ Add Booking" primary action
+- Outlined Button for "Calendar View" secondary action
+- DataGrid for list body with IconButton row actions
+
+**Bookings Calendar Form:**
+- Heading (headline-small) for "Calendar" title
+- ColumnPanel with view toggle buttons (Month, Week, Day)
+- Outlined Button for "List View" back to BookingListForm
+- ColumnPanel content_panel for dynamic view injection
 
 **Editor Forms:**
 - Card (outlined) as container
 - Heading (headline-small) for section headers
 - Outlined TextBox/TextArea for inputs
 - Outlined DropdownMenu/DatePicker for selections
-- LinearPanel action row with Filled Save Button and Outlined Cancel Button
+- FlowPanel action row with Filled Save Button and Outlined Cancel Button
 
 **Dashboard Forms:**
 - Heading (headline-large)
@@ -697,7 +806,7 @@ Create the following 36 tables in Anvil Data Tables with the exact specification
 All components follow the prefix convention:
 - Button: `btn_`
 - TextBox: `txt_`
-- Label: `lbl_`
+- Heading: `hdg_`
 - DropdownMenu: `dd_`
 - DatePicker: `dp_`
 - FileLoader: `fu_`
@@ -705,7 +814,6 @@ All components follow the prefix convention:
 - Checkbox: `cb_`
 - RadioButton: `rb_`
 - ColumnPanel: `col_`
-- LinearPanel: `lp_`
 - FlowPanel: `flow_`
 - Card: `card_`
 - DataGrid: `dg_`
@@ -720,6 +828,18 @@ All components follow the prefix convention:
 - Button hierarchy: one filled button per screen (primary), outlined (secondary), text (tertiary)
 - TextBox password masking: `hide_text = True` in Designer
 - Write Back toggle (W): enabled in Designer Data Bindings panel
+
+**Native M3 components** (fully supported): `m3.Switch`, `m3.Slider`, `m3.RadioButton`, `m3.Checkbox`, `m3.Button`, `m3.IconButton`, `m3.NavigationLink`, all input and layout components.
+
+**Custom composition required** (partially supported): Chips, Snackbar, Bottom Sheet, Tabs, Date Picker. See `m3_component_mapping.md` for implementation guidance.
+
+**Native M3 components** (fully supported): `m3.Switch`, `m3.Slider`, `m3.RadioButton`, `m3.Checkbox`, `m3.Button`, `m3.IconButton`, `m3.NavigationLink`, all input and layout components.
+
+**Custom composition required** (partially supported): Chips, Snackbar, Bottom Sheet, Tabs, Date Picker. See `m3_component_mapping.md` for implementation guidance.
+
+**Native M3 components** (fully supported): `m3.Switch`, `m3.Slider`, `m3.RadioButton`, `m3.Checkbox`, `m3.Button`, `m3.IconButton`, `m3.NavigationLink`, all input and layout components.
+
+**Custom composition required** (partially supported): Chips, Snackbar, Bottom Sheet, Tabs, Date Picker. See `m3_component_mapping.md` for implementation guidance.
 
 ---
 
@@ -760,8 +880,12 @@ Dashboard                          (always)
   lambda e, fn=form_name, a=attr_name: self._nav_click(fn, a)
   ```
 - `open_form(string)` for parameterised navigation
-- `NavigationDrawerLayoutTemplate` not used
+- `NavigationDrawerLayoutTemplate` not used in current architecture
 - `navigate_to` not used
+
+**Note:** Native M3 navigation components are fully supported by the M3 theme dependency but not used in the current Mybizz architecture. See ADR-002.
+
+**Note:** Native M3 navigation components are fully supported by the M3 theme dependency but not used in the current Mybizz architecture. See ADR-002.
 
 ### CustomerLayout (Deferred to V2)
 
@@ -814,9 +938,10 @@ nav_account       — Account         (always)
 
 ### Data Binding Pattern
 - `self.item` set before `self.init_components()`
-- Write Back enabled in Designer
+- **Write Back toggle (W) must be enabled in Designer Data Bindings panel** — cannot be set in code
 - Call `refresh_data_bindings()` when modifying `self.item` in place
 - Do NOT use data bindings on settings forms that manage their own server calls
+- Applies to: TextBox, TextArea, DropdownMenu, DatePicker, and all data-bound inputs
 
 ### Server Function Pattern
 - Every server function returns response envelope:

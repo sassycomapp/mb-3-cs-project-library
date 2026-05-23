@@ -7,14 +7,15 @@ Source: Devlog #29 — task-navigation-ruling-propagation
 
 ## Context
 
-The original Anvil navigation approach used `NavigationDrawerLayoutTemplate` with
-`NavigationLink` components and `navigate_to()`. During development it was established
-that this pattern does not suit the Mybizz architecture. `navigate_to` requires an
-instantiated Form object and only functions inside `NavigationDrawerLayoutTemplate`.
-Neither condition is compatible with Mybizz's custom layout approach.
+The Mybizz CS application uses custom `HtmlTemplate` layouts (`AdminLayoutTemplate`, `CustomerLayoutTemplate`) for authenticated navigation. This architecture was chosen to support the dependency-based model where client instances depend on a versioned master_template.
 
-A ruling was made (session prior to devlog #29) and propagated across all affected
-files in devlog #29.
+Anvil provides native Material 3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationRailLayout`, `NavigationLink`) that are fully supported by the M3 theme dependency. However, these are not used in the current Mybizz architecture because:
+
+1. `navigate_to()` requires instantiated Form objects and only functions inside `NavigationDrawerLayoutTemplate`
+2. The custom layout approach provides more control over the dependency model
+3. Plain `Link` components with `open_form()` are compatible with all layout patterns
+
+This is a usage decision based on the current architecture, not a component ban. If a future architecture review determines that native M3 navigation layouts are better suited, the docs may change without requiring an ADR update.
 
 ---
 
@@ -43,6 +44,8 @@ open_form('BookingViewerForm', booking_id=row['booking_id'])
 **`NavigationDrawerLayoutTemplate` is not used.** Custom HtmlTemplate is the standard.
 **`NavigationLink` is not used for navigation.** The `nav_` prefix in component naming
 refers to Link components styled for sidebar use — not NavigationLink components.
+
+**Native M3 navigation components** (`NavigationDrawerLayoutTemplate`, `NavigationRailLayout`, `NavigationLink`) are permitted by the M3 theme dependency but are not used in the current architecture. They may be adopted in the future if the architecture changes.
 
 ---
 

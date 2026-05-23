@@ -7,9 +7,18 @@
 
 ## 1. The M3 Mandate
 
-All user interface work uses Material Design 3 exclusively. No Anvil Extras components, no legacy Anvil components, no third-party UI libraries. This is a hard constraint — mixing M3 with legacy components produces CSS conflicts that are difficult to diagnose.
+All user interface work uses Material Design 3 exclusively. The M3 theme dependency (`4UK6WHQ6UX7AKELK`) is the only UI framework. Mixing M3 with non-M3 components produces CSS conflicts that are difficult to diagnose.
 
-**Blocked Anvil Extras components:** Tabs, MultiSelectDropDown, Autocomplete, Quill, Switch, Slider, RadioGroup, CheckBoxGroup, Popover. M3 alternatives exist for all of them.
+**Native M3 components** (provided by the M3 theme dependency) are fully supported:
+- `m3.Switch`, `m3.Slider`, `m3.RadioButton`, `m3.Checkbox`
+- `m3.Button`, `m3.IconButton`, `m3.NavigationLink`
+- All input components (`m3.TextBox`, `m3.TextArea`, `m3.DropdownMenu`)
+- All layout components (`ColumnPanel`, `FlowPanel`, `DataGrid`, `Card`)
+
+**Partially supported M3 components** (use custom composition):
+- Chips, Snackbar, Bottom Sheet, Tabs, Date Picker
+
+These require custom composition via Panels, Cards, and Buttons. See `m3_component_mapping.md` for implementation guidance.
 
 When a component appears absent, compose from available M3 primitives — do not import from outside the M3 system.
 
@@ -33,7 +42,7 @@ All components follow the prefix convention:
 |---|---|---|
 | Button | `btn_` | `btn_save`, `btn_cancel` |
 | TextBox / TextArea | `txt_` | `txt_customer_name`, `txt_notes` |
-| Label / Text / Heading | `lbl_` | `lbl_page_title` |
+| Heading | `hdg_` | `hdg_page_title` |
 | DropdownMenu | `dd_` | `dd_status` |
 | DatePicker | `dp_` | `dp_booking_date` |
 | FileLoader | `fu_` | `fu_upload` |
@@ -41,8 +50,7 @@ All components follow the prefix convention:
 | Checkbox | `cb_` | `cb_agree_terms` |
 | RadioButton | `rb_` | `rb_payment_method` |
 | ColumnPanel | `col_` | `col_main` |
-| LinearPanel | `lp_` | `lp_header` |
-| FlowPanel | `flow_` | `flow_tags` |
+| FlowPanel | `flow_` | `flow_header` |
 | Card | `card_` | `card_details` |
 | DataGrid | `dg_` | `dg_customers` |
 | RepeatingPanel | `rp_` | `rp_items` |
@@ -64,21 +72,11 @@ Two categories of properties cannot be set in Python code:
 
 ---
 
-## 5. LinearPanel Orientation
-
-LinearPanel orientation must be set in code, not in the Designer. Add a comment explaining why:
-
-```python
-self.lp_tab_bar.orientation = 'horizontal'  # Must be set in code — not available in Designer
-```
-
----
-
 ## 6. Form Types and Layout Patterns
 
-**List forms** (ContactListForm, BookingListForm): Heading (headline-large) for page title, horizontal LinearPanel header with search TextBox and filter DropdownMenu, filled Button for primary action, DataGrid for list body with IconButton row actions.
+**List forms** (ContactListForm, BookingListForm): Heading (headline-large) for page title, horizontal FlowPanel header with search TextBox and filter DropdownMenu, filled Button for primary action, DataGrid for list body with IconButton row actions.
 
-**Editor forms** (ContactEditorForm, ServiceEditorForm): Card (outlined) as container, Heading (headline-small) for section headers, outlined TextBox/TextArea for inputs, outlined DropdownMenu/DatePicker for selections, LinearPanel action row with filled Save Button and outlined Cancel Button.
+**Editor forms** (ContactEditorForm, ServiceEditorForm): Card (outlined) as container, Heading (headline-small) for section headers, outlined TextBox/TextArea for inputs, outlined DropdownMenu/DatePicker for selections, FlowPanel action row with filled Save Button and outlined Cancel Button.
 
 **Dashboard forms:** Heading (headline-large), FlowPanel for metrics row holding elevated Cards, Plot components for charts, DataGrid for summary tables.
 

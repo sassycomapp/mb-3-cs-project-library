@@ -46,7 +46,7 @@
 |---|---|---|
 | Button | `btn_` | `btn_save` |
 | TextBox / TextArea | `txt_` | `txt_name` |
-| Label / Text / Heading | `lbl_` | `lbl_title` |
+| Heading | `hdg_` | `hdg_title` |
 | DropdownMenu | `dd_` | `dd_status` |
 | DatePicker | `dp_` | `dp_date` |
 | FileLoader | `fu_` | `fu_upload` |
@@ -54,8 +54,7 @@
 | Checkbox | `cb_` | `cb_agree` |
 | RadioButton | `rb_` | `rb_option` |
 | ColumnPanel | `col_` | `col_main` |
-| LinearPanel | `lp_` | `lp_header` |
-| FlowPanel | `flow_` | `flow_tags` |
+| FlowPanel | `flow_` | `flow_header` |
 | Card | `card_` | `card_details` |
 | DataGrid | `dg_` | `dg_customers` |
 | RepeatingPanel | `rp_` | `rp_items` |

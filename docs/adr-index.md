@@ -8,9 +8,19 @@
 | 004 | Lead Capture: Simultaneous Creation | Accepted | 2026-03-21 |
 | 005 | Client Timezone: UTC Storage, Display Conversion | Accepted | 2026-03-17 |
 | 006 | Package Name: crm/ Replaces marketing/ | Accepted | 2026-03-18 |
-| 007 | Continue.dev Front Matter CoP | **Obsolete** | 2026-03-23 |
-| 008 | Rules File Line Limit | **Obsolete** | 2026-04-20 |
+| 007 | Continue.dev Front Matter CoP | **Obsolete** | 2026-03-23 | Obsolete
+| 008 | Rules File Line Limit | **Obsolete** | 2026-04-20 | Obsolete
 | 009 | Multi-Vertical to Single-Vertical Conversion | Accepted | 2026-04-04 |
 | 010 | Single Contacts Table Replaces Dual contacts/customers | Accepted | 2026-05-03 |
 | 011 | Schema Scope Reduction | Accepted | 2026-05-03 |
 | 012 | Consolidated Build Sequence | **Pending** | 2026-05-03 |
+| 013 | Anvil Extras Exclusion | Accepted | 2026-05-21 |
+| 014 | Material 3 Theme Component Scope | Accepted | 2026-05-21 |
+| 013 | Anvil Extras Exclusion | Accepted | 2026-05-21 |
+| 014 | Material 3 Theme Component Scope | Accepted | 2026-05-21 |
+| 013 | Anvil Extras Exclusion | Accepted | 2026-05-21 |
+| 014 | Material 3 Theme Component Scope | Accepted | 2026-05-21 |
+| 013 | Anvil Extras Exclusion | Accepted | 2026-05-21 |
+| 014 | Material 3 Theme Component Scope | Accepted | 2026-05-21 |
+| 013 | Anvil Extras Exclusion | Accepted | 2026-05-21 |
+| 014 | Material 3 Theme Component Scope | Accepted | 2026-05-21 |

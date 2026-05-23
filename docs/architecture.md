@@ -2,20 +2,22 @@
 
 **Vertical:** Consulting & Services only
 **Architecture:** Dependency-based (master_template → client instances)
-**Schema:** 36 tables (see `database-schema.md`)
+**Schema:** 36 tables (see `authoritative-schema.md`)
 
 ---
 
 ## 1. The Three Applications
 
-### master_template_dev
+### mb-3-cs
 The development workspace. All feature work happens here. Connected to GitHub as the shared source of truth between Anvil.works and VS Code.
 
 ### master_template
-The published dependency. A frozen, versioned snapshot of master_template_dev. Client instances contain no application code — they depend entirely on master_template for all functionality. Updates are pull-based: clients choose when to adopt a new version.
+The published dependency. A frozen, versioned snapshot of mb-3-cs. Client instances contain no application code — they depend entirely on master_template for all functionality. Updates are pull-based: clients choose when to adopt a new version.
 
 ### Mybizz_management
 The platform operator's internal tooling — client provisioning, health monitoring, billing automation, update distribution. A separate Anvil application, never part of master_template. Built only after the master template reaches launch and the first client has been manually onboarded.
+
+**Note:** mb-2-cs was the original development application and has been deprecated. All development has migrated to mb-3-cs.
 
 **See:** ADR-009 (Multi-Vertical to Single-Vertical)
 
@@ -84,7 +86,9 @@ Two navigation systems, not interchangeable:
 - Use plain `Link` components — not `NavigationLink`
 - Lambda click handlers with mandatory loop variable capture: `lambda e, fn=form_name, a=attr_name: self._nav_click(fn, a)`
 - `open_form(string)` for parameterised navigation (row clicks, detail forms)
-- `NavigationDrawerLayoutTemplate`, `NavigationLink`, and `navigate_to` are never used
+- `NavigationDrawerLayoutTemplate`, `NavigationLink`, and `navigate_to` are not used in the current architecture
+
+**Note:** Native M3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationLink`, `NavigationRailLayout`) are fully supported by the M3 theme dependency but are not used in the current Mybizz architecture. This is a usage decision based on the custom layout approach. If a future architecture review determines native M3 navigation layouts are better suited, the docs may change without requiring an ADR update. See ADR-002.
 
 **See:** ADR-002 (Navigation Standard)
 

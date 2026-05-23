@@ -1,4 +1,3 @@
-"C:\_mb2-cs-app\project-library\agents.md"
 # AGENTS.md — project-library [PLAN] project
 
 ## Project purpose
@@ -159,14 +158,19 @@ When summarising the project:
 
 ## Devlog protocol (Plan / Build / Status)
 
+### Canonical locations and ownership
+The canonical shared devlog files for this workspace are:
+- `C:\_mb2-cs-app\devlog\README.md`
+- `C:\_mb2-cs-app\devlog\index.md`
+
+Rules:
+- Plan is responsible for updating these canonical devlog files.
+- Build must not edit the canonical devlog files directly.
+- Build provides handoff information (type, slug, one-line brief, files changed, changes made, validation outcome) when its work should be recorded.
+
 ### Devlog goals
 - Keep an append-only history of important planning and build work.
-- Make every completed task leave exactly one devlog file and one index row.
-
-### Devlog locations
-- Devlog files live under `C:/_mb2-cs-app/project-library/logs/devlog/`.
-- The devlog index file is `C:/_mb2-cs-app/project-library/logs/devlog/index.md`.
-- Treat those paths as authoritative for devlog history.
+- Make every completed task leave exactly one devlog entry and one index row in the canonical system.
 
 ### Devlog types
 Use exactly one type per entry:
@@ -176,92 +180,83 @@ Use exactly one type per entry:
 
 Do not classify planning work as build.
 
-### Devlog sequence and serials
-- Always open `C:/_mb2-cs-app/project-library/logs/devlog/index.md` first.
-- Read the last serial number from the index.
-- The next devlog serial is last + 1.
-- Never renumber existing entries.
-- Never delete existing entries.
-- New entries are always appended at the bottom.
+### Devlog process
+For each devlog entry the user wants recorded:
 
-### Devlog file naming
-Use this naming pattern:
-
-`{serial}-{type}-{slug}.md`
-
-`{slug}` is a short, kebab-case summary of the task.
-
-### Devlog file template
-Every new devlog file must follow this structure:
-
-```text
-# Devlog #{serial} — {type} — {slug}
-Date: YYYY-MM-DD
-Type: {plan|build|status}
-
-***
-
-## Task
-
-## Sources Used
-
-## Changes Made
-
-## Validation Outcome
-
-## Files Changed
-
-***
-
-*End of devlog entry #{serial}*
-```
-
-Keep sections short and factual.
-
-### Devlog index update
-After writing the devlog file, append a matching row to `C:/_mb2-cs-app/project-library/logs/devlog/index.md`:
-
-```text
-| {serial} | {type} | {slug} | {one-line brief} |
-```
-
-### Task completion rule
-A task is not complete until:
-- the devlog file exists,
-- the index row exists and matches,
-- the type is correct.
-
-Do not report a task as complete until both the devlog file and index row are created.
+1. Plan reads `C:\_mb2-cs-app\devlog\index.md` to determine the next entry and structure.
+2. Plan writes or updates the canonical devlog content in `README.md` and/or associated files, following the agreed format.
+3. Plan updates the index to reflect the new entry.
+4. Only then may the task be reported as fully recorded.
 
 ## To-do system (deferred and out-of-scope work)
 
+### Canonical locations and ownership
+The canonical shared to-do files are:
+- `C:\_mb2-cs-app\todo\todo.md`
+- `C:\_mb2-cs-app\todo\todo-archive.md`
+
+Rules:
+- Plan is responsible for updating canonical to-do files.
+- Build must not edit canonical to-do files directly.
+- Build provides handoff information (status, group tag, date, task, notes) when out-of-scope work should be tracked.
+
 ### Purpose
-Use `todo.md` to capture work discovered during document analysis, validation, planning, prompt creation, or implementation-support work that is outside the currently approved task scope.
+Use the canonical `todo.md` to capture work discovered during document analysis, validation, planning, prompt creation, or implementation-support work that is outside the currently approved task scope.
 
 Do not silently expand scope.
-Record it for later unless the user explicitly expands scope.
-
-### Files
-- Active backlog: `todo.md`
-- Closed backlog archive: `todo-archive.md`
-
-### Core rules
-- Read `todo.md` at the start of a relevant task.
-- When new out-of-scope work is discovered, add a new item to the top of `todo.md`.
-- Completed and cancelled items must be moved from `todo.md` to `todo-archive.md` at close.
-- `todo-archive.md` is append-only. Never edit or remove old archive rows.
-- IDs are unique identifiers only, not priority numbers.
-- New items are added to the top and use the next available ID.
-
-### When to create a to-do item
-Create a to-do item when:
-- a document gap is discovered but not resolved in the current task,
-- a validation mismatch needs later review,
-- a prompt/build-rules improvement is identified but deferred,
-- a separate bug, inconsistency, or cleanup task is found outside current scope,
-- the user explicitly says to defer something for later.
 
 ### Status tags
 - `[NEXT-UP]` — ready for future execution, no known blocker
 - `[PENDING]` — blocked by an external dependency, decision, or prerequisite
-- `[FROZEN]` — intentionally 
+- `[FROZEN]` — intentionally paused until David raises it
+- `[WIP]` — actively being worked on now
+- `[DONE]` — complete; moved to `todo-archive.md`
+- `[CANCELLED]` — intentionally dropped; moved to `todo-archive.md`
+
+### Group tags
+Use exactly one group tag per row:
+- `[BUILD]` — code implementation, features, refactors, tests
+- `[UI]` — layout, styling, forms, usability, visual fixes
+- `[DATA]` — tables, schema, queries, data migrations
+- `[INTEGRATION]` — external APIs, webhooks, third-party services
+- `[DOCS]` — documentation, specs, prompts, build-rules, reference files
+- `[DEVLOG]` — devlog system, handoff records, tracking consistency
+- `[TOOLING]` — local tooling, config, scripts, environment workflow
+- `[DAVID]` — action required by David outside the codebase
+
+### Required row format
+The canonical `todo.md` uses a table with:
+
+```text
+| # | Status | Date | Task | Notes |
+|---|---|---|---|---|
+```
+
+Each row must contain:
+- unique numeric ID,
+- status tag and group tag in the Status column,
+- date in `YYYY-MM-DD`,
+- concise task description,
+- short note showing origin, blocker, or context.
+
+### Writing rules
+- Keep task text short, specific, and action-oriented.
+- Keep notes short and factual.
+- Do not rewrite old IDs.
+- Do not sort by date or priority; newest items go at the top.
+
+## Safety and integration rules
+- Do not delete or move canonical devlog or to-do files unless the user explicitly asks.
+- Do not treat internal working notes as canonical devlog or to-do without the user’s consent.
+- Git operations are permission-only.
+- WSL/bash access may be used for either repo when approved.
+
+## Communication style
+- Keep answers concise, structured, and practical.
+- Prefer stepwise guidance over long explanations.
+- Distinguish clearly between:
+  - facts from the repo,
+  - inferences or assumptions,
+  - proposed revisions.
+- Flag uncertainty, contradictions, or missing provenance explicitly.
+- No emojis or side topics unless the user asks.

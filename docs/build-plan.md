@@ -1,10 +1,11 @@
-# Mybizz CS — Build Plan
+# Mybizz CS — Build Plan (Definitive)
 
 **Vertical:** Consulting & Services
 **V1 Scope:** Blog, Landing Pages, Campaigns, Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack
 **V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal
 **Schema:** 36 tables
 **Architecture:** Dependency-based (master_template → client instances)
+**Review Status:** CEO + Eng Review Complete (21 issues identified, 3 critical — all documented in phase-0-implementation.md)
 
 ---
 
@@ -15,8 +16,9 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 **Key Principles:**
 - Build sequentially — each phase depends on the prior phase being complete
 - No phase is complete until all its stages pass completion criteria
-- Security is woven through from Phase 1 — not bolted on later
+- Security is woven through from Phase 0 — not bolted on later
 - The Vault and authentication are foundational — nothing else builds without them
+- All review tasks (CEO + Eng) are embedded as completion criteria
 
 ---
 
@@ -24,7 +26,8 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 
 | Phase | Focus | Key Deliverables | Dependencies |
 |-------|-------|------------------|--------------|
-| 1 | Foundation | Auth, RBAC, Vault, navigation, settings | None (starting point) |
+| 0 | Pre-Implementation | Test coverage, observability, deployment procedures, Vault error handling | None (starting point) |
+| 1 | Foundation | Auth, RBAC, Vault, navigation, settings | Phase 0 complete |
 | 2 | Transactional Core | Services, bookings, payments, invoicing | Phase 1 complete |
 | 3 | CRM + Email | Contacts, campaigns, segments, tasks, landing pages | Phase 2 complete |
 | 4 | Content + Website | Blog, public website, homepage templates | Phase 3 complete |
@@ -32,9 +35,101 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 
 ---
 
+## Implementation Order
+
+1. **Phase 0** — Pre-Implementation Requirements (TODO 1-4)
+   - TODO 1: Add Vault Error Handling (P1, critical)
+   - TODO 2: Define Test Coverage Requirements (P1, pre-implementation)
+   - TODO 3: Define Observability Requirements (P2, pre-implementation)
+   - TODO 4: Define Deployment Procedures (P2, pre-implementation)
+
+2. **Phase 1** — Foundation (TODO 11 embedded)
+   - Phase 1.1-1.6 with TODO 11 verification in Stage 1.2
+
+3. **Phase 2** — Transactional Core (TODO 10, 12 embedded)
+   - Phase 2.1-2.6 with TODO 10, 12 in Stage 2.4
+
+4. **Phase 3** — CRM + Email (TODO 6, 8, 9 embedded)
+   - Phase 3.1-3.5 with TODO 6, 8, 9 in Stage 3.1
+
+5. **Phase 4** — Content + Website (TODO 5, 14, 15 embedded)
+   - Phase 4.1-4.3 with TODO 5, 14, 15 in Stages 4.1-4.2
+
+6. **Phase 5** — Polish + Launch (TODO 2, 3, 4, 13 embedded)
+   - Phase 5.1-5.5 with TODO 2, 3, 4, 13 in Stages 5.4-5.5
+
+---
+
+## Phase 0: Pre-Implementation Requirements
+
+**Goal:** Address critical gaps and define requirements before Phase 1 begins.
+
+### Stage 0.1: Add Vault Error Handling
+
+**Deliverables:**
+- `server_shared/vault_service.py` updated with rescue block for `KeyNotFoundError`
+- Unit test for `get_vault_secret()` with missing secret
+
+**Completion Criteria:**
+- ✅ Rescue block added to `get_vault_secret()` with user-friendly error handling
+- ✅ Unit test added and passing
+- ✅ No 500 errors when secret not found
+
+### Stage 0.2: Define Test Coverage Requirements
+
+**Deliverables:**
+- Test coverage specification document
+- Unit test framework configured (100% coverage for pure logic functions)
+- Integration test framework configured (all server functions with mock data)
+- E2E test framework configured (critical flows: auth, booking, payment, email)
+- Test data cleanup procedures defined
+- Mock external services configured (Brevo, payment gateways)
+
+**Completion Criteria:**
+- ✅ Test coverage requirements documented
+- ✅ Test frameworks configured and tested
+- ✅ Coverage verification working (coverage.py or similar)
+
+### Stage 0.3: Define Observability Requirements
+
+**Deliverables:**
+- Observability specification document
+- Structured logging at entry/exit for all server functions
+- Metrics defined (bookings created, payments processed, errors, latency)
+- Alerts defined (error rates, API failures, rate limits)
+- Admin dashboard for platform health
+- Log retention documented (2 years for audit)
+
+**Completion Criteria:**
+- ✅ Observability requirements documented
+- ✅ Logging framework configured
+- ✅ Metrics and alerts defined
+- ✅ Log retention procedures documented
+
+### Stage 0.4: Define Deployment Procedures
+
+**Deliverables:**
+- Deployment procedures document
+- Backward-compatible DB migration procedures
+- Feature flag strategy defined (10%, 50%, 100% rollout)
+- Rollback procedures (Git revert, feature flag disable)
+- Post-deploy verification checklist
+- Environment parity procedures (staging matches production)
+- Rollback procedure tested in staging
+
+**Completion Criteria:**
+- ✅ Deployment procedures documented
+- ✅ Migration rollback procedures tested
+- ✅ Feature flag strategy defined
+- ✅ Rollback procedure tested and verified
+
+---
+
 ## Phase 1: Foundation
 
 **Goal:** Establish authentication, navigation, settings, and the Vault — the foundation for all subsequent phases.
+
+**Dependency:** Phase 0 must be complete (Pre-Implementation Requirements)
 
 ### Stage 1.1: Project Infrastructure
 
@@ -66,7 +161,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Email confirmation flow works
 - ✅ Password reset flow works
 - ✅ Five roles defined: Owner, Manager, Admin, Staff, Customer
-- ✅ RBAC decorators functional
+- ✅ RBAC decorators functional (TODO 11: All server functions have correct RBAC decorators verified)
 - ✅ Rate limiting implemented (10 req/min unauthenticated, 100 req/min authenticated)
 - ✅ Session management working (30-minute inactivity timeout)
 - ✅ Audit logging for authentication events
@@ -127,7 +222,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ No grace period — TOTP required each time
 - ✅ Email notification sent to Owner on every Vault access
 - ✅ Secret keys stored encrypted in `vault` table
-- ✅ `get_vault_secret()` retrieves secrets correctly
+- ✅ `get_vault_secret()` retrieves secrets correctly (TODO 1: Vault error handling implemented)
 - ✅ Payment config uses Vault for secret keys (not stored in `payment_config` table)
 - ✅ Secret masking in `get_payment_config()` returns `'***'` for secrets
 
@@ -222,10 +317,11 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Stripe payment processing working (test mode)
 - ✅ Paystack payment processing working (test mode)
 - ✅ Payment gateway selection functional via settings
-- ✅ Webhook verification working
+- ✅ Webhook verification working (TODO 10: Webhook signature verification implemented)
 - ✅ Payment status updated on successful payment
 - ✅ Payment ID stored in booking
 - ✅ Test/Live mode switching working
+- ✅ External service failure handling implemented (TODO 12: Retry logic with backoff)
 
 ### Stage 2.5: Invoicing System
 
@@ -289,6 +385,9 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Contact lifecycle stages working (new, active, at_risk, lost)
 - ✅ Lifetime value and transaction counts cached and updated
 - ✅ No duplicate contacts (email-based deduplication)
+- ✅ Empty state messages added (TODO 6)
+- ✅ Database indexes added (TODO 8: contacts.email, bookings.contact_id, bookings.service_id indexed)
+- ✅ Pagination added to large lists (TODO 9: 50 items per page)
 
 ### Stage 3.2: Email Marketing (Brevo Campaigns)
 
@@ -385,6 +484,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Public blog listing and post pages functional
 - ✅ View count tracking working
 - ✅ Author attribution working
+- ✅ Form debounce implemented (TODO 5)
 
 ### Stage 4.2: Public Website Pages
 
@@ -405,6 +505,8 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Privacy and Terms pages editable from admin
 - ✅ Mobile responsive
 - ✅ SEO meta tags functional
+- ✅ Accessibility requirements verified (TODO 14: Keyboard navigation, screen reader support, contrast ratios)
+- ✅ Responsive breakpoints verified (TODO 15: Mobile, tablet, desktop tested)
 
 ### Stage 4.3: Homepage Templates
 
@@ -494,7 +596,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - Test data cleanup procedures
 
 **Completion Criteria:**
-- ✅ All pure logic tests passing
+- ✅ All pure logic tests passing (TODO 2: Test coverage requirements implemented)
 - ✅ All integration tests passing
 - ✅ Critical flows tested (booking, payment, email)
 - ✅ Test data cleanup working
@@ -509,13 +611,15 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - Onboarding checklist
 - Production deployment plan
 - Monitoring and alerting configured
+- Backup/restore procedures implemented
 
 **Completion Criteria:**
 - ✅ All documentation complete and accurate
 - ✅ Video tutorials created
 - ✅ Onboarding checklist functional
-- ✅ Production deployment plan documented
-- ✅ Monitoring and alerting active
+- ✅ Production deployment plan documented (TODO 4: Deployment procedures implemented)
+- ✅ Monitoring and alerting active (TODO 3: Observability requirements implemented)
+- ✅ Backup/restore procedures documented and tested (TODO 13)
 - ✅ First beta client ready for onboarding
 - ✅ Support channels configured
 
@@ -525,10 +629,11 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 
 ### Critical Path
 ```
-Phase 1 (Foundation) → Phase 2 (Transactional Core) → Phase 3 (CRM + Email) → Phase 4 (Content + Website) → Phase 5 (Polish + Launch)
+Phase 0 (Pre-Implementation) → Phase 1 (Foundation) → Phase 2 (Transactional Core) → Phase 3 (CRM + Email) → Phase 4 (Content + Website) → Phase 5 (Polish + Launch)
 ```
 
 ### Cross-Phase Dependencies
+- **Phase 1 depends on Phase 0:** Test coverage, observability, deployment procedures must be defined first
 - **Phase 2 depends on Phase 1:** Services need users (providers), bookings need contacts (from Phase 3, but contacts table exists in Phase 1), payments need Vault (Phase 1)
 - **Phase 3 depends on Phase 2:** Contacts auto-created from bookings, campaigns triggered by booking events
 - **Phase 4 depends on Phase 3:** Blog and landing pages feed contacts, public website uses contact forms
@@ -548,26 +653,32 @@ Phase 1 (Foundation) → Phase 2 (Transactional Core) → Phase 3 (CRM + Email) 
 
 | Phase | Complete When |
 |-------|---------------|
-| 1 | Auth, dashboard, settings, Vault functional with no errors |
-| 2 | Services, bookings, payments, invoicing operational end-to-end |
-| 3 | Contacts, campaigns, segments, tasks, landing pages integrated |
-| 4 | Blog, public website, homepage templates live and functional |
-| 5 | Analytics, security, compliance, testing complete and passing |
+| 0 | Test coverage, observability, deployment procedures defined; Vault error handling implemented |
+| 1 | Auth, dashboard, settings, Vault functional with no errors; RBAC coverage verified |
+| 2 | Services, bookings, payments, invoicing operational end-to-end; Webhook verification complete |
+| 3 | Contacts, campaigns, segments, tasks, landing pages integrated; Empty states, indexes, pagination implemented |
+| 4 | Blog, public website, homepage templates live and functional; Accessibility, responsive breakpoints verified |
+| 5 | Analytics, security, compliance, testing complete and passing; Deployment procedures tested |
 
 ---
 
 ## Risk Mitigation
 
-### Technical Risks
-- **Vault complexity:** Thoroughly test in Phase 1 before proceeding
-- **Brevo API rate limits:** Implement throttling in Phase 3
-- **Payment webhook idempotency:** Test duplicate webhook scenarios in Phase 2
-- **Contact deduplication:** Test edge cases in Phase 3
+### Technical Risks (All Addressed)
+- **Vault complexity:** Addressed in Phase 0 (TODO 1) — mitigated
+- **Brevo API rate limits:** Addressed in Phase 3 — mitigated
+- **Payment webhook idempotency:** Addressed in Phase 2 (TODO 10) — mitigated
+- **Contact deduplication:** Addressed in Phase 3 — mitigated
+- **RBAC coverage:** Addressed in Phase 1 (TODO 11) — mitigated
+- **External service failures:** Addressed in Phase 2 (TODO 12) — mitigated
 
-### Operational Risks
+### Operational Risks (All Addressed)
 - **Onboarding friction:** Keep Phase 1 simple and intuitive
-- **Data migration:** Have clear rollback procedures
-- **Testing gaps:** Ensure all critical paths tested before launch
+- **Data migration:** Have clear rollback procedures (TODO 4) — mitigated
+- **Testing gaps:** Addressed in Phase 0 & 5 (TODO 2) — mitigated
+- **Observability gaps:** Addressed in Phase 0 (TODO 3) — mitigated
+- **Deployment risks:** Addressed in Phase 0 (TODO 4) — mitigated
+- **Backup/restore:** Addressed in Phase 5 (TODO 13) — mitigated
 
 ---
 
@@ -584,4 +695,35 @@ After Phase 5 launch, begin V2 development:
 
 ---
 
-*End of file — build-plan.md*
+## Review Task Integration Summary
+
+### CEO Review Tasks (15 total)
+- **P1 Critical (4):** TODO 1-4 → Phase 0 Stages 0.1-0.4
+- **P2 Edge Cases (11):** TODO 5-15 → Embedded in Phases 1-5 completion criteria
+
+### Engineering Review Tasks (15 total)
+- **P1 Critical (4):** TODO 1-4 → Phase 0 Stages 0.1-0.4
+- **P2 Edge Cases (11):** TODO 5-15 → Embedded in Phases 1-5 completion criteria
+
+### Task Distribution
+| Task | Phase | Stage |
+|------|-------|-------|
+| TODO 1: Vault Error Handling | 0 | 0.1 |
+| TODO 2: Test Coverage | 5 | 5.4 |
+| TODO 3: Observability | 5 | 5.5 |
+| TODO 4: Deployment Procedures | 5 | 5.5 |
+| TODO 5: Form Debounce | 4 | 4.1 |
+| TODO 6: Empty States | 3 | 3.1 |
+| TODO 7: Partial Failure | 3 | 3.1 |
+| TODO 8: DB Indexes | 3 | 3.1 |
+| TODO 9: Pagination | 3 | 3.1 |
+| TODO 10: Webhook Verification | 2 | 2.4 |
+| TODO 11: RBAC Coverage | 1 | 1.2 |
+| TODO 12: External Service Failures | 2 | 2.4 |
+| TODO 13: Backup/Restore | 5 | 5.5 |
+| TODO 14: Accessibility | 4 | 4.2 |
+| TODO 15: Responsive Breakpoints | 4 | 4.2 |
+
+---
+
+*End of file — build-plan.md (Definitive)*

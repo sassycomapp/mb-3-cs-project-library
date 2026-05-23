@@ -21,9 +21,18 @@ The approved exception is The Vault. Client API keys cannot go in Anvil Secrets 
 
 ## 2. The UI Standard — Material Design 3
 
-All user interface work uses Material Design 3 exclusively. The M3 theme dependency (`4UK6WHQ6UX7AKELK`) is the only UI framework. Mixing M3 with legacy components or Anvil Extras produces CSS conflicts.
+All user interface work uses Material Design 3 exclusively. The M3 theme dependency (`4UK6WHQ6UX7AKELK`) is the only UI framework. Mixing M3 with non-M3 components produces CSS conflicts.
 
-Specific Anvil Extras components are explicitly blocked: Tabs, MultiSelectDropDown, Autocomplete, Quill, Switch, Slider, RadioGroup, CheckBoxGroup, Popover.
+**Native M3 components** (provided by the M3 theme dependency) are fully supported:
+- `m3.Switch`, `m3.Slider`, `m3.RadioButton`, `m3.Checkbox`
+- `m3.Button`, `m3.IconButton`, `m3.NavigationLink`
+- All input components (`m3.TextBox`, `m3.TextArea`, `m3.DropdownMenu`)
+- All layout components (`ColumnPanel`, `FlowPanel`, `DataGrid`, `Card`)
+
+**Partially supported M3 components** (use custom composition):
+- Chips, Snackbar, Bottom Sheet, Tabs, Date Picker
+
+These require custom composition via Panels, Cards, and Buttons. See `m3_component_mapping.md` for implementation guidance.
 
 Colour always uses the `theme:` prefix — never hardcoded hex or RGB values. Typography uses M3 role names. Inputs are always `outlined` style.
 
