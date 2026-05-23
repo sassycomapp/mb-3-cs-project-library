@@ -1,6 +1,6 @@
 # project-library
 
-Documentation, planning, workspace governance, devlog, prompts, and GStack / GBrain integration for the Mybizz CS workspace.
+Documentation, planning, workspace governance, and GStack / GBrain integration for the Mybizz CS workspace.
 
 ---
 
@@ -8,10 +8,11 @@ Documentation, planning, workspace governance, devlog, prompts, and GStack / GBr
 
 `project-library` is the **planning and documentation workspace** for the Mybizz CS system. It is responsible for:
 
-- Architecture and refactor decisions (ADRs and related docs)
-- Mapping multi‑vertical to single‑vertical behavior (MM/AM docs)
-- Handover notes and open tasks
-- Workspace‑level governance (how tools and agents should behave)
+- Architecture and refactor decisions (ADRs)
+- Application documentation (design docs, specifications, policies)
+- GStack-generated outputs (reports, planning outputs, task lists)
+- Visual design references (wireframes, mockups)
+- Workspace-level governance (how tools and agents should behave)
 - Orchestration and memory design (GStack and GBrain docs)
 
 No live application code lives here; that is in `mb-3-cs`.
@@ -20,45 +21,71 @@ No live application code lives here; that is in `mb-3-cs`.
 
 ## 2. Key directories
 
-- `adr\`  
-  Architecture Decision Records and related reference notes.
+### Four-folder governance
 
-- `docs\`  
-  Supporting documentation, including AM/MM method documents and reference material.
+```
+adr/           — Architecture Decision Records
+docs/          — Application documentation
+gstack-outputs — GStack-generated outputs
+wireframes/    — Visual design artifacts
+```
 
-- `handovers\`  
-  Handoff notes between sessions, people, or phases (Plan ↔ Build, docs ↔ code).
+#### `adr/` — Architecture Decision Records
 
-- `open-tasks\`  
-  Workspace‑local task lists and planning notes that complement the canonical `todo` repo.
+- One decision per file
+- Clear context, the decision taken, rationale
+- Consequences, scope and constraints
+- Explains why the system is built the way it is
 
-- `prompts\`  
-  Prompt and build‑rules drafts for OpenCode/GStack usage.
+#### `docs/` — Application documentation
 
-- `brain-resources\`  
-  Early material and resources intended to support future GBrain ingestion (not yet wired).
+- Design documents and specifications
+- UI standards and architecture summaries
+- Component mappings and policy documents
+- Feature documentation
+- Durable documentation describing the actual application
 
-- `workspace\`  
-  Workspace‑level orchestration and integration docs:
-  - `workspace-description.md` — how this OpenCode + WSL workspace runs on this machine.
-  - `workspace-docmap.md` — path‑centric index of config, orchestration, and memory docs.
-  - `opencode-setup.md` — OpenCode setup/status tracker.
-  - `gstack\` — GStack operating model and workflow docs.
-  - `gbrain\` — GBrain operating model and source‑tier docs.
+#### `gstack-outputs/` — GStack-generated outputs
+
+- Office-hours reports
+- CEO review reports
+- ENG review reports
+- Planning outputs and task lists
+- Handoff notes
+- Temporary or session-based artifacts
+
+These are useful records of agent work but not canonical app documentation.
+
+#### `wireframes/` — Visual design artifacts
+
+- Wireframes and mockups
+- Reference screens
+- Static UI layout examples
+- Design references (not policy documents)
+
+### Additional folder
+
+#### `workspace/` — Workspace orchestration
+
+- `workspace-description.md` — how this OpenCode + WSL workspace runs
+- `workspace-docmap.md` — path-centric index of config and docs
+- `opencode-setup.md` — OpenCode setup/status tracker
+- `gstack/` — GStack operating model and workflow docs
+- `gbrain/` — GBrain operating model and source-tier docs
 
 ---
 
 ## 3. OpenCode configuration (docs project)
 
 - `AGENTS.md`  
-  Documentation‑workspace rules:
+  Documentation-workspace rules:
   - provenance and trust model,
   - required workflow order (refine ADRs → validate AM/MM docs → update working docs),
   - how canonical devlog/todo files are used,
   - Plan vs Build responsibilities.
 
 - `opencode.json`  
-  Project‑level OpenCode config:
+  Project-level OpenCode config:
   - `default_agent` = `plan`,
   - conservative permissions (`edit` / `webfetch` / `bash` all `ask`),
   - read access to:
@@ -67,12 +94,12 @@ No live application code lives here; that is in `mb-3-cs`.
     - `C:\_mb2-cs-app\todo\`.
 
 - `.opencode\agents\`  
-  Project‑local agent definitions:
+  Project-local agent definitions:
   - `plan` = primary planning/analysis/validation/architecture agent.
-  - `build` = tightly scoped helper for non‑live‑code document changes.
+  - `build` = tightly scoped helper for non-live-code document changes.
 
 - `.opencode\commands\`  
-  Project‑local commands for this repo. Preferred pattern on this machine instead of relying on the global `OPENCODE_CONFIG_DIR` environment variable.
+  Project-local commands for this repo. Preferred pattern on this machine instead of relying on the global `OPENCODE_CONFIG_DIR` environment variable.
 
 ---
 
@@ -113,10 +140,39 @@ These documents define how workflows and memory **should** behave. Actual runtim
 
 ---
 
-## 6. Where to start
+## 6. Artifact governance
+
+### File placement rules
+
+- If the file is a GStack session output, place it in `gstack-outputs/`.
+- If the file is a durable app document, place it in `docs/`.
+- If the file is an architectural decision, place it in `adr/`.
+- If the file is a screen reference or mockup, place it in `wireframes/`.
+
+### Lifecycle guidance
+
+- GStack outputs start in `gstack-outputs/`.
+- Important decisions or stable guidance may be promoted into `docs/` or `adr/`.
+- Wireframes remain in `wireframes/` unless replaced by updated visual references.
+
+### Special notes
+
+- `DESIGN.md` belongs in `docs/` because it is an application UI design document.
+- Do not place long-lived app specifications in `gstack-outputs/`.
+- Do not place transient planning reports in `docs/` unless promoted.
+- Do not place ADRs inside `docs/` or `gstack-outputs/`.
+
+### Path handling
+
+File paths may be passed to GStack as Windows paths (e.g., `C:\_mb2-cs-app\project-library\adr\`), but the true staging location is `/mnt/c/` in WSL.
+
+---
+
+## 7. Where to start
 
 If you are new to this repo and want the big picture:
 
-1. Read `workspace\workspace-description.md` for an end‑to‑end explanation of how this workspace runs on this machine (OpenCode Desktop + WSL + GStack + GBrain).
-2. Use `workspace\workspace-docmap.md` as the detailed path index.
+1. Read `workspace/workspace-description.md` for an end-to-end explanation of how this workspace runs on this machine (OpenCode Desktop + WSL + GStack + GBrain).
+2. Use `workspace/workspace-docmap.md` as the detailed path index.
 3. Consult `AGENTS.md` and `opencode.json` before asking OpenCode to make changes, so agent behavior stays aligned with the intended rules.
+4. Review the four-folder governance structure to understand where files belong.
