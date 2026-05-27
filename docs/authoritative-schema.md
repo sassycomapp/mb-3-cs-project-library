@@ -473,7 +473,7 @@ Blog post categories.
 | `slug` | string | URL-friendly |
 | `description` | string | |
 
-### [] 5.2 `blog_posts`
+### [DONE] 5.2 `blog_posts`
 Blog content.
 
 | Field | Type | Notes |

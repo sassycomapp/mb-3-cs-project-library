@@ -299,7 +299,7 @@ The following are explicitly not part of the Consulting & Services platform:
 
 **Onboarding tiers:**
 - Standard (included): 30-minute guided call
-- Premium ($200): Mybizz handles all setup
+- Premium ($100): Mybizz handles all setup
 
 ---
 

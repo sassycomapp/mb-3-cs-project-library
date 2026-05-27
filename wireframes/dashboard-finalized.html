@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* M3 Color System */
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      
+      /* Spacing Scale */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      
+      /* Typography */
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      
+      /* Border Radius */
+      --radius-button: 100px;
+      --radius-card: 12px;
+      
+      /* Elevation */
+      --elevation-card: 2dp;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+    }
+    
+    .sidebar {
+      width: 240px;
+      background: var(--surface);
+      border-right: 1px solid var(--outline);
+      padding: var(--space-4);
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    
+    .sidebar-header {
+      padding: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+    
+    .sidebar-header h1 {
+      font: var(--font-headline-small);
+      color: var(--primary);
+    }
+    
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-1);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      color: var(--on-surface-variant);
+      text-decoration: none;
+      min-height: 48px;
+    }
+    
+    .nav-item:hover {
+      background: var(--surface-variant);
+    }
+    
+    .nav-item.active {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 500;
+    }
+    
+    .nav-item:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+    
+    .main-content {
+      flex: 1;
+      margin-left: 240px;
+      padding: var(--space-8);
+    }
+    
+    .page-header {
+      margin-bottom: var(--space-8);
+    }
+    
+    .page-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      box-shadow: 0 var(--elevation-card);
+    }
+    
+    .metric-card h2 {
+      font: var(--font-title);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+    
+    .metric-card .value {
+      font: var(--font-headline-large);
+      color: var(--primary);
+      margin-bottom: var(--space-1);
+      font-weight: 700;
+    }
+    
+    .metric-card .change {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    
+    .metric-card .change.positive {
+      color: #4CAF50;
+    }
+    
+    .metric-card .change.negative {
+      color: var(--error);
+    }
+    
+    .metric-card .change::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar" role="navigation" aria-label="Main navigation">
+    <div class="sidebar-header">
+      <h1>Mybizz CS</h1>
+    </div>
+    
+    <a href="/dashboard" class="nav-item active" aria-current="page">
+      Dashboard
+    </a>
+    
+    <a href="/bookings" class="nav-item">
+      Bookings
+    </a>
+    
+    <a href="/services" class="nav-item">
+      Services
+    </a>
+    
+    <a href="/contacts" class="nav-item">
+      Contacts
+    </a>
+    
+    <a href="/campaigns" class="nav-item">
+      Campaigns
+    </a>
+    
+    <a href="/invoices" class="nav-item">
+      Invoices
+    </a>
+    
+    <a href="/settings" class="nav-item">
+      Settings
+    </a>
+  </nav>
+  
+  <main class="main-content" role="main">
+    <header class="page-header">
+      <h1>Dashboard</h1>
+      <p>Welcome back! Here's what's happening with your business.</p>
+    </header>
+    
+    <section class="metrics-grid" aria-label="Business metrics">
+      <article class="metric-card">
+        <h2>Total Revenue</h2>
+        <div class="value">$12,450</div>
+        <div class="change positive">↑ 12% from last month</div>
+      </article>
+      
+      <article class="metric-card">
+        <h2>Bookings</h2>
+        <div class="value">145</div>
+        <div class="change positive">↑ 8% from last month</div>
+      </article>
+      
+      <article class="metric-card">
+        <h2>Customers</h2>
+        <div class="value">89</div>
+        <div class="change positive">↑ 15% from last month</div>
+      </article>
+      
+      <article class="metric-card">
+        <h2>Pending</h2>
+        <div class="value">12</div>
+        <div class="change negative">↓ 3 from last week</div>
+      </article>
+    </section>
+  </main>
+  
+  <!-- Pretext Source (Inlined) -->
+  <script>
+    (function() {
+      'use strict';
+      
+      const Pretext = {
+        prepare: function(text, font) {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          ctx.font = font;
+          
+          const words = text.split(' ');
+          const lines = [];
+          let currentLine = '';
+          
+          for (const word of words) {
+            const testLine = currentLine ? currentLine + ' ' + word : word;
+            const metrics = ctx.measureText(testLine);
+            
+            if (metrics.width > 300) {
+              lines.push(currentLine);
+              currentLine = word;
+            } else {
+              currentLine = testLine;
+            }
+          }
+          
+          if (currentLine) {
+            lines.push(currentLine);
+          }
+          
+          const height = lines.length * 20;
+          
+          return {
+            lines,
+            height,
+            handle: { text, font, lines }
+          };
+        },
+        
+        layout: function(handle, maxWidth, lineHeight) {
+          const { text, font, lines } = handle;
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          ctx.font = font;
+          
+          const words = text.split(' ');
+          const computedLines = [];
+          let currentLine = '';
+          
+          for (const word of words) {
+            const testLine = currentLine ? currentLine + ' ' + word : word;
+            const metrics = ctx.measureText(testLine);
+            
+            if (metrics.width > maxWidth) {
+              computedLines.push(currentLine);
+              currentLine = word;
+            } else {
+              currentLine = testLine;
+            }
+          }
+          
+          if (currentLine) {
+            computedLines.push(currentLine);
+          }
+          
+          const height = computedLines.length * lineHeight;
+          
+          return {
+            height,
+            lineCount: computedLines.length
+          };
+        }
+      };
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        const elements = document.querySelectorAll('[data-pretext]');
+        const prepared = new Map();
+        
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function() {
+            for (const el of elements) {
+              const font = getComputedStyle(el).font;
+              prepared.set(el, Pretext.prepare(el.textContent, font));
+            }
+            
+            function relayout() {
+              for (const [el, handle] of prepared) {
+                const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+                const maxWidth = el.clientWidth;
+                const { height } = Pretext.layout(handle, maxWidth, lineHeight);
+                el.style.minHeight = height + 'px';
+              }
+            }
+            
+            new ResizeObserver(() => relayout()).observe(document.body);
+            relayout();
+          });
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

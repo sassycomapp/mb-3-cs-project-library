@@ -1,4 +1,4 @@
-# 014 — Material 3 Theme Component Scope
+# 15 — Material 3 Theme Component Scope
 Date: 2026-05-21
 Status: Accepted
 Source: M3 component mapping alignment task

@@ -1,7 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "plan",
-  "model": "openrouter/qwen/qwen3.6-plus",
   "permission": {
     "edit": {
       "*": "ask"
@@ -11,13 +10,7 @@
       "*": "ask"
     },
     "external_directory": {
-      "C:\\_mb2-cs-app\\mb-2-cs\\**": "allow",
-      "C:\\_mb2-cs-app\\devlog\\**": "allow",
-      "C:\\_mb2-cs-app\\todo\\**": "allow"
+      "C:\\_mb2-cs-app\\mb-3-cs\\**": "allow"
     }
-  },
-  "shell": {
-    "path": "/bin/bash",
-    "args": ["-l"]
   }
 }

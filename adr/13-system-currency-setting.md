@@ -1,4 +1,4 @@
-# ADR-012: System Currency Setting at Onboarding
+# ADR-13: System Currency Setting at Onboarding
 
 **Status:** Proposed  
 **Date:** 2026-05-10  

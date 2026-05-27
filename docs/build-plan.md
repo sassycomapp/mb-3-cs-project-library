@@ -1,11 +1,28 @@
-# Mybizz CS — Build Plan (Definitive)
+# Mybizz CS — Build Plan (Definitive)**Vertical:** Consulting & Services**V1 Scope:** Blog, Landing Pages, Campaigns, Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack**V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal**Schema:** 36 tables**Architecture:** Dependency-based (master_template → client instances)**Review Status:** CEO + Eng Review Complete (All 5 phases engineering reviews complete)---## Current Status| Component | Status | Notes ||-----------|--------|-------|| **Schema** | ✅ 100% Complete | 36 tables designed and documented || **Wireframes** | ✅ 100% Complete | 15 HTML screens created || **Design Direction** | ✅ 100% Complete | M3 design approved || **ADR Documentation** | ✅ 100% Complete | 13 ADRs written || **Positioning Strategy** | ✅ 100% Complete | Business model documented || **Phase 0** | ✅ 100% Complete | All TODOs implemented || **Phase 1** | ✅ Engineering Review Complete | Ready for implementation || **Phase 2** | ✅ Engineering Review Complete | Ready for implementation || **Phase 3** | ✅ Engineering Review Complete | Ready for implementation || **Phase 4** | ✅ Engineering Review Complete | Ready for implementation || **Phase 5** | ✅ Engineering Review Complete | Ready for implementation || **Implementation** | ⏸️ Pending | All planning complete, ready to begin |---**Last Updated:** 2026-05-26  **Next Review:** N/A — All engineering reviews complete, ready for implementation---
 
-**Vertical:** Consulting & Services
-**V1 Scope:** Blog, Landing Pages, Campaigns, Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack
-**V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal
-**Schema:** 36 tables
-**Architecture:** Dependency-based (master_template → client instances)
-**Review Status:** CEO + Eng Review Complete (21 issues identified, 3 critical — all documented in phase-0-implementation.md)
+---
+
+## Current Status
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| **Schema** | ✅ 100% Complete | 36 tables designed and documented |
+| **Wireframes** | ✅ 100% Complete | 15 HTML screens created |
+| **Design Direction** | ✅ 100% Complete | M3 design approved |
+| **ADR Documentation** | ✅ 100% Complete | 13 ADRs written |
+| **Positioning Strategy** | ✅ 100% Complete | Business model documented |
+| **Phase 0** | ✅ 100% Complete | All TODOs implemented |
+| **Phase 1** | 🔄 In Progress | Foundation implementation started |
+| **Phase 2** | ⏸️ Pending | Awaits Phase 1 completion |
+| **Phase 3** | ⏸️ Pending | Awaits Phase 2 completion |
+| **Phase 4** | ⏸️ Pending | Awaits Phase 3 completion |
+| **Phase 5** | ⏸️ Pending | Awaits Phase 4 completion |
+| **Implementation** | 🔄 In Progress | Phase 1 Foundation implementation |
+
+---
+
+**Last Updated:** 2026-05-26  
+**Next Review:** After Phase 1 implementation completion
 
 ---
 
@@ -153,18 +170,27 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - `LoginForm` — email/password login with validation
 - `SignupForm` — new user registration with business name capture
 - `PasswordResetForm` — password reset flow
-- `server_auth/service.py` — authentication server functions
-- `server_auth/rbac.py` — role-based access control decorators
+- `server_auth/service.py` — authentication server functions (email confirmation, rate limiting, session management)
+- `server_auth/rbac.py` — role-based access control decorators (full coverage)
+- `tests/test_auth_service.py` — auth unit tests
+- `tests/test_rbac.py` — RBAC unit tests
 
 **Completion Criteria:**
 - ✅ Users can register with email/password
-- ✅ Email confirmation flow works
+- ✅ Email confirmation flow works (Brevo SMTP, expiration handling, resend capability)
 - ✅ Password reset flow works
 - ✅ Five roles defined: Owner, Manager, Admin, Staff, Customer
-- ✅ RBAC decorators functional (TODO 11: All server functions have correct RBAC decorators verified)
-- ✅ Rate limiting implemented (10 req/min unauthenticated, 100 req/min authenticated)
-- ✅ Session management working (30-minute inactivity timeout)
+- ✅ RBAC decorators functional on ALL server functions (TODO 11 verified)
+- ✅ Rate limiting implemented (10 req/min unauthenticated, 100 req/min authenticated) using `rate_limits` table
+- ✅ Session management working (30-minute inactivity timeout, "Remember me" V1 feature)
 - ✅ Audit logging for authentication events
+- ✅ All unit tests passing
+
+**Implementation Notes:**
+- Email confirmation uses Brevo SMTP (configured in Phase 0)
+- Rate limiting uses `rate_limits` table for persistence across server restarts
+- Session timeout is 30 minutes inactivity, with "Remember me" option for extended sessions (V1 feature)
+- Full RBAC coverage required on all server functions, not just critical endpoints
 
 ### Stage 1.3: Dashboard & Navigation
 
@@ -172,7 +198,8 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - `AdminLayout` — custom HtmlTemplate layout with navigation
 - `DashboardForm` — main admin dashboard with metrics
 - Navigation structure implemented (Dashboard, Sales & Operations, Customers & Marketing, Content & Website, Finance & Reports, Settings)
-- `shared/navigation_helpers.py` — navigation utility functions
+- `shared/navigation_helpers.py` — navigation utility functions (lambda click handlers, open_form wrappers)
+- `tests/test_navigation.py` — navigation unit tests
 
 **Completion Criteria:**
 - ✅ AdminLayout renders with M3 styling
@@ -182,6 +209,12 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Navigation visibility respects RBAC (Settings Owner/Manager only)
 - ✅ Mobile responsive layout working
 - ✅ Sign out link present at bottom of sidebar
+- ✅ All unit tests passing
+
+**Implementation Notes:**
+- Navigation helpers prevent lambda capture bugs and ensure consistent patterns
+- AdminLayout uses custom HtmlTemplate with plain Link components (not NavigationLink)
+- Navigation structure follows the spec in architecture.md
 
 ### Stage 1.4: Settings & Configuration
 
@@ -191,12 +224,13 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - `email_config` table for email settings
 - `payment_config` table for payment gateway settings
 - `theme_config` table for M3 theme customization
-- `SettingsForm` — main settings form with sections:
-  - Business Profile
-  - Feature Activation
-  - Theme Customization
-  - Currency
-  - Users & Permissions
+- `SettingsForm` — main settings form with sub-sections:
+  - `BusinessProfileForm` — business profile section
+  - `FeatureFlagsForm` — feature activation section
+  - `ThemeConfigForm` — theme customization section
+  - `CurrencyForm` — currency selection section
+  - `UserManagementForm` — users & permissions section
+- `tests/test_settings.py` — settings unit tests
 
 **Completion Criteria:**
 - ✅ Business profile can be saved and retrieved
@@ -205,6 +239,12 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Currency selection working (immutable after first transaction)
 - ✅ User management functional (invite, edit role, deactivate)
 - ✅ All config tables initialized via `create_initial_config()`
+- ✅ All unit tests passing
+
+**Implementation Notes:**
+- SettingsForm uses sub-sections for better maintainability
+- Currency becomes immutable after first transaction
+- Feature flags control navigation item visibility
 
 ### Stage 1.5: The Vault
 
@@ -727,3 +767,113 @@ After Phase 5 launch, begin V2 development:
 ---
 
 *End of file — build-plan.md (Definitive)*
+
+---
+
+## Engineering Review Summary
+
+All 5 phases have completed engineering reviews with decisions documented:
+
+### Phase 0 — Pre-Implementation
+**Status:** ✅ Complete  
+**Decisions:** Vault error handling, test coverage, observability, deployment procedures  
+**Report:** `phase-0-implementation.md`
+
+### Phase 1 — Foundation
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Email confirmation, RBAC coverage, TOTP + email notifications, SettingsForm sub-sections, Navigation helpers, Rate limiting, Session timeout  
+**Report:** `gstack-outputs/phase-1-engineering-review-report.md` (created during session)
+
+### Phase 2 — Transactional Core
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Payment webhook idempotency, Booking state machine, Invoice PDF generation  
+**Report:** `gstack-outputs/phase-2-engineering-review-report.md`
+
+### Phase 3 — CRM + Email
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Brevo API rate limiting, Contact deduplication  
+**Report:** `gstack-outputs/phase-3-engineering-review-report.md`
+
+### Phase 4 — Content + Website
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Blog SEO strategy, Homepage template system  
+**Report:** `gstack-outputs/phase-4-engineering-review-report.md`
+
+### Phase 5 — Polish + Launch
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Analytics caching strategy, GDPR/POPIA compliance  
+**Report:** `gstack-outputs/phase-5-engineering-review-report.md`
+
+---
+
+## Implementation Ready
+
+**All planning complete. Ready to begin implementation:**
+
+1. **Phase 1** (Foundation) - 25-35 hours estimated
+2. **Phase 2** (Transactional Core) - 25-35 hours estimated
+3. **Phase 3** (CRM + Email) - 20-30 hours estimated
+4. **Phase 4** (Content + Website) - 15-25 hours estimated
+5. **Phase 5** (Polish + Launch) - 20-30 hours estimated
+
+**Total Estimated Implementation Time:** 105-155 hours
+
+---
+
+*End of file — Build Plan (Definitive)*
+
+
+---
+
+## Engineering Review Summary
+
+All 5 phases have completed engineering reviews with decisions documented:
+
+### Phase 0 — Pre-Implementation
+**Status:** ✅ Complete  
+**Decisions:** Vault error handling, test coverage, observability, deployment procedures  
+**Report:** `phase-0-implementation.md`
+
+### Phase 1 — Foundation
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Email confirmation, RBAC coverage, TOTP + email notifications, SettingsForm sub-sections, Navigation helpers, Rate limiting, Session timeout  
+**Report:** `gstack-outputs/phase-1-engineering-review-report.md` (created during session)
+
+### Phase 2 — Transactional Core
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Payment webhook idempotency, Booking state machine, Invoice PDF generation  
+**Report:** `gstack-outputs/phase-2-engineering-review-report.md`
+
+### Phase 3 — CRM + Email
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Brevo API rate limiting, Contact deduplication  
+**Report:** `gstack-outputs/phase-3-engineering-review-report.md`
+
+### Phase 4 — Content + Website
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Blog SEO strategy, Homepage template system  
+**Report:** `gstack-outputs/phase-4-engineering-review-report.md`
+
+### Phase 5 — Polish + Launch
+**Status:** ✅ Engineering Review Complete  
+**Decisions:** Analytics caching strategy, GDPR/POPIA compliance  
+**Report:** `gstack-outputs/phase-5-engineering-review-report.md`
+
+---
+
+## Implementation Ready
+
+**All planning complete. Ready to begin implementation:**
+
+1. **Phase 1** (Foundation) - 25-35 hours estimated
+2. **Phase 2** (Transactional Core) - 25-35 hours estimated
+3. **Phase 3** (CRM + Email) - 20-30 hours estimated
+4. **Phase 4** (Content + Website) - 15-25 hours estimated
+5. **Phase 5** (Polish + Launch) - 20-30 hours estimated
+
+**Total Estimated Implementation Time:** 105-155 hours
+
+---
+
+*End of file — Build Plan (Definitive)*
+
