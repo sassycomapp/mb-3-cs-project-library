@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — EventRegistrationTemplate Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 800px; margin: 0 auto; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
+.wf-dd::after { content: " ▾"; color: #aaa; }
+.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
+.wf-checkbox::before { content: "☐ "; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
+.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — EventRegistrationTemplate Wireframe</h1>
+<p class="subtitle">Custom Component — Event Registration Template</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<!-- EVENT REGISTRATION TEMPLATE -->
+<h2>EventRegistrationTemplate — Event Registration Custom Component</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_event_registration (ColumnPanel)</span>
+
+  <div class="wf-panel">
+    <div class="wf-heading-lg">Register for Our Webinar</div>
+    <div class="cn">hdg_event_title <span class="ct">(Heading)</span> <span class="cfixed">"Register for Our Webinar"</span></div>
+    
+    <div class="wf-text">Join us for an exclusive webinar on business growth strategies</div>
+    <div class="cn">txt_event_description <span class="ct">(Text)</span> <span class="cfixed">"Join us for an exclusive webinar on business growth strategies"</span></div>
+  </div>
+
+  <div class="wf-panel">
+    <div class="wf-heading-sm">Event Details</div>
+    <div class="cn">hdg_event_details <span class="ct">(Heading)</span> <span class="cfixed">"Event Details"</span></div>
+    
+    <div class="wf-panel-h">
+      <div>
+        <div class="wf-text">Date</div>
+        <div class="wf-textbox" style="background:#f5f5f5;">March 15, 2024</div>
+      </div>
+      <div>
+        <div class="wf-text">Time</div>
+        <div class="wf-textbox" style="background:#f5f5f5;">2:00 PM EST</div>
+      </div>
+      <div>
+        <div class="wf-text">Duration</div>
+        <div class="wf-textbox" style="background:#f5f5f5;">90 minutes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-panel">
+    <div class="wf-heading-sm">Your Information</div>
+    <div class="cn">hdg_event_form <span class="ct">(Heading)</span> <span class="cfixed">"Your Information"</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_event_name <span class="ct">(TextBox)</span> <span class="cfixed">"Full Name"</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_event_email <span class="ct">(TextBox)</span> <span class="cfixed">"Email Address"</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_event_company <span class="ct">(TextBox)</span> <span class="cfixed">"Company Name"</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_event_job_title <span class="ct">(TextBox)</span> <span class="cfixed">"Job Title"</span></div>
+  </div>
+
+  <div class="wf-panel">
+    <div class="wf-heading-sm">How did you hear about us?</div>
+    <div class="cn">hdg_event_source <span class="ct">(Heading)</span> <span class="cfixed">"How did you hear about us?"</span></div>
+    
+    <div class="wf-dd">&nbsp;</div>
+    <div class="cn">dd_event_source <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+  </div>
+
+  <div class="wf-panel">
+    <div class="wf-heading-sm">Additional Notes</div>
+    <div class="cn">hdg_event_notes <span class="ct">(Heading)</span> <span class="cfixed">"Additional Notes"</span></div>
+    
+    <div class="wf-textarea" style="height:80px;">&nbsp;</div>
+    <div class="cn">txt_event_notes <span class="ct">(TextArea)</span> <span class="cfixed">"Any questions or topics you'd like us to cover?"</span></div>
+  </div>
+
+  <div class="wf-panel-h" style="margin-top:10px;">
+    <div>
+      <div class="wf-btn-filled">Register Now</div>
+      <div class="cn">btn_register <span class="ct">(Button)</span> <span class="cfixed">"Register Now"</span></div>
+    </div>
+  </div>
+
+  <div class="wf-text">Registration is limited to 100 participants</div>
+  <div class="cn">txt_registration_limit <span class="ct">(Text)</span> <span class="cfixed">"Registration is limited to 100 participants"</span></div>
+</div>
+
+<div class="prop-caption">Properties table</div>
+
+<br><br>
+<p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
+  Custom Components — Mybizz CS · Generated for Anvil Implementation · 2026-05-27
+</p>
+
+</body>
+</html>

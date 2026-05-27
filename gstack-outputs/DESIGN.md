@@ -1,7 +1,7 @@
 # Mybizz CS — DESIGN
 
 **Status:** Final consolidated design system  
-**Date:** 2026-05-26  
+**Date:** 2026-05-27  
 **Project:** Mybizz CS  
 **Platform:** Anvil.works with Material Design 3 (M3)  
 **Purpose:** Authoritative design system input for GStack workflows, especially `/design-shotgun` and `/design-html`.
@@ -493,7 +493,7 @@ Blog settings should support:
 
 ## Custom Components Inventory
 
-The design consultation established the following important custom components:
+The design consultation established the following important custom components for V1:
 
 - `PaletteSettingsForm`
 - `OnboardingPaletteForm`
@@ -502,7 +502,7 @@ The design consultation established the following important custom components:
 - `BlogPostClassicTemplate`
 - `BlogPostTwoColumnTemplate`
 - `BlogPostFullWidthTemplate`
-- `VideoDisplayComponent`
+- `VideoDisplayComponent` - Supports YouTube and other video sources for blog posts and homepage
 - `LeadCaptureTemplate`
 - `EventRegistrationTemplate`
 - `VslTemplate`
@@ -511,14 +511,12 @@ The design consultation established the following important custom components:
 - `HomePageBookingTemplate`
 - `HomePageMinimalistTemplate`
 - `FooterComponent`
-- `TimeLapseCarouselComponent`
-- `ParallaxComponent`
-- `AnimatedButtonComponent`
-- `AnimatedCardComponent`
-- `AnimatedLinkComponent`
-- `AnimatedImageComponent`
+- `TimeLapseCarouselComponent` - Rotating service display on homepage
+- `ParallaxComponent` - Hero image parallax effect on homepage
 
 These components must remain governed by the same token, typography, spacing, and role system defined in this document.
+
+**Note:** AnimatedButtonComponent, AnimatedCardComponent, AnimatedLinkComponent, and AnimatedImageComponent have been removed from V1 scope as standard Anvil M3 components already provide sufficient hover and focus animations through role-based styling.
 
 ---
 

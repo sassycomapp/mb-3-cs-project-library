@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — HomePageBookingTemplate Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
+.wf-dd::after { content: " ▾"; color: #aaa; }
+.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
+.wf-checkbox::before { content: "☐ "; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
+.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — HomePageBookingTemplate Wireframe</h1>
+<p class="subtitle">Custom Component — Booking-Focused Homepage Template</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<!-- HOME PAGE BOOKING TEMPLATE -->
+<h2>HomePageBookingTemplate — Booking-Focused Homepage Custom Component</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_home_booking (ColumnPanel)</span>
+
+  <div class="wf-panel">
+    <div class="wf-heading-lg">Book Your Appointment Today</div>
+    <div class="cn">hdg_home_booking_hero <span class="ct">(Heading)</span> <span class="cfixed">"Book Your Appointment Today"</span></div>
+    
+    <div class="wf-text">Schedule your appointment in just a few simple steps</div>
+    <div class="cn">txt_home_booking_subtitle <span class="ct">(Text)</span> <span class="cfixed">"Schedule your appointment in just a few simple steps"</span></div>
+  </div>
+
+  <div class="wf-panel">
+    <div class="wf-heading-sm">Quick Booking</div>
+    <div class="cn">hdg_home_booking_form <span class="ct">(Heading)</span> <span class="cfixed">"Quick Booking"</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">dd_booking_service <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_booking_date <span class="ct">(TextBox)</span> <span class="cfixed">"Select Date"</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_booking_time <span class="ct">(TextBox)</span> <span class="cfixed">"Select Time"</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_booking_name <span class="ct">(TextBox)</span> <span class="cfixed">"Your Name"</span></div>
+    
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_booking_email <span class="ct">(TextBox)</span> <span class="cfixed">"Your Email"</span></div>
+    
+    <div class="wf-panel-h" style="margin-top:10px;">
+      <div>
+        <div class="wf-btn-filled">Book Now</div>
+        <div class="cn">btn_booking_submit <span class="ct">(Button)</span> <span class="cfixed">"Book Now"</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-panel">
+    <div class="wf-heading-sm">Our Services</div>
+    <div class="cn">hdg_home_booking_services <span class="ct">(Heading)</span> <span class="cfixed">"Our Services"</span></div>
+    
+    <div class="wf-panel-h">
+      <div style="width:300px;">
+        <div class="wf-image" style="width:100%;height:200px;background:#ddd;">[Service Image]</div>
+        <div class="wf-heading-sm">Service 1</div>
+        <div class="wf-text">Description of service 1.</div>
+        <div class="wf-textbox" style="background:#EADDFF;color:#21005D;padding:4px 8px;border-radius:8px;display:inline-block;">$97</div>
+      </div>
+      <div style="width:300px;">
+        <div class="wf-image" style="width:100%;height:200px;background:#ddd;">[Service Image]</div>
+        <div class="wf-heading-sm">Service 2</div>
+        <div class="wf-text">Description of service 2.</div>
+        <div class="wf-textbox" style="background:#EADDFF;color:#21005D;padding:4px 8px;border-radius:8px;display:inline-block;">$147</div>
+      </div>
+      <div style="width:300px;">
+        <div class="wf-image" style="width:100%;height:200px;background:#ddd;">[Service Image]</div>
+        <div class="wf-heading-sm">Service 3</div>
+        <div class="wf-text">Description of service 3.</div>
+        <div class="wf-textbox" style="background:#EADDFF;color:#21005D;padding:4px 8px;border-radius:8px;display:inline-block;">$197</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-panel">
+    <div class="wf-heading-sm">Why Book With Us?</div>
+    <div class="cn">hdg_home_booking_benefits <span class="ct">(Heading)</span> <span class="cfixed">"Why Book With Us?"</span></div>
+    
+    <div class="wf-panel-h">
+      <div style="width:300px;">
+        <div class="wf-heading-sm">Easy Scheduling</div>
+        <div class="wf-text">Book appointments online 24/7 at your convenience.</div>
+      </div>
+      <div style="width:300px;">
+        <div class="wf-heading-sm">Flexible Times</div>
+        <div class="wf-text">Choose from a wide range of available time slots.</div>
+      </div>
+      <div style="width:300px;">
+        <div class="wf-heading-sm">Instant Confirmation</div>
+        <div class="wf-text">Receive immediate confirmation via email and SMS.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="prop-caption">Properties table</div>
+
+<br><br>
+<p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
+  Custom Components — Mybizz CS · Generated for Anvil Implementation · 2026-05-27
+</p>
+
+</body>
+</html>
