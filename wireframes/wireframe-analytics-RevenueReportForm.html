@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Campaign Wireframes</title>
+<title>Mybizz CS — RevenueReportForm Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -29,8 +29,8 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Campaign Wireframes</h1>
-<p class="subtitle">Email Campaign Management</p>
+<h1>Mybizz CS — RevenueReportForm Wireframe</h1>
+<p class="subtitle">Analytics Dashboard Components</p>
 
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -38,55 +38,24 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span>
 </div>
 
-<h2>EmailCampaignListForm — Campaign List</h2>
+<h2>RevenueReportForm — Revenue Report</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_campaigns (ColumnPanel)</span>
+  <span class="wf-label">col_revenue (ColumnPanel)</span>
 
   <div class="wf-panel">
-    <div class="wf-heading-sm">Email Campaigns</div>
-    <div class="cn">hdg_campaigns_title <span class="ct">(Heading)</span> <span class="cfixed">"Email Campaigns"</span></div>
+    <div class="wf-heading-sm">Revenue Report</div>
+    <div class="cn">hdg_report_title <span class="ct">(Heading)</span> <span class="cfixed">"Revenue Report"</span></div>
   </div>
 
   <div class="wf-panel">
-    <span class="wf-label">txt_search <span class="ct">(TextBox)</span></span>
-    <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <span class="wf-label">dp_date_range <span class="ct">(DatePicker)</span></span>
+    <div class="cn">dp_date_range <span class="ct">(DatePicker)</span> <span class="cfixed">(W)</span></div>
   </div>
 
   <div class="wf-panel">
-    <span class="wf-label">dg_campaigns <span class="ct">(DataGrid)</span></span>
-    <div class="wf-text">Campaign list table</div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-<table class="props">
-  <tr><th>Type</th><th>Name</th><th>Text / Label</th><th>Property</th></tr>
-</table>
-
-<h2>EmailCampaignEditorForm — Campaign Editor</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_campaign_editor (ColumnPanel)</span>
-
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Campaign Details</div>
-    <div class="cn">hdg_editor_title <span class="ct">(Heading)</span> <span class="cfixed">"Campaign Editor"</span></div>
-  </div>
-
-  <div class="wf-panel">
-    <span class="wf-label">txt_campaign_name <span class="ct">(TextBox)</span></span>
-    <div class="cn">txt_campaign_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-  </div>
-
-  <div class="wf-panel">
-    <span class="wf-label">txt_subject <span class="ct">(TextBox)</span></span>
-    <div class="cn">txt_subject <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-  </div>
-
-  <div class="wf-panel">
-    <span class="wf-label">txt_body_html <span class="ct">(TextArea)</span></span>
-    <div class="cn">txt_body_html <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span></div>
+    <span class="wf-label">plot_revenue_breakdown <span class="ct">(Plot)</span></span>
+    <div class="wf-text">Revenue breakdown chart</div>
   </div>
 </div>
 

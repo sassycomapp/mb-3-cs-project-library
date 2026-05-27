@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Contacts Wireframes</title>
+<title>Mybizz CS — ContactViewerForm Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -42,7 +42,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Contacts Wireframes</h1>
+<h1>Mybizz CS — ContactViewerForm Wireframe</h1>
 <p class="subtitle">Contact Management — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -51,100 +51,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>ContactListForm — Contacts List</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_content (ColumnPanel)</span>
-
-  <div class="wf-panel-h">
-    <span class="wf-label">flow_search_filters (FlowPanel)</span>
-    <div>
-      <div class="wf-textbox">&nbsp;</div>
-      <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-    </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_segment <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    </div>
-  </div>
-
-  <div class="wf-panel">
-    <span class="wf-label">dg_contacts (DataGrid)</span>
-    <div style="font-size:11px;color:#999;padding:8px 0;text-align:center;">Data Grid with columns: Name, Email, Phone, Status, Total Spent, Actions</div>
-    <div class="cn">dg_contacts <span class="ct">(DataGrid)</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-filled">+ Add Contact</div>
-      <div class="cn">btn_add_contact <span class="ct">(Button)</span> <span class="cfixed">"+ Add Contact"</span></div>
-    </div>
-    <div>
-      <div class="wf-btn-outlined">Import CSV</div>
-      <div class="cn">btn_import_csv <span class="ct">(Button)</span> <span class="cfixed">"Import CSV"</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-
-<h2 class="pagebreak">ContactEditorForm — Create/Edit Contact</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_contact_editor (ColumnPanel)</span>
-
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Contact Details</div>
-    <div class="cn">hdg_section_details <span class="ct">(Heading)</span> <span class="cfixed">"Contact Details"</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_first_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_last_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_phone <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-dd">&nbsp;</div>
-    <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-dd">&nbsp;</div>
-    <div class="cn">dd_segment <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textarea">&nbsp;</div>
-    <div class="cn">txt_notes <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-heading-sm">Tags</div>
-    <div class="cn">hdg_section_tags <span class="ct">(Heading)</span> <span class="cfixed">"Tags"</span></div>
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_tags <span class="ct">(TextBox)</span> <span class="cfixed">"VIP, Recurring, etc."</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-outlined">Cancel</div>
-      <div class="cn">btn_cancel <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span></div>
-    </div>
-    <div>
-      <div class="wf-btn-filled">Save Contact</div>
-      <div class="cn">btn_save <span class="ct">(Button)</span> <span class="cfixed">"Save Contact"</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-
-<h2 class="pagebreak">ContactViewerForm — Contact Detail View</h2>
+<h2>ContactViewerForm — Contact Detail View</h2>
 
 <div class="wf-outer">
   <span class="wf-label">col_contact_viewer (ColumnPanel)</span>

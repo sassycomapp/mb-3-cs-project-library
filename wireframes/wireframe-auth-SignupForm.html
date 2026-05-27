@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — SignupForm Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-hidden { border: 2px dashed #aaa; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #f7f7f7; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-label-hidden { position: absolute; top: -10px; left: 10px; background: #f7f7f7; font-size: 11px; font-weight: bold; color: #aaa; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
+.wf-dd::after { content: " ▾"; color: #aaa; }
+.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
+.wf-checkbox::before { content: "☐ "; }
+.wf-image { border: 2px dashed #ccc; border-radius: 4px; padding: 8px 16px; font-size: 11px; color: #ccc; display: inline-block; margin: 6px 0 0; }
+.wf-fileloader { border: 2px dashed #888; border-radius: 4px; padding: 8px 16px; font-size: 12px; color: #777; display: inline-block; margin: 6px 0 0; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.wf-spacer { height: 6px; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
+.dash { color: #bbb; }
+.warn { color: #c00; font-weight: bold; }
+.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — SignupForm Wireframe</h1>
+<p class="subtitle">Authentication Forms — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<!-- ════════════════════════ SIGNUP FORM ════════════════════════ -->
+<h2>SignupForm — New User Registration</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_signup (ColumnPanel)</span>
+
+  <div class="wf-heading-lg">Create Account</div>
+  <div class="cn">hdg_create_account <span class="ct">(Heading)</span> <span class="cfixed">"Create Account"</span></div>
+
+  <div class="wf-panel">
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_business_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_password <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-textbox">&nbsp;</div>
+    <div class="cn">txt_confirm_password <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-spacer"></div>
+    <div class="wf-checkbox">I agree to the Terms of Service and Privacy Policy</div>
+    <div class="cn">cb_agree_terms <span class="ct">(Checkbox)</span> <span class="cfixed">"I agree..."</span></div>
+
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Create Account</div>
+    <div class="cn">btn_create_account <span class="ct">(Button)</span> <span class="cfixed">"Create Account"</span></div>
+
+    <div class="wf-spacer"></div>
+    <div class="wf-text">Already have an account? Sign in</div>
+    <div class="cn">hdg_sign_in_prompt <span class="ct">(Heading)</span></div>
+  </div>
+</div>
+
+<div class="prop-caption">Properties table</div>
+
+<br><br>
+<p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
+  Auth Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-10
+</p>
+
+</body>
+</html>

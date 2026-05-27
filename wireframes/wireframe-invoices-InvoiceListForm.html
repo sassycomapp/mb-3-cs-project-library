@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Invoices Wireframes</title>
+<title>Mybizz CS — InvoiceListForm Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -40,7 +40,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Invoices Wireframes</h1>
+<h1>Mybizz CS — InvoiceListForm Wireframe</h1>
 <p class="subtitle">Invoice Management — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -81,124 +81,6 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div>
       <div class="wf-btn-filled">+ Create Invoice</div>
       <div class="cn">btn_create_invoice <span class="ct">(Button)</span> <span class="cfixed">"+ Create Invoice"</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-
-<h2 class="pagebreak">InvoiceEditorForm — Create/Edit Invoice</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_invoice_editor (ColumnPanel)</span>
-
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Invoice Details</div>
-    <div class="cn">hdg_section_details <span class="ct">(Heading)</span> <span class="cfixed">"Invoice Details"</span></div>
-
-    <div class="wf-dd">&nbsp;</div>
-    <div class="cn">dd_customer <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">dp_invoice_date <span class="ct">(DatePicker)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">dp_due_date <span class="ct">(DatePicker)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-heading-sm">Line Items</div>
-    <div class="cn">hdg_section_items <span class="ct">(Heading)</span> <span class="cfixed">"Line Items"</span></div>
-    <div class="wf-image">[ Add line items ]</div>
-    <div class="cn">dg_invoice_items <span class="ct">(DataGrid)</span></div>
-    <div class="wf-btn-filled" style="margin-top: 8px;">+ Add Item</div>
-    <div class="cn">btn_add_item <span class="ct">(Button)</span> <span class="cfixed">"+ Add Item"</span></div>
-  </div>
-
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Notes</div>
-    <div class="cn">hdg_section_notes <span class="ct">(Heading)</span> <span class="cfixed">"Notes"</span></div>
-    <div class="wf-textarea">&nbsp;</div>
-    <div class="cn">txt_notes <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-outlined">Cancel</div>
-      <div class="cn">btn_cancel <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span></div>
-    </div>
-    <div>
-      <div class="wf-btn-filled">Save Invoice</div>
-      <div class="cn">btn_save <span class="ct">(Button)</span> <span class="cfixed">"Save Invoice"</span></div>
-    </div>
-    <div>
-      <div class="wf-btn-outlined">Send</div>
-      <div class="cn">btn_send <span class="ct">(Button)</span> <span class="cfixed">"Send"</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-
-<h2 class="pagebreak">InvoiceViewerForm — Invoice Detail View</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_invoice_viewer (ColumnPanel)</span>
-
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Invoice #INV-2026-001</div>
-    <div class="cn">hdg_invoice_number <span class="ct">(Heading)</span> <span class="cfixed">"Invoice #INV-2026-001"</span></div>
-
-    <div class="wf-panel-h">
-      <div>
-        <div class="wf-text">Bill To:</div>
-        <div class="cn">hdg_bill_to <span class="ct">(Heading)</span> <span class="cfixed">"Jane Smith"</span></div>
-        <div class="wf-text">jane@email.com</div>
-        <div class="cn">hdg_bill_email <span class="ct">(Heading)</span></div>
-      </div>
-      <div>
-        <div class="wf-text">Invoice Date:</div>
-        <div class="cn">hdg_invoice_date <span class="ct">(Heading)</span> <span class="cfixed">"May 10, 2026"</span></div>
-        <div class="wf-text">Due Date:</div>
-        <div class="cn">hdg_due_date <span class="ct">(Heading)</span> <span class="cfixed">"May 24, 2026"</span></div>
-      </div>
-    </div>
-
-    <div class="wf-panel">
-      <div class="wf-image">[ Invoice Line Items Table ]</div>
-      <div class="cn">dg_invoice_items_view <span class="ct">(DataGrid)</span></div>
-    </div>
-
-    <div class="wf-panel-h">
-      <div>
-        <div class="wf-text">Subtotal:</div>
-        <div class="cn">hdg_subtotal_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight: bold;">R 2,500.00</div>
-        <div class="cn">hdg_subtotal_value <span class="ct">(Heading)</span></div>
-      </div>
-      <div>
-        <div class="wf-text">Tax (15%):</div>
-        <div class="cn">hdg_tax_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight: bold;">R 375.00</div>
-        <div class="cn">hdg_tax_value <span class="ct">(Heading)</span></div>
-      </div>
-      <div>
-        <div class="wf-text">Total:</div>
-        <div class="cn">hdg_total_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight: bold; font-size: 16px;">R 2,875.00</div>
-        <div class="cn">hdg_total_value <span class="ct">(Heading)</span></div>
-      </div>
-    </div>
-
-    <div class="wf-panel-h" style="margin-top:10px;">
-      <span class="wf-label">flow_actions (FlowPanel)</span>
-      <div>
-        <div class="wf-btn-outlined">Download PDF</div>
-        <div class="cn">btn_download_pdf <span class="ct">(Button)</span> <span class="cfixed">"Download PDF"</span></div>
-      </div>
-      <div>
-        <div class="wf-btn-filled">Send Invoice</div>
-        <div class="cn">btn_send_invoice <span class="ct">(Button)</span> <span class="cfixed">"Send Invoice"</span></div>
-      </div>
     </div>
   </div>
 </div>

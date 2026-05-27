@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Dashboard Wireframes</title>
+<title>Mybizz CS — ActivityFeed Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -46,7 +46,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Dashboard Wireframes</h1>
+<h1>Mybizz CS — ActivityFeed Wireframe</h1>
 <p class="subtitle">Dashboard & Components — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -54,101 +54,6 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
-
-<!-- ════════════════════════ DASHBOARD FORM ════════════════════════ -->
-<h2>DashboardForm — Admin Dashboard</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_content (ColumnPanel)</span>
-
-  <!-- Metric Cards Row -->
-  <div class="wf-panel-h">
-    <span class="wf-label">card_revenue (Card)</span>
-    <div>
-      <div class="wf-heading-sm">💰 R 12,450</div>
-      <div class="cn">hdg_revenue_value <span class="ct">(Heading)</span></div>
-      <div class="wf-text">Revenue This Month</div>
-      <div class="cn">hdg_revenue_label <span class="ct">(Heading)</span></div>
-    </div>
-    <div>
-      <div class="wf-heading-sm">📅 48</div>
-      <div class="cn">hdg_bookings_value <span class="ct">(Heading)</span></div>
-      <div class="wf-text">Bookings This Month</div>
-      <div class="cn">hdg_bookings_label <span class="ct">(Heading)</span></div>
-    </div>
-    <div>
-      <div class="wf-heading-sm">👥 156</div>
-      <div class="cn">hdg_contacts_value <span class="ct">(Heading)</span></div>
-      <div class="wf-text">Total Contacts</div>
-      <div class="cn">hdg_contacts_label <span class="ct">(Heading)</span></div>
-    </div>
-    <div>
-      <div class="wf-heading-sm">📧 89%</div>
-      <div class="cn">hdg_email_value <span class="ct">(Heading)</span></div>
-      <div class="wf-text">Email Open Rate</div>
-      <div class="cn">hdg_email_label <span class="ct">(Heading)</span></div>
-    </div>
-  </div>
-
-  <!-- Charts Row -->
-  <div class="wf-panel-h">
-    <span class="wf-label">col_revenue_chart (ColumnPanel)</span>
-    <div>
-      <div class="wf-heading-sm">Revenue Trend</div>
-      <div class="cn">hdg_revenue_chart_title <span class="ct">(Heading)</span></div>
-      <div class="wf-image">[ Plot Chart ]</div>
-      <div class="cn">plot_revenue <span class="ct">(Plot)</span></div>
-    </div>
-    <div>
-      <div class="wf-heading-sm">Bookings by Month</div>
-      <div class="cn">hdg_bookings_chart_title <span class="ct">(Heading)</span></div>
-      <div class="wf-image">[ Plot Chart ]</div>
-      <div class="cn">plot_bookings <span class="ct">(Plot)</span></div>
-    </div>
-  </div>
-
-  <!-- Recent Bookings -->
-  <div class="wf-panel">
-    <span class="wf-label">card_recent_bookings (Card)</span>
-    <div style="display: flex; justify-content: space-between;">
-      <div>
-        <div class="wf-heading-sm">Recent Bookings</div>
-        <div class="cn">hdg_recent_bookings_title <span class="ct">(Heading)</span></div>
-      </div>
-      <div>
-        <a href="#" class="wf-text">View All →</a>
-        <div class="cn">lnk_view_all <span class="ct">(Link)</span></div>
-      </div>
-    </div>
-    <div class="wf-image">[ Data Grid ]</div>
-    <div class="cn">dg_recent_bookings <span class="ct">(DataGrid)</span></div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-
-<!-- ════════════════════════ METRIC CARD COMPONENT ════════════════════════ -->
-<h2 class="pagebreak">MetricCard — Reusable Metric Component</h2>
-<p style="font-size:12px;color:#666;margin-bottom:16px;">This is a reusable component used in DashboardForm</p>
-
-<div class="wf-outer">
-  <span class="wf-label">metric_card (ColumnPanel)</span>
-
-  <div class="wf-panel-h">
-    <span class="wf-label">icon_container (ColumnPanel)</span>
-    <div class="wf-image">[ Icon ]</div>
-    <div class="cn">img_icon <span class="ct">(Image)</span></div>
-  </div>
-
-  <div>
-    <div class="wf-heading-sm">R 12,450</div>
-    <div class="cn">hdg_value <span class="ct">(Heading)</span></div>
-    <div class="wf-text">Revenue This Month</div>
-    <div class="cn">hdg_label <span class="ct">(Heading)</span></div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
 
 <!-- ════════════════════════ ACTIVITY FEED COMPONENT ════════════════════════ -->
 <h2 class="pagebreak">ActivityFeed — Activity Timeline Component</h2>

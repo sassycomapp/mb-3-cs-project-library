@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Tasks Wireframes</title>
+<title>Mybizz CS — BlankLayout Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -16,18 +16,11 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
-.wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
 .wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
 .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
 .prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
 table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
@@ -35,13 +28,12 @@ table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: l
 table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
 table.props tr:nth-child(even) td { background: #f9f9f9; }
 .dash { color: #bbb; }
-.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
 </style>
 </head>
 <body>
 
-<h1>Mybizz CS — Tasks Wireframes</h1>
-<p class="subtitle">Task Management — Anvil Construction Guide</p>
+<h1>Mybizz CS — BlankLayout Wireframe</h1>
+<p class="subtitle">Layout Templates — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -49,39 +41,21 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>TaskListForm — Task List</h2>
+<h2>BlankLayout — Blank Layout (No Sidebar)</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_content (ColumnPanel)</span>
+  <span class="wf-label">structure (ColumnPanel)</span>
 
-  <div class="wf-panel-h">
-    <span class="wf-label">flow_search_filters (FlowPanel)</span>
-    <div>
-      <div class="wf-textbox">&nbsp;</div>
-      <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-    </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_contact <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    </div>
+  <div class="wf-panel">
+    <span class="wf-label">app_bar (Container)</span>
+    <div class="wf-heading-sm">Page Title</div>
+    <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Page Title"</span></div>
   </div>
 
   <div class="wf-panel">
-    <span class="wf-label">dg_tasks (DataGrid)</span>
-    <div style="font-size:11px;color:#999;padding:8px 0;text-align:center;">Data Grid with columns: Task Title, Contact, Due Date, Status, Assigned To, Actions</div>
-    <div class="cn">dg_tasks <span class="ct">(DataGrid)</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-filled">+ Add Task</div>
-      <div class="cn">btn_add_task <span class="ct">(Button)</span> <span class="cfixed">"+ Add Task"</span></div>
-    </div>
+    <span class="wf-label">content (ColumnPanel)</span>
+    <div class="wf-text">[ Content area ]</div>
+    <div class="cn">col_content <span class="ct">(ColumnPanel)</span></div>
   </div>
 </div>
 
@@ -89,7 +63,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 
 <br><br>
 <p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
-  Tasks Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-10
+  Layout Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-10
 </p>
 
 </body>

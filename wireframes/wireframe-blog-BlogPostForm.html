@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Blog Wireframes</title>
+<title>Mybizz CS — BlogPostForm Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -22,6 +22,7 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-dd::after { content: " ▾"; color: #aaa; }
 .wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
 .wf-checkbox::before { content: "☐ "; }
+.wf-image { border: 2px dashed #ccc; border-radius: 4px; padding: 8px 16px; font-size: 11px; color: #ccc; display: inline-block; margin: 6px 0 0; }
 .wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
@@ -40,7 +41,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Blog Wireframes</h1>
+<h1>Mybizz CS — BlogPostForm Wireframe</h1>
 <p class="subtitle">Blog Management — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -49,124 +50,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>BlogListForm — Blog Posts List</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_content (ColumnPanel)</span>
-
-  <div class="wf-panel-h">
-    <span class="wf-label">flow_search_filters (FlowPanel)</span>
-    <div>
-      <div class="wf-textbox">&nbsp;</div>
-      <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-    </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_category <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    </div>
-  </div>
-
-  <div class="wf-panel">
-    <span class="wf-label">dg_posts (DataGrid)</span>
-    <div style="font-size:11px;color:#999;padding:8px 0;text-align:center;">Data Grid with columns: Title, Category, Author, Published Date, Status, Views, Actions</div>
-    <div class="cn">dg_posts <span class="ct">(DataGrid)</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-filled">+ Create Post</div>
-      <div class="cn">btn_create_post <span class="ct">(Button)</span> <span class="cfixed">"+ Create Post"</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-
-<h2 class="pagebreak">BlogEditorForm — Create/Edit Blog Post</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_blog_editor (ColumnPanel)</span>
-
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Post Details</div>
-    <div class="cn">hdg_section_details <span class="ct">(Heading)</span> <span class="cfixed">"Post Details"</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_title <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_slug <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-dd">&nbsp;</div>
-    <div class="cn">dd_category <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textarea" style="height: 200px;">&nbsp;</div>
-    <div class="cn">txt_content <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-heading-sm">SEO Settings</div>
-    <div class="cn">hdg_section_seo <span class="ct">(Heading)</span> <span class="cfixed">"SEO Settings"</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_meta_title <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_meta_description <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-  </div>
-
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Featured Image</div>
-    <div class="cn">hdg_section_image <span class="ct">(Heading)</span> <span class="cfixed">"Featured Image"</span></div>
-    <div class="wf-image">[ Upload image ]</div>
-    <div class="cn">fu_featured_image <span class="ct">(FileLoader)</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-outlined">Cancel</div>
-      <div class="cn">btn_cancel <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span></div>
-    </div>
-    <div>
-      <div class="wf-checkbox">Publish immediately</div>
-      <div class="cn">cb_publish <span class="ct">(Checkbox)</span> <span class="cfixed">"Publish immediately"</span></div>
-    </div>
-    <div>
-      <div class="wf-btn-filled">Save</div>
-      <div class="cn">btn_save <span class="ct">(Button)</span> <span class="cfixed">"Save"</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-
-<h2 class="pagebreak">CategoryManagementForm — Blog Categories</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_categories (ColumnPanel)</span>
-
-  <div class="wf-panel">
-    <span class="wf-label">dg_categories (DataGrid)</span>
-    <div style="font-size:11px;color:#999;padding:8px 0;text-align:center;">Data Grid with columns: Category Name, Slug, Post Count, Sort Order, Actions</div>
-    <div class="cn">dg_categories <span class="ct">(DataGrid)</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-filled">+ Add Category</div>
-      <div class="cn">btn_add_category <span class="ct">(Button)</span> <span class="cfixed">"+ Add Category"</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-
-<h2 class="pagebreak">BlogPostForm — View Single Blog Post</h2>
+<h2>BlogPostForm — View Single Blog Post</h2>
 
 <div class="wf-outer">
   <span class="wf-label">col_post_viewer (ColumnPanel)</span>
