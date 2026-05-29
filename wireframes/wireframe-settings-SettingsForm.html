@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — SettingsForm Wireframe</title>
+<title>Mybizz CS — Settings Form</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -46,7 +46,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — SettingsForm Wireframe</h1>
+<h1>Mybizz CS — Settings Wireframes</h1>
 <p class="subtitle">Settings & Configuration — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -55,7 +55,6 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<!-- SETTINGS FORM -->
 <h2>SettingsForm — Main Settings Tabbed Interface</h2>
 
 <div class="wf-outer">
@@ -78,6 +77,10 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div>
       <div class="wf-btn-outlined">Theme & Branding</div>
       <div class="cn">btn_tab_theme <span class="ct">(Button)</span> <span class="cfixed">"Theme & Branding"</span></div>
+    </div>
+    <div>
+      <div class="wf-btn-outlined">Color Palette</div>
+      <div class="cn">btn_tab_palette <span class="ct">(Button)</span> <span class="cfixed">"Color Palette"</span></div>
     </div>
     <div>
       <div class="wf-btn-outlined">Users</div>
@@ -110,8 +113,73 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   </div>
 
   <div class="wf-panel-hidden">
-    <span class="wf-label-hidden">col_palette (ColumnPanel)</span>
-    <div style="font-size:11px;color:#ccc;padding:5px 0;text-align:center;">PaletteSettingsForm custom component — see PaletteSettingsForm wireframe</div>
+    <span class="wf-label-hidden">col_users (ColumnPanel)</span>
+    <div style="font-size:11px;color:#ccc;padding:5px 0;text-align:center;">Tab 5 content — see User Management wireframe</div>
+  </div>
+
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_vault (ColumnPanel)</span>
+    <div style="font-size:11px;color:#ccc;padding:5px 0;text-align:center;">Tab 6 content — see Vault Form wireframe</div>
+  </div>
+        <div>
+          <div class="wf-btn-outlined" style="background:#E85A4F; color:#fff;">Warm Coral</div>
+          <div class="cn">btn_warm <span class="ct">(Button)</span> <span class="cfixed">"Warm Coral"</span></div>
+        </div>
+        <div>
+          <div class="wf-btn-outlined" style="background:#2E7D6D; color:#fff;">Calm Teal</div>
+          <div class="cn">btn_calm <span class="ct">(Button)</span> <span class="cfixed">"Calm Teal"</span></div>
+        </div>
+        <div>
+          <div class="wf-btn-outlined" style="background:#6750A4; color:#fff;">Sophisticated Purple</div>
+          <div class="cn">btn_sophisticated <span class="ct">(Button)</span> <span class="cfixed">"Sophisticated Purple"</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wf-panel-hidden">
+      <span class="wf-label-hidden">preview_panel (ColumnPanel)</span>
+      
+      <div class="wf-panel">
+        <div class="wf-heading-sm">Palette Preview</div>
+        <div class="cn">hdg_preview <span class="ct">(Heading)</span></div>
+        
+        <div class="wf-text">Best for [business type]</div>
+        <div class="cn">txt_preview_business <span class="ct">(Text)</span></div>
+        
+        <div class="wf-spacer"></div>
+        
+        <div class="wf-panel" style="padding:8px 12px;">
+          <div class="wf-btn-filled">Sample Primary Button</div>
+          <div class="cn">btn_preview_primary <span class="ct">(Button)</span> <span class="cfixed">"Sample Primary Button"</span></div>
+          
+          <div class="wf-spacer"></div>
+          
+          <div class="wf-btn-outlined">Sample Secondary Button</div>
+          <div class="cn">btn_preview_secondary <span class="ct">(Button)</span> <span class="cfixed">"Sample Secondary Button"</span></div>
+          
+          <div class="wf-spacer"></div>
+          
+          <div class="wf-panel" style="padding:12px; background:#f0f0f0;">
+            <div style="font-size:12px; font-weight:bold; margin-bottom:4px;">Sample Card</div>
+            <div style="font-size:11px; color:#666;">Sample card content with tonal background</div>
+          </div>
+          <div class="cn">card_preview_tonal <span class="ct">(Card)</span></div>
+        </div>
+        
+        <div class="wf-spacer"></div>
+        
+        <div class="wf-btn-filled">Apply Palette</div>
+        <div class="cn">btn_apply <span class="ct">(Button)</span> <span class="cfixed">"Apply Palette"</span></div>
+      </div>
+    </div>
+
+    <div class="wf-text">Changes apply immediately across all pages</div>
+    <div class="cn">txt_disclaimer <span class="ct">(Text)</span> <span class="cfixed">"Changes apply immediately across all pages"</span></div>
+  </div>
+
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_users (ColumnPanel)</span>
+    <div style="font-size:11px;color:#ccc;padding:5px 0;text-align:center;">Tab 5 content — see User Management wireframe</div>
   </div>
 
   <div class="wf-panel-hidden">
@@ -134,11 +202,6 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </div>
 
 <div class="prop-caption">Properties table</div>
-
-<br><br>
-<p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
-  Settings Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-10
-</p>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — ServiceListForm Wireframe</title>
+<title>Mybizz CS — Service List Form</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -46,7 +46,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — ServiceListForm Wireframe</h1>
+<h1>Mybizz CS — Services Wireframes</h1>
 <p class="subtitle">Service Management — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -55,7 +55,6 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<!-- SERVICE LIST FORM -->
 <h2>ServiceListForm — Services List</h2>
 
 <div class="wf-outer">
@@ -83,6 +82,104 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">dg_services <span class="ct">(DataGrid)</span></div>
   </div>
 
+  <div class="wf-panel">
+    <div class="wf-heading-sm">Time Lapse Carousel</div>
+    <div class="cn">hdg_section_carousel <span class="ct">(Heading)</span> <span class="cfixed">"Featured Services"</span></div>
+
+    <div class="wf-panel">
+      <span class="wf-label">col_carousel (ColumnPanel)</span>
+
+      <div class="wf-panel">
+        <span class="wf-label">flow_track (FlowPanel)</span>
+        <div style="display:flex; gap:0;">
+          <div class="wf-image">[Slide 1]</div>
+          <div class="cn">img_slide_1 <span class="ct">(Image)</span></div>
+          
+          <div class="wf-image">[Slide 2]</div>
+          <div class="cn">img_slide_2 <span class="ct">(Image)</span></div>
+          
+          <div class="wf-image">[Slide 3]</div>
+          <div class="cn">img_slide_3 <span class="ct">(Image)</span></div>
+        </div>
+      </div>
+
+      <div class="wf-panel">
+        <span class="wf-label">btn_prev (IconButton)</span>
+        <div class="wf-icon-btn">[◀]</div>
+        <div class="cn">btn_prev <span class="ct">(IconButton)</span> <span class="cfixed">icon: "chevron_left"</span></div>
+      </div>
+
+      <div class="wf-panel">
+        <span class="wf-label">btn_next (IconButton)</span>
+        <div class="wf-icon-btn">[▶]</div>
+        <div class="cn">btn_next <span class="ct">(IconButton)</span> <span class="cfixed">icon: "chevron_right"</span></div>
+      </div>
+
+      <div class="wf-panel">
+        <span class="wf-label">flow_dots (FlowPanel)</span>
+        <div style="display:flex; gap:8px;">
+          <div class="wf-btn-text" style="width:8px; height:8px; border-radius:50%; padding:0;">●</div>
+          <div class="cn">btn_dot_0 <span class="ct">(Button)</span></div>
+          
+          <div class="wf-btn-text" style="width:8px; height:8px; border-radius:50%; padding:0;">○</div>
+          <div class="cn">btn_dot_1 <span class="ct">(Button)</span></div>
+          
+          <div class="wf-btn-text" style="width:8px; height:8px; border-radius:50%; padding:0;">○</div>
+          <div class="cn">btn_dot_2 <span class="ct">(Button)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-panel">
+    <div class="wf-heading-sm">Time Lapse Carousel</div>
+    <div class="cn">hdg_section_carousel <span class="ct">(Heading)</span> <span class="cfixed">"Featured Services"</span></div>
+
+    <div class="wf-panel">
+      <span class="wf-label">col_carousel (ColumnPanel)</span>
+
+      <div class="wf-panel">
+        <span class="wf-label">flow_track (FlowPanel)</span>
+        <div style="display:flex; gap:0;">
+          <div class="wf-image">[Slide 1]</div>
+          <div class="cn">img_slide_1 <span class="ct">(Image)</span></div>
+          
+          <div class="wf-image">[Slide 2]</div>
+          <div class="cn">img_slide_2 <span class="ct">(Image)</span></div>
+          
+          <div class="wf-image">[Slide 3]</div>
+          <div class="cn">img_slide_3 <span class="ct">(Image)</span></div>
+        </div>
+      </div>
+
+      <div class="wf-panel">
+        <span class="wf-label">btn_prev (IconButton)</span>
+        <div class="wf-icon-btn">[◀]</div>
+        <div class="cn">btn_prev <span class="ct">(IconButton)</span> <span class="cfixed">icon: "chevron_left"</span></div>
+      </div>
+
+      <div class="wf-panel">
+        <span class="wf-label">btn_next (IconButton)</span>
+        <div class="wf-icon-btn">[▶]</div>
+        <div class="cn">btn_next <span class="ct">(IconButton)</span> <span class="cfixed">icon: "chevron_right"</span></div>
+      </div>
+
+      <div class="wf-panel">
+        <span class="wf-label">flow_dots (FlowPanel)</span>
+        <div style="display:flex; gap:8px;">
+          <div class="wf-btn-text" style="width:8px; height:8px; border-radius:50%; padding:0;">●</div>
+          <div class="cn">btn_dot_0 <span class="ct">(Button)</span></div>
+          
+          <div class="wf-btn-text" style="width:8px; height:8px; border-radius:50%; padding:0;">○</div>
+          <div class="cn">btn_dot_1 <span class="ct">(Button)</span></div>
+          
+          <div class="wf-btn-text" style="width:8px; height:8px; border-radius:50%; padding:0;">○</div>
+          <div class="cn">btn_dot_2 <span class="ct">(Button)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="wf-panel-h" style="margin-top:10px;">
     <span class="wf-label">flow_actions (FlowPanel)</span>
     <div>
@@ -93,11 +190,6 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </div>
 
 <div class="prop-caption">Properties table</div>
-
-<br><br>
-<p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
-  Services Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-10
-</p>
 
 </body>
 </html>

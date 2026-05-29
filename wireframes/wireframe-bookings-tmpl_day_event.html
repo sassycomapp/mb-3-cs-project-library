@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — tmpl_day_event Wireframe</title>
+<title>Mybizz CS — tmpl_day_event</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -43,7 +43,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — tmpl_day_event Wireframe</h1>
+<h1>Mybizz CS — Bookings Wireframes</h1>
 <p class="subtitle">Booking Management — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -52,56 +52,56 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>tmpl_day_event — Day Event Template</h2>
+<h2 class="pagebreak">Template Subforms</h2>
 
-<p><strong>Purpose:</strong> Renders a single event in the day view</p>
-<p><strong>Used by:</strong> RepeatingPanel in frm_calendar_day</p>
+<p><strong>Purpose:</strong> Template subforms used by BookingCalendarForm for dynamic calendar views</p>
 
-<div class="wf-outer">
-  <span class="wf-label">tmpl_day_event (template subform)</span>
+<div class="template-section">
+  <div class="template-title">tmpl_day_event — Day Event Template</div>
+  <p><strong>Purpose:</strong> Renders a single event in the day view</p>
+  <p><strong>Used by:</strong> RepeatingPanel in frm_calendar_day</p>
   
-  <!-- Interactive Card -->
-  <div class="wf-panel">
-    <span class="wf-label">card_event (InteractiveCard)</span>
-    <div class="wf-text">Clickable event container</div>
-    <div class="cn">card_event <span class="ct">(InteractiveCard)</span></div>
+  <div class="wf-outer">
+    <span class="wf-label">tmpl_day_event (template subform)</span>
+    
+    <!-- Interactive Card -->
+    <div class="wf-panel">
+      <span class="wf-label">card_event (InteractiveCard)</span>
+      <div class="wf-text">Clickable event container</div>
+      <div class="cn">card_event <span class="ct">(InteractiveCard)</span></div>
+    </div>
+    
+    <!-- Card Content -->
+    <div class="wf-panel">
+      <span class="wf-label">card_content (CardContentContainer)</span>
+      <div class="wf-text">Container for event details</div>
+      <div class="cn">card_content <span class="ct">(CardContentContainer)</span></div>
+    </div>
+    
+    <!-- Event Title -->
+    <div class="wf-panel">
+      <span class="wf-label">hdg_title (Heading)</span>
+      <div class="wf-heading-sm">Massage Therapy</div>
+      <div class="cn">hdg_title <span class="ct">(Heading)</span></div>
+    </div>
+    
+    <!-- Event Time -->
+    <div class="wf-panel">
+      <span class="wf-label">hdg_time (Heading)</span>
+      <div class="wf-heading-sm">9:00 AM - 10:00 AM</div>
+      <div class="cn">hdg_time <span class="ct">(Heading)</span></div>
+    </div>
+    
+    <!-- Event Description (Optional) -->
+    <div class="wf-panel">
+      <span class="wf-label">hdg_description (Heading)</span>
+      <div class="wf-text">Optional event description</div>
+      <div class="cn">hdg_description <span class="ct">(Heading)</span></div>
+    </div>
   </div>
-  
-  <!-- Card Content -->
-  <div class="wf-panel">
-    <span class="wf-label">card_content (CardContentContainer)</span>
-    <div class="wf-text">Container for event details</div>
-    <div class="cn">card_content <span class="ct">(CardContentContainer)</span></div>
-  </div>
-  
-  <!-- Event Title -->
-  <div class="wf-panel">
-    <span class="wf-label">hdg_title (Heading)</span>
-    <div class="wf-heading-sm">Massage Therapy</div>
-    <div class="cn">hdg_title <span class="ct">(Heading)</span></div>
-  </div>
-  
-  <!-- Event Time -->
-  <div class="wf-panel">
-    <span class="wf-label">hdg_time (Heading)</span>
-    <div class="wf-heading-sm">9:00 AM - 10:00 AM</div>
-    <div class="cn">hdg_time <span class="ct">(Heading)</span></div>
-  </div>
-  
-  <!-- Event Description (Optional) -->
-  <div class="wf-panel">
-    <span class="wf-label">hdg_description (Heading)</span>
-    <div class="wf-text">Optional event description</div>
-    <div class="cn">hdg_description <span class="ct">(Heading)</span></div>
-  </div>
+
+  <div class="prop-caption">Properties table</div>
 </div>
-
-<div class="prop-caption">Properties table</div>
-
-<br><br>
-<p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
-  Bookings Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-20
-</p>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — OnboardingForm Wireframe</title>
+<title>Mybizz CS — Leads Wireframes</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -17,17 +17,11 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
 .wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
-.wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
 .wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
 .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
 .prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
 table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
@@ -35,13 +29,12 @@ table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: l
 table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
 table.props tr:nth-child(even) td { background: #f9f9f9; }
 .dash { color: #bbb; }
-.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
 </style>
 </head>
 <body>
 
-<h1>Mybizz CS — OnboardingForm Wireframe</h1>
-<p class="subtitle">Onboarding Flow — Anvil Construction Guide</p>
+<h1>Mybizz CS — Leads Wireframes</h1>
+<p class="subtitle">Lead Capture — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -49,54 +42,30 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<!-- ════════════════════════ ONBOARDING FORM ════════════════════════ -->
-<h2>OnboardingForm — Initial Business Setup</h2>
+<h2>LeadCaptureForm — Lead Capture Form</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_onboarding (ColumnPanel)</span>
+  <span class="wf-label">col_lead_capture (ColumnPanel)</span>
 
   <div class="wf-panel">
-    <div class="wf-heading-sm">Business Information</div>
-    <div class="cn">hdg_business_info <span class="ct">(Heading)</span> <span class="cfixed">"Business Information"</span></div>
+    <div class="wf-heading-sm">Capture Your Details</div>
+    <div class="cn">hdg_form_title <span class="ct">(Heading)</span> <span class="cfixed">"Capture Your Details"</span></div>
+
+    <div class="wf-text">Enter your information below to receive our free guide.</div>
+    <div class="cn">hdg_form_description <span class="ct">(Heading)</span></div>
 
     <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_business_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_business_description <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_business_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_phone <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_business_phone <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-  </div>
-
-  <div class="wf-panel">
-    <span class="wf-label">custom_palette_selection (Custom Component)</span>
-    <div class="cn">custom_palette_selection <span class="ct">(Custom Component)</span> <span class="cfixed">OnboardingPaletteForm</span></div>
-    <div class="wf-text">Palette selection component — see OnboardingPaletteForm wireframe</div>
-  </div>
-
-  <div class="wf-panel">
-    <div class="wf-heading-sm">System Settings</div>
-    <div class="cn">hdg_system_settings <span class="ct">(Heading)</span> <span class="cfixed">"System Settings"</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">dd_system_timezone <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">dd_system_currency <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    <div class="wf-text">System currency (immutable after first transaction)</div>
-    <div class="cn">txt_currency_note <span class="ct">(Text)</span> <span class="cfixed">"System currency (immutable after first transaction)"</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-filled">Continue</div>
-      <div class="cn">btn_continue <span class="ct">(Button)</span> <span class="cfixed">"Continue"</span></div>
-    </div>
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Get Free Guide</div>
+    <div class="cn">btn_submit <span class="ct">(Button)</span> <span class="cfixed">"Get Free Guide"</span></div>
   </div>
 </div>
 
@@ -104,7 +73,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 
 <br><br>
 <p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
-  Onboarding Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-27
+  Leads Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-10
 </p>
 
 </body>

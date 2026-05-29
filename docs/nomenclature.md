@@ -25,6 +25,11 @@
 | Manager | Client's operational manager — `Manager` role in RBAC |
 | Admin | Client's administrative staff — `Admin` role in RBAC |
 
+Client and Owner are principally defined as;
+"Client" refers to the entity, business or individual, which signs up to the Mybizz management application as a new client/ subscriber who is then onboarded and then becomes the "owner" Of that client instance 
+"Owner" refers to the entity which signed up with the maybizz management application for a new client instance and is therefore the person responsible for that client instance
+
+
 ---
 
 ## Form Naming

@@ -298,6 +298,7 @@ The following are explicitly not part of the Consulting & Services platform:
 - Direct costs at capacity (Anvil hosting): $18,000/year
 
 **Onboarding tiers:**
+- Free trial. (included): 30 day 30 minute guided call costs the "Free Trial" client $50
 - Standard (included): 30-minute guided call
 - Premium ($100): Mybizz handles all setup
 

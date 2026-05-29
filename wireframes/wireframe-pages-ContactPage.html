@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — ContactPage Wireframe</title>
+<title>Mybizz CS — ContactPage</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -22,7 +22,6 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-dd::after { content: " ▾"; color: #aaa; }
 .wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
 .wf-checkbox::before { content: "☐ "; }
-.wf-image { border: 2px dashed #ccc; border-radius: 4px; padding: 8px 16px; font-size: 11px; color: #ccc; display: inline-block; margin: 6px 0 0; }
 .wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
@@ -41,7 +40,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — ContactPage Wireframe</h1>
+<h1>Mybizz CS — Public Pages Wireframes</h1>
 <p class="subtitle">Website Pages — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -50,7 +49,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>ContactPage — Contact Form</h2>
+<h2 class="pagebreak">ContactPage — Contact Form</h2>
 
 <div class="wf-outer">
   <span class="wf-label">col_contact_form (ColumnPanel)</span>
@@ -77,12 +76,94 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   </div>
 </div>
 
-<div class="prop-caption">Properties table</div>
+<div class="wf-outer">
+  <span class="wf-label">col_footer (ColumnPanel)</span>
 
-<br><br>
-<p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
-  Public Pages Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-10
-</p>
+  <div class="wf-panel">
+    <span class="wf-label">flow_top (FlowPanel)</span>
+    <div style="display:flex; gap:32px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:200px;">
+        <div class="wf-image">[Logo]</div>
+        <div class="cn">img_logo <span class="ct">(Image)</span></div>
+        
+        <div class="wf-text">Business Name</div>
+        <div class="cn">txt_business_name <span class="ct">(Text)</span></div>
+      </div>
+      
+      <div style="flex:1; min-width:200px;">
+        <div class="wf-text">Accreditation 1</div>
+        <div class="cn">txt_creds_1 <span class="ct">(Text)</span></div>
+        
+        <div class="wf-text">Accreditation 2</div>
+        <div class="cn">txt_creds_2 <span class="ct">(Text)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-panel">
+    <span class="wf-label">flow_middle (FlowPanel)</span>
+    <div style="display:flex; gap:32px; flex-wrap:wrap; margin-top:32px;">
+      <div>
+        <div style="display:flex; gap:16px;">
+          <div class="wf-icon-btn">[FB]</div>
+          <div class="cn">btn_fb <span class="ct">(IconButton)</span> <span class="cfixed">icon: "facebook"</span></div>
+          
+          <div class="wf-icon-btn">[IG]</div>
+          <div class="cn">btn_ig <span class="ct">(IconButton)</span> <span class="cfixed">icon: "instagram"</span></div>
+          
+          <div class="wf-icon-btn">[LI]</div>
+          <div class="cn">btn_li <span class="ct">(IconButton)</span> <span class="cfixed">icon: "linkedin"</span></div>
+          
+          <div class="wf-icon-btn">[TW]</div>
+          <div class="cn">btn_tw <span class="ct">(IconButton)</span> <span class="cfixed">icon: "twitter"</span></div>
+        </div>
+        <div class="wf-spacer"></div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <div class="wf-text">Privacy Policy</div>
+          <div class="cn">lnk_privacy <span class="ct">(Link)</span></div>
+          
+          <div class="wf-text">Terms & Conditions</div>
+          <div class="cn">lnk_terms <span class="ct">(Link)</span></div>
+          
+          <div class="wf-text">Cookie Policy</div>
+          <div class="cn">lnk_cookie <span class="ct">(Link)</span></div>
+        </div>
+      </div>
+      
+      <div style="flex:1; min-width:300px;">
+        <div class="wf-heading-sm">Contact Us</div>
+        <div class="cn">hdg_contact <span class="ct">(Heading)</span> <span class="cfixed">"Contact Us"</span></div>
+        
+        <div class="wf-text">email@example.com</div>
+        <div class="cn">txt_email <span class="ct">(Text)</span></div>
+        
+        <div class="wf-text">+1 234 567 890</div>
+        <div class="cn">txt_phone <span class="ct">(Text)</span></div>
+        
+        <div class="wf-btn-text">Send Message</div>
+        <div class="cn">btn_contact_us <span class="ct">(Button)</span> <span class="cfixed">"Send Message"</span></div>
+        
+        <div class="wf-spacer"></div>
+        
+        <div class="wf-image">[Google Maps Embed]</div>
+        <div class="cn">html_map <span class="ct">(HtmlTemplate)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-panel">
+    <span class="wf-label">flow_copyright (FlowPanel)</span>
+    <div style="display:flex; gap:16px; justify-content:space-between; border-top: 1px solid #999; padding-top: 16px; margin-top: 32px;">
+      <div class="wf-text">© 2026 Business Name. All rights reserved.</div>
+      <div class="cn">txt_copyright <span class="ct">(Text)</span></div>
+      
+      <div class="wf-text">Back to Top</div>
+      <div class="cn">lnk_back_top <span class="ct">(Link)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="prop-caption">Properties table</div>
 
 </body>
 </html>

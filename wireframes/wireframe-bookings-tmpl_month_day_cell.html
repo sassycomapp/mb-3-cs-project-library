@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — tmpl_month_day_cell Wireframe</title>
+<title>Mybizz CS — tmpl_month_day_cell</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -43,7 +43,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — tmpl_month_day_cell Wireframe</h1>
+<h1>Mybizz CS — Bookings Wireframes</h1>
 <p class="subtitle">Booking Management — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -52,42 +52,42 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>tmpl_month_day_cell — Month Day Cell Template</h2>
+<h2 class="pagebreak">Template Subforms</h2>
 
-<p><strong>Purpose:</strong> Renders a single day cell in the month grid</p>
-<p><strong>Used by:</strong> HTMLTemplate in frm_calendar_month</p>
+<p><strong>Purpose:</strong> Template subforms used by BookingCalendarForm for dynamic calendar views</p>
 
-<div class="wf-outer">
-  <span class="wf-label">tmpl_month_day_cell (HTMLTemplate)</span>
+<div class="template-section">
+  <div class="template-title">tmpl_month_day_cell — Month Day Cell Template</div>
+  <p><strong>Purpose:</strong> Renders a single day cell in the month grid</p>
+  <p><strong>Used by:</strong> HTMLTemplate in frm_calendar_month</p>
   
-  <!-- Day Container -->
-  <div class="wf-panel">
-    <span class="wf-label">calendar_day_container (div)</span>
-    <div class="wf-text">CSS class: calendar-day</div>
-    <div class="cn">calendar_day_container <span class="ct">(div)</span></div>
+  <div class="wf-outer">
+    <span class="wf-label">tmpl_month_day_cell (HTMLTemplate)</span>
+    
+    <!-- Day Container -->
+    <div class="wf-panel">
+      <span class="wf-label">calendar_day_container (div)</span>
+      <div class="wf-text">CSS class: calendar-day</div>
+      <div class="cn">calendar_day_container <span class="ct">(div)</span></div>
+    </div>
+    
+    <!-- Day Number -->
+    <div class="wf-panel">
+      <span class="wf-label">hdg_day_number (Heading)</span>
+      <div class="wf-heading-sm">15</div>
+      <div class="cn">hdg_day_number <span class="ct">(Heading)</span></div>
+    </div>
+    
+    <!-- Events Container -->
+    <div class="wf-panel">
+      <span class="wf-label">flow_events (FlowPanel)</span>
+      <div class="wf-text">Container for events on this day</div>
+      <div class="cn">flow_events <span class="ct">(FlowPanel)</span></div>
+    </div>
   </div>
-  
-  <!-- Day Number -->
-  <div class="wf-panel">
-    <span class="wf-label">hdg_day_number (Heading)</span>
-    <div class="wf-heading-sm">15</div>
-    <div class="cn">hdg_day_number <span class="ct">(Heading)</span></div>
-  </div>
-  
-  <!-- Events Container -->
-  <div class="wf-panel">
-    <span class="wf-label">flow_events (FlowPanel)</span>
-    <div class="wf-text">Container for events on this day</div>
-    <div class="cn">flow_events <span class="ct">(FlowPanel)</span></div>
-  </div>
+
+  <div class="prop-caption">Properties table</div>
 </div>
-
-<div class="prop-caption">Properties table</div>
-
-<br><br>
-<p style="font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px;">
-  Bookings Wireframes — Mybizz CS · Generated for Anvil Implementation · 2026-05-20
-</p>
 
 </body>
 </html>
