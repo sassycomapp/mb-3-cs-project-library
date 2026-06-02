@@ -47,6 +47,7 @@ Client and Owner are principally defined as;
 | `EditorForm` | Create or edit | `ContactEditorForm` |
 | `ViewerForm` | Read-only detail | `ContactViewerForm` |
 | `DashboardForm` | Summary with metrics | `DashboardForm` |
+| `Page` | Public-facing read-only page | `PrivacyPolicyPage`, `TermsConditionsPage` |
 
 ---
 

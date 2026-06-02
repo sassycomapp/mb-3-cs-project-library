@@ -271,7 +271,8 @@ relayout()
    - Create RBAC tests
 
 2. Begin Stage 1.4: Settings & Configuration
-   - Implement SettingsForm with sub-sections
+   - Implement SettingsForm with 11-tab structure and RBAC governance
+   - Implement Return to Onboarding button
    - Create settings tests
 
 3. Begin Stage 1.5: The Vault
@@ -327,3 +328,9 @@ After `/design-html`, proceed with:
 ---
 
 *End of file — Design HTML Report*
+
+---
+
+## Reconciliation Note (2026-06-02)
+
+This report has been reviewed against the reconciled design authority (DESIGN.md, 2026-06-02). The generated HTML files, design system implementation, and Pretext implementation details remain valid. The Phase 1 implementation references have been updated: SettingsForm now has an 11-tab structure with RBAC governance (not sub-sections). See DESIGN.md "Forms and Pages > SettingsForm" for the current tab structure.

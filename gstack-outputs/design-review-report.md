@@ -317,4 +317,12 @@ Engineering review decision #7 specified "30-minute inactivity timeout + 'Rememb
 
 ---
 
+## Reconciliation Note (2026-06-02)
+
+This report has been reviewed against the reconciled design authority (DESIGN.md, 2026-06-02). The visual QA findings and fixes remain valid. The design system verification (colours, typography, spacing, accessibility, responsive behaviour) remains aligned with the current DESIGN.md.
+
+The implementation references in the original "Next Steps" section have been updated: SettingsForm now has an 11-tab structure with RBAC governance (not sub-sections). See DESIGN.md "Forms and Pages > SettingsForm" for the current tab structure.
+
+---
+
 *End of file — Design Review Report*

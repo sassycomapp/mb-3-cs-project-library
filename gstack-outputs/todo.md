@@ -1,6 +1,6 @@
 # Todo
 
-**Last Updated:** 2026-06-01 — Updated per full planning & design sanity audit.  
+**Last Updated:** 2026-06-02 — Updated per plan-design-review. Wireframe and DESIGN.md status reconciled.  
 Items are reconciled against all ADRs, onboarding plan, design system, and wireframes.
 
 ---
@@ -163,17 +163,17 @@ Items are reconciled against all ADRs, onboarding plan, design system, and wiref
 
 ### 5.1 Onboarding Form Wireframe
 
-- **Tag:** [Planned]  
-- **Status:** Missing; must be created.  
-- **Priority:** High  
+- **Tag:** [Done]  
+- **Status:** Created 2026-06-02.  
 - **Details:**  
-  Create `wireframes/wireframe-onboarding-OnboardingForm.html` showing the 6-step onboarding flow:  
+  `wireframes/wireframe-onboarding-OnboardingForm.html` — 6-step onboarding flow:  
   1. Welcome and orientation  
   2. Business Profile → link to Settings → Business Profile tab  
   3. Palette Selection → link to Settings → Palette tab  
   4. System Currency → dropdown + confirm (required, immutable after first transaction)  
   5. Legal Acknowledgement → text + checkbox + confirm (required, logged in Mybizz_management)  
   6. Completion → onboarding complete  
+  Includes progress indicator, bidirectional navigation buttons, and completion state.  
   **Source:** Onboarding implementation plan §3.3, §9.3, wireframe reconciliation audit  
   **Priority:** High  
 
@@ -203,12 +203,12 @@ Items are reconciled against all ADRs, onboarding plan, design system, and wiref
 
 ### 6.1 Custom Components Inventory in DESIGN.md
 
-- **Tag:** [Planned]  
-- **Status:** DESIGN.md currently outdated; must be updated.  
+- **Tag:** [Done]  
+- **Status:** DESIGN.md reconciled 2026-06-02.  
 - **Details:**  
-  - Remove `OnboardingPaletteForm` from custom components inventory.  
-  - Mark `PaletteSettingsForm` as local/form-specific (SettingsForm only).  
-  - Add `ClauseBuilder` as a shared custom component with summary of responsibilities.  
+  - `OnboardingPaletteForm` removed from custom components inventory.  
+  - `PaletteSettingsForm` marked as local/form-specific (SettingsForm only).  
+  - `ClauseBuilder` added as a shared custom component with summary of responsibilities.  
   **Build Plan:** Stage 4.2 (Public Website Pages) — documentation task  
 
 ---

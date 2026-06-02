@@ -253,33 +253,9 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 </div>
 
 <!-- Properties Table -->
-<h2>Properties Table — Key Components</h2>
-
-<div class="prop-caption">btn_return_onboarding (Button)</div>
-<div class="prop-note">Visible only when onboarding is in progress. Returns Owner to onboarding form.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>secondary-button</td><td>Outlined, green border for visibility</td></tr>
-<tr><td>text</td><td>"Return to Onboarding"</td><td>Fixed at design time</td></tr>
-<tr><td>visible</td><td>[Dynamic]</td><td>True when business_profile.onboarding_status == "in_progress"</td></tr>
-<tr><td>on_click</td><td>open_form('OnboardingForm')</td><td>Returns to onboarding with progress preserved</td></tr>
-</table>
-
-<div class="prop-caption">flow_tabs (FlowPanel)</div>
-<div class="prop-note">Tab navigation using M3 buttons. Active tab is filled, inactive tabs are outlined.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>—</td><td>FlowPanel with horizontal layout</td></tr>
-<tr><td>children</td><td>11 Button components</td><td>One per tab</td></tr>
-</table>
-
-<div class="prop-caption">Tab Panels (col_business, col_palette, etc.)</div>
-<div class="prop-note">Only one tab panel visible at a time. Tab buttons toggle visibility.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>section-container</td><td></td></tr>
-<tr><td>visible</td><td>[Dynamic]</td><td>True only for the active tab</td></tr>
-</table>
+<h2>Properties Table</h2>
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
 
 ---
 

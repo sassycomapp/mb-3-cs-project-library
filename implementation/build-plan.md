@@ -1,8 +1,8 @@
 # Mybizz CS — Build Plan (Definitive)
 
 **Vertical:** Consulting & Services
-**V1 Scope:** Blog, Landing Pages, Campaigns, Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack
-**V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal
+**V1 Scope:** Blog, Landing Pages, Campaigns, Pre-built Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack
+**V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal, Time Tracking, Custom Segment Builder
 **Schema:** 38 tables (plus onboarding additions per authoritative-schema.md)
 **Architecture:** Dependency-based (master_template → client instances)
 **Review Status:** CEO + Eng Review Complete (All 5 phases engineering reviews complete)
@@ -14,7 +14,7 @@
 | Component | Status | Notes |
 |-----------|--------|-------|
 | **Schema** | ✅ 100% Complete | 38 tables designed and documented |
-| **Wireframes** | ✅ 100% Complete | 47 HTML screens created |
+| **Wireframes** | ✅ 100% Complete | 50 HTML screens created |
 | **Design Direction** | ✅ 100% Complete | M3 design approved |
 | **ADR Documentation** | ✅ 100% Complete | 23 ADRs written (see adr-index.md) |
 | **Positioning Strategy** | ✅ 100% Complete | Business model documented |
@@ -28,7 +28,7 @@
 
 ---
 
-**Last Updated:** 2026-05-31  
+**Last Updated:** 2026-06-02  
 **Next Review:** After Phase 1 implementation completion
 
 ---
@@ -71,7 +71,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
    - Phase 1.1-1.6 with TODO 11 verification in Stage 1.2
 
 3. **Phase 2** — Transactional Core (TODO 10, 12 embedded)
-   - Phase 2.1-2.6 with TODO 10, 12 in Stage 2.4
+   - Phase 2.1-2.5 with TODO 10, 12 in Stage 2.4 (Time Tracking deferred to V2)
 
 4. **Phase 3** — CRM + Email (TODO 6, 8, 9 embedded)
    - Phase 3.1-3.5 with TODO 6, 8, 9 in Stage 3.1
@@ -296,6 +296,8 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 
 **Dependency:** Phase 1 must be complete (Foundation, Vault, Auth, Navigation, Settings)
 
+**Note:** Time Tracking (originally Stage 2.6) has been deferred to V2 per CEO review. It is a separate product concern that does not belong in the core booking/payment pipeline.
+
 ### Stage 2.1: Service Catalogue
 
 **Deliverables:**
@@ -390,20 +392,6 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Payment recording updates invoice status
 - ✅ Multi-currency display working
 
-### Stage 2.6: Time Tracking (V1)
-
-**Deliverables:**
-- `time_entries` table populated
-- `time_entries/TimeEntriesForm` — time tracking UI
-- `server_bookings/time_service.py` — time tracking server functions
-
-**Completion Criteria:**
-- ✅ Time entries can be logged against bookings/services
-- ✅ Staff attribution working
-- ✅ Billable vs non-billable distinction
-- ✅ Time entries visible in admin panel
-- ✅ Time entries link to bookings correctly
-
 ---
 
 ## Phase 3: CRM + Email
@@ -462,14 +450,16 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 
 **Deliverables:**
 - `segments` table — segment definitions
-- `crm/SegmentManagerForm` — segment builder UI
+- Pre-built segments: New Leads, Active Customers, Inactive Customers, High Value
+- Segment contact counts accurate and cached
+- Segments usable for campaign targeting
+
+**Note:** Custom segment builder (filter by tags, status, spend, booking history) has been deferred to V2 per CEO review. Pre-built segments are sufficient for V1 campaign targeting.
 
 **Completion Criteria:**
 - ✅ Pre-built segments working (New Leads, Active Customers, Inactive Customers, High Value)
-- ✅ Custom segment builder functional (filter by tags, status, spend, booking history)
 - ✅ Segment contact counts accurate and cached
 - ✅ Segments usable for campaign targeting
-- ✅ CSV export per segment working
 
 ### Stage 3.4: Tasks & Automation
 
@@ -557,6 +547,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Privacy Policy page renders clauses from `privacy_policy` table
 - ✅ Terms & Conditions page renders clauses from `t_and_c` table
 - ✅ Policy editor screen functional in Settings → Website
+- ✅ Policy version history display functional (publish timestamps, version tracking)
 - ✅ Privacy and Terms pages editable from admin via clause builder
 - ✅ Mobile responsive
 - ✅ SEO meta tags functional
@@ -700,7 +691,7 @@ Phase 0 (Pre-Implementation) → Phase 1 (Foundation) → Phase 2 (Transactional
 ### Data Flow Dependencies
 - `users` table (Phase 1) → all other tables
 - `contacts` table (Phase 3) → bookings, tasks, campaigns
-- `services` table (Phase 2) → bookings, time_entries
+- `services` table (Phase 2) → bookings
 - `bookings` table (Phase 2) → invoices, contact_events
 - `email_campaigns` table (Phase 3) → contact_campaigns
 - `landing_pages` table (Phase 3) → leads → contacts
@@ -750,6 +741,8 @@ After Phase 5 launch, begin V2 development:
 - Complex task automation
 - PayPal integration
 - Additional homepage templates
+- Time tracking (logging billable hours against bookings/services)
+- Custom segment builder (filter by tags, status, spend, booking history)
 
 ---
 

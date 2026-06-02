@@ -148,7 +148,7 @@ These are one-time elements that must be completed on the onboarding form. They 
 
 **Outputs:**
 - Updates `business_profile.system_currency`
-- Logs confirmation event in Mybizz_management amendment log
+- Logs confirmation event in client-instance audit log (sync to Mybizz_management amendment log when Mybizz_management is built — out of scope for current project)
 
 #### 3.4.2 Legal Acknowledgement
 
@@ -181,7 +181,7 @@ These are one-time elements that must be completed on the onboarding form. They 
 - Updates `business_profile.legal_ack_accepted_at: datetime.now()`
 - Updates `business_profile.data_governance_ack_accepted: True`
 - Updates `business_profile.data_governance_ack_accepted_at: datetime.now()`
-- Logs acknowledgement event in Mybizz_management amendment log
+- Logs acknowledgement event in client-instance audit log (sync to Mybizz_management amendment log when Mybizz_management is built — out of scope for current project)
 
 ### 3.5 Navigation to Settings
 
@@ -191,7 +191,9 @@ The onboarding form includes buttons that link to specific Settings tabs:
 |-------------------|---------------------|---------|
 | Business Profile | "Configure in Settings →" | Jump to Settings → Business Profile tab |
 | Palette Selection | "Choose Palette in Settings →" | Jump to Settings → Palette tab |
-| Payment Gateway | "Configure Gateway in Settings →" | Jump to Settings → Payment Gateway tab |
+| Completion | "Configure Gateway in Settings →" | Jump to Settings → Payment Gateway tab (post-onboarding) |
+
+> **Note:** These are convenience navigation affordances within the onboarding form, not required onboarding steps. Payment Gateway configuration is a post-onboarding Settings concern (see ADR-019). The gateway link appears in the completion step as a suggested next action.
 
 **Navigation behaviour:**
 - Clicking the button opens the Settings form with the relevant tab active
@@ -441,12 +443,12 @@ Post-Onboarding (accessible at any time)
 2. **Implement tabbed SettingsForm** — M3 button tabs, RBAC-governed, "Return to Onboarding" button
 3. **Implement system currency selection** — dropdown + confirmation button, immutability after first transaction
 4. **Implement legal acknowledgement** — text with critical excerpts, "Read more" link, checkbox, confirmation button
-5. **Implement Mybizz_management amendment log** — append-only credential change history
+5. **Implement client-instance audit log** — append-only credential change logging (sync to Mybizz_management amendment log when Mybizz_management is built — out of scope for current project)
 6. **Add new columns to `business_profile` table** (9 columns listed in Section 7.1)
 
 ### 12.2 Dependencies
 
-- **Mybizz_management app** must be built before provisioning can be implemented
+- **Mybizz_management app** is out of scope for current project. Client-instance audit log captures events locally; sync to Mybizz_management deferred.
 - **`business_profile` table schema** must be updated with new columns
 - **`PaletteSettingsForm` custom component** must be available for palette selection in Settings
 - **The Vault** must be available for post-onboarding API key storage

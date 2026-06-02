@@ -205,66 +205,9 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 </div>
 
 <!-- Properties Table -->
-<h2>Properties Table — Key Components</h2>
-
-<div class="prop-caption">dd_document_type (DropdownMenu)</div>
-<div class="prop-note">Selects which policy document to edit. Switches data source between privacy_policy and t_and_c tables.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>outlined-select</td><td>M3 outlined dropdown</td></tr>
-<tr><td>items</td><td>["Privacy Policy", "Terms & Conditions"]</td><td>Fixed at design time</td></tr>
-<tr><td>on_change</td><td>load_document(doc_type)</td><td>Loads clauses from selected table</td></tr>
-</table>
-
-<div class="prop-caption">btn_publish (Button)</div>
-<div class="prop-note">Publishes current clauses to the public-facing policy page.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>primary-button</td><td>Filled</td></tr>
-<tr><td>text</td><td>"Publish"</td><td>Fixed at design time</td></tr>
-<tr><td>on_click</td><td>publish_policy()</td><td>Writes clauses to data source, updates public page</td></tr>
-</table>
-
-<div class="prop-caption">btn_add_clause (Button)</div>
-<div class="prop-note">Opens the add clause form panel.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>secondary-button</td><td>Outlined</td></tr>
-<tr><td>text</td><td>"+ Add Custom Clause"</td><td>Fixed at design time</td></tr>
-<tr><td>on_click</td><td>show_clause_form()</td><td>Sets col_clause_form.visible = True</td></tr>
-</table>
-
-<div class="prop-caption">rp_seeded_clauses (RepeatingPanel)</div>
-<div class="prop-note">Repeating panel for seeded clauses from master template. Editable text, not deletable.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>section-container</td><td></td></tr>
-<tr><td>items</td><td>[Dynamic]</td><td>Filtered by selected document type and category, where is_seeded = True</td></tr>
-</table>
-
-<div class="prop-caption">rp_custom_clauses (RepeatingPanel)</div>
-<div class="prop-note">Repeating panel for custom clauses added by Owner. Editable and deletable.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>section-container</td><td></td></tr>
-<tr><td>items</td><td>[Dynamic]</td><td>Filtered by selected document type and category, where is_seeded = False</td></tr>
-</table>
-
-<div class="prop-caption">col_clause_form (ColumnPanel)</div>
-<div class="prop-note">Hidden by default. Visible when adding or editing a clause.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>form-container</td><td></td></tr>
-<tr><td>visible</td><td>False</td><td>Shown by btn_add_clause or Edit link click</td></tr>
-</table>
-
-<div class="prop-caption">col_version_history (ColumnPanel)</div>
-<div class="prop-note">Hidden by default. Visible after publish. Shows version history.</div>
-<table class="props">
-<tr><th>Property</th><th>Value</th><th>Notes</th></tr>
-<tr><td>role</td><td>section-container</td><td></td></tr>
-<tr><td>visible</td><td>False</td><td>Shown after btn_publish click</td></tr>
-</table>
+<h2>Properties Table</h2>
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
 
 ---
 

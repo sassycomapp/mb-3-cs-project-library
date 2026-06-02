@@ -1,7 +1,7 @@
 # Mybizz CS — DESIGN
 
-**Status:** Final consolidated design system  
-**Date:** 2026-05-27  
+**Status:** Reconciled canonical design system  
+**Date:** 2026-06-02  
 **Project:** Mybizz CS  
 **Platform:** Anvil.works with Material Design 3 (M3)  
 **Purpose:** Authoritative design system input for GStack workflows, especially `/design-shotgun` and `/design-html`.
@@ -17,10 +17,31 @@ This document is consolidated from the following approved design consultation ou
 
 - `design-direction.md` — primary source for visual direction, tokens, typography, spacing, elevation, Anvil role map, and component styling rules.
 - `design-consultation-plan-workflows.md` — source for workflow-specific component definitions, template inventory, implementation notes, schema additions, and design documentation expectations.
-- `design-consultation-plan-descriptive.md` — source for workstream framing, palette strategy, blog template strategy, layout architecture, and client-facing customization model.
+- `design-consultation-plan-descriprive.md` — source for workstream framing, palette strategy, blog template strategy, layout architecture, and client-facing customization model.
 
 Where these source documents overlap, this file takes precedence as the authoritative consolidated reference.
 If deeper implementation detail is needed, the source documents remain supporting references, but this file is the first design authority to consult.
+
+### Reconciliation Notes (2026-06-02)
+
+This file has been reconciled against:
+- `sanity-audit-final-report.md` (2026-06-01)
+- `plan-tune-verification-report.md` (2026-06-01)
+- `wireframe-reconciliation-audit.md` (2026-06-01)
+- `platform-overview.md` (current)
+- `nomenclature.md` (current)
+
+Key corrections applied:
+- OnboardingPaletteForm removed from active inventory (obsolete).
+- ClauseBuilder added as shared custom component.
+- PaletteSettingsForm downgraded to local/form-specific.
+- OnboardingForm, SettingsForm, PolicyEditorForm, PrivacyPolicyPage, TermsConditionsPage now explicitly covered.
+- SettingsForm updated to 11-tab structure with RBAC governance.
+- Onboarding/Settings architectural boundary reflected.
+- Legal acknowledgement placed in onboarding scope.
+- Payment gateway configuration placed in Settings scope.
+- Mybizzmanagement treated as out-of-scope context only.
+- privacy_policy and t_and_c tables added to schema expectations.
 
 ---
 
@@ -73,6 +94,7 @@ The intended character is:
 ## Dual-Context Product Tone
 
 The product has two distinct but related presentation contexts.
+Both contexts use one shared design system. The difference is in emphasis, density, and composition, not in building two separate design languages.
 
 ### Management UI
 
@@ -110,8 +132,6 @@ These two contexts must use the same underlying design system:
 - Same token structure.
 - Same core components.
 - Same role naming logic.
-
-The difference is in emphasis, density, and composition, not in building two separate design languages.
 
 ---
 
@@ -397,6 +417,117 @@ Template variation is allowed through arrangement, visibility, and composition, 
 
 ---
 
+## Forms and Pages
+
+This section defines the primary implementation-facing forms and pages in the Mybizz CS application. Each entry states its purpose, architectural boundary, and key design constraints.
+
+### OnboardingForm
+
+**Purpose:** Guided first-run experience for new Owners.  
+**Architecture:** Onboarding is a separate form, not part of Settings.  
+**Wireframe:** `wireframe-onboarding-OnboardingForm.html` (created).
+
+**Flow structure (6 steps):**
+1. Welcome and orientation.
+2. Business Profile — links to Settings Business Profile tab for detail editing.
+3. Palette Selection — links to Settings Palette tab for detail editing.
+4. System Currency — dropdown plus confirm button. Required. Immutable after first transaction. See ADR-016.
+5. Legal Acknowledgement — text, checkbox, confirm button. Required. Logged in Mybizz_management. See ADR-018.
+6. Completion — onboarding complete.
+
+**Key design rules:**
+- Progress indicator must be visible throughout.
+- Bidirectional navigation (back and forward) between steps.
+- "Go to Settings" links open the corresponding Settings tab and return to onboarding when done.
+- Legal acknowledgement is a required action in onboarding, not a mutable Settings configuration.
+- Payment gateway configuration is not part of onboarding. Onboarding links to Settings for gateway setup. See ADR-019.
+- Onboarding state is tracked in `business_profile.onboarding_status`. See ADR-023, ADR-025.
+
+### SettingsForm
+
+**Purpose:** Single tabbed form for all post-onboarding configuration.  
+**Architecture:** Settings is a single form with tab-based navigation using M3 buttons.  
+**Wireframe:** `wireframe-settings-SettingsForm.html` (recreated with 11 tabs).
+
+**Tab structure (11 tabs):**
+
+| Tab | Content | RBAC Visibility |
+|---|---|---|
+| Business Profile | Name, email, phone, address, timezone, entity type | Owner, Manager |
+| Palette | Brand colour selection (PaletteSettingsForm — local component) | Owner, Manager |
+| System Currency | Currency display (locked after first transaction) | Owner only |
+| Legal Acknowledgement | Read-only view of legal acknowledgements | Owner only |
+| Display Currency | Optional per-service currency override | Owner, Manager |
+| Payment Gateway | Stripe/Paystack configuration (API keys in Vault) | Owner only |
+| Services | Service catalogue management | Owner, Manager, Admin |
+| Users & Permissions | User management and RBAC | Owner only |
+| Email Configuration | Brevo SMTP and API settings | Owner only |
+| Theme | M3 theme customisation | Owner, Manager |
+| Feature Flags | Feature activation toggles | Owner only |
+
+**Key design rules:**
+- Tab visibility is RBAC-governed. Different roles see different tabs.
+- "Return to Onboarding" button in header — visible only when onboarding is in progress.
+- Vault access (within Payment Gateway tab) requires TOTP step-up per ADR-03.
+- Legal Acknowledgement tab is read-only. It displays acknowledgement history. The acknowledgement action itself belongs to onboarding.
+- Payment gateway configuration is a Settings concern, not an onboarding concern. See ADR-019.
+- PaletteSettingsForm is a local/form-specific component used only within the Palette tab.
+
+### PolicyEditorForm
+
+**Purpose:** Settings-hosted screen for editing Privacy Policy and Terms & Conditions using the ClauseBuilder component.  
+**Architecture:** Accessed from Settings. Uses ClauseBuilder as a shared custom component.  
+**Wireframe:** `wireframe-settings-PolicyEditorForm.html` (created).
+
+**Key design rules:**
+- Contains a document type selector (Privacy Policy vs Terms & Conditions).
+- Embeds the ClauseBuilder component, parameterized by document type.
+- Publish/update button writes to `privacy_policy` or `t_and_c` table and publishes to the corresponding public page.
+- See ADR-018.
+
+### ClauseBuilder (Shared Custom Component)
+
+**Purpose:** Standalone reusable clause editor for legal policy documents.  
+**Architecture:** Shared custom component used by Privacy Policy and Terms & Conditions editing flows.  
+**Wireframe:** `wireframe-custom-component-ClauseBuilder.html` (created).
+
+**Key design rules:**
+- Parameterized by document type (`privacy_policy` or `t_and_c`).
+- Category dropdown selector for clause grouping.
+- Seeded clauses from master template (green border, editable text, not deletable).
+- Custom clauses added by Owner (blue border, editable and deletable).
+- "+ Add Custom Clause" button reveals add form.
+- "Edit" link on each clause reveals edit form.
+- "Save" button writes changes to datatable and publishes to public page.
+- Has its own data model: `category`, `title`, `clause`, `sort_order`, `is_seeded`, `is_active`.
+- Used in 2+ places (PrivacyPolicyEditor, TermsConditionsEditor). Qualifies as shared.
+
+### PrivacyPolicyPage
+
+**Purpose:** Public-facing page that renders the Owner's privacy policy.  
+**Architecture:** Reads from `privacy_policy` table. Renders clauses grouped by category.  
+**Wireframe:** To be created.
+
+**Key design rules:**
+- Uses standard public page layout with FooterComponent.
+- Clauses rendered in category order, then sort_order within category.
+- Only active clauses (`is_active = True`) are displayed.
+- Follows public-facing UI tone (comfortable density, generous whitespace).
+
+### TermsConditionsPage
+
+**Purpose:** Public-facing page that renders the Owner's terms and conditions.  
+**Architecture:** Reads from `t_and_c` table. Renders clauses grouped by category.  
+**Wireframe:** To be created.
+
+**Key design rules:**
+- Uses standard public page layout with FooterComponent.
+- Clauses rendered in category order, then sort_order within category.
+- Only active clauses (`is_active = True`) are displayed.
+- Follows public-facing UI tone (comfortable density, generous whitespace).
+
+---
+
 ## Template and Layout Architecture
 
 ### Architecture Principle
@@ -493,30 +624,45 @@ Blog settings should support:
 
 ## Custom Components Inventory
 
-The design consultation established the following important custom components for V1:
+### Shared Custom Components (6)
 
-- `PaletteSettingsForm`
-- `OnboardingPaletteForm`
-- `BlogListTiledTemplate`
-- `BlogListListTemplate`
-- `BlogPostClassicTemplate`
-- `BlogPostTwoColumnTemplate`
-- `BlogPostFullWidthTemplate`
-- `VideoDisplayComponent` - Supports YouTube and other video sources for blog posts and homepage
-- `LeadCaptureTemplate`
-- `EventRegistrationTemplate`
-- `VslTemplate`
-- `HomePageClassicTemplate`
-- `HomePageServicesTemplate`
-- `HomePageBookingTemplate`
-- `HomePageMinimalistTemplate`
-- `FooterComponent`
-- `TimeLapseCarouselComponent` - Rotating service display on homepage
-- `ParallaxComponent` - Hero image parallax effect on homepage
+| Component | Where Used | Justification |
+|---|---|---|
+| VideoDisplayComponent | BlogPostForm, HomePage | Multi-source video support not in native M3. Supports YouTube (V1). |
+| FooterComponent | All public pages (6+) | Custom footer with logo, credentials, social links, policies, map, contact. Not in native M3. |
+| TimeLapseCarouselComponent | HomePage, ServicesForm | Auto-rotating carousel not in native M3. |
+| ParallaxComponent | Multiple public pages | Parallax scroll effect not in native M3. |
+| ClauseBuilder | PrivacyPolicyEditor, TermsConditionsEditor | Reusable clause editor parameterized by document type. Used in 2+ places. Not in native M3. |
+| BlogListTiledTemplate | Public blog listing | Tiled grid blog list view. Not in native M3. |
+| BlogListListTemplate | Public blog listing | List-with-thumbnail blog list view. Not in native M3. |
+| BlogPostClassicTemplate | Public blog post | Classic centered blog post layout. |
+| BlogPostTwoColumnTemplate | Public blog post | Two-column blog post layout with sidebar. |
+| BlogPostFullWidthTemplate | Public blog post | Full-width immersive blog post layout. |
+| HomePageClassicTemplate | Public homepage | Classic homepage variant. |
+| HomePageServicesTemplate | Public homepage | Services-focused homepage variant. |
+| HomePageBookingTemplate | Public homepage | Booking-focused homepage variant. |
+| HomePageMinimalistTemplate | Public homepage | Minimalist homepage variant. |
+| LeadCaptureTemplate | Landing pages | Lead capture landing page. |
+| EventRegistrationTemplate | Landing pages | Event registration landing page. |
+| VslTemplate | Landing pages | Video sales letter landing page. |
 
-These components must remain governed by the same token, typography, spacing, and role system defined in this document.
+### Local/Form-Specific Components (1)
 
-**Note:** AnimatedButtonComponent, AnimatedCardComponent, AnimatedLinkComponent, and AnimatedImageComponent have been removed from V1 scope as standard Anvil M3 components already provide sufficient hover and focus animations through role-based styling.
+| Component | Where Used | Reason |
+|---|---|---|
+| PaletteSettingsForm | SettingsForm Palette tab only | Only used in one form. Does not meet shared criteria. |
+
+### Removed from V1 Scope
+
+| Component | Reason |
+|---|---|
+| OnboardingPaletteForm | Obsolete. Onboarding palette selection is now part of OnboardingForm. |
+| AnimatedButtonComponent | Standard M3 components provide sufficient hover/focus animations via role-based styling. |
+| AnimatedCardComponent | Standard M3 components provide sufficient hover/focus animations via role-based styling. |
+| AnimatedLinkComponent | Standard M3 components provide sufficient hover/focus animations via role-based styling. |
+| AnimatedImageComponent | Standard M3 components provide sufficient hover/focus animations via role-based styling. |
+
+All custom components must remain governed by the same token, typography, spacing, and role system defined in this document.
 
 ---
 
@@ -587,6 +733,7 @@ Client-side palette caching may be used where appropriate, but implementation sh
 ## Design-Related Schema Expectations
 
 The design consultation established schema expectations tied to presentation and customization.
+These should be treated as approved design-support requirements, subject to alignment with the authoritative schema and implementation plan.
 
 ### business_profile additions
 
@@ -630,7 +777,41 @@ Expected fields include:
 - `created_at`
 - `updated_at`
 
-These schema expectations should be treated as approved design-support requirements, subject to alignment with the authoritative schema and implementation plan.
+### privacy_policy table
+
+Expected fields include:
+
+- `instance_id`
+- `category`
+- `title`
+- `clause`
+- `sort_order`
+- `is_seeded`
+- `is_active`
+- `created_at`
+- `updated_at`
+
+### t_and_c table
+
+Expected fields include:
+
+- `instance_id`
+- `category`
+- `title`
+- `clause`
+- `sort_order`
+- `is_seeded`
+- `is_active`
+- `created_at`
+- `updated_at`
+
+---
+
+## Mybizz_management Context
+
+Mybizz_management is **out of scope** for this project. The following is recorded as architectural context only. Mybizz_management is a separate Anvil application for platform operator tooling — client provisioning, health monitoring, billing automation, and update distribution. It is not part of master_template and is built only after the master template reaches launch.
+
+Relevant architectural context is documented in `platform-overview.md` section 17.
 
 ---
 
@@ -677,6 +858,8 @@ This document should be updated when any of the following change:
 - component roles
 - approved custom components
 - design-related schema requirements
+- form or page boundaries
+- onboarding or settings architecture
 
 When updated, this file remains the canonical design reference and supporting documents remain secondary references.
 
@@ -690,7 +873,7 @@ This section records how the source files map into this consolidated design auth
 |---|---|
 | `design-direction.md` | Core visual direction, tokens, spacing, typography, elevations, role map |
 | `design-consultation-plan-workflows.md` | Workflow details, custom components, schema additions, implementation notes |
-| `design-consultation-plan-descriptive.md` | Workstreams, palette model, blog template strategy, layout architecture |
+| `design-consultation-plan-descriprive.md` | Workstreams, palette model, blog template strategy, layout architecture |
 
 ---
 

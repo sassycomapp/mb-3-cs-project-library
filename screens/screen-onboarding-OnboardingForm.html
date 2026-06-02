@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Onboarding Form Implementation Screen</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
+table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
+th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
+td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
+tr:nth-child(even) td { background: #f9f9f9; }
+.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
+.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
+ul { margin: 0 0 16px 18px; padding: 0; }
+li { font-size: 13px; margin-bottom: 4px; }
+code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Onboarding Form Implementation Screen</h1>
+<p class="subtitle">OnboardingForm — Guided First-Run Experience — Anvil Construction Guide</p>
+<div class="meta">
+  <strong>Source wireframe:</strong> <code>wireframes/wireframe-onboarding-OnboardingForm.html</code><br>
+  <strong>Phase:</strong> Phase 1 &mdash; Stage 1.4: Settings &amp; Configuration<br>
+  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
+  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
+</div>
+
+<h2>Screen Purpose</h2>
+<p class="note">This screen file is the implementation counterpart of <code>wireframe-onboarding-OnboardingForm.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+
+<h2>Sections (from wireframe)</h2>
+<ul>
+      <li>Architecture Note</li>
+      <li>OnboardingForm — All 6 Steps</li>
+      <li>Properties Table — Key Components</li>
+      <li>Step Navigation Buttons</li>
+      <li>Settings Navigation (Bidirectional)</li>
+      <li>Behaviour Notes</li>
+      <li>Data State Transitions</li>
+      <li>ADR &amp; Document References</li>
+  <li><em>Refer to source wireframe for full annotated layout</em></li>
+</ul>
+
+<h2>Component Inventory (extracted from wireframe)</h2>
+<table>
+  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
+      <tr><td><code>hdg_onboarding_title</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_go_settings</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_step_indicator</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>progress_bar</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>hdg_step1_title</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_welcome_message</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step1_next</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>hdg_step2_title</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_step2_description</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step2_settings</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step2_back</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step2_next</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>hdg_step3_title</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_step3_description</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step3_settings</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step3_back</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step3_next</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>hdg_step4_title</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_step4_description</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_currency_warning</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>dd_system_currency</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_confirm_currency</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step4_back</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>btn_step4_next</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>hdg_step5_title</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_data_governance</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_data_download</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>txt_legal_responsibility</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>lnk_legal_compliance</code></td><td>—</td><td>Stub</td></tr>
+      <tr><td><code>cb_legal_ack</code></td><td>—</td><td>Stub</td></tr>
+</table>
+
+<h2>Implementation Notes</h2>
+<ul>
+  <li>Phase: <strong>Phase 1</strong></li>
+  <li>Stage: <strong>Stage 1.4</strong></li>
+  <li>Build-plan focus: <strong>Settings &amp; Configuration</strong></li>
+  <li>Source wireframe: <code>wireframes/wireframe-onboarding-OnboardingForm.html</code></li>
+</ul>
+
+<p class="note">End of screen file — screen-onboarding-OnboardingForm.html</p>
+
+</body>
+</html>

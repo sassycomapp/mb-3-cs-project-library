@@ -263,7 +263,7 @@ When a lead is captured from a landing page, both `leads` and `contacts` rows ar
 - Service catalogue (duration + unit pricing)
 - Bookings & appointments (calendar, availability, booking flow, reminders, recurring)
 - Payments & invoicing (Stripe + Paystack)
-- CRM & contacts (tags, segments, activity timeline, CSV import/export)
+- CRM & contacts (tags, pre-built segments, activity timeline, CSV import/export)
 - Email campaigns (Brevo — pre-built sequences, triggers, broadcasts)
 - Tasks (manual creation + basic auto-generation)
 - Blog (rich text editor, SEO, public listing)
@@ -278,6 +278,8 @@ When a lead is captured from a landing page, both `leads` and `contacts` rows ar
 - Complex task automation
 - Additional homepage templates beyond the four V1 templates
 - PayPal integration
+- Time tracking (logging billable hours against bookings/services)
+- Custom segment builder (filter by tags, status, spend, booking history)
 
 ## 15. What Is Out of Scope
 
