@@ -71,4 +71,4 @@ Components from excluded categories cannot be used without explicit ADR approval
 
 ---
 
-*End of ADR-014*
+*End of ADR-015*

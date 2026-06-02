@@ -22,7 +22,7 @@ Mybizz was originally designed as a multi-vertical open platform supporting four
 
 The entire codebase, database schema, and planning documents are scoped to Consulting & Services. Products, orders, shopping carts, shipping, room reservations, membership tiers, subscription billing, and hospitality-specific features are explicitly out of scope.
 
-**See:** ADR-009 (Multi-Vertical to Single-Vertical Conversion)
+**See:** `09-multi-vertical-to-single-vertical-conversion.md`
 
 ---
 
@@ -60,6 +60,9 @@ Each subscriber receives their own independent Anvil application. This instance 
 - Dashboard: revenue, booking count, customer totals — with period comparison
 - Settings: business profile, theme, currency, user & permissions management
 - The Vault: encrypted secrets store for all API keys — owner-only access
+- **Onboarding:** Onboarding is a separate form with required elements (currency selection, legal acknowledgement). Settings is a single tabbed form for all configuration. Bidirectional navigation between Onboarding and Settings. **[`25-onboarding-finality.md`]**
+
+**See:** `22-tiers-model.md`, `25-onboarding-finality.md`
 
 ### 5.2 Public-Facing Website
 - Standard pages: Home, About, Contact (with enquiry form), Privacy Policy, Terms & Conditions
@@ -171,11 +174,9 @@ Each client instance is a separate Anvil app with its own Data Tables. `app_tabl
 - `NavigationDrawerLayoutTemplate` is not used in the current architecture
 - `navigate_to` is not used
 
-**Note:** Native M3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationLink`, `NavigationRailLayout`) are fully supported by the M3 theme dependency but are not used in the current Mybizz architecture. This is a usage decision based on the custom layout approach. See ADR-002.
+**Note:** Native M3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationLink`, `NavigationRailLayout`) are fully supported by the M3 theme dependency but are not used in the current Mybizz architecture. This is a usage decision based on the custom layout approach. See `02-navigation-lambda-link-open-form.md`.
 
-**Note:** Native M3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationLink`, `NavigationRailLayout`) are fully supported by the M3 theme dependency but are not used in the current Mybizz architecture. This is a usage decision based on the custom layout approach. See ADR-002.
-
-**See:** ADR-002 (Navigation Standard)
+**See:** `02-navigation-lambda-link-open-form.md`
 
 ---
 
@@ -196,7 +197,7 @@ API keys and credentials are stored in The Vault — an encrypted secrets store 
 
 Access to the Vault is restricted to the Owner role and requires TOTP step-up authentication on every open.
 
-**See:** ADR-003 (Payment Security Boundary)
+**See:** `03-payment-security-boundary-vault.md`
 
 ---
 
@@ -213,9 +214,9 @@ Both gateways use the same gateway-agnostic service layer. Payment is integrated
 
 ## 11. Email and Communication
 
-Three distinct email systems serve different purposes and must not be conflated. Brevo replaces all Zoho products (ADR-001). Each client connects their own Brevo account. The free tier provides 300 emails/day with SMTP access included.
+Three distinct email systems serve different purposes and must not be conflated. Brevo replaces all Zoho products (`01-brevo-replaces-zoho-email.md`). Each client connects their own Brevo account. The free tier provides 300 emails/day with SMTP access included.
 
-**See:** ADR-001 (Brevo Replaces All Zoho Products)
+**See:** `01-brevo-replaces-zoho-email.md`
 
 ---
 
@@ -238,7 +239,7 @@ Role enforcement is server-side. Client-side navigation visibility is a UX conve
 ### 13.1 Schema Overview
 36 tables across 6 groups: Core (10), Bookings (6), CRM (9), Email (3), Content (4), Finance (3).
 
-**See:** ADR-010 (Single Contacts Table), ADR-011 (Schema Scope Reduction)
+**See:** `10-single-contacts-table.md`, `11-schema-scope-reduction.md`
 
 ### 13.2 Single Contacts Table
 A single `contacts` table serves as the unified person record. All customers are contacts but not all contacts are customers. All foreign keys point to `contacts`.
@@ -246,10 +247,12 @@ A single `contacts` table serves as the unified person record. All customers are
 ### 13.3 UTC Storage & Timezone Display
 All datetimes stored in UTC. Display conversion uses `business_profile.timezone` (IANA string).
 
-**See:** ADR-005 (Client Timezone)
+**See:** `05-timezone-utc-storage-display-conversion.md`
 
-### 13.4 Lead Capture (ADR-004)
+### 13.4 Lead Capture
 When a lead is captured from a landing page, both `leads` and `contacts` rows are created simultaneously. `leads.converted_to_contact_id` is set immediately. No manual conversion step required.
+
+**See:** `04-lead-capture-simultaneous-creation.md`
 
 ---
 
@@ -289,19 +292,48 @@ The following are explicitly not part of the Consulting & Services platform:
 
 ---
 
-## 15. Business Model
+## 16. Business Model
 
 - Maximum clients: 100 (V1.x)
-- First 50 clients (beta): $25/month, grandfathered for life
-- Remaining 50 clients: $50/month
-- Annual revenue at capacity: $45,000
+- First 10 clients (Launch): $25/month, grandfathered for life
+- Clients 11–50 (Pioneer): $35/month, grandfathered for life
+- Clients 51+ (Business): $50/month, price not fixed for life
+- 30-day free trial with limited functionality for all new signups
 - Direct costs at capacity (Anvil hosting): $18,000/year
 
-**Onboarding tiers:**
-- Free trial. (included): 30 day 30 minute guided call costs the "Free Trial" client $50
-- Standard (included): 30-minute guided call
-- Premium ($100): Mybizz handles all setup
+**Onboarding:**
+- All tiers: 30-minute guided setup session included
+- $100 DFY (Done For You) setup option available
+- Onboarding is a separate form with required elements (currency selection, legal acknowledgement)
+- Settings is a single tabbed form for all configuration
+
+**See:** `22-tiers-model.md`, `25-onboarding-finality.md`
 
 ---
 
-*End of file*
+## 17. Mybizz_management Data Architecture
+
+> **Note:** Mybizz_management is outside the scope of this project. The following is recorded as an architectural intention.
+
+Mybizz_management maintains three data tables for client records:
+
+### 17.1 Client Details Table (Owner-Modifiable)
+- Contains client details that the Owner has the right to change at any time
+- The Owner may remove entries from this table
+- Updates append new values; old values are retained in the amendment log
+
+### 17.2 Retained Records Table (Legal/Financial)
+- Contains client details retained by Mybizz for legal or financial purposes
+- The Owner has no right to remove these
+- Held separately and immutable from the Owner's perspective
+
+### 17.3 Amendment Log (Append-Only)
+- Full history of all credential and configuration changes
+- Never overwritten — always holds the latest values plus the full history
+- Outside the client instance scope but a system-level behaviour
+
+**See:** `25-onboarding-finality.md`, `21-client-data-management-rights-and-mybizz-retention-boundary.md`
+
+---
+
+*End of file — platform-overview.md*

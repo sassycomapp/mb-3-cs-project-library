@@ -10,6 +10,11 @@
 |---|---|---|
 | Folders | PascalCase | `ServerAuth`, `ContactListForm` |
 | Files | lowercase_with_underscores.ext | `backup_strategy_analysis.md` |
+| ADR files | `{number}-{kebab-case-name}.md` | `01-brevo-replaces-zoho-email.md` |
+| ADR files (superseded) | `{number}-superseded-{kebab-case-name}.md` | `013-superseded-system-currency-setting.md` |
+| ADR files (cancelled) | `{number}-cancelled-{kebab-case-name}.md` | `025-cancelled-onboarding-finality.md` |
+| Wireframe files | `wireframe-{package}-{FormName}.html` | `wireframe-settings-SettingsForm.html` |
+| Custom component wireframes | `wireframe-custom-component-{ComponentName}.html` | `wireframe-custom-component-ClauseBuilder.html` |
 
 ---
 

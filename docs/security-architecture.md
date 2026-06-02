@@ -18,7 +18,7 @@ All integration server modules retrieve client credentials by calling `get_vault
 
 Access to the Vault is restricted to the Owner role and requires TOTP step-up authentication (Google Authenticator) on every open. No grace period. An email notification is sent to the Owner on every Vault access.
 
-**See:** ADR-003 (Payment Security Boundary)
+**See:** `03-payment-security-boundary-vault.md`
 
 ---
 

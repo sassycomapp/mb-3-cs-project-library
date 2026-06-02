@@ -9,7 +9,7 @@ Source: YC Office Hours session — scope validation against C&S vertical
 
 ## Context
 
-The live `anvil.yaml` schema contained tables inherited from earlier multi-vertical iterations (ADR-009) and feature creep from exploratory development phases. These tables were not part of the confirmed Consulting & Services V1 scope and added maintenance burden, documentation complexity, and potential confusion for developers.
+The live `anvil.yaml` schema contained tables inherited from earlier multi-vertical iterations (`09-multi-vertical-to-single-vertical-conversion.md`) and feature creep from exploratory development phases. These tables were not part of the confirmed Consulting & Services V1 scope and added maintenance burden, documentation complexity, and potential confusion for developers.
 
 Tables identified as out of scope:
 - **Support/Help:** `tickets`, `ticket_messages`, `kb_articles`, `kb_categories`, `reviews`
@@ -38,7 +38,7 @@ Additionally, `bookable_resources` was removed as an unnecessary abstraction —
 | `expenses` | Expense tracking — out of scope (time tracking retained) |
 | `backups` | Anvil handles backups natively; metadata table redundant |
 | `bookable_resources` | Unnecessary abstraction; providers are Staff users |
-| `customers` | Merged into `contacts` (ADR-010) |
+| `customers` | Merged into `contacts` (`10-single-contacts-table.md`) |
 
 ### Tables retained (36 total):
 - **Core (10):** activity_log, business_profile, config, email_config, files, payment_config, rate_limits, theme_config, users, vault

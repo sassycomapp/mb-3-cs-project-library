@@ -116,7 +116,7 @@ self.card.role = "surface-card elevated"
 
 #### 3.3 Material Web Components (EXCLUDED)
 
-**Material Web Components are excluded from the Mybizz CS project.** See ADR-014 for the complete component scope policy.
+**Material Web Components are excluded from the Mybizz CS project.** See `14-anvil-extras-exclusion.md` for the complete component scope policy.
 
 Only components included in the Anvil Material 3 Theme dependency (`4UK6WHQ6UX7AKELK`) are permitted. Any component outside that dependency requires explicit ADR approval.
 

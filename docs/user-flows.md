@@ -40,20 +40,29 @@
 
 ## §1 Client Onboarding
 
-**Two tiers:**
-- **Standard (included):** 30-minute guided call. Client does preparatory work; Mybizz imports data during the call.
-- **Premium ($200):** Mybizz handles all setup. Client receives a fully operational instance.
+**Two flows:**
 
-**Sequence:**
-1. **Payment & Signup** — Business name, email, phone, address, country (sets system currency — IMMUTABLE). Billing: $50/month or $25/month for first 50 beta clients.
-2. **Provisioning (Mybizz, 1–2 hours)** — Clone master_template, configure dependency, initialise tables, set currency, issue subdomain, create Owner credentials.
-3. **Tier selection** — Standard or Premium.
-4A. **Branding** — Logo, brand colours, font, tagline.
-4B. **Email setup** — Client creates free Brevo account, provides SMTP key and API key.
-4C. **Payment gateway** — Stripe or Paystack: API keys stored in Vault, test transaction, webhook verified.
-4D. **Services setup** — Add service categories and individual services.
-5. **Go Live checklist** — Branding, email, payment, services, test booking.
-6. **Success milestones** — Dashboard progress tracker. Nudge emails at Day 3, 7, 14 if stalled.
+### Mybizz_management Provisioning (internal)
+1. **Create instance** — Clone master_template, configure dependency, initialise tables
+2. **Create Owner account** — Owner role, credentials
+3. **Set onboarding state** — `business_profile.onboarding_status = "in_progress"`
+4. **Create client record** — Mybizz_management Client Details Table
+5. **Send welcome email** — Login credentials via Brevo
+
+### Owner Onboarding (Onboarding Form — guided first-run)
+
+> **Note:** Onboarding is a separate form from Settings. It links to Settings for specific configuration tasks. See `implementation/onboarding-implementation-plan.md` for full details.
+
+1. **Owner logs in** → Onboarding form opens with welcome and progress indicator
+2. **Business Profile** — Link to Settings → Business Profile tab
+3. **Palette Selection** — Link to Settings → Palette tab
+4. **System Currency** — Select currency from dropdown + confirm (immutable after first transaction)
+5. **Legal Acknowledgement** — Read critical excerpts, tick checkbox, confirm (logged in Mybizz_management)
+6. **Onboarding complete** → Owner directed to Dashboard
+
+**Bidirectional navigation:** Settings form includes "Return to Onboarding" button (visible while onboarding is in progress).
+
+**Post-onboarding:** Owner may return to Onboarding at any time to change credentials. Settings form accessible at any time for ongoing configuration (tabbed, RBAC-governed).
 
 ---
 

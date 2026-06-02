@@ -1,9 +1,9 @@
 # Mybizz CS — Authoritative Database Schema
 
-**Date:** 2026-05-07  
-**Version:** V1 (Consulting & Services only)  
-**Total Tables:** 36  
-**Platform:** Anvil.works  
+**Date:** 2026-06-01
+**Version:** V1 (Consulting & Services only)
+**Total Tables:** 38
+**Platform:** Anvil.works
 **Source:** Consolidated from `database-schema.md`, `scaffold-spec.md`, and `build-plan.md`
 
 ---
@@ -17,8 +17,9 @@
 | **CRM** | 9 | Contacts, campaigns, segments, tasks, leads |
 | **Email** | 3 | Templates, logs, webhooks |
 | **Content** | 4 | Blog, pages, landing pages |
+| **Policy** | 2 | Privacy policy, terms & conditions clauses |
 | **Finance** | 3 | Invoices, time entries |
-| **Total** | **36** | |
+| **Total** | **38** | |
 
 ---
 
@@ -64,7 +65,23 @@ Client business information.
 
 **Note:** `system_currency` is set during onboarding and becomes immutable after the first transaction. All internal calculations use this currency. Customer-facing prices can be set in different currencies via service pricing, but all internal work is done in `system_currency`.
 
-**Note:** `system_currency` is set during onboarding and becomes immutable after the first transaction. All internal calculations use this currency. Customer-facing prices can be set in different currencies via service pricing, but all internal work is done in `system_currency`.
+#### Onboarding fields (added per plan-tune audit 2026-05-31)
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `onboarding_status` | string | `"in_progress"` or `"completed"` — tracks onboarding state |
+| `onboarding_completed` | bool | Overall completion flag |
+| `onboarding_completed_at` | datetime | UTC — when onboarding completed |
+| `entity_type` | string | `"Individual"` or `"Business"` |
+| `palette` | string | Selected brand palette identifier |
+| `legal_compliance_enabled` | bool | Legal Compliances switch — irreversible once True |
+| `legal_compliance_enabled_at` | datetime | UTC — when switch was enabled |
+| `legal_ack_accepted` | bool | Legal responsibility acknowledgement |
+| `legal_ack_accepted_at` | datetime | UTC — when acknowledgement recorded |
+| `data_governance_ack_accepted` | bool | Data governance boundary acknowledgement |
+| `data_governance_ack_accepted_at` | datetime | UTC — when acknowledgement recorded |
+
+> **See:** `implementation/onboarding-implementation-plan.md` for full onboarding field definitions.
 
 ###[DONE] 1.3 `config`
 Key-value configuration storage.
@@ -529,6 +546,42 @@ Static website pages.
 
 ---
 
+## 5A. Policy Tables (2)
+
+### 5A.1 `privacy_policy`
+Privacy policy clause data for the Owner's public-facing privacy policy page.
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `instance_id` | link → users | Client identifier |
+| `category` | string | Logical grouping (e.g., "Data Collection", "Cookies", "Third Parties") |
+| `title` | string | Clause heading |
+| `clause` | string | Body text / rich text |
+| `sort_order` | number | Display order within category |
+| `is_seeded` | bool | True if from master template, False if custom |
+| `is_active` | bool | Whether clause is published |
+| `created_at` | datetime | UTC |
+| `updated_at` | datetime | UTC |
+
+### 5A.2 `t_and_c`
+Terms and conditions clause data for the Owner's public-facing T&Cs page.
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `instance_id` | link → users | Client identifier |
+| `category` | string | Logical grouping (e.g., "Service Terms", "Payment Terms", "Liability") |
+| `title` | string | Clause heading |
+| `clause` | string | Body text / rich text |
+| `sort_order` | number | Display order within category |
+| `is_seeded` | bool | True if from master template, False if custom |
+| `is_active` | bool | Whether clause is published |
+| `created_at` | datetime | UTC |
+| `updated_at` | datetime | UTC |
+
+> **See:** `18-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture.md` for the clause builder architecture.
+
+---
+
 ## 6. Finance Tables (3)
 
 ### 6.1 `invoice`
@@ -595,14 +648,22 @@ Tables with `instance_id` → `users` enforce client data isolation. Some tables
 ### Secret Management
 Payment gateway secret keys stored in `vault` table only (encrypted at rest). Credentials retrieved via `get_vault_secret()` in server code.
 
-### Lead Capture (ADR-004)
+### Lead Capture (`04-lead-capture-simultaneous-creation.md`)
 When lead submitted from landing page: both `leads` and `contacts` rows created simultaneously. `leads.converted_to_contact_id` set immediately. Contact auto-enrolled in welcome campaign.
 
-### Email Architecture (ADR-001)
+### Email Architecture (`01-brevo-replaces-zoho-email.md`)
 - Brevo SMTP — Transactional email
 - Brevo Campaigns API — Marketing email
 - All clients use identical SMTP host (smtp-relay.brevo.com:587)
 - Per-client credentials in vault
+
+### Mybizz_management Amendment Log
+Mybizz_management (the platform operator's internal tooling) maintains an **append-only amendment log** of credential and configuration changes. It never overwrites. It always holds the latest values plus the full history. This is outside the client instance scope but is a system-level behaviour required for audit and compliance.
+
+### Onboarding Model
+Onboarding is a separate form with required elements (currency selection, legal acknowledgement). Settings is a single tabbed form for all configuration. Bidirectional navigation between Onboarding and Settings. **[`25-onboarding-finality.md`]**
+
+**See:** `implementation/onboarding-implementation-plan.md` for full onboarding specification.
 
 ---
 

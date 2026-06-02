@@ -883,9 +883,9 @@ Dashboard                          (always)
 - `NavigationDrawerLayoutTemplate` not used in current architecture
 - `navigate_to` not used
 
-**Note:** Native M3 navigation components are fully supported by the M3 theme dependency but not used in the current Mybizz architecture. See ADR-002.
+**Note:** Native M3 navigation components are fully supported by the M3 theme dependency but not used in the current Mybizz architecture. See `02-navigation-lambda-link-open-form.md`.
 
-**Note:** Native M3 navigation components are fully supported by the M3 theme dependency but not used in the current Mybizz architecture. See ADR-002.
+**Note:** Native M3 navigation components are fully supported by the M3 theme dependency but not used in the current Mybizz architecture. See `02-navigation-lambda-link-open-form.md`.
 
 ### CustomerLayout (Deferred to V2)
 

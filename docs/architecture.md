@@ -19,7 +19,7 @@ The platform operator's internal tooling — client provisioning, health monitor
 
 **Note:** mb-2-cs was the original development application and has been deprecated. All development has migrated to mb-3-cs.
 
-**See:** ADR-009 (Multi-Vertical to Single-Vertical)
+**See:** `09-multi-vertical-to-single-vertical-conversion.md`
 
 ---
 
@@ -58,7 +58,7 @@ server_code/
 
 **Note:** The client-side CRM and marketing package is named `crm/` — not `marketing/`. The server-side package remains `server_marketing/`.
 
-**See:** ADR-006 (Package Name: crm/ Replaces marketing/)
+**See:** `06-crm-package-replaces-marketing.md`
 
 ---
 
@@ -88,9 +88,9 @@ Two navigation systems, not interchangeable:
 - `open_form(string)` for parameterised navigation (row clicks, detail forms)
 - `NavigationDrawerLayoutTemplate`, `NavigationLink`, and `navigate_to` are not used in the current architecture
 
-**Note:** Native M3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationLink`, `NavigationRailLayout`) are fully supported by the M3 theme dependency but are not used in the current Mybizz architecture. This is a usage decision based on the custom layout approach. If a future architecture review determines native M3 navigation layouts are better suited, the docs may change without requiring an ADR update. See ADR-002.
+**Note:** Native M3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationLink`, `NavigationRailLayout`) are fully supported by the M3 theme dependency but are not used in the current Mybizz architecture. This is a usage decision based on the custom layout approach. If a future architecture review determines native M3 navigation layouts are better suited, the docs may change without requiring an ADR update. See `02-navigation-lambda-link-open-form.md`.
 
-**See:** ADR-002 (Navigation Standard)
+**See:** `02-navigation-lambda-link-open-form.md`
 
 ### AdminLayout Navigation Structure
 ```

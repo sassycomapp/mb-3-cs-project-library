@@ -1,8 +1,9 @@
-# ADR-13: System Currency Setting at Onboarding
+# ADR-13: System Currency Setting at Onboarding [SUPERSEDED]
 
-**Status:** Proposed  
-**Date:** 2026-05-10  
+**Status:** **Superseded** — consolidated into `016-system-currency-selection-and-immutability.md`
+**Date:** 2026-05-10
 **Authors:** Mybizz CS Team
+Superseded by: `016-system-currency-selection-and-immutability.md` (2026-06-01) — consolidated ADR covering system currency, display currency, immutability, and conversion strategy
 
 ---
 
@@ -184,4 +185,4 @@ INTERNAL: system_currency calculation
 
 ---
 
-*End of file — ADR-012*
+*End of ADR-013*

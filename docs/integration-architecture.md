@@ -46,7 +46,7 @@ Campaign sequences, broadcast emails, newsletter communications. Subject to unsu
 
 Brevo API key stored in Vault (`brevo_api_key`). Separate from SMTP key — two distinct credentials per client.
 
-**See:** ADR-001 (Brevo Replaces All Zoho Products)
+**See:** `01-brevo-replaces-zoho-email.md`
 
 ---
 
@@ -78,7 +78,7 @@ Any operation expected to exceed 22 seconds must use `@anvil.server.background_t
 
 Each client instance configures its own timezone at onboarding, stored as an IANA timezone string in `business_profile.timezone`. All datetimes are stored in the database as UTC. Conversion to the client's local timezone occurs at display time in server functions.
 
-**See:** ADR-005 (Client Timezone)
+**See:** `05-timezone-utc-storage-display-conversion.md`
 
 ---
 

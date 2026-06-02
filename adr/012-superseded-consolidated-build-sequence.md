@@ -1,8 +1,9 @@
-# 12 — Consolidated Build Sequence
+# 12 — Consolidated Build Sequence [SUPERSEDED]
 **Single Authoritative Phase Plan Replacing Obsolete mm1-08/mm1-12/mm1-21**
 
 Date: 2026-05-03
-Status: Pending — awaiting completion of unified planning docs
+Status: **Superseded** — by `implementation/build-plan.md` (Definitive Build Plan)
+Superseded by: `implementation/build-plan.md` (2026-05-26) — 5-phase build plan with full stage definitions
 
 ---
 

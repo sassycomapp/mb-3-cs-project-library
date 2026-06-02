@@ -200,7 +200,7 @@ standard DropDown — For staff selection
 Do NOT use:
 
 Labels for titles — Use Heading (hdg_) instead
-Chips — Not part of M3 calendar design. Chips are custom components composed from `m3.Button` or `m3.Card` per ADR-014.
+Chips — Not part of M3 calendar design. Chips are custom components composed from `m3.Button` or `m3.Card` per `15-material-3-theme-component-scope.md`.
 LinearPanel — Use ColumnPanel or FlowPanel
 Anvil Extras — Pure Anvil only
 custom JS widgets — No external libraries

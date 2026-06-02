@@ -1,8 +1,8 @@
 # Mybizz CS — Custom Component Requirements Matrix
 
-**Date:** 2026-05-28  
-**Status:** Final V1 Scope  
-**Project:** Mybizz CS  
+**Date:** 2026-06-01
+**Status:** Final V1 Scope
+**Project:** Mybizz CS
 **Platform:** Anvil.works with Material Design 3 (M3)
 
 ---
@@ -17,13 +17,20 @@ A custom component is a reusable interactive UI element that:
 
 ## Custom Component Matrix
 
-| Component | Reused In | Justification |
-|-----------|-----------|---------------|
-| **VideoDisplayComponent** | BlogPostForm, HomePage | Native Anvil YouTube insufficient for multi-source video (YouTube, Vimeo, etc.) |
-| **FooterComponent** | All public pages | Custom footer with logo, social links, policies, map, contact - not in native Anvil |
-| **PaletteSettingsForm** | SettingsForm, Onboarding flow | Reusable palette selection form for client customization |
-| **TimeLapseCarouselComponent** | HomePage, ServicesForm | Auto-rotating carousel for service/catalogue display - not in native Anvil |
-| **ParallaxComponent** | Multiple public pages | Parallax scroll effect for hero sections - not in native Anvil |
+| Component | Reused In | Usage Count | Justification |
+|-----------|-----------|-------------|---------------|
+| **VideoDisplayComponent** | BlogPostForm, HomePage | 2 | Native Anvil YouTube insufficient for multi-source video (YouTube, Vimeo, etc.) |
+| **FooterComponent** | All public pages (6+) | 6+ | Custom footer with logo, social links, policies, map, contact — not in native Anvil |
+| **TimeLapseCarouselComponent** | HomePage, ServicesForm | 2 | Auto-rotating carousel for service/catalogue display — not in native Anvil |
+| **ParallaxComponent** | Multiple public pages | 2+ | Parallax scroll effect for hero sections — not in native Anvil |
+| **ClauseBuilder** | PrivacyPolicyEditor, TermsConditionsEditor | 2 (planned) | Reusable clause-level editor for policy documents — not provided by native M3. Parameterized with document type (Privacy Policy vs T&Cs). |
+
+### Downgraded Components
+
+| Component | Previous Status | Current Status | Reason |
+|-----------|----------------|----------------|--------|
+| **PaletteSettingsForm** | Shared custom component | Local/form-specific UI | Only used in SettingsForm. Does not meet the shared component criteria of use in more than one place. |
+| **OnboardingPaletteForm** | Shared custom component | Removed (obsolete) | Onboarding no longer has a separate palette form. Palette selection is done via Settings → Palette tab. |
 
 ---
 
@@ -39,11 +46,6 @@ A custom component is a reusable interactive UI element that:
 - Must be implemented as a reusable component
 - Use in: All public pages (HomePage, BlogList, BlogPost, ContactPage, AboutPage, ServicePage)
 
-### PaletteSettingsForm
-- Palette selection with preview
-- Must be implemented as a reusable form component
-- Use in: SettingsForm, Onboarding flow
-
 ### TimeLapseCarouselComponent
 - Auto-rotating carousel with manual navigation
 - Must be implemented as a reusable component
@@ -54,6 +56,19 @@ A custom component is a reusable interactive UI element that:
 - Must be implemented as a reusable component
 - Use in: Multiple public pages
 
+### ClauseBuilder
+- Reusable clause-level editor for policy documents (Privacy Policy and T&Cs)
+- Parameterized with document type (`privacy_policy` or `t_and_c`)
+- Supports: category selection, clause selection from seeded list, custom clause creation, clause editing, clause ordering
+- On save: writes changes to the appropriate data source (`privacy_policy` or `t_and_c` table)
+- Must be implemented as a standalone custom component (not embedded in each PolicyEditorForm)
+- Use in: PrivacyPolicyEditor, TermsConditionsEditor (both in Settings → Website)
+
+### PaletteSettingsForm (Local/Form-Specific)
+- Palette selection with preview
+- Local to SettingsForm — not a shared custom component
+- Use in: SettingsForm only
+
 ---
 
 ## V1 Custom Component Count
@@ -62,10 +77,10 @@ A custom component is a reusable interactive UI element that:
 |-----------|-------|
 | **VideoDisplayComponent** | 1 |
 | **FooterComponent** | 1 |
-| **PaletteSettingsForm** | 1 |
 | **TimeLapseCarouselComponent** | 1 |
 | **ParallaxComponent** | 1 |
-| **Total Custom Components** | **5** |
+| **ClauseBuilder** | 1 |
+| **Total Shared Custom Components** | **5** |
 
 ---
 

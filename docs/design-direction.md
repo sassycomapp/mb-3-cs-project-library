@@ -231,7 +231,7 @@ A refined, business-focused Material 3 design emphasizing clarity, efficiency, a
 | `metric-display` | Metric cards, KPIs |
 | `chart-container` | Plot/Chart containers |
 | `tag` | Tags, badges |
-| `chip` | **Custom Component** — composed from `m3.Button` or `m3.Card` per ADR-014 |
+| `chip` | **Custom Component** — composed from `m3.Button` or `m3.Card` per `15-material-3-theme-component-scope.md` |
 
 ---
 
@@ -283,7 +283,7 @@ A refined, business-focused Material 3 design emphasizing clarity, efficiency, a
 | Metric Display | ColumnPanel | `metric-display` | elevated + custom layout | Combine elevated-card + metric styling | Extend `metric-card` | Icon + value + label structure |
 | Chart | Plot | `chart-container` | border-radius: 12px, border: 1px | Set in Designer | `.plot-container.plotly` | Uses Plotly.js |
 | Tag | Label | `tag` | background: Surface Variant, border-radius: 8px | Set background in Designer | Custom CSS | Use Label with custom role |
-| Chip | **Custom Component** | `chip` | **Composed from `m3.Button` or `m3.Card`** | See ADR-014 | Custom CSS | Not a native M3 component |
+| Chip | **Custom Component** | `chip` | **Composed from `m3.Button` or `m3.Card`** | See `15-material-3-theme-component-scope.md` | Custom CSS | Not a native M3 component |
 
 ---
 

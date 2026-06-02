@@ -317,6 +317,40 @@ This log tracks implementation progress, blockers, decisions, and plan changes f
 | 2026-05-26 | Created phase-4-engineering-review-report.md | Engineering review for Phase 4 |
 | 2026-05-26 | Created phase-5-engineering-review-report.md | Engineering review for Phase 5 |
 | 2026-05-26 | Updated build-plan.md | Added implementation details for Phases 1-5 |
+| 2026-05-31 | **Major rewrite: onboarding-implementation-plan.md** | No bespoke onboarding forms — settings-based onboarding with Legal Compliances switch |
+| 2026-06-01 | **Rewritten: onboarding-implementation-plan.md** | Onboarding is a separate form (not Settings). Settings is a single tabbed form. Bidirectional navigation. |
+| 2026-06-01 | **Rewritten: `25-onboarding-finality.md`** | Onboarding is resumable and revisitable. Credential changes are append-only. Mybizz_management data rights defined. |
+| 2026-06-01 | **Renamed: `025-cancelled-onboarding-finality.md`** | Old ADR-025 cancelled and superseded by new `25-onboarding-finality.md` |
+| 2026-06-01 | **Superseded: `012-superseded-consolidated-build-sequence.md`** | ADR-12 superseded by `implementation/build-plan.md` |
+| 2026-06-01 | **Consolidated: ADR-13 + ADR-16 → `016-system-currency-selection-and-immutability.md`** | Merged system currency architecture, immutability, display currency, and conversion strategy |
+| 2026-06-01 | **Superseded: `013-superseded-system-currency-setting.md`** | ADR-13 superseded by consolidated ADR-16 |
+| 2026-06-01 | **Updated: `custom-component-requirements-matrix.md`** | PaletteSettingsForm downgraded to local/form-specific. ClauseBuilder added as shared custom component. |
+| 2026-06-01 | **Created: `wireframe-custom-component-ClauseBuilder.html`** | Minimal clause builder wireframe: category selection, seeded clauses, custom clauses, save |
+| 2026-06-01 | **Recreated: `wireframe-settings-SettingsForm.html`** | Recreated from scratch with 11 tabs per current design |
+| 2026-06-01 | **Deleted: `wireframe-custom-component-OnboardingPaletteForm.html`** | Obsolete — component no longer exists |
+| 2026-06-01 | **Updated: `authoritative-schema.md`** | Added privacy_policy and t_and_c tables. Updated table count to 38. |
+| 2026-06-01 | **Updated: `adr-index.md`** | All 23 ADRs listed with correct statuses, supersessions, and cancellations |
+| 2026-06-01 | **Normalized: `build-plan.md`** | Removed duplicate Engineering Review Summary section. Updated ADR count and table count. |
+| 2026-06-01 | **Updated: `nomenclature.md`** | Added ADR file naming conventions and wireframe naming conventions |
+| 2026-06-01 | **Updated: `todo.md`** | Added items 11-13 (onboarding wireframe, settings wireframe recreation, delete obsolete wireframe) |
+| 2026-06-01 | **Full planning & design sanity audit completed** | Comprehensive cross-reference audit across all docs, ADRs, wireframes, components, and todo |
+| 2026-06-01 | **Plan-tune verification completed** | Verified todo.md coverage against build-plan, updated Stage 4.2 with clause builder, updated Stage 1.4 with 11-tab Settings, updated stale counts |
+| 2026-06-01 | **Updated: `build-plan.md` Stage 4.2** | Added ClauseBuilder component, policy editor screen, privacy_policy and t_and_c tables to Public Website Pages stage |
+| 2026-06-01 | **Updated: `build-plan.md` Stage 1.4** | Updated SettingsForm to 11-tab structure with RBAC governance and Return to Onboarding button |
+| 2026-06-01 | **Updated: `build-plan.md` Stage 5.3** | Added data export UI, clause builder integration, PDF export with data separation |
+| 2026-06-01 | **Updated: `build-plan.md` status table** | Corrected schema count (38) and wireframe count (47) |
+| 2026-06-01 | **Updated: `todo.md`** | Added build-plan stage references to all [Planned] items |
+| 2026-05-31 | **Created `25-onboarding-finality.md`** | Formalises onboarding resumability, credential changes, Mybizz_management data rights |
+| 2026-05-31 | **Updated `22-tiers-model.md`** | New tiers: Free Trial, Launch ($25), Pioneer ($35), Business ($50) |
+| 2026-05-31 | **Rewrote adr-index.md** | All 22 ADRs listed, duplicates removed, stale entries cleaned |
+| 2026-05-31 | **Fixed ADR end-marker typos** | ADRs 13, 14, 15 had wrong end-marker numbers |
+| 2026-05-31 | **Fixed build-plan.md** | Removed duplicate status table, updated ADR count (22), wireframe count (48) |
+| 2026-05-31 | **Updated user-flows.md §1** | Client onboarding flow rewritten to match settings-based approach |
+| 2026-05-31 | **Updated authoritative-schema.md** | Added 11 onboarding fields to business_profile, added Mybizz_management amendment log note |
+| 2026-05-31 | **Updated custom-component-requirements-matrix.md** | Removed OnboardingPaletteForm as separate component, PaletteSettingsForm used in Settings only |
+| 2026-05-31 | **Updated platform-overview.md** | New tiers, onboarding model, Legal Compliances switch |
+| 2026-05-31 | **Updated todo.md** | Marked resolved/superseded items, defined clause builder and service catalogue scope |
+| 2026-05-31 | **Plan-tune audit completed** | Full cross-reference audit, 21 issues identified and resolved |
 
 ---
 

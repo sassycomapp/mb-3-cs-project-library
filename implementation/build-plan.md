@@ -1,4 +1,11 @@
-# Mybizz CS — Build Plan (Definitive)**Vertical:** Consulting & Services**V1 Scope:** Blog, Landing Pages, Campaigns, Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack**V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal**Schema:** 36 tables**Architecture:** Dependency-based (master_template → client instances)**Review Status:** CEO + Eng Review Complete (All 5 phases engineering reviews complete)---## Current Status| Component | Status | Notes ||-----------|--------|-------|| **Schema** | ✅ 100% Complete | 36 tables designed and documented || **Wireframes** | ✅ 100% Complete | 15 HTML screens created || **Design Direction** | ✅ 100% Complete | M3 design approved || **ADR Documentation** | ✅ 100% Complete | 13 ADRs written || **Positioning Strategy** | ✅ 100% Complete | Business model documented || **Phase 0** | ✅ 100% Complete | All TODOs implemented || **Phase 1** | ✅ Engineering Review Complete | Ready for implementation || **Phase 2** | ✅ Engineering Review Complete | Ready for implementation || **Phase 3** | ✅ Engineering Review Complete | Ready for implementation || **Phase 4** | ✅ Engineering Review Complete | Ready for implementation || **Phase 5** | ✅ Engineering Review Complete | Ready for implementation || **Implementation** | ⏸️ Pending | All planning complete, ready to begin |---**Last Updated:** 2026-05-26  **Next Review:** N/A — All engineering reviews complete, ready for implementation---
+# Mybizz CS — Build Plan (Definitive)
+
+**Vertical:** Consulting & Services
+**V1 Scope:** Blog, Landing Pages, Campaigns, Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack
+**V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal
+**Schema:** 38 tables (plus onboarding additions per authoritative-schema.md)
+**Architecture:** Dependency-based (master_template → client instances)
+**Review Status:** CEO + Eng Review Complete (All 5 phases engineering reviews complete)
 
 ---
 
@@ -6,10 +13,10 @@
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| **Schema** | ✅ 100% Complete | 36 tables designed and documented |
-| **Wireframes** | ✅ 100% Complete | 15 HTML screens created |
+| **Schema** | ✅ 100% Complete | 38 tables designed and documented |
+| **Wireframes** | ✅ 100% Complete | 47 HTML screens created |
 | **Design Direction** | ✅ 100% Complete | M3 design approved |
-| **ADR Documentation** | ✅ 100% Complete | 13 ADRs written |
+| **ADR Documentation** | ✅ 100% Complete | 23 ADRs written (see adr-index.md) |
 | **Positioning Strategy** | ✅ 100% Complete | Business model documented |
 | **Phase 0** | ✅ 100% Complete | All TODOs implemented |
 | **Phase 1** | 🔄 In Progress | Foundation implementation started |
@@ -21,7 +28,7 @@
 
 ---
 
-**Last Updated:** 2026-05-26  
+**Last Updated:** 2026-05-31  
 **Next Review:** After Phase 1 implementation completion
 
 ---
@@ -224,12 +231,10 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - `email_config` table for email settings
 - `payment_config` table for payment gateway settings
 - `theme_config` table for M3 theme customization
-- `SettingsForm` — main settings form with sub-sections:
-  - `BusinessProfileForm` — business profile section
-  - `FeatureFlagsForm` — feature activation section
-  - `ThemeConfigForm` — theme customization section
-  - `CurrencyForm` — currency selection section
-  - `UserManagementForm` — users & permissions section
+- `SettingsForm` — single tabbed form with 11 tabs (M3 button navigation, RBAC-governed):
+  - Business Profile, Palette, System Currency, Legal Acknowledgement, Display Currency
+  - Payment Gateway, Services, Users & Permissions, Email Configuration, Theme, Feature Flags
+  - "Return to Onboarding" button in header (visible when onboarding in progress)
 - `tests/test_settings.py` — settings unit tests
 
 **Completion Criteria:**
@@ -239,6 +244,9 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Currency selection working (immutable after first transaction)
 - ✅ User management functional (invite, edit role, deactivate)
 - ✅ All config tables initialized via `create_initial_config()`
+- ✅ Settings form uses 11-tab layout with M3 button navigation
+- ✅ RBAC governance enforced per tab
+- ✅ "Return to Onboarding" button visible only when onboarding in progress
 - ✅ All unit tests passing
 
 **Implementation Notes:**
@@ -534,15 +542,22 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
   - `HomePage` — home page with routing
   - `AboutPage` — about page
   - `ContactPage` — contact form page
-  - `PrivacyPolicyPage` — privacy policy
-  - `TermsConditionsPage` — terms & conditions
+  - `PrivacyPolicyPage` — privacy policy (reads from `privacy_policy` table via ClauseBuilder)
+  - `TermsConditionsPage` — terms & conditions (reads from `t_and_c` table via ClauseBuilder)
+- `ClauseBuilder` custom component — reusable clause-level editor parameterized by document type
+- Policy editor screen in Settings → Website — uses ClauseBuilder for both Privacy Policy and T&Cs
+- `privacy_policy` and `t_and_c` tables populated with master template starter clauses
 - Routing dependency configured for public pages
 
 **Completion Criteria:**
 - ✅ All standard pages functional (Home, About, Contact, Privacy, Terms)
 - ✅ Contact form submits and creates `contact_submissions` record
 - ✅ Contact form notifications working (owner + auto-reply)
-- ✅ Privacy and Terms pages editable from admin
+- ✅ ClauseBuilder component functional (category selection, seeded clauses, custom clauses, save)
+- ✅ Privacy Policy page renders clauses from `privacy_policy` table
+- ✅ Terms & Conditions page renders clauses from `t_and_c` table
+- ✅ Policy editor screen functional in Settings → Website
+- ✅ Privacy and Terms pages editable from admin via clause builder
 - ✅ Mobile responsive
 - ✅ SEO meta tags functional
 - ✅ Accessibility requirements verified (TODO 14: Keyboard navigation, screen reader support, contrast ratios)
@@ -611,17 +626,20 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 ### Stage 5.3: Compliance Implementation
 
 **Deliverables:**
-- Privacy Policy page populated
-- Terms of Service page populated
+- Privacy Policy page populated (reads from `privacy_policy` table via ClauseBuilder)
+- Terms of Service page populated (reads from `t_and_c` table via ClauseBuilder)
 - Cookie consent banner on public pages
-- `export_my_data()` function — GDPR/POPIA data export
+- `export_my_data()` function — GDPR/POPIA data export (PDF with Mybizz-held and client-instance data separation)
+- Dashboard entry point for Owner data export — RBAC-governed (Owner only)
 - `delete_my_account()` function — GDPR/POPIA anonymization
 - Consent recording on forms and booking flows
 
 **Completion Criteria:**
-- ✅ Privacy Policy and Terms pages accurate and published
+- ✅ Privacy Policy and Terms pages accurate and published (clause builder functional)
 - ✅ Cookie consent banner functional
-- ✅ Data export function working (exports all user data)
+- ✅ Data export function working (exports all user data as PDF)
+- ✅ Data export UI accessible from Dashboard → Account → Download My Data
+- ✅ Data export separates Mybizz-held records from client-instance data
 - ✅ Account deletion/anonymization working
 - ✅ Consent recording on all data collection points
 - ✅ Unsubscribe handling from marketing emails
@@ -767,113 +785,4 @@ After Phase 5 launch, begin V2 development:
 ---
 
 *End of file — build-plan.md (Definitive)*
-
----
-
-## Engineering Review Summary
-
-All 5 phases have completed engineering reviews with decisions documented:
-
-### Phase 0 — Pre-Implementation
-**Status:** ✅ Complete  
-**Decisions:** Vault error handling, test coverage, observability, deployment procedures  
-**Report:** `phase-0-implementation.md`
-
-### Phase 1 — Foundation
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Email confirmation, RBAC coverage, TOTP + email notifications, SettingsForm sub-sections, Navigation helpers, Rate limiting, Session timeout  
-**Report:** `gstack-outputs/phase-1-engineering-review-report.md` (created during session)
-
-### Phase 2 — Transactional Core
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Payment webhook idempotency, Booking state machine, Invoice PDF generation  
-**Report:** `gstack-outputs/phase-2-engineering-review-report.md`
-
-### Phase 3 — CRM + Email
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Brevo API rate limiting, Contact deduplication  
-**Report:** `gstack-outputs/phase-3-engineering-review-report.md`
-
-### Phase 4 — Content + Website
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Blog SEO strategy, Homepage template system  
-**Report:** `gstack-outputs/phase-4-engineering-review-report.md`
-
-### Phase 5 — Polish + Launch
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Analytics caching strategy, GDPR/POPIA compliance  
-**Report:** `gstack-outputs/phase-5-engineering-review-report.md`
-
----
-
-## Implementation Ready
-
-**All planning complete. Ready to begin implementation:**
-
-1. **Phase 1** (Foundation) - 25-35 hours estimated
-2. **Phase 2** (Transactional Core) - 25-35 hours estimated
-3. **Phase 3** (CRM + Email) - 20-30 hours estimated
-4. **Phase 4** (Content + Website) - 15-25 hours estimated
-5. **Phase 5** (Polish + Launch) - 20-30 hours estimated
-
-**Total Estimated Implementation Time:** 105-155 hours
-
----
-
-*End of file — Build Plan (Definitive)*
-
-
----
-
-## Engineering Review Summary
-
-All 5 phases have completed engineering reviews with decisions documented:
-
-### Phase 0 — Pre-Implementation
-**Status:** ✅ Complete  
-**Decisions:** Vault error handling, test coverage, observability, deployment procedures  
-**Report:** `phase-0-implementation.md`
-
-### Phase 1 — Foundation
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Email confirmation, RBAC coverage, TOTP + email notifications, SettingsForm sub-sections, Navigation helpers, Rate limiting, Session timeout  
-**Report:** `gstack-outputs/phase-1-engineering-review-report.md` (created during session)
-
-### Phase 2 — Transactional Core
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Payment webhook idempotency, Booking state machine, Invoice PDF generation  
-**Report:** `gstack-outputs/phase-2-engineering-review-report.md`
-
-### Phase 3 — CRM + Email
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Brevo API rate limiting, Contact deduplication  
-**Report:** `gstack-outputs/phase-3-engineering-review-report.md`
-
-### Phase 4 — Content + Website
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Blog SEO strategy, Homepage template system  
-**Report:** `gstack-outputs/phase-4-engineering-review-report.md`
-
-### Phase 5 — Polish + Launch
-**Status:** ✅ Engineering Review Complete  
-**Decisions:** Analytics caching strategy, GDPR/POPIA compliance  
-**Report:** `gstack-outputs/phase-5-engineering-review-report.md`
-
----
-
-## Implementation Ready
-
-**All planning complete. Ready to begin implementation:**
-
-1. **Phase 1** (Foundation) - 25-35 hours estimated
-2. **Phase 2** (Transactional Core) - 25-35 hours estimated
-3. **Phase 3** (CRM + Email) - 20-30 hours estimated
-4. **Phase 4** (Content + Website) - 15-25 hours estimated
-5. **Phase 5** (Polish + Launch) - 20-30 hours estimated
-
-**Total Estimated Implementation Time:** 105-155 hours
-
----
-
-*End of file — Build Plan (Definitive)*
 
