@@ -1,86 +1,477 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Policy Editor Implementation Screen</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Policy Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface-variant);
+      min-height: 100vh;
+      padding: var(--space-8) var(--space-4);
+    }
+
+    .editor-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .editor-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+    }
+
+    .editor-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+    }
+
+    .btn-return {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .btn-return:hover { background: var(--primary-container); }
+    .btn-return:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .editor-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: var(--space-8);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .section-heading {
+      font: var(--font-headline-small);
+      color: var(--on-surface);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--outline);
+    }
+
+    .form-group { margin-bottom: var(--space-4); }
+
+    .form-label {
+      display: block;
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2379747E' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .hint-text {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      margin-top: var(--space-1);
+    }
+
+    .clause-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-4);
+    }
+
+    .clause-header h3 {
+      font: var(--font-title);
+      color: var(--on-surface);
+    }
+
+    .btn-add {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2) var(--space-4);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 36px;
+    }
+
+    .btn-add:hover { background: var(--primary-container); }
+    .btn-add:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .category-heading {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .clause-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: var(--space-4);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      margin-bottom: var(--space-3);
+      background: var(--surface);
+      transition: border-color 0.2s;
+    }
+
+    .clause-item:hover { border-color: var(--primary); }
+
+    .clause-item.seeded { border-left: 3px solid #2E7D32; }
+    .clause-item.custom { border-left: 3px solid var(--primary); }
+
+    .clause-info {
+      flex: 1;
+      margin-right: var(--space-4);
+    }
+
+    .clause-title {
+      font: var(--font-button);
+      color: var(--on-surface);
+      margin-bottom: var(--space-1);
+    }
+
+    .clause-preview {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .clause-actions {
+      display: flex;
+      gap: var(--space-2);
+      flex-shrink: 0;
+    }
+
+    .btn-clause-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-1) var(--space-3);
+      font: var(--font-caption);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      min-height: 32px;
+    }
+
+    .btn-clause-action:hover {
+      background: var(--primary-container);
+      border-color: var(--primary);
+    }
+
+    .btn-clause-action:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .btn-clause-action.delete {
+      color: var(--error);
+      border-color: var(--error);
+    }
+
+    .btn-clause-action.delete:hover { background: #F9DEDC; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-primary:hover { background: #523E8A; }
+    .btn-primary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-secondary:hover { background: var(--primary-container); }
+    .btn-secondary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .form-actions {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--outline);
+    }
+
+    .version-history {
+      margin-top: var(--space-6);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      overflow: hidden;
+    }
+
+    .version-history-header {
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-variant);
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+    }
+
+    .version-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .version-item:last-child { border-bottom: none; }
+
+    .version-label {
+      font: var(--font-body);
+      color: var(--on-surface);
+    }
+
+    .version-date {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+    }
+
+    .version-actions a {
+      font: var(--font-caption);
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .version-actions a:hover { text-decoration: underline; }
+    .version-actions a:focus { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 2px; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <main class="editor-container" role="main">
+    <header class="editor-header">
+      <h1>Policy Editor</h1>
+      <a href="/settings" class="btn-return">Return to Settings</a>
+    </header>
 
-<h1>Mybizz CS — Policy Editor Implementation Screen</h1>
-<p class="subtitle">Settings → Website — Policy Editor with ClauseBuilder — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-settings-PolicyEditorForm.html</code><br>
-  <strong>Phase:</strong> Phase 4 &mdash; Stage 4.2: Public Website Pages<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+    <article class="editor-card">
+      <form id="policyForm">
+        <div class="form-group">
+          <label for="document_type" class="form-label">Document Type</label>
+          <select id="document_type" name="document_type" class="form-select">
+            <option value="privacy_policy" selected>Privacy Policy</option>
+            <option value="terms_conditions">Terms &amp; Conditions</option>
+          </select>
+          <p class="hint-text">Select which document to edit. Clauses are managed per document type.</p>
+        </div>
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-settings-PolicyEditorForm.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+        <div class="clause-header">
+          <h3>Clauses</h3>
+          <button type="button" class="btn-add" id="btnAddClause">+ Add Custom Clause</button>
+        </div>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-      <li>SettingsForm — Policy Editor Tab</li>
-      <li>Properties Table — Key Components</li>
-      <li>Behaviour Notes</li>
-      <li>ADR &amp; Document References</li>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+        <div class="form-group">
+          <label for="category_filter" class="form-label">Filter by Category</label>
+          <select id="category_filter" name="category_filter" class="form-select">
+            <option value="">All Categories</option>
+            <option value="data_collection">Data Collection</option>
+            <option value="data_usage">Data Usage</option>
+            <option value="data_sharing">Data Sharing</option>
+            <option value="user_rights">User Rights</option>
+            <option value="cookies">Cookies</option>
+            <option value="security">Security</option>
+          </select>
+        </div>
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>hdg_settings_title</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_return_onboarding</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_business</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_palette</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_currency</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_legal</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_display_currency</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_payments</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_services</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_users</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_email</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_theme</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_features</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_policy_title</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_publish</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_document_type</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_add_clause</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_category_filter</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>rp_seeded_clauses</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>rp_custom_clauses</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_clause_title</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_clause_body</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_save_clause</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_cancel_clause</code></td><td>—</td><td>Stub</td></tr>
-</table>
+        <div class="category-heading">Seeded Clauses (from master template)</div>
 
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 4</strong></li>
-  <li>Stage: <strong>Stage 4.2</strong></li>
-  <li>Build-plan focus: <strong>Public Website Pages</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-settings-PolicyEditorForm.html</code></li>
-</ul>
+        <div class="clause-item seeded">
+          <div class="clause-info">
+            <div class="clause-title">Information We Collect</div>
+            <div class="clause-preview">We collect personal information you provide directly, including your name, email address, phone number, and payment information when you register for our services.</div>
+          </div>
+          <div class="clause-actions">
+            <button type="button" class="btn-clause-action">Edit</button>
+          </div>
+        </div>
 
-<p class="note">End of screen file — screen-settings-PolicyEditorForm.html</p>
+        <div class="clause-item seeded">
+          <div class="clause-info">
+            <div class="clause-title">How We Use Your Information</div>
+            <div class="clause-preview">We use your information to provide, maintain, and improve our services, process transactions, send communications, and comply with legal obligations.</div>
+          </div>
+          <div class="clause-actions">
+            <button type="button" class="btn-clause-action">Edit</button>
+          </div>
+        </div>
 
+        <div class="clause-item seeded">
+          <div class="clause-info">
+            <div class="clause-title">Data Retention</div>
+            <div class="clause-preview">We retain your personal information for as long as necessary to provide our services, comply with legal obligations, resolve disputes, and enforce our agreements.</div>
+          </div>
+          <div class="clause-actions">
+            <button type="button" class="btn-clause-action">Edit</button>
+          </div>
+        </div>
+
+        <div class="category-heading">Custom Clauses</div>
+
+        <div class="clause-item custom">
+          <div class="clause-info">
+            <div class="clause-title">Our Cookie Policy</div>
+            <div class="clause-preview">We use cookies and similar tracking technologies to enhance your experience on our website, analyze usage patterns, and deliver personalized content.</div>
+          </div>
+          <div class="clause-actions">
+            <button type="button" class="btn-clause-action">Edit</button>
+            <button type="button" class="btn-clause-action delete">Delete</button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary">Save Draft</button>
+          <button type="button" class="btn-primary">Publish</button>
+        </div>
+      </form>
+
+      <div class="version-history">
+        <div class="version-history-header">Version History</div>
+        <div class="version-item">
+          <div>
+            <span class="version-label">Version 3</span>
+            <span class="version-date"> — Published 2026-05-15 14:30</span>
+          </div>
+          <div class="version-actions"><a href="#">View</a></div>
+        </div>
+        <div class="version-item">
+          <div>
+            <span class="version-label">Version 2</span>
+            <span class="version-date"> — Published 2026-05-10 09:15</span>
+          </div>
+          <div class="version-actions"><a href="#">View</a></div>
+        </div>
+        <div class="version-item">
+          <div>
+            <span class="version-label">Version 1</span>
+            <span class="version-date"> — Published 2026-05-01 11:00</span>
+          </div>
+          <div class="version-actions"><a href="#">View</a></div>
+        </div>
+      </div>
+    </article>
+  </main>
 </body>
 </html>

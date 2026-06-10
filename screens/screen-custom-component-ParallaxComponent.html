@@ -1,62 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Parallax Component</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Parallax Component</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-body-large: 16px/24px 400;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --radius-button: 100px;
+      --radius-card: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: 20px;
+      min-height: 100vh;
+    }
+
+    .parallax-section {
+      position: relative;
+      width: 100%;
+      min-height: 500px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      top: -20%;
+      left: 0;
+      width: 100%;
+      height: 140%;
+      background: linear-gradient(135deg, var(--on-primary-container) 0%, var(--primary) 50%, var(--primary-container) 100%);
+      z-index: 0;
+    }
+
+    .parallax-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 40%);
+    }
+
+    .parallax-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: 1;
+    }
+
+    .parallax-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 640px;
+      padding: var(--space-8);
+    }
+
+    .parallax-content h1 {
+      font: var(--font-display);
+      color: var(--surface);
+      margin-bottom: var(--space-4);
+    }
+
+    .parallax-content p {
+      font: var(--font-body-large);
+      color: var(--surface-variant);
+      margin-bottom: var(--space-8);
+      line-height: 24px;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-8);
+      font: var(--font-button);
+      color: var(--on-primary-container);
+      background: var(--primary-container);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 48px;
+      text-decoration: none;
+    }
+
+    .btn-cta:hover {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .btn-cta:focus {
+      outline: 2px solid var(--surface);
+      outline-offset: 2px;
+    }
+
+    .page-content {
+      padding: var(--space-10) var(--space-8);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .page-content h2 {
+      font: var(--font-headline-small);
+      color: var(--on-surface);
+      margin-bottom: var(--space-3);
+    }
+
+    .page-content p {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-6);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+      .parallax-bg {
+        top: 0;
+        height: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .parallax-section {
+        min-height: 360px;
+      }
+      .parallax-content {
+        padding: var(--space-6);
+      }
+      .parallax-content h1 {
+        font-size: 40px;
+        line-height: 48px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main role="main">
+    <section class="parallax-section" aria-label="Hero section">
+      <div class="parallax-bg" aria-hidden="true"></div>
+      <div class="parallax-overlay" aria-hidden="true"></div>
+      <div class="parallax-content">
+        <h1>Grow Your Business</h1>
+        <p>Expert consulting and accounting services tailored to help your business thrive in today's competitive market.</p>
+        <a href="/contact" class="btn-cta">Get Started</a>
+      </div>
+    </section>
 
-<h1>Mybizz CS — Implementation Screen: Parallax Component</h1>
-<p class="subtitle">Parallax — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-custom-component-ParallaxComponent.html</code><br>
-  <strong>Phase:</strong> Phase 4 &mdash; Stage 4.2: Public Website Pages<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
-
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-custom-component-ParallaxComponent.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
-
-<h2>Sections (from wireframe)</h2>
-<ul>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
-
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>img_background</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_headline</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_body</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_cta</code></td><td>—</td><td>Stub</td></tr>
-</table>
-
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 4</strong></li>
-  <li>Stage: <strong>Stage 4.2</strong></li>
-  <li>Build-plan focus: <strong>Public Website Pages</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-custom-component-ParallaxComponent.html</code></li>
-</ul>
-
-<p class="note">End of screen file — screen-custom-component-ParallaxComponent.html</p>
-
+    <div class="page-content">
+      <h2>Welcome to Mybizz Consulting</h2>
+      <p>We provide comprehensive business consulting, accounting, and tax services to small and medium enterprises across the UK.</p>
+    </div>
+  </main>
 </body>
 </html>

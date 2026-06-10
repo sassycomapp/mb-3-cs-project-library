@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Mybizz CS — tmpl_month_day_cell</title>
 <style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 500px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
 .subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
 .legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
@@ -12,39 +12,33 @@ h1 { font-size: 22px; margin-bottom: 4px; }
 h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
 .wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
 .wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-hidden { border: 2px dashed #aaa; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #f7f7f7; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-md { font-size: 14px; font-weight: 500; color: #333; margin: 4px 0 8px; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
-.wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-cell-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.wf-day-cell { background: #fff; border: 1px solid #E7E0EC; border-radius: 4px; min-height: 80px; padding: 4px; cursor: pointer; }
+.wf-day-cell.today { border-color: #6750A4; background: #EADDFF; }
+.wf-day-cell.other-month { opacity: 0.4; }
+.wf-day-number { font-size: 11px; font-weight: 500; color: #49454F; text-align: right; padding: 4px; }
+.wf-day-cell.today .wf-day-number { color: #21005D; font-weight: 700; }
+.wf-event-chip { display: block; font-size: 9px; line-height: 12px; font-weight: 500; padding: 1px 3px; border-radius: 2px; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wf-event-chip.confirmed { background: #c8e6c9; color: #1b5e20; }
+.wf-event-chip.pending { background: #fff9c4; color: #795548; }
+.wf-day-cell.today .wf-event-chip.confirmed { background: #a5d6a7; }
+.wf-template-preview { background: #F3EDF7; border-radius: 12px; padding: 16px; }
+.wf-template-label { font-size: 11px; font-weight: 500; color: #49454F; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
 .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
 .prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
-.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
-.template-section { border-left: 3px solid #333; padding-left: 20px; margin-top: 20px; }
-.template-title { font-size: 14px; font-weight: bold; margin-bottom: 10px; color: #333; }
 </style>
 </head>
 <body>
 
 <h1>Mybizz CS — Bookings Wireframes</h1>
-<p class="subtitle">Booking Management — Anvil Construction Guide</p>
+<p class="subtitle">Calendar Template — Month Day Cell</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -52,43 +46,56 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2 class="pagebreak">Template Subforms</h2>
+<h2>tmpl_month_day_cell — Month Day Cell Template</h2>
 
-<p><strong>Purpose:</strong> Template subforms used by BookingCalendarForm for dynamic calendar views</p>
+<div class="wf-outer">
+  <span class="wf-label">tmpl_month_day_cell (HTMLTemplate) — used in month calendar grid</span>
 
-<div class="template-section">
-  <div class="template-title">tmpl_month_day_cell — Month Day Cell Template</div>
-  <p><strong>Purpose:</strong> Renders a single day cell in the month grid</p>
-  <p><strong>Used by:</strong> HTMLTemplate in frm_calendar_month</p>
-  
-  <div class="wf-outer">
-    <span class="wf-label">tmpl_month_day_cell (HTMLTemplate)</span>
-    
-    <!-- Day Container -->
-    <div class="wf-panel">
-      <span class="wf-label">calendar_day_container (div)</span>
-      <div class="wf-text">CSS class: calendar-day</div>
-      <div class="cn">calendar_day_container <span class="ct">(div)</span></div>
-    </div>
-    
-    <!-- Day Number -->
-    <div class="wf-panel">
-      <span class="wf-label">hdg_day_number (Heading)</span>
-      <div class="wf-heading-sm">15</div>
-      <div class="cn">hdg_day_number <span class="ct">(Heading)</span></div>
-    </div>
-    
-    <!-- Events Container -->
-    <div class="wf-panel">
-      <span class="wf-label">flow_events (FlowPanel)</span>
-      <div class="wf-text">Container for events on this day</div>
-      <div class="cn">flow_events <span class="ct">(FlowPanel)</span></div>
-    </div>
+  <div class="wf-panel">
+    <span class="wf-label">page_header (Header)</span>
+    <div class="wf-heading-md">tmpl_month_day_cell</div>
+    <div class="wf-text">Renders a single day cell within the month calendar grid.</div>
   </div>
 
-  <div class="prop-caption">Properties table</div>
-<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+  <div class="wf-panel">
+    <span class="wf-label">template_preview (Container)</span>
+    <div class="wf-template-preview">
+      <div class="wf-template-label">Component Preview</div>
+
+      <div class="wf-cell-grid">
+        <!-- Other month cells -->
+        <div class="wf-day-cell other-month"><div class="wf-day-number">28</div></div>
+        <div class="wf-day-cell other-month"><div class="wf-day-number">29</div></div>
+        <div class="wf-day-cell other-month"><div class="wf-day-number">30</div></div>
+        <div class="wf-day-cell other-month"><div class="wf-day-number">31</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">1</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">2</div></div>
+        <div class="wf-day-cell today"><div class="wf-day-number">3</div><span class="wf-event-chip confirmed">Consult</span><span class="wf-event-chip pending">Tax Rev</span></div>
+
+        <!-- Regular cells -->
+        <div class="wf-day-cell"><div class="wf-day-number">4</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">5</div><span class="wf-event-chip confirmed">Audit</span></div>
+        <div class="wf-day-cell"><div class="wf-day-number">6</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">7</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">8</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">9</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">10</div></div>
+
+        <!-- More cells -->
+        <div class="wf-day-cell"><div class="wf-day-number">11</div><span class="wf-event-chip pending">Bookkeep</span></div>
+        <div class="wf-day-cell"><div class="wf-day-number">12</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">13</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">14</div></div>
+        <div class="wf-day-cell"><div class="wf-day-number">15</div><span class="wf-event-chip confirmed">Consult</span></div>
+        <div class="wf-day-cell"><div class="wf-day-number">16</div><span class="wf-event-chip pending">Tax Rev</span></div>
+        <div class="wf-day-cell"><div class="wf-day-number">17</div></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
 
 </body>
 </html>

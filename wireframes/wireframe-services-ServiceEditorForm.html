@@ -93,8 +93,14 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-image">[ Drag and drop images ]</div>
     <div class="cn">fu_images <span class="ct">(FileLoader)</span></div>
 
+    <div class="wf-heading-sm" style="margin-top:12px;">Video Embed</div>
+    <div class="wf-dd">&nbsp;</div>
+    <div class="cn">dd_video_source <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span> — YouTube (V1)</div>
+
     <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_video_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_video_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> — placeholder: "Paste YouTube URL here..."</div>
+    <div class="wf-text">Paste the full YouTube URL. Leave empty to hide video on the service detail page.</div>
+    <div class="cn">lbl_video_hint <span class="ct">(Label)</span></div>
 
     <div class="wf-checkbox">Active</div>
     <div class="cn">cb_is_active <span class="ct">(Checkbox)</span></div>
@@ -125,7 +131,8 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <tr><td>txt_duration</td><td>TextBox</td><td>writeback = W</td></tr>
 <tr><td>dd_provider</td><td>DropdownMenu</td><td>writeback = W</td></tr>
 <tr><td>dd_meeting_type</td><td>DropdownMenu</td><td>writeback = W</td></tr>
-<tr><td>txt_video_url</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>dd_video_source</td><td>DropdownMenu</td><td>writeback = W, items=['YouTube'] (V1)</td></tr>
+<tr><td>txt_video_url</td><td>TextBox</td><td>writeback = W, placeholder='Paste YouTube URL here...'</td></tr>
 </table>
 
 </body>

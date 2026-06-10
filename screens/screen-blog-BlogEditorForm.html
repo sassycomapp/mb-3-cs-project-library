@@ -1,71 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Blog Editor Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Blog Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+      --elevation-card: 2dp;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: var(--font-body);
+      min-height: 100vh;
+      padding: var(--space-6);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .page-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .editor-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    .editor-main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+      padding: var(--space-6);
+    }
+
+    .card-title {
+      font: var(--font-title);
+      color: var(--on-surface);
+      margin-bottom: var(--space-4);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      display: block;
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-input::placeholder {
+      color: var(--outline);
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical;
+      min-height: 320px;
+      line-height: 1.6;
+    }
+
+    .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-textarea::placeholder {
+      color: var(--outline);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      min-height: 48px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2379747E' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+
+    .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .editor-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .file-upload-area {
+      border: 2px dashed var(--outline);
+      border-radius: var(--radius-input);
+      padding: var(--space-6) var(--space-4);
+      text-align: center;
+      color: var(--on-surface-variant);
+      font: var(--font-caption);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .file-upload-area:hover {
+      border-color: var(--primary);
+    }
+
+    .file-upload-area .upload-icon {
+      font-size: 32px;
+      margin-bottom: var(--space-2);
+      display: block;
+    }
+
+    .seo-hint {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      margin-top: var(--space-1);
+    }
+
+    .seo-char-count {
+      font: var(--font-caption);
+      color: var(--outline);
+      text-align: right;
+      margin-top: var(--space-1);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: #523E8A;
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-container);
+    }
+
+    .btn-secondary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: var(--space-3);
+      justify-content: flex-end;
+      margin-top: var(--space-6);
+    }
+
+    .editor-toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-3);
+      background: var(--surface-variant);
+      border: 1px solid var(--outline);
+      border-bottom: none;
+      border-radius: var(--radius-input) var(--radius-input) 0 0;
+    }
+
+    .toolbar-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      font: var(--font-body);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-input);
+      cursor: pointer;
+    }
+
+    .toolbar-btn:hover {
+      background: var(--surface);
+    }
+
+    .toolbar-btn:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .toolbar-separator {
+      width: 1px;
+      height: 20px;
+      background: var(--outline);
+      margin: 0 var(--space-1);
+    }
+
+    .editor-toolbar + .form-textarea {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .editor-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="page-container" role="main">
+    <header class="page-header">
+      <h1>Edit Post</h1>
+      <div class="header-actions">
+        <a href="/blog" class="btn-secondary" role="button">Cancel</a>
+        <button type="button" class="btn-secondary">Save Draft</button>
+        <button type="button" class="btn-primary">Publish</button>
+      </div>
+    </header>
 
-<h1>Mybizz CS — Implementation Screen: Blog Editor Form</h1>
-<p class="subtitle">Blog Management — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-blog-BlogEditorForm.html</code><br>
-  <strong>Phase:</strong> Phase 4 &mdash; Stage 4.1: Blog System<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+    <form id="blogEditorForm">
+      <div class="editor-layout">
+        <div class="editor-main">
+          <div class="card">
+            <div class="form-group">
+              <label for="post_title" class="form-label">Post Title</label>
+              <input
+                type="text"
+                id="post_title"
+                name="title"
+                class="form-input"
+                placeholder="Enter post title"
+                value="How to Optimize Your Business Operations"
+              >
+            </div>
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-blog-BlogEditorForm.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+            <div class="form-group">
+              <label for="post_excerpt" class="form-label">Excerpt</label>
+              <input
+                type="text"
+                id="post_excerpt"
+                name="excerpt"
+                class="form-input"
+                placeholder="Brief summary of the post"
+                value="Learn practical strategies to streamline your daily business operations and boost productivity."
+              >
+            </div>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+            <div class="form-group">
+              <label for="post_content" class="form-label">Content</label>
+              <div class="editor-toolbar">
+                <button type="button" class="toolbar-btn" aria-label="Bold" title="Bold">B</button>
+                <button type="button" class="toolbar-btn" aria-label="Italic" title="Italic"><em>I</em></button>
+                <button type="button" class="toolbar-btn" aria-label="Underline" title="Underline"><u>U</u></button>
+                <span class="toolbar-separator"></span>
+                <button type="button" class="toolbar-btn" aria-label="Heading" title="Heading">H</button>
+                <button type="button" class="toolbar-btn" aria-label="Bullet list" title="Bullet list">&bull;</button>
+                <button type="button" class="toolbar-btn" aria-label="Numbered list" title="Numbered list">1.</button>
+                <span class="toolbar-separator"></span>
+                <button type="button" class="toolbar-btn" aria-label="Insert link" title="Insert link">&#128279;</button>
+                <button type="button" class="toolbar-btn" aria-label="Insert image" title="Insert image">&#128247;</button>
+              </div>
+              <textarea
+                id="post_content"
+                name="content"
+                class="form-textarea"
+                placeholder="Write your post content here..."
+              >Running a business efficiently requires more than just hard work — it demands smart strategies and the right tools. In this post, we explore practical approaches to optimize your daily operations.
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>hdg_section_details</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_title</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_slug</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_category</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_content</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_section_seo</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_meta_title</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_meta_description</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_section_image</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>fu_featured_image</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_cancel</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>cb_publish</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_save</code></td><td>—</td><td>Stub</td></tr>
-</table>
+## Streamline Your Workflow
 
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 4</strong></li>
-  <li>Stage: <strong>Stage 4.1</strong></li>
-  <li>Build-plan focus: <strong>Blog System</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-blog-BlogEditorForm.html</code></li>
-</ul>
+Start by identifying bottlenecks in your current processes. Common areas where businesses lose time include manual data entry, scattered communication channels, and inconsistent reporting.
 
-<p class="note">End of screen file — screen-blog-BlogEditorForm.html</p>
+## Leverage Technology
 
+Modern business management platforms like Mybizz can centralize your client management, invoicing, and scheduling into a single dashboard. This reduces context switching and keeps all your data in one place.
+
+## Delegate Effectively
+
+Not every task requires your personal attention. Build a system of clear responsibilities and handoffs so your team can operate independently while maintaining quality standards.</textarea>
+            </div>
+          </div>
+        </div>
+
+        <aside class="editor-sidebar">
+          <div class="card">
+            <h2 class="card-title">Post Settings</h2>
+            <div class="form-group">
+              <label for="post_category" class="form-label">Category</label>
+              <select id="post_category" name="category" class="form-select">
+                <option value="business-tips" selected>Business Tips</option>
+                <option value="tutorials">Tutorials</option>
+                <option value="finance">Finance</option>
+                <option value="technology">Technology</option>
+                <option value="news">News</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="post_status" class="form-label">Status</label>
+              <select id="post_status" name="status" class="form-select">
+                <option value="draft" selected>Draft</option>
+                <option value="published">Published</option>
+                <option value="archived">Archived</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title">Featured Image</h2>
+            <div class="file-upload-area" role="button" tabindex="0" aria-label="Upload featured image">
+              <span class="upload-icon">&#128228;</span>
+              Click to upload or drag and drop<br>
+              PNG, JPG up to 5MB
+            </div>
+            <div class="form-hint" style="margin-top: var(--space-2);">Uses FileLoader component for image upload</div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title">Video Embed</h2>
+            <div class="form-group">
+              <label for="video_source" class="form-label">Video Source</label>
+              <select id="video_source" name="video_source" class="form-select">
+                <option value="youtube" selected>YouTube</option>
+                <option value="vimeo">Vimeo</option>
+                <option value="dailymotion">Dailymotion</option>
+                <option value="custom">Custom URL</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="video_url" class="form-label">Video URL</label>
+              <input
+                type="url"
+                id="video_url"
+                name="video_url"
+                class="form-input"
+                placeholder="Paste video URL here..."
+              >
+              <div class="seo-hint">Paste the full URL from the selected video platform</div>
+            </div>
+            <div class="file-upload-area" role="button" tabindex="0" aria-label="Or upload a video file" style="margin-top: var(--space-3);">
+              <span class="upload-icon">&#127916;</span>
+              Or upload a video file<br>
+              MP4, WebM up to 50MB
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="card-title">SEO Settings</h2>
+            <div class="form-group">
+              <label for="meta_title" class="form-label">Meta Title</label>
+              <input
+                type="text"
+                id="meta_title"
+                name="meta_title"
+                class="form-input"
+                placeholder="SEO title"
+                value="How to Optimize Your Business | Mybizz Blog"
+              >
+              <div class="seo-char-count">52 / 60 characters</div>
+            </div>
+            <div class="form-group">
+              <label for="meta_description" class="form-label">Meta Description</label>
+              <textarea
+                id="meta_description"
+                name="meta_description"
+                class="form-textarea"
+                placeholder="SEO description"
+                rows="3"
+                style="min-height: 80px;"
+              >Learn practical strategies to streamline your daily business operations and boost productivity with smart tools and workflows.</textarea>
+              <div class="seo-char-count">112 / 160 characters</div>
+            </div>
+            <div class="form-group">
+              <label for="keywords" class="form-label">Keywords</label>
+              <input
+                type="text"
+                id="keywords"
+                name="keywords"
+                class="form-input"
+                placeholder="business, optimization, productivity"
+                value="business optimization, productivity, workflow"
+              >
+              <div class="seo-hint">Separate keywords with commas</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="form-actions">
+        <a href="/blog" class="btn-secondary" role="button">Cancel</a>
+        <button type="submit" class="btn-secondary">Save Draft</button>
+        <button type="submit" class="btn-primary">Publish</button>
+      </div>
+    </form>
+  </main>
 </body>
 </html>

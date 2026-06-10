@@ -1,66 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Time Lapse Carousel Component</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Time Lapse Carousel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --surface-container: #F3EDF7;
+      --surface-container-low: #F7F2FA;
+      --outline: #79747E;
+      --outline-variant: #CAC4D0;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-headline-small: 22px/28px 500;
+      --font-body: 14px/20px 400;
+      --font-caption: 12px/16px 400;
+      --radius-card: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-6);
+    }
+
+    .carousel-container {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .carousel-viewport {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-card);
+      background: var(--surface-container-low);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .slide-content {
+      text-align: center;
+      padding: var(--space-8);
+    }
+
+    .slide-content h2 {
+      font: var(--font-headline-small);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+
+    .slide-content p {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+    }
+
+    .slide-1 {
+      background: linear-gradient(135deg, #EADDFF 0%, #D0BCFF 100%);
+    }
+
+    .slide-2 {
+      background: linear-gradient(135deg, #FFD8E4 0%, #FFB1C8 100%);
+    }
+
+    .slide-3 {
+      background: linear-gradient(135deg, #D1E8FF 0%, #A8D8FF 100%);
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--on-surface);
+      transition: background 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: #fff;
+    }
+
+    .nav-btn:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .nav-btn.prev {
+      left: var(--space-3);
+    }
+
+    .nav-btn.next {
+      right: var(--space-3);
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .dot.active {
+      background: var(--primary);
+    }
+
+    .dot:not(.active) {
+      background: var(--outline-variant);
+    }
+
+    .dot:hover:not(.active) {
+      background: var(--outline);
+    }
+
+    .dot:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --surface-container: #211F26;
+        --surface-container-low: #1D1B20;
+        --outline: #938F99;
+        --outline-variant: #49454F;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="carousel-container" role="main" aria-label="Time lapse carousel">
+    <div class="carousel-viewport">
+      <div class="carousel-track" style="transform: translateX(0%);">
+        <div class="carousel-slide slide-1">
+          <div class="slide-content">
+            <h2>Professional Services</h2>
+            <p>Expert consulting for your business growth</p>
+          </div>
+        </div>
+        <div class="carousel-slide slide-2">
+          <div class="slide-content">
+            <h2>Tax &amp; Compliance</h2>
+            <p>Stay compliant with HMRC regulations</p>
+          </div>
+        </div>
+        <div class="carousel-slide slide-3">
+          <div class="slide-content">
+            <h2>Financial Planning</h2>
+            <p>Strategic planning for long-term success</p>
+          </div>
+        </div>
+      </div>
+      <button class="nav-btn prev" aria-label="Previous slide">&#10094;</button>
+      <button class="nav-btn next" aria-label="Next slide">&#10095;</button>
+    </div>
 
-<h1>Mybizz CS — Implementation Screen: Time Lapse Carousel Component</h1>
-<p class="subtitle">Time Lapse Carousel — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-custom-component-TimeLapseCarouselComponent.html</code><br>
-  <strong>Phase:</strong> Phase 4 &mdash; Stage 4.2: Public Website Pages<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
-
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-custom-component-TimeLapseCarouselComponent.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
-
-<h2>Sections (from wireframe)</h2>
-<ul>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
-
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>img_slide_1</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>img_slide_2</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>img_slide_3</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_prev</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_next</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_dot_0</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_dot_1</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_dot_2</code></td><td>—</td><td>Stub</td></tr>
-</table>
-
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 4</strong></li>
-  <li>Stage: <strong>Stage 4.2</strong></li>
-  <li>Build-plan focus: <strong>Public Website Pages</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-custom-component-TimeLapseCarouselComponent.html</code></li>
-</ul>
-
-<p class="note">End of screen file — screen-custom-component-TimeLapseCarouselComponent.html</p>
-
+    <div class="carousel-dots" role="tablist" aria-label="Slide navigation">
+      <button class="dot active" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+      <button class="dot" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+      <button class="dot" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+    </div>
+  </main>
 </body>
 </html>

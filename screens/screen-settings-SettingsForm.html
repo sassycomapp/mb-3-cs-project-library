@@ -1,91 +1,731 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Settings Form (Recreated)</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface-variant);
+      min-height: 100vh;
+      padding: var(--space-8) var(--space-4);
+    }
+
+    .settings-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .settings-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+    }
+
+    .settings-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+    }
+
+    .btn-return {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .btn-return:hover { background: var(--primary-container); }
+    .btn-return:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .tab-bar {
+      display: flex;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface);
+      border-radius: var(--radius-card) var(--radius-card) 0 0;
+      overflow-x: auto;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2) var(--space-4);
+      font: var(--font-button);
+      color: var(--on-surface-variant);
+      background: transparent;
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      min-height: 36px;
+    }
+
+    .tab-btn:hover { background: var(--surface-variant); }
+    .tab-btn:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .tab-btn.active {
+      color: var(--on-primary);
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .tab-content {
+      background: var(--surface);
+      border-radius: 0 0 var(--radius-card) var(--radius-card);
+      padding: var(--space-8);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .section-heading {
+      font: var(--font-headline-small);
+      color: var(--on-surface);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--outline);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .form-group { margin-bottom: var(--space-4); }
+
+    .form-label {
+      display: block;
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-input::placeholder { color: var(--outline); }
+
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2379747E' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--outline);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-primary:hover { background: #523E8A; }
+    .btn-primary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-secondary:hover { background: var(--primary-container); }
+    .btn-secondary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .hint-text {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      margin-top: var(--space-1);
+    }
+
+    .warning-text {
+      font: var(--font-caption);
+      color: var(--error);
+      margin-top: var(--space-2);
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font: var(--font-body);
+      color: var(--on-surface);
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .acknowledgement-item {
+      padding: var(--space-4);
+      background: var(--surface-variant);
+      border-radius: var(--radius-input);
+      margin-bottom: var(--space-3);
+    }
+
+    .acknowledgement-item p {
+      font: var(--font-body);
+      color: var(--on-surface);
+      margin-bottom: var(--space-1);
+    }
+
+    .acknowledgement-item .date {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .palette-card {
+      padding: var(--space-4);
+      border: 2px solid var(--outline);
+      border-radius: var(--radius-card);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .palette-card.selected { border-color: var(--primary); }
+
+    .palette-card-name {
+      font: var(--font-button);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+
+    .palette-swatches {
+      display: flex;
+      gap: var(--space-1);
+    }
+
+    .palette-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+    }
+
+    .manage-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .manage-link:hover { background: var(--primary-container); }
+    .manage-link:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .palette-grid { grid-template-columns: 1fr; }
+      .tab-bar { gap: var(--space-1); }
+      .tab-btn { font-size: 12px; padding: var(--space-2) var(--space-3); }
+    }
+  </style>
 </head>
 <body>
+  <main class="settings-container" role="main">
+    <header class="settings-header">
+      <h1>Settings</h1>
+      <a href="/onboarding" class="btn-return">Return to Onboarding</a>
+    </header>
 
-<h1>Mybizz CS — Implementation Screen: Settings Form (Recreated)</h1>
-<p class="subtitle">Settings &amp; Configuration — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-settings-SettingsForm.html</code><br>
-  <strong>Phase:</strong> Phase 1 &mdash; Stage 1.4: Settings &amp; Configuration<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+    <nav class="tab-bar" role="tablist" aria-label="Settings sections">
+      <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-business" id="tab-business">Business Profile</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-palette" id="tab-palette">Palette</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-currency" id="tab-currency">System Currency</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-legal" id="tab-legal">Legal Acknowledgement</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-display-currency" id="tab-display-currency">Display Currency</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-payments" id="tab-payments">Payment Gateway</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-services" id="tab-services">Services</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-users" id="tab-users">Users &amp; Permissions</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-email" id="tab-email">Email Configuration</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-theme" id="tab-theme">Theme</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-features" id="tab-features">Feature Flags</button>
+    </nav>
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-settings-SettingsForm.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+    <div class="tab-content">
+      <!-- Business Profile -->
+      <section class="tab-panel active" id="panel-business" role="tabpanel" aria-labelledby="tab-business">
+        <h2 class="section-heading">Business Profile</h2>
+        <form id="businessForm">
+          <div class="form-group">
+            <label for="business_name" class="form-label">Business Name</label>
+            <input type="text" id="business_name" name="business_name" class="form-input" placeholder="My Business Name" required>
+          </div>
+          <div class="form-group">
+            <label for="contact_email" class="form-label">Contact Email</label>
+            <input type="email" id="contact_email" name="contact_email" class="form-input" placeholder="info@mybusiness.com">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (555) 000-0000">
+            </div>
+            <div class="form-group">
+              <label for="timezone" class="form-label">Timezone</label>
+              <select id="timezone" name="timezone" class="form-select">
+                <option value="">Select timezone</option>
+                <option value="UTC">UTC</option>
+                <option value="America/New_York">Eastern Time (ET)</option>
+                <option value="America/Chicago">Central Time (CT)</option>
+                <option value="America/Denver">Mountain Time (MT)</option>
+                <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                <option value="Europe/London">London (GMT/BST)</option>
+                <option value="Europe/Paris">Central European (CET)</option>
+                <option value="Africa/Lagos">West Africa (WAT)</option>
+                <option value="Africa/Nairobi">East Africa (EAT)</option>
+                <option value="Asia/Dubai">Gulf (GST)</option>
+                <option value="Asia/Tokyo">Japan (JST)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address_1" class="form-label">Address Line 1</label>
+            <input type="text" id="address_1" name="address_1" class="form-input" placeholder="Street address">
+          </div>
+          <div class="form-group">
+            <label for="address_2" class="form-label">Address Line 2</label>
+            <input type="text" id="address_2" name="address_2" class="form-input" placeholder="Apt, suite, unit (optional)">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city" class="form-label">City</label>
+              <input type="text" id="city" name="city" class="form-input" placeholder="City">
+            </div>
+            <div class="form-group">
+              <label for="country" class="form-label">Country</label>
+              <input type="text" id="country" name="country" class="form-input" placeholder="Country">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="postal_code" class="form-label">Postal Code</label>
+              <input type="text" id="postal_code" name="postal_code" class="form-input" placeholder="Postal code">
+            </div>
+            <div class="form-group">
+              <label for="entity_type" class="form-label">Entity Type</label>
+              <select id="entity_type" name="entity_type" class="form-select">
+                <option value="">Select type</option>
+                <option value="individual">Individual</option>
+                <option value="business">Business</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="website" class="form-label">Website URL</label>
+            <input type="url" id="website" name="website" class="form-input" placeholder="https://mybusiness.com">
+          </div>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-      <li>SettingsForm — Main Settings Tabbed Interface</li>
-      <li>Properties Table — Key Components</li>
-      <li>RBAC Governance</li>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+          <h3 class="section-heading" style="font-size: 16px; margin-top: var(--space-6);">Website Videos</h3>
+          <div class="form-group">
+            <label for="home_video_url" class="form-label">Home Page Video URL</label>
+            <input type="url" id="home_video_url" name="home_video_url" class="form-input" placeholder="https://www.youtube.com/watch?v=...">
+            <p class="hint-text">YouTube URL displayed on the home page. Leave empty to hide the video section.</p>
+          </div>
+          <div class="form-group">
+            <label for="services_video_url" class="form-label">Services Page Video URL</label>
+            <input type="url" id="services_video_url" name="services_video_url" class="form-input" placeholder="https://www.youtube.com/watch?v=...">
+            <p class="hint-text">YouTube URL displayed on the services page. Leave empty to hide the video section.</p>
+          </div>
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>hdg_settings_title</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_return_onboarding</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_business</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_palette</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_currency</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_legal</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_display_currency</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_payments</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_services</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_users</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_email</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_theme</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tab_features</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_business_name</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_contact_email</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_phone</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_address_1</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_address_2</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_city</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_country</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_postal</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_timezone</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_entity_type</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_website</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_save_business</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_save_palette</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_system_currency</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_confirm_currency</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_display_currency</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_save_display_currency</code></td><td>—</td><td>Stub</td></tr>
-</table>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Save Business Profile</button>
+          </div>
+        </form>
+      </section>
 
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 1</strong></li>
-  <li>Stage: <strong>Stage 1.4</strong></li>
-  <li>Build-plan focus: <strong>Settings &amp; Configuration</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-settings-SettingsForm.html</code></li>
-</ul>
+      <!-- Palette -->
+      <section class="tab-panel" id="panel-palette" role="tabpanel" aria-labelledby="tab-palette">
+        <h2 class="section-heading">Color Palette</h2>
+        <div class="palette-grid">
+          <div class="palette-card selected">
+            <div class="palette-card-name">Professional Blue</div>
+            <div class="palette-swatches">
+              <span class="palette-swatch" style="background:#1565C0;"></span>
+              <span class="palette-swatch" style="background:#42A5F5;"></span>
+              <span class="palette-swatch" style="background:#E3F2FD;"></span>
+            </div>
+          </div>
+          <div class="palette-card">
+            <div class="palette-card-name">Warm Coral</div>
+            <div class="palette-swatches">
+              <span class="palette-swatch" style="background:#D84315;"></span>
+              <span class="palette-swatch" style="background:#FF7043;"></span>
+              <span class="palette-swatch" style="background:#FBE9E7;"></span>
+            </div>
+          </div>
+          <div class="palette-card">
+            <div class="palette-card-name">Calm Teal</div>
+            <div class="palette-swatches">
+              <span class="palette-swatch" style="background:#00695C;"></span>
+              <span class="palette-swatch" style="background:#26A69A;"></span>
+              <span class="palette-swatch" style="background:#E0F2F1;"></span>
+            </div>
+          </div>
+          <div class="palette-card">
+            <div class="palette-card-name">Sophisticated Purple</div>
+            <div class="palette-swatches">
+              <span class="palette-swatch" style="background:#6A1B9A;"></span>
+              <span class="palette-swatch" style="background:#AB47BC;"></span>
+              <span class="palette-swatch" style="background:#F3E5F5;"></span>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-primary">Save Palette</button>
+        </div>
+      </section>
 
-<p class="note">End of screen file — screen-settings-SettingsForm.html</p>
+      <!-- System Currency -->
+      <section class="tab-panel" id="panel-currency" role="tabpanel" aria-labelledby="tab-currency">
+        <h2 class="section-heading">System Currency</h2>
+        <div class="form-group">
+          <label for="system_currency" class="form-label">System Currency</label>
+          <select id="system_currency" name="system_currency" class="form-select">
+            <option value="">Select currency</option>
+            <option value="USD">USD — US Dollar</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="GBP">GBP — British Pound</option>
+            <option value="NGN">NGN — Nigerian Naira</option>
+            <option value="KES">KES — Kenyan Shilling</option>
+            <option value="ZAR">ZAR — South African Rand</option>
+            <option value="GHS">GHS — Ghanaian Cedi</option>
+            <option value="AED">AED — UAE Dirham</option>
+            <option value="CAD">CAD — Canadian Dollar</option>
+            <option value="AUD">AUD — Australian Dollar</option>
+          </select>
+          <p class="warning-text">This becomes immutable after your first transaction.</p>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-primary">Confirm Currency</button>
+        </div>
+      </section>
 
+      <!-- Legal Acknowledgement -->
+      <section class="tab-panel" id="panel-legal" role="tabpanel" aria-labelledby="tab-legal">
+        <h2 class="section-heading">Legal Acknowledgement</h2>
+        <p class="hint-text" style="margin-bottom:var(--space-4);">Read-only view of your legal and data governance acknowledgements.</p>
+        <div class="acknowledgement-item">
+          <p><strong>Legal Acknowledgement</strong></p>
+          <p class="date">Accepted on 2026-05-15</p>
+        </div>
+        <div class="acknowledgement-item">
+          <p><strong>Data Governance Acknowledgement</strong></p>
+          <p class="date">Accepted on 2026-05-15</p>
+        </div>
+        <p class="hint-text" style="margin-top:var(--space-4);">These acknowledgements cannot be reversed once accepted.</p>
+      </section>
+
+      <!-- Display Currency -->
+      <section class="tab-panel" id="panel-display-currency" role="tabpanel" aria-labelledby="tab-display-currency">
+        <h2 class="section-heading">Display Currency</h2>
+        <p class="hint-text" style="margin-bottom:var(--space-4);">Optional per-service currency override for customer-facing prices.</p>
+        <div class="form-group">
+          <label for="display_currency" class="form-label">Display Currency</label>
+          <select id="display_currency" name="display_currency" class="form-select">
+            <option value="">Same as system currency</option>
+            <option value="USD">USD — US Dollar</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="GBP">GBP — British Pound</option>
+            <option value="NGN">NGN — Nigerian Naira</option>
+            <option value="KES">KES — Kenyan Shilling</option>
+          </select>
+          <p class="hint-text">This is optional and can be changed at any time.</p>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-primary">Save Display Currency</button>
+        </div>
+      </section>
+
+      <!-- Payment Gateway -->
+      <section class="tab-panel" id="panel-payments" role="tabpanel" aria-labelledby="tab-payments">
+        <h2 class="section-heading">Payment Gateway</h2>
+        <div class="form-group">
+          <label for="active_gateway" class="form-label">Active Gateway</label>
+          <select id="active_gateway" name="active_gateway" class="form-select">
+            <option value="">Select gateway</option>
+            <option value="stripe">Stripe</option>
+            <option value="paystack">Paystack</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="publishable_key" class="form-label">Publishable Key</label>
+          <input type="text" id="publishable_key" name="publishable_key" class="form-input" placeholder="pk_live_...">
+        </div>
+        <p class="hint-text" style="margin-bottom:var(--space-4);">Secret keys are stored securely in The Vault and are not displayed here.</p>
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="gateway_connected" name="gateway_connected">
+            Gateway connected and verified
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-primary">Save Gateway Config</button>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section class="tab-panel" id="panel-services" role="tabpanel" aria-labelledby="tab-services">
+        <h2 class="section-heading">Services</h2>
+        <p class="hint-text" style="margin-bottom:var(--space-4);">Manage your service catalogue. Add, edit, or remove services offered to clients.</p>
+        <a href="/settings/services" class="manage-link">Manage Services</a>
+      </section>
+
+      <!-- Users & Permissions -->
+      <section class="tab-panel" id="panel-users" role="tabpanel" aria-labelledby="tab-users">
+        <h2 class="section-heading">Users &amp; Permissions</h2>
+        <p class="hint-text" style="margin-bottom:var(--space-4);">Invite team members, assign roles, and manage access levels.</p>
+        <a href="/settings/users" class="manage-link">Manage Users</a>
+      </section>
+
+      <!-- Email Configuration -->
+      <section class="tab-panel" id="panel-email" role="tabpanel" aria-labelledby="tab-email">
+        <h2 class="section-heading">Email Configuration</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="from_email" class="form-label">From Email</label>
+            <input type="email" id="from_email" name="from_email" class="form-input" placeholder="noreply@mybusiness.com">
+          </div>
+          <div class="form-group">
+            <label for="from_name" class="form-label">From Name</label>
+            <input type="text" id="from_name" name="from_name" class="form-input" placeholder="My Business Name">
+          </div>
+        </div>
+        <p class="hint-text" style="margin-bottom:var(--space-4);">SMTP credentials are stored securely in The Vault.</p>
+        <div class="form-actions">
+          <button type="button" class="btn-primary">Save Email Config</button>
+        </div>
+      </section>
+
+      <!-- Theme -->
+      <section class="tab-panel" id="panel-theme" role="tabpanel" aria-labelledby="tab-theme">
+        <h2 class="section-heading">Theme</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="primary_color" class="form-label">Primary Color</label>
+            <input type="text" id="primary_color" name="primary_color" class="form-input" placeholder="#6750A4">
+          </div>
+          <div class="form-group">
+            <label for="accent_color" class="form-label">Accent Color</label>
+            <input type="text" id="accent_color" name="accent_color" class="form-input" placeholder="#FF7043">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="font_family" class="form-label">Font Family</label>
+          <input type="text" id="font_family" name="font_family" class="form-input" placeholder="Roboto">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-primary">Save Theme</button>
+        </div>
+      </section>
+
+      <!-- Feature Flags -->
+      <section class="tab-panel" id="panel-features" role="tabpanel" aria-labelledby="tab-features">
+        <h2 class="section-heading">Feature Flags</h2>
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="feat_bookings" name="feat_bookings" checked>
+            Bookings Enabled
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="feat_services" name="feat_services" checked>
+            Services Enabled
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="feat_marketing" name="feat_marketing">
+            Marketing Enabled
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="feat_blog" name="feat_blog">
+            Blog Enabled
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-primary">Save Feature Flags</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function() {
+        var tabs = document.querySelectorAll('.tab-btn');
+        var panels = document.querySelectorAll('.tab-panel');
+        for (var i = 0; i < tabs.length; i++) {
+          tabs[i].addEventListener('click', function() {
+            for (var j = 0; j < tabs.length; j++) {
+              tabs[j].classList.remove('active');
+              tabs[j].setAttribute('aria-selected', 'false');
+            }
+            for (var k = 0; k < panels.length; k++) {
+              panels[k].classList.remove('active');
+            }
+            this.classList.add('active');
+            this.setAttribute('aria-selected', 'true');
+            var target = document.getElementById(this.getAttribute('aria-controls'));
+            if (target) { target.classList.add('active'); }
+          });
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

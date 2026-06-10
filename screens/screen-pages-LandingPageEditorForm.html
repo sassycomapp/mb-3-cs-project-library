@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — LandingPageEditorForm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+      --elevation-card: 2dp;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface-variant);
+      line-height: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admin-layout {
+      display: flex;
+      flex: 1;
+    }
+
+    .admin-sidebar {
+      width: 240px;
+      background: var(--surface);
+      border-right: 1px solid var(--outline);
+      padding: var(--space-6) 0;
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo {
+      font: var(--font-headline-small);
+      color: var(--primary);
+      padding: 0 var(--space-6) var(--space-6);
+      border-bottom: 1px solid var(--surface-variant);
+      margin-bottom: var(--space-4);
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar-nav li {
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .sidebar-nav li:hover {
+      background: var(--surface-variant);
+    }
+
+    .sidebar-nav li.active {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 500;
+    }
+
+    .admin-main {
+      flex: 1;
+      padding: var(--space-8);
+      overflow-x: auto;
+    }
+
+    .editor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .editor-header h1 {
+      font: var(--font-headline-large);
+    }
+
+    .editor-actions {
+      display: flex;
+      gap: var(--space-3);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: #523E8A;
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-container);
+    }
+
+    .btn-secondary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .btn-success {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: #FFFFFF;
+      background: #2E7D32;
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .btn-success:hover {
+      background: #1B5E20;
+    }
+
+    .btn-success:focus {
+      outline: 2px solid #2E7D32;
+      outline-offset: 2px;
+    }
+
+    .editor-meta {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: var(--space-6);
+      box-shadow: 0 var(--elevation-card);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input {
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 40px;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-input::placeholder {
+      color: var(--outline);
+    }
+
+    .form-select {
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 40px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2379747E' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+
+    .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .editor-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    .editor-section {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: 0 var(--elevation-card);
+      overflow: hidden;
+    }
+
+    .editor-section-full {
+      grid-column: 1 / -1;
+    }
+
+    .section-header {
+      font: var(--font-title);
+      color: var(--on-surface);
+      padding: var(--space-4) var(--space-6);
+      border-bottom: 1px solid var(--surface-variant);
+      background: var(--surface-variant);
+    }
+
+    .section-body {
+      padding: var(--space-6);
+    }
+
+    .template-preview-area {
+      min-height: 240px;
+      background: var(--surface-variant);
+      border: 2px dashed var(--outline);
+      border-radius: var(--radius-input);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      font: var(--font-body);
+    }
+
+    .fields-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .fields-table th {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      text-align: left;
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .fields-table td {
+      font: var(--font-body);
+      color: var(--on-surface);
+      padding: var(--space-2) var(--space-3);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .fields-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .field-type-tag {
+      display: inline-block;
+      padding: var(--space-1) var(--space-2);
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
+      border-radius: var(--radius-input);
+      font: var(--font-caption);
+    }
+
+    .add-field-btn {
+      margin-top: var(--space-4);
+    }
+
+    .seo-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .form-textarea {
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 80px;
+      resize: vertical;
+      font-family: var(--font-family);
+    }
+
+    .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-textarea::placeholder {
+      color: var(--outline);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <p class="sidebar-logo">Mybizz</p>
+      <nav>
+        <ul class="sidebar-nav">
+          <li>Dashboard</li>
+          <li>Contacts</li>
+          <li>Services</li>
+          <li class="active">Landing Pages</li>
+          <li>Settings</li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="admin-main" role="main">
+      <div class="editor-header">
+        <h1>Edit Landing Page</h1>
+        <div class="editor-actions">
+          <a href="/admin/landing-pages/1/preview" class="btn-secondary">Preview</a>
+          <button type="button" class="btn-primary">Save</button>
+          <button type="button" class="btn-success">Publish</button>
+        </div>
+      </div>
+
+      <div class="editor-meta">
+        <div class="form-group">
+          <label for="title" class="form-label">Page Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="form-input"
+            placeholder="Page Title"
+            value="Summer Promo Landing"
+          >
+        </div>
+        <div class="form-group">
+          <label for="slug" class="form-label">URL Slug</label>
+          <input
+            type="text"
+            id="slug"
+            name="slug"
+            class="form-input"
+            placeholder="/my-landing-page"
+            value="/summer-promo"
+          >
+        </div>
+        <div class="form-group">
+          <label for="template_type" class="form-label">Template Type</label>
+          <select id="template_type" name="template_type" class="form-select">
+            <option value="lead_capture" selected>Lead Capture</option>
+            <option value="event_registration">Event Registration</option>
+            <option value="vsl">VSL</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="editor-sections">
+        <div class="editor-section editor-section-full">
+          <div class="section-header">Template Preview</div>
+          <div class="section-body">
+            <div class="template-preview-area">
+              Lead Capture Template Preview
+            </div>
+          </div>
+        </div>
+
+        <div class="editor-section">
+          <div class="section-header">Form Fields Configuration</div>
+          <div class="section-body">
+            <table class="fields-table">
+              <thead>
+                <tr>
+                  <th>Field Name</th>
+                  <th>Type</th>
+                  <th>Required</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>First Name</td>
+                  <td><span class="field-type-tag">Text</span></td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Last Name</td>
+                  <td><span class="field-type-tag">Text</span></td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td><span class="field-type-tag">Email</span></td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td><span class="field-type-tag">Phone</span></td>
+                  <td>No</td>
+                </tr>
+                <tr>
+                  <td>Service Interest</td>
+                  <td><span class="field-type-tag">Dropdown</span></td>
+                  <td>No</td>
+                </tr>
+              </tbody>
+            </table>
+            <button type="button" class="btn-secondary add-field-btn">+ Add Field</button>
+          </div>
+        </div>
+
+        <div class="editor-section">
+          <div class="section-header">SEO Settings</div>
+          <div class="section-body">
+            <div class="seo-group">
+              <div class="form-group">
+                <label for="meta_title" class="form-label">Meta Title</label>
+                <input
+                  type="text"
+                  id="meta_title"
+                  name="meta_title"
+                  class="form-input"
+                  placeholder="Meta title for search engines"
+                  value="Summer Promo — Free Consultation | Mybizz"
+                >
+              </div>
+              <div class="form-group">
+                <label for="meta_description" class="form-label">Meta Description</label>
+                <textarea
+                  id="meta_description"
+                  name="meta_description"
+                  class="form-textarea"
+                  placeholder="Meta description for search engines"
+                >Get a free business consultation this summer. Expert consulting, financial advisory, and marketing strategy services tailored to your needs.</textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,76 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Footer Component</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Footer Component</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #1C1B1F;
+      --on-surface: #E6E1E5;
+      --surface-variant: #49454F;
+      --on-surface-variant: #CAC4D0;
+      --surface-container: #211F26;
+      --surface-container-low: #1D1B20;
+      --outline: #938F99;
+      --outline-variant: #49454F;
+      --inverse-surface: #E6E1E5;
+      --inverse-on-surface: #313033;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --font-family: 'Roboto', sans-serif;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-title-small: 16px/20px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-card: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .footer {
+      width: 100%;
+      background: var(--surface-container);
+      border-top: 1px solid var(--outline-variant);
+      padding: var(--space-10) var(--space-8) var(--space-6);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+
+    .footer-brand .logo-placeholder {
+      width: 120px;
+      height: 40px;
+      background: var(--surface-variant);
+      border-radius: var(--radius-card);
+      margin-bottom: var(--space-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      font: var(--font-caption);
+    }
+
+    .footer-brand .business-name {
+      font: var(--font-title);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+
+    .footer-brand .accreditation {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-1);
+    }
+
+    .footer-links h3 {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-3);
+    }
+
+    .footer-links a {
+      display: block;
+      font: var(--font-body);
+      color: var(--on-surface);
+      text-decoration: none;
+      padding: var(--space-1) 0;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-container);
+    }
+
+    .footer-links a:focus {
+      outline: 2px solid var(--primary-container);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    .footer-contact h3 {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-3);
+    }
+
+    .footer-contact p {
+      font: var(--font-body);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+
+    .footer-contact .map-placeholder {
+      width: 100%;
+      height: 120px;
+      background: var(--surface-variant);
+      border-radius: var(--radius-card);
+      margin-top: var(--space-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      font: var(--font-caption);
+    }
+
+    .footer-middle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4) 0;
+      border-top: 1px solid var(--outline-variant);
+      border-bottom: 1px solid var(--outline-variant);
+      margin-bottom: var(--space-4);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--outline-variant);
+      border-radius: 50%;
+      color: var(--on-surface-variant);
+      font-size: 14px;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .social-icon:hover {
+      border-color: var(--on-surface);
+      color: var(--on-surface);
+    }
+
+    .social-icon:focus {
+      outline: 2px solid var(--primary-container);
+      outline-offset: 2px;
+    }
+
+    .policy-links {
+      display: flex;
+      gap: var(--space-4);
+    }
+
+    .policy-links a {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      text-decoration: none;
+    }
+
+    .policy-links a:hover {
+      color: var(--on-surface);
+    }
+
+    .policy-links a:focus {
+      outline: 2px solid var(--primary-container);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .copyright {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+    }
+
+    .back-to-top {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      text-decoration: none;
+    }
+
+    .back-to-top:hover {
+      color: var(--on-surface);
+    }
+
+    .back-to-top:focus {
+      outline: 2px solid var(--primary-container);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --surface-container: #211F26;
+        --surface-container-low: #1D1B20;
+        --outline: #938F99;
+        --outline-variant: #49454F;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+      .footer-middle {
+        flex-direction: column;
+        gap: var(--space-4);
+      }
+    }
+  </style>
 </head>
 <body>
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-placeholder" aria-label="Business logo">LOGO</div>
+          <div class="business-name">Mybizz Consulting</div>
+          <div class="accreditation">ISO 9001 Certified</div>
+          <div class="accreditation">Member of ICAEW</div>
+        </div>
 
-<h1>Mybizz CS — Implementation Screen: Footer Component</h1>
-<p class="subtitle">Footer — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-custom-component-FooterComponent.html</code><br>
-  <strong>Phase:</strong> Phase 4 &mdash; Stage 4.2: Public Website Pages<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <a href="/about">About Us</a>
+          <a href="/services">Services</a>
+          <a href="/blog">Blog</a>
+          <a href="/contact">Contact</a>
+        </div>
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-custom-component-FooterComponent.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p>info@mybizzconsulting.com</p>
+          <p>+44 20 1234 5678</p>
+          <a href="/contact" class="btn-link" style="font: var(--font-button); color: var(--primary-container); text-decoration: none;">Send Message</a>
+          <div class="map-placeholder" aria-label="Map location placeholder">
+            Map placeholder
+          </div>
+        </div>
+      </div>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+      <div class="footer-middle">
+        <div class="social-icons" aria-label="Social media links">
+          <a href="#" class="social-icon" aria-label="Facebook">FB</a>
+          <a href="#" class="social-icon" aria-label="Instagram">IG</a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">LI</a>
+          <a href="#" class="social-icon" aria-label="Twitter">TW</a>
+        </div>
+        <div class="policy-links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms &amp; Conditions</a>
+          <a href="/cookies">Cookie Policy</a>
+        </div>
+      </div>
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>img_logo</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_business_name</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_creds_1</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_creds_2</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_fb</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_ig</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_li</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_tw</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>lnk_privacy</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>lnk_terms</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>lnk_cookie</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_contact</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_email</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_phone</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_contact_us</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>html_map</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_copyright</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>lnk_back_top</code></td><td>—</td><td>Stub</td></tr>
-</table>
-
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 4</strong></li>
-  <li>Stage: <strong>Stage 4.2</strong></li>
-  <li>Build-plan focus: <strong>Public Website Pages</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-custom-component-FooterComponent.html</code></li>
-</ul>
-
-<p class="note">End of screen file — screen-custom-component-FooterComponent.html</p>
-
+      <div class="footer-bottom">
+        <span class="copyright">&copy; 2026 Mybizz Consulting. All rights reserved.</span>
+        <a href="#" class="back-to-top">Back to Top</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

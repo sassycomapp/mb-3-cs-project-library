@@ -9,10 +9,11 @@ The source tier determines how much trust may be placed in recalled information.
 These are the highest-trust GBrain inputs for the current CS application.
 
 Approved Tier A sources are:
-- `C:\_mb2-cs-app\project-library\adr\`
-- `C:\_mb2-cs-app\project-library\docs\am1-anvil-methods\`
-- `C:\_mb2-cs-app\project-library\docs\mm1-mybizz-methods\`
-- `C:\_mb2-cs-app\project-library\docs\reference-anvil.yaml\anvil.yaml`
+  - `C:\_mb2-cs-app\project-library\adr\`,
+  - `C:\_mb2-cs-app\project-library\docs\`,
+  - `C:\_mb2-cs-app\project-library\developer-rules\`.
+
+
 
 Tier A recall may be treated as high-confidence advisory memory, but the underlying files still remain authoritative.
 
@@ -20,16 +21,14 @@ Tier A recall may be treated as high-confidence advisory memory, but the underly
 These are authoritative tracking sources for shared work state.
 
 Approved Tier B sources are:
-- `C:\_mb2-cs-app\devlog\README.md`
-- `C:\_mb2-cs-app\devlog\index.md`
-- `C:\_mb2-cs-app\todo\todo.md`
-- `C:\_mb2-cs-app\todo\todo-archive.md`
-
+  - `C:\_mb2-cs-app\project-library\implementation\`.
+  
 Tier B recall may be used for work history, task state, and handoff context.
 
 ## Tier C — Validated workflow outputs
 These are validated outputs produced by approved workflows.
-
+  - `C:\_mb2-cs-app\project-library\gstack-outputs\`.
+  - `C:\_mb2-cs-app\project-library\workspace\gbrain\gbrain-log.md`.
 Examples:
 - final Plan handoffs,
 - final Build handoffs,

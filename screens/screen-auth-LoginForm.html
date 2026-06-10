@@ -1,66 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Login Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+      --elevation-card: 2dp;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      padding: var(--space-8);
+    }
+
+    .login-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: var(--space-8);
+      box-shadow: 0 var(--elevation-card);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .login-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+
+    .login-header p {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .form-label {
+      display: block;
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-input::placeholder {
+      color: var(--outline);
+    }
+
+    .form-checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .form-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .form-checkbox-label {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+      cursor: pointer;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-primary:hover {
+      background: #523E8A;
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-container);
+    }
+
+    .btn-secondary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: var(--space-6);
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+    }
+
+    .form-footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .form-footer a:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="login-container" role="main">
+    <article class="login-card">
+      <header class="login-header">
+        <h1>Welcome Back</h1>
+        <p>Sign in to your Mybizz account</p>
+      </header>
 
-<h1>Mybizz CS — Implementation Screen: Login Form</h1>
-<p class="subtitle">Authentication Forms — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-auth-LoginForm.html</code><br>
-  <strong>Phase:</strong> Phase 1 &mdash; Stage 1.2: Authentication System<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+      <form id="loginForm" action="/auth/login" method="POST">
+        <div class="form-group">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-input"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+            data-pretext
+          >
+        </div>
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-auth-LoginForm.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-input"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+            data-pretext
+          >
+        </div>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-      <li>LoginForm — Email/Password Login</li>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+        <div class="form-checkbox-group">
+          <input
+            type="checkbox"
+            id="remember"
+            name="remember"
+            class="form-checkbox"
+          >
+          <label for="remember" class="form-checkbox-label">Remember me</label>
+        </div>
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>hdg_welcome</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_email</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_password</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>cb_remember</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_sign_in</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>lnk_forgot_password</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_sign_up_prompt</code></td><td>—</td><td>Stub</td></tr>
-</table>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">
+            Sign In
+          </button>
 
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 1</strong></li>
-  <li>Stage: <strong>Stage 1.2</strong></li>
-  <li>Build-plan focus: <strong>Authentication System</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-auth-LoginForm.html</code></li>
-</ul>
+          <a href="/auth/password-reset" class="btn-secondary">
+            Forgot password?
+          </a>
+        </div>
 
-<p class="note">End of screen file — screen-auth-LoginForm.html</p>
+        <div class="form-footer">
+          Don't have an account? <a href="/auth/signup">Sign up</a>
+        </div>
+      </form>
+    </article>
+  </main>
 
+  <script>
+    (function() {
+      'use strict';
+
+      const Pretext = {
+        prepare: function(text, font) {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          ctx.font = font;
+
+          const words = text.split(' ');
+          const lines = [];
+          let currentLine = '';
+
+          for (const word of words) {
+            const testLine = currentLine ? currentLine + ' ' + word : word;
+            const metrics = ctx.measureText(testLine);
+
+            if (metrics.width > 300) {
+              lines.push(currentLine);
+              currentLine = word;
+            } else {
+              currentLine = testLine;
+            }
+          }
+
+          if (currentLine) {
+            lines.push(currentLine);
+          }
+
+          const height = lines.length * 20;
+
+          return {
+            lines,
+            height,
+            handle: { text, font, lines }
+          };
+        },
+
+        layout: function(handle, maxWidth, lineHeight) {
+          const { text, font, lines } = handle;
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          ctx.font = font;
+
+          const words = text.split(' ');
+          const computedLines = [];
+          let currentLine = '';
+
+          for (const word of words) {
+            const testLine = currentLine ? currentLine + ' ' + word : word;
+            const metrics = ctx.measureText(testLine);
+
+            if (metrics.width > maxWidth) {
+              computedLines.push(currentLine);
+              currentLine = word;
+            } else {
+              currentLine = testLine;
+            }
+          }
+
+          if (currentLine) {
+            computedLines.push(currentLine);
+          }
+
+          const height = computedLines.length * lineHeight;
+
+          return {
+            height,
+            lineCount: computedLines.length
+          };
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const inputs = document.querySelectorAll('[data-pretext]');
+        const prepared = new Map();
+
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function() {
+            for (const el of inputs) {
+              const font = getComputedStyle(el).font;
+              prepared.set(el, Pretext.prepare(el.placeholder, font));
+            }
+
+            function relayout() {
+              for (const [el, handle] of prepared) {
+                const lineHeight = parseFloat(getComputedStyle(el).lineHeight);
+                const maxWidth = el.clientWidth;
+                const { height } = Pretext.layout(handle, maxWidth, lineHeight);
+                el.style.minHeight = height + 'px';
+              }
+            }
+
+            new ResizeObserver(() => relayout()).observe(document.body);
+            relayout();
+          });
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1,71 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Availability Settings Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Availability Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --surface-container: #F3EDF7;
+      --surface-container-high: #ECE6F0;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-title-medium: 16px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-body-small: 12px/16px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: 20px;
+      min-height: 100vh;
+      padding: var(--space-8);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .page-header {
+      margin-bottom: var(--space-6);
+    }
+
+    .page-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+
+    .page-header p {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+    }
+
+    .settings-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--surface-variant);
+      overflow: hidden;
+      margin-bottom: var(--space-6);
+    }
+
+    .settings-section {
+      padding: var(--space-6);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .settings-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .settings-section-title {
+      font: var(--font-title-medium);
+      color: var(--on-surface);
+      margin-bottom: var(--space-4);
+    }
+
+    .day-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr 60px;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .day-row:last-child {
+      border-bottom: none;
+    }
+
+    .day-label {
+      font: var(--font-body);
+      color: var(--on-surface);
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 44px;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-input::placeholder {
+      color: var(--outline);
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 48px;
+      height: 28px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--surface-variant);
+      border: 2px solid var(--outline);
+      border-radius: 14px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .toggle-slider::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 2px;
+      bottom: 2px;
+      background: var(--outline);
+      border-radius: 50%;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+      background: var(--primary-container);
+      border-color: var(--primary);
+    }
+
+    .toggle-switch input:checked + .toggle-slider::before {
+      transform: translateX(20px);
+      background: var(--primary);
+    }
+
+    .toggle-switch input:focus + .toggle-slider {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .exceptions-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: var(--space-4);
+    }
+
+    .exceptions-table th {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      text-align: left;
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--surface-variant);
+      background: var(--surface-container);
+    }
+
+    .exceptions-table td {
+      font: var(--font-body);
+      color: var(--on-surface);
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .exceptions-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-3);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-primary:hover { background: #523E8A; }
+    .btn-primary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-secondary:hover { background: var(--primary-container); }
+    .btn-secondary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .btn-icon-sm {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: var(--on-surface-variant);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .btn-icon-sm:hover { background: var(--surface-variant); }
+    .btn-icon-sm:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+        --surface-container: #211F26;
+        --surface-container-high: #2B2930;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <main class="page-container" role="main">
+    <header class="page-header">
+      <h1>Availability Settings</h1>
+      <p>Configure your weekly schedule and blocked dates.</p>
+    </header>
 
-<h1>Mybizz CS — Implementation Screen: Availability Settings Form</h1>
-<p class="subtitle">Booking Management — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-bookings-AvailabilitySettingsForm.html</code><br>
-  <strong>Phase:</strong> Phase 2 &mdash; Stage 2.2: Availability Management<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+    <form id="availabilityForm" action="/settings/availability" method="POST">
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-bookings-AvailabilitySettingsForm.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+      <div class="settings-card">
+        <div class="settings-section">
+          <div class="settings-section-title">Business Hours</div>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+          <div class="day-row">
+            <span class="day-label">Monday</span>
+            <input type="time" class="form-input" value="08:00" aria-label="Monday start time">
+            <input type="time" class="form-input" value="17:00" aria-label="Monday end time">
+            <label class="toggle-switch" aria-label="Enable Monday"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>hdg_section_hours</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_monday</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_monday_start</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_monday_end</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_tuesday</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_tuesday_start</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_tuesday_end</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_wednesday</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_wednesday_start</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_wednesday_end</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_section_exceptions</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dg_exceptions</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_add_exception</code></td><td>—</td><td>Stub</td></tr>
-</table>
+          <div class="day-row">
+            <span class="day-label">Tuesday</span>
+            <input type="time" class="form-input" value="08:00" aria-label="Tuesday start time">
+            <input type="time" class="form-input" value="17:00" aria-label="Tuesday end time">
+            <label class="toggle-switch" aria-label="Enable Tuesday"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
 
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 2</strong></li>
-  <li>Stage: <strong>Stage 2.2</strong></li>
-  <li>Build-plan focus: <strong>Availability Management</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-bookings-AvailabilitySettingsForm.html</code></li>
-</ul>
+          <div class="day-row">
+            <span class="day-label">Wednesday</span>
+            <input type="time" class="form-input" value="08:00" aria-label="Wednesday start time">
+            <input type="time" class="form-input" value="17:00" aria-label="Wednesday end time">
+            <label class="toggle-switch" aria-label="Enable Wednesday"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
 
-<p class="note">End of screen file — screen-bookings-AvailabilitySettingsForm.html</p>
+          <div class="day-row">
+            <span class="day-label">Thursday</span>
+            <input type="time" class="form-input" value="08:00" aria-label="Thursday start time">
+            <input type="time" class="form-input" value="17:00" aria-label="Thursday end time">
+            <label class="toggle-switch" aria-label="Enable Thursday"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
 
+          <div class="day-row">
+            <span class="day-label">Friday</span>
+            <input type="time" class="form-input" value="08:00" aria-label="Friday start time">
+            <input type="time" class="form-input" value="17:00" aria-label="Friday end time">
+            <label class="toggle-switch" aria-label="Enable Friday"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="day-row">
+            <span class="day-label">Saturday</span>
+            <input type="time" class="form-input" value="09:00" aria-label="Saturday start time" placeholder="--:--">
+            <input type="time" class="form-input" value="13:00" aria-label="Saturday end time" placeholder="--:--">
+            <label class="toggle-switch" aria-label="Enable Saturday"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="day-row">
+            <span class="day-label">Sunday</span>
+            <input type="time" class="form-input" disabled placeholder="--:--" aria-label="Sunday start time">
+            <input type="time" class="form-input" disabled placeholder="--:--" aria-label="Sunday end time">
+            <label class="toggle-switch" aria-label="Enable Sunday"><input type="checkbox"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-section-title">Blocked Dates</div>
+          <table class="exceptions-table" aria-label="Blocked dates">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Reason</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jun 16, 2026</td>
+                <td>Youth Day</td>
+                <td><button class="btn-icon-sm" aria-label="Remove blocked date Jun 16">&#128465;</button></td>
+              </tr>
+              <tr>
+                <td>Jun 25, 2026</td>
+                <td>Company retreat</td>
+                <td><button class="btn-icon-sm" aria-label="Remove blocked date Jun 25">&#128465;</button></td>
+              </tr>
+              <tr>
+                <td>Jul 18, 2026</td>
+                <td>Personal leave</td>
+                <td><button class="btn-icon-sm" aria-label="Remove blocked date Jul 18">&#128465;</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="button" class="btn-secondary">+ Add Blocked Date</button>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Save Settings</button>
+      </div>
+    </form>
+  </main>
 </body>
 </html>

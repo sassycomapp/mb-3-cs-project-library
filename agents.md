@@ -13,6 +13,18 @@ Its purpose is to:
 The live application code lives in `mb-3-cs`. Read from `mb-3-cs` for context when needed.
 Do not treat this repo as the application implementation workspace.
 
+## Hard rules (always apply)
+
+1. **anvil.yaml protection**
+
+   Hard rule: never ever write to anvil.yaml.
+
+   - Treat anvil.yaml as Anvil-managed metadata/configuration.
+   - Do not create, edit, reformat, regenerate, normalize, merge-edit, or patch it.
+   - Do not include it in bulk refactors or automated file updates.
+   - If a task appears to require changing anvil.yaml, stop and ask the user for explicit approval.
+   - Assume Anvil is the authoritative writer for anvil.yaml.
+
 ## Workspace structure and file placement
 
 | Folder | Purpose |

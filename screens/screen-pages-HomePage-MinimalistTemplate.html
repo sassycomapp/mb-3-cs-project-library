@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — HomePage (Minimalist Template)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4; --on-primary: #FFFFFF; --primary-container: #EADDFF; --on-primary-container: #21005D;
+      --secondary: #625B71; --on-secondary: #FFFFFF; --secondary-container: #E8DEF8; --on-secondary-container: #1D192B;
+      --surface: #FFFBFE; --on-surface: #1C1B1F; --surface-variant: #E7E0EC; --on-surface-variant: #49454F;
+      --outline: #79747E; --outline-variant: #CAC4D0; --error: #B3261E; --on-error: #FFFFFF;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400; --font-headline-large: 32px/40px 400; --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500; --font-body: 14px/20px 400; --font-body-large: 16px/24px 400;
+      --font-button: 14px/14px 500; --font-label: 12px/16px 500; --font-caption: 12px/16px 400;
+      --radius-button: 100px; --radius-card: 12px; --radius-input: 4px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-family); font-size: var(--font-body); color: var(--on-surface); background: var(--surface); line-height: 20px; min-height: 100vh; display: flex; flex-direction: column; }
+    .page-content { flex: 1; }
+
+    /* Hero — concise */
+    .hero { background: var(--primary-container); color: var(--on-primary-container); padding: 80px var(--space-8); text-align: center; }
+    .hero h1 { font: var(--font-headline-large); margin-bottom: var(--space-4); }
+    .hero p { font: var(--font-body-large); max-width: 500px; margin: 0 auto var(--space-8); line-height: 24px; }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-3) var(--space-8); font: var(--font-button); color: var(--on-primary); background: var(--primary); border: none; border-radius: var(--radius-button); cursor: pointer; min-height: 48px; text-decoration: none; }
+    .btn-primary:hover { background: #523E8A; }
+    .btn-primary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    /* About — very brief */
+    .about-brief { padding: 80px var(--space-8); max-width: 600px; margin: 0 auto; text-align: center; }
+    .about-brief h2 { font: var(--font-headline-large); margin-bottom: var(--space-4); }
+    .about-brief p { font: var(--font-body-large); color: var(--on-surface-variant); line-height: 24px; }
+
+    /* Trust strip — compact */
+    .trust-strip { background: var(--surface-variant); padding: 48px var(--space-8); }
+    .trust-strip-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-6); text-align: center; }
+    .trust-item .trust-value { font: var(--font-headline-large); color: var(--primary); margin-bottom: var(--space-1); }
+    .trust-item .trust-label { font: var(--font-label); color: var(--on-surface-variant); }
+
+    /* CTA band — single strong CTA */
+    .cta-band { background: var(--primary-container); color: var(--on-primary-container); padding: 80px var(--space-8); text-align: center; }
+    .cta-band h2 { font: var(--font-headline-large); margin-bottom: var(--space-4); }
+    .cta-band p { font: var(--font-body-large); max-width: 500px; margin: 0 auto var(--space-8); line-height: 24px; }
+    .btn-filled-cta { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-3) var(--space-8); font: var(--font-button); color: var(--on-primary); background: var(--primary); border: none; border-radius: var(--radius-button); cursor: pointer; min-height: 48px; text-decoration: none; }
+    .btn-filled-cta:hover { background: #523E8A; }
+    .btn-filled-cta:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    /* Footer */
+    .footer { background: var(--on-surface); color: var(--surface-variant); padding: 48px var(--space-8) var(--space-6); }
+    .footer-top { display: flex; gap: var(--space-8); flex-wrap: wrap; max-width: 1100px; margin: 0 auto; padding-bottom: 32px; }
+    .footer-col { flex: 1; min-width: 200px; }
+    .footer-col h4 { font: var(--font-title); color: var(--surface); margin-bottom: var(--space-4); }
+    .footer-logo { font: var(--font-headline-small); color: var(--surface); margin-bottom: var(--space-2); }
+    .footer-tagline { font: var(--font-caption); color: var(--outline); }
+    .footer-links { list-style: none; padding: 0; }
+    .footer-links li { margin-bottom: var(--space-2); }
+    .footer-links a { color: var(--surface-variant); text-decoration: none; font: var(--font-body); }
+    .footer-links a:hover { text-decoration: underline; }
+    .footer-links a:focus { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 2px; }
+    .social-links { display: flex; gap: var(--space-3); margin-bottom: var(--space-4); }
+    .social-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--outline); display: flex; align-items: center; justify-content: center; color: var(--surface-variant); text-decoration: none; font-size: 14px; transition: border-color 0.2s; }
+    .social-icon:hover { border-color: var(--primary-container); }
+    .social-icon:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .footer-contact p { font: var(--font-body); color: var(--surface-variant); margin-bottom: var(--space-2); }
+    .footer-map { width: 100%; height: 120px; background: var(--surface-variant); border-radius: var(--radius-input); display: flex; align-items: center; justify-content: center; color: var(--outline); font: var(--font-caption); margin-top: var(--space-4); }
+    .footer-bottom { border-top: 1px solid var(--on-surface-variant); padding-top: var(--space-4); display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .footer-bottom p { font: var(--font-caption); color: var(--outline); }
+    .footer-bottom a { color: var(--outline); text-decoration: none; font: var(--font-caption); }
+    .footer-bottom a:hover { text-decoration: underline; }
+    .footer-bottom a:focus { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 2px; }
+
+    @media (prefers-color-scheme: dark) { :root { --surface: #1C1B1F; --on-surface: #E6E1E5; --surface-variant: #49454F; --on-surface-variant: #CAC4D0; --outline: #938F99; --outline-variant: #49454F; } }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+    @media (max-width: 768px) { .hero { padding: 60px var(--space-6); } .hero h1 { font-size: 28px; line-height: 36px; } .about-brief { padding: 60px var(--space-6); } .cta-band { padding: 60px var(--space-6); } }
+  </style>
+</head>
+<body>
+  <div class="page-content">
+    <!-- 1. Hero — concise headline + short sentence -->
+    <section class="hero" aria-label="Hero section">
+      <h1>Professional Services, Simplified</h1>
+      <p>Expert consulting and tailored solutions for your business.</p>
+      <a href="/contact" class="btn-primary">Get in Touch</a>
+    </section>
+
+    <!-- 2. About summary — very brief -->
+    <section class="about-brief" aria-label="About us">
+      <h2>About Us</h2>
+      <p>We help businesses grow with expert consulting, tailored solutions, and measurable results.</p>
+    </section>
+
+    <!-- 3. Trust / proof strip — compact -->
+    <section class="trust-strip" aria-label="Trust indicators">
+      <div class="trust-strip-inner">
+        <div class="trust-item"><div class="trust-value">10+</div><div class="trust-label">Years Experience</div></div>
+        <div class="trust-item"><div class="trust-value">500+</div><div class="trust-label">Clients</div></div>
+        <div class="trust-item"><div class="trust-value">98%</div><div class="trust-label">Satisfaction</div></div>
+      </div>
+    </section>
+
+    <!-- 4. CTA / contact band — single strong CTA -->
+    <section class="cta-band" aria-label="Call to action">
+      <h2>Ready to Get Started?</h2>
+      <p>Book a free consultation today.</p>
+      <a href="/contact" class="btn-filled-cta">Contact Us</a>
+    </section>
+  </div>
+
+  <!-- 5. Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-top">
+      <div class="footer-col"><p class="footer-logo">Mybizz</p><p class="footer-tagline">Professional consulting and services</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul class="footer-links"><li><a href="/privacy">Privacy Policy</a></li><li><a href="/terms">Terms &amp; Conditions</a></li><li><a href="/cookies">Cookie Policy</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><div class="social-links"><a href="#" class="social-icon" aria-label="Facebook">FB</a><a href="#" class="social-icon" aria-label="Instagram">IG</a><a href="#" class="social-icon" aria-label="LinkedIn">LI</a><a href="#" class="social-icon" aria-label="Twitter">TW</a></div></div>
+      <div class="footer-col footer-contact"><h4>Contact Us</h4><p>email@example.com</p><p>+1 234 567 890</p><div class="footer-map" aria-label="Map placeholder">Google Maps Embed</div></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Mybizz. All rights reserved.</p><a href="#top">Back to Top</a></div>
+  </footer>
+</body>
+</html>

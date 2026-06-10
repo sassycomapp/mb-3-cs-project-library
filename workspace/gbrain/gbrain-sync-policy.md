@@ -10,24 +10,30 @@ This document defines **when and how GBrain memory is refreshed, re-embedded, or
 
 ### 2.1 Always-fresh sources (Tier A and Tier B)
 
-For Tier A and Tier B:
-
 - Treat repo files as the real-time source of truth.
 - Memory is **allowed to lag**, but:
   - if a file changes significantly,
-  - or if an ADR is superseded,
-  memory connected to that file should be:
+
+For Tier A and Tier B, if:
+  - `C:\_mb2-cs-app\project-library\adr\` is edited,
+  - `C:\_mb2-cs-app\project-library\docs\` is edited,
+  - `C:\_mb2-cs-app\project-library\developer-rules` is edited,
+  - `C:\_mb2-cs-app\project-library\adr\` ADR status changes (e.g., “Accepted” → “Superseded”). 
+
+ memory connected to that file should be:
   - re-ingested, or
   - marked as stale/invalid.
-
+  
 Suggested policy:
 
 - For ADRs:
   - Re-check or re-ingest when:
     - ADR is edited,
     - ADR status changes (e.g., “Accepted” → “Superseded”).
-- For devlog and todo:
-  - Re-ingest only finalized entries (for example, devlog entries that describe completed work).
+- For docs\ and developer-rules\:
+  - Re-ingest only finalized entries.
+  
+  ---
 
 ### 2.2 Advisory sources (Tier C–E)
 
@@ -64,7 +70,7 @@ Avoid continuous automatic sync. Use **explicit triggers**:
 
 When a conflict is detected between GBrain memory and current source files:
 
-1. Treat the current source (ADR, repo file, devlog, todo) as authoritative.
+1. Treat the current source (ADR, docs, developer-rules, gstack-outputs, implementation) as authoritative.
 2. Mark the conflicting memory as:
    - “stale” or “invalidated”, and
    - if possible, attach a pointer to the new authoritative source.
@@ -83,7 +89,7 @@ This should be reflected in how recall results are ranked and presented.
 
 - Any automation or scripts that operate on GBrain should:
   - log what they ingest or invalidate,
-  - keep a small audit trail (for example, in devlog or a dedicated GBrain log).
+  - keep a small audit trail (for example, in devlog or a dedicated GBrain log) ["C:\_mb2-cs-app\project-library\workspace\gbrain\gbrain-log.md"].
 
 ---
 

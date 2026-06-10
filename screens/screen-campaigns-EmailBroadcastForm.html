@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Email Broadcast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+      --elevation-card: 2dp;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: var(--font-body);
+      min-height: 100vh;
+      padding: var(--space-6);
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+    }
+
+    .page-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+    }
+
+    .form-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .section-title {
+      font: var(--font-title);
+      color: var(--on-surface);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: var(--space-4);
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-input::placeholder { color: var(--outline); }
+
+    .recipient-selector {
+      display: flex;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .recipient-option {
+      flex: 1;
+      padding: var(--space-4);
+      border: 2px solid var(--surface-variant);
+      border-radius: var(--radius-card);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      text-align: center;
+    }
+
+    .recipient-option:hover {
+      border-color: var(--outline);
+    }
+
+    .recipient-option.selected {
+      border-color: var(--primary);
+      background: var(--primary-container);
+    }
+
+    .recipient-option input[type="radio"] {
+      display: none;
+    }
+
+    .recipient-icon {
+      font-size: 24px;
+      margin-bottom: var(--space-2);
+      color: var(--primary);
+    }
+
+    .recipient-title {
+      font: var(--font-body);
+      font-weight: 500;
+      color: var(--on-surface);
+      margin-bottom: var(--space-1);
+    }
+
+    .recipient-desc {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+    }
+
+    .segment-picker {
+      display: none;
+    }
+
+    .segment-picker.visible {
+      display: block;
+    }
+
+    .segment-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      min-height: 48px;
+      background: var(--surface);
+      align-items: center;
+    }
+
+    .segment-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-1) var(--space-3);
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
+      border-radius: var(--radius-button);
+      font: var(--font-caption);
+      font-weight: 500;
+    }
+
+    .segment-chip button {
+      background: none;
+      border: none;
+      color: var(--on-secondary-container);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0;
+      opacity: 0.7;
+    }
+
+    .segment-chip button:hover { opacity: 1; }
+
+    .segment-placeholder {
+      font: var(--font-body);
+      color: var(--outline);
+    }
+
+    .recipient-count {
+      font: var(--font-caption);
+      color: var(--primary);
+      font-weight: 500;
+      margin-top: var(--space-2);
+    }
+
+    .editor-toolbar {
+      display: flex;
+      gap: var(--space-1);
+      padding: var(--space-2);
+      border: 1px solid var(--outline);
+      border-bottom: none;
+      border-radius: var(--radius-input) var(--radius-input) 0 0;
+      background: var(--surface-variant);
+    }
+
+    .toolbar-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-input);
+      border: none;
+      background: transparent;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .toolbar-btn:hover { background: var(--surface); }
+    .toolbar-btn:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .toolbar-separator {
+      width: 1px;
+      background: var(--outline);
+      margin: var(--space-1) var(--space-1);
+    }
+
+    .body-editor {
+      width: 100%;
+      min-height: 280px;
+      padding: var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-top: none;
+      border-radius: 0 0 var(--radius-input) var(--radius-input);
+      outline: none;
+      resize: vertical;
+      font-family: var(--font-family);
+      line-height: 1.6;
+    }
+
+    .body-editor:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .char-count {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      text-align: right;
+      margin-top: var(--space-1);
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-primary:hover { background: #523E8A; }
+    .btn-primary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-secondary:hover { background: var(--primary-container); }
+    .btn-secondary:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    .btn-outline-danger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--error);
+      background: transparent;
+      border: 1px solid var(--error);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-outline-danger:hover { background: #FDE7E7; }
+    .btn-outline-danger:focus { outline: 2px solid var(--error); outline-offset: 2px; }
+
+    .schedule-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-top: var(--space-3);
+    }
+
+    .schedule-row label {
+      font: var(--font-body);
+      color: var(--on-surface);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .schedule-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .schedule-datetime {
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+      .btn-outline-danger:hover { background: #3B1A1A; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-container" role="main">
+    <header class="page-header">
+      <h1>Email Broadcast</h1>
+    </header>
+
+    <form id="emailBroadcastForm">
+      <section class="form-card" aria-label="Recipient selection">
+        <h2 class="section-title">Recipients</h2>
+        <div class="recipient-selector">
+          <label class="recipient-option selected">
+            <input type="radio" name="recipient_type" value="segment" checked>
+            <div class="recipient-icon">&#9733;</div>
+            <div class="recipient-title">By Segment</div>
+            <div class="recipient-desc">Send to one or more segments</div>
+          </label>
+          <label class="recipient-option">
+            <input type="radio" name="recipient_type" value="all">
+            <div class="recipient-icon">&#9711;</div>
+            <div class="recipient-title">All Contacts</div>
+            <div class="recipient-desc">Send to every active contact</div>
+          </label>
+          <label class="recipient-option">
+            <input type="radio" name="recipient_type" value="manual">
+            <div class="recipient-icon">&#9998;</div>
+            <div class="recipient-title">Manual List</div>
+            <div class="recipient-desc">Paste or type email addresses</div>
+          </label>
+        </div>
+
+        <div class="segment-picker visible" id="segmentPicker">
+          <div class="form-group">
+            <label class="form-label">Select Segments</label>
+            <div class="segment-chips">
+              <span class="segment-chip">VIP Clients <button type="button" aria-label="Remove VIP Clients">&times;</button></span>
+              <span class="segment-chip">Recurring Customers <button type="button" aria-label="Remove Recurring Customers">&times;</button></span>
+              <span class="segment-placeholder">Type to search segments...</span>
+            </div>
+          </div>
+          <div class="recipient-count">204 recipients selected</div>
+        </div>
+      </section>
+
+      <section class="form-card" aria-label="Email content">
+        <h2 class="section-title">Email Content</h2>
+        <div class="form-group">
+          <label for="subject" class="form-label">Subject Line</label>
+          <input type="text" id="subject" name="subject" class="form-input" placeholder="Enter email subject" value="Your June Update from Mybizz">
+        </div>
+        <div class="form-group">
+          <label for="preview_text" class="form-label">Preview Text</label>
+          <input type="text" id="preview_text" name="preview_text" class="form-input" placeholder="Text shown in inbox preview" value="New features, tips, and a special offer inside">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Body</label>
+          <div class="editor-toolbar">
+            <button type="button" class="toolbar-btn" aria-label="Bold" title="Bold"><strong>B</strong></button>
+            <button type="button" class="toolbar-btn" aria-label="Italic" title="Italic"><em>I</em></button>
+            <button type="button" class="toolbar-btn" aria-label="Underline" title="Underline"><u>U</u></button>
+            <span class="toolbar-separator"></span>
+            <button type="button" class="toolbar-btn" aria-label="Bullet list" title="Bullet list">&#8226;</button>
+            <button type="button" class="toolbar-btn" aria-label="Numbered list" title="Numbered list">1.</button>
+            <span class="toolbar-separator"></span>
+            <button type="button" class="toolbar-btn" aria-label="Insert link" title="Insert link">&#128279;</button>
+            <button type="button" class="toolbar-btn" aria-label="Insert image" title="Insert image">&#128247;</button>
+            <span class="toolbar-separator"></span>
+            <button type="button" class="toolbar-btn" aria-label="Merge tags" title="Merge tags">{'{}'}</button>
+          </div>
+          <textarea id="body" name="body" class="body-editor" placeholder="Write your email content here...">Hi {{first_name}},
+
+We hope you're having a great month! Here's what's new at Mybizz:
+
+**New Feature: Segment Manager**
+You can now create dynamic segments that automatically update based on contact activity. Try it out from the Contacts menu.
+
+**Tip of the Month**
+Use tags to organise your contacts and create targeted campaigns that drive better results.
+
+**Special Offer**
+Upgrade to Premium this month and get 20% off your first quarter. Use code JUNE20 at checkout.
+
+Best regards,
+The Mybizz Team</textarea>
+          <div class="char-count">842 characters</div>
+        </div>
+      </section>
+
+      <section class="form-card" aria-label="Scheduling">
+        <h2 class="section-title">Schedule</h2>
+        <div class="schedule-row">
+          <label>
+            <input type="checkbox" id="schedule_later" name="schedule_later">
+            Schedule for later
+          </label>
+        </div>
+        <div class="schedule-datetime" style="margin-top: var(--space-3); opacity: 0.5; pointer-events: none;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="schedule_date" class="form-label">Date</label>
+            <input type="date" id="schedule_date" name="schedule_date" class="form-input" style="min-height: 40px; width: 180px;" disabled>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="schedule_time" class="form-label">Time</label>
+            <input type="time" id="schedule_time" name="schedule_time" class="form-input" style="min-height: 40px; width: 140px;" disabled>
+          </div>
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary">Save as Draft</button>
+        <button type="button" class="btn-outline-danger">Discard</button>
+        <button type="submit" class="btn-primary">Send Now</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

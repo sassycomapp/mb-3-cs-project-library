@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Mybizz CS — tmpl_week_event</title>
 <style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 500px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
 .subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
 .legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
@@ -12,39 +12,33 @@ h1 { font-size: 22px; margin-bottom: 4px; }
 h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
 .wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
 .wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-hidden { border: 2px dashed #aaa; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #f7f7f7; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-md { font-size: 14px; font-weight: 500; color: #333; margin: 4px 0 8px; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
-.wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-week-column { background: #fff; border-radius: 8px; border: 1px solid #E7E0EC; overflow: hidden; width: 160px; }
+.wf-week-column-header { font-size: 11px; font-weight: 500; color: #49454F; text-align: center; padding: 6px; background: #F3EDF7; border-bottom: 1px solid #E7E0EC; }
+.wf-week-column-header.today { color: #6750A4; font-weight: 700; }
+.wf-week-event { padding: 4px 8px; border-bottom: 1px solid #E7E0EC; cursor: pointer; min-height: 48px; position: relative; }
+.wf-week-event:last-child { border-bottom: none; }
+.wf-week-event .wf-event-title { font-size: 11px; color: #1C1B1F; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wf-week-event .wf-event-time { font-size: 10px; color: #49454F; }
+.wf-week-event.confirmed { border-left: 3px solid #388e3c; }
+.wf-week-event.pending { border-left: 3px solid #f9a825; }
+.wf-week-event.cancelled { border-left: 3px solid #c62828; opacity: 0.5; }
+.wf-template-preview { background: #F3EDF7; border-radius: 12px; padding: 16px; }
+.wf-template-label { font-size: 11px; font-weight: 500; color: #49454F; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
 .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
 .prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
-.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
-.template-section { border-left: 3px solid #333; padding-left: 20px; margin-top: 20px; }
-.template-title { font-size: 14px; font-weight: bold; margin-bottom: 10px; color: #333; }
 </style>
 </head>
 <body>
 
 <h1>Mybizz CS — Bookings Wireframes</h1>
-<p class="subtitle">Booking Management — Anvil Construction Guide</p>
+<p class="subtitle">Calendar Template — Week Event</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -52,50 +46,46 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2 class="pagebreak">Template Subforms</h2>
+<h2>tmpl_week_event — Week Event Template</h2>
 
-<p><strong>Purpose:</strong> Template subforms used by BookingCalendarForm for dynamic calendar views</p>
+<div class="wf-outer">
+  <span class="wf-label">tmpl_week_event (Template Subform) — nested in tmpl_week_timeslot</span>
 
-<div class="template-section">
-  <div class="template-title">tmpl_week_event — Week Event Template (Nested in tmpl_week_timeslot)</div>
-  <p><strong>Purpose:</strong> Renders a single event within a week timeslot</p>
-  <p><strong>Used by:</strong> RepeatingPanel rp_week_events in tmpl_week_timeslot</p>
-  
-  <div class="wf-outer">
-    <span class="wf-label">tmpl_week_event (template subform)</span>
-    
-    <!-- Interactive Card -->
-    <div class="wf-panel">
-      <span class="wf-label">card_event (InteractiveCard)</span>
-      <div class="wf-text">Clickable event container</div>
-      <div class="cn">card_event <span class="ct">(InteractiveCard)</span></div>
-    </div>
-    
-    <!-- Card Content -->
-    <div class="wf-panel">
-      <span class="wf-label">card_content (CardContentContainer)</span>
-      <div class="wf-text">Container for event details</div>
-      <div class="cn">card_content <span class="ct">(CardContentContainer)</span></div>
-    </div>
-    
-    <!-- Event Title -->
-    <div class="wf-panel">
-      <span class="wf-label">hdg_title (Heading)</span>
-      <div class="wf-heading-sm">Consultation</div>
-      <div class="cn">hdg_title <span class="ct">(Heading)</span></div>
-    </div>
-    
-    <!-- Event Time -->
-    <div class="wf-panel">
-      <span class="wf-label">hdg_time (Heading)</span>
-      <div class="wf-heading-sm">30 min</div>
-      <div class="cn">hdg_time <span class="ct">(Heading)</span></div>
-    </div>
+  <div class="wf-panel">
+    <span class="wf-label">page_header (Header)</span>
+    <div class="wf-heading-md">tmpl_week_event</div>
+    <div class="wf-text">Renders an event block inside a week view day column.</div>
   </div>
 
-  <div class="prop-caption">Properties table</div>
-<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+  <div class="wf-panel">
+    <span class="wf-label">template_preview (Container)</span>
+    <div class="wf-template-preview">
+      <div class="wf-template-label">Component Preview</div>
+
+      <div class="wf-week-column">
+        <div class="wf-week-column-header today">Wed 3</div>
+        <div class="wf-week-event confirmed" role="button" tabindex="0">
+          <div class="wf-event-title">Initial Consultation</div>
+          <div class="wf-event-time">10:00 — 11:00</div>
+          <div class="cn">week_event_1 <span class="ct">(Card)</span> — border-left: confirmed</div>
+        </div>
+        <div class="wf-week-event pending" role="button" tabindex="0">
+          <div class="wf-event-title">Tax Review</div>
+          <div class="wf-event-time">14:00 — 15:30</div>
+          <div class="cn">week_event_2 <span class="ct">(Card)</span> — border-left: pending</div>
+        </div>
+        <div class="wf-week-event confirmed" role="button" tabindex="0">
+          <div class="wf-event-title">Financial Planning</div>
+          <div class="wf-event-time">16:00 — 17:00</div>
+          <div class="cn">week_event_3 <span class="ct">(Card)</span> — border-left: confirmed</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
 
 </body>
 </html>

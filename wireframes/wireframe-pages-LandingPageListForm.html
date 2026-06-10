@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — LandingPageListForm Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #6750A4; --on-primary: #FFFFFF; --primary-container: #EADDFF; --on-primary-container: #21005D;
+  --secondary: #625B71; --on-secondary: #FFFFFF; --secondary-container: #E8DEF8; --on-secondary-container: #1D192B;
+  --surface: #FFFBFE; --on-surface: #1C1B1F; --surface-variant: #E7E0EC; --on-surface-variant: #49454F;
+  --surface-container: #F3EDF7; --outline: #79747E; --outline-variant: #CAC4D0; --error: #B3261E; --on-error: #FFFFFF;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  --font-headline-large: 32px/40px 400; --font-headline-small: 22px/28px 500;
+  --font-title: 18px/24px 500; --font-body: 14px/20px 400;
+  --font-button: 14px/14px 500; --font-label: 12px/16px 500; --font-caption: 12px/16px 400;
+  --radius-button: 100px; --radius-card: 12px; --radius-input: 4px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-family); font-size: var(--font-body); color: var(--on-surface); background: var(--surface-variant); line-height: 20px; min-height: 100vh; display: flex; }
+h1 { font: var(--font-headline-small); margin-bottom: var(--space-1); }
+.subtitle { font: var(--font-caption); color: var(--on-surface-variant); margin-bottom: var(--space-6); }
+h2 { font: var(--font-title); margin-top: var(--space-8); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 1px solid var(--outline-variant); }
+
+.admin-layout { display: flex; flex: 1; }
+.admin-sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--outline); padding: var(--space-6) 0; flex-shrink: 0; }
+.sidebar-logo { font: var(--font-headline-small); color: var(--primary); padding: 0 var(--space-6) var(--space-6); border-bottom: 1px solid var(--surface-variant); margin-bottom: var(--space-4); }
+.sidebar-nav { list-style: none; padding: 0; }
+.sidebar-nav li { padding: var(--space-3) var(--space-6); font: var(--font-body); color: var(--on-surface-variant); }
+.sidebar-nav li.active { background: var(--primary-container); color: var(--on-primary-container); font-weight: 500; border-radius: 0 var(--radius-input) var(--radius-input) 0; }
+.admin-main { flex: 1; padding: var(--space-8); overflow-x: auto; max-width: 900px; }
+
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6); }
+.page-header h1 { font: var(--font-headline-large); }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-3) var(--space-6); font: var(--font-button); color: var(--on-primary); background: var(--primary); border: none; border-radius: var(--radius-button); min-height: 40px; text-decoration: none; }
+
+.filters-bar { display: flex; gap: var(--space-4); margin-bottom: var(--space-6); flex-wrap: wrap; }
+.filter-input { flex: 2; min-width: 200px; padding: var(--space-3) var(--space-4); font: var(--font-body); color: var(--on-surface); background: var(--surface); border: 1px solid var(--outline); border-radius: var(--radius-input); min-height: 40px; }
+.filter-select { flex: 1; min-width: 150px; padding: var(--space-3) var(--space-4); font: var(--font-body); color: var(--on-surface); background: var(--surface); border: 1px solid var(--outline); border-radius: var(--radius-input); min-height: 40px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2379747E' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+
+.data-table-wrapper { background: var(--surface); border-radius: var(--radius-card); box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table thead { background: var(--surface-variant); }
+.data-table th { font: var(--font-label); color: var(--on-surface-variant); text-align: left; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--outline-variant); }
+.data-table td { font: var(--font-body); color: var(--on-surface); padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--surface-variant); }
+.data-table tbody tr:hover { background: var(--surface-container); }
+.data-table tbody tr:last-child td { border-bottom: none; }
+
+.status-badge { display: inline-block; padding: var(--space-1) var(--space-3); border-radius: var(--radius-button); font: var(--font-caption); font-weight: 500; }
+.status-published { background: #E8F5E9; color: #2E7D32; }
+.status-draft { background: #FFF3E0; color: #E65100; }
+.template-tag { display: inline-block; padding: var(--space-1) var(--space-3); background: var(--secondary-container); color: var(--on-secondary-container); border-radius: var(--radius-button); font: var(--font-caption); }
+.action-btn { background: none; border: none; color: var(--primary); font: var(--font-caption); cursor: pointer; padding: var(--space-1) var(--space-2); border-radius: var(--radius-input); }
+
+.cn { font-size: 10px; color: var(--outline); margin: 2px 0 var(--space-2) 1px; }
+.ct { font-style: italic; }
+.cfixed { color: var(--on-surface-variant); font-style: normal; }
+.prop-caption { font: var(--font-body); font-weight: 500; margin: var(--space-6) 0 var(--space-1); }
+.prop-note { font: var(--font-caption); color: var(--on-surface-variant); margin-bottom: var(--space-4); }
+
+@media (prefers-color-scheme: dark) {
+  :root { --surface: #1C1B1F; --on-surface: #E6E1E5; --surface-variant: #49454F; --on-surface-variant: #CAC4D0; --surface-container: #211F26; --outline: #938F99; --outline-variant: #49454F; }
+  .status-published { background: #1B5E20; color: #A5D6A7; }
+  .status-draft { background: #4E2A00; color: #FFB74D; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <p class="sidebar-logo">Mybizz</p>
+    <nav>
+      <ul class="sidebar-nav">
+        <li>Dashboard</li>
+        <li>Contacts</li>
+        <li>Services</li>
+        <li class="active">Landing Pages</li>
+        <li>Settings</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="admin-main" role="main">
+    <h1>LandingPageListForm</h1>
+    <p class="subtitle">Admin list form for managing landing pages</p>
+
+    <h2>Structure</h2>
+
+    <div class="page-header">
+      <div>
+        <div style="font: var(--font-headline-large);">Landing Pages</div>
+        <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Landing Pages"</span></div>
+      </div>
+      <div>
+        <div class="btn-primary">+ New Landing Page</div>
+        <div class="cn">btn_create <span class="ct">(Button)</span> <span class="cfixed">"+ New Landing Page" — primary</span></div>
+      </div>
+    </div>
+
+    <div class="filters-bar">
+      <input type="search" class="filter-input" placeholder="Search landing pages..." aria-label="Search landing pages">
+      <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">role='outlined-input', placeholder="Search landing pages..."</span></div>
+      <select class="filter-select" aria-label="Filter by status">
+        <option>All Statuses</option><option>Published</option><option>Draft</option>
+      </select>
+      <div class="cn">dd_status_filter <span class="ct">(DropdownMenu)</span> <span class="cfixed">role='outlined-select', items: All/Published/Draft</span></div>
+      <select class="filter-select" aria-label="Filter by template">
+        <option>All Templates</option><option>Lead Capture</option><option>Event Registration</option><option>VSL</option>
+      </select>
+      <div class="cn">dd_template_filter <span class="ct">(DropdownMenu)</span> <span class="cfixed">role='outlined-select', items: All/Lead Capture/Event Registration/VSL</span></div>
+    </div>
+
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr><th>Title</th><th>Template Type</th><th>Status</th><th>Views</th><th>Conversions</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Summer Promo Landing</td>
+            <td><span class="template-tag">Lead Capture</span></td>
+            <td><span class="status-badge status-published">Published</span></td>
+            <td>1,248</td><td>87</td>
+            <td><button class="action-btn">Edit</button> <button class="action-btn">Preview</button></td>
+          </tr>
+          <tr>
+            <td>Webinar Registration</td>
+            <td><span class="template-tag">Event Registration</span></td>
+            <td><span class="status-badge status-published">Published</span></td>
+            <td>856</td><td>134</td>
+            <td><button class="action-btn">Edit</button> <button class="action-btn">Preview</button></td>
+          </tr>
+          <tr>
+            <td>Product Launch VSL</td>
+            <td><span class="template-tag">VSL</span></td>
+            <td><span class="status-badge status-draft">Draft</span></td>
+            <td>0</td><td>0</td>
+            <td><button class="action-btn">Edit</button> <button class="action-btn">Preview</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="cn">dg_landing_pages <span class="ct">(DataGrid)</span> <span class="cfixed">columns: Title, Template Type, Status, Views, Conversions, Actions</span></div>
+    </div>
+
+    <h2>Properties</h2>
+    <div class="prop-caption">Designer-Only Properties</div>
+    <div class="prop-note">None — all component properties can be set programmatically.</div>
+
+    <h2>Architecture</h2>
+    <div class="prop-note">
+      <strong>Data source:</strong> <code>landing_pages</code> table (authoritative-schema.md §5.3)<br>
+      <strong>Package:</strong> <code>landing_pages/</code> (Phase 3)<br>
+      <strong>Row actions:</strong> Edit (opens LandingPageEditorForm), Preview (opens LandingPage in new tab)<br>
+      <strong>Primary action:</strong> "+ New Landing Page" opens LandingPageEditorForm in create mode<br>
+      <strong>Filters:</strong> Search by title, filter by status, filter by template type
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,61 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: tmpl_month_day_cell</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Month Day Cell Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --surface-container: #F3EDF7;
+      --surface-container-high: #ECE6F0;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-title-medium: 16px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-body-small: 12px/16px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: 20px;
+      min-height: 100vh;
+      padding: var(--space-8);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .page-header {
+      margin-bottom: var(--space-6);
+    }
+
+    .page-header h1 {
+      font: var(--font-headline-small);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+
+    .page-header p {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+    }
+
+    .template-preview {
+      background: var(--surface-container);
+      border-radius: var(--radius-card);
+      padding: var(--space-6);
+    }
+
+    .template-label {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cell-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+
+    .day-cell {
+      background: var(--surface);
+      border: 1px solid var(--surface-variant);
+      border-radius: 4px;
+      min-height: 80px;
+      padding: var(--space-1);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .day-cell:hover {
+      border-color: var(--primary);
+    }
+
+    .day-cell.today {
+      border-color: var(--primary);
+      background: var(--primary-container);
+    }
+
+    .day-cell.other-month {
+      opacity: 0.4;
+    }
+
+    .day-number {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      text-align: right;
+      padding: var(--space-1);
+    }
+
+    .day-cell.today .day-number {
+      color: var(--on-primary-container);
+      font-weight: 700;
+    }
+
+    .event-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin: 0 1px;
+    }
+
+    .event-dot.confirmed { background: #388e3c; }
+    .event-dot.pending { background: #f9a825; }
+    .event-dot.cancelled { background: #c62828; }
+
+    .event-chip {
+      display: block;
+      font: 9px/12px 500;
+      padding: 1px 3px;
+      border-radius: 2px;
+      margin-top: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .event-chip.confirmed {
+      background: #c8e6c9;
+      color: #1b5e20;
+    }
+
+    .event-chip.pending {
+      background: #fff9c4;
+      color: #795548;
+    }
+
+    .day-cell.today .event-chip.confirmed {
+      background: #a5d6a7;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+        --surface-container: #211F26;
+        --surface-container-high: #2B2930;
+      }
+      .event-chip.confirmed { background: #1b4332; color: #95d5b2; }
+      .event-chip.pending { background: #3a2e00; color: #ffd166; }
+      .event-dot.confirmed { background: #95d5b2; }
+      .event-dot.pending { background: #ffd166; }
+      .event-dot.cancelled { background: #f4a3a8; }
+      .day-cell.today .event-chip.confirmed { background: #1b4332; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <main class="page-container" role="main">
+    <header class="page-header">
+      <h1>tmpl_month_day_cell</h1>
+      <p>Renders a single day cell within the month calendar grid.</p>
+    </header>
 
-<h1>Mybizz CS — Implementation Screen: tmpl_month_day_cell</h1>
-<p class="subtitle">Booking Management — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-bookings-tmpl_month_day_cell.html</code><br>
-  <strong>Phase:</strong> Phase 2 &mdash; Stage 2.3: Booking System<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+    <div class="template-preview">
+      <div class="template-label">Component Preview</div>
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-bookings-tmpl_month_day_cell.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+      <div class="cell-grid">
+        <div class="day-cell other-month"><div class="day-number">28</div></div>
+        <div class="day-cell other-month"><div class="day-number">29</div></div>
+        <div class="day-cell other-month"><div class="day-number">30</div></div>
+        <div class="day-cell other-month"><div class="day-number">31</div></div>
+        <div class="day-cell"><div class="day-number">1</div></div>
+        <div class="day-cell"><div class="day-number">2</div></div>
+        <div class="day-cell today"><div class="day-number">3</div><span class="event-chip confirmed">Consult</span><span class="event-chip pending">Tax Rev</span></div>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+        <div class="day-cell"><div class="day-number">4</div></div>
+        <div class="day-cell"><div class="day-number">5</div><span class="event-chip confirmed">Audit</span></div>
+        <div class="day-cell"><div class="day-number">6</div></div>
+        <div class="day-cell"><div class="day-number">7</div></div>
+        <div class="day-cell"><div class="day-number">8</div></div>
+        <div class="day-cell"><div class="day-number">9</div></div>
+        <div class="day-cell"><div class="day-number">10</div></div>
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>calendar_day_container</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>hdg_day_number</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>flow_events</code></td><td>—</td><td>Stub</td></tr>
-</table>
-
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 2</strong></li>
-  <li>Stage: <strong>Stage 2.3</strong></li>
-  <li>Build-plan focus: <strong>Booking System</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-bookings-tmpl_month_day_cell.html</code></li>
-</ul>
-
-<p class="note">End of screen file — screen-bookings-tmpl_month_day_cell.html</p>
-
+        <div class="day-cell"><div class="day-number">11</div><span class="event-chip pending">Bookkeep</span></div>
+        <div class="day-cell"><div class="day-number">12</div></div>
+        <div class="day-cell"><div class="day-number">13</div></div>
+        <div class="day-cell"><div class="day-number">14</div></div>
+        <div class="day-cell"><div class="day-number">15</div><span class="event-chip confirmed">Consult</span></div>
+        <div class="day-cell"><div class="day-number">16</div><span class="event-chip pending">Tax Rev</span></div>
+        <div class="day-cell"><div class="day-number">17</div></div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

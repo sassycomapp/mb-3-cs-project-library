@@ -1,60 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: BlankLayout</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — BlankLayout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --surface-container-low: #F7F2FA;
+      --outline: #79747E;
+      --outline-variant: #CAC4D0;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --font-family: 'Roboto', sans-serif;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-caption: 12px/16px 400;
+      --radius-card: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-6);
+      background: var(--surface);
+      border-bottom: 1px solid var(--outline-variant);
+      min-height: 56px;
+    }
+
+    .app-bar-title {
+      font: var(--font-title);
+      color: var(--on-surface);
+    }
+
+    .app-bar-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--on-surface-variant);
+      font-size: 18px;
+    }
+
+    .icon-btn:hover {
+      background: var(--surface-variant);
+    }
+
+    .icon-btn:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .content-area {
+      flex: 1;
+      padding: var(--space-6);
+      background: var(--surface);
+    }
+
+    .content-placeholder {
+      width: 100%;
+      min-height: 400px;
+      background: var(--surface-container-low);
+      border: 1px dashed var(--outline-variant);
+      border-radius: var(--radius-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      font: var(--font-body);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --surface-container-low: #1D1B20;
+        --outline: #938F99;
+        --outline-variant: #49454F;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="app-bar" role="banner">
+    <span class="app-bar-title">Page Title</span>
+    <div class="app-bar-actions">
+      <button class="icon-btn" aria-label="Notifications">&#128276;</button>
+      <button class="icon-btn" aria-label="User menu">&#128100;</button>
+    </div>
+  </header>
 
-<h1>Mybizz CS — Implementation Screen: BlankLayout</h1>
-<p class="subtitle">Layout Templates — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-layouts-BlankLayout.html</code><br>
-  <strong>Phase:</strong> Phase 1 &mdash; Stage 1.3: Dashboard &amp; Navigation<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
-
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-layouts-BlankLayout.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
-
-<h2>Sections (from wireframe)</h2>
-<ul>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
-
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>hdg_page_title</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>col_content</code></td><td>—</td><td>Stub</td></tr>
-</table>
-
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 1</strong></li>
-  <li>Stage: <strong>Stage 1.3</strong></li>
-  <li>Build-plan focus: <strong>Dashboard &amp; Navigation</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-layouts-BlankLayout.html</code></li>
-</ul>
-
-<p class="note">End of screen file — screen-layouts-BlankLayout.html</p>
-
+  <main class="content-area" role="main">
+    <div class="content-placeholder">
+      Content area — forms load here
+    </div>
+  </main>
 </body>
 </html>

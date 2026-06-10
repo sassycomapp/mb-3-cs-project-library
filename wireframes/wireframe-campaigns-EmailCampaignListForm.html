@@ -12,50 +12,136 @@ h1 { font-size: 22px; margin-bottom: 4px; }
 h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
 .wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
 .wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-lg { font-size: 18px; font-weight: bold; color: #333; margin: 4px 0 0; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 30px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 240px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+.wf-table th { text-align: left; padding: 8px 12px; background: #eee; border-bottom: 1px solid #ccc; font-weight: bold; color: #333; white-space: nowrap; }
+.wf-table td { padding: 8px 12px; border-bottom: 1px solid #ddd; color: #555; vertical-align: middle; }
+.wf-table tbody tr:last-child td { border-bottom: none; }
+.wf-badge { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: 11px; font-weight: 500; }
+.wf-type-badge { background: #eee; color: #666; }
+.wf-status-active { background: #E6F4EA; color: #1B5E20; }
+.wf-status-draft { background: #eee; color: #666; }
+.wf-status-paused { background: #FFF3E0; color: #E65100; }
+.wf-status-completed { background: #E3F2FD; color: #0D47A1; }
+.wf-metric { font-size: 12px; color: #333; }
+.wf-metric-sub { font-size: 11px; color: #666; }
+.wf-action-link { font-size: 11px; color: #6750A4; cursor: pointer; text-decoration: none; padding: 2px 4px; }
+.wf-table-footer { display: flex; justify-content: space-between; padding: 8px 12px; font-size: 11px; color: #666; border-top: 1px solid #ddd; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.dash { color: #bbb; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
 </style>
 </head>
 <body>
 
 <h1>Mybizz CS — Campaign Wireframes</h1>
-<p class="subtitle">Email Campaign Management</p>
-
+<p class="subtitle">Email Campaign Management — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
-  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
 <h2>EmailCampaignListForm — Campaign List</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_campaigns (ColumnPanel)</span>
+  <span class="wf-label">col_campaigns (ColumnPanel) — max-width: 1100px, page-container</span>
 
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Email Campaigns</div>
-    <div class="cn">hdg_campaigns_title <span class="ct">(Heading)</span> <span class="cfixed">"Email Campaigns"</span></div>
+  <!-- Page header with title and action buttons -->
+  <div class="wf-panel-h">
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Campaigns</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Campaigns"</span> — role: page-title (headline-large)</div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div>
+        <div class="wf-textbox">Search campaigns...</div>
+        <div class="cn">txt_search <span class="ct">(TextBox)</span> — role: outlined-input, placeholder: "Search campaigns..."</div>
+      </div>
+      <div>
+        <div class="wf-btn-filled">+ New Campaign</div>
+        <div class="cn">btn_new_campaign <span class="ct">(Button)</span> <span class="cfixed">"+ New Campaign"</span> — role: primary-button</div>
+      </div>
+    </div>
   </div>
 
+  <!-- Data table card -->
   <div class="wf-panel">
-    <span class="wf-label">txt_search <span class="ct">(TextBox)</span></span>
-    <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-  </div>
+    <span class="wf-label">dg_campaigns (DataGrid) — role: data-card, elevated</span>
 
-  <div class="wf-panel">
-    <span class="wf-label">dg_campaigns <span class="ct">(DataGrid)</span></span>
-    <div class="wf-text">Campaign list table</div>
+    <table class="wf-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Emails Sent</th>
+          <th>Opens</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>May Newsletter</strong></td>
+          <td><span class="wf-badge wf-type-badge">Sequence</span></td>
+          <td><span class="wf-badge wf-status-active">Active</span></td>
+          <td class="wf-metric">1,248</td>
+          <td class="wf-metric">624 <span class="wf-metric-sub">(50%)</span></td>
+          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span> <span class="wf-action-link">Pause</span></td>
+        </tr>
+        <tr>
+          <td><strong>Welcome Series</strong></td>
+          <td><span class="wf-badge wf-type-badge">Sequence</span></td>
+          <td><span class="wf-badge wf-status-active">Active</span></td>
+          <td class="wf-metric">356</td>
+          <td class="wf-metric">214 <span class="wf-metric-sub">(60%)</span></td>
+          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span> <span class="wf-action-link">Pause</span></td>
+        </tr>
+        <tr>
+          <td><strong>Summer Promotion</strong></td>
+          <td><span class="wf-badge wf-type-badge">Broadcast</span></td>
+          <td><span class="wf-badge wf-status-draft">Draft</span></td>
+          <td class="wf-metric">0</td>
+          <td class="wf-metric">0 <span class="wf-metric-sub">(0%)</span></td>
+          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span></td>
+        </tr>
+        <tr>
+          <td><strong>Re-engagement Drive</strong></td>
+          <td><span class="wf-badge wf-type-badge">Sequence</span></td>
+          <td><span class="wf-badge wf-status-paused">Paused</span></td>
+          <td class="wf-metric">890</td>
+          <td class="wf-metric">312 <span class="wf-metric-sub">(35%)</span></td>
+          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span> <span class="wf-action-link">Resume</span></td>
+        </tr>
+        <tr>
+          <td><strong>Q1 Recap</strong></td>
+          <td><span class="wf-badge wf-type-badge">Broadcast</span></td>
+          <td><span class="wf-badge wf-status-completed">Completed</span></td>
+          <td class="wf-metric">2,100</td>
+          <td class="wf-metric">1,155 <span class="wf-metric-sub">(55%)</span></td>
+          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Duplicate</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="wf-table-footer">
+      <span>Showing 5 of 12 campaigns</span>
+      <span>Page 1 of 3</span>
+    </div>
   </div>
 </div>
 
@@ -63,7 +149,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>
 <table class="props">
 <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_search</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_search</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
 </table>
 
 </body>

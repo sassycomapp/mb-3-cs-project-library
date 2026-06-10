@@ -13,13 +13,12 @@ Workspace structure (Windows):
 - `C:\_mb2-cs-app\project-library` — docs/ADR/refactor planning repo.
 - `C:\_mb2-cs-app\mb-3-cs` — live / production-adjacent code repo.
 - Shared tracking:
-  - `C:\_mb2-cs-app\devlog\`
-  - `C:\_mb2-cs-app\todo\`
+  - To be confirmed
 
 GBrain’s primary focus:
 
 - authoritative documents and ADRs in `project-library`,
-- canonical tracking in `devlog` and `todo`,
+- canonical tracking in project-library,
 - selected validated outputs referencing `mb-3-cs`.
 
 ---
@@ -33,8 +32,7 @@ GBrain’s primary focus:
   - specific architecture/specification subfolders under `project-library\docs\...`
 
 - Canonical tracking:
-  - `devlog\README.md`, `devlog\index.md`
-  - `todo\todo.md`, `todo\todo-archive.md`
+  - `project-library\
 
 - Validated workflow outputs:
   - handoffs and summaries explicitly marked as final.

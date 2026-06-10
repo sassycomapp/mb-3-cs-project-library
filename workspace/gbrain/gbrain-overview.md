@@ -48,7 +48,6 @@ Typical uses for GBrain in this workspace:
 - When GBrain recall conflicts with:
   - ADRs,
   - repo files,
-  - devlog/todo,
   those sources win, and conflicting memory should be treated as stale.
 
 - No ingestion from:

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — LandingPageEditorForm Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #6750A4; --on-primary: #FFFFFF; --primary-container: #EADDFF; --on-primary-container: #21005D;
+  --secondary: #625B71; --on-secondary: #FFFFFF; --secondary-container: #E8DEF8; --on-secondary-container: #1D192B;
+  --surface: #FFFBFE; --on-surface: #1C1B1F; --surface-variant: #E7E0EC; --on-surface-variant: #49454F;
+  --surface-container: #F3EDF7; --outline: #79747E; --outline-variant: #CAC4D0; --error: #B3261E; --on-error: #FFFFFF;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  --font-headline-large: 32px/40px 400; --font-headline-small: 22px/28px 500;
+  --font-title: 18px/24px 500; --font-body: 14px/20px 400;
+  --font-button: 14px/14px 500; --font-label: 12px/16px 500; --font-caption: 12px/16px 400;
+  --radius-button: 100px; --radius-card: 12px; --radius-input: 4px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-family); font-size: var(--font-body); color: var(--on-surface); background: var(--surface-variant); line-height: 20px; min-height: 100vh; display: flex; }
+h1 { font: var(--font-headline-small); margin-bottom: var(--space-1); }
+.subtitle { font: var(--font-caption); color: var(--on-surface-variant); margin-bottom: var(--space-6); }
+h2 { font: var(--font-title); margin-top: var(--space-8); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 1px solid var(--outline-variant); }
+
+.admin-layout { display: flex; flex: 1; }
+.admin-sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--outline); padding: var(--space-6) 0; flex-shrink: 0; }
+.sidebar-logo { font: var(--font-headline-small); color: var(--primary); padding: 0 var(--space-6) var(--space-6); border-bottom: 1px solid var(--surface-variant); margin-bottom: var(--space-4); }
+.sidebar-nav { list-style: none; padding: 0; }
+.sidebar-nav li { padding: var(--space-3) var(--space-6); font: var(--font-body); color: var(--on-surface-variant); }
+.sidebar-nav li.active { background: var(--primary-container); color: var(--on-primary-container); font-weight: 500; border-radius: 0 var(--radius-input) var(--radius-input) 0; }
+.admin-main { flex: 1; padding: var(--space-8); overflow-x: auto; }
+
+.editor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6); }
+.editor-header h1 { font: var(--font-headline-large); }
+.editor-actions { display: flex; gap: var(--space-3); }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-3) var(--space-6); font: var(--font-button); color: var(--on-primary); background: var(--primary); border: none; border-radius: var(--radius-button); min-height: 40px; text-decoration: none; }
+.btn-secondary { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-3) var(--space-6); font: var(--font-button); color: var(--primary); background: transparent; border: 1px solid var(--primary); border-radius: var(--radius-button); min-height: 40px; text-decoration: none; }
+.btn-success { display: inline-flex; align-items: center; justify-content: center; padding: var(--space-3) var(--space-6); font: var(--font-button); color: var(--on-primary); background: #2E7D32; border: none; border-radius: var(--radius-button); min-height: 40px; text-decoration: none; }
+
+.editor-meta { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-6); background: var(--surface); border-radius: var(--radius-card); padding: var(--space-6); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.form-group { display: flex; flex-direction: column; }
+.form-label { font: var(--font-label); color: var(--on-surface-variant); margin-bottom: var(--space-2); }
+.form-input { padding: var(--space-3) var(--space-4); font: var(--font-body); color: var(--on-surface); background: var(--surface); border: 1px solid var(--outline); border-radius: var(--radius-input); min-height: 40px; }
+.form-select { padding: var(--space-3) var(--space-4); font: var(--font-body); color: var(--on-surface); background: var(--surface); border: 1px solid var(--outline); border-radius: var(--radius-input); min-height: 40px; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2379747E' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+.form-textarea { padding: var(--space-3) var(--space-4); font: var(--font-body); color: var(--on-surface); background: var(--surface); border: 1px solid var(--outline); border-radius: var(--radius-input); min-height: 80px; resize: vertical; font-family: var(--font-family); }
+
+.editor-sections { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+.editor-section { background: var(--surface); border-radius: var(--radius-card); box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; }
+.editor-section-full { grid-column: 1 / -1; }
+.section-header { font: var(--font-title); color: var(--on-surface); padding: var(--space-4) var(--space-6); border-bottom: 1px solid var(--surface-variant); background: var(--surface-container); }
+.section-body { padding: var(--space-6); }
+.template-preview-area { min-height: 240px; background: var(--surface-variant); border: 2px dashed var(--outline); border-radius: var(--radius-input); display: flex; align-items: center; justify-content: center; color: var(--on-surface-variant); font: var(--font-body); }
+
+.fields-table { width: 100%; border-collapse: collapse; }
+.fields-table th { font: var(--font-label); color: var(--on-surface-variant); text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--surface-variant); }
+.fields-table td { font: var(--font-body); color: var(--on-surface); padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--surface-variant); }
+.fields-table tbody tr:last-child td { border-bottom: none; }
+.field-type-tag { display: inline-block; padding: var(--space-1) var(--space-2); background: var(--secondary-container); color: var(--on-secondary-container); border-radius: var(--radius-input); font: var(--font-caption); }
+
+.seo-group { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.cn { font-size: 10px; color: var(--outline); margin: 2px 0 var(--space-2) 1px; }
+.ct { font-style: italic; }
+.cfixed { color: var(--on-surface-variant); font-style: normal; }
+.prop-caption { font: var(--font-body); font-weight: 500; margin: var(--space-6) 0 var(--space-1); }
+.prop-note { font: var(--font-caption); color: var(--on-surface-variant); margin-bottom: var(--space-4); }
+table.props { border-collapse: collapse; font: var(--font-caption); margin-bottom: var(--space-4); width: 100%; max-width: 600px; }
+table.props th { background: var(--surface-variant); text-align: left; padding: var(--space-2) var(--space-3); border: 1px solid var(--outline-variant); font-weight: 500; }
+table.props td { padding: var(--space-2) var(--space-3); border: 1px solid var(--outline-variant); vertical-align: top; }
+
+@media (prefers-color-scheme: dark) {
+  :root { --surface: #1C1B1F; --on-surface: #E6E1E5; --surface-variant: #49454F; --on-surface-variant: #CAC4D0; --surface-container: #211F26; --outline: #938F99; --outline-variant: #49454F; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <p class="sidebar-logo">Mybizz</p>
+    <nav>
+      <ul class="sidebar-nav">
+        <li>Dashboard</li>
+        <li>Contacts</li>
+        <li>Services</li>
+        <li class="active">Landing Pages</li>
+        <li>Settings</li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="admin-main" role="main">
+    <h1>LandingPageEditorForm</h1>
+    <p class="subtitle">Admin editor for creating and editing landing pages</p>
+
+    <h2>Structure</h2>
+
+    <div class="editor-header">
+      <div>
+        <div style="font: var(--font-headline-large);">Edit Landing Page</div>
+        <div class="cn">hdg_editor_title <span class="ct">(Heading)</span> <span class="cfixed">"Edit Landing Page"</span></div>
+      </div>
+      <div class="editor-actions">
+        <div class="btn-secondary">Preview</div>
+        <div class="cn">btn_preview <span class="ct">(Button)</span> <span class="cfixed">"Preview" — secondary</span></div>
+        <div class="btn-primary">Save</div>
+        <div class="cn">btn_save <span class="ct">(Button)</span> <span class="cfixed">"Save" — primary</span></div>
+        <div class="btn-success">Publish</div>
+        <div class="cn">btn_publish <span class="ct">(Button)</span> <span class="cfixed">"Publish" — success</span></div>
+      </div>
+    </div>
+
+    <div class="editor-meta">
+      <div class="form-group">
+        <label class="form-label">Page Title</label>
+        <input type="text" class="form-input" placeholder="Page Title" value="Summer Promo Landing">
+        <div class="cn">txt_title <span class="ct">(TextBox)</span> <span class="cfixed">role='outlined-input', (W)</span></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">URL Slug</label>
+        <input type="text" class="form-input" placeholder="/my-landing-page" value="/summer-promo">
+        <div class="cn">txt_slug <span class="ct">(TextBox)</span> <span class="cfixed">role='outlined-input', (W)</span></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Template Type</label>
+        <select class="form-select">
+          <option selected>Lead Capture</option>
+          <option>Event Registration</option>
+          <option>VSL</option>
+        </select>
+        <div class="cn">dd_template_type <span class="ct">(DropdownMenu)</span> <span class="cfixed">role='outlined-select', items: lead_capture/event_registration/vsl</span></div>
+      </div>
+    </div>
+
+    <div class="editor-sections">
+      <div class="editor-section editor-section-full">
+        <div class="section-header">Template Preview</div>
+        <div class="section-body">
+          <div class="template-preview-area">Lead Capture Template Preview</div>
+          <div class="cn">col_template_preview <span class="ct">(ColumnPanel)</span> <span class="cfixed">swappable content panel — shows preview of selected template variant</span></div>
+        </div>
+      </div>
+
+      <div class="editor-section">
+        <div class="section-header">Form Fields Configuration</div>
+        <div class="section-body">
+          <table class="fields-table">
+            <thead><tr><th>Field Name</th><th>Type</th><th>Required</th></tr></thead>
+            <tbody>
+              <tr><td>First Name</td><td><span class="field-type-tag">Text</span></td><td>Yes</td></tr>
+              <tr><td>Last Name</td><td><span class="field-type-tag">Text</span></td><td>Yes</td></tr>
+              <tr><td>Email</td><td><span class="field-type-tag">Email</span></td><td>Yes</td></tr>
+              <tr><td>Phone</td><td><span class="field-type-tag">Phone</span></td><td>No</td></tr>
+              <tr><td>Service Interest</td><td><span class="field-type-tag">Dropdown</span></td><td>No</td></tr>
+            </tbody>
+          </table>
+          <div class="cn">dg_form_fields <span class="ct">(DataGrid)</span></div>
+          <div style="margin-top: var(--space-4);">
+            <div class="btn-secondary">+ Add Field</div>
+            <div class="cn">btn_add_field <span class="ct">(Button)</span> <span class="cfixed">"+ Add Field" — secondary</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-section">
+        <div class="section-header">SEO Settings</div>
+        <div class="section-body">
+          <div class="seo-group">
+            <div class="form-group">
+              <label class="form-label">Meta Title</label>
+              <input type="text" class="form-input" placeholder="Meta title for search engines" value="Summer Promo — Free Consultation | Mybizz">
+              <div class="cn">txt_meta_title <span class="ct">(TextBox)</span> <span class="cfixed">role='outlined-input', (W)</span></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Meta Description</label>
+              <textarea class="form-textarea" placeholder="Meta description for search engines">Get a free business consultation this summer. Expert consulting, financial advisory, and marketing strategy services tailored to your needs.</textarea>
+              <div class="cn">txt_meta_description <span class="ct">(TextArea)</span> <span class="cfixed">role='outlined-input', (W)</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Properties</h2>
+    <div class="prop-caption">Designer-Only Properties</div>
+    <div class="prop-note">Write Back (W) must be enabled in Designer for all text input components.</div>
+    <table class="props">
+    <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+    <tr><td>txt_title</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+    <tr><td>txt_slug</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+    <tr><td>dd_template_type</td><td>DropdownMenu</td><td>role='outlined-select'</td></tr>
+    <tr><td>txt_meta_title</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+    <tr><td>txt_meta_description</td><td>TextArea</td><td>role='outlined-input', writeback = W</td></tr>
+    </table>
+
+    <h2>Architecture</h2>
+    <div class="prop-note">
+      <strong>Data source:</strong> <code>landing_pages</code> table (authoritative-schema.md §5.3)<br>
+      <strong>Package:</strong> <code>landing_pages/</code> (Phase 3)<br>
+      <strong>Template types:</strong> lead_capture, event_registration, vsl — each is a swappable content panel<br>
+      <strong>Form fields:</strong> Configured via landing_pages.config simpleObject field<br>
+      <strong>Actions:</strong> Save (draft), Publish (validates + publishes), Preview (opens in new tab)<br>
+      <strong>User flow:</strong> §11 Landing Page Creation
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

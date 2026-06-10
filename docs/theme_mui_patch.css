@@ -1,0 +1,332 @@
+/**
+ * MUI AESTHETIC PATCH — Mybizz CS
+ * Applied: 2026-06-10
+ * Purpose: Emulate MUI dashboard aesthetic within Anvil M3 theme.
+ *
+ * This patch appends to theme.css. Do not merge inline — keep as a
+ * named section at the bottom of theme.css so it can be identified,
+ * updated, or rolled back independently.
+ *
+ * All color values reference existing Anvil %color:Token% placeholders
+ * or the new --md-sys-color-* custom properties set by the palette selector.
+ * No hardcoded hex values are introduced.
+ *
+ * Items patched:
+ *   1. Surface distinction — two-level background vs surface separation
+ *   2. Card shadow — soft MUI dual-layer shadow replacing tonal elevation
+ *   3. Border radius — tightened to MUI rhythm (8px medium, 6px small)
+ *   4. Typography density — confirmed 14px body, 600 heading weight
+ *   5. Dividers — translucent hairlines at 40% opacity
+ *   6. State layer opacities — hover 0.08, pressed 0.12, focused 0.12
+ *   7. Component role CSS — cards, inputs, nav rail, app bar
+ *
+ * Reference: DESIGN_palette_section.md, palette_selector_tokens.md
+ */
+
+
+/* ============================================================
+   1. SURFACE DISTINCTION
+   Page background uses --md-sys-color-background (palette-specific).
+   Card/panel surfaces use --md-sys-color-surface (slightly tinted).
+   Both are now palette-driven via the palette selector.
+   The body rule already uses %color:Background% — verified correct.
+   This rule ensures panel surfaces use the surface token, not background.
+   ============================================================ */
+
+.anvil-panel-col,
+.column-panel,
+.anvil-role-page-container,
+.anvil-role-section-container,
+.anvil-role-form-container,
+.anvil-role-card-container {
+  background-color: var(--md-sys-color-surface, %color:Surface%);
+}
+
+/* Surface container tokens for layered depth */
+.anvil-role-surface-lowest  { background-color: var(--md-sys-color-surface-container-lowest,  %color:Surface%); }
+.anvil-role-surface-low     { background-color: var(--md-sys-color-surface-container-low,      %color:Surface%); }
+.anvil-role-surface         { background-color: var(--md-sys-color-surface-container,          %color:Surface%); }
+.anvil-role-surface-high    { background-color: var(--md-sys-color-surface-container-high,     %color:Surface Variant%); }
+.anvil-role-surface-highest { background-color: var(--md-sys-color-surface-container-highest,  %color:Surface Variant%); }
+
+
+/* ============================================================
+   2. CARD SHADOW — MUI soft dual-layer
+   Replaces Anvil default 2dp tonal elevation shadow on elevated cards.
+   Outlined cards get no shadow (border only).
+   Tonal cards get no shadow (surface variant fill only).
+   ============================================================ */
+
+/* MUI shadow definition — referenced below */
+:root {
+  --mui-shadow-card: hsla(220, 30%, 5%, 0.07) 0px 4px 16px 0px,
+                     hsla(220, 25%, 10%, 0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220, 30%, 5%, 0.10) 0px 6px 20px 0px,
+                       hsla(220, 25%, 10%, 0.10) 0px 10px 20px -5px;
+  --mui-shadow-modal: hsla(220, 30%, 5%, 0.18) 0px 12px 32px 0px,
+                      hsla(220, 25%, 10%, 0.16) 0px 16px 28px -5px;
+}
+
+.anvil-role-elevated-card {
+  box-shadow: var(--mui-shadow-card);
+}
+
+.anvil-role-elevated-card:hover {
+  box-shadow: var(--mui-shadow-raised);
+  transition: box-shadow 200ms ease;
+}
+
+/* metric-card gets the same MUI shadow treatment */
+.anvil-role-metric-card {
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: %color:Surface%;
+  box-shadow: var(--mui-shadow-card);
+  padding: 16px;
+}
+
+.anvil-role-metric-card:hover {
+  box-shadow: var(--mui-shadow-raised);
+  transition: box-shadow 200ms ease;
+}
+
+
+/* ============================================================
+   3. BORDER RADIUS — MUI rhythm
+   Current theme.css values:
+     cards: 12px  → MUI: 8px (medium)
+     dialogs: 28px → keep (M3 spec, intentional)
+     buttons: 100px → keep (pill, per DESIGN.md)
+     inputs (outlined): 4px → keep (per DESIGN.md)
+     nav items: 100px → keep (pill, per DESIGN.md)
+     data grid: 24px → keep (per DESIGN.md)
+     mobile nav drawer: 20px → keep
+
+   Only cards and plots tighten to MUI values.
+   ============================================================ */
+
+.anvil-role-outlined-card {
+  border-radius: 8px;   /* was 12px */
+}
+
+.anvil-role-elevated-card {
+  border-radius: 8px;   /* was 12px */
+}
+
+.anvil-role-tonal-card {
+  border-radius: 8px;   /* was 12px */
+}
+
+/* App bar links — tighten hover halo radius */
+.app-bar a, .app-bar a.anvil-component {
+  border-radius: 8px;   /* was 20px — MUI uses tighter pill on toolbar items */
+}
+
+/* Plot container radius matches card */
+div.plot-container.plotly svg.main-svg {
+  border-radius: 8px;   /* was 12px */
+}
+
+
+/* ============================================================
+   4. TYPOGRAPHY DENSITY
+   Body 14px confirmed — already correct in theme.css (line 102).
+   Heading weights updated to 600 per MUI/DESIGN.md spec.
+   headline role was 400 — update to match DESIGN.md Headline weight.
+   title role was 500 — keep (matches DESIGN.md Title weight).
+   ============================================================ */
+
+.anvil-role-headline {
+  font-weight: 600;     /* was 400 — MUI and DESIGN.md both specify 600 */
+}
+
+/* page-title role — Headline Large, 600 weight */
+.anvil-role-page-title {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  color: %color:On Surface%;
+}
+
+/* section-title role — Headline Small, 600 weight */
+.anvil-role-section-title {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  color: %color:On Surface%;
+}
+
+/* card-title role — Title, 500 weight */
+.anvil-role-card-title {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  color: %color:On Surface%;
+}
+
+/* label-title role — Body Large, 500 weight */
+.anvil-role-label-title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: %color:On Surface Variant%;
+}
+
+
+/* ============================================================
+   5. DIVIDERS — translucent hairlines
+   Uses outline-variant at 40% opacity per MUI aesthetic.
+   Applied to elements that need separator lines.
+   ============================================================ */
+
+:root {
+  --divider-color: var(--md-sys-color-outline-variant, %color:Outline%);
+}
+
+/* Horizontal divider role */
+.anvil-role-divider {
+  border: none;
+  border-top: 1px solid var(--divider-color);
+  opacity: 0.4;
+  margin: 8px 0;
+}
+
+/* Data grid borders — soften from solid surface-variant to translucent */
+.anvil-role-tonal-data-grid.anvil-data-grid {
+  border-color: var(--divider-color);
+}
+
+.anvil-role-tonal-data-grid.anvil-data-grid .data-grid-child-panel div.data-row-col {
+  border-left-color: var(--divider-color);
+  border-bottom-color: var(--divider-color);
+}
+
+.anvil-role-tonal-data-grid.anvil-data-grid > .data-grid-child-panel > div.auto-grid-header {
+  border-bottom-color: var(--divider-color);
+}
+
+/* Outlined card border — use outline-variant at reduced opacity */
+.anvil-role-outlined-card {
+  border-color: var(--md-sys-color-outline-variant, %color:Outline%);
+  border-width: 1px;
+}
+
+/* App bar — replace blank bottom with hairline divider */
+.app-bar {
+  border-bottom: 1px solid var(--divider-color);
+}
+
+/* Left nav — replace blank edge with hairline */
+.nav-holder .left-nav,
+.left-nav-placeholder {
+  border-right: 1px solid var(--divider-color);
+}
+
+
+/* ============================================================
+   6. STATE LAYER OPACITIES
+   MUI values: hover 0.08, pressed/focused 0.12, dragged 0.16.
+   Existing theme.css uses Light/Dark Overlay tokens for state layers.
+   These overlay tokens should resolve to the values below.
+   Adding explicit CSS-var fallbacks so OpenCode sessions can reference them.
+   ============================================================ */
+
+:root {
+  --state-hover-opacity:    0.08;
+  --state-pressed-opacity:  0.12;
+  --state-focused-opacity:  0.12;
+  --state-dragged-opacity:  0.16;
+}
+
+/* Focus ring — consistent across all interactive elements */
+.btn:focus-visible,
+input.anvil-component:focus-visible,
+textarea.anvil-component:focus-visible,
+.anvil-component select:focus-visible {
+  outline: 2px solid %color:Primary%;
+  outline-offset: 2px;
+}
+
+
+/* ============================================================
+   7. COMPONENT ROLE CSS
+   Applies MUI aesthetic to named Anvil roles used throughout the app.
+   ============================================================ */
+
+/* -- Cards -- */
+
+/* surface-card = outlined, neutral, standard content */
+.anvil-role-surface-card {
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: var(--md-sys-color-surface, %color:Surface%);
+  border: 1px solid var(--md-sys-color-outline-variant, %color:Outline%);
+  padding: 16px;
+}
+
+/* data-card = outlined, for data rows and lists */
+.anvil-role-data-card {
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: var(--md-sys-color-surface, %color:Surface%);
+  border: 1px solid var(--md-sys-color-outline-variant, %color:Outline%);
+  padding: 12px 16px;
+}
+
+/* Card internal padding — standardise to 16px per MUI rhythm */
+.anvil-role-outlined-card,
+.anvil-role-elevated-card,
+.anvil-role-tonal-card {
+  padding: 16px;   /* was 15px — align to 4px grid */
+}
+
+
+/* -- Navigation rail / app bar -- */
+
+/* App bar: surface token, no background gradient, hairline bottom */
+.app-bar {
+  background-color: var(--md-sys-color-surface, %color:Surface%);
+}
+
+/* App bar scrolled state: use surface-container-low instead of gradient */
+.app-bar.scrolled {
+  background: var(--md-sys-color-surface-container-low, %color:Surface%);
+  transition: background 250ms;
+}
+
+/* Left nav: use surface-container-low for slight depth separation */
+.nav-holder .left-nav,
+.left-nav-placeholder {
+  background: var(--md-sys-color-surface-container-low, %color:Surface%);
+}
+
+
+/* -- Inputs -- */
+
+/* Outlined inputs: tighter radius per DESIGN.md (4px already correct) */
+/* Confirmed: border-radius: 4px 4px 0 0 on filled inputs — correct */
+/* Confirmed: border-radius: 4px on outlined inputs — correct */
+
+/* Input focus ring consistent with MUI */
+input.anvil-component:focus,
+textarea.anvil-component:focus,
+.anvil-component select:focus,
+.anvil-datepicker input:focus {
+  outline: none;  /* outline handled by border-bottom: 2px solid Primary (existing) */
+}
+
+
+/* -- Spacing density: card collections -- */
+
+.anvil-role-card-container > .anvil-panel-section > .anvil-panel-section-container {
+  gap: 16px;
+}
+
+.anvil-role-grid-container > .anvil-panel-section > .anvil-panel-section-container {
+  gap: 16px;
+}
+
+
+/* ============================================================
+   END MUI AESTHETIC PATCH
+   ============================================================ */

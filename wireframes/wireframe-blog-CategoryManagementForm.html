@@ -12,22 +12,27 @@ h1 { font-size: 22px; margin-bottom: 4px; }
 h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
 .wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
 .wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-lg { font-size: 18px; font-weight: bold; color: #333; margin: 4px 0 8px; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
-.wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; white-space: nowrap; }
+.wf-btn-text { background: transparent; color: #6750A4; border: none; padding: 4px 8px; font-size: 12px; font-family: Arial; display: inline-block; cursor: pointer; }
+.wf-btn-text-danger { background: transparent; color: #B3261E; border: none; padding: 4px 8px; font-size: 12px; font-family: Arial; display: inline-block; cursor: pointer; }
+.wf-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.wf-table thead { background: #E7E0EC; }
+.wf-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 500; color: #49454F; border-bottom: 1px solid #79747E; white-space: nowrap; }
+.wf-table td { padding: 8px 12px; border-bottom: 1px solid #E7E0EC; vertical-align: middle; }
+.wf-table tbody tr:hover { background: #E7E0EC; }
+.wf-table tbody tr:last-child td { border-bottom: none; }
+.wf-slug { font-family: monospace; font-size: 12px; color: #49454F; }
+.wf-count { text-align: center; font-variant-numeric: tabular-nums; }
+.wf-actions { white-space: nowrap; text-align: right; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
 .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
 .prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
 table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
@@ -35,7 +40,6 @@ table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: l
 table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
 table.props tr:nth-child(even) td { background: #f9f9f9; }
 .dash { color: #bbb; }
-.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
 </style>
 </head>
 <body>
@@ -49,28 +53,130 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2 class="pagebreak">CategoryManagementForm — Blog Categories</h2>
+<h2>CategoryManagementForm — Blog Categories</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_categories (ColumnPanel)</span>
+  <span class="wf-label">col_categories (ColumnPanel) — max-width: 900px</span>
 
-  <div class="wf-panel">
-    <span class="wf-label">dg_categories (DataGrid)</span>
-    <div style="font-size:11px;color:#999;padding:8px 0;text-align:center;">Data Grid with columns: Category Name, Slug, Post Count, Sort Order, Actions</div>
-    <div class="cn">dg_categories <span class="ct">(DataGrid)</span></div>
+  <!-- Page header -->
+  <div style="margin-bottom:16px;">
+    <div class="wf-heading-lg">Category Management</div>
+    <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Category Management"</span></div>
   </div>
 
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-filled">+ Add Category</div>
-      <div class="cn">btn_add_category <span class="ct">(Button)</span> <span class="cfixed">"+ Add Category"</span></div>
+  <!-- Add Category card with inline form -->
+  <div class="wf-panel">
+    <span class="wf-label">card_add_category (Card) — elevated</span>
+    <div class="wf-heading-sm">Add Category</div>
+    <div class="cn">hdg_add_title <span class="ct">(Heading)</span> <span class="cfixed">"Add Category"</span></div>
+
+    <div class="wf-panel-h">
+      <div style="flex:1;">
+        <div class="wf-heading-sm">Category Name</div>
+        <div class="cn">lbl_cat_name <span class="ct">(Label)</span> <span class="cfixed">"Category Name"</span></div>
+        <div class="wf-textbox">e.g. Business Tips</div>
+        <div class="cn">txt_cat_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> role='outlined'</div>
+      </div>
+      <div style="flex:1;">
+        <div class="wf-heading-sm">Slug</div>
+        <div class="cn">lbl_cat_slug <span class="ct">(Label)</span> <span class="cfixed">"Slug"</span></div>
+        <div class="wf-textbox">e.g. business-tips</div>
+        <div class="cn">txt_cat_slug <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> role='outlined'</div>
+      </div>
+      <div>
+        <div class="wf-btn-filled">+ Add Category</div>
+        <div class="cn">btn_add_category <span class="ct">(Button)</span> <span class="cfixed">"+ Add Category"</span> — primary-button</div>
+      </div>
     </div>
+  </div>
+
+  <!-- Categories table card -->
+  <div class="wf-panel">
+    <span class="wf-label">card_categories_table (Card) — elevated</span>
+
+    <table class="wf-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Slug</th>
+          <th>Post Count</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Business Tips
+            <div class="cn">lbl_name <span class="ct">(Label)</span></div>
+          </td>
+          <td class="wf-slug">business-tips
+            <div class="cn">lbl_slug <span class="ct">(Label)</span></div>
+          </td>
+          <td class="wf-count">8
+            <div class="cn">lbl_count <span class="ct">(Label)</span></div>
+          </td>
+          <td class="wf-actions">
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+            <div class="cn">btn_edit <span class="ct">(Button)</span> | btn_delete <span class="ct">(Button)</span> — tertiary-button / text</div>
+          </td>
+        </tr>
+        <tr>
+          <td>Tutorials</td>
+          <td class="wf-slug">tutorials</td>
+          <td class="wf-count">5</td>
+          <td class="wf-actions">
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Finance</td>
+          <td class="wf-slug">finance</td>
+          <td class="wf-count">3</td>
+          <td class="wf-actions">
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Technology</td>
+          <td class="wf-slug">technology</td>
+          <td class="wf-count">4</td>
+          <td class="wf-actions">
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>News</td>
+          <td class="wf-slug">news</td>
+          <td class="wf-count">2</td>
+          <td class="wf-actions">
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Case Studies</td>
+          <td class="wf-slug">case-studies</td>
+          <td class="wf-count">1</td>
+          <td class="wf-actions">
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <div class="prop-caption">Properties table</div>
-<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+<div class="prop-note">Designer-mandatory properties: Write Back toggle must be enabled in Designer Data Bindings panel for TextBox components.</div>
+<table class="props">
+<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+<tr><td>txt_cat_name</td><td>TextBox</td><td>role='outlined', writeback = W</td></tr>
+<tr><td>txt_cat_slug</td><td>TextBox</td><td>role='outlined', writeback = W</td></tr>
+</table>
 
 </body>
 </html>

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Revenue Report Form</title>
+<title>Mybizz CS — Revenue Report Wireframe</title>
 <style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 1100px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
 .subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
 .legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
@@ -14,7 +14,19 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-xs { font-size: 12px; font-weight: bold; color: #444; margin: 6px 0 0; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-row { display: flex; gap: 12px; margin: 8px 0; align-items: flex-end; }
+.wf-row > * { flex: 0 0 auto; }
+.wf-row-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 8px 0; }
+.wf-metric { border: 1px solid #ccc; border-radius: 4px; padding: 10px; background: #fafafa; }
+.wf-metric .wf-heading-xs { margin-bottom: 4px; }
+.wf-metric .wf-value { font-size: 16px; font-weight: bold; color: #333; margin: 4px 0; }
+.wf-input { display: inline-block; border: 1px solid #999; border-radius: 2px; padding: 4px 8px; font-size: 11px; color: #666; background: #fff; min-width: 120px; }
+.wf-button { display: inline-block; padding: 4px 16px; font-size: 11px; color: #fff; background: #6750A4; border: none; border-radius: 100px; }
+.wf-table-placeholder { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 8px; }
+.wf-table-placeholder th { background: #eee; padding: 4px 8px; text-align: left; font-weight: bold; border-bottom: 1px solid #ccc; }
+.wf-table-placeholder td { padding: 4px 8px; border-bottom: 1px solid #ddd; color: #666; }
 table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 30px; width: 100%; max-width: 720px; }
 table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
 table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
@@ -24,7 +36,6 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.dash { color: #bbb; }
 </style>
 </head>
 <body>
@@ -43,27 +54,92 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <div class="wf-outer">
   <span class="wf-label">col_revenue (ColumnPanel)</span>
 
+  <!-- Page header -->
   <div class="wf-panel">
     <div class="wf-heading-sm">Revenue Report</div>
     <div class="cn">hdg_report_title <span class="ct">(Heading)</span> <span class="cfixed">"Revenue Report"</span></div>
+    <div class="wf-text">View revenue breakdown by date range</div>
+    <div class="cn">lbl_subtitle <span class="ct">(Label)</span> <span class="cfixed">"View revenue breakdown by date range"</span></div>
   </div>
 
+  <!-- Filters bar -->
   <div class="wf-panel">
-    <span class="wf-label">dp_date_range <span class="ct">(DatePicker)</span></span>
-    <div class="cn">dp_date_range <span class="ct">(DatePicker)</span> <span class="cfixed">(W)</span></div>
+    <span class="wf-label">flow_filters <span class="ct">(FlowPanel)</span></span>
+    <div class="wf-heading-xs">Date Range Filter</div>
+    <div class="wf-row">
+      <div>
+        <div class="cn">lbl_date_from <span class="ct">(Label)</span> <span class="cfixed">"From"</span></div>
+        <div class="cn">dp_date_from <span class="ct">(DatePicker)</span> <span class="cfixed">(W)</span></div>
+      </div>
+      <div>
+        <div class="cn">lbl_date_to <span class="ct">(Label)</span> <span class="cfixed">"To"</span></div>
+        <div class="cn">dp_date_to <span class="ct">(DatePicker)</span> <span class="cfixed">(W)</span></div>
+      </div>
+      <div>
+        <div class="cn">btn_generate <span class="ct">(Button)</span> <span class="cfixed">"Generate Report"</span> — primary-button</div>
+      </div>
+    </div>
+    <div class="wf-text">Horizontal flow: From label + DatePicker, To label + DatePicker, Generate Report button. Stacks vertically on mobile.</div>
   </div>
 
+  <!-- Summary row: 3 cards -->
   <div class="wf-panel">
-    <span class="wf-label">plot_revenue_breakdown <span class="ct">(Plot)</span></span>
-    <div class="wf-text">Revenue breakdown chart</div>
+    <span class="wf-label">flow_summary_row <span class="ct">(FlowPanel)</span></span>
+    <div class="wf-heading-xs">Revenue Summary (3-column grid)</div>
+    <div class="wf-row-summary">
+      <div class="wf-metric">
+        <div class="wf-heading-xs">Total Revenue</div>
+        <div class="cn">card_total_revenue <span class="ct">(Card)</span></div>
+        <div class="wf-value">$12,480</div>
+      </div>
+      <div class="wf-metric">
+        <div class="wf-heading-xs">Total Bookings</div>
+        <div class="cn">card_total_bookings <span class="ct">(Card)</span></div>
+        <div class="wf-value">148</div>
+      </div>
+      <div class="wf-metric">
+        <div class="wf-heading-xs">Avg Order Value</div>
+        <div class="cn">card_avg_order <span class="ct">(Card)</span></div>
+        <div class="wf-value">$84.32</div>
+      </div>
+    </div>
+    <div class="wf-text">3-column grid on desktop, 1-column on mobile. Each card is a tonal-card with summary-label and summary-value.</div>
   </div>
+
+  <!-- Chart section -->
+  <div class="wf-panel">
+    <span class="wf-label">card_revenue_chart <span class="ct">(Card)</span></span>
+    <div class="wf-heading-xs">Revenue Over Time</div>
+    <div class="cn">plot_revenue_over_time <span class="ct">(Plot)</span></div>
+    <div class="wf-text">Line chart — daily revenue for selected date range</div>
+  </div>
+
+  <!-- Data table section -->
+  <div class="wf-panel">
+    <span class="wf-label">card_revenue_details <span class="ct">(Card)</span></span>
+    <div class="wf-heading-xs">Revenue Details</div>
+    <div class="cn">dg_revenue_details <span class="ct">(DataGrid)</span></div>
+    <table class="wf-table-placeholder">
+      <thead><tr><th>Date</th><th>Revenue</th><th>Bookings</th><th>Avg Order Value</th></tr></thead>
+      <tbody>
+        <tr><td>2026-05-01</td><td>$420</td><td>5</td><td>$84.00</td></tr>
+        <tr><td>2026-05-02</td><td>$580</td><td>7</td><td>$82.86</td></tr>
+        <tr><td>2026-05-03</td><td>$340</td><td>4</td><td>$85.00</td></tr>
+        <tr><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+      </tbody>
+    </table>
+    <div class="wf-text">4-column DataGrid: Date, Revenue, Bookings, Avg Order Value. One row per day in selected range. Sorted by date ascending.</div>
+  </div>
+
 </div>
 
 <div class="prop-caption">Properties table</div>
-<div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>
+<div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for DatePicker components. Layout column counts for FlowPanel grid children must be set in Designer.</div>
 <table class="props">
-<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>dp_date_range</td><td>DatePicker</td><td>writeback = W</td></tr>
+<tr><th>Component</th><th>Type</th><th>Designer Property</th><th>Notes</th></tr>
+<tr><td>dp_date_from</td><td>DatePicker</td><td>writeback = W</td><td>Default: first day of current month</td></tr>
+<tr><td>dp_date_to</td><td>DatePicker</td><td>writeback = W</td><td>Default: last day of current month</td></tr>
+<tr><td>flow_summary_row</td><td>FlowPanel</td><td>layout = column(3) on desktop</td><td>Responsive: 1 on mobile</td></tr>
 </table>
 
 </body>

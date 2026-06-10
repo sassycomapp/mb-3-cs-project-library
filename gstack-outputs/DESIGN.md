@@ -239,6 +239,24 @@ The palette selector component should show:
 Palette switching is a product customization concern and should remain token-driven.
 Switching a palette must not require page-specific redesign or branching CSS logic.
 
+### Source reference 
+Palette System Reference Documents
+The following documents are authoritative supporting references for the Palette System section of this file.
+They were generated from source colors using the M3 HCT tonal palette algorithm and are treated as design constants.
+Do not modify these files without regenerating tokens from source colors.
+
+Document	Purpose	Status
+Document	Purpose	Status
+DESIGN_palette_section.md	Full M3 CSS token sets for all 4 palettes. Replaces the Palette System section in this file. Contains 32 tokens per palette in CSS custom property format.	Authoritative
+palette_selector_tokens.md	Python dict blocks for the palette selector component. Contains the same 32 tokens per palette in Python dict format plus the apply_palette usage pattern.	Authoritative
+Source Colors (Locked)
+Palette	Source Hex	Algorithm
+Professional Blue	#2b2ee0	M3 HCT TonalSpot
+Warm Coral	#fa7268	M3 HCT TonalSpot
+Calm Teal	#008080	M3 HCT TonalSpot
+Sophisticated Purple	#a30dd1	M3 HCT TonalSpot
+If a source color changes, both reference documents must be regenerated together and this table updated.
+
 ---
 
 ## Typography
@@ -472,6 +490,82 @@ This section defines the primary implementation-facing forms and pages in the My
 - Legal Acknowledgement tab is read-only. It displays acknowledgement history. The acknowledgement action itself belongs to onboarding.
 - Payment gateway configuration is a Settings concern, not an onboarding concern. See ADR-019.
 - PaletteSettingsForm is a local/form-specific component used only within the Palette tab.
+- Business Profile is a tab within SettingsForm, not a standalone form.
+- Services and Users & Permissions tabs are link-only tabs that navigate to their respective forms.
+
+### VaultForm
+
+**Purpose:** Owner-only Vault UI for managing encrypted API keys and credentials.  
+**Architecture:** Standalone form accessed from Settings. Requires TOTP step-up on every open.  
+**Completion criteria (Stage 1.5):** TOTP required each time, no grace period, email notification on every access, secrets stored encrypted in `vault` table.
+
+**Key design rules:**
+- TOTP verification notice displayed prominently at top of form.
+- Stored secrets listed with name, last updated date, and usage context.
+- Each secret has View (masked reveal) and Delete actions.
+- Add Secret form at bottom with name and password input.
+- Secret values are encrypted at rest and never displayed after saving.
+- RBAC: Owner only.
+
+### EmailSetupForm
+
+**Purpose:** Configure Brevo SMTP sender settings for outgoing emails.  
+**Architecture:** Standalone form. Per-client configuration stored in `email_config` table. SMTP credentials stored in Vault.
+
+**Schema fields (`email_config`):** `from_email`, `from_name`, `configured`, `configured_at`, `sender_domain_verified`.
+
+**Key design rules:**
+- From Email and From Name are the only per-client editable fields.
+- SMTP host, port, and encryption are platform constants (smtp-relay.brevo.com:587, TLS) — not user-configurable. See ADR-001.
+- SMTP credentials (API key) stored in Vault, not in the form or database.
+- Test Connection button verifies SMTP configuration.
+- Success/error result displayed inline after test.
+- RBAC: Owner only.
+
+### PaymentGatewayForm
+
+**Purpose:** Configure active payment gateway (Stripe or Paystack).  
+**Architecture:** Standalone form. One active gateway per client instance (ADR-024). Publishable key stored in `payment_config` table. Secret key stored in Vault (ADR-003).
+
+**Schema fields (`payment_config`):** `active_gateway`, `stripe_publishable_key`, `stripe_connected`, `stripe_connected_at`, `paystack_connected`, `paystack_connected_at`, `test_mode`, `configured_at`.
+
+**Key design rules:**
+- Gateway selector with Stripe and Paystack options (radio buttons or cards).
+- Test Mode toggle for sandbox/live key switching.
+- Publishable Key input — safe to expose in client-side code.
+- Secret Key input must NOT be present in the form. Secret keys are stored exclusively in The Vault per ADR-003.
+- Vault notice displayed explaining secret key storage.
+- RBAC: Owner only.
+
+### ThemeConfigForm
+
+**Purpose:** Customize M3 theme for client-facing public pages.  
+**Architecture:** Standalone form. Configuration stored in `theme_config` table.
+
+**Schema fields (`theme_config`):** `primary_color`, `accent_color`, `font_family`, `header_style`, `updated_at`.
+
+**Key design rules:**
+- Primary Color and Accent Color with color picker + hex text input.
+- Font Family dropdown (Google Fonts selection).
+- Header Style dropdown (Standard, Centered, Minimal).
+- Live Preview section showing theme applied to sample content.
+- Reset to Default button.
+- Token-driven theming — palette system integration per DESIGN.md Palette System section.
+- RBAC: Owner, Manager.
+
+### UserManagementForm
+
+**Purpose:** Invite team members, assign roles, and manage user access.  
+**Architecture:** Standalone form. Users stored in `users` table with role, permissions, account_status fields.
+
+**Key design rules:**
+- Role filter dropdown (All, Owner, Manager, Admin, Staff, Customer).
+- Invite User button (primary action).
+- User table with Name, Email, Role, Status, Actions columns.
+- Role badges with semantic color coding per role.
+- Status indicators (Active, Inactive, Pending).
+- Row actions: Edit (all), Deactivate (active users), Reactivate (inactive users).
+- RBAC: Owner only.
 
 ### PolicyEditorForm
 
@@ -568,6 +662,43 @@ Supported homepage variants:
 
 These are variation patterns built on the same design system, not separate site themes.
 
+**Implementation model:** One HomePage form with four template variants. All four are configurable content/layout presets inside a single form, driven by the `business_profile.homepage_template` field. They share the same underlying data, the same component inventory, and the same routing/permission model. Templates differ only by layout, section ordering, emphasis, and the default visibility of optional sections.
+
+**Design coverage:** Four discrete screen artefacts with matching wireframe views (one per template variant).
+
+#### Shared Section Inventory
+
+All four templates draw from the same governed section inventory:
+
+1. **Hero (Parallax)** — ParallaxComponent with hero heading, subheading, and primary CTA.
+2. **Services showcase** — TimeLapseCarouselComponent + service card grid (M3 Cards).
+3. **Intro / About summary** — Short text section with heading + body text.
+4. **Video story** — VideoDisplayComponent, bound to `business_profile.home_video_url`, hidden when no URL configured.
+5. **Testimonials** — 2–3 testimonial cards with quote text and author details.
+6. **Trust / proof strip** — 3–4 trust data points using M3 text and card patterns.
+7. **CTA / contact band** — Headline, explanatory text, primary button, optional secondary action.
+8. **Footer** — Shared FooterComponent across all public pages.
+
+#### Template Differentiation Matrix
+
+**Classic** (default, balanced):
+Section order: Hero → Intro → Services → Video → Testimonials → Trust strip → CTA band → Footer.
+All major sections visible by default (video respects no-URL-hidden rule).
+
+**Services** (services-first):
+Section order: Hero (shorter) → Services showcase → Trust strip → Testimonials → Intro (shorter) → CTA band → Video (optional) → Footer.
+Services section moves directly below hero. About and video support but do not lead.
+
+**Booking** (conversion-focused):
+Section order: Hero (strong booking CTA) → CTA band → Trust strip → Services showcase → Testimonials → Video (optional) → Intro (short reinforcing) → Footer.
+CTA appears twice near top. Trust data moved up to support conversion.
+
+**Minimalist** (clean, minimal):
+Section order: Hero (concise) → Intro (very brief) → Trust strip (compact) → CTA band → Footer.
+Hides: carousel, full services grid, full testimonials, video. Uses fewer text blocks and more whitespace.
+
+**Video visibility rule:** Video section is controlled by `business_profile.home_video_url` and hidden automatically when no URL is configured, for all templates.
+
 ---
 
 ## Blog Design System
@@ -628,7 +759,7 @@ Blog settings should support:
 
 | Component | Where Used | Justification |
 |---|---|---|
-| VideoDisplayComponent | BlogPostForm, HomePage | Multi-source video support not in native M3. Supports YouTube (V1). |
+| VideoDisplayComponent | ServicesForm, HomePage, BlogPostForm, ServiceViewerForm | Display-only video embed. Not in native M3. Supports YouTube (V1). Programmatic visibility — hidden when no valid video URL exists. |
 | FooterComponent | All public pages (6+) | Custom footer with logo, credentials, social links, policies, map, contact. Not in native M3. |
 | TimeLapseCarouselComponent | HomePage, ServicesForm | Auto-rotating carousel not in native M3. |
 | ParallaxComponent | Multiple public pages | Parallax scroll effect not in native M3. |
@@ -663,6 +794,34 @@ Blog settings should support:
 | AnimatedImageComponent | Standard M3 components provide sufficient hover/focus animations via role-based styling. |
 
 All custom components must remain governed by the same token, typography, spacing, and role system defined in this document.
+
+### VideoDisplayComponent — Architectural Definition
+
+**Purpose:** Display-only video embed component. Renders an iframe/video for a valid video URL. When no valid URL exists, the component is programmatically hidden.
+
+**Design intent:**
+- The component is display-only. It does not contain input controls (no source selector, no URL input field).
+- Input controls for video source and URL belong in the host forms (BlogEditorForm, ServiceEditorForm, SettingsForm).
+- The component receives `video_url` and `video_type` as properties set programmatically by the host form.
+- Visibility is programmatic: if `video_url` is empty or invalid, the component's `visible` property is set to `False` in code.
+- No user-facing include/exclude switch is required.
+
+**Host contexts and video URL governance:**
+
+| Host Context | Video URL Source | Governed By |
+|---|---|---|
+| ServicesForm (list page) | `business_profile.services_video_url` | SettingsForm → Business Profile tab |
+| HomePage | `business_profile.home_video_url` | SettingsForm → Business Profile tab |
+| BlogPostForm (public view) | `blog_posts.video_url` | BlogEditorForm sidebar → Video Embed card |
+| ServiceViewerForm (detail view) | `services.video_url` | ServiceEditorForm → video URL field |
+
+**V1 scope:** YouTube only. Multi-source support (Vimeo, Dailymotion, custom URLs) is deferred to V2. The `video_type` field is included in the schema for future extensibility but defaults to `"youtube"` in V1.
+
+**Programmatic visibility rule:**
+- The component's `visible` property is controlled in code, not in the Anvil Designer.
+- If `video_url` is `None`, empty, or fails URL validation, the component is hidden.
+- If a valid URL exists, the component is shown and renders the embed.
+- This applies uniformly across all host contexts.
 
 ---
 
@@ -753,6 +912,10 @@ Expected fields include:
 - `google_maps_embed_url`
 - `contact_email`
 - `contact_phone`
+- `home_video_url` — YouTube URL for homepage video display (governed via SettingsForm)
+- `home_video_type` — Video source type for homepage (V1: "youtube")
+- `services_video_url` — YouTube URL for services page video display (governed via SettingsForm)
+- `services_video_type` — Video source type for services page (V1: "youtube")
 
 ### blog_posts additions
 
@@ -763,6 +926,8 @@ Expected fields include:
 - `meta_description`
 - `keywords`
 - `pullquote`
+- `video_url` — YouTube URL for embedded video display (V1: YouTube only)
+- `video_type` — Video source type (V1: "youtube"; V2: "vimeo", "dailymotion", "custom")
 
 ### blog_comments table
 
@@ -812,6 +977,80 @@ Expected fields include:
 Mybizz_management is **out of scope** for this project. The following is recorded as architectural context only. Mybizz_management is a separate Anvil application for platform operator tooling — client provisioning, health monitoring, billing automation, and update distribution. It is not part of master_template and is built only after the master template reaches launch.
 
 Relevant architectural context is documented in `platform-overview.md` section 17.
+
+---
+
+## Invoice Design
+
+### Tax Handling (V1)
+
+The `invoice` and `invoice_items` schema tables do not contain dedicated tax fields. Tax is handled as a display-time calculation:
+
+- `invoice_items.amount` = `quantity` × `unit_price` (per line item)
+- Subtotal = sum of all `invoice_items.amount` values
+- Tax = subtotal × tax rate (display calculation)
+- `invoice.total_amount` = subtotal + tax (the final stored amount)
+
+For V1, the tax rate is fixed at **15%** (South African VAT). This rate is used for display calculation only and is not stored per invoice. If a configurable tax rate is needed in future, it should be added to the `business_profile` or `config` table.
+
+### Invoice Status Lifecycle
+
+The `invoice.status` field supports five values: `draft`, `sent`, `paid`, `overdue`, `cancelled`.
+
+**Status transitions:**
+- `draft` → `sent` (when invoice is emailed to customer)
+- `sent` → `paid` (when payment is recorded)
+- `sent` → `overdue` (when due date passes without payment)
+- `overdue` → `paid` (when payment is recorded)
+- `draft` / `sent` / `overdue` → `cancelled` (when invoice is voided)
+- `cancelled` and `paid` are terminal states
+
+**Status-based permitted actions in InvoiceViewerForm:**
+
+| Status | Edit | Send | Record Payment | Cancel | Download PDF |
+|--------|------|------|----------------|--------|--------------|
+| Draft | Yes | Yes | No | Yes | Yes |
+| Sent | No | No | Yes | Yes | Yes |
+| Paid | No | No | No | No | Yes |
+| Overdue | No | No | Yes | Yes | Yes |
+| Cancelled | No | No | No | No | Yes |
+
+**Status-based permitted actions in InvoiceListForm row actions:**
+
+| Status | View | Edit |
+|--------|------|------|
+| Draft | Yes | Yes |
+| Sent | Yes | No |
+| Paid | Yes | No |
+| Overdue | Yes | No |
+| Cancelled | Yes | No |
+
+### InvoiceViewerForm Completeness
+
+The viewer must display all architecturally defined invoice fields:
+- Invoice number and status badge
+- Bill To: contact name, email, phone, address (from linked `contacts` record)
+- Invoice Date, Due Date, Currency
+- Line Items table (description, quantity, unit price, amount)
+- Totals: Subtotal, Tax, Total
+- Notes (if present on the invoice record)
+- Status-appropriate action buttons (per table above)
+
+### InvoiceEditorForm Scope
+
+The editor supports both create and edit workflows:
+- **Create:** New invoice with customer selection, dates, currency, line items, and notes
+- **Edit:** Modify existing draft invoices only (status must be `draft`)
+- Action buttons: "Save Draft" (sets status to `draft`) and "Send Invoice" (sets status to `sent` and triggers email delivery)
+- A "Cancel" button returns to the list without saving
+
+### InvoiceListForm Scope
+
+The list form provides invoice discovery and status awareness:
+- Search by invoice number or customer name
+- Filter by status (All, Draft, Sent, Paid, Overdue, Cancelled)
+- Row actions: View (all statuses), Edit (Draft only)
+- Primary action: "+ Create Invoice" opens InvoiceEditorForm in create mode
 
 ---
 

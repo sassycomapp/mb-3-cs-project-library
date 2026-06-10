@@ -2,63 +2,190 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — ErrorLayout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — ErrorLayout Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-.legend span { margin-right: 24px; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
-.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
-.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
-.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
-.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
-.ct { font-style: italic; color: #bbb; }
-.cfixed { color: #555; font-style: normal; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
+:root {
+  --primary: #6750A4;
+  --on-primary: #FFFFFF;
+  --primary-container: #EADDFF;
+  --on-primary-container: #21005D;
+  --secondary: #625B71;
+  --on-secondary: #FFFFFF;
+  --surface: #FFFBFE;
+  --on-surface: #1C1B1F;
+  --surface-variant: #E7E0EC;
+  --on-surface-variant: #49454F;
+  --outline: #79747E;
+  --outline-variant: #CAC4D0;
+  --error: #B3261E;
+  --on-error: #FFFFFF;
+  --error-container: #F9DEDC;
+  --on-error-container: #410E0B;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --font-family: 'Roboto', sans-serif;
+  --font-display: 57px/64px 400;
+  --font-headline-large: 32px/40px 400;
+  --font-headline-small: 22px/28px 500;
+  --font-title: 18px/24px 500;
+  --font-body: 14px/20px 400;
+  --font-body-large: 16px/24px 400;
+  --font-label: 12px/16px 500;
+  --font-caption: 12px/16px 400;
+  --radius-button: 100px;
+  --radius-card: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-body);
+  color: var(--on-surface);
+  background: var(--surface);
+  line-height: 20px;
+  padding: var(--space-8);
+  max-width: 1100px;
+}
+h1 { font: var(--font-headline-small); margin-bottom: var(--space-1); }
+.subtitle { font: var(--font-caption); color: var(--on-surface-variant); margin-bottom: var(--space-6); }
+h2 { font: var(--font-title); margin-top: var(--space-8); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 1px solid var(--outline-variant); }
+
+.wf-outer {
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  background: var(--surface);
+  position: relative;
+  margin-bottom: var(--space-6);
+}
+.wf-panel {
+  border: 1px solid var(--surface-variant);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+  margin: var(--space-2) 0;
+  position: relative;
+  background: var(--surface-container-low);
+}
+.wf-label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background: var(--surface);
+  font: var(--font-label);
+  color: var(--on-surface-variant);
+  padding: 0 var(--space-1);
+}
+.wf-heading-sm { font: var(--font-body); font-weight: 500; color: var(--on-surface); margin: var(--space-2) 0 0; }
+.wf-text { font: var(--font-caption); color: var(--on-surface-variant); margin: var(--space-1) 0 0; }
+.wf-btn-filled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-8);
+  font: var(--font-body);
+  font-weight: 500;
+  color: var(--on-primary);
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-button);
+  min-height: 40px;
+  text-decoration: none;
+  margin-top: var(--space-4);
+}
+.cn { font-size: 10px; color: var(--outline); margin: 2px 0 var(--space-2) 1px; }
+.ct { font-style: italic; color: var(--outline); }
+.cfixed { color: var(--on-surface-variant); font-style: normal; }
+.prop-caption { font: var(--font-body); font-weight: 500; margin-bottom: var(--space-1); }
+.prop-note { font: var(--font-caption); color: var(--on-surface-variant); margin-bottom: var(--space-4); }
+
+.error-code-mockup {
+  font: var(--font-display);
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: var(--space-4);
+}
+.error-heading-mockup {
+  font: var(--font-headline-large);
+  color: var(--on-surface);
+  text-align: center;
+  margin-bottom: var(--space-3);
+}
+.error-message-mockup {
+  font: var(--font-body-large);
+  color: var(--on-surface-variant);
+  text-align: center;
+  margin-bottom: var(--space-8);
+  line-height: 24px;
+  max-width: 480px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1C1B1F;
+    --on-surface: #E6E1E5;
+    --surface-variant: #49454F;
+    --on-surface-variant: #CAC4D0;
+    --outline: #938F99;
+    --outline-variant: #49454F;
+    --error-container: #8C1D18;
+    --on-error-container: #F2B8B5;
+  }
+}
 </style>
 </head>
 <body>
 
-<h1>Mybizz CS — Layout Wireframes</h1>
-<p class="subtitle">Layout Templates — Anvil Construction Guide</p>
-<div class="legend">
-  <span><strong>Solid border</strong> = visible on load</span>
-  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
-  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
-  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
-</div>
+<h1>ErrorLayout</h1>
+<p class="subtitle">Error and exception presentation layout — no chrome, no sidebar. Centred content with error code, heading, message, and recovery action.</p>
 
-<h2 class="pagebreak">ErrorLayout — Error Page Layout</h2>
+<h2>Structure</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">structure (ColumnPanel)</span>
+  <span class="wf-label">layout_root (ColumnPanel)</span>
 
-  <div class="wf-panel">
-    <span class="wf-label">error_content (ColumnPanel)</span>
-    <div class="wf-heading-sm">Error 404</div>
+  <div class="wf-panel" style="text-align: center; padding: var(--space-8) var(--space-6); max-width: 480px; margin: 0 auto;">
+    <span class="wf-label">error_container (ColumnPanel)</span>
+
+    <div class="error-code-mockup">404</div>
+    <div class="cn">txt_error_code <span class="ct">(Label)</span> <span class="cfixed">dynamic — "404", "500", etc.</span></div>
+
+    <div class="error-heading-mockup">Page Not Found</div>
     <div class="cn">hdg_error_title <span class="ct">(Heading)</span> <span class="cfixed">"Page Not Found"</span></div>
-    <div class="wf-text">The page you're looking for doesn't exist or has been moved.</div>
-    <div class="cn">hdg_error_message <span class="ct">(Heading)</span></div>
-    <div class="wf-btn-filled">Go Home</div>
-    <div class="cn">btn_go_home <span class="ct">(Button)</span> <span class="cfixed">"Go Home"</span></div>
+
+    <div class="error-message-mockup">The page you're looking for doesn't exist or has been moved.</div>
+    <div class="cn">txt_error_message <span class="ct">(Text)</span> <span class="cfixed">dynamic — contextual error description</span></div>
+
+    <div style="text-align: center;">
+      <div class="wf-btn-filled">Go Home</div>
+      <div class="cn">btn_go_home <span class="ct">(Button)</span> <span class="cfixed">"Go Home" — appearance: filled</span></div>
+    </div>
   </div>
 </div>
 
-<div class="prop-caption">Properties table</div>
-<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+<h2>Properties</h2>
+<div class="prop-caption">Designer-Only Properties</div>
+<div class="prop-note">None — all component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+
+<h2>Usage</h2>
+<div class="prop-note">
+  ErrorLayout has no app bar and no sidebar. It is a full-viewport centred layout for error and exception presentation.<br>
+  The error code, heading, message, and button text are set programmatically based on the error type (404, 500, 403, etc.).<br>
+  The "Go Home" button navigates to the homepage or dashboard depending on authentication state.
+</div>
+
+<h2>Responsiveness</h2>
+<div class="prop-note">
+  Full-viewport centred layout. Max-width container (480px) ensures readability at all breakpoints.<br>
+  Text and spacing adapt naturally. No sidebar or navigation chrome to collapse.
+</div>
 
 </body>
 </html>

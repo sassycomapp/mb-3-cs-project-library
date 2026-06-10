@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Mybizz CS — Blog List Form</title>
 <style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 1100px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
 .subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
 .legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
@@ -15,19 +15,33 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-lg { font-size: 18px; font-weight: bold; color: #333; margin: 4px 0 8px; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 240px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 140px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
 .wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-text { background: transparent; color: #6750A4; border: none; padding: 4px 8px; font-size: 12px; font-family: Arial; display: inline-block; cursor: pointer; }
+.wf-btn-text-danger { background: transparent; color: #B3261E; border: none; padding: 4px 8px; font-size: 12px; font-family: Arial; display: inline-block; cursor: pointer; }
+.wf-link { color: #6750A4; text-decoration: none; font-size: 12px; }
+.wf-link:hover { text-decoration: underline; }
+.wf-badge { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: 11px; white-space: nowrap; }
+.wf-badge-published { background: #B8F397; color: #386A20; }
+.wf-badge-draft { background: #FFDEA6; color: #7C5800; }
+.wf-badge-archived { background: #E7E0EC; color: #49454F; }
+.wf-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.wf-table thead { background: #E7E0EC; }
+.wf-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 500; color: #49454F; border-bottom: 1px solid #79747E; white-space: nowrap; }
+.wf-table td { padding: 8px 12px; border-bottom: 1px solid #E7E0EC; vertical-align: middle; }
+.wf-table tbody tr:hover { background: #E7E0EC; }
+.wf-table tbody tr:last-child td { border-bottom: none; }
+.wf-table-footer { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; font-size: 11px; color: #49454F; }
+.wf-pagination { display: flex; align-items: center; gap: 4px; }
+.wf-page-btn { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; font-size: 12px; color: #1C1B1F; background: #fff; border: 1px solid #79747E; border-radius: 4px; cursor: pointer; }
+.wf-page-btn.active { background: #6750A4; color: #fff; border-color: #6750A4; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
 .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
 .prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
 table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
@@ -35,7 +49,6 @@ table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: l
 table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
 table.props tr:nth-child(even) td { background: #f9f9f9; }
 .dash { color: #bbb; }
-.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
 </style>
 </head>
 <body>
@@ -52,46 +65,146 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <h2>BlogListForm — Blog Posts List</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_content (ColumnPanel)</span>
+  <span class="wf-label">col_content (ColumnPanel) — max-width: 1100px</span>
 
+  <!-- Page header with search, filter, and primary action -->
   <div class="wf-panel-h">
-    <span class="wf-label">flow_search_filters (FlowPanel)</span>
-    <div>
-      <div class="wf-textbox">&nbsp;</div>
-      <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Blog Posts</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Blog Posts"</span></div>
     </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_category <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div>
+        <div class="wf-textbox">&nbsp;</div>
+        <div class="cn">txt_search <span class="ct">(TextBox)</span></div>
+      </div>
+      <div>
+        <div class="wf-dd">All Statuses</div>
+        <div class="cn">dd_status_filter <span class="ct">(DropdownMenu)</span></div>
+      </div>
+      <div>
+        <div class="wf-btn-filled">+ New Post</div>
+        <div class="cn">btn_new_post <span class="ct">(Button)</span> <span class="cfixed">"+ New Post"</span> — primary-button</div>
+      </div>
     </div>
   </div>
 
+  <!-- Data table card -->
   <div class="wf-panel">
-    <span class="wf-label">dg_posts (DataGrid)</span>
-    <div style="font-size:11px;color:#999;padding:8px 0;text-align:center;">Data Grid with columns: Title, Category, Author, Published Date, Status, Views, Actions</div>
-    <div class="cn">dg_posts <span class="ct">(DataGrid)</span></div>
-  </div>
+    <span class="wf-label">card_data (Card) — elevated</span>
 
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-filled">+ Create Post</div>
-      <div class="cn">btn_create_post <span class="ct">(Button)</span> <span class="cfixed">"+ Create Post"</span></div>
+    <table class="wf-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Category</th>
+          <th>Status</th>
+          <th>Published Date</th>
+          <th>Views</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="#" class="wf-link">How to Optimize Your Business Operations</a>
+            <div class="cn">nav_post_title <span class="ct">(Link)</span></div>
+          </td>
+          <td>John Doe
+            <div class="cn">lbl_author <span class="ct">(Label)</span></div>
+          </td>
+          <td>Business Tips
+            <div class="cn">lbl_category <span class="ct">(Label)</span></div>
+          </td>
+          <td><span class="wf-badge wf-badge-published">Published</span>
+            <div class="cn">badge_status <span class="ct">(Badge/Label)</span></div>
+          </td>
+          <td>May 10, 2026
+            <div class="cn">lbl_published_date <span class="ct">(Label)</span></div>
+          </td>
+          <td style="text-align:right; font-variant-numeric:tabular-nums;">1,245
+            <div class="cn">lbl_views <span class="ct">(Label)</span></div>
+          </td>
+          <td>
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+            <div class="cn">btn_edit <span class="ct">(Button)</span> | btn_delete <span class="ct">(Button)</span> — tertiary-button / text</div>
+          </td>
+        </tr>
+        <tr>
+          <td><a href="#" class="wf-link">Getting Started with Client Management</a></td>
+          <td>Jane Smith</td>
+          <td>Tutorials</td>
+          <td><span class="wf-badge wf-badge-published">Published</span></td>
+          <td>May 8, 2026</td>
+          <td style="text-align:right;">892</td>
+          <td>
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td><a href="#" class="wf-link">Understanding Invoicing Best Practices</a></td>
+          <td>John Doe</td>
+          <td>Finance</td>
+          <td><span class="wf-badge wf-badge-draft">Draft</span></td>
+          <td>Jun 1, 2026</td>
+          <td style="text-align:right;">—</td>
+          <td>
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td><a href="#" class="wf-link">Top 10 Productivity Tools for 2026</a></td>
+          <td>Alice Brown</td>
+          <td>Technology</td>
+          <td><span class="wf-badge wf-badge-published">Published</span></td>
+          <td>Apr 22, 2026</td>
+          <td style="text-align:right;">2,410</td>
+          <td>
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td><a href="#" class="wf-link">Seasonal Business Planning Guide</a></td>
+          <td>Jane Smith</td>
+          <td>Business Tips</td>
+          <td><span class="wf-badge wf-badge-archived">Archived</span></td>
+          <td>Jan 15, 2026</td>
+          <td style="text-align:right;">567</td>
+          <td>
+            <button class="wf-btn-text">Edit</button>
+            <button class="wf-btn-text-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="wf-table-footer">
+      <span>Showing 1–5 of 12 posts
+        <div class="cn">lbl_pagination_info <span class="ct">(Label)</span></div>
+      </span>
+      <div class="wf-pagination">
+        <button class="wf-page-btn">&larr;</button>
+        <button class="wf-page-btn active">1</button>
+        <button class="wf-page-btn">2</button>
+        <button class="wf-page-btn">3</button>
+        <button class="wf-page-btn">&rarr;</button>
+        <div class="cn">nav_pagination <span class="ct">(FlowPanel)</span></div>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="prop-caption">Properties table</div>
-<div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>
+<div class="prop-note">Designer-mandatory properties: Write Back toggle must be enabled in Designer Data Bindings panel for TextBox and DropdownMenu components.</div>
 <table class="props">
 <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_search</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>dd_category</td><td>DropdownMenu</td><td>writeback = W</td></tr>
-<tr><td>dd_status</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+<tr><td>txt_search</td><td>TextBox</td><td>role='outlined', writeback = W</td></tr>
+<tr><td>dd_status_filter</td><td>DropdownMenu</td><td>role='outlined', writeback = W, items=['All Statuses','Published','Draft','Archived']</td></tr>
 </table>
 
 </body>

@@ -55,62 +55,38 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
   <span><strong>Blue left border</strong> = custom clause added by Owner</span>
 </div>
 
-<h2>SettingsForm — Policy Editor Tab</h2>
+<h2>PolicyEditorForm — Policy Editor</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_settings (ColumnPanel)</span>
+  <span class="wf-label">col_policy_editor (ColumnPanel)</span>
 
+  <!-- Header with Return to Settings -->
   <div class="wf-panel-h">
     <span class="wf-label">flow_header (FlowPanel)</span>
     <div style="flex:1;">
-      <div class="wf-heading-lg">Settings</div>
-      <div class="cn">hdg_settings_title <span class="ct">(Heading)</span> <span class="cfixed">"Settings"</span></div>
+      <div class="wf-heading-lg">Policy Editor</div>
+      <div class="cn">hdg_policy_title <span class="ct">(Heading)</span> <span class="cfixed">"Policy Editor"</span></div>
     </div>
     <div>
-      <div class="wf-return-btn">Return to Onboarding</div>
-      <div class="cn">btn_return_onboarding <span class="ct">(Button)</span> <span class="cfixed">"Return to Onboarding"</span></div>
-      <div class="cn" style="color:#4a9;">visible = onboarding_status == "in_progress"</div>
+      <div class="wf-return-btn">Return to Settings</div>
+      <div class="cn">btn_return_settings <span class="ct">(Button)</span> <span class="cfixed">"Return to Settings"</span></div>
     </div>
   </div>
 
+  <!-- Document Type and Publish -->
   <div class="wf-panel-h">
-    <span class="wf-label">flow_tabs (FlowPanel)</span>
-    <div><div class="wf-tab-inactive">Business Profile</div><div class="cn">btn_tab_business <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Palette</div><div class="cn">btn_tab_palette <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">System Currency</div><div class="cn">btn_tab_currency <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Legal Ack</div><div class="cn">btn_tab_legal <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Display Currency</div><div class="cn">btn_tab_display_currency <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Payment Gateway</div><div class="cn">btn_tab_payments <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Services</div><div class="cn">btn_tab_services <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Users</div><div class="cn">btn_tab_users <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Email</div><div class="cn">btn_tab_email <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Theme</div><div class="cn">btn_tab_theme <span class="ct">(Button)</span></div></div>
-    <div><div class="wf-tab-inactive">Features</div><div class="cn">btn_tab_features <span class="ct">(Button)</span></div></div>
-  </div>
-
-  <!-- Policy Editor Tab Content (visible when Website tab active) -->
-  <div class="wf-panel">
-    <span class="wf-label">col_policy_editor (ColumnPanel)</span>
-
-    <div class="wf-panel-h">
-      <span class="wf-label">flow_doc_type (FlowPanel)</span>
-      <div style="flex:1;">
-        <div class="wf-heading-sm">Policy Editor</div>
-        <div class="cn">hdg_policy_title <span class="ct">(Heading)</span> <span class="cfixed">"Policy Editor"</span></div>
-      </div>
-      <div>
-        <div class="wf-btn-filled">Publish</div>
-        <div class="cn">btn_publish <span class="ct">(Button)</span> <span class="cfixed">"Publish"</span></div>
-      </div>
-    </div>
-
-    <div class="wf-panel">
-      <span class="wf-label">col_document_type (ColumnPanel)</span>
+    <span class="wf-label">flow_doc_type (FlowPanel)</span>
+    <div style="flex:1;">
       <div class="wf-heading-sm">Document Type</div>
       <div class="wf-dd">Privacy Policy</div>
-      <div class="cn">dd_document_type <span class="ct">(DropdownMenu)</span> — Privacy Policy / Terms & Conditions</div>
+      <div class="cn">dd_document_type <span class="ct">(DropdownMenu)</span> — Privacy Policy / Terms &amp; Conditions</div>
       <div class="cn">Selects which data source to load: privacy_policy or t_and_c</div>
     </div>
+    <div>
+      <div class="wf-btn-filled">Publish</div>
+      <div class="cn">btn_publish <span class="ct">(Button)</span> <span class="cfixed">"Publish"</span></div>
+    </div>
+  </div>
 
     <!-- ClauseBuilder component embedded -->
     <div class="wf-panel" style="border-color:#4a9;">

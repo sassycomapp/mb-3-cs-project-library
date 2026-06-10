@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Theme Configuration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --tertiary: #7D5260;
+      --tertiary-container: #FFD8E4;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface-variant);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: var(--space-6);
+    }
+
+    .theme-container {
+      width: 100%;
+      max-width: 700px;
+      margin-top: var(--space-8);
+    }
+
+    .theme-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: var(--space-8);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .theme-header {
+      text-align: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .theme-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+      margin-bottom: var(--space-2);
+    }
+
+    .theme-header p {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+    }
+
+    .section-heading {
+      font: var(--font-headline-small);
+      color: var(--on-surface);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--outline);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .form-label {
+      display: block;
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-input::placeholder {
+      color: var(--outline);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2379747E' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .color-input-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .color-swatch {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-input);
+      border: 1px solid var(--outline);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .color-swatch:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .preview-section {
+      margin-top: var(--space-6);
+      padding: var(--space-6);
+      background: var(--surface-variant);
+      border-radius: var(--radius-card);
+    }
+
+    .preview-section h3 {
+      font: var(--font-title);
+      color: var(--on-surface);
+      margin-bottom: var(--space-4);
+    }
+
+    .preview-header {
+      padding: var(--space-4) var(--space-6);
+      border-radius: var(--radius-input);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .preview-header .logo-text {
+      font: var(--font-headline-small);
+    }
+
+    .preview-header .nav-links {
+      display: flex;
+      gap: var(--space-4);
+    }
+
+    .preview-header .nav-link {
+      font: var(--font-button);
+      opacity: 0.8;
+    }
+
+    .preview-content {
+      padding: var(--space-4);
+      background: var(--surface);
+      border-radius: var(--radius-input);
+    }
+
+    .preview-content h4 {
+      font: var(--font-title);
+      margin-bottom: var(--space-2);
+    }
+
+    .preview-content p {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-4);
+    }
+
+    .preview-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2) var(--space-4);
+      font: var(--font-button);
+      border: none;
+      border-radius: var(--radius-button);
+      min-height: 36px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--outline);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-primary:hover {
+      background: #523E8A;
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-container);
+    }
+
+    .btn-secondary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .hint-text {
+      font: var(--font-caption);
+      color: var(--on-surface-variant);
+      margin-top: var(--space-1);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="theme-container" role="main">
+    <article class="theme-card">
+      <header class="theme-header">
+        <h1>Theme Configuration</h1>
+        <p>Customize the look and feel of your client-facing pages</p>
+      </header>
+
+      <form id="themeForm">
+        <h2 class="section-heading">Colors</h2>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="primary_color" class="form-label">Primary Color</label>
+            <div class="color-input-group">
+              <input type="color" id="primary_swatch" class="color-swatch" value="#6750A4" tabindex="0" aria-label="Primary color picker">
+              <input type="text" id="primary_color" name="primary_color" class="form-input" placeholder="#6750A4" value="#6750A4">
+            </div>
+            <p class="hint-text">Used for buttons, links, and key UI elements.</p>
+          </div>
+          <div class="form-group">
+            <label for="accent_color" class="form-label">Accent Color</label>
+            <div class="color-input-group">
+              <input type="color" id="accent_swatch" class="color-swatch" value="#FF7043" tabindex="0" aria-label="Accent color picker">
+              <input type="text" id="accent_color" name="accent_color" class="form-input" placeholder="#FF7043" value="#FF7043">
+            </div>
+            <p class="hint-text">Used for highlights and call-to-action elements.</p>
+          </div>
+        </div>
+
+        <h2 class="section-heading">Typography</h2>
+
+        <div class="form-group">
+          <label for="font_family" class="form-label">Font Family</label>
+          <select id="font_family" name="font_family" class="form-select">
+            <option value="Roboto" selected>Roboto</option>
+            <option value="Open Sans">Open Sans</option>
+            <option value="Lato">Lato</option>
+            <option value="Montserrat">Montserrat</option>
+            <option value="Poppins">Poppins</option>
+            <option value="Inter">Inter</option>
+            <option value="Nunito">Nunito</option>
+            <option value="Source Sans Pro">Source Sans Pro</option>
+          </select>
+          <p class="hint-text">Select a Google Font for your public pages.</p>
+        </div>
+
+        <h2 class="section-heading">Header Style</h2>
+
+        <div class="form-group">
+          <label for="header_style" class="form-label">Header Layout</label>
+          <select id="header_style" name="header_style" class="form-select">
+            <option value="standard" selected>Standard — Logo left, nav right</option>
+            <option value="centered">Centered — Logo and nav centered</option>
+            <option value="minimal">Minimal — Logo only, hamburger menu</option>
+          </select>
+        </div>
+
+        <h2 class="section-heading">Preview</h2>
+
+        <div class="preview-section" id="themePreview">
+          <h3>Live Preview</h3>
+          <div class="preview-header" id="previewHeader" style="background:#6750A4; color:#FFFFFF;">
+            <span class="logo-text">Your Business</span>
+            <div class="nav-links">
+              <span class="nav-link">Home</span>
+              <span class="nav-link">Services</span>
+              <span class="nav-link">Contact</span>
+            </div>
+          </div>
+          <div class="preview-content">
+            <h4>Welcome to Our Services</h4>
+            <p>This is a preview of how your theme will look on client-facing pages.</p>
+            <button class="preview-btn" id="previewBtn" style="background:#6750A4; color:#FFFFFF;">Book Now</button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary">Reset to Default</button>
+          <button type="submit" class="btn-primary">Save Theme</button>
+        </div>
+      </form>
+    </article>
+  </main>
+
+  <script>
+    (function() {
+      'use strict';
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var primaryInput = document.getElementById('primary_color');
+        var primarySwatch = document.getElementById('primary_swatch');
+        var accentInput = document.getElementById('accent_color');
+        var accentSwatch = document.getElementById('accent_swatch');
+        var previewHeader = document.getElementById('previewHeader');
+        var previewBtn = document.getElementById('previewBtn');
+
+        function updatePreview() {
+          var primaryColor = primaryInput.value || '#6750A4';
+          previewHeader.style.background = primaryColor;
+          previewBtn.style.background = primaryColor;
+        }
+
+        primaryInput.addEventListener('input', function() {
+          primarySwatch.value = this.value;
+          updatePreview();
+        });
+
+        primarySwatch.addEventListener('input', function() {
+          primaryInput.value = this.value;
+          updatePreview();
+        });
+
+        accentInput.addEventListener('input', function() {
+          accentSwatch.value = this.value;
+        });
+
+        accentSwatch.addEventListener('input', function() {
+          accentInput.value = this.value;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

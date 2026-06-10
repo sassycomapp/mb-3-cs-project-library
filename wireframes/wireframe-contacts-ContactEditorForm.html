@@ -15,29 +15,32 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-lg { font-size: 18px; font-weight: bold; color: #333; margin: 4px 0 0; }
+.wf-heading-md { font-size: 15px; font-weight: bold; color: #333; margin: 4px 0 8px; border-bottom: 1px solid #eee; padding-bottom: 6px; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
+.wf-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.wf-form-grid .full-width { grid-column: 1 / -1; }
+.wf-form-group { display: flex; flex-direction: column; }
+.wf-form-label { font-size: 11px; color: #666; margin-bottom: 4px; font-weight: 500; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; height: 80px; margin: 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; resize: vertical; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
 .wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
-.wf-image { border: 2px dashed #ccc; border-radius: 4px; padding: 8px 16px; font-size: 11px; color: #ccc; display: inline-block; margin: 6px 0 0; }
-.wf-fileloader { border: 2px dashed #888; border-radius: 4px; padding: 8px 16px; font-size: 12px; color: #777; display: inline-block; margin: 6px 0 0; }
+.wf-tag-area { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px; border: 1px solid #888; border-radius: 4px; min-height: 40px; background: #fff; align-items: center; }
+.wf-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; background: #E8DEF8; color: #1D192B; border-radius: 100px; font-size: 11px; font-weight: 500; }
+.wf-tag-remove { cursor: pointer; font-size: 12px; opacity: 0.7; }
+.wf-tag-placeholder { font-size: 12px; color: #999; }
 .wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
 .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
 .prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
 table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
 table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
 table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
 table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
-.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
 </style>
 </head>
 <body>
@@ -51,51 +54,125 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2 class="pagebreak">ContactEditorForm — Create/Edit Contact</h2>
+<h2>ContactEditorForm — Create/Edit Contact</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_contact_editor (ColumnPanel)</span>
+  <span class="wf-label">col_contact_editor (ColumnPanel) — max-width: 720px, page-container</span>
 
-  <div class="wf-panel">
-    <div class="wf-heading-sm">Contact Details</div>
-    <div class="cn">hdg_section_details <span class="ct">(Heading)</span> <span class="cfixed">"Contact Details"</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_first_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_last_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_phone <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-dd">&nbsp;</div>
-    <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-dd">&nbsp;</div>
-    <div class="cn">dd_segment <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-textarea">&nbsp;</div>
-    <div class="cn">txt_notes <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span></div>
-
-    <div class="wf-heading-sm">Tags</div>
-    <div class="cn">hdg_section_tags <span class="ct">(Heading)</span> <span class="cfixed">"Tags"</span></div>
-    <div class="wf-textbox">&nbsp;</div>
-    <div class="cn">txt_tags <span class="ct">(TextBox)</span> <span class="cfixed">"VIP, Recurring, etc."</span></div>
+  <!-- Page header -->
+  <div class="wf-panel-h">
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Edit Contact</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Edit Contact"</span> — role: page-title (headline-large)</div>
+    </div>
   </div>
 
-  <div class="wf-panel-h" style="margin-top:10px;">
+  <!-- Personal Information card -->
+  <div class="wf-panel">
+    <span class="wf-label">card_personal (Card) — role: elevated-card</span>
+
+    <div class="wf-heading-md">Personal Information</div>
+    <div class="cn">hdg_section_personal <span class="ct">(Heading)</span> <span class="cfixed">"Personal Information"</span> — role: section-title (title)</div>
+
+    <div class="wf-form-grid">
+      <div class="wf-form-group">
+        <div class="wf-form-label">First Name</div>
+        <div class="wf-textbox">Jane</div>
+        <div class="cn">txt_first_name <span class="ct">(TextBox)</span> — role: outlined-input, placeholder: "Enter first name"</div>
+      </div>
+      <div class="wf-form-group">
+        <div class="wf-form-label">Last Name</div>
+        <div class="wf-textbox">Smith</div>
+        <div class="cn">txt_last_name <span class="ct">(TextBox)</span> — role: outlined-input, placeholder: "Enter last name"</div>
+      </div>
+      <div class="wf-form-group">
+        <div class="wf-form-label">Company</div>
+        <div class="wf-textbox">Smith Consulting</div>
+        <div class="cn">txt_company <span class="ct">(TextBox)</span> — role: outlined-input, placeholder: "Enter company name"</div>
+      </div>
+      <div class="wf-form-group">
+        <div class="wf-form-label">Job Title</div>
+        <div class="wf-textbox">Director</div>
+        <div class="cn">txt_job_title <span class="ct">(TextBox)</span> — role: outlined-input, placeholder: "Enter job title"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Details card -->
+  <div class="wf-panel">
+    <span class="wf-label">card_contact (Card) — role: elevated-card</span>
+
+    <div class="wf-heading-md">Contact Details</div>
+    <div class="cn">hdg_section_contact <span class="ct">(Heading)</span> <span class="cfixed">"Contact Details"</span> — role: section-title (title)</div>
+
+    <div class="wf-form-grid">
+      <div class="wf-form-group">
+        <div class="wf-form-label">Email</div>
+        <div class="wf-textbox">jane.smith@email.com</div>
+        <div class="cn">txt_email <span class="ct">(TextBox)</span> — role: outlined-input, input type: email</div>
+      </div>
+      <div class="wf-form-group">
+        <div class="wf-form-label">Phone</div>
+        <div class="wf-textbox">+27 12 345 6789</div>
+        <div class="cn">txt_phone <span class="ct">(TextBox)</span> — role: outlined-input, input type: tel</div>
+      </div>
+      <div class="wf-form-group">
+        <div class="wf-form-label">Status</div>
+        <div class="wf-dd">Active</div>
+        <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> — role: outlined-select, items: ["Active","Inactive","Lead"]</div>
+      </div>
+      <div class="wf-form-group">
+        <div class="wf-form-label">Segment</div>
+        <div class="wf-dd">VIP</div>
+        <div class="cn">dd_segment <span class="ct">(DropdownMenu)</span> — role: outlined-select, items: ["VIP","Recurring","New","General"]</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tags card -->
+  <div class="wf-panel">
+    <span class="wf-label">card_tags (Card) — role: elevated-card</span>
+
+    <div class="wf-heading-md">Tags</div>
+    <div class="cn">hdg_section_tags <span class="ct">(Heading)</span> <span class="cfixed">"Tags"</span> — role: section-title (title)</div>
+
+    <div class="wf-form-group">
+      <div class="wf-form-label">Contact Tags</div>
+      <div class="wf-tag-area">
+        <span class="wf-tag">VIP <span class="wf-tag-remove">&times;</span></span>
+        <span class="wf-tag">Recurring <span class="wf-tag-remove">&times;</span></span>
+        <span class="wf-tag-placeholder">Type to add a tag...</span>
+      </div>
+      <div class="cn">tag_input_area <span class="ct">(Custom: FlowPanel + RepeatingPanel)</span> — chips with remove buttons</div>
+    </div>
+  </div>
+
+  <!-- Notes card -->
+  <div class="wf-panel">
+    <span class="wf-label">card_notes (Card) — role: elevated-card</span>
+
+    <div class="wf-heading-md">Notes</div>
+    <div class="cn">hdg_section_notes <span class="ct">(Heading)</span> <span class="cfixed">"Notes"</span> — role: section-title (title)</div>
+
+    <div class="wf-form-group">
+      <div class="wf-form-label">Internal Notes</div>
+      <div class="wf-textarea">Prefers email communication. Has been a client since 2023. Interested in premium services package.</div>
+      <div class="cn">txt_notes <span class="ct">(TextArea)</span> — role: outlined-input, placeholder: "Add internal notes about this contact..."</div>
+    </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="wf-panel-h">
     <span class="wf-label">flow_actions (FlowPanel)</span>
+    <div style="flex:1;"></div>
     <div>
       <div class="wf-btn-outlined">Cancel</div>
-      <div class="cn">btn_cancel <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span></div>
+      <div class="cn">btn_cancel <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span> — role: secondary-button</div>
     </div>
     <div>
       <div class="wf-btn-filled">Save Contact</div>
-      <div class="cn">btn_save <span class="ct">(Button)</span> <span class="cfixed">"Save Contact"</span></div>
+      <div class="cn">btn_save <span class="ct">(Button)</span> <span class="cfixed">"Save Contact"</span> — role: primary-button</div>
     </div>
   </div>
 </div>
@@ -104,13 +181,15 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>
 <table class="props">
 <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_first_name</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_last_name</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_email</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_phone</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>dd_status</td><td>DropdownMenu</td><td>writeback = W</td></tr>
-<tr><td>dd_segment</td><td>DropdownMenu</td><td>writeback = W</td></tr>
-<tr><td>txt_notes</td><td>TextArea</td><td>writeback = W</td></tr>
+<tr><td>txt_first_name</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+<tr><td>txt_last_name</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+<tr><td>txt_company</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+<tr><td>txt_job_title</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+<tr><td>txt_email</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+<tr><td>txt_phone</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+<tr><td>dd_status</td><td>DropdownMenu</td><td>role='outlined-select', writeback = W</td></tr>
+<tr><td>dd_segment</td><td>DropdownMenu</td><td>role='outlined-select', writeback = W</td></tr>
+<tr><td>txt_notes</td><td>TextArea</td><td>role='outlined-input', writeback = W</td></tr>
 </table>
 
 </body>

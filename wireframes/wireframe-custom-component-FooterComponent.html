@@ -12,11 +12,8 @@ h1 { font-size: 22px; margin-bottom: 4px; }
 h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
 .wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
 .wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-hidden { border: 2px dashed #aaa; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #f7f7f7; }
 .wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-label-hidden { position: absolute; top: -10px; left: 10px; background: #f7f7f7; font-size: 11px; font-weight: bold; color: #aaa; padding: 0 4px; }
-.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
 .wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
@@ -27,10 +24,12 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-checkbox::before { content: "☐ "; }
 .wf-image { border: 2px dashed #ccc; border-radius: 4px; padding: 8px 16px; font-size: 11px; color: #ccc; display: inline-block; margin: 6px 0 0; }
 .wf-fileloader { border: 2px dashed #888; border-radius: 4px; padding: 8px 16px; font-size: 12px; color: #777; display: inline-block; margin: 6px 0 0; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-text { background: #fff; color: #333; border: 2px dotted #999; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-icon-btn { background: #fff; color: #333; border: 2px solid #999; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-text { background: transparent; color: #333; border: none; padding: 4px 8px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; text-decoration: underline; }
+.wf-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #938F99; border-radius: 100px; font-size: 12px; color: #49454F; background: transparent; cursor: pointer; }
+.wf-link { color: #6750A4; text-decoration: none; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-link:hover { text-decoration: underline; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
@@ -42,7 +41,6 @@ table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: l
 table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
 table.props tr:nth-child(even) td { background: #f9f9f9; }
 .dash { color: #bbb; }
-.warn { color: #c00; font-weight: bold; }
 .pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
 </style>
 </head>
@@ -60,94 +58,146 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <h2 class="pagebreak">FooterComponent — Bottom Page Banner</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_footer (ColumnPanel)</span>
+  <span class="wf-label">col_footer (ColumnPanel) — role: page-container</span>
 
+  <!-- Top row: Logo + Business Name | Accreditations -->
   <div class="wf-panel">
-    <span class="wf-label">flow_top (FlowPanel)</span>
+    <span class="wf-label">flow_top (FlowPanel) — role: section-container</span>
     <div style="display:flex; gap:32px; flex-wrap:wrap; justify-content:space-between;">
       <div style="flex:1; min-width:200px;">
         <div class="wf-image">[Logo]</div>
-        <div class="cn">img_logo <span class="ct">(Image)</span></div>
+        <div class="cn">img_logo <span class="ct">(Image)</span> — data: business_profile.logo</div>
         
         <div class="wf-text">Business Name</div>
-        <div class="cn">txt_business_name <span class="ct">(Text)</span></div>
+        <div class="cn">lbl_business_name <span class="ct">(Label)</span> — role: label-title, data: business_profile.business_name</div>
       </div>
       
       <div style="flex:1; min-width:200px;">
         <div class="wf-text">Accreditation 1</div>
-        <div class="cn">txt_creds_1 <span class="ct">(Text)</span></div>
+        <div class="cn">lbl_creds_1 <span class="ct">(Label)</span> — role: label-title, data: business_profile.accreditations[0]</div>
         
         <div class="wf-text">Accreditation 2</div>
-        <div class="cn">txt_creds_2 <span class="ct">(Text)</span></div>
+        <div class="cn">lbl_creds_2 <span class="ct">(Label)</span> — role: label-title, data: business_profile.accreditations[1]</div>
       </div>
     </div>
   </div>
 
+  <!-- Middle row: Social + Legal Links | Contact Info + Map -->
   <div class="wf-panel">
-    <span class="wf-label">flow_middle (FlowPanel)</span>
+    <span class="wf-label">flow_middle (FlowPanel) — role: section-container</span>
     <div style="display:flex; gap:32px; flex-wrap:wrap; margin-top:32px;">
+      <!-- Social links + Legal links -->
       <div>
         <div style="display:flex; gap:16px;">
           <div class="wf-icon-btn">[FB]</div>
-          <div class="cn">btn_fb <span class="ct">(IconButton)</span> <span class="cfixed">icon: "facebook"</span></div>
+          <div class="cn">btn_fb <span class="ct">(IconButton)</span> <span class="cfixed">icon: "facebook"</span> — role: icon-button, data: business_profile.social_facebook</div>
           
           <div class="wf-icon-btn">[IG]</div>
-          <div class="cn">btn_ig <span class="ct">(IconButton)</span> <span class="cfixed">icon: "instagram"</span></div>
+          <div class="cn">btn_ig <span class="ct">(IconButton)</span> <span class="cfixed">icon: "instagram"</span> — role: icon-button, data: business_profile.social_instagram</div>
           
           <div class="wf-icon-btn">[LI]</div>
-          <div class="cn">btn_li <span class="ct">(IconButton)</span> <span class="cfixed">icon: "linkedin"</span></div>
+          <div class="cn">btn_li <span class="ct">(IconButton)</span> <span class="cfixed">icon: "linkedin"</span> — role: icon-button, data: business_profile.social_linkedin</div>
           
           <div class="wf-icon-btn">[TW]</div>
-          <div class="cn">btn_tw <span class="ct">(IconButton)</span> <span class="cfixed">icon: "twitter"</span></div>
+          <div class="cn">btn_tw <span class="ct">(IconButton)</span> <span class="cfixed">icon: "twitter"</span> — role: icon-button, data: business_profile.social_x</div>
         </div>
         <div class="wf-spacer"></div>
         <div style="display:flex; gap:16px; flex-wrap:wrap;">
           <div class="wf-text">Privacy Policy</div>
-          <div class="cn">lnk_privacy <span class="ct">(Link)</span></div>
+          <div class="cn">lnk_privacy <span class="ct">(Link)</span> — role: nav-item, navigates to PrivacyPolicyPage</div>
           
           <div class="wf-text">Terms & Conditions</div>
-          <div class="cn">lnk_terms <span class="ct">(Link)</span></div>
+          <div class="cn">lnk_terms <span class="ct">(Link)</span> — role: nav-item, navigates to TermsConditionsPage</div>
           
           <div class="wf-text">Cookie Policy</div>
-          <div class="cn">lnk_cookie <span class="ct">(Link)</span></div>
+          <div class="cn">lnk_cookie <span class="ct">(Link)</span> — role: nav-item, navigates to CookiePolicyPage</div>
         </div>
       </div>
       
+      <!-- Contact info + Map link -->
       <div style="flex:1; min-width:300px;">
         <div class="wf-heading-sm">Contact Us</div>
-        <div class="cn">hdg_contact <span class="ct">(Heading)</span> <span class="cfixed">"Contact Us"</span></div>
+        <div class="cn">hdg_contact <span class="ct">(Heading)</span> <span class="cfixed">"Contact Us"</span> — role: card-title</div>
         
         <div class="wf-text">email@example.com</div>
-        <div class="cn">txt_email <span class="ct">(Text)</span></div>
+        <div class="cn">lbl_email <span class="ct">(Label)</span> — role: label-title, data: business_profile.contact_email</div>
         
         <div class="wf-text">+1 234 567 890</div>
-        <div class="cn">txt_phone <span class="ct">(Text)</span></div>
+        <div class="cn">lbl_phone <span class="ct">(Label)</span> — role: label-title, data: business_profile.phone</div>
         
-        <div class="wf-btn-text">Send Message</div>
-        <div class="cn">btn_contact_us <span class="ct">(Button)</span> <span class="cfixed">"Send Message"</span></div>
+        <div class="wf-link">View on Google Maps</div>
+        <div class="cn">nav_map <span class="ct">(Link)</span> — role: nav-item, opens business_profile.google_maps_embed_url in new tab</div>
         
         <div class="wf-spacer"></div>
         
-        <div class="wf-image">[Google Maps Embed]</div>
-        <div class="cn">html_map <span class="ct">(HtmlTemplate)</span></div>
+        <div class="wf-link">Send us a message</div>
+        <div class="cn">nav_contact_page <span class="ct">(Link)</span> — role: nav-item, navigates to ContactPage</div>
       </div>
     </div>
   </div>
 
+  <!-- Copyright row -->
   <div class="wf-panel">
-    <span class="wf-label">flow_copyright (FlowPanel)</span>
-    <div style="display:flex; gap:16px; justify-content:space-between; border-top: 1px solid #999; padding-top: 16px; margin-top: 32px;">
+    <span class="wf-label">flow_copyright (FlowPanel) — role: section-container</span>
+    <div style="display:flex; gap:16px; justify-content:space-between; border-top: 1px solid #938F99; padding-top: 16px; margin-top: 32px;">
       <div class="wf-text">© 2026 Business Name. All rights reserved.</div>
-      <div class="cn">txt_copyright <span class="ct">(Text)</span></div>
+      <div class="cn">lbl_copyright <span class="ct">(Label)</span> — role: caption, data: business_profile.business_name</div>
       
-      <div class="wf-text">Back to Top</div>
-      <div class="cn">lnk_back_top <span class="ct">(Link)</span></div>
+      <div class="wf-link">Back to Top</div>
+      <div class="cn">lnk_back_top <span class="ct">(Link)</span> — role: nav-item, scrolls to top</div>
     </div>
   </div>
 </div>
 
 <div class="prop-caption">Properties table</div>
-<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+<div class="prop-note">All footer content is rendered programmatically from the <code>business_profile</code> table. No designer-only required properties. The component constructor accepts no parameters — it reads directly from the current user's business_profile row. Social links open in new tabs. "View on Google Maps" opens the URL from <code>business_profile.google_maps_embed_url</code>. "Send us a message" navigates to the ContactPage form.</div>
+
+<table class="props">
+<tr><th>Component</th><th>Type</th><th>Designer Property</th><th>Data Source</th></tr>
+<tr><td>img_logo</td><td>Image</td><td>—</td><td>business_profile.logo</td></tr>
+<tr><td>lbl_business_name</td><td>Label</td><td>role='label-title'</td><td>business_profile.business_name</td></tr>
+<tr><td>lbl_creds_1</td><td>Label</td><td>role='label-title'</td><td>business_profile.accreditations (parsed)</td></tr>
+<tr><td>lbl_creds_2</td><td>Label</td><td>role='label-title'</td><td>business_profile.accreditations (parsed)</td></tr>
+<tr><td>btn_fb</td><td>IconButton</td><td>role='icon-button'</td><td>business_profile.social_facebook</td></tr>
+<tr><td>btn_ig</td><td>IconButton</td><td>role='icon-button'</td><td>business_profile.social_instagram</td></tr>
+<tr><td>btn_li</td><td>IconButton</td><td>role='icon-button'</td><td>business_profile.social_linkedin</td></tr>
+<tr><td>btn_tw</td><td>IconButton</td><td>role='icon-button'</td><td>business_profile.social_x</td></tr>
+<tr><td>lnk_privacy</td><td>Link</td><td>role='nav-item'</td><td>navigates to PrivacyPolicyPage</td></tr>
+<tr><td>lnk_terms</td><td>Link</td><td>role='nav-item'</td><td>navigates to TermsConditionsPage</td></tr>
+<tr><td>lnk_cookie</td><td>Link</td><td>role='nav-item'</td><td>navigates to CookiePolicyPage</td></tr>
+<tr><td>lbl_email</td><td>Label</td><td>role='label-title'</td><td>business_profile.contact_email</td></tr>
+<tr><td>lbl_phone</td><td>Label</td><td>role='label-title'</td><td>business_profile.phone</td></tr>
+<tr><td>nav_map</td><td>Link</td><td>role='nav-item'</td><td>business_profile.google_maps_embed_url</td></tr>
+<tr><td>nav_contact_page</td><td>Link</td><td>role='nav-item'</td><td>navigates to ContactPage</td></tr>
+<tr><td>lbl_copyright</td><td>Label</td><td>role='caption'</td><td>business_profile.business_name</td></tr>
+<tr><td>lnk_back_top</td><td>Link</td><td>role='nav-item'</td><td>scrolls to page top</td></tr>
+</table>
+
+---
+
+### Responsive Behaviour
+
+| Width | Layout |
+|---|---|
+| ≥ 768px (desktop) | flow_top: two columns (logo + name | accreditations). flow_middle: two columns (social + legal links | contact + map). flow_copyright: side-by-side copyright and back-to-top. |
+| < 768px (mobile) | flow_top: single column, stacked. flow_middle: single column, stacked — social links first, contact info below. flow_copyright: stacked — copyright above back-to-top. All flex-wrap enabled. Min-width constraints removed on mobile. |
+
+### Accessibility
+
+- All icon buttons have `aria-label` attributes (e.g., "Facebook", "Instagram").
+- All links have descriptive text or `aria-label`.
+- Logo image has `alt` text from `business_profile.business_name`.
+- "Back to Top" link uses `scrollIntoView()` for smooth scroll.
+- Footer uses `<footer>` semantic element in implementation.
+
+### Anvil M3 Compliance Notes
+
+- All buttons use M3 role-based styling: `icon-button` for social, `nav-item` for links.
+- Colors use `theme:` prefix — no hardcoded hex.
+- Spacing follows 4px rhythm.
+- Typography uses M3 scale: `label-title` (Body Large) for contact info, `caption` for copyright.
+- Border radius: 100px for icon buttons (pill), 12px for card containers.
+- Elevation: 0dp (flat surface) — footer is a flat bottom section, not elevated.
 
 </body>
 </html>

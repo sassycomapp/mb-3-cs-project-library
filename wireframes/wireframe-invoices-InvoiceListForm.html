@@ -15,27 +15,33 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-lg { font-size: 18px; font-weight: bold; color: #222; margin: 0 0 4px; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 200px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: inline-block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 150px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: inline-block; box-sizing: border-box; position: relative; }
 .wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
 .wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: bold; }
+.wf-badge-draft { background: #eee; color: #666; }
+.wf-badge-sent { background: #d3e4fd; color: #004a77; }
+.wf-badge-paid { background: #d4f5d0; color: #1b5e1b; }
+.wf-badge-overdue { background: #f9dedc; color: #b3261e; }
+.wf-badge-cancelled { background: #eee; color: #999; text-decoration: line-through; }
+.wf-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 8px 0; }
+.wf-table th { background: #f0f0f0; padding: 8px 12px; text-align: left; font-weight: bold; color: #555; border-bottom: 2px solid #ddd; }
+.wf-table td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+.wf-table td.amount { text-align: right; font-variant-numeric: tabular-nums; }
+.wf-action-btn { display: inline-block; padding: 4px 10px; font-size: 10px; color: #6750A4; border: 1px solid #6750A4; border-radius: 100px; background: #fff; cursor: pointer; margin-right: 4px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
 .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
 .prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
 table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
 table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
 table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
 table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
-.pagebreak { margin-top: 80px; border-top: 3px dashed #ccc; padding-top: 20px; }
 </style>
 </head>
 <body>
@@ -54,34 +60,104 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <div class="wf-outer">
   <span class="wf-label">col_content (ColumnPanel)</span>
 
+  <!-- Page Header -->
   <div class="wf-panel-h">
-    <span class="wf-label">flow_search_filters (FlowPanel)</span>
-    <div>
-      <div class="wf-textbox">&nbsp;</div>
-      <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Invoices</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Invoices"</span></div>
     </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    </div>
-    <div>
-      <div class="wf-dd">&nbsp;</div>
-      <div class="cn">dd_date_range <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+      <div>
+        <div class="wf-textbox">&nbsp;</div>
+        <div class="cn">txt_search <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+      </div>
+      <div>
+        <div class="wf-dd">&nbsp;</div>
+        <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+      </div>
+      <div>
+        <div class="wf-btn-filled">+ Create Invoice</div>
+        <div class="cn">btn_create_invoice <span class="ct">(Button)</span> <span class="cfixed">"+ Create Invoice"</span></div>
+      </div>
     </div>
   </div>
 
+  <!-- Data Table -->
   <div class="wf-panel">
-    <span class="wf-label">dg_invoices (DataGrid)</span>
-    <div style="font-size:11px;color:#999;padding:8px 0;text-align:center;">Data Grid with columns: Invoice #, Customer, Date, Amount, Status, Actions</div>
+    <span class="wf-label">card_table (Card)</span>
+    <table class="wf-table">
+      <thead>
+        <tr>
+          <th>Invoice #</th>
+          <th>Customer</th>
+          <th>Date</th>
+          <th>Due Date</th>
+          <th style="text-align:right;">Total</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>INV-2026-001</td>
+          <td>Jane Smith</td>
+          <td>10 May 2026</td>
+          <td>24 May 2026</td>
+          <td class="amount">R 2,875.00</td>
+          <td><span class="wf-badge wf-badge-draft">Draft</span></td>
+          <td>
+            <span class="wf-action-btn">View</span>
+            <span class="wf-action-btn">Edit</span>
+          </td>
+        </tr>
+        <tr>
+          <td>INV-2026-002</td>
+          <td>Acme Corp</td>
+          <td>12 May 2026</td>
+          <td>26 May 2026</td>
+          <td class="amount">R 14,500.00</td>
+          <td><span class="wf-badge wf-badge-sent">Sent</span></td>
+          <td>
+            <span class="wf-action-btn">View</span>
+          </td>
+        </tr>
+        <tr>
+          <td>INV-2026-003</td>
+          <td>Thabo Molefe</td>
+          <td>01 May 2026</td>
+          <td>15 May 2026</td>
+          <td class="amount">R 6,200.00</td>
+          <td><span class="wf-badge wf-badge-paid">Paid</span></td>
+          <td>
+            <span class="wf-action-btn">View</span>
+          </td>
+        </tr>
+        <tr>
+          <td>INV-2026-004</td>
+          <td>Lerato Ndaba</td>
+          <td>20 Apr 2026</td>
+          <td>04 May 2026</td>
+          <td class="amount">R 3,150.00</td>
+          <td><span class="wf-badge wf-badge-overdue">Overdue</span></td>
+          <td>
+            <span class="wf-action-btn">View</span>
+          </td>
+        </tr>
+        <tr>
+          <td>INV-2026-005</td>
+          <td>Pinecrest Ltd</td>
+          <td>05 May 2026</td>
+          <td>19 May 2026</td>
+          <td class="amount">R 8,900.00</td>
+          <td><span class="wf-badge wf-badge-cancelled">Cancelled</span></td>
+          <td>
+            <span class="wf-action-btn">View</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <div class="cn">dg_invoices <span class="ct">(DataGrid)</span></div>
-  </div>
-
-  <div class="wf-panel-h" style="margin-top:10px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-filled">+ Create Invoice</div>
-      <div class="cn">btn_create_invoice <span class="ct">(Button)</span> <span class="cfixed">"+ Create Invoice"</span></div>
-    </div>
   </div>
 </div>
 
@@ -89,9 +165,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>
 <table class="props">
 <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_search</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>dd_status</td><td>DropdownMenu</td><td>writeback = W</td></tr>
-<tr><td>dd_date_range</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+<tr><td>txt_search</td><td>TextBox</td><td>writeback = W, placeholder = "Search invoices..."</td></tr>
+<tr><td>dd_status</td><td>DropdownMenu</td><td>writeback = W, items = ["All Statuses", "Draft", "Sent", "Paid", "Overdue", "Cancelled"]</td></tr>
+<tr><td>btn_create_invoice</td><td>Button</td><td>role = "primary-button"</td></tr>
 </table>
 
 </body>

@@ -1,72 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Service Editor Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Service Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --font-display: 57px/64px 400;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+      --elevation-card: 2dp;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface-variant);
+      line-height: var(--font-body);
+      min-height: 100vh;
+      padding: var(--space-6);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page-container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+    }
+
+    .page-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: 0 var(--elevation-card);
+      padding: var(--space-8);
+      margin-bottom: var(--space-6);
+    }
+
+    .section-title {
+      font: var(--font-title);
+      color: var(--on-surface);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+
+    .form-row-full {
+      margin-bottom: var(--space-4);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .form-label {
+      display: block;
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      min-height: 48px;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--outline);
+    }
+
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2379747E' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+      cursor: pointer;
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .pricing-model-group {
+      display: flex;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .pricing-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-2) var(--space-4);
+      font: var(--font-button);
+      color: var(--on-surface-variant);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 36px;
+    }
+
+    .pricing-chip:hover {
+      background: var(--surface-variant);
+    }
+
+    .pricing-chip.active {
+      color: var(--on-primary);
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .pricing-chip:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .upload-zone {
+      border: 2px dashed var(--outline);
+      border-radius: var(--radius-card);
+      padding: var(--space-8) var(--space-4);
+      text-align: center;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      margin-bottom: var(--space-4);
+    }
+
+    .upload-zone:hover {
+      border-color: var(--primary);
+      background: var(--primary-container);
+    }
+
+    .upload-zone-icon {
+      font-size: 32px;
+      margin-bottom: var(--space-2);
+      display: block;
+      color: var(--outline);
+    }
+
+    .upload-zone-text {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+    }
+
+    .upload-zone-hint {
+      font: var(--font-caption);
+      color: var(--outline);
+      margin-top: var(--space-1);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .checkbox-group label {
+      font: var(--font-body);
+      color: var(--on-surface);
+      cursor: pointer;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--surface-variant);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-primary:hover {
+      background: #523E8A;
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      font: var(--font-button);
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-container);
+    }
+
+    .btn-secondary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --outline: #938F99;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="page-container" role="main">
+    <div class="page-header">
+      <h1>Create Service</h1>
+    </div>
 
-<h1>Mybizz CS — Implementation Screen: Service Editor Form</h1>
-<p class="subtitle">Service Management — Anvil Construction Guide</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-services-ServiceEditorForm.html</code><br>
-  <strong>Phase:</strong> Phase 2 &mdash; Stage 2.1: Service Catalogue<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+    <form id="serviceEditorForm" action="/services/save" method="POST">
+      <div class="card">
+        <h2 class="section-title">Basic Information</h2>
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-services-ServiceEditorForm.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+        <div class="form-group">
+          <label for="service_name" class="form-label">Service Name</label>
+          <input type="text" id="service_name" name="service_name" class="form-input" placeholder="e.g. Initial Consultation" required>
+        </div>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+        <div class="form-group">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" name="description" class="form-textarea" placeholder="Describe what this service includes..."></textarea>
+        </div>
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>hdg_section_details</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_service_name</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_description</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_category</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_pricing_model</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_price</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_duration</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_provider</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dd_meeting_type</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>fu_images</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>txt_video_url</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>cb_is_active</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_cancel</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>btn_save</code></td><td>—</td><td>Stub</td></tr>
-</table>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-select" required>
+              <option value="">Select a category</option>
+              <option value="consulting">Consulting</option>
+              <option value="coaching">Coaching</option>
+              <option value="training">Training</option>
+              <option value="development">Development</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="provider" class="form-label">Provider</label>
+            <select id="provider" name="provider" class="form-select">
+              <option value="">Select a provider</option>
+              <option value="jane">Jane Smith</option>
+              <option value="john">John Doe</option>
+              <option value="sarah">Sarah Johnson</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 2</strong></li>
-  <li>Stage: <strong>Stage 2.1</strong></li>
-  <li>Build-plan focus: <strong>Service Catalogue</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-services-ServiceEditorForm.html</code></li>
-</ul>
+      <div class="card">
+        <h2 class="section-title">Pricing</h2>
 
-<p class="note">End of screen file — screen-services-ServiceEditorForm.html</p>
+        <div class="form-group">
+          <label class="form-label">Pricing Model</label>
+          <div class="pricing-model-group" role="radiogroup" aria-label="Pricing model">
+            <button type="button" class="pricing-chip active" role="radio" aria-checked="true">Fixed Price</button>
+            <button type="button" class="pricing-chip" role="radio" aria-checked="false">Hourly</button>
+            <button type="button" class="pricing-chip" role="radio" aria-checked="false">Duration-based</button>
+            <button type="button" class="pricing-chip" role="radio" aria-checked="false">Free</button>
+          </div>
+        </div>
 
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price" class="form-label">Price (ZAR)</label>
+            <input type="number" id="price" name="price" class="form-input" placeholder="0.00" step="0.01" min="0">
+          </div>
+          <div class="form-group">
+            <label for="duration" class="form-label">Duration (minutes)</label>
+            <input type="number" id="duration" name="duration" class="form-input" placeholder="60" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Meeting Type</h2>
+
+        <div class="form-group">
+          <label for="meeting_type" class="form-label">How will this service be delivered?</label>
+          <select id="meeting_type" name="meeting_type" class="form-select">
+            <option value="">Select meeting type</option>
+            <option value="video">Video Call</option>
+            <option value="phone">Phone Call</option>
+            <option value="in_person">In Person</option>
+            <option value="async">Async</option>
+          </select>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="is_active" name="is_active" checked>
+          <label for="is_active">Active — visible to clients</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Media</h2>
+
+        <div class="upload-zone" role="button" tabindex="0" aria-label="Upload service images">
+          <span class="upload-zone-icon">&#128247;</span>
+          <span class="upload-zone-text">Drag and drop images here, or click to browse</span>
+          <span class="upload-zone-hint">PNG, JPG up to 5MB</span>
+        </div>
+
+        <div class="form-group">
+          <label for="video_source" class="form-label">Video Source</label>
+          <select id="video_source" name="video_source" class="form-select">
+            <option value="youtube" selected>YouTube</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="video_url" class="form-label">Video URL</label>
+          <input type="url" id="video_url" name="video_url" class="form-input" placeholder="https://youtube.com/watch?v=...">
+          <p class="hint-text">Paste the full YouTube URL. Leave empty to hide video on the service detail page.</p>
+        </div>
+      </div>
+
+        <div class="form-group">
+          <label for="video_source" class="form-label">Video Source</label>
+          <select id="video_source" name="video_source" class="form-select">
+            <option value="youtube" selected>YouTube</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="video_url" class="form-label">Video URL</label>
+          <input type="url" id="video_url" name="video_url" class="form-input" placeholder="https://youtube.com/watch?v=...">
+          <p class="hint-text">Paste the full YouTube URL. Leave empty to hide video on the service detail page.</p>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary">Cancel</button>
+        <button type="submit" class="btn-primary">Save Service</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    (function() {
+      'use strict';
+
+      document.querySelectorAll('.pricing-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+          document.querySelectorAll('.pricing-chip').forEach(function(c) {
+            c.classList.remove('active');
+            c.setAttribute('aria-checked', 'false');
+          });
+          chip.classList.add('active');
+          chip.setAttribute('aria-checked', 'true');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

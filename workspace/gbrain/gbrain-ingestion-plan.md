@@ -16,15 +16,11 @@ Start with:
 
 - **Tier A** — Authoritative CS specification sources:
   - `C:\_mb2-cs-app\project-library\adr\`
-  - `C:\_mb2-cs-app\project-library\docs\am1-anvil-methods\`
-  - `C:\_mb2-cs-app\project-library\docs\mm1-mybizz-methods\`
-  - `C:\_mb2-cs-app\project-library\docs\reference-anvil.yaml\anvil.yaml`
+  - `C:\_mb2-cs-app\project-library\docs\`
+  - `C:\_mb2-cs-app\project-library\developer-rules`
 
 - **Tier B** — Canonical tracking:
-  - `C:\_mb2-cs-app\devlog\README.md`
-  - `C:\_mb2-cs-app\devlog\index.md`
-  - `C:\_mb2-cs-app\todo\todo.md`
-  - `C:\_mb2-cs-app\todo\todo-archive.md`
+  - `C:\_mb2-cs-app\project-library\implementation`
 
 Rules for Phase 1:
 - Ingest only content that is:
@@ -33,7 +29,10 @@ Rules for Phase 1:
   - clearly within current architecture/policy.
 - Do **not** ingest legacy or partially-migrated content.
 
-### 2.2 Phase 2 — Validated workflow outputs (Tier C)
+### 2.2 Phase 2 — Validated workflow outputs
+- **Tier C** — Validated workflow outputs:
+  - `C:\_mb2-cs-app\project-library\gstack-outputs`
+  
 
 Once Phase 1 behavior is understood:
 

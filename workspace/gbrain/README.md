@@ -95,6 +95,7 @@ Operational wiring (Supabase project, embeddings, patch, smoke tests) is recorde
 - `README.md` (this file)  
   Index and high‑level orientation for the GBrain docs in this workspace.
 
+- `gbrain-log.md` (live)
 Together, these documents describe **what GBrain may remember, from where, and under which rules**, and provide enough detail to keep the running GBrain instance safe and predictable.
 
 ---
@@ -149,9 +150,8 @@ GBrain should defer to current source material, especially:
 - `project-library` docs and ADRs,
 - `mb-3-cs` current repo state,
 - canonical shared tracking:
-  - `C:\_mb2-cs-app\devlog\`
-  - `C:\_mb2-cs-app\todo\`
-
+  - `C:\_mb2-cs-app\project-library\`
+ 
 Memory is useful for recall and continuity, but the current source files remain authoritative. When conflicts appear, the policy in `gbrain-operating-model.md` and `gbrain-sync-policy.md` explains how to resolve them (files and ADRs win; stale memory is re‑ingested or invalidated).
 
 ---

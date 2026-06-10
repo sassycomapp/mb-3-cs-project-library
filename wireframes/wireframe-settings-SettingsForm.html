@@ -109,6 +109,18 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
     <div class="cn">dd_entity_type <span class="ct">(DropdownMenu)</span> — Individual / Business</div>
     <div class="wf-textbox" style="width:60%;">Website URL</div>
     <div class="cn">txt_website <span class="ct">(TextBox)</span></div>
+
+    <div class="wf-heading-sm" style="margin-top:16px;">Website Videos</div>
+    <div class="wf-textbox" style="width:60%;">https://www.youtube.com/watch?v=...</div>
+    <div class="cn">txt_home_video_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="wf-text" style="margin-bottom:8px;">YouTube URL for home page video. Leave empty to hide.</div>
+    <div class="cn">lbl_home_video_hint <span class="ct">(Label)</span></div>
+
+    <div class="wf-textbox" style="width:60%;">https://www.youtube.com/watch?v=...</div>
+    <div class="cn">txt_services_video_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="wf-text" style="margin-bottom:8px;">YouTube URL for services page video. Leave empty to hide.</div>
+    <div class="cn">lbl_services_video_hint <span class="ct">(Label)</span></div>
+
     <div class="wf-spacer"></div>
     <div class="wf-btn-filled">Save Business Profile</div>
     <div class="cn">btn_save_business <span class="ct">(Button)</span></div>
@@ -173,9 +185,9 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
     <div class="cn">dd_active_gateway <span class="ct">(DropdownMenu)</span> — Stripe / Paystack</div>
     <div class="wf-textbox" style="width:60%;">Stripe Publishable Key</div>
     <div class="cn">txt_stripe_publishable <span class="ct">(TextBox)</span></div>
-    <div class="cn">Secret keys stored in The Vault (not here)</div>
-    <div class="wf-checkbox">Stripe Connected</div>
-    <div class="cn">cb_stripe_connected <span class="ct">(CheckBox)</span></div>
+    <div class="cn">Secret keys stored exclusively in The Vault (not in this form)</div>
+    <div class="wf-checkbox">Gateway connected and verified</div>
+    <div class="cn">cb_gateway_connected <span class="ct">(CheckBox)</span></div>
     <div class="wf-spacer"></div>
     <div class="wf-btn-filled">Save Gateway Config</div>
     <div class="cn">btn_save_gateway <span class="ct">(Button)</span></div>
@@ -210,8 +222,10 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
     <div class="cn">txt_from_email <span class="ct">(TextBox)</span></div>
     <div class="wf-textbox" style="width:60%;">From Name</div>
     <div class="cn">txt_from_name <span class="ct">(TextBox)</span></div>
-    <div class="cn">SMTP credentials stored in The Vault (not here)</div>
+    <div class="cn">SMTP host/port/encryption are platform constants (Brevo). Credentials stored in Vault.</div>
     <div class="wf-spacer"></div>
+    <div class="wf-btn-outlined">Test Connection</div>
+    <div class="cn">btn_test_connection <span class="ct">(Button)</span></div>
     <div class="wf-btn-filled">Save Email Config</div>
     <div class="cn">btn_save_email <span class="ct">(Button)</span></div>
   </div>

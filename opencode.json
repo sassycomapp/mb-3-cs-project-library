@@ -3,6 +3,7 @@
   "default_agent": "plan",
   "permission": {
     "edit": {
+      "**/anvil.yaml": "deny",
       "*": "ask"
     },
     "webfetch": "ask",

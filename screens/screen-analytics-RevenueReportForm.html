@@ -1,61 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Implementation Screen: Revenue Report Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #fff; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.meta { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 40px; margin-bottom: 16px; }
-table { border-collapse: collapse; font-size: 13px; margin-bottom: 24px; width: 100%; max-width: 720px; }
-th { background: #f0f0f0; text-align: left; padding: 7px 12px; border: 1px solid #ddd; }
-td { padding: 6px 12px; border: 1px solid #ddd; vertical-align: top; }
-tr:nth-child(even) td { background: #f9f9f9; }
-.badge { display: inline-block; background: #e8e8e8; border-radius: 4px; padding: 2px 8px; font-size: 11px; color: #555; margin: 2px; }
-.note { font-size: 12px; color: #888; font-style: italic; margin: 4px 0 16px; }
-ul { margin: 0 0 16px 18px; padding: 0; }
-li { font-size: 13px; margin-bottom: 4px; }
-code { background: #f5f5f5; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — Revenue Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --surface-container: #F3EDF7;
+      --surface-container-low: #F7F2FA;
+      --outline: #79747E;
+      --outline-variant: #CAC4D0;
+      --error: #B3261E;
+      --on-error: #FFFFFF;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --font-family: 'Roboto', sans-serif;
+      --font-headline-large: 32px/40px 400;
+      --font-headline-small: 22px/28px 500;
+      --font-title: 18px/24px 500;
+      --font-title-small: 16px/20px 500;
+      --font-body: 14px/20px 400;
+      --font-button: 14px/14px 500;
+      --font-label: 12px/16px 500;
+      --font-caption: 12px/16px 400;
+      --radius-button: 100px;
+      --radius-card: 12px;
+      --radius-input: 4px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      line-height: 20px;
+      min-height: 100vh;
+    }
+
+    .page-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: var(--space-6);
+    }
+
+    .page-header {
+      margin-bottom: var(--space-6);
+    }
+
+    .page-header h1 {
+      font: var(--font-headline-large);
+      color: var(--on-surface);
+      margin-bottom: var(--space-1);
+    }
+
+    .page-header p {
+      font: var(--font-body);
+      color: var(--on-surface-variant);
+    }
+
+    .filters-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-1);
+    }
+
+    .form-input {
+      padding: var(--space-2) var(--space-3);
+      font: var(--font-body);
+      color: var(--on-surface);
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-input);
+      outline: none;
+      min-height: 40px;
+      min-width: 160px;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2) var(--space-6);
+      font: var(--font-button);
+      color: var(--on-primary);
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius-button);
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 40px;
+    }
+
+    .btn-primary:hover {
+      background: #523E8A;
+    }
+
+    .btn-primary:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .summary-card {
+      background: var(--surface-container-low);
+      border-radius: var(--radius-card);
+      padding: var(--space-4) var(--space-6);
+    }
+
+    .summary-label {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-1);
+    }
+
+    .summary-value {
+      font: var(--font-headline-small);
+      color: var(--on-surface);
+    }
+
+    .chart-section {
+      background: var(--surface);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-card);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .chart-title {
+      font: var(--font-title);
+      color: var(--on-surface);
+      margin-bottom: var(--space-4);
+    }
+
+    .chart-placeholder {
+      width: 100%;
+      height: 300px;
+      background: var(--surface-container-low);
+      border-radius: var(--radius-input);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      font: var(--font-body);
+      border: 1px dashed var(--outline-variant);
+    }
+
+    .chart-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.4;
+    }
+
+    .table-section {
+      background: var(--surface);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-card);
+      padding: var(--space-6);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th {
+      font: var(--font-label);
+      color: var(--on-surface-variant);
+      text-align: left;
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 2px solid var(--outline-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .data-table td {
+      font: var(--font-body);
+      color: var(--on-surface);
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--surface-variant);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tbody tr:hover {
+      background: var(--surface-container-low);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --surface: #1C1B1F;
+        --on-surface: #E6E1E5;
+        --surface-variant: #49454F;
+        --on-surface-variant: #CAC4D0;
+        --surface-container: #211F26;
+        --surface-container-low: #1D1B20;
+        --outline: #938F99;
+        --outline-variant: #49454F;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .summary-row {
+        grid-template-columns: 1fr;
+      }
+      .filters-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="page-container" role="main">
+    <header class="page-header">
+      <h1>Revenue Report</h1>
+      <p>View revenue breakdown by date range</p>
+    </header>
 
-<h1>Mybizz CS — Implementation Screen: Revenue Report Form</h1>
-<p class="subtitle">Analytics Dashboard Components</p>
-<div class="meta">
-  <strong>Source wireframe:</strong> <code>wireframes/wireframe-analytics-RevenueReportForm.html</code><br>
-  <strong>Phase:</strong> Phase 5 &mdash; Stage 5.1: Dashboard Analytics<br>
-  <strong>Status:</strong> Implementation screen stub &mdash; pending feature implementation<br>
-  <strong>Created:</strong> 2026-06-02 (screen generation from reconciled wireframe inventory)
-</div>
+    <div class="filters-bar">
+      <div class="form-group">
+        <label for="date_from" class="form-label">From</label>
+        <input type="date" id="date_from" class="form-input" value="2026-05-01">
+      </div>
+      <div class="form-group">
+        <label for="date_to" class="form-label">To</label>
+        <input type="date" id="date_to" class="form-input" value="2026-05-31">
+      </div>
+      <button class="btn-primary">Generate Report</button>
+    </div>
 
-<h2>Screen Purpose</h2>
-<p class="note">This screen file is the implementation counterpart of <code>wireframe-analytics-RevenueReportForm.html</code>. It will contain the live Anvil form/page logic when the corresponding feature is implemented.</p>
+    <section class="summary-row" aria-label="Revenue summary">
+      <div class="summary-card">
+        <div class="summary-label">Total Revenue</div>
+        <div class="summary-value">$12,480</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Total Bookings</div>
+        <div class="summary-value">148</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Avg Order Value</div>
+        <div class="summary-value">$84.32</div>
+      </div>
+    </section>
 
-<h2>Sections (from wireframe)</h2>
-<ul>
-      <li>RevenueReportForm — Revenue Report</li>
-  <li><em>Refer to source wireframe for full annotated layout</em></li>
-</ul>
+    <section class="chart-section" aria-label="Revenue chart">
+      <div class="chart-title">Revenue Over Time</div>
+      <div class="chart-placeholder" aria-label="Revenue chart placeholder">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="4,40 12,28 20,32 28,16 36,22 44,8" />
+          <line x1="4" y1="44" x2="44" y2="44" />
+        </svg>
+      </div>
+    </section>
 
-<h2>Component Inventory (extracted from wireframe)</h2>
-<table>
-  <tr><th>Component</th><th>Type</th><th>Status</th></tr>
-      <tr><td><code>hdg_report_title</code></td><td>—</td><td>Stub</td></tr>
-      <tr><td><code>dp_date_range</code></td><td>—</td><td>Stub</td></tr>
-</table>
-
-<h2>Implementation Notes</h2>
-<ul>
-  <li>Phase: <strong>Phase 5</strong></li>
-  <li>Stage: <strong>Stage 5.1</strong></li>
-  <li>Build-plan focus: <strong>Dashboard Analytics</strong></li>
-  <li>Source wireframe: <code>wireframes/wireframe-analytics-RevenueReportForm.html</code></li>
-</ul>
-
-<p class="note">End of screen file — screen-analytics-RevenueReportForm.html</p>
-
+    <section class="table-section" aria-label="Revenue data table">
+      <div class="chart-title">Revenue Details</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Revenue</th>
+            <th scope="col">Bookings</th>
+            <th scope="col">Avg Order Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2026-05-01</td>
+            <td>$420</td>
+            <td>5</td>
+            <td>$84.00</td>
+          </tr>
+          <tr>
+            <td>2026-05-02</td>
+            <td>$580</td>
+            <td>7</td>
+            <td>$82.86</td>
+          </tr>
+          <tr>
+            <td>2026-05-03</td>
+            <td>$340</td>
+            <td>4</td>
+            <td>$85.00</td>
+          </tr>
+          <tr>
+            <td>2026-05-04</td>
+            <td>$760</td>
+            <td>9</td>
+            <td>$84.44</td>
+          </tr>
+          <tr>
+            <td>2026-05-05</td>
+            <td>$510</td>
+            <td>6</td>
+            <td>$85.00</td>
+          </tr>
+          <tr>
+            <td>2026-05-06</td>
+            <td>$620</td>
+            <td>7</td>
+            <td>$88.57</td>
+          </tr>
+          <tr>
+            <td>2026-05-07</td>
+            <td>$480</td>
+            <td>6</td>
+            <td>$80.00</td>
+          </tr>
+          <tr>
+            <td>2026-05-08</td>
+            <td>$890</td>
+            <td>10</td>
+            <td>$89.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
 </body>
 </html>
