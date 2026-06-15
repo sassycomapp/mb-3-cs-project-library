@@ -1,6 +1,7 @@
 # Mybizz CS — Security & Secrets Architecture
 
-**Authority:** Mandatory — all security implementation must conform
+**Authority:** Mandatory — all security implementation must conform  
+**Related ADRs:** ADR-003 (Vault), ADR-028 (Client Instance Architecture), ADR-033 (Mybizz_management Visibility)
 
 ---
 
@@ -18,7 +19,7 @@ All integration server modules retrieve client credentials by calling `get_vault
 
 Access to the Vault is restricted to the Owner role and requires TOTP step-up authentication (Google Authenticator) on every open. No grace period. An email notification is sent to the Owner on every Vault access.
 
-**See:** `03-payment-security-boundary-vault.md`
+**See:** `3-payment-security-boundary-vault.md`
 
 ---
 
@@ -93,6 +94,33 @@ All significant actions are logged with actor, timestamp, and description:
 - All Vault access
 
 The audit log is visible to Owner and Manager only. Retention: two years.
+
+---
+
+## 8. Management Token Security (ADR-033)
+
+Mybizz_management communicates with client instances via bidirectional HTTP endpoints secured with per-client Bearer tokens.
+
+### Token Types
+
+| Direction | Token type | Storage |
+|---|---|---|
+| Mybizz → Client | Per-client Bearer token (unique per instance) | Mybizz_management client registry (encrypted); client instance management config |
+| Client → Mybizz | Shared event push token | Each client instance Vault |
+
+### Security Properties
+
+- **Per-client isolation:** Each client instance has a unique management Bearer token. Compromise of one instance does not affect others.
+- **Encrypted storage:** Management tokens are stored encrypted in Mybizz_management's client registry.
+- **Server-side validation:** All management endpoints validate the Bearer token before processing. Invalid tokens receive HTTP 403.
+- **Non-blocking event push:** Client-to-Mybizz event push calls are non-blocking — failure to reach Mybizz_management does not block client instance processing.
+
+### Token Lifecycle
+
+- **Generation:** Unique token generated at provisioning (see `client-activation-runbook.md`)
+- **Storage:** Stored in both Mybizz_management registry (encrypted) and client instance config
+- **Rotation:** Not automated in V1 — manual rotation via re-provisioning if compromise suspected
+- **Revocation:** Delete from Mybizz_management registry and client instance config
 
 ---
 

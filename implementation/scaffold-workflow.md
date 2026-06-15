@@ -51,7 +51,7 @@
 
 ## Step 3: Create Database Tables
 
-Follow the exact specifications in `scaffold-spec.md` to create all 36 tables.
+Follow the exact specifications in `scaffold-spec.md` to create all 43 tables.
 
 ### Table Creation Order
 
@@ -261,7 +261,7 @@ server_code/
 ## Step 8: Verify Scaffolding
 
 **Checklist:**
-- [ ] All 36 tables created
+- [ ] All 43 tables created
 - [ ] All 36 forms created
 - [ ] All 13 server packages created
 - [ ] M3 theme installed and active

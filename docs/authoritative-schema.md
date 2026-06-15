@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-01
 **Version:** V1 (Consulting & Services only)
-**Total Tables:** 38
+**Total Tables:** 43
 **Platform:** Anvil.works
 **Source:** Consolidated from `database-schema.md`, `scaffold-spec.md`, and `build-plan.md`
 
@@ -16,10 +16,11 @@
 | **Bookings** | 6 | Services, availability, bookings, appointments |
 | **CRM** | 9 | Contacts, campaigns, segments, tasks, leads |
 | **Email** | 3 | Templates, logs, webhooks |
-| **Content** | 4 | Blog, pages, landing pages |
+| **Content** | 5 | Blog, comments, pages, landing pages |
 | **Policy** | 2 | Privacy policy, terms & conditions clauses |
 | **Finance** | 3 | Invoices, time entries |
-| **Total** | **38** | |
+| **Summary** | 5 | Pre-computed analytics and health |
+| **Total** | **43** | |
 
 ---
 
@@ -82,6 +83,18 @@ Client business information.
 | `data_governance_ack_accepted_at` | datetime | UTC — when acknowledgement recorded |
 
 > **See:** `implementation/onboarding-implementation-plan.md` for full onboarding field definitions.
+
+#### Design and website fields (added per DESIGN.md)
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `palette_updated_at` | datetime | UTC — when palette was last changed |
+| `blog_list_view` | string | "tiled" or "list" — blog listing style |
+| `enable_comments` | bool | Enable blog comments |
+| `homepage_template` | string | "classic", "services", "booking", "minimalist" |
+| `business_logo` | media | Separate from logo — used in specific contexts |
+| `accreditations` | string | Business accreditations text |
+| `google_maps_embed_url` | string | Google Maps embed URL for contact page |
 
 ###[DONE] 1.3 `config`
 Key-value configuration storage.
@@ -475,9 +488,11 @@ Payment gateway webhook history.
 | `error_message` | string | If processing failed |
 | `received_at` | datetime | UTC |
 
+**Note:** ADR-038 (Webhook Architecture) defines an alternative column set for this table. The columns above represent the actual implementation. The ADR's `source` maps to `gateway`, `status` maps to `verified` + `processed`, and `idempotency_key` is handled via `event_type` + `gateway` dedup. See ADR-038 for the design rationale.
+
 ---
 
-## 5. Content Tables (4)
+## 5. Content Tables (5)
 
 ### [DONE] 5.1 `blog_categories`
 Blog post categories.
@@ -509,6 +524,27 @@ Blog content.
 | `created_at` | datetime | UTC |
 | `updated_at` | datetime | UTC |
 | `view_count` | number | |
+| `template` | string | "classic_centered", "two_column", "full_width" |
+| `meta_title` | string | SEO title override |
+| `meta_description` | string | SEO meta description |
+| `keywords` | string | SEO keywords (comma-separated) |
+| `pullquote` | string | Featured pullquote text |
+| `video_url` | string | YouTube URL for embedded video (V1: YouTube only) |
+| `video_type` | string | Video source type (V1: "youtube") |
+
+### [DONE] 5.2A `blog_comments`
+Blog post comments.
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `instance_id` | link → users | Client identifier |
+| `post_id` | link → blog_posts | Blog post |
+| `commenter_name` | string | |
+| `commenter_email` | string | |
+| `comment` | string | Comment text |
+| `status` | string | "pending", "approved", "rejected" |
+| `created_at` | datetime | UTC |
+| `updated_at` | datetime | UTC |
 
 ### [DONE] 5.3 `landing_pages`
 Marketing landing pages.
@@ -635,6 +671,73 @@ Time tracking for services.
 | `is_invoiced` | bool | |
 | `created_at` | datetime | UTC |
 
+**Note:** Time tracking is deferred to V2 per build-plan.md. This table exists as V2 infrastructure. No V1 UI or server code references it.
+
+---
+
+## 7. Summary Tables (5)
+
+### 7.1 `daily_summary`
+Pre-computed daily analytics. Populated by daily background task (ADR-036, ADR-040).
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `instance_id` | link → users | Client identifier |
+| `date` | date | Summary date |
+| `total_revenue` | number | Revenue for the day |
+| `revenue_by_service` | simpleObject | JSON breakdown by service |
+| `booking_count` | number | Confirmed bookings |
+| `new_contacts` | number | New contacts created |
+| `created_at` | datetime | UTC |
+
+### 7.2 `service_performance`
+Pre-computed per-service analytics. Populated by daily background task (ADR-040).
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `instance_id` | link → users | Client identifier |
+| `service_id` | link → services | |
+| `date` | date | Summary date |
+| `revenue` | number | Revenue for the service |
+| `booking_count` | number | Bookings for the service |
+| `created_at` | datetime | UTC |
+
+### 7.3 `provider_performance`
+Pre-computed per-provider analytics. Populated by daily background task (ADR-040).
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `instance_id` | link → users | Client identifier |
+| `provider_id` | link → users | Staff provider |
+| `date` | date | Summary date |
+| `revenue` | number | Revenue for the provider |
+| `booking_count` | number | Bookings for the provider |
+| `created_at` | datetime | UTC |
+
+### 7.4 `campaign_metrics`
+Pre-computed campaign analytics. Populated by hourly background task (ADR-040).
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `instance_id` | link → users | Client identifier |
+| `campaign_id` | link → email_campaigns | |
+| `date` | date | Summary date |
+| `opens` | number | Email opens |
+| `clicks` | number | Email clicks |
+| `conversions` | number | Conversions |
+| `created_at` | datetime | UTC |
+
+### 7.5 `health_log`
+Instance health metrics. Written every 15 minutes by health heartbeat background task (ADR-036).
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `instance_id` | link → users | Client identifier |
+| `timestamp` | datetime | UTC — when health check ran |
+| `status` | string | "healthy", "degraded", "unhealthy" |
+| `metrics` | simpleObject | JSON health metrics |
+| `created_at` | datetime | UTC |
+
 ---
 
 ## Key Architectural Patterns
@@ -648,10 +751,10 @@ Tables with `instance_id` → `users` enforce client data isolation. Some tables
 ### Secret Management
 Payment gateway secret keys stored in `vault` table only (encrypted at rest). Credentials retrieved via `get_vault_secret()` in server code.
 
-### Lead Capture (`04-lead-capture-simultaneous-creation.md`)
+### Lead Capture (`4-lead-capture-simultaneous-creation.md`)
 When lead submitted from landing page: both `leads` and `contacts` rows created simultaneously. `leads.converted_to_contact_id` set immediately. Contact auto-enrolled in welcome campaign.
 
-### Email Architecture (`01-brevo-replaces-zoho-email.md`)
+### Email Architecture (`1-brevo-replaces-zoho-email.md`)
 - Brevo SMTP — Transactional email
 - Brevo Campaigns API — Marketing email
 - All clients use identical SMTP host (smtp-relay.brevo.com:587)
@@ -689,4 +792,4 @@ Onboarding is a separate form with required elements (currency selection, legal 
 
 ---
 
-*End of file — authoritative-schema.md (V1, 36 tables)*
+*End of file — authoritative-schema.md (V1, 43 tables)*

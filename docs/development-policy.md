@@ -52,7 +52,7 @@ Navigation is driven by `open_form(string)`. `NavigationDrawerLayoutTemplate`, `
 
 Public website pages use the Routing dependency (`3PIDO5P3H4VPEMPL`) with `@router.route`.
 
-**See:** `02-navigation-lambda-link-open-form.md`
+**See:** `2-navigation-lambda-link-open-form.md`
 
 ---
 

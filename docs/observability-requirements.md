@@ -1,11 +1,16 @@
 # Mybizz CS — Observability Requirements
-# Phase 0 Implementation — TODO 3
+
+**Authority:** ADR-032 (Observability Architecture), ADR-033 (Mybizz_management Visibility and Control)
+
+---
 
 ## Overview
 
-This document defines the observability requirements for the Mybizz CS platform.
-Observability includes logging, metrics, and alerts to ensure system health and
-troubleshooting capability.
+This document defines the observability requirements for the Mybizz CS platform. Observability is delivered through application-level metrics written to each client instance's Data Tables, queried by Mybizz_management via HTTP endpoints.
+
+**Key architectural decision:** External monitoring tools (Prometheus, Grafana, Datadog) were evaluated and rejected as unnecessary at this scale and inconsistent with the hosted-only infrastructure model. See ADR-032.
+
+Anvil's built-in observability tools (App Logs, CPU/Memory tabs, Profiling and Tracing) remain in use for per-app diagnostic investigation. They are complementary to, not a replacement for, the consolidated Mybizz_management monitoring layer.
 
 ## Logging Requirements
 
@@ -55,192 +60,146 @@ All logs must be structured (JSON format) for easy parsing and aggregation:
 
 ## Metrics
 
-### Key Performance Indicators (KPIs)
+### Application-Level Metrics (ADR-032)
 
-**Bookings:**
-- `bookings_created_total` - Total number of bookings created
-- `bookings_completed_total` - Total number of bookings completed
-- `bookings_cancelled_total` - Total number of bookings cancelled
-- `booking_creation_latency_ms` - Time from booking request to confirmation
+Metrics are written to designated Data Tables within each client instance by master_template server modules. Mybizz_management queries these tables via management HTTP endpoints (ADR-033).
 
-**Payments:**
-- `payments_processed_total` - Total number of payments processed
-- `payments_successful_total` - Total number of successful payments
-- `payments_failed_total` - Total number of failed payments
-- `payment_processing_latency_ms` - Time from payment request to completion
-- `payment_amount_total` - Total payment amount (sum)
+**Health metrics (written to `health_log` table):**
+- Health heartbeat — scheduled background task, every 15 minutes
+- Last active timestamp — updated on user login/logout
+- Background task status — last run, success/failure per task
 
-**Email:**
-- `emails_sent_total` - Total number of emails sent
-- `emails_delivered_total` - Total number of emails delivered
-- `emails_failed_total` - Total number of emails failed
-- `email_open_rate` - Percentage of emails opened
-- `email_click_rate` - Percentage of emails with clicks
+**Audit metrics (written to `audit_log` table):**
+- Background task completion/failure events
+- Payment success/failure events
+- Vault access events (every occurrence)
+- User session events (login/logout)
 
-**Errors:**
-- `errors_total` - Total number of errors by type
-- `errors_by_function` - Errors grouped by function
-- `error_rate` - Errors per 1000 operations
+**Error metrics (written to `error_log` table):**
+- Unhandled exceptions
+- Error threshold exceeded events
+- Webhook processing failures
 
-### Custom Metrics
+### Business Metrics (Pre-Computed)
 
-**Business Metrics:**
-- `revenue_total` - Total revenue (sum of successful payments)
-- `revenue_by_service` - Revenue grouped by service
-- `revenue_by_period` - Revenue grouped by day/week/month
-- `active_users` - Number of active users (last 30 days)
-- `active_bookings` - Number of bookings in next 7 days
+Complex aggregations are computed by background tasks and stored in summary tables (ADR-040):
 
-**System Metrics:**
-- `api_request_latency_ms` - API request latency (p50, p95, p99)
-- `api_request_rate` - Requests per second
-- `database_query_latency_ms` - Database query latency
-- `cache_hit_rate` - Cache hit rate for cached data
+**Daily summary (`daily_summary` table):**
+- Total revenue
+- Revenue by service
+- Booking count
+- New contacts
+
+**Service performance (`service_performance` table):**
+- Revenue per service
+- Booking count per service
+- Completion rate per service
+
+**Campaign metrics (`campaign_metrics` table):**
+- Emails sent, delivered, opened, clicked
+- Conversion rates
+- Unsubscribe rates
 
 ## Alerts
 
-### Error Rate Alerts
+### Mybizz_management Dashboard (ADR-033)
 
-**Critical:**
-- Error rate > 5% for 5 minutes
-- Critical errors in production
+Mybizz_management presents a consolidated dashboard across all client instances:
 
-**Warning:**
-- Error rate > 1% for 10 minutes
-- Unusual error patterns
+- Last active per client
+- Background task health (last run, success/failure)
+- Error count and last error per client
+- Subscription and billing status
 
-### Performance Alerts
+### Alert Triggers
 
-**Critical:**
-- API p99 latency > 5 seconds
-- Database query p99 latency > 1 second
-- Payment processing failure rate > 10%
+**Critical (operator action required):**
+- Client instance fails to respond to health check within threshold
+- Error rate exceeds threshold for a client instance
+- Background task failure rate exceeds threshold
+- Payment processing failure rate exceeds 10%
 
-**Warning:**
-- API p95 latency > 2 seconds
-- Database query p95 latency > 500ms
-- Payment processing failure rate > 5%
+**Warning (monitor closely):**
+- Client instance response time degraded
+- Background task running longer than expected
+- Error rate elevated but below critical threshold
 
-### Availability Alerts
+### Anvil Built-In Tools (Complementary)
 
-**Critical:**
-- Service unavailable (health check fails)
-- Database connection pool exhausted
-- Payment gateway unreachable
+Anvil's per-app observability tools remain in use for deep diagnostic investigation:
 
-**Warning:**
-- High memory usage (> 80%)
-- High CPU usage (> 80%)
-- Disk space low (> 90%)
+| Tool | Use case |
+|---|---|
+| App Logs | Deep diagnostic investigation of a specific client issue |
+| CPU/Memory tabs | Performance investigation of a specific client instance |
+| Profiling and Tracing | Code-level bottleneck analysis during development |
 
 ## Log Retention
 
 **Production:**
-- Detailed logs: 90 days
-- Aggregated metrics: 2 years
-- Audit logs: 7 years (compliance requirement)
+- Detailed logs: 90 days (via Anvil App Logs)
+- Application metrics: retained in Data Tables (health_log, audit_log, error_log)
+- Audit logs: 2 years (compliance requirement)
 
 **Staging:**
 - Detailed logs: 30 days
-- Aggregated metrics: 6 months
-
-## Monitoring Dashboard
-
-### Admin Dashboard
-
-The admin dashboard should display:
-
-**Real-time:**
-- Current active users
-- Active bookings (next 24 hours)
-- Recent payments (last hour)
-- Error rate (last 15 minutes)
-
-**Daily:**
-- Total bookings
-- Total revenue
-- New customers
-- Email campaign performance
-
-**Weekly:**
-- Revenue trends
-- Booking completion rate
-- Customer retention rate
-- Top services by revenue
 
 ## Implementation Notes
 
-### Structured Logging Library
+### Structured Logging
 
-Use `structlog` for structured logging:
+Use Python's built-in `logging` module for server-side structured logging:
 
 ```python
-import structlog
+import logging
 
-def setup_logging():
-    structlog.configure(
-        processors=[
-            structlog.stdlib.filter_by_level,
-            structlog.stdlib.add_logger_name,
-            structlog.stdlib.add_log_level,
-            structlog.stdlib.PositionalArgumentsFormatter(),
-            structlog.processors.TimeStamper(fmt="iso"),
-            structlog.processors.StackInfoRenderer(),
-            structlog.processors.format_exc_info,
-            structlog.processors.UnicodeDecoder(),
-            structlog.processors.JSONRenderer()
-        ],
-        context_class=dict,
-        logger_factory=structlog.stdlib.LoggerFactory(),
-        wrapper_class=structlog.stdlib.BoundLogger,
-        cache_logger_on_first_use=True,
-    )
+logger = logging.getLogger(__name__)
 
-def get_logger():
-    return structlog.get_logger()
+def get_vault_secret(secret_name):
+    logger.info("get_vault_secret called", extra={"secret_name": secret_name})
+    # ... function logic ...
+    logger.info("get_vault_secret completed", extra={"secret_name": secret_name, "result_type": type(result).__name__})
 ```
 
 ### Metrics Collection
 
-Use Prometheus client library for metrics:
+Metrics are written directly to Data Tables via server functions:
 
 ```python
-from prometheus_client import Counter, Histogram, Gauge
+def write_health_heartbeat():
+    """Write health heartbeat to health_log table."""
+    app_tables.health_log.add_row(
+        timestamp=datetime.now(TZ.UTC),
+        status='healthy',
+        last_active=datetime.now(TZ.UTC),
+        background_tasks_running=get_running_task_count()
+    )
 
-# Define metrics
-BOOKINGS_CREATED = Counter(
-    'bookings_created_total',
-    'Total number of bookings created'
-)
-
-PAYMENT_LATENCY = Histogram(
-    'payment_processing_latency_ms',
-    'Payment processing latency in milliseconds',
-    buckets=[100, 250, 500, 1000, 2500, 5000]
-)
-
-# Record metrics
-BOOKINGS_CREATED.inc()
-PAYMENT_LATENCY.observe(250)
+def log_payment_event(event_type, amount, status):
+    """Write payment event to audit_log table."""
+    app_tables.audit_log.add_row(
+        event_type=f'payment_{event_type}',
+        timestamp=datetime.now(TZ.UTC),
+        details=json.dumps({
+            'amount': amount,
+            'status': status
+        })
+    )
 ```
 
-### Alerting
+### Error Threshold Monitoring
 
-Use Alertmanager or equivalent for alert routing:
-
-```yaml
-# alert_rules.yaml
-groups:
-  - name: mybizz_alerts
-    rules:
-      - alert: HighErrorRate
-        expr: rate(errors_total[5m]) > 0.05
-        for: 5m
-        labels:
-          severity: critical
-        annotations:
-          summary: "High error rate detected"
-          description: "Error rate is {{ $value }}% for the last 5 minutes"
+```python
+def check_error_threshold(client_id):
+    """Check if error count exceeds threshold."""
+    recent_errors = app_tables.error_log.search(
+        timestamp=datetime.now(TZ.UTC) - timedelta(hours=1)
+    )
+    if len(recent_errors) > ERROR_THRESHOLD:
+        push_management_event('error_threshold_exceeded', {
+            'client_id': client_id,
+            'error_count': len(recent_errors)
+        })
 ```
 
 ---

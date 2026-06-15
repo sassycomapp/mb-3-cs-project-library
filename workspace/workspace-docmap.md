@@ -36,7 +36,7 @@ This document registers the relevant OpenCode system, workspace, and integration
   - `default_agent` = `plan`,
   - conservative permissions (`edit` / `webfetch` / `bash` all `ask`),
   - read access to:
-    - `C:\_mb2-cs-app\mb-2-cs\`
+    - `C:\_mb2-cs-app\mb-3-cs\`
     - `C:\_mb2-cs-app\devlog\`
     - `C:\_mb2-cs-app\todo\`
 
@@ -53,10 +53,10 @@ This document registers the relevant OpenCode system, workspace, and integration
 
 ---
 
-## 3. Project rules & config — mb-2-cs
+## 3. Project rules & config — mb-3-cs
 
 - **Project AGENTS rules (code)**  
-  `C:\_mb2-cs-app\mb-2-cs\AGENTS.md`  
+  `C:\_mb2-cs-app\mb-3-cs\AGENTS.md`  
   Live‑code repository rules file. Defines:
   - conservative, implementation‑focused behavior,
   - protected‑file rules,
@@ -64,8 +64,8 @@ This document registers the relevant OpenCode system, workspace, and integration
   - how this repo uses the canonical shared devlog/todo files.
 
 - **Project config (code)**  
-  `C:\_mb2-cs-app\mb-2-cs\opencode.json`  
-  Project‑level OpenCode configuration for `mb-2-cs`. Sets:
+  `C:\_mb2-cs-app\mb-3-cs\opencode.json`  
+  Project‑level OpenCode configuration for `mb-3-cs`. Sets:
   - `default_agent` = `build`,
   - conservative permissions (`edit` / `webfetch` / `bash` all `ask`),
   - path‑based edit protection for critical files:
@@ -80,7 +80,7 @@ This document registers the relevant OpenCode system, workspace, and integration
     - `C:\_mb2-cs-app\todo\`
 
 - **Project-local agents (code)**  
-  `C:\_mb2-cs-app\mb-2-cs\.opencode\agents\`  
+  `C:\_mb2-cs-app\mb-3-cs\.opencode\agents\`  
   Defines `plan` and `build` for the live repo:
   - `build` = primary implementation agent for explicit user‑directed code tasks.
   - `plan` = planning/architecture/analysis agent.
@@ -100,7 +100,7 @@ All paths below are relative to:
   Human‑facing description of:
   - how the dual‑project OpenCode workspace is structured,
   - how to start sessions on this specific Windows + WSL setup,
-  - how `project-library` and `mb-2-cs` are intended to be used,
+  - how `project-library` and `mb-3-cs` are intended to be used,
   - where GStack and GBrain fit in the overall picture.
 
 - **Workspace docmap**  
@@ -120,7 +120,7 @@ All paths below are relative to:
 
 ## 5. Shared devlog & todo locations (canonical)
 
-These paths are shared across `project-library` and `mb-2-cs` and are treated as canonical:
+These paths are shared across `project-library` and `mb-3-cs` and are treated as canonical:
 
 - **Devlog (canonical):**
   - `C:\_mb2-cs-app\devlog\README.md`
@@ -171,10 +171,10 @@ Ownership and behavior for these files are defined in each project’s `AGENTS.m
     /mnt/c/_mb2-cs-app/project-library
     ```
 
-  - `mb-2-cs`:
+  - `mb-3-cs`:
 
     ```text
-    /mnt/c/_mb2-cs-app/mb-2-cs
+    /mnt/c/_mb2-cs-app/mb-3-cs
     ```
 
 ---
@@ -184,7 +184,7 @@ Ownership and behavior for these files are defined in each project’s `AGENTS.m
 ### 7.1 Actual GStack repo
 
 - **Local GStack repo (Windows)**  
-  `C:\_mb2-cs-app\gstack`  
+  `C:\\_mb2-cs-app\\gstack`  
   Actual local clone of the GStack repository.
 
 - **Local GStack repo (WSL)**  
@@ -192,30 +192,30 @@ Ownership and behavior for these files are defined in each project’s `AGENTS.m
   Linux‑side path used when running GStack from WSL.
 
 - **Runnable status (WSL)**  
-  Core GStack shell scripts in `bin\` have been normalized for WSL (CRLF → LF), and commands such as:
+  Core GStack shell scripts in `bin\\` have been normalized for WSL (CRLF → LF), and commands such as:
 
   ```bash
   ./bin/gstack-config --help
   ```
 
-  are confirmed runnable.
+  are confirmed runnable from within WSL. This validates that the underlying GStack CLI/tooling works in the same environment that OpenCode uses for code execution. [file:575][web:560]
 
 ### 7.2 Workspace‑level GStack docs (project-library)
 
 - **Location (Windows)**  
-  `C:\_mb2-cs-app\project-library\workspace\gstack\`
+  `C:\\_mb2-cs-app\\project-library\\workspace\\gstack\\`
 
 - **Key populated docs:**
   - `gstack-operating-model.md`  
     Defines the GStack operating model for the dual‑project CS workspace. Clarifies that:
     - OpenCode remains the runtime host and authority for permissions and protected files.
-    - GStack is a workflow/orchestration layer around OpenCode.
-    - GBrain is an advisory memory layer with provenance, not a truth source.
+    - GStack is a workflow/orchestration layer wrapped around OpenCode.
+    - GBrain is an advisory memory layer with provenance, not a truth source. [file:575][web:568]
 
   - `gstack-workflows.md`  
     Defines three main workflows:
     - `docs-plan` — primary in `project-library` for planning, validation, documentation, and prompt/build‑rules work.
-    - `code-plan-build` — primary in `mb-2-cs` for safe implementation (Plan → Build).
+    - `code-plan-build` — primary in `mb-3-cs` for safe implementation (Plan → Build).
     - `status-handover` — cross‑workspace status, checkpoint, and handoff workflow.
 
   - `gstack-handoff-contract.md`  
@@ -233,18 +233,26 @@ Ownership and behavior for these files are defined in each project’s `AGENTS.m
 
 ### 7.3 Integration state for GStack
 
-- No GStack‑specific config under `C:\Users\dev-p\.config\opencode\gstack\` yet.
-- No `.opencode\gstack\` config under the repos yet.
+- GStack is **actively used** as the primary workflow/orchestration layer by the OpenCode agents via skills (slash commands), for example: `/office-hours`, `/plan-ceo-review`, `/plan-eng-review`, `/build`, `/investigate`, `/review`, `/ship`, `/setup-gbrain`, and related flows. These skills are available to the agents when sessions are attached to the WSL server. [file:575][web:212][web:560][web:568]
+
+- There is **no GStack‑specific config** yet under:
+
+  - `C:\\Users\\dev-p\\.config\\opencode\\gstack\\` (global), or  
+  - `C:\\_mb2-cs-app\\project-library\\.opencode\\gstack\\` / `C:\\_mb2-cs-app\\mb-3-cs\\.opencode\\gstack\\` (project‑local),
+
+  so GStack is currently integrated **via its skillpack and workspace docs**, not via `.opencode` command wrappers.
+
 - GStack currently functions as:
-  - a documented workflow layer via the workspace docs above,
-  - a local command‑line tool under `/mnt/c/_mb2-cs-app/gstack`.
-- Future work:
-  - Populate remaining GStack docs with concrete, practiced workflows.
-  - Add project‑local commands in `.opencode\commands\` that map directly onto:
+  - a documented workflow layer via the workspace docs above, and  
+  - a local tool/skillpack under `/mnt/c/_mb2-cs-app/gstack` that the agents can call when appropriate.
+
+- **Future work:**
+  - Populate the remaining GStack docs with concrete, practiced workflows and examples.
+  - Add project‑local commands in `.opencode\\commands\\` that map directly onto:
     - `docs-plan`,
     - `code-plan-build`,
-    - `status-handover`.
-
+    - `status-handover`,
+    while preserving OpenCode’s permission model and protected‑file behavior.
 ---
 
 ## 8. GBrain — workspace docs and operating model
@@ -252,19 +260,19 @@ Ownership and behavior for these files are defined in each project’s `AGENTS.m
 ### 8.1 Workspace‑level GBrain docs (project-library)
 
 - **Location (Windows)**  
-  `C:\_mb2-cs-app\project-library\workspace\gbrain\`
+  `C:\\_mb2-cs-app\\project-library\\workspace\\gbrain\\`
 
 - **Key populated docs:**
   - `gbrain-operating-model.md`  
     Defines GBrain as:
-    - advisory memory and recall layer, not an authoritative truth source,
+    - an advisory memory and recall layer, not an authoritative truth source,
     - subordinate in authority to:
       1. user decisions,
       2. repo files and canonical tracking,
       3. OpenCode rules,
       4. validated current outputs,
-      5. GBrain memory.
-    - requiring provenance, freshness, and explicit conflict handling.
+      5. GBrain memory,
+    - requiring provenance, freshness, and explicit conflict handling. [file:575]
 
   - `gbrain-source-tiers.md`  
     Defines source tiers for memory ingestion and recall:
@@ -283,6 +291,35 @@ Ownership and behavior for these files are defined in each project’s `AGENTS.m
   - `gbrain-sources.md`
   - `gbrain-sync-policy.md`
   - `README.md`
+
+### 8.2 Integration state for GBrain
+
+- **Running GBrain instance (runtime configuration):**
+  - `gbrain` version: `v0.18.2` at `~/gbrain/`.  
+  - Engine: **Supabase (PostgreSQL)** project named `project-library` (`fnjcssmqljshckdksvam`), accessed via the Supabase connection/pooler URL configured during `/setup-gbrain`. [web:532][web:541]  
+  - Embeddings: `text-embedding-3-large` via **OpenRouter**, using `OPENAI_API_BASE` set to `https://openrouter.ai/api/v1` and an OpenRouter API key. [web:533][web:538]  
+  - Smoke test: **Passed** — write + embed + search round‑trip confirmed from the GStack `/setup-gbrain` flow. [web:239]
+
+- **Local patch for OpenRouter compatibility:**
+  - The file `~/gbrain/src/core/embedding.ts` has been modified so that the embedding client respects the `OPENAI_API_BASE` environment variable instead of hardcoding `https://api.openai.com`.  
+  - This allows GBrain to talk to OpenRouter’s `text-embedding-3-large` endpoint transparently while still using the OpenAI‑compatible client interface. [web:533][web:538]  
+  - This is a **local fork change** and will be lost on a `gbrain` upgrade unless upstreamed or re‑applied. Any future upgrade must account for this patch explicitly.
+
+- **Integration with GStack and OpenCode:**
+  - GBrain is wired into GStack via the `/setup-gbrain` skill, which configured:
+    - the Supabase engine and connection details,
+    - the embedding model and OpenRouter base URL,
+    - and performed a doctor/smoke‑test run to validate write + embed + search. [web:239][web:466]
+  - GStack-aware workflows (for example, memory‑heavy skills like `/gstack-learn`, context save/restore flows, and other long‑term memory features) can read from and write to this GBrain instance automatically, within the source‑tier and provenance rules defined in the GBrain workspace docs. [web:466][web:542]
+  - GBrain remains an **advisory** layer: recalled content must be treated as context that can inform decisions, but final authority always rests with current repo content, ADRs, and user decisions.
+
+- **Future work:**
+  - Fill in the ingestion and sync plans in:
+    - `gbrain-ingestion-plan.md`
+    - `gbrain-sync-policy.md`
+    - `gbrain-sources.md`
+    - `gbrain-repo-strategy.md`
+  - Add project‑local commands for safe GBrain ingestion/recall (under `.opencode\\commands\\`), aligned with GStack workflows and OpenCode rules, so that common memory workflows can be triggered via explicit commands in addition to GStack skills.
 
 ### 8.2 Integration state for GBrain
 
@@ -305,7 +342,7 @@ Ownership and behavior for these files are defined in each project’s `AGENTS.m
 
 - **Possible future project-local GStack config paths:**  
   - `C:\_mb2-cs-app\project-library\.opencode\gstack\`  
-  - `C:\_mb2-cs-app\mb-2-cs\.opencode\gstack\`  
+  - `C:\_mb2-cs-app\mb-3-cs\.opencode\gstack\`  
   Reserved for potential future per‑project GStack config. No active configs live here yet.
 
 - **Additional workspace‑level docs:**  

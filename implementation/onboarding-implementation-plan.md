@@ -6,7 +6,7 @@
 > - **Bidirectional navigation** between Onboarding and Settings
 > - **Mybizz_management amendment log** — append-only credential change history
 > - **Client data rights** — Owner may remove details from Client Details Table, but not from Retained Records Table
-> - All ADR references use full file names (e.g., `01-brevo-replaces-zoho-email.md`)
+> - All ADR references use full file names (e.g., `1-brevo-replaces-zoho-email.md`)
 
 ---
 

@@ -29,7 +29,7 @@
 
 | Topic | Specification |
 |---|---|
-| ADR | `02-navigation-lambda-link-open-form.md` |
+| ADR | `2-navigation-lambda-link-open-form.md` |
 | Layout type | Custom `HtmlTemplate` only (`AdminLayoutTemplate`, `CustomerLayoutTemplate`) |
 | Sidebar nav component | Plain `Link` components |
 | Sidebar nav creation | Built programmatically in `build_navigation()` |
@@ -207,11 +207,11 @@ def btn_next_click(self, **event_args):
 | Component / Pattern | Rule |
 |---|---|
 | Anvil Extras | Excluded — see `14-anvil-extras-exclusion.md` |
-| `NavigationLink` for sidebar | Not used in current architecture — see `02-navigation-lambda-link-open-form.md` |
-| `NavigationDrawerLayoutTemplate` | Not used in current architecture — see `02-navigation-lambda-link-open-form.md` |
-| `navigate_to` for internal nav | Not used — see `02-navigation-lambda-link-open-form.md` |
+| `NavigationLink` for sidebar | Not used in current architecture — see `2-navigation-lambda-link-open-form.md` |
+| `NavigationDrawerLayoutTemplate` | Not used in current architecture — see `2-navigation-lambda-link-open-form.md` |
+| `navigate_to` for internal nav | Not used — see `2-navigation-lambda-link-open-form.md` |
 | RichText | Use sparingly; not core M3 |
-| Legacy multi-vertical components | Removed under `09-multi-vertical-to-single-vertical-conversion.md` |
+| Legacy multi-vertical components | Removed under `9-multi-vertical-to-single-vertical-conversion.md` |
 | Material Web Components | Excluded — see `14-anvil-extras-exclusion.md` |
 | Material Web Components | Excluded — see `14-anvil-extras-exclusion.md` |
 | Material Web Components | Excluded — see `14-anvil-extras-exclusion.md` |
@@ -753,7 +753,7 @@ def process_email_campaigns():
 
 | Topic | Specification |
 |---|---|
-| ADR | `09-multi-vertical-to-single-vertical-conversion.md` |
+| ADR | `9-multi-vertical-to-single-vertical-conversion.md` |
 | Platform focus | Consulting & Services only |
 | Removed | E-commerce, Hospitality, Membership |
 
@@ -847,4 +847,4 @@ def process_email_campaigns():
 
 ---
 
-**Status:** Consolidated specification and methods reference aligned to active Mybizz Anvil methods, M3 standards, `02-navigation-lambda-link-open-form.md` navigation, `09-multi-vertical-to-single-vertical-conversion.md` single-vertical scope, testing code of practice, startup pattern, packages/namespaces, Designer gotchas, uplink patterns, and background tasks.
+**Status:** Consolidated specification and methods reference aligned to active Mybizz Anvil methods, M3 standards, `2-navigation-lambda-link-open-form.md` navigation, `9-multi-vertical-to-single-vertical-conversion.md` single-vertical scope, testing code of practice, startup pattern, packages/namespaces, Designer gotchas, uplink patterns, and background tasks.

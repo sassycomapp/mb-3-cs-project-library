@@ -23,6 +23,8 @@ Payment is integrated into the booking flow. No separate checkout. Central-accou
 
 System currency is set at onboarding and immutable after the first transaction.
 
+**See:** ADR-038 (Webhook Architecture), ADR-034 (Anvil Platform Constraints)
+
 ---
 
 ## 2. Three-Tier Email Architecture
@@ -46,7 +48,7 @@ Campaign sequences, broadcast emails, newsletter communications. Subject to unsu
 
 Brevo API key stored in Vault (`brevo_api_key`). Separate from SMTP key — two distinct credentials per client.
 
-**See:** `01-brevo-replaces-zoho-email.md`
+**See:** `1-brevo-replaces-zoho-email.md`
 
 ---
 
@@ -62,15 +64,25 @@ CRM is automatically updated whenever a booking or service transaction is create
 
 ## 4. Background Tasks
 
-Three scheduled background tasks:
+Seven scheduled and event-driven background tasks (see ADR-036):
 
 | Task | Schedule | Purpose |
-|---|---|---|
+|------|----------|---------|
+| Health heartbeat | Every 15 minutes | Write health metrics to `health_log` table |
+| Campaign enrollment | Hourly | Process active campaign enrollments, send next email |
+| Appointment reminders (24h) | Hourly check | Send reminders for appointments in next 24 hours |
+| Appointment reminders (1h) | Hourly check | Send reminders for appointments in next 1 hour |
 | Lifecycle stage updates | Daily 02:00 | Recalculate contact lifecycle stages |
-| Campaign processing | Hourly | Evaluate active campaign enrollments, send next email |
 | Automated task generation | Daily 03:00 | Create follow-up tasks based on upcoming bookings |
+| Webhook processing | On event | Defer webhook payload processing from HTTP handler |
 
 Any operation expected to exceed 22 seconds must use `@anvil.server.background_task`. Background tasks have no timeout limit.
+
+**See:** ADR-036 (Real-Time and Background Task Architecture)
+
+**See:** ADR-039 (PDF Invoice Generation) for invoice PDF approach.
+
+**See:** ADR-040 (Data Access Patterns) for denormalization and pre-computed aggregation patterns.
 
 ---
 
@@ -78,7 +90,7 @@ Any operation expected to exceed 22 seconds must use `@anvil.server.background_t
 
 Each client instance configures its own timezone at onboarding, stored as an IANA timezone string in `business_profile.timezone`. All datetimes are stored in the database as UTC. Conversion to the client's local timezone occurs at display time in server functions.
 
-**See:** `05-timezone-utc-storage-display-conversion.md`
+**See:** `5-timezone-utc-storage-display-conversion.md`
 
 ---
 

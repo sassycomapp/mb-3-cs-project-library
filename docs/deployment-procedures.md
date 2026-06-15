@@ -1,404 +1,194 @@
 # Mybizz CS — Deployment Procedures
-# Phase 0 Implementation — TODO 4
+
+**Authority:** ADR-029 (Dependency Update Model), ADR-030 (blank_client_template), ADR-034 (Anvil Platform Constraints)
+
+---
 
 ## Overview
 
-This document defines the deployment procedures for the Mybizz CS platform.
-It covers database migrations, feature flags, rollback procedures, and
-post-deploy verification.
+This document defines the deployment procedures for the Mybizz CS platform. It covers the update deployment model, schema migration strategy, staged rollout, rollback procedures, and post-deploy verification.
 
-## Deployment Environment Strategy
+**Key architectural decision:** The platform uses a branch-based update model. Merging `develop` → `stable` in GitHub releases an update to all client instances automatically. See ADR-029.
 
-### Environments
+---
 
-**Development:**
-- Single developer workspace
-- Direct commits to main branch
-- No automated testing required
-- Data reset weekly
+## Deployment Model
 
-**Staging:**
-- Mirror of production environment
-- Automated testing required
-- Pre-production validation
-- Data reset monthly
+### The Update Flow
 
-**Production:**
-- Live customer environment
-- All testing required
-- Change approval required
-- Backup before each deployment
-
-## Database Migration Strategy
-
-### Expand-and-Contract Pattern
-
-All database migrations follow the expand-and-contract pattern to minimize
-downtime and risk:
-
-### Phase 1: Expand (Backward Compatible)
-```sql
--- Step 1: Add new column (nullable)
-ALTER TABLE bookings ADD COLUMN new_field VARCHAR(255);
-
--- Step 2: Populate existing data
-UPDATE bookings SET new_field = COALESCE(old_field, 'default');
-
--- Step 3: Deploy code that reads both old and new fields
--- Code should prefer new_field, fall back to old_field
+```
+mb-3-cs (GitHub develop branch)
+    ↓ merge when tested and ready
+master_template (GitHub stable branch)
+    ↓ automatically — no manual action
+All client instances tracking stable branch
 ```
 
-### Phase 2: Contraction (Breaking Change)
-```sql
--- Step 1: Deploy code that only uses new_field
--- Remove all references to old_field
+**There is no manual per-client update action.** Merging to `stable` is a production action. Release discipline — full testing in mb-3-cs before merge — is the quality gate. "A single merge to stable propagates all three categories of change simultaneously: server logic, UI, and forms. The only change that does not propagate automatically is Data Table schema — schema changes are always manual operations per client instance."
 
--- Step 2: Drop old column (after verification)
-ALTER TABLE bookings DROP COLUMN old_field;
+### Release Process
 
--- Step 3: Add NOT NULL constraint to new_field
-ALTER TABLE bookings ALTER COLUMN new_field SET NOT NULL;
-```
+1. **Develop** — All feature work happens in mb-3-cs on the `develop` branch
+2. **Test** — Feature is fully tested in mb-3-cs
+3. **Prepare release notes** — Document what changed, any action required
+4. **Merge** — `develop` is merged into `stable` in GitHub
+5. **Verify** — Confirm client instances reflect the update
+6. **Notify** — Send release notification email to clients via Anvil built-in email
 
-### Migration Safety
+### Staged Rollout (High-Risk Releases)
 
-**Before Migration:**
-- ✅ Backup database
-- ✅ Test migration on staging
-- ✅ Verify rollback procedure
-- ✅ Schedule during low-traffic period
+For high-risk releases, version tags (`v1.0.0`, `v1.1.0`) allow staged rollout:
 
-**During Migration:**
-- ✅ Monitor error rates
-- ✅ Monitor query performance
-- ✅ Have rollback ready
+1. Tag the release commit in master_template's GitHub repo
+2. Update a subset of client instances to the version tag (instead of tracking `stable`)
+3. Monitor for issues
+4. Once confirmed stable, roll remaining client instances to `stable`
 
-**After Migration:**
-- ✅ Verify data integrity
-- ✅ Run smoke tests
-- ✅ Monitor for 24 hours
+All managed from the single mybizz Anvil IDE.
 
-## Feature Flags
+### Client Notification
 
-### Feature Flag Strategy
+Clients receive a release notification via Anvil built-in email. The notification is informational — the update has already been applied at the time of sending.
 
-All new features must be behind feature flags to enable gradual rollout:
+An internal in-app notification system is planned for the Mybizz_management phase.
 
-**Rollout Percentages:**
-- 10% - Initial rollout (monitor for errors)
-- 50% - Extended rollout (monitor for performance)
-- 100% - Full rollout (remove feature flag)
+---
 
-**Feature Flag Configuration:**
+## Schema Migration Strategy
 
-```python
-# Feature flag definitions
-FEATURE_FLAGS = {
-    'new_booking_flow': {
-        'enabled': False,
-        'rollout_percentage': 0,
-        'owner': 'team_bookings',
-        'description': 'New streamlined booking flow'
-    },
-    'email_notifications': {
-        'enabled': True,
-        'rollout_percentage': 100,
-        'owner': 'team_marketing',
-        'description': 'Email notifications for bookings'
-    }
-}
+### The Challenge
 
-def is_feature_enabled(feature_name, user_id=None):
-    """
-    Check if a feature is enabled for a user.
-    
-    Args:
-        feature_name: Name of the feature flag
-        user_id: Optional user ID for user-specific flags
-    
-    Returns:
-        bool: True if feature is enabled
-    """
-    if feature_name not in FEATURE_FLAGS:
-        return False
-    
-    flag = FEATURE_FLAGS[feature_name]
-    
-    if not flag['enabled']:
-        return False
-    
-    if flag['rollout_percentage'] >= 100:
-        return True
-    
-    # Hash-based rollout for consistent user experience
-    import hashlib
-    hash_input = f"{feature_name}:{user_id}"
-    hash_value = int(hashlib.md5(hash_input.encode()).hexdigest(), 16)
-    percentage = (hash_value % 100) + 1
-    
-    return percentage <= flag['rollout_percentage']
-```
+Anvil has no programmatic API for creating or modifying Data Tables. Schema changes must be applied via the IDE. With 100 client instances, schema migrations are manual operations.
 
-### Feature Flag Lifecycle
+### Migration Rules
 
-1. **Create:** Add feature flag before implementing feature
-2. **Implement:** Build feature behind flag
-3. **Deploy:** Deploy code with flag disabled
-4. **Enable:** Gradually enable flag (10% → 50% → 100%)
-5. **Remove:** Remove feature flag after full rollout
-6. **Clean:** Remove feature flag code after 30 days
+1. **Schema changes must never be merged to `stable` without a documented migration plan**
+2. **Every schema change must be applied to `blank_client_template`** (for future clients)
+3. **Every schema change must be applied manually to all existing client instances** (for running clients)
 
-## Rollback Procedures
+### Migration Process
 
-### Git Rollback
+**For new columns (additive):**
+1. Add the column to `blank_client_template` via IDE
+2. Add the column to each existing client instance via IDE
+3. Deploy code that reads both old and new fields
+4. Merge to `stable` — code propagates automatically
+5. Existing rows will have NULL for the new column — code must handle this
 
-**For Code Issues:**
-```bash
-# Identify bad commit
-git log --oneline -10
+**For removed columns (breaking):**
+1. Deploy code that no longer references the old column
+2. Merge to `stable` — code propagates automatically
+3. Remove the column from each existing client instance via IDE
+4. Remove the column from `blank_client_template` via IDE
 
-# Revert the commit
-git revert <commit-hash>
+**For modified columns:**
+1. Add a new column with the desired schema
+2. Deploy code that reads from the new column (with fallback to old)
+3. Merge to `stable`
+4. Migrate data from old column to new column (manual or script)
+5. Remove the old column
 
-# Push the revert
-git push origin main
-```
+### Migration Checklist
 
-**For Multiple Commits:**
-```bash
-# Revert multiple commits
-git revert <commit1> <commit2> <commit3>
+- [ ] Schema change documented in release notes
+- [ ] `blank_client_template` updated
+- [ ] Migration script/procedure documented for existing clients
+- [ ] Code handles both old and new schema (backward compatible)
+- [ ] Rollback procedure documented
+- [ ] Migration tested on at least one existing client instance
 
-# Or reset to known good state (use with caution)
-git reset --hard <good-commit-hash>
-```
-
-### Database Rollback
-
-**For Schema Changes:**
-```sql
--- Keep migration files for rollback
--- Migration: Add new column
-ALTER TABLE bookings ADD COLUMN new_field VARCHAR(255);
-
--- Rollback: Drop column
-ALTER TABLE bookings DROP COLUMN new_field;
-```
-
-**For Data Issues:**
-```sql
--- Backup before deployment
-CREATE TABLE bookings_backup AS SELECT * FROM bookings;
-
--- Rollback to backup
-TRUNCATE TABLE bookings;
-INSERT INTO bookings SELECT * FROM bookings_backup;
-DROP TABLE bookings_backup;
-```
-
-### Feature Flag Rollback
-
-**Immediate Disable:**
-```python
-# Disable feature flag immediately
-FEATURE_FLAGS['new_booking_flow']['enabled'] = False
-
-# Or reduce rollout percentage
-FEATURE_FLAGS['new_booking_flow']['rollout_percentage'] = 0
-```
-
-### Deployment Rollback Checklist
-
-**Before Rollback:**
-- [ ] Identify root cause
-- [ ] Confirm rollback is necessary
-- [ ] Notify stakeholders
-- [ ] Prepare rollback commands
-
-**During Rollback:**
-- [ ] Execute rollback procedure
-- [ ] Monitor for errors
-- [ ] Verify service restoration
-
-**After Rollback:**
-- [ ] Document incident
-- [ ] Create post-mortem
-- [ ] Plan fix for next deployment
+---
 
 ## Post-Deploy Verification
 
 ### Automated Checks
 
-**Health Check:**
-```python
-@anvil.server.callable
-def health_check():
-    """Verify system health after deployment."""
-    
-    checks = {
-        'database': False,
-        'vault': False,
-        'email': False,
-        'payments': False
-    }
-    
-    # Database check
-    try:
-        app_tables.users.find_one()
-        checks['database'] = True
-    except:
-        pass
-    
-    # Vault check
-    try:
-        from server_shared.vault_service import get_vault_secret
-        # Don't actually retrieve, just verify function exists
-        checks['vault'] = True
-    except:
-        pass
-    
-    # Email check
-    try:
-        import anvil.server
-        # Verify email functionality
-        checks['email'] = True
-    except:
-        pass
-    
-    # Payments check
-    try:
-        # Verify payment gateway connection
-        checks['payments'] = True
-    except:
-        pass
-    
-    return {
-        'healthy': all(checks.values()),
-        'checks': checks
-    }
-```
+After merging to `stable`, verify:
 
-**Smoke Tests:**
-```python
-@anvil.server.callable
-def smoke_tests():
-    """Run smoke tests after deployment."""
-    
-    results = {
-        'auth': False,
-        'booking': False,
-        'payment': False,
-        'email': False
-    }
-    
-    # Auth smoke test
-    try:
-        # Create test user
-        # Login with test user
-        # Verify session
-        results['auth'] = True
-    except:
-        pass
-    
-    # Booking smoke test
-    try:
-        # Create test booking
-        # Verify booking created
-        results['booking'] = True
-    except:
-        pass
-    
-    # Payment smoke test (test mode only)
-    try:
-        # Create test payment
-        # Verify payment processed
-        results['payment'] = True
-    except:
-        pass
-    
-    # Email smoke test
-    try:
-        # Send test email
-        # Verify email sent
-        results['email'] = True
-    except:
-        pass
-    
-    return {
-        'healthy': all(results.values()),
-        'results': results
-    }
-```
+1. **Health endpoint** — Call `/management/health` on a sample of client instances
+2. **Background tasks** — Verify scheduled tasks are running (health heartbeat, campaign enrollment)
+3. **Error rate** — Check `error_log` table for new errors
 
 ### Manual Verification
 
-**Admin Dashboard:**
-- [ ] Login to admin dashboard
-- [ ] Verify all navigation items work
-- [ ] Check dashboard metrics display
-- [ ] Verify settings page loads
+For significant releases:
 
-**Public Website:**
-- [ ] Load homepage
-- [ ] Test contact form
-- [ ] Verify booking widget loads
-- [ ] Check mobile responsiveness
+1. **Login** to a sample client instance
+2. **Verify** key functionality (booking flow, payment processing, email delivery)
+3. **Check** dashboard metrics are displaying correctly
+4. **Confirm** no new errors in Anvil App Logs
 
-**Customer Experience:**
-- [ ] Create test booking
-- [ ] Complete payment (test mode)
-- [ ] Verify confirmation email
-- [ ] Check calendar shows booking
+---
+
+## Rollback Procedures
+
+### Code Rollback
+
+If a release introduces a critical bug:
+
+1. **Revert** the merge commit in GitHub (`develop` branch)
+2. **Merge** the revert to `stable`
+3. **All client instances update automatically** to the reverted code
+4. **Notify** clients of the rollback
+
+**Note:** Rollback via merge is the safest approach. It preserves git history and is reversible.
+
+### Schema Rollback
+
+If a schema change causes issues:
+
+1. **Revert** the code change that depends on the new schema
+2. **Merge** the revert to `stable`
+3. **Manually remove** the new column from affected client instances (if it was added)
+4. **Update** `blank_client_template` if the schema change was applied there
+
+---
 
 ## Deployment Checklist
 
 ### Pre-Deployment
 
 **Code:**
-- [ ] All tests passing
-- [ ] Code review completed
-- [ ] Feature flags configured
-- [ ] Documentation updated
+- [ ] All tests passing in mb-3-cs
+- [ ] Feature fully tested
+- [ ] Release notes prepared
+- [ ] Schema changes documented (if applicable)
 
 **Database:**
-- [ ] Migration scripts tested
-- [ ] Rollback procedures documented
-- [ ] Backup scheduled
+- [ ] Schema migration plan documented (if applicable)
+- [ ] `blank_client_template` updated (if applicable)
+- [ ] Rollback procedure documented
 
 **Communication:**
-- [ ] Stakeholders notified
-- [ ] Maintenance window scheduled (if needed)
-- [ ] Rollback plan communicated
+- [ ] Release notes ready to send
+- [ ] Stakeholders notified (if significant release)
 
 ### Deployment
 
-**Steps:**
-1. [ ] Create database backup
-2. [ ] Deploy code to staging
-3. [ ] Run smoke tests on staging
-4. [ ] Verify staging deployment
-5. [ ] Deploy code to production
-6. [ ] Run health checks on production
-7. [ ] Run smoke tests on production
-8. [ ] Monitor error rates for 15 minutes
+1. [ ] Merge `develop` → `stable` in GitHub
+2. [ ] Verify master_template reflects the update
+3. [ ] Verify sample client instances reflect the update
+4. [ ] Monitor error rates for 15 minutes
+5. [ ] Send release notification email to clients
 
 ### Post-Deployment
 
 **Monitoring:**
 - [ ] Monitor error rates for 1 hour
-- [ ] Monitor performance metrics for 1 hour
-- [ ] Check customer support tickets
+- [ ] Check background task health
+- [ ] Review client support tickets
 
 **Documentation:**
 - [ ] Update deployment log
-- [ ] Document any issues
-- [ ] Update runbooks if needed
+- [ ] Document any issues encountered
+
+---
 
 ## Rollback Triggers
 
 **Immediate Rollback Required:**
-- Error rate > 10%
-- Critical functionality broken
+- Error rate > 10% across client instances
+- Critical functionality broken (booking flow, payments)
 - Data corruption detected
 - Security vulnerability introduced
 
@@ -406,18 +196,6 @@ def smoke_tests():
 - Error rate > 5%
 - Performance degradation > 50%
 - Customer complaints increasing
-- Monitoring alerts triggered
-
-## Incident Response
-
-**If Rollback Needed:**
-
-1. **Assess:** Determine severity and impact
-2. **Decide:** Rollback or hotfix
-3. **Execute:** Follow rollback procedure
-4. **Communicate:** Notify stakeholders
-5. **Document:** Record incident details
-6. **Learn:** Create post-mortem
 
 ---
 

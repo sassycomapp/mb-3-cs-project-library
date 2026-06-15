@@ -11,7 +11,7 @@
 
 **Problem:** Schema was fragmented across `database-schema.md`, `scaffold-spec.md`, and `build-plan.md` with inconsistent details.
 
-**Solution:** Created `authoritative-schema.md` — single source of truth with all 36 tables fully specified.
+**Solution:** Created `authoritative-schema.md` — single source of truth with all 43 tables fully specified.
 
 **Location:** `docs/authoritative-schema.md`
 
@@ -48,7 +48,7 @@
 
 ## Authoritative Schema Reference
 
-**36 Tables Total:**
+**43 Tables Total:**
 
 | Group | Tables | Files |
 |-------|--------|-------|
@@ -88,7 +88,7 @@
 | **Database schema** | `docs/authoritative-schema.md` |
 | **Package structure** | `docs/scaffold-spec.md` (updated) |
 | **Scaffolding workflow** | `docs/scaffold-workflow.md` (updated) |
-| **Build plan** | `docs/build-plan.md` |
+| **Build plan** | `implementation/build-plan.md` |
 | **Architecture** | `docs/architecture.md` |
 
 ---

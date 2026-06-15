@@ -3,7 +3,7 @@
 **Vertical:** Consulting & Services
 **V1 Scope:** Blog, Landing Pages, Campaigns, Pre-built Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack
 **V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal, Time Tracking, Custom Segment Builder
-**Schema:** 38 tables (plus onboarding additions per authoritative-schema.md)
+**Schema:** See docs/authoritative-schema.md for current table count
 **Architecture:** Dependency-based (master_template → client instances)
 **Review Status:** CEO + Eng Review Complete (All 5 phases engineering reviews complete)
 
@@ -13,10 +13,10 @@
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| **Schema** | ✅ 100% Complete | 38 tables designed and documented |
+| **Schema** | ✅ 100% Complete | See docs/authoritative-schema.md |
 | **Wireframes** | ✅ 100% Complete | 50 HTML screens created |
 | **Design Direction** | ✅ 100% Complete | M3 design approved |
-| **ADR Documentation** | ✅ 100% Complete | 23 ADRs written (see adr-index.md) |
+| **ADR Documentation** | ✅ 100% Complete | See docs/adr-index.md for current ADR count and status |
 | **Positioning Strategy** | ✅ 100% Complete | Business model documented |
 | **Phase 0** | ✅ 100% Complete | All TODOs implemented |
 | **Phase 1** | 🔄 In Progress | Foundation implementation started |
@@ -222,6 +222,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - Navigation helpers prevent lambda capture bugs and ensure consistent patterns
 - AdminLayout uses custom HtmlTemplate with plain Link components (not NavigationLink)
 - Navigation structure follows the spec in architecture.md
+- **See:** ADR-035 (Form Architecture and State Management)
 
 ### Stage 1.4: Settings & Configuration
 
@@ -253,6 +254,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - SettingsForm uses sub-sections for better maintainability
 - Currency becomes immutable after first transaction
 - Feature flags control navigation item visibility
+- **See:** ADR-037 (UI Customization Approach)
 
 ### Stage 1.5: The Vault
 
@@ -352,6 +354,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Booking status workflow (PENDING → CONFIRMED → COMPLETED/CANCELLED)
 - ✅ Contact auto-created from booking if not exists
 - ✅ Booking metadata schemas functional for intake forms
+- **See:** ADR-035 (Form Architecture — booking flow latency management)
 
 ### Stage 2.4: Payment Integration
 
@@ -372,6 +375,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Payment ID stored in booking
 - ✅ Test/Live mode switching working
 - ✅ External service failure handling implemented (TODO 12: Retry logic with backoff)
+- **See:** ADR-038 (Webhook Architecture), ADR-036 (Real-Time and Background Tasks)
 
 ### Stage 2.5: Invoicing System
 
@@ -391,6 +395,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Invoice statuses working (Draft, Sent, Paid, Overdue, Cancelled)
 - ✅ Payment recording updates invoice status
 - ✅ Multi-currency display working
+- **See:** ADR-039 (PDF Invoice Generation)
 
 ---
 
@@ -424,6 +429,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Empty state messages added (TODO 6)
 - ✅ Database indexes added (TODO 8: contacts.email, bookings.contact_id, bookings.service_id indexed)
 - ✅ Pagination added to large lists (TODO 9: 50 items per page)
+- **See:** ADR-040 (Data Access Patterns — pagination, denormalization)
 
 ### Stage 3.2: Email Marketing (Brevo Campaigns)
 
@@ -445,6 +451,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Open/click tracking via webhooks working
 - ✅ Broadcast emails functional
 - ✅ Unsubscribe handling working
+- **See:** ADR-036 (Real-Time and Background Tasks — campaign enrollment task)
 
 ### Stage 3.3: Segmentation
 
@@ -595,6 +602,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Period selector working (week, month, quarter, custom)
 - ✅ Real-time data refresh working
 - ✅ Charts rendering correctly
+- **See:** ADR-040 (Data Access Patterns — pre-computed aggregations)
 
 ### Stage 5.2: Security Hardening
 
@@ -696,6 +704,8 @@ Phase 0 (Pre-Implementation) → Phase 1 (Foundation) → Phase 2 (Transactional
 - `email_campaigns` table (Phase 3) → contact_campaigns
 - `landing_pages` table (Phase 3) → leads → contacts
 
+**See:** ADR-034 (Anvil Platform Constraints) for platform-specific implementation guidance.
+
 ---
 
 ## Completion Criteria Summary
@@ -720,6 +730,7 @@ Phase 0 (Pre-Implementation) → Phase 1 (Foundation) → Phase 2 (Transactional
 - **Contact deduplication:** Addressed in Phase 3 — mitigated
 - **RBAC coverage:** Addressed in Phase 1 (TODO 11) — mitigated
 - **External service failures:** Addressed in Phase 2 (TODO 12) — mitigated
+- **Anvil platform constraints:** All phases — ADR-034 documents Skulpt limits, lazy rows, server latency, background tasks
 
 ### Operational Risks (All Addressed)
 - **Onboarding friction:** Keep Phase 1 simple and intuitive

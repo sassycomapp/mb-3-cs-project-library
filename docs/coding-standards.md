@@ -25,6 +25,8 @@ Every server function has a docstring with Args, Returns, and Raises sections. G
 ### Type Hints
 Required on all public functions.
 
+**See:** ADR-034 (Anvil Platform Constraints — server call latency)
+
 ### Logging
 ```python
 import logging
@@ -107,6 +109,9 @@ Every table must have: `instance_id` (link → users), `created_at` (datetime), 
 - Paginate with slicing: `[:50]`
 - Sort with `tables.order_by()`
 - Never convert SearchIterator to list unless necessary
+
+**See:** ADR-040 (Data Access Patterns — denormalization, bounded pagination, pre-computed aggregations)
+**See:** ADR-035 (Form Architecture — state management via globals.py)
 
 ### Transactions
 Use `@tables.in_transaction` for counter increments and multi-step operations requiring atomicity.

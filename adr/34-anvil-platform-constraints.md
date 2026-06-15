@@ -1,0 +1,138 @@
+# ADR-034 — Anvil Platform Constraints and Design Boundaries
+
+**Status:** Approved  
+**Date:** 2026-06-14  
+**Authority:** Derived from platform-overview.md, Issues to be resolved, Anvil platform documentation
+
+---
+
+## Context
+
+The Mybizz CS platform is built on Anvil.works, a hosted full-stack Python platform. Anvil provides significant velocity advantages — built-in hosting, HTTPS, Data Tables, user authentication, and a visual designer — but imposes specific constraints that differ from traditional self-hosted Python deployments.
+
+Every architectural decision in this platform must be made with awareness of these constraints. Designing against Anvil's parameters produces a faster, more reliable product than designing around them. The meta-decision is deliberate: velocity over migration path.
+
+---
+
+## Decision
+
+The platform is designed to work within Anvil's specific parameters. All team members must understand the following constraints before building features. No feature should be built assuming capabilities that Anvil does not provide.
+
+---
+
+## Constraint Catalogue
+
+### 1. Skulpt Runtime Limitations
+
+Anvil's client-side Python runs on Skulpt (a Python-to-JavaScript compiler), not CPython. Not all Python 3 standard library modules work as expected.
+
+**Known limitations:**
+
+| Area | Issue | Workaround |
+|------|-------|------------|
+| `re` module | Subtle bugs and gaps vs CPython regex | Use server-side for complex regex |
+| `json` module | Minor differences in edge cases | Use server-side for critical JSON processing |
+| `datetime` | Arithmetic and timezone handling quirks | All date logic lives in server modules |
+| Currency formatting | Client-side formatting unreliable | All money display goes through server functions |
+| Number formatting | Locale-specific formatting gaps | Server-side formatting for all financial display |
+
+**Rule of thumb:** Anything touching money or dates lives in server modules only. Client-side Skulpt is used for UI logic, form handling, and display formatting that does not involve calculation.
+
+### 2. No Native URL Routing
+
+Anvil does not provide built-in URL routing. Client-side navigation uses the community routing library (Harry Twose's Anvil Routing dependency).
+
+**Dependency ID:** `3PIDO5P3H4VPEMPL`
+
+**Scope:** Public website pages only. Admin and customer portal navigation uses the lambda/Link/open_form pattern (ADR-002).
+
+### 3. Data Table Row Access
+
+Anvil Data Table rows are lazy-loaded. Iterating over a large table without `.search()` or `.limit_to()` will timeout on large datasets.
+
+**Rule:** Never iterate over all rows. Always use `.search()` with filters or `.limit_to()` for bounded queries.
+
+### 4. Server Call Latency
+
+Every `anvil.server.call()` is an HTTP round-trip. Over-reliance on server calls degrades UX — each call adds 100-500ms depending on server warm-up and network conditions.
+
+**Rule:** Minimize server calls in user-facing flows. Batch operations where possible. See ADR-035 (Form Architecture and State Management).
+
+### 5. Background Task Limits
+
+Anvil's background task system has plan-dependent limits:
+
+| Plan | Timeout | Scheduled Tasks | Notes |
+|------|---------|-----------------|-------|
+| Free | 30 seconds | None | Core features non-functional |
+| Personal | Limited | Limited | Insufficient for production |
+| Business | Unlimited timeout | Available | Required for Mybizz |
+
+With 100 client instances each running multiple background tasks (health heartbeat, campaign enrollment, reminders, webhook processing), the per-account task load must be verified against Anvil Business plan limits.
+
+**See:** ADR-036 (Real-Time and Background Tasks)
+
+### 6. Git Integration Quirks
+
+Anvil's built-in Git integration is one-way friendly (Anvil ← GitHub). Branching and merging workflows within the Anvil IDE are awkward. All branching and merging happens in GitHub, not in the Anvil IDE.
+
+**Rule:** Never merge branches within the Anvil IDE. All merge operations happen in GitHub.
+
+### 7. Secrets Management
+
+`anvil.secrets` works but has size limits and no rotation tooling. The platform uses Anvil Secrets for exactly one item: `encryption_key`. All other secrets are managed through the custom Vault system (ADR-003).
+
+### 8. Media/File Handling
+
+`BlobMedia` in Data Tables has row size limits that are not always obvious. Large file uploads may silently fail or cause performance issues.
+
+**Rule:** Store file references (URLs) in Data Tables, not file contents. Use external storage for large media.
+
+### 9. Persistent Server
+
+Anvil's free tier has no persistent server. The Business plan includes persistent server capability, which is required for performance-sensitive operations.
+
+---
+
+## Governing Decision
+
+**The platform is designed to work within Anvil's parameters, not around them.**
+
+This means:
+- Server-side Python (CPython) handles all business logic, calculations, and integrations
+- Client-side Python (Skulpt) handles UI logic only
+- Data Table patterns follow Anvil's lazy-load model
+- Background tasks are used for all async operations
+- The Vault system replaces Anvil Secrets for client credentials
+- The dependency model (ADR-028) is the foundation of the multi-tenant architecture
+
+The alternative — designing for eventual migration off Anvil — would add abstraction layers, reduce velocity, and produce a worse product within Anvil. If migration becomes necessary in the future, the cost of rewriting is accepted as a trade-off for shipping faster today.
+
+---
+
+## Consequences
+
+- ✅ Faster development velocity — no abstraction layers for hypothetical migration
+- ✅ Simpler codebase — direct use of Anvil's native capabilities
+- ✅ Better Anvil-specific optimisations — lazy loading, background tasks, dependency model
+- ⚠️ Migration off Anvil would require a full rewrite — this is an accepted trade-off
+- ⚠️ Anvil platform changes (deprecations, limit changes) directly affect the platform
+- ⚠️ Team members must learn Anvil-specific patterns before building features
+
+---
+
+## Related Documents
+
+| Document | Relationship |
+|---|---|
+| `adr/2-navigation-lambda-link-open-form.md` | Navigation pattern that works within Anvil's constraints |
+| `adr/3-payment-security-boundary-vault.md` | Vault system replaces Anvil Secrets |
+| `adr/028-client-instance-architecture.md` | Dependency model — the core architectural pattern |
+| `adr/035-form-architecture-and-state.md` | How forms work within Anvil's form model |
+| `adr/036-real-time-and-background-tasks.md` | Background task patterns within Anvil's limits |
+| `adr/040-data-access-patterns.md` | Data Table query patterns within Anvil's model |
+| `docs/platform-overview.md` | Section 6: Technical Stack |
+
+---
+
+*End of ADR-034*

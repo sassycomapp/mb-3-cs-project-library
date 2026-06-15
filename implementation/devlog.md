@@ -3,6 +3,7 @@
 **Project:** Mybizz Consulting Services V1  
 **Start Date:** 2026-05-26  
 **Current Phase:** Realignment (aligning existing work with build plan)
+**Last Updated:** 2026-06-14
 
 ---
 
@@ -226,6 +227,34 @@ This log tracks implementation progress, blockers, decisions, and plan changes f
 
 ---
 
+## June 2026 — Planning Realignment
+
+### Status: Complete
+
+**Completed:**
+- ✅ Onboarding implementation plan rewritten (2026-06-01): Separate onboarding form, tabbed Settings, bidirectional navigation
+- ✅ ADR-25 rewritten (2026-06-01): Onboarding finality, resumability, append-only logging
+- ✅ ADR-12 superseded (2026-06-01): By build-plan.md
+- ✅ ADR-13 superseded (2026-06-01): By consolidated ADR-16
+- ✅ ADR-027 created (2026-06-10): Design Rules
+- ✅ ADR-028 through ADR-033 created (2026-06-13): Client instance architecture, dependency update model, blank_client_template, free trial abandoned, observability architecture, Mybizz_management visibility
+- ✅ ADR-034 through ADR-040 created (2026-06-14): Anvil platform constraints, form architecture, real-time/background tasks, UI customization, webhook architecture, PDF invoice generation, data access patterns
+- ✅ DESIGN.md reconciled (2026-06-02): OnboardingPaletteForm removed, ClauseBuilder added, PaletteSettingsForm downgraded, 11-tab Settings, onboarding/settings boundary
+- ✅ Sanity audit completed (2026-06-01): 21 issues found and resolved, 3-pass audit
+- ✅ CEO review completed (2026-06-14): 18 gaps identified, 36 tasks to close
+
+**Blockers:** None
+
+**Decisions:**
+- All 7 new ADRs (034-040) consolidate decisions from platform-overview.md into formal ADR format
+- blog_comments table exists in anvil.yaml but was missing from authoritative-schema.md — added
+- 5 summary tables (ADR-040, ADR-036) required for analytics — added to schema
+- bookings table in anvil.yaml missing 12 of 16 columns — requires Anvil Designer fix
+- tasks table missing instance_id — requires Anvil Designer fix
+- All doc discrepancies (stale counts, duplicates, missing ADR refs) — resolved in this session
+
+---
+
 ## Implementation Notes
 
 ### Realignment Phase (Current)
@@ -321,9 +350,9 @@ This log tracks implementation progress, blockers, decisions, and plan changes f
 | 2026-06-01 | **Rewritten: onboarding-implementation-plan.md** | Onboarding is a separate form (not Settings). Settings is a single tabbed form. Bidirectional navigation. |
 | 2026-06-01 | **Rewritten: `25-onboarding-finality.md`** | Onboarding is resumable and revisitable. Credential changes are append-only. Mybizz_management data rights defined. |
 | 2026-06-01 | **Renamed: `025-cancelled-onboarding-finality.md`** | Old ADR-025 cancelled and superseded by new `25-onboarding-finality.md` |
-| 2026-06-01 | **Superseded: `012-superseded-consolidated-build-sequence.md`** | ADR-12 superseded by `implementation/build-plan.md` |
+| 2026-06-01 | **Superseded: `12-consolidated-build-sequence.md`** | ADR-12 superseded by `implementation/build-plan.md` |
 | 2026-06-01 | **Consolidated: ADR-13 + ADR-16 → `016-system-currency-selection-and-immutability.md`** | Merged system currency architecture, immutability, display currency, and conversion strategy |
-| 2026-06-01 | **Superseded: `013-superseded-system-currency-setting.md`** | ADR-13 superseded by consolidated ADR-16 |
+| 2026-06-01 | **Superseded: `13-system-currency-setting.md`** | ADR-13 superseded by consolidated ADR-16 |
 | 2026-06-01 | **Updated: `custom-component-requirements-matrix.md`** | PaletteSettingsForm downgraded to local/form-specific. ClauseBuilder added as shared custom component. |
 | 2026-06-01 | **Created: `wireframe-custom-component-ClauseBuilder.html`** | Minimal clause builder wireframe: category selection, seeded clauses, custom clauses, save |
 | 2026-06-01 | **Recreated: `wireframe-settings-SettingsForm.html`** | Recreated from scratch with 11 tabs per current design |

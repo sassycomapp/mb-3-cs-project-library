@@ -2,7 +2,7 @@
 
 **Vertical:** Consulting & Services only
 **Architecture:** Dependency-based (master_template → client instances)
-**Schema:** 36 tables (see `authoritative-schema.md`)
+**Schema:** 43 tables (see `authoritative-schema.md`)
 
 ---
 
@@ -19,7 +19,7 @@ The platform operator's internal tooling — client provisioning, health monitor
 
 **Note:** mb-2-cs was the original development application and has been deprecated. All development has migrated to mb-3-cs.
 
-**See:** `09-multi-vertical-to-single-vertical-conversion.md`
+**See:** `9-multi-vertical-to-single-vertical-conversion.md`
 
 ---
 
@@ -58,7 +58,7 @@ server_code/
 
 **Note:** The client-side CRM and marketing package is named `crm/` — not `marketing/`. The server-side package remains `server_marketing/`.
 
-**See:** `06-crm-package-replaces-marketing.md`
+**See:** `6-crm-package-replaces-marketing.md`
 
 ---
 
@@ -70,6 +70,8 @@ server_code/
 4. **Pure Logic Modules** (no Anvil imports) contain side-effect-free business logic for unit testing.
 
 This structure is not a preference. It is what makes the testing strategy work.
+
+**See:** ADR-035 (Form Architecture and State Management)
 
 ---
 
@@ -88,9 +90,11 @@ Two navigation systems, not interchangeable:
 - `open_form(string)` for parameterised navigation (row clicks, detail forms)
 - `NavigationDrawerLayoutTemplate`, `NavigationLink`, and `navigate_to` are not used in the current architecture
 
-**Note:** Native M3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationLink`, `NavigationRailLayout`) are fully supported by the M3 theme dependency but are not used in the current Mybizz architecture. This is a usage decision based on the custom layout approach. If a future architecture review determines native M3 navigation layouts are better suited, the docs may change without requiring an ADR update. See `02-navigation-lambda-link-open-form.md`.
+**Note:** Native M3 navigation components (`NavigationDrawerLayoutTemplate`, `NavigationLink`, `NavigationRailLayout`) are fully supported by the M3 theme dependency but are not used in the current Mybizz architecture. This is a usage decision based on the custom layout approach. If a future architecture review determines native M3 navigation layouts are better suited, the docs may change without requiring an ADR update. See `2-navigation-lambda-link-open-form.md`.
 
-**See:** `02-navigation-lambda-link-open-form.md`
+**See:** `2-navigation-lambda-link-open-form.md`
+
+**See:** ADR-037 (UI Customization Approach)
 
 ### AdminLayout Navigation Structure
 ```
@@ -132,8 +136,6 @@ Account                            (always)
 
 **Note:** The CustomerLayout is deferred to V2. Customers book via the public site and the business manages all bookings from the admin panel in V1.
 
-**Note:** The CustomerLayout is deferred to V2. Customers book via the public site and the business manages all bookings from the admin panel in V1.
-
 ---
 
 ## 7. Startup and Authentication Routing
@@ -145,6 +147,8 @@ The Startup Form is `auth.LoginForm` (defined in anvil.yaml). The `__init__` met
 3. If not logged in → proceed with LoginForm display
 
 Calling `open_form()` in `__init__` must always be followed by `return`.
+
+**See:** ADR-034 (Anvil Platform Constraints — server call latency)
 
 ---
 

@@ -1,0 +1,161 @@
+# ADR-036 — Real-Time Updates and Background Task Architecture
+
+**Status:** Approved  
+**Date:** 2026-06-14  
+**Authority:** Derived from platform-overview.md, ADR-032, ADR-034, integration-architecture.md
+
+---
+
+## Context
+
+The platform requires two forms of asynchronous behavior:
+
+1. **Real-time updates** — Users expect to see new bookings, payment confirmations, and notifications without manual page refresh
+2. **Background processing** — Campaign enrollment, appointment reminders, health monitoring, and webhook processing must happen without blocking the user
+
+Anvil has no native WebSocket push from server to client. Background tasks have plan-dependent limits. With 100 client instances each running multiple background tasks, the architecture must be designed for Anvil's actual capabilities.
+
+---
+
+## Decision
+
+### Real-Time Updates: Client-Side Timer Polling
+
+The platform uses client-side timer polling for near-real-time updates. A timer on key dashboard and list forms periodically calls a server function to check for new data.
+
+**Pattern:**
+
+```python
+# In DashboardForm
+import anvil.server
+import time
+
+class DashboardForm:
+    def __init__(self):
+        self.poll_timer = None
+        self.last_check = None
+    
+    def form_show(self):
+        self.start_polling()
+    
+    def form_hide(self):
+        self.stop_polling()
+    
+    def start_polling(self):
+        self.poll_timer = anvil.Timer(interval=30, callback=self.check_for_updates)
+    
+    def stop_polling(self):
+        if self.poll_timer:
+            self.poll_timer.stop()
+    
+    def check_for_updates(self):
+        result = anvil.server.call('get_dashboard_updates', self.last_check)
+        if result['has_updates']:
+            self.update_display(result['data'])
+            self.last_check = result['timestamp']
+```
+
+**Polling intervals by context:**
+
+| Context | Interval | Rationale |
+|---------|----------|-----------|
+| Dashboard | 30 seconds | Balance between freshness and server load |
+| Booking list (active) | 15 seconds | Higher frequency during active use |
+| Background forms | 60 seconds | Lower priority; reduce server load |
+
+**Why polling over alternatives:**
+
+| Alternative | Reason not chosen |
+|---|---|
+| WebSocket push | Not available in Anvil |
+| Streaming responses | Limited Anvil support; complex to implement |
+| Server-sent events | Not natively supported in Anvil |
+
+### Background Task Architecture
+
+All asynchronous operations use Anvil's `@anvil.server.background_task` decorator. Background tasks have no timeout limit on the Business plan.
+
+**Task inventory per client instance:**
+
+| Task | Schedule | Purpose | Estimated Load |
+|------|----------|---------|----------------|
+| Health heartbeat | Every 15 minutes | Write health metrics to `health_log` table | Low |
+| Campaign enrollment | Hourly | Process active campaign enrollments, send next email | Medium |
+| Appointment reminders (24h) | Hourly check | Send reminders for appointments in next 24 hours | Medium |
+| Appointment reminders (1h) | Hourly check | Send reminders for appointments in next 1 hour | Medium |
+| Lifecycle stage updates | Daily 02:00 | Recalculate contact lifecycle stages | Low |
+| Automated task generation | Daily 03:00 | Create follow-up tasks based on upcoming bookings | Low |
+| Webhook processing | On event | Defer webhook payload processing from HTTP handler | Burst |
+
+**Total per client instance:** ~6 scheduled tasks + event-driven webhook processing
+
+**At 100 clients:** ~600 scheduled tasks + webhook bursts
+
+**Anvil Business plan verification required:** Confirm that 600+ scheduled tasks across 100 apps on a single account is within limits. This is a blocking question before launch.
+
+### Webhook Processing Pattern
+
+Webhook handlers (Stripe, Paystack, Brevo) must return HTTP 200 immediately or the gateway times out. Processing is deferred to a background task.
+
+**Pattern:**
+
+```python
+# In webhook handler
+@anvil.server.http_handler(path='webhooks/stripe')
+def handle_stripe_webhook():
+    payload = anvil.server.request.body
+    signature = anvil.server.request.headers.get('stripe-signature')
+    
+    # Validate signature
+    if not verify_stripe_signature(payload, signature):
+        return anvil.server.HttpResponse(status=400)
+    
+    # Store raw payload and dispatch to background task
+    event_id = app_tables.webhook_log.add_row(
+        source='stripe',
+        payload=payload,
+        status='pending',
+        received_at=datetime.now(TZ.UTC)
+    )
+    
+    anvil.server.launch_background_task('process_webhook', event_id)
+    
+    # Return 200 immediately
+    return anvil.server.HttpResponse(status=200)
+
+# In background task
+@anvil.server.background_task
+def process_webhook(event_id):
+    event = app_tables.webhook_log.get_by_id(event_id)
+    # Process the webhook payload
+    # Update booking status, payment status, etc.
+    event.status = 'processed'
+```
+
+---
+
+## Consequences
+
+- ✅ Near-real-time updates without WebSocket infrastructure
+- ✅ All async operations use Anvil's native background task system
+- ✅ Webhook handlers return 200 immediately — no gateway timeouts
+- ⚠️ Polling adds server load — must be balanced against freshness needs
+- ⚠️ Background task limits per Anvil plan are a hard ceiling — must be verified
+- ⚠️ Client-side timers stop when the form is hidden — updates pause in background tabs
+- ⚠️ No push notifications for critical events in V1 — polling is the only mechanism until Mybizz_management is built
+
+---
+
+## Related Documents
+
+| Document | Relationship |
+|---|---|
+| `adr/032-observability-architecture.md` | Health heartbeat task feeds observability metrics |
+| `adr/034-anvil-platform-constraints.md` | Background task limits and server call latency constraints |
+| `adr/038-webhook-architecture.md` | Detailed webhook handling pattern |
+| `integration-architecture.md` | Section 4: Background Tasks (existing task inventory) |
+| `docs/platform-overview.md` | Section 5.7: Email & Campaigns (campaign enrollment task) |
+
+---
+
+*End of ADR-036*

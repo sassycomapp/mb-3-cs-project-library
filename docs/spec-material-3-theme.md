@@ -8,6 +8,8 @@ Based on the information gathered, here is a strict spec/documentation style rew
 
 This application uses **Anvil's official Material 3 Theme dependency** as the foundational design system. Material 3 (M3) components, layouts, and design tokens are provided by this dependency and customized through roles and CSS overrides. [anvil](https://anvil.works/docs/ui/app-themes/material-3)
 
+**MUI Aesthetic Overlay:** The MUI dashboard aesthetic has been applied on top of M3 via CSS custom properties and Anvil role selectors. See `DESIGN.md` Section "MUI Aesthetic Implementation" for the authoritative MUI variables. See `theme_mui_patch.css` for the reference patch and `theme_patched.css` for the deployment-ready theme.
+
 ### 2. Theme Architecture
 
 #### 2.1 Material 3 Dependency (MANDATORY)

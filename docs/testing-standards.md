@@ -12,6 +12,8 @@
 - Fast (milliseconds), zero risk
 - Run continuously on every code change
 
+**See:** ADR-034 (Anvil Platform Constraints — Skulpt runtime limitations affect client-side test approach)
+
 ### Level 2: Integration Tests (Uplink)
 - Server function integration, Data Tables operations
 - Run via Anvil Uplink — accesses real Anvil app
@@ -70,6 +72,8 @@ def test_feature_scenario():
 1. Clean up test data
 2. Verify cleanup successful
 3. Create backup if tests pass
+
+**See:** ADR-036 (Real-Time and Background Tasks — background task testing patterns)
 
 ### Uplink Connection
 ```python

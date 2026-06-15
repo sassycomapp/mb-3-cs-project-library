@@ -1,6 +1,7 @@
 # Mybizz CS — User Flows
 
-**Authority:** Reference — defines intended behaviour for all user flows
+**Authority:** Reference — defines intended behaviour for all user flows  
+**Related ADRs:** ADR-035 (Form Architecture and State Management), ADR-038 (Webhook Architecture)
 
 ---
 
@@ -80,6 +81,10 @@
 
 **Post-confirmation:** Offer recurring appointment option (weekly / bi-weekly / monthly).
 
+**Performance note:** The booking flow has multiple steps, each potentially requiring a server call. To avoid sluggish UX, data is pre-loaded where possible and related operations are batched. See ADR-035 (Form Architecture — booking flow latency management).
+
+**See:** ADR-034 (Anvil Platform Constraints — Skulpt limits on date/money logic)
+
 ---
 
 ## §3 Admin Daily Operations
@@ -98,6 +103,11 @@ Vault (Owner only)
 **Morning routine:** View today's metrics and alerts → process pending items → check today's calendar.
 
 **Processing a booking:** Open detail → verify details and payment status → Confirm (PENDING → CONFIRMED) → system sends confirmation email and creates calendar event.
+
+**Payment webhooks:** Stripe and Paystack POST webhooks to the client instance. Handlers return HTTP 200 immediately and defer processing to background tasks. See ADR-038 (Webhook Architecture).
+
+**See:** ADR-036 (Real-Time and Background Tasks — polling intervals)
+**See:** ADR-039 (PDF Invoice Generation) for invoice creation on booking completion.
 
 ---
 
