@@ -345,3 +345,34 @@ Both are connected via the `gbrain-repo` federated source in GBrain. Your workin
 - `workspace/gbrain/gbrain-sync-policy.md` — Freshness rules and sync triggers
 - `workspace/gbrain/gbrain-install-plan.md` — Installation and configuration details
 - `gstack-outputs/gbrain-assessment.md` — Full assessment results from 2026-06-10
+
+---
+# OpenCode vs WSL
+work through OpenCode for everything except maintenance.
+
+Use | Where 
+Asking questions, research, coding tasks | OpenCode
+git push, gbrain sync, gbrain embed | WSL
+gbrain doctor (health check)| WSL
+
+In OpenCode, GBrain is wired in as MCP tools — the agent can search and query your 627 pages automatically without you doing anything in WSL.
+
+**After Doing Work in Project-Library**
+Run these in WSL in order, every time:
+bashcd /mnt/c/_mb2-cs-app/project-library
+git add -A
+git commit -m "brief description of what changed"
+git push origin main
+gbrain sync
+gbrain embed --stale
+That's the complete sequence: GitHub updated, GBrain updated, new content embedded.
+
+**Telling the Agent to Use GBrain in OpenCode**
+GBrain is available automatically in every OpenCode session. 
+To make it explicit at the start of a task, add this to your prompt:
+Instruction: [Before starting, search GBrain for any existing context on [topic].]
+
+Or for a bigger task:
+Instruction: [Search GBrain for: [topic 1], [topic 2], [topic 3] — then begin.]
+
+The agent will call gbrain_search and gbrain_query directly. It has access to all 627 pages of your project library, ADRs, and docs as research sources without you needing to paste anything in.
