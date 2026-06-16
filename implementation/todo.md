@@ -376,3 +376,105 @@ Items are reconciled against all ADRs, onboarding plan, design system, and wiref
 ---
 
 *End of file — todo.md*
+
+---
+
+## 8. CEO Review 2026-06-15 — Captured Actions
+
+### 8.1 Anvil Account Failure Recovery Documentation
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 1
+- **Task:** Add account-level failure and recovery procedures to deployment-procedures.md
+
+### 8.2 app_tables Failure Handling Spec
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 2
+- **Task:** Define behavior when app_tables resolution fails in ADR-034
+
+### 8.3 Background Task Failure Policy
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 2
+- **Task:** Define retry/failure policy per background task in ADR-036
+
+### 8.4 TOTP Recovery Path
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 3
+- **Task:** Document TOTP recovery via Mybizz_management
+
+### 8.5 Brevo Monitoring Note
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P2
+- **Source:** CEO review 2026-06-15 Section 3
+- **Task:** Add note on Brevo credential monitoring responsibility
+
+### 8.6 Edge Case Documentation (Core Flows)
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 4
+- **Task:** Document booking, onboarding, dedup, currency, and landing page edge cases
+
+### 8.7 Build Plan Self-Review Checklists
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P2
+- **Source:** CEO review 2026-06-15 Section 5
+- **Task:** Add self-review checklist to each build plan phase
+
+### 8.8 E2E Booking Test Spec
+- **Tag:** [Planned]
+- **Type:** Test
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 6
+- **Task:** Define full booking flow E2E test
+
+### 8.9 Error Path Test Coverage
+- **Tag:** [Planned]
+- **Type:** Test
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 6
+- **Task:** Add error-path test cases across modules
+
+### 8.10 RBAC Coverage Matrix
+- **Tag:** [Planned]
+- **Type:** Test
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 6
+- **Task:** Define RBAC test matrix
+
+### 8.11 Observability Gaps Documentation
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 7
+- **Task:** Define thresholds, retention, and error monitoring
+
+### 8.12 Webhook Schema Reconciliation
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 9
+- **Task:** Align webhook_log schema between ADR-038 and authoritative schema
+
+### 8.13 Anvil Billing Model Clarification
+- **Tag:** [Planned]
+- **Type:** Research
+- **Priority:** P2
+- **Source:** CEO review 2026-06-15 Section 10
+- **Task:** Resolve per-account vs per-app limits
+
+### 8.14 UI State Specifications
+- **Tag:** [Planned]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** CEO review 2026-06-15 Section 11
+- **Task:** Add empty/loading/error state specs to build plan

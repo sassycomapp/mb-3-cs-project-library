@@ -359,12 +359,13 @@ In OpenCode, GBrain is wired in as MCP tools — the agent can search and query 
 
 **After Doing Work in Project-Library**
 Run these in WSL in order, every time:
-bashcd /mnt/c/_mb2-cs-app/project-library
-git add -A
-git commit -m "brief description of what changed"
-git push origin main
-gbrain sync
-gbrain embed --stale
+bash 
+1. cd /mnt/c/_mb2-cs-app/project-library
+2. git add -A
+3. git commit -m "/plan-ceo-review done"
+4. git push origin main
+5. gbrain sync
+6. gbrain embed --stale
 That's the complete sequence: GitHub updated, GBrain updated, new content embedded.
 
 **Telling the Agent to Use GBrain in OpenCode**
