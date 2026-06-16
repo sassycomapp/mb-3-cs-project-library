@@ -60,6 +60,28 @@ Free tier capabilities: 100,000 contacts, full API access, marketing automation 
 
 CRM is automatically updated whenever a booking or service transaction is created via `contact_service.py`'s `update_contact_from_transaction()` function.
 
+### Brevo Credential Monitoring
+
+**Source:** CEO review 2026-06-15 Section 3
+
+Each client creates their own Brevo account and stores SMTP and API keys in the Vault. If a client's Brevo account is compromised, an attacker could send emails as that client.
+
+**Current state (V1):**
+- Mybizz has no monitoring for unusual Brevo activity per client
+- Brevo credentials are stored securely in Vault (encrypted at rest)
+- TOTP step-up required to access Vault
+
+**Documented intention (Mybizz_management scope):**
+- Mybizz_management will monitor Brevo API usage per client instance
+- Unusual activity patterns (volume spikes, new sender domains) will trigger alerts
+- Credential rotation will be available through Mybizz_management
+- This is out of V1 scope but is a documented operational requirement
+
+**Mitigation in V1:**
+- Vault TOTP gate prevents casual credential access
+- Brevo's own account security (2FA if enabled by client) provides additional protection
+- Client is responsible for securing their own Brevo account
+
 ---
 
 ## 4. Background Tasks

@@ -92,21 +92,41 @@ Anvil's built-in Git integration is one-way friendly (Anvil ← GitHub). Branchi
 
 Anvil's free tier has no persistent server. The Business plan includes persistent server capability, which is required for performance-sensitive operations.
 
----
+### 10. `app_tables` Resolution Failure
 
-## Governing Decision
+When a server module in `master_template` calls `app_tables`, Anvil resolves the tables to the calling client instance's Data Tables. If the client instance is corrupted, misconfigured, or missing required tables, `app_tables` resolution may fail or return incomplete results.
 
-**The platform is designed to work within Anvil's parameters, not around them.**
+**Failure behavior (documented):**
+- If `app_tables` resolution fails, the server function must not crash with a 500 error
+- Show the user a generic, non-technical error message: "Something went wrong. Please try again or contact support."
+- Log the failure to `health_log` with status `"unhealthy"` and details of the missing table
+- Alert Mybizz_management via the health monitoring system
+- Do not expose internal error details to the client user
 
-This means:
-- Server-side Python (CPython) handles all business logic, calculations, and integrations
-- Client-side Python (Skulpt) handles UI logic only
-- Data Table patterns follow Anvil's lazy-load model
-- Background tasks are used for all async operations
-- The Vault system replaces Anvil Secrets for client credentials
-- The dependency model (ADR-028) is the foundation of the multi-tenant architecture
+**Prevention:**
+- `blank_client_template` must always have the complete table set
+- Schema migrations must follow the checklist in `deployment-procedures.md`
+- Health heartbeat task verifies critical table accessibility every 15 minutes
 
-The alternative — designing for eventual migration off Anvil — would add abstraction layers, reduce velocity, and produce a worse product within Anvil. If migration becomes necessary in the future, the cost of rewriting is accepted as a trade-off for shipping faster today.
+**Source:** CEO review 2026-06-15 Section 2
+
+### 11. Vault TOTP Recovery
+
+Vault access requires TOTP step-up on every open (ADR-003). If the Owner loses their TOTP device, the following recovery path applies:
+
+**Recovery process:**
+1. Owner contacts Mybizz support (Mybizz_management)
+2. Mybizz_management verifies the Owner's identity through an out-of-band process (government ID, registered email, security questions)
+3. Mybizz_management resets the Owner's TOTP configuration
+4. Owner re-enrolls TOTP on their new device
+5. The reset event is logged in the Mybizz_management amendment log (append-only)
+
+**Constraints:**
+- Only Mybizz_management can reset TOTP — no self-service recovery
+- The reset event is permanently logged for audit
+- TOTP recovery is a V1 operational requirement, not a code feature
+
+**Source:** CEO review 2026-06-15 Section 3
 
 ---
 
@@ -132,6 +152,7 @@ The alternative — designing for eventual migration off Anvil — would add abs
 | `adr/036-real-time-and-background-tasks.md` | Background task patterns within Anvil's limits |
 | `adr/040-data-access-patterns.md` | Data Table query patterns within Anvil's model |
 | `docs/platform-overview.md` | Section 6: Technical Stack |
+| `docs/deployment-procedures.md` | Anvil account-level failure scenarios and recovery |
 
 ---
 

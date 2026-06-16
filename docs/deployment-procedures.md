@@ -199,4 +199,74 @@ If a schema change causes issues:
 
 ---
 
+## Anvil Account-Level Failure Scenarios
+
+**Source:** CEO review 2026-06-15 Section 1
+
+All 100 client instances are hosted on a single Anvil Business account. This creates a single-point-of-failure at the account level. The following scenarios and recovery procedures address this operational risk.
+
+### Scenario 1: Anvil Account Suspension
+
+**Cause:** Terms of service violation, billing failure, or Anvil policy enforcement.
+
+**Impact:** All client instances become inaccessible simultaneously. No client can log in, process bookings, or access data.
+
+**Detection:**
+- Health heartbeat background tasks stop writing to `health_log`
+- Mybizz_management monitoring dashboard shows all instances offline
+- Client support tickets spike
+
+**Recovery:**
+1. Contact Anvil support immediately to understand the suspension reason
+2. Resolve the underlying issue (billing, policy, etc.)
+3. Request account reinstatement
+4. Once reinstated, verify all client instances are accessible
+5. Run health checks across all instances
+6. Notify affected clients with a status update
+
+**Prevention:**
+- Maintain billing payment method with redundancy
+- Stay current with Anvil Terms of Service changes
+- Maintain direct contact relationship with Anvil support team
+
+### Scenario 2: Anvil Account Compromise
+
+**Cause:** Credential theft, social engineering, or Anvil platform breach.
+
+**Impact:** Attacker may access the Anvil IDE, modify code, access Data Tables, or delete apps.
+
+**Detection:**
+- Unexpected code changes visible in git history
+- Unknown user sessions in Anvil IDE
+- Unusual API activity or data access patterns
+
+**Recovery:**
+1. Immediately change all Anvil account credentials
+2. Enable 2FA on the Anvil account (if not already enabled)
+3. Audit git history for unauthorized commits
+4. Audit Data Table changes for unauthorized modifications
+5. If code was modified: revert to last known-good commit
+6. If data was accessed: notify affected clients per data breach protocol
+7. Review and rotate all Vault encryption keys
+
+### Scenario 3: Anvil Platform Outage
+
+**Cause:** Anvil infrastructure failure, DDoS, or cloud provider outage.
+
+**Impact:** All client instances are temporarily unavailable.
+
+**Detection:**
+- Health heartbeat tasks fail
+- Client reports of inaccessible platform
+
+**Recovery:**
+1. Monitor Anvil status page and support channels
+2. Communicate expected resolution timeline to clients
+3. Once restored: verify all instances are healthy
+4. Review `health_log` for any data gaps during outage
+
+**Note:** This is an accepted risk of the platform decision (ADR-034). No self-hosted fallback is planned.
+
+---
+
 *End of file — Deployment Procedures*

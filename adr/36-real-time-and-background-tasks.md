@@ -93,6 +93,29 @@ All asynchronous operations use Anvil's `@anvil.server.background_task` decorato
 
 **Anvil Business plan verification required:** Confirm that 600+ scheduled tasks across 100 apps on a single account is within limits. This is a blocking question before launch.
 
+### Per-Task Failure and Retry Policy
+
+**Source:** CEO review 2026-06-15 Section 2
+
+Each background task must define its failure behavior. The following table specifies the retry policy and failure action for each task:
+
+| Task | On Failure | Max Retries | Retry Interval | Failure Action |
+|------|-----------|-------------|----------------|----------------|
+| Health heartbeat | Log failure, continue | 1 | Next scheduled run (15 min) | Mark instance `"degraded"` in `health_log` after 3 consecutive failures |
+| Campaign enrollment | Skip failed contact, continue | 3 | 5 minutes (exponential backoff) | Log to `error_log`, skip contact, continue with next |
+| Appointment reminders (24h) | Retry, then skip | 3 | 10 minutes | Log to `error_log`, send on next hourly run if missed |
+| Appointment reminders (1h) | Retry, then skip | 2 | 5 minutes | Log to `error_log` — shorter window means fewer retries |
+| Lifecycle stage updates | Retry full batch | 2 | 30 minutes | Log to `error_log`, run on next daily cycle |
+| Automated task generation | Retry full batch | 2 | 30 minutes | Log to `error_log`, run on next daily cycle |
+| Webhook processing | Retry individual event | 5 | Exponential backoff (1m, 2m, 4m, 8m, 16m) | Mark webhook `"failed"` in `webhook_log`, alert Mybizz_management |
+
+**General rules:**
+- All retries use exponential backoff unless specified otherwise
+- Maximum retry window: 1 hour for hourly tasks, 24 hours for daily tasks
+- After max retries exhausted: log to `error_log`, mark task as `"failed"` in the relevant table
+- Critical task failures (webhook processing) trigger an alert to Mybizz_management
+- Non-critical failures (campaign enrollment) are logged but do not trigger alerts
+
 ### Webhook Processing Pattern
 
 Webhook handlers (Stripe, Paystack, Brevo) must return HTTP 200 immediately or the gateway times out. Processing is deferred to a background task.
@@ -155,6 +178,7 @@ def process_webhook(event_id):
 | `adr/038-webhook-architecture.md` | Detailed webhook handling pattern |
 | `integration-architecture.md` | Section 4: Background Tasks (existing task inventory) |
 | `docs/platform-overview.md` | Section 5.7: Email & Campaigns (campaign enrollment task) |
+| `docs/deployment-procedures.md` | Operational procedures for task failure recovery |
 
 ---
 

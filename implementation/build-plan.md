@@ -28,8 +28,9 @@
 
 ---
 
-**Last Updated:** 2026-06-02  
+**Last Updated:** 2026-06-15  
 **Next Review:** After Phase 1 implementation completion
+**CEO Review:** 2026-06-15 — 11 sections reviewed, 14 TODO items captured (see todo.md section 8), plan changes applied
 
 ---
 
@@ -129,6 +130,9 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Logging framework configured
 - ✅ Metrics and alerts defined
 - ✅ Log retention procedures documented
+- ✅ Health thresholds defined: "healthy" (all checks pass), "degraded" (>1 check fails in 15 min), "unhealthy" (>3 consecutive failures)
+- ✅ Log retention policy: 2 years for audit logs, 90 days for operational logs, 30 days for debug logs
+- ✅ Error rate monitoring: alert when error rate exceeds 5% of requests in any 15-minute window
 
 ### Stage 0.4: Define Deployment Procedures
 
@@ -216,6 +220,9 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Navigation visibility respects RBAC (Settings Owner/Manager only)
 - ✅ Mobile responsive layout working
 - ✅ Sign out link present at bottom of sidebar
+- ✅ Empty state: dashboard shows welcome message and onboarding link when no data exists
+- ✅ Loading state: dashboard shows skeleton/placeholder while server calls are in progress
+- ✅ Error state: dashboard shows retry button and error message on server failure
 - ✅ All unit tests passing
 
 **Implementation Notes:**
@@ -243,11 +250,13 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Feature flags functional (bookings_enabled, services_enabled, etc.)
 - ✅ Theme customization persists and applies correctly
 - ✅ Currency selection working (immutable after first transaction)
+- ✅ Edge case: first transaction is refunded/voided — currency remains immutable; refund uses the original currency
 - ✅ User management functional (invite, edit role, deactivate)
 - ✅ All config tables initialized via `create_initial_config()`
 - ✅ Settings form uses 11-tab layout with M3 button navigation
 - ✅ RBAC governance enforced per tab
 - ✅ "Return to Onboarding" button visible only when onboarding in progress
+- ✅ Edge case: user closes browser mid-onboarding — onboarding resumable from last completed step (ADR-023); no session expiry for incomplete onboarding
 - ✅ All unit tests passing
 
 **Implementation Notes:**
@@ -354,6 +363,11 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Booking status workflow (PENDING → CONFIRMED → COMPLETED/CANCELLED)
 - ✅ Contact auto-created from booking if not exists
 - ✅ Booking metadata schemas functional for intake forms
+- ✅ Empty state: booking calendar shows "No bookings yet" with "Create Booking" CTA
+- ✅ Loading state: calendar shows skeleton grid while data loads
+- ✅ Error state: booking form shows inline validation errors and server error retry
+- ✅ Edge case: user navigates away mid-payment — booking holds for 15 minutes, then expires (documented behavior)
+- ✅ Edge case: slow connection during payment — 30-second timeout with user-visible progress indicator
 - **See:** ADR-035 (Form Architecture — booking flow latency management)
 
 ### Stage 2.4: Payment Integration
@@ -427,6 +441,10 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Lifetime value and transaction counts cached and updated
 - ✅ No duplicate contacts (email-based deduplication)
 - ✅ Empty state messages added (TODO 6)
+- ✅ Loading state: contact list shows skeleton rows while data loads
+- ✅ Error state: contact form shows inline validation errors; list shows retry on server failure
+- ✅ Edge case: contact dedup with same email, different names — manual merge dialog when confidence < 90%
+- ✅ Edge case: landing page lead submitted with duplicate email — updates existing contact, does not reject
 - ✅ Database indexes added (TODO 8: contacts.email, bookings.contact_id, bookings.service_id indexed)
 - ✅ Pagination added to large lists (TODO 9: 50 items per page)
 - **See:** ADR-040 (Data Access Patterns — pagination, denormalization)
@@ -754,6 +772,64 @@ After Phase 5 launch, begin V2 development:
 - Additional homepage templates
 - Time tracking (logging billable hours against bookings/services)
 - Custom segment builder (filter by tags, status, spend, booking history)
+
+---
+
+## Self-Review Checklists
+
+**Source:** CEO review 2026-06-15 Section 5
+
+For a solo developer, self-review is where bugs hide. Complete the following checklist before marking any stage as done.
+
+### Phase 1 Self-Review (Foundation)
+
+- [ ] All server functions have RBAC decorators — grep for `@authenticated_endpoint` or equivalent
+- [ ] No secrets in client code — search for hardcoded API keys, passwords, or tokens
+- [ ] Settings form tabs respect RBAC visibility — test with each role
+- [ ] Vault TOTP gate works on every open — no grace period
+- [ ] Currency selection is immutable after first transaction — test the guardrail
+- [ ] Navigation links resolve correctly — no dead links or 404s
+- [ ] Mobile responsive layout verified at 375px minimum width
+
+### Phase 2 Self-Review (Transactional Core)
+
+- [ ] Payment webhook signature verification rejects invalid signatures
+- [ ] Idempotency check prevents duplicate payment processing
+- [ ] Booking status transitions are correct (PENDING → CONFIRMED → COMPLETED/CANCELLED)
+- [ ] Double-booking prevention works — test concurrent booking attempts
+- [ ] Invoice amounts match booking amounts (including tax/currency)
+- [ ] External service failures handled gracefully (Brevo, Stripe, Paystack)
+- [ ] All financial calculations use server-side functions (not Skulpt)
+
+### Phase 3 Self-Review (CRM + Email)
+
+- [ ] Contact deduplication works — same email updates existing contact
+- [ ] Campaign enrollment does not duplicate contacts
+- [ ] Unsubscribe handling works — contact removed from future sends
+- [ ] Empty states display correctly for all list views
+- [ ] Pagination works correctly with 50-item pages
+- [ ] Landing page lead capture creates both `leads` and `contacts` simultaneously
+- [ ] Database indexes verified on high-query columns
+
+### Phase 4 Self-Review (Content + Website)
+
+- [ ] Public pages render correctly on mobile, tablet, desktop
+- [ ] SEO meta tags present on all public pages
+- [ ] Keyboard navigation works for all interactive elements
+- [ ] Screen reader support verified for key flows
+- [ ] Contact form creates `contact_submissions` record
+- [ ] ClauseBuilder saves correctly to both `privacy_policy` and `t_and_c` tables
+- [ ] Form debounce prevents double-submissions
+
+### Phase 5 Self-Review (Polish + Launch)
+
+- [ ] All critical flows tested end-to-end (booking, payment, email)
+- [ ] RBAC coverage matrix verified for all roles and forms
+- [ ] Error path tests pass (payment failure, webhook timeout, service down)
+- [ ] Backup/restore procedure tested and documented
+- [ ] Deployment rollback procedure tested
+- [ ] Monitoring and alerting configured and tested
+- [ ] No critical or high-severity issues in error_log
 
 ---
 
