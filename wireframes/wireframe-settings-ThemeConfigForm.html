@@ -61,27 +61,54 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     </div>
   </div>
 
-  <!-- Color Settings -->
+  <!-- Palette Selection -->
   <div class="wf-panel">
-    <span class="wf-label">card_colors (Card)</span>
-    <div class="wf-heading-sm">Colors</div>
-    <div class="cn">hdg_colors <span class="ct">(Heading)</span> <span class="cfixed">"Colors"</span></div>
+    <span class="wf-label">card_palette (Card)</span>
+    <div class="wf-heading-sm">Color Palette</div>
+    <div class="cn">hdg_palette <span class="ct">(Heading)</span> <span class="cfixed">"Color Palette"</span></div>
+    <div class="wf-text">Choose a color scheme that reflects your business</div>
+    <div class="cn">txt_palette_desc <span class="ct">(Text)</span></div>
 
-    <div style="display: flex; gap: 16px; align-items: center; margin: 12px 0;">
-      <div class="wf-color-swatch" style="background: #6750A4;"></div>
-      <div style="flex: 1;">
-        <div class="wf-text">Primary Color</div>
-        <div class="wf-textbox" style="color: #aaa;">#6750A4</div>
-        <div class="cn">txt_primary_color <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div style="display: flex; gap: 12px; margin: 12px 0;">
+      <div style="flex: 1; border: 2px solid #6750A4; border-radius: 8px; padding: 12px; background: #F3EDF7; text-align: center; cursor: pointer;">
+        <div style="display: flex; gap: 4px; justify-content: center; margin-bottom: 8px;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #493ef3;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #e6dff3;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #625a74;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #e8defc;"></div>
+        </div>
+        <div style="font-size: 12px; font-weight: bold; color: #333;">Professional Blue</div>
+        <div class="cn">palette_professional_blue <span class="ct">(Card)</span> — selected</div>
       </div>
-    </div>
-
-    <div style="display: flex; gap: 16px; align-items: center; margin: 12px 0;">
-      <div class="wf-color-swatch" style="background: #625B71;"></div>
-      <div style="flex: 1;">
-        <div class="wf-text">Accent Color</div>
-        <div class="wf-textbox" style="color: #aaa;">#625B71</div>
-        <div class="cn">txt_accent_color <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+      <div style="flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 12px; background: #fff; text-align: center; cursor: pointer;">
+        <div style="display: flex; gap: 4px; justify-content: center; margin-bottom: 8px;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #ae2f2f;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #fbdbd7;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #785651;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #fbdbd7;"></div>
+        </div>
+        <div style="font-size: 12px; font-weight: bold; color: #333;">Warm Coral</div>
+        <div class="cn">palette_warm_coral <span class="ct">(Card)</span></div>
+      </div>
+      <div style="flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 12px; background: #fff; text-align: center; cursor: pointer;">
+        <div style="display: flex; gap: 4px; justify-content: center; margin-bottom: 8px;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #206868;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #91f3f2;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #486363;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #cae8e8;"></div>
+        </div>
+        <div style="font-size: 12px; font-weight: bold; color: #333;">Calm Teal</div>
+        <div class="cn">palette_calm_teal <span class="ct">(Card)</span></div>
+      </div>
+      <div style="flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 12px; background: #fff; text-align: center; cursor: pointer;">
+        <div style="display: flex; gap: 4px; justify-content: center; margin-bottom: 8px;">
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #971dbf;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #f5dafb;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #6b586f;"></div>
+          <div style="width: 24px; height: 24px; border-radius: 50%; background: #f1dbf6;"></div>
+        </div>
+        <div style="font-size: 12px; font-weight: bold; color: #333;">Sophisticated Purple</div>
+        <div class="cn">palette_sophisticated_purple <span class="ct">(Card)</span></div>
       </div>
     </div>
   </div>
@@ -93,9 +120,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_typography <span class="ct">(Heading)</span> <span class="cfixed">"Typography"</span></div>
 
     <div class="wf-text">Font Family</div>
+    <div class="cn">txt_font_label <span class="ct">(Text)</span> <span class="cfixed">"Font Family"</span></div>
     <div class="wf-dd">Roboto</div>
     <div class="cn">dd_font_family <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    <div class="wf-text">Available: Roboto, Noto Sans, Arial, Open Sans</div>
   </div>
 
   <!-- Header Style -->
@@ -105,9 +132,11 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_header <span class="ct">(Heading)</span> <span class="cfixed">"Header Style"</span></div>
 
     <div class="wf-text">Header Layout</div>
+    <div class="cn">txt_header_label <span class="ct">(Text)</span> <span class="cfixed">"Header Layout"</span></div>
     <div class="wf-dd">Standard</div>
     <div class="cn">dd_header_style <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
     <div class="wf-text">Options: Standard, Centered, Minimal</div>
+    <div class="cn">txt_header_options <span class="ct">(Text)</span> <span class="cfixed">"Options: Standard, Centered, Minimal"</span></div>
   </div>
 
   <!-- Live Preview -->
@@ -150,8 +179,6 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 <div class="prop-note">Designer-mandatory properties: Write Back toggle (W) must be enabled in Designer Data Bindings panel for all input components.</div>
 <table class="props">
 <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_primary_color</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_accent_color</td><td>TextBox</td><td>writeback = W</td></tr>
 <tr><td>dd_font_family</td><td>DropdownMenu</td><td>writeback = W</td></tr>
 <tr><td>dd_header_style</td><td>DropdownMenu</td><td>writeback = W</td></tr>
 </table>

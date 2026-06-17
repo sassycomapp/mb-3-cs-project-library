@@ -81,7 +81,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
         <span class="wf-badge wf-badge-confirmed">Confirmed</span>
         <span class="wf-badge wf-badge-paid">Paid</span>
       </div>
-      <div class="cn">badge_status <span class="ct">(Label)</span> — dynamic status badge</div>
+      <div class="cn">badge_status <span class="ct">(Text)</span> — dynamic status badge</div>
     </div>
   </div>
 
@@ -92,13 +92,20 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_details <span class="ct">(Heading)</span> <span class="cfixed">"Booking Information"</span></div>
 
     <div class="wf-kv"><span class="wf-kv-label">Service</span><span class="wf-kv-value">Initial Consultation</span></div>
+    <div class="cn">txt_service_label <span class="ct">(Text)</span> <span class="cfixed">"Service"</span> | txt_service_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Provider</span><span class="wf-kv-value">Sarah Johnson</span></div>
+    <div class="cn">txt_provider_label <span class="ct">(Text)</span> <span class="cfixed">"Provider"</span> | txt_provider_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Date</span><span class="wf-kv-value">May 15, 2026</span></div>
+    <div class="cn">txt_date_label <span class="ct">(Text)</span> <span class="cfixed">"Date"</span> | txt_date_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Time</span><span class="wf-kv-value">10:00 AM - 11:00 AM</span></div>
+    <div class="cn">txt_time_label <span class="ct">(Text)</span> <span class="cfixed">"Time"</span> | txt_time_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Meeting Type</span><span class="wf-kv-value">Video Call</span></div>
+    <div class="cn">txt_meeting_label <span class="ct">(Text)</span> <span class="cfixed">"Meeting Type"</span> | txt_meeting_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Amount</span><span class="wf-kv-value">R 850.00</span></div>
+    <div class="cn">txt_amount_label <span class="ct">(Text)</span> <span class="cfixed">"Amount"</span> | txt_amount_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Payment Status</span><span class="wf-kv-value"><span class="wf-badge wf-badge-paid">Paid</span></span></div>
-    <div class="cn">details_panel <span class="ct">(ColumnPanel)</span> — key-value pairs</div>
+    <div class="cn">txt_payment_label <span class="ct">(Text)</span> <span class="cfixed">"Payment Status"</span> | badge_payment_status <span class="ct">(Label)</span> <span class="cfixed">dynamic</span></div>
+    <div class="cn">col_details <span class="ct">(ColumnPanel)</span> — key-value pairs</div>
   </div>
 
   <!-- Customer Information -->
@@ -108,9 +115,12 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_customer <span class="ct">(Heading)</span> <span class="cfixed">"Customer"</span></div>
 
     <div class="wf-kv"><span class="wf-kv-label">Name</span><span class="wf-kv-value">John Doe</span></div>
+    <div class="cn">txt_name_label <span class="ct">(Text)</span> <span class="cfixed">"Name"</span> | txt_name_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Email</span><span class="wf-kv-value">john@example.com</span></div>
+    <div class="cn">txt_email_label <span class="ct">(Text)</span> <span class="cfixed">"Email"</span> | txt_email_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Phone</span><span class="wf-kv-value">+27 82 123 4567</span></div>
-    <div class="cn">customer_panel <span class="ct">(ColumnPanel)</span></div>
+    <div class="cn">txt_phone_label <span class="ct">(Text)</span> <span class="cfixed">"Phone"</span> | txt_phone_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
+    <div class="cn">col_customer <span class="ct">(ColumnPanel)</span></div>
   </div>
 
   <!-- Notes -->
