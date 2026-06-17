@@ -78,12 +78,14 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
         <div style="font-size: 24px; margin-bottom: 8px;">&#128179;</div>
         <div class="wf-card-title">Stripe</div>
         <div class="wf-card-meta">International payments</div>
+        <div class="cn">lbl_stripe_desc <span class="ct">(Text)</span> <span class="cfixed">"International payments"</span></div>
         <div class="cn">card_stripe <span class="ct">(Card)</span> — selected</div>
       </div>
       <div class="wf-card" style="flex: 1; text-align: center;">
         <div style="font-size: 24px; margin-bottom: 8px;">&#127793;</div>
         <div class="wf-card-title">Paystack</div>
         <div class="wf-card-meta">South Africa & Africa</div>
+        <div class="cn">lbl_paystack_desc <span class="ct">(Text)</span> <span class="cfixed">"South Africa & Africa"</span></div>
         <div class="cn">card_paystack <span class="ct">(Card)</span></div>
       </div>
     </div>
@@ -103,6 +105,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
       <div class="cn">toggle_test_mode <span class="ct">(Switch)</span> <span class="cfixed">(W)</span></div>
     </div>
     <div class="wf-text">When test mode is enabled, payments are processed in the gateway's sandbox environment.</div>
+    <div class="cn">lbl_test_mode_note <span class="ct">(Text)</span></div>
   </div>
 
   <!-- Publishable Key -->
@@ -115,6 +118,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-textbox" style="color: #aaa;">pk_test_...</div>
     <div class="cn">txt_publishable_key <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
     <div class="wf-text">Safe to expose in client-side code.</div>
+    <div class="cn">lbl_key_note <span class="ct">(Text)</span></div>
 
     <div class="wf-notice" style="margin-top: 12px;">
       <strong>Secret Key is stored in The Vault.</strong> Your Stripe/Paystack secret key is encrypted at rest and never displayed. Configure it in the Vault form (Settings → Vault).
@@ -146,6 +150,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_webhook <span class="ct">(Heading)</span> <span class="cfixed">"Webhook Configuration"</span></div>
 
     <div class="wf-text">Register this webhook URL in your Stripe/Paystack dashboard:</div>
+    <div class="cn">lbl_webhook_note <span class="ct">(Text)</span></div>
     <div style="padding: 8px 12px; background: #F3EDF7; border-radius: 4px; font-size: 12px; font-family: monospace; margin: 8px 0;">
       https://yourbusiness.mybizz.live/api/webhooks/stripe
     </div>

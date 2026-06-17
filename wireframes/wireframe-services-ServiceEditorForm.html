@@ -67,14 +67,17 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_basic <span class="ct">(Heading)</span> <span class="cfixed">"Basic Information"</span></div>
 
     <div class="wf-text">Service Name</div>
+    <div class="cn">txt_name_label <span class="ct">(Text)</span> <span class="cfixed">"Service Name"</span></div>
     <div class="wf-textbox" style="color: #aaa;">Initial Consultation</div>
     <div class="cn">txt_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-text" style="margin-top: 8px;">Description</div>
+    <div class="cn">txt_description_label <span class="ct">(Text)</span> <span class="cfixed">"Description"</span></div>
     <div class="wf-textbox" style="height: 80px; color: #aaa;">First meeting with new clients to discuss their needs...</div>
     <div class="cn">txt_description <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-text" style="margin-top: 8px;">Category</div>
+    <div class="cn">dd_category_label <span class="ct">(Text)</span> <span class="cfixed">"Category"</span></div>
     <div class="wf-dd">Consulting</div>
     <div class="cn">dd_category <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
   </div>
@@ -86,18 +89,22 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_pricing <span class="ct">(Heading)</span> <span class="cfixed">"Pricing"</span></div>
 
     <div class="wf-text">Pricing Model</div>
+    <div class="cn">txt_pricing_model_label <span class="ct">(Text)</span> <span class="cfixed">"Pricing Model"</span></div>
     <div class="wf-radio selected">Duration (time-based)</div>
+    <div class="cn">rb_duration <span class="ct">(RadioButton)</span> <span class="cfixed">"Duration (time-based)"</span></div>
     <div class="wf-radio">Unit (deliverable-based)</div>
-    <div class="cn">rb_pricing_model <span class="ct">(RadioButton)</span></div>
+    <div class="cn">rb_unit <span class="ct">(RadioButton)</span> <span class="cfixed">"Unit (deliverable-based)"</span></div>
 
     <div style="display: flex; gap: 16px; margin-top: 12px;">
       <div style="flex: 1;">
         <div class="wf-text">Price</div>
+        <div class="cn">txt_price_label <span class="ct">(Text)</span> <span class="cfixed">"Price"</span></div>
         <div class="wf-textbox" style="color: #aaa;">850</div>
         <div class="cn">txt_price <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
       </div>
       <div style="flex: 1;">
         <div class="wf-text">Duration (minutes)</div>
+        <div class="cn">txt_duration_label <span class="ct">(Text)</span> <span class="cfixed">"Duration (minutes)"</span></div>
         <div class="wf-textbox" style="color: #aaa;">60</div>
         <div class="cn">txt_duration <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
       </div>
@@ -111,16 +118,20 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_provider <span class="ct">(Heading)</span> <span class="cfixed">"Provider"</span></div>
 
     <div class="wf-text">Assigned Provider</div>
+    <div class="cn">txt_assigned_provider_label <span class="ct">(Text)</span> <span class="cfixed">"Assigned Provider"</span></div>
     <div class="wf-dd">Sarah Johnson</div>
     <div class="cn">dd_provider <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-text" style="margin-top: 8px;">Meeting Types</div>
+    <div class="cn">txt_meeting_types_label <span class="ct">(Text)</span> <span class="cfixed">"Meeting Types"</span></div>
     <div style="display: flex; gap: 16px;">
       <div class="wf-radio selected">In-Person</div>
+      <div class="cn">rb_in_person <span class="ct">(RadioButton)</span> <span class="cfixed">"In-Person"</span></div>
       <div class="wf-radio selected">Video Call</div>
+      <div class="cn">rb_video_call <span class="ct">(RadioButton)</span> <span class="cfixed">"Video Call"</span></div>
       <div class="wf-radio">Phone Call</div>
+      <div class="cn">rb_phone_call <span class="ct">(RadioButton)</span> <span class="cfixed">"Phone Call"</span></div>
     </div>
-    <div class="cn">rb_meeting_types <span class="ct">(RadioButton group)</span></div>
   </div>
 
   <!-- Media -->
@@ -130,10 +141,12 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_media <span class="ct">(Heading)</span> <span class="cfixed">"Media"</span></div>
 
     <div class="wf-text">Image URL</div>
+    <div class="cn">txt_image_url_label <span class="ct">(Text)</span> <span class="cfixed">"Image URL"</span></div>
     <div class="wf-textbox" style="color: #aaa;">https://...</div>
     <div class="cn">txt_image_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-text" style="margin-top: 8px;">Video URL (optional)</div>
+    <div class="cn">txt_video_url_label <span class="ct">(Text)</span> <span class="cfixed">"Video URL (optional)"</span></div>
     <div class="wf-textbox" style="color: #aaa;">https://youtube.com/...</div>
     <div class="cn">txt_video_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
   </div>

@@ -90,16 +90,16 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_tab_title <span class="ct">(Heading)</span> <span class="cfixed">"Business Profile"</span></div>
 
     <div class="wf-textbox" style="color:#aaa;">Business name</div>
-    <div class="cn">txt_business_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_business_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> <span class="cfixed">"Business name"</span></div>
 
     <div class="wf-textbox" style="color:#aaa;">Contact email</div>
-    <div class="cn">txt_contact_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_contact_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> <span class="cfixed">"Contact email"</span></div>
 
     <div class="wf-textbox" style="color:#aaa;">Phone</div>
-    <div class="cn">txt_phone <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_phone <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> <span class="cfixed">"Phone"</span></div>
 
     <div class="wf-textbox" style="color:#aaa;">Address</div>
-    <div class="cn">txt_address <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_address <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> <span class="cfixed">"Address"</span></div>
 
     <div class="wf-dd">Select timezone...</div>
     <div class="cn">dd_timezone <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
@@ -114,42 +114,54 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
     <span class="wf-label">tab_palette (ColumnPanel) — visible = False until tab selected</span>
     <div class="wf-heading-sm">Palette</div>
+    <div class="cn">hdg_palette <span class="ct">(Heading)</span> <span class="cfixed">"Palette"</span></div>
     <div class="wf-text">[ PaletteSettingsForm — local component for brand colour selection ]</div>
+    <div class="cn">txt_palette_desc <span class="ct">(Text)</span> <span class="cfixed">"[ PaletteSettingsForm — local component for brand colour selection ]"</span></div>
     <div class="cn">palette_settings <span class="ct">(CustomComponent)</span> — PaletteSettingsForm</div>
   </div>
 
   <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
     <span class="wf-label">tab_currency (ColumnPanel) — visible = False until tab selected</span>
     <div class="wf-heading-sm">System Currency</div>
+    <div class="cn">hdg_system_currency <span class="ct">(Heading)</span> <span class="cfixed">"System Currency"</span></div>
     <div class="wf-text">[ Currency display — locked after first transaction ]</div>
+    <div class="cn">txt_currency_desc <span class="ct">(Text)</span> <span class="cfixed">"[ Currency display — locked after first transaction ]"</span></div>
     <div class="cn">lbl_currency <span class="ct">(Text)</span> — read-only after first transaction</div>
   </div>
 
   <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
     <span class="wf-label">tab_legal (ColumnPanel) — visible = False until tab selected</span>
     <div class="wf-heading-sm">Legal Acknowledgement</div>
+    <div class="cn">hdg_legal <span class="ct">(Heading)</span> <span class="cfixed">"Legal Acknowledgement"</span></div>
     <div class="wf-text">[ Read-only view of legal acknowledgement history ]</div>
+    <div class="cn">txt_legal_desc <span class="ct">(Text)</span> <span class="cfixed">"[ Read-only view of legal acknowledgement history ]"</span></div>
     <div class="cn">rp_legal_history <span class="ct">(RepeatingPanel)</span> — read-only</div>
   </div>
 
   <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
     <span class="wf-label">tab_payment (ColumnPanel) — visible = False until tab selected</span>
     <div class="wf-heading-sm">Payment Gateway</div>
+    <div class="cn">hdg_payment_gateway <span class="ct">(Heading)</span> <span class="cfixed">"Payment Gateway"</span></div>
     <div class="wf-text">[ PaymentGatewayForm — Stripe/Paystack configuration, secret keys in Vault ]</div>
+    <div class="cn">txt_payment_desc <span class="ct">(Text)</span> <span class="cfixed">"[ PaymentGatewayForm — Stripe/Paystack configuration, secret keys in Vault ]"</span></div>
     <div class="cn">payment_gateway_form <span class="ct">(CustomComponent)</span></div>
   </div>
 
   <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
     <span class="wf-label">tab_services (ColumnPanel) — visible = False until tab selected</span>
     <div class="wf-heading-sm">Services</div>
+    <div class="cn">hdg_services <span class="ct">(Heading)</span> <span class="cfixed">"Services"</span></div>
     <div class="wf-text">[ Links to ServiceListForm — service catalogue management ]</div>
+    <div class="cn">txt_services_desc <span class="ct">(Text)</span> <span class="cfixed">"[ Links to ServiceListForm — service catalogue management ]"</span></div>
     <div class="cn">nav_services <span class="ct">(Link)</span> <span class="cfixed">"Manage Services"</span></div>
   </div>
 
   <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
     <span class="wf-label">tab_users (ColumnPanel) — visible = False until tab selected</span>
     <div class="wf-heading-sm">Users & Permissions</div>
+    <div class="cn">hdg_users <span class="ct">(Heading)</span> <span class="cfixed">"Users & Permissions"</span></div>
     <div class="wf-text">[ Links to UserManagementForm — user management and RBAC ]</div>
+    <div class="cn">txt_users_desc <span class="ct">(Text)</span> <span class="cfixed">"[ Links to UserManagementForm — user management and RBAC ]"</span></div>
     <div class="cn">nav_users <span class="ct">(Link)</span> <span class="cfixed">"Manage Users"</span></div>
   </div>
 </div>

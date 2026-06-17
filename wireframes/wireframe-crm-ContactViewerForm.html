@@ -76,6 +76,7 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
         <div class="wf-heading-lg">John Doe</div>
         <div class="cn">hdg_contact_name <span class="ct">(Heading)</span> <span class="cfixed">"John Doe"</span></div>
         <div class="wf-text">john@example.com · +27 82 123 4567</div>
+        <div class="cn">txt_contact_summary <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
       </div>
       <span class="wf-badge wf-badge-active">Active</span>
       <div class="cn">badge_lifecycle <span class="ct">(Text)</span> — dynamic lifecycle badge</div>
@@ -89,13 +90,21 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
     <div class="cn">hdg_info <span class="ct">(Heading)</span> <span class="cfixed">"Contact Information"</span></div>
 
     <div class="wf-kv"><span class="wf-kv-label">Email</span><span class="wf-kv-value">john@example.com</span></div>
+    <div class="cn">kv_email <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Phone</span><span class="wf-kv-value">+27 82 123 4567</span></div>
+    <div class="cn">kv_phone <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Company</span><span class="wf-kv-value">Acme Corp</span></div>
+    <div class="cn">kv_company <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Job Title</span><span class="wf-kv-value">Manager</span></div>
+    <div class="cn">kv_job_title <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Lifecycle Stage</span><span class="wf-kv-value"><span class="wf-badge wf-badge-active">Active</span></span></div>
+    <div class="cn">kv_lifecycle_stage <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Lifetime Value</span><span class="wf-kv-value">R 4,250</span></div>
+    <div class="cn">kv_lifetime_value <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Total Bookings</span><span class="wf-kv-value">5</span></div>
+    <div class="cn">kv_total_bookings <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="wf-kv"><span class="wf-kv-label">Tags</span><span class="wf-kv-value">consulting, tax</span></div>
+    <div class="cn">kv_tags <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     <div class="cn">col_info <span class="ct">(ColumnPanel)</span></div>
   </div>
 
@@ -107,15 +116,21 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 
     <div style="font-size: 12px; margin: 8px 0; padding: 8px; border-bottom: 1px solid #eee;">
       <div style="font-weight: 500;">Booking completed — Initial Consultation</div>
+      <div class="cn">txt_event_title_1 <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
       <div style="color: #888; font-size: 11px;">May 15, 2026 · R 850</div>
+      <div class="cn">txt_event_detail_1 <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     </div>
     <div style="font-size: 12px; margin: 8px 0; padding: 8px; border-bottom: 1px solid #eee;">
       <div style="font-weight: 500;">Email sent — Welcome campaign</div>
+      <div class="cn">txt_event_title_2 <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
       <div style="color: #888; font-size: 11px;">May 10, 2026</div>
+      <div class="cn">txt_event_detail_2 <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     </div>
     <div style="font-size: 12px; margin: 8px 0; padding: 8px; border-bottom: 1px solid #eee;">
       <div style="font-weight: 500;">Contact created — Via landing page</div>
+      <div class="cn">txt_event_title_3 <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
       <div style="color: #888; font-size: 11px;">May 10, 2026</div>
+      <div class="cn">txt_event_detail_3 <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
     </div>
     <div class="cn">rp_activity <span class="ct">(RepeatingPanel)</span> — contact_events</div>
   </div>
@@ -142,8 +157,9 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
   <div class="wf-panel">
     <span class="wf-label">card_notes (Card)</span>
     <div class="wf-heading-sm">Notes</div>
+    <div class="cn">hdg_notes <span class="ct">(Heading)</span> <span class="cfixed">"Notes"</span></div>
     <div class="wf-text-normal">Prefers morning appointments. Has a dog named Max.</div>
-    <div class="cn">txt_notes <span class="ct">(Text)</span></div>
+    <div class="cn">txt_notes <span class="ct">(Text)</span> <span class="cfixed">dynamic</span></div>
   </div>
 </div>
 
