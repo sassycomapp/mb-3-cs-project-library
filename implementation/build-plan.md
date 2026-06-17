@@ -28,9 +28,12 @@
 
 ---
 
-**Last Updated:** 2026-06-15  
+**Last Updated:** 2026-06-16  
 **Next Review:** After Phase 1 implementation completion
 **CEO Review:** 2026-06-15 — 11 sections reviewed, 14 TODO items captured (see todo.md section 8), plan changes applied
+**Eng Review:** 2026-06-16 — 5 dilemmas reviewed, 4 completable items executed (see todo.md section 9)
+**Test Specs:** `docs/test-specifications.md` — E2E booking, error paths, RBAC matrix
+**State Contract:** `docs/globals-contract.md` — shared state variables and defensive loading pattern
 
 ---
 
@@ -368,7 +371,16 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Error state: booking form shows inline validation errors and server error retry
 - ✅ Edge case: user navigates away mid-payment — booking holds for 15 minutes, then expires (documented behavior)
 - ✅ Edge case: slow connection during payment — 30-second timeout with user-visible progress indicator
+- ✅ Booking flow completes in under 3 seconds on a standard connection (service selection → confirmation display)
+- **Round-trip budget (max 3 server calls):**
+  - Call 1: `get_booking_context(service_id)` → service details, available providers, date ranges, intake form template
+  - Call 2: `get_available_slots(provider_id, date_range)` → available time slots
+  - Call 3: `confirm_booking(booking_data)` → booking confirmation, payment result
+  - Meeting type and intake form are client-side selections from pre-loaded data — no server call
+  - Confirmation display is client-side — no server call
+  - Cache `get_booking_context()` response in `globals.py` for flow duration (see `docs/globals-contract.md`)
 - **See:** ADR-035 (Form Architecture — booking flow latency management)
+- **See:** `docs/test-specifications.md` (E2E booking test spec, error path tests, RBAC matrix)
 
 ### Stage 2.4: Payment Integration
 

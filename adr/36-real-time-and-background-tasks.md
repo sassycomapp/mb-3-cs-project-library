@@ -116,6 +116,30 @@ Each background task must define its failure behavior. The following table speci
 - Critical task failures (webhook processing) trigger an alert to Mybizz_management
 - Non-critical failures (campaign enrollment) are logged but do not trigger alerts
 
+### Task Priority for Graceful Degradation
+
+**Source:** Engineering review 2026-06-16
+
+If Anvil enforces per-account background task limits, the platform must degrade gracefully rather than fail silently. Tasks are assigned priority levels:
+
+| Priority | Tasks | Degradation Strategy |
+|----------|-------|---------------------|
+| **P1 — Must run** | Health heartbeat, webhook processing | Never skip. If capacity is constrained, reduce heartbeat frequency from every 15 min to every 30 min. |
+| **P2 — Should run** | Appointment reminders (24h, 1h), campaign enrollment | Stagger across clients (not all at the same minute). If still constrained, consolidate into a single task that runs sequentially. |
+| **P3 — Nice to have** | Lifecycle stage updates, automated task generation | Consolidate into a single daily task that runs all three sequentially. Skip if capacity is full — run on next available window. |
+
+**Consolidation fallback:** If per-account limits are confirmed, Priority 3 tasks merge into one `daily_maintenance` background task:
+
+```python
+@anvil.server.background_task
+def daily_maintenance():
+    update_lifecycle_stages()
+    generate_automated_tasks()
+    # Future: summary table computation
+```
+
+**Staggering:** Health heartbeat and campaign enrollment tasks should be scheduled at different minute offsets per client to avoid thundering herd. Example: client A heartbeat at :00, client B at :01, client C at :02, etc.
+
 ### Webhook Processing Pattern
 
 Webhook handlers (Stripe, Paystack, Brevo) must return HTTP 200 immediately or the gateway times out. Processing is deferred to a background task.

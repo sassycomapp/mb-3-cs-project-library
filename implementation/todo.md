@@ -1,6 +1,6 @@
 # Todo
 
-**Last Updated:** 2026-06-02 — Updated per plan-design-review. Wireframe and DESIGN.md status reconciled.  
+**Last Updated:** 2026-06-16 — Updated per build pass. CEO remediation audited, eng review processed, completable items executed.  
 Items are reconciled against all ADRs, onboarding plan, design system, and wireframes.
 
 ---
@@ -382,88 +382,100 @@ Items are reconciled against all ADRs, onboarding plan, design system, and wiref
 ## 8. CEO Review 2026-06-15 — Captured Actions
 
 ### 8.1 Anvil Account Failure Recovery Documentation
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 1
 - **Task:** Add account-level failure and recovery procedures to deployment-procedures.md
+- **Deliverable:** `docs/deployment-procedures.md` — "Anvil Account-Level Failure Scenarios" section (3 scenarios: suspension, compromise, outage)
 
 ### 8.2 app_tables Failure Handling Spec
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 2
 - **Task:** Define behavior when app_tables resolution fails in ADR-034
+- **Deliverable:** `adr/34-anvil-platform-constraints.md` — Constraint 10: `app_tables` Resolution Failure
 
 ### 8.3 Background Task Failure Policy
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 2
 - **Task:** Define retry/failure policy per background task in ADR-036
+- **Deliverable:** `adr/36-real-time-and-background-tasks.md` — "Per-Task Failure and Retry Policy" table + "Task Priority for Graceful Degradation" section
 
 ### 8.4 TOTP Recovery Path
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 3
 - **Task:** Document TOTP recovery via Mybizz_management
+- **Deliverable:** `adr/34-anvil-platform-constraints.md` — Constraint 11: Vault TOTP Recovery
 
 ### 8.5 Brevo Monitoring Note
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P2
 - **Source:** CEO review 2026-06-15 Section 3
 - **Task:** Add note on Brevo credential monitoring responsibility
+- **Deliverable:** `docs/integration-architecture.md` — "Brevo Credential Monitoring" section
 
 ### 8.6 Edge Case Documentation (Core Flows)
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 4
 - **Task:** Document booking, onboarding, dedup, currency, and landing page edge cases
+- **Deliverable:** `implementation/build-plan.md` — Edge cases added to Stages 1.4, 2.3, 3.1 completion criteria
 
 ### 8.7 Build Plan Self-Review Checklists
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P2
 - **Source:** CEO review 2026-06-15 Section 5
 - **Task:** Add self-review checklist to each build plan phase
+- **Deliverable:** `implementation/build-plan.md` — "Self-Review Checklists" section (5 phases, 7 items each)
 
 ### 8.8 E2E Booking Test Spec
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Test
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 6
 - **Task:** Define full booking flow E2E test
+- **Deliverable:** `docs/test-specifications.md` — Section 1: E2E Booking Flow Test Spec (happy path + 3 edge cases)
 
 ### 8.9 Error Path Test Coverage
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Test
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 6
 - **Task:** Add error-path test cases across modules
+- **Deliverable:** `docs/test-specifications.md` — Section 2: Error Path Test Cases (7 scenarios: payment failure, webhook signature, dispatch failure, Brevo 429, Vault missing, dedup conflict, server timeout)
 
 ### 8.10 RBAC Coverage Matrix
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Test
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 6
 - **Task:** Define RBAC test matrix
+- **Deliverable:** `docs/test-specifications.md` — Section 3: RBAC Coverage Matrix (19 forms × 4 roles + 11 settings tabs × 4 roles)
 
 ### 8.11 Observability Gaps Documentation
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 7
 - **Task:** Define thresholds, retention, and error monitoring
+- **Deliverable:** `implementation/build-plan.md` — Stage 0.3 completion criteria (health thresholds, log retention policy, error rate monitoring)
 
 ### 8.12 Webhook Schema Reconciliation
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 9
 - **Task:** Align webhook_log schema between ADR-038 and authoritative schema
+- **Deliverable:** `adr/38-webhook-architecture.md` — Webhook Log Table reconciled with authoritative schema columns; code examples updated to use `gateway`/`event_type`/`verified`/`processed` instead of `source`/`status`/`idempotency_key`; hardening notes added (dispatch failure handling, idempotency in HTTP handler, reconciliation task)
 
 ### 8.13 Anvil Billing Model Clarification
 - **Tag:** [Planned]
@@ -471,10 +483,48 @@ Items are reconciled against all ADRs, onboarding plan, design system, and wiref
 - **Priority:** P2
 - **Source:** CEO review 2026-06-15 Section 10
 - **Task:** Resolve per-account vs per-app limits
+- **Blocker:** Requires answer from Anvil support. Questions documented in `docs/questions-to-raise-with-anvil.md` Section 3-4. Graceful degradation design added to ADR-036 as mitigation.
 
 ### 8.14 UI State Specifications
-- **Tag:** [Planned]
+- **Tag:** [Done]
 - **Type:** Documentation
 - **Priority:** P1
 - **Source:** CEO review 2026-06-15 Section 11
 - **Task:** Add empty/loading/error state specs to build plan
+- **Deliverable:** `implementation/build-plan.md` — Empty/loading/error state specs added to Stages 1.3, 1.4, 2.3, 3.1 completion criteria
+
+---
+
+## 9. Engineering Review 2026-06-16 — Executed Items
+
+### 9.1 Webhook Hardening Notes
+- **Tag:** [Done]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** Engineering review 2026-06-16 Dilemma 2
+- **Task:** Add dispatch failure handling, idempotency in HTTP handler, and reconciliation task to ADR-038
+- **Deliverable:** `adr/38-webhook-architecture.md` — "Implementation Hardening Notes" section (3 patterns with code examples)
+
+### 9.2 Booking Flow Round-Trip Budget
+- **Tag:** [Done]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** Engineering review 2026-06-16 Dilemma 3
+- **Task:** Document the 3-round-trip budget with specific server functions and performance gate
+- **Deliverable:** `implementation/build-plan.md` — Stage 2.3 round-trip budget (3 calls: get_booking_context, get_available_slots, confirm_booking) + 3-second performance gate
+
+### 9.3 globals.py Contract Document
+- **Tag:** [Done]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** Engineering review 2026-06-16 Dilemma 4
+- **Task:** Define a contract document listing every shared state variable in globals.py
+- **Deliverable:** `docs/globals-contract.md` — 4 variables (current_contact, current_booking, booking_flow_state, current_invoice) with type, set-by, read-by, None-handling, and defensive loading pattern
+
+### 9.4 Webhook Schema Reconciliation (Full)
+- **Tag:** [Done]
+- **Type:** Documentation
+- **Priority:** P1
+- **Source:** Engineering review 2026-06-16 Cross-Cutting Concern
+- **Task:** Reconcile ADR-038 webhook_log columns with authoritative schema
+- **Deliverable:** `adr/38-webhook-architecture.md` — Webhook Log Table updated to use authoritative schema column names (gateway, event_type, payload, signature, verified, processed, error_message, received_at); all code examples updated accordingly

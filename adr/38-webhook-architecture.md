@@ -53,9 +53,12 @@ def handle_stripe_webhook():
     
     # 2. Log raw payload
     event_row = app_tables.webhook_log.add_row(
-        source='stripe',
+        gateway='stripe',
+        event_type=event.get('type', ''),
         payload=payload,
-        status='pending',
+        signature=sig_header,
+        verified=True,
+        processed=False,
         received_at=datetime.now(TZ.UTC)
     )
     
@@ -90,11 +93,10 @@ def process_stripe_webhook(event_row_id):
         elif event_type == 'customer.subscription.deleted':
             handle_subscription_cancellation(event)
         
-        event_row.status = 'processed'
-        event_row.processed_at = datetime.now(TZ.UTC)
+        event_row.processed = True
+        event_row.received_at = datetime.now(TZ.UTC)  # Update with processing timestamp
         
     except Exception as e:
-        event_row.status = 'failed'
         event_row.error_message = str(e)
         # Push error event to Mybizz_management (ADR-033)
         push_management_event('webhook_processing_error', {
@@ -128,16 +130,104 @@ def handle_payment_success(event):
 
 ### Webhook Log Table
 
-| Column | Type | Purpose |
-|--------|------|---------|
-| `id` | UUID | Primary key |
-| `source` | Text | `stripe`, `paystack`, or `brevo` |
-| `payload` | Text | Raw JSON payload |
-| `status` | Text | `pending`, `processed`, `failed` |
-| `received_at` | DateTime | When the webhook was received |
-| `processed_at` | DateTime | When processing completed |
-| `error_message` | Text | Error details if failed |
-| `idempotency_key` | Text | Deduplication key |
+**Reconciled with authoritative schema (2026-06-16).** The authoritative schema is the source of truth.
+
+| Authoritative Schema Column | Type | Purpose | ADR-038 Alias |
+|-----|------|---------|---------------|
+| `gateway` | string | `stripe`, `paystack`, or `brevo` | `source` |
+| `event_type` | string | e.g., `payment_intent.succeeded` | — |
+| `payload` | simpleObject | Raw webhook payload | `payload` |
+| `signature` | string | Gateway signature header | — |
+| `verified` | bool | Signature verified successfully | — |
+| `processed` | bool | Processing completed successfully | `status` (mapped: `pending` = verified:false/processed:false, `processed` = processed:true, `failed` = verified:true/processed:false + error_message) |
+| `error_message` | string | Error details if processing failed | `error_message` |
+| `received_at` | datetime | UTC — when webhook was received | `received_at` |
+
+**Idempotency:** Enforced via `event_type` + `gateway` combination (check for existing row before inserting). No separate `idempotency_key` column needed — the event type from each gateway is unique per event.
+
+**Row ID:** Anvil auto-generates row IDs. No explicit `id` or `UUID` column needed.
+
+---
+
+## Implementation Hardening Notes
+
+**Source:** Engineering review 2026-06-16
+
+Three additions to the webhook pattern that prevent silent data loss.
+
+### 1. Dispatch Failure Handling
+
+The HTTP handler returns 200 immediately after dispatching the background task. If `launch_background_task()` fails, the `webhook_log` row is stuck at `"pending"` and the gateway won't retry (it already got 200).
+
+**Fix:** Wrap dispatch in try/except:
+
+```python
+@anvil.server.http_handler(path='webhooks/stripe')
+def handle_stripe_webhook():
+    payload = anvil.server.request.body
+    sig_header = anvil.server.request.headers.get('stripe-signature', '')
+    
+    if not verify_stripe_signature(payload, sig_header):
+        return anvil.server.HttpResponse(status=400)
+    
+    # Idempotency check in HTTP handler (see below)
+    idempotency_key = extract_stripe_event_id(payload)
+    if idempotency_key:
+        existing = app_tables.webhook_log.search(
+            gateway='stripe',
+            event_type=idempotency_key
+        )
+        if existing:
+            return anvil.server.HttpResponse(status=200)
+    
+    event_row = app_tables.webhook_log.add_row(
+        gateway='stripe',
+        event_type=idempotency_key,
+        payload=payload,
+        verified=True,
+        processed=False,
+        received_at=datetime.now(TZ.UTC)
+    )
+    
+    try:
+        anvil.server.launch_background_task('process_stripe_webhook', event_row.get_id())
+    except Exception:
+        event_row.status = 'dispatch_failed'
+        # Reconciliation task will retry these
+    
+    return anvil.server.HttpResponse(status=200)
+```
+
+### 2. Idempotency in HTTP Handler (Not Just in Business Logic)
+
+The original pattern checks idempotency inside `handle_payment_success()` — after the background task starts. This prevents duplicate business logic but not duplicate task dispatch.
+
+**Fix:** Check `webhook_log` for an existing row with the same `idempotency_key` in the HTTP handler, before adding a new row. This prevents duplicate `webhook_log` entries and duplicate background task dispatches.
+
+The `idempotency_key` extraction depends on the gateway:
+- **Stripe:** `event['id']` from the parsed payload
+- **Paystack:** `event['id']` or `reference`
+- **Brevo:** webhook event ID
+
+### 3. Reconciliation Background Task
+
+A low-priority background task runs hourly to find orphaned webhook rows:
+
+```python
+@anvil.server.background_task
+def reconcile_webhooks():
+    orphaned = app_tables.webhook_log.search(
+        processed=False,
+        received_at=tables.less_than(datetime.now(TZ.UTC) - timedelta(minutes=5))
+    )
+    for row in orphaned:
+        try:
+            anvil.server.launch_background_task('process_webhook', row.get_id())
+        except Exception:
+            pass  # Will be caught on next reconciliation run
+```
+
+This ensures webhooks are never silently lost due to dispatch failures.
 
 ---
 
