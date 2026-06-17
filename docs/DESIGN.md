@@ -450,7 +450,7 @@ This section defines the primary implementation-facing forms and pages in the My
 2. Business Profile — links to Settings Business Profile tab for detail editing.
 3. Palette Selection — links to Settings Palette tab for detail editing.
 4. System Currency — dropdown plus confirm button. Required. Immutable after first transaction. See ADR-016.
-5. Legal Acknowledgement — text, checkbox, confirm button. Required. Logged in Mybizz_management. See ADR-018.
+5. Legal Acknowledgement — two checkboxes plus confirm button. Required. Logged in Mybizz_management. See ADR-018.
 6. Completion — onboarding complete.
 
 **Key design rules:**
@@ -460,6 +460,23 @@ This section defines the primary implementation-facing forms and pages in the My
 - Legal acknowledgement is a required action in onboarding, not a mutable Settings configuration.
 - Payment gateway configuration is not part of onboarding. Onboarding links to Settings for gateway setup. See ADR-019.
 - Onboarding state is tracked in `business_profile.onboarding_status`. See ADR-023, ADR-025.
+
+**Step 5 — Legal Acknowledgement (two checkboxes):**
+- `cb_legal_ack` (CheckBox) — "I understand I must configure my own Privacy Policy and Terms & Conditions in Settings → Policy Editor. Mybizz is not responsible for the content of those pages." Sets `business_profile.legal_ack_accepted`.
+- `cb_data_governance_ack` (CheckBox) — "I understand that Mybizz retains certain records for legal and compliance purposes as described above." Sets `business_profile.data_governance_ack_accepted`.
+- "Confirm Acknowledgement" button (`btn_confirm_legal`) is enabled only when both checkboxes are ticked.
+- This acknowledgement is recorded once and cannot be reversed.
+
+**Per-step Continue button enable/disable logic:**
+
+| Step | Continue Button | Logic |
+|------|----------------|-------|
+| 1 (Welcome) | Always enabled | Informational only |
+| 2 (Business Profile) | Always enabled | Optional link step — can be skipped |
+| 3 (Palette Selection) | Always enabled | Optional link step — can be skipped |
+| 4 (System Currency) | Disabled until confirmed | Enabled only after `btn_confirm_currency` is clicked and `business_profile.system_currency` is set |
+| 5 (Legal Acknowledgement) | Disabled until confirmed | Enabled only after both `cb_legal_ack` and `cb_data_governance_ack` are ticked and `btn_confirm_legal` is clicked |
+| 6 (Completion) | "Go to Dashboard" | Sets `onboarding_status = "completed"`, `onboarding_completed = True`, navigates to Dashboard |
 
 ### SettingsForm
 
@@ -506,6 +523,26 @@ This section defines the primary implementation-facing forms and pages in the My
 - Add Secret form at bottom with name and password input.
 - Secret values are encrypted at rest and never displayed after saving.
 - RBAC: Owner only.
+
+**TOTP entry screen:**
+- Displayed before the vault content is visible. Full-screen overlay or prominent card at top of form.
+- Shows: "TOTP Verification Required" heading, instruction text ("Enter the code from your authenticator app"), 6-digit input field, "Verify" button.
+- On success: TOTP overlay dismissed, vault content (secrets list + add form) becomes visible.
+- On failure: Error message "Invalid code. Please try again." with input field cleared. No lockout — unlimited retries.
+- No grace period: TOTP is required on every VaultForm open, even if the user just verified 30 seconds ago.
+
+**Vault empty state (no secrets stored):**
+- Displayed when the `vault` table has zero rows for this client instance.
+- Shows: Lock icon (or vault icon), heading "No secrets stored yet", body text "Add your API keys and credentials below. They will be encrypted at rest and never displayed after saving.", "Add Your First Secret" primary button.
+
+**Vault error state (TOTP failure):**
+- If the TOTP verification server call fails (not wrong code, but actual server error): show error banner "Unable to verify TOTP. Please try again or contact support." with a "Retry" button.
+- If the encryption key is missing from Anvil Secrets: show critical error "Vault is not configured. Contact Mybizz support." — this is a provisioning error, not a user error.
+
+**Vault loading state (encryption/decryption in progress):**
+- When adding a new secret: "Add Secret" button shows spinner, text changes to "Encrypting...".
+- When viewing a secret (masked reveal): the eye icon shows a small spinner while the server decrypts and returns the value.
+- When deleting a secret: the delete icon shows a spinner, the row fades slightly until deletion is confirmed.
 
 ### EmailSetupForm
 
@@ -698,6 +735,77 @@ Section order: Hero (concise) → Intro (very brief) → Trust strip (compact) �
 Hides: carousel, full services grid, full testimonials, video. Uses fewer text blocks and more whitespace.
 
 **Video visibility rule:** Video section is controlled by `business_profile.home_video_url` and hidden automatically when no URL is configured, for all templates.
+
+### ErrorLayout
+
+**Purpose:** Application-level error and exception presentation (404, 500, 403, etc.).
+**Architecture:** Full-viewport centred layout with NO chrome — no app bar, no sidebar, no navigation.
+
+**Structure:**
+```text
+ErrorLayout (HtmlTemplate)
+└── error_container (ColumnPanel) — max-width: 480px, centred
+    ├── txt_error_code (Label) — Display typography (57px), color: primary
+    ├── hdg_error_title (Heading) — Headline Large (32px)
+    ├── txt_error_message (Text) — Body Large (16px), color: on-surface-variant
+    └── btn_go_home (Button) — filled, "Go Home"
+```
+
+**Key design rules:**
+- All four elements (error code, heading, message, button text) are set programmatically based on error type.
+- Error code uses Display typography (`57px/64px 400`), color: `var(--primary)`.
+- Heading uses Headline Large (`32px/40px 400`), color: `var(--on-surface)`.
+- Message uses Body Large (`16px/24px 400`), color: `var(--on-surface-variant)`, max-width: 480px.
+- "Go Home" button: filled primary, pill radius. Navigates to homepage (unauthenticated) or Dashboard (authenticated).
+- Container is centred vertically and horizontally. No sidebar, no app bar.
+- Responsive: 480px max-width container works at all breakpoints. No sidebar to collapse.
+
+**Supported error types:**
+
+| Error | Code | Heading | Message |
+|-------|------|---------|---------|
+| Not Found | 404 | Page Not Found | The page you're looking for doesn't exist or has been moved. |
+| Server Error | 500 | Something Went Wrong | An unexpected error occurred. Please try again or contact support. |
+| Forbidden | 403 | Access Denied | You don't have permission to access this page. |
+
+### AdminLayout
+
+**Purpose:** Admin panel shell — custom HtmlTemplate layout with sidebar navigation.
+**Architecture:** Custom HtmlTemplate with sidebar + content panel pattern. Uses plain Link components with lambda click handlers (not NavigationLink).
+
+**Structure:**
+```text
+AdminLayout (HtmlTemplate)
+├── app_bar (Container) — "Mybizz CS" title, notifications icon, user menu icon
+├── sidebar (ColumnPanel) — 260px fixed width, navigation groups below
+└── content_area (ColumnPanel) — forms load here via content panel pattern
+```
+
+**Sidebar navigation groups and items:**
+
+| Group | Items | Conditional Visibility |
+|-------|-------|----------------------|
+| (ungrouped) | Dashboard | Always |
+| Sales & Operations | Bookings, Services | Always |
+| Customers & Marketing | Contacts, Campaigns, Broadcasts, Segments, Tasks | Contacts: always. Campaigns, Broadcasts, Segments, Tasks: `marketing_enabled` feature flag |
+| Content & Website | Blog, Pages | Blog: `blog_enabled` feature flag. Pages: always |
+| Finance & Reports | Invoices, Payments, Reports, Analytics, Time Entries | Always |
+| (bottom) | Settings | Owner, Manager |
+| (bottom) | Vault | Owner only |
+| (bottom) | Sign Out | Always — all roles |
+
+**Key design rules:**
+- Sidebar uses plain Link components with lambda click handlers. NavigationLink and navigate_to are NOT used.
+- Sidebar width: 260px on desktop (>=998px). Collapses to hamburger drawer overlay on mobile (<998px).
+- Active link highlighting via M3 primary-container background.
+- Sign Out is always visible at sidebar bottom for all roles.
+- Vault link is Owner-only. Settings link is Owner/Manager only.
+- Content area uses the content panel pattern — forms are swapped in, not navigated to via open_form().
+- App bar shows notifications icon and user menu icon (both icon-only buttons).
+
+**Responsive behavior:**
+- Desktop (>=998px): Fixed sidebar (260px) + content fills remainder.
+- Mobile (<998px): Sidebar collapses to hamburger drawer overlay. Content is full-width.
 
 ---
 
@@ -1051,6 +1159,158 @@ The list form provides invoice discovery and status awareness:
 - Filter by status (All, Draft, Sent, Paid, Overdue, Cancelled)
 - Row actions: View (all statuses), Edit (Draft only)
 - Primary action: "+ Create Invoice" opens InvoiceEditorForm in create mode
+
+---
+
+## Booking Design
+
+### Booking Status Lifecycle
+
+The `bookings.status` field supports three values: `pending`, `confirmed`, `cancelled`.
+
+**Status transitions:**
+- `pending` → `confirmed` (when payment succeeds or manual confirmation)
+- `pending` → `cancelled` (when payment fails or customer cancels)
+- `confirmed` → `cancelled` (when booking is cancelled after confirmation)
+- `cancelled` and `confirmed` are terminal states for the booking lifecycle
+
+**Status badge colors:**
+
+| Status | Background | Text |
+|--------|-----------|------|
+| Confirmed | `#d4edda` | `#155724` |
+| Pending | `#fff3cd` | `#856404` |
+| Cancelled | `#f8d7da` | `#721c24` |
+
+**Status-based permitted actions in BookingViewerForm:**
+
+| Status | Edit | Cancel | View Invoice | Reschedule |
+|--------|------|--------|-------------|------------|
+| Pending | Yes | Yes | No | Yes |
+| Confirmed | No | Yes | Yes | Yes |
+| Cancelled | No | No | No | No |
+
+### Booking Calendar Architecture
+
+The booking calendar uses 4 template subforms for rendering events across three views (Month, Week, Day). View toggle uses a SegmentedButton.
+
+**Template subforms:**
+
+| Subform | Purpose | Used In |
+|---------|---------|---------|
+| `tmpl_day_event` | Event card in day view | Day view RepeatingPanel |
+| `tmpl_month_day_cell` | Day cell in month grid | Month view grid |
+| `tmpl_week_event` | Event block in week view | Week view RepeatingPanel |
+| `tmpl_week_timeslot` | Time row in week view | Week view time grid |
+
+**Event color coding (left border):**
+
+| Status | Border Color | Opacity |
+|--------|-------------|---------|
+| Confirmed | `#388e3c` (green) | 1.0 |
+| Pending | `#f9a825` (yellow) | 1.0 |
+| Cancelled | `#c62828` (red) | 0.6 |
+
+**Day view (`tmpl_day_event`):**
+- Event card with 4px left border (color-coded by status), 8px border-radius, subtle shadow.
+- Shows: event title (12px, weight 500), time range (11px), description with customer name and meeting type (11px), status badge.
+- Clickable — opens BookingViewerForm.
+
+**Month view (`tmpl_month_day_cell`):**
+- Day cell in month grid. Today cell has `primary-container` background.
+- Other-month cells have `opacity: 0.4`.
+- Event chips are 9px font with status color coding.
+
+**Week view (`tmpl_week_event`):**
+- Event block with left border color coding (same palette as day view).
+- Cancelled events have `opacity: 0.5`.
+
+**Week timeslot (`tmpl_week_timeslot`):**
+- Time row: 60px time label column + 1fr content.
+- Empty timeslots show a thin spacer line (`height: 1px`, `background: #E7E0EC`, `opacity: 0.5`).
+- Events have hover state (`background: #EADDFF`).
+
+### 7-Step Booking Flow Per-Step UI Layout
+
+The booking flow uses 3 server round-trips maximum (ADR-035). Each step has a defined UI:
+
+**Round-trip 1: `get_booking_context(service_id)`**
+
+| Step | UI Elements | Server Call |
+|------|-------------|-------------|
+| 1. Select Service | Service cards (image, name, price, duration), search/filter. Selected card highlights with primary-container border. | Part of RT1 (pre-loaded) |
+| 2. Select Provider | Provider cards (avatar, name, specialty). Available providers from RT1 response. Selected card highlights. | Client-side from RT1 cache |
+
+**Round-trip 2: `get_available_slots(provider_id, date_range)`**
+
+| Step | UI Elements | Server Call |
+|------|-------------|-------------|
+| 3. Select Date/Time | Date picker (month calendar) + time slot grid. Available slots from RT2. Selected slot highlights with primary background. Unavailable slots greyed out. | RT2 |
+
+**Client-side (no server call):**
+
+| Step | UI Elements | Server Call |
+|------|-------------|-------------|
+| 4. Meeting Type | Radio buttons or cards: In-Person, Video Call, Phone Call. Selected option highlights. | None — from RT1 cache |
+| 5. Intake Form | Dynamic form fields from `booking_metadata_schemas`. Text inputs, dropdowns, textareas as defined by schema. | None — from RT1 cache |
+
+**Round-trip 3: `confirm_booking(booking_data)`**
+
+| Step | UI Elements | Server Call |
+|------|-------------|-------------|
+| 6. Payment | Order summary card (service, provider, date, time, meeting type, amount). "Confirm & Pay" button. Processing spinner during RT3. | RT3 |
+| 7. Confirmation | Success card with check icon, booking ID, details summary. "View Booking" and "Book Another" buttons. | None — client-side |
+
+**Global booking flow rules:**
+- globals.py `booking_flow_state` preserves selections across steps (see `docs/globals-contract.md`).
+- Back navigation preserves state — no re-fetch if data is cached in `booking_flow_state.cached_context`.
+- Step transitions show a brief loading indicator (LinearProgressIndicator or spinner) during server calls.
+- 30-second timeout on any server call — shows "Connection timed out. Please try again." with retry button.
+- Mid-payment navigation: booking holds for 15 minutes, then expires.
+
+### BookingListForm Columns
+
+| Column | Content | Notes |
+|--------|---------|-------|
+| Booking # | `BK-YYYY-NNN` format | Auto-generated |
+| Customer | Contact name | Linked to contact |
+| Service | Service name | From services table |
+| Date | Booking date | Formatted per client timezone |
+| Time | Start time | Formatted per client timezone |
+| Status | Status badge | Color-coded per status lifecycle |
+| Actions | View, Edit, Delete | Icon buttons; Edit only for Pending |
+
+**Primary actions:** "+ Add Booking" (filled), "Calendar View" (outlined — toggles to BookingCalendarForm).
+**Search/Filter:** Search TextBox + Status DropdownMenu + Date Range DropdownMenu.
+
+---
+
+## Empty States
+
+Every data-driven screen must define an empty state. The empty state pattern has three elements: a warm message, a primary action button, and a brief explanation of what will appear here.
+
+**General pattern:**
+```text
+[Icon — relevant to the screen]
+[Heading — warm, not clinical]
+[Body text — brief explanation of what will appear here]
+[Primary action button — the most likely next step]
+```
+
+### Empty State Specifications
+
+| Screen | Icon | Heading | Body Text | Primary Action |
+|--------|------|---------|-----------|----------------|
+| Invoice list | Receipt icon | No invoices yet | Invoices will appear here when you create them for your bookings. | "+ Create Invoice" |
+| Task list | Task icon | No tasks yet | Tasks are created automatically from bookings and campaigns, or you can add them manually. | "+ Add Task" |
+| Campaign list | Mail icon | No campaigns yet | Email campaigns help you stay in touch with your clients. Create your first campaign to get started. | "+ Create Campaign" |
+| Blog list | Article icon | No blog posts yet | Blog posts help you share expertise and attract visitors to your site. | "+ New Post" |
+| Landing page list | Page icon | No landing pages yet | Landing pages capture leads from marketing campaigns. Create one to start collecting sign-ups. | "+ Create Landing Page" |
+| Service list | Service icon | No services yet | Add your first service so clients can book appointments with you. | "+ Add Service" |
+| Segment list | People icon | No segments yet | Segments group your contacts by behaviour or attributes. They are created automatically or manually. | (no action — explain that segments are auto-created) |
+| Activity feed | Activity icon | No recent activity | Activity from bookings, emails, and contacts will appear here as your business operates. | (no action — explain that activity appears automatically) |
+| Vault | Lock icon | No secrets stored yet | Add your API keys and credentials below. They will be encrypted at rest and never displayed after saving. | "Add Your First Secret" |
+| Analytics dashboard | Chart icon | No data yet | Analytics will appear here once you have bookings, payments, and contacts in the system. | (no action — explain that data appears as the business operates) |
 
 ---
 
