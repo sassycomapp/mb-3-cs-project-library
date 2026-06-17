@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Policy Editor Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; max-width: 300px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-badge { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: 11px; }
+.wf-badge-published { background: #d4edda; color: #155724; }
+.wf-badge-draft { background: #E7E0EC; color: #49454F; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Settings Wireframes</h1>
+<p class="subtitle">Policy Editor — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>PolicyEditorForm — Settings → Website → Policy Editor</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_content (ColumnPanel) — max-width: 900px</span>
+
+  <!-- Page Header -->
+  <div class="wf-panel-h">
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Policy Editor</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Policy Editor"</span></div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div class="wf-btn-outlined">Preview</div>
+      <div class="cn">btn_preview <span class="ct">(Button)</span> <span class="cfixed">"Preview"</span></div>
+      <div class="wf-btn-filled">Publish</div>
+      <div class="cn">btn_publish <span class="ct">(Button)</span> <span class="cfixed">"Publish"</span></div>
+    </div>
+  </div>
+
+  <!-- Document Type Selector -->
+  <div class="wf-panel">
+    <span class="wf-label">card_selector (Card)</span>
+    <div class="wf-heading-sm">Document Type</div>
+    <div class="cn">hdg_selector <span class="ct">(Heading)</span> <span class="cfixed">"Document Type"</span></div>
+
+    <div class="wf-text">Select which policy document to edit</div>
+    <div class="wf-dd">Privacy Policy</div>
+    <div class="cn">dd_document_type <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+
+    <div style="display: flex; gap: 12px; margin-top: 8px;">
+      <div>
+        <span class="wf-badge wf-badge-published">Published</span>
+        <div class="cn">badge_status <span class="ct">(Label)</span> — current publish status</div>
+      </div>
+      <div style="font-size: 11px; color: #888;">Last published: May 15, 2026 at 10:30 AM</div>
+      <div class="cn">txt_last_published <span class="ct">(Text)</span></div>
+    </div>
+  </div>
+
+  <!-- ClauseBuilder Component -->
+  <div class="wf-panel">
+    <span class="wf-label">clause_builder (ClauseBuilder) — shared custom component</span>
+
+    <div class="wf-heading-sm">Clauses</div>
+    <div class="cn">hdg_clauses <span class="ct">(Heading)</span> <span class="cfixed">"Clauses"</span></div>
+
+    <div class="wf-text">Manage clauses for this policy document. Seeded clauses are provided by the platform and cannot be deleted.</div>
+
+    <!-- Category Filter -->
+    <div style="display: flex; gap: 8px; margin: 12px 0;">
+      <div class="wf-btn-filled" style="font-size: 11px; padding: 4px 12px;">All</div>
+      <div class="wf-btn-outlined" style="font-size: 11px; padding: 4px 12px;">Introduction</div>
+      <div class="wf-btn-outlined" style="font-size: 11px; padding: 4px 12px;">Data Usage</div>
+      <div class="wf-btn-outlined" style="font-size: 11px; padding: 4px 12px;">Data Sharing</div>
+      <div class="wf-btn-outlined" style="font-size: 11px; padding: 4px 12px;">Your Rights</div>
+    </div>
+    <div class="cn">dd_category_filter <span class="ct">(DropdownMenu)</span></div>
+
+    <!-- Clause List -->
+    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin: 8px 0; background: #fff; border-left: 4px solid #388e3c;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 11px; color: #888; text-transform: uppercase;">Introduction</div>
+          <div style="font-size: 14px; font-weight: bold; color: #333;">1. Information We Collect</div>
+        </div>
+        <div style="display: flex; gap: 4px;">
+          <span style="font-size: 11px; color: #388e3c; border: 1px solid #388e3c; padding: 2px 8px; border-radius: 4px;">Seeded</span>
+          <span style="font-size: 12px; color: #6750A4; cursor: pointer; padding: 4px 8px;">Edit</span>
+        </div>
+      </div>
+      <div style="font-size: 12px; color: #666; margin-top: 8px;">We collect information you provide directly to us...</div>
+      <div class="cn">clause_1 <span class="ct">(ColumnPanel)</span> — seeded clause, green border</div>
+    </div>
+
+    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin: 8px 0; background: #fff; border-left: 4px solid #388e3c;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 11px; color: #888; text-transform: uppercase;">Data Usage</div>
+          <div style="font-size: 14px; font-weight: bold; color: #333;">2. How We Use Your Information</div>
+        </div>
+        <div style="display: flex; gap: 4px;">
+          <span style="font-size: 11px; color: #388e3c; border: 1px solid #388e3c; padding: 2px 8px; border-radius: 4px;">Seeded</span>
+          <span style="font-size: 12px; color: #6750A4; cursor: pointer; padding: 4px 8px;">Edit</span>
+        </div>
+      </div>
+      <div style="font-size: 12px; color: #666; margin-top: 8px;">We use the information we collect to provide, maintain...</div>
+      <div class="cn">clause_2 <span class="ct">(ColumnPanel)</span> — seeded clause, green border</div>
+    </div>
+
+    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin: 8px 0; background: #fff; border-left: 4px solid #6750A4;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 11px; color: #888; text-transform: uppercase;">Custom</div>
+          <div style="font-size: 14px; font-weight: bold; color: #333;">7. Cookie Policy</div>
+        </div>
+        <div style="display: flex; gap: 4px;">
+          <span style="font-size: 11px; color: #6750A4; border: 1px solid #6750A4; padding: 2px 8px; border-radius: 4px;">Custom</span>
+          <span style="font-size: 12px; color: #6750A4; cursor: pointer; padding: 4px 8px;">Edit</span>
+          <span style="font-size: 12px; color: #B3261E; cursor: pointer; padding: 4px 8px;">Delete</span>
+        </div>
+      </div>
+      <div style="font-size: 12px; color: #666; margin-top: 8px;">We use cookies to improve your experience...</div>
+      <div class="cn">clause_7 <span class="ct">(ColumnPanel)</span> — custom clause, blue border</div>
+    </div>
+
+    <!-- Add Custom Clause Button -->
+    <div class="wf-btn-outlined" style="margin-top: 8px;">+ Add Custom Clause</div>
+    <div class="cn">btn_add_clause <span class="ct">(Button)</span> <span class="cfixed">"+ Add Custom Clause"</span></div>
+  </div>
+
+  <!-- Version History -->
+  <div class="wf-panel">
+    <span class="wf-label">card_history (Card)</span>
+    <div class="wf-heading-sm">Version History</div>
+    <div class="cn">hdg_history <span class="ct">(Heading)</span> <span class="cfixed">"Version History"</span></div>
+
+    <div style="font-size: 12px; margin: 8px 0; padding: 8px; border-bottom: 1px solid #eee;">
+      <div style="display: flex; justify-content: space-between;">
+        <div style="font-weight: 500;">Version 3</div>
+        <div style="color: #888;">May 15, 2026 at 10:30 AM</div>
+      </div>
+      <div style="color: #888; font-size: 11px;">Published by Owner</div>
+    </div>
+    <div style="font-size: 12px; margin: 8px 0; padding: 8px; border-bottom: 1px solid #eee;">
+      <div style="display: flex; justify-content: space-between;">
+        <div style="font-weight: 500;">Version 2</div>
+        <div style="color: #888;">May 10, 2026 at 3:15 PM</div>
+      </div>
+      <div style="color: #888; font-size: 11px;">Published by Owner</div>
+    </div>
+    <div style="font-size: 12px; margin: 8px 0; padding: 8px;">
+      <div style="display: flex; justify-content: space-between;">
+        <div style="font-weight: 500;">Version 1</div>
+        <div style="color: #888;">May 1, 2026 at 9:00 AM</div>
+      </div>
+      <div style="color: #888; font-size: 11px;">Initial publish by Owner</div>
+    </div>
+    <div class="cn">rp_history <span class="ct">(RepeatingPanel)</span></div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div style="display: flex; gap: 8px; margin-top: 16px;">
+    <div class="wf-btn-filled">Publish</div>
+    <div class="cn">btn_publish <span class="ct">(Button)</span> <span class="cfixed">"Publish"</span></div>
+    <div class="wf-btn-outlined">Preview</div>
+    <div class="cn">btn_preview <span class="ct">(Button)</span> <span class="cfixed">"Preview"</span></div>
+  </div>
+</div>
+
+<h2>Implementation Notes</h2>
+<div class="prop-note">
+  The PolicyEditorForm is accessed from Settings → Website.<br>
+  It uses the ClauseBuilder shared custom component, parameterized by document type (`privacy_policy` or `t_and_c`).<br>
+  Seeded clauses (green border) are non-deletable but editable. Custom clauses (blue border) are editable and deletable.<br>
+  Publish writes to the corresponding data table and updates the public page.<br>
+  See ADR-018 for architecture details.
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">Designer-mandatory properties: Write Back toggle (W) must be enabled in Designer Data Bindings panel for DropdownMenu.</div>
+<table class="props">
+<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+<tr><td>dd_document_type</td><td>DropdownMenu</td><td>writeback = W, items = ["Privacy Policy", "Terms & Conditions"]</td></tr>
+</table>
+
+</body>
+</html>

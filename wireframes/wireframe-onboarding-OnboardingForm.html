@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Onboarding Form Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 700px; margin: 0 auto; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+h3 { font-size: 14px; color: #555; margin-top: 40px; margin-bottom: 12px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-hidden { border: 2px dashed #aaa; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #f0f0f0; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-label-hidden { position: absolute; top: -10px; left: 10px; background: #f0f0f0; font-size: 11px; font-weight: bold; color: #aaa; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 12px; color: #666; margin: 8px 0; line-height: 18px; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; max-width: 300px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-checkbox { font-size: 12px; color: #555; margin: 8px 0; line-height: 18px; }
+.wf-checkbox::before { content: "☐ "; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-text { background: none; border: none; color: #6750A4; font-size: 12px; padding: 8px 0; cursor: pointer; text-decoration: underline; }
+.wf-info { background: #EADDFF; border: 1px solid #6750A4; border-radius: 4px; padding: 12px; margin: 8px 0; font-size: 12px; color: #21005D; }
+.wf-warning { background: #FFDAD6; border: 1px solid #B3261E; border-radius: 4px; padding: 12px; margin: 8px 0; font-size: 12px; color: #410002; }
+.wf-success { background: #D3F0D1; border: 1px solid #388e3c; border-radius: 4px; padding: 12px; margin: 8px 0; font-size: 12px; color: #002204; }
+.step-indicator { display: flex; gap: 8px; margin: 16px 0; }
+.step-dot { width: 24px; height: 24px; border-radius: 50%; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #888; }
+.step-dot.active { background: #6750A4; color: #fff; }
+.step-dot.completed { background: #388e3c; color: #fff; }
+.step-nav { display: flex; justify-content: space-between; margin-top: 16px; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.crequired { color: #B3261E; font-weight: bold; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Onboarding Wireframes</h1>
+<p class="subtitle">OnboardingForm — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>OnboardingForm — 6-Step Guided First-Run</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_onboarding (ColumnPanel) — centred card, max-width 600px</span>
+
+  <!-- Step Indicator -->
+  <div class="step-indicator">
+    <div class="step-dot completed">1</div>
+    <div class="step-dot completed">2</div>
+    <div class="step-dot active">3</div>
+    <div class="step-dot">4</div>
+    <div class="step-dot">5</div>
+    <div class="step-dot">6</div>
+  </div>
+  <div class="cn">step_indicator <span class="ct">(FlowPanel)</span> — dynamic step dots</div>
+
+  <!-- STEP 1: Welcome -->
+  <h3>Step 1: Welcome</h3>
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">step_1_welcome (ColumnPanel) — visible = False until step == 1</span>
+    <div class="wf-heading-lg">Welcome to Mybizz</div>
+    <div class="cn">hdg_step_title <span class="ct">(Heading)</span> <span class="cfixed">"Welcome to Mybizz"</span></div>
+    <div class="wf-text">Let's set up your business in a few quick steps. You can skip optional steps and come back to them later.</div>
+    <div class="cn">txt_welcome <span class="ct">(Text)</span></div>
+    <div class="step-nav">
+      <div></div>
+      <div class="wf-btn-filled">Get Started</div>
+      <div class="cn">btn_continue <span class="ct">(Button)</span> <span class="cfixed">"Get Started"</span> — always enabled</div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Business Profile -->
+  <h3>Step 2: Business Profile (Optional)</h3>
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">step_2_business (ColumnPanel) — visible = False until step == 2</span>
+    <div class="wf-heading-lg">Business Profile</div>
+    <div class="cn">hdg_step_title <span class="ct">(Heading)</span> <span class="cfixed">"Business Profile"</span></div>
+    <div class="wf-text">Tell us about your business. You can update this anytime in Settings.</div>
+    <div class="wf-info">This step links to Settings → Business Profile tab for detailed editing.</div>
+    <div class="cn">info_box <span class="ct">(ColumnPanel)</span></div>
+    <div class="step-nav">
+      <div class="wf-btn-outlined">Back</div>
+      <div class="cn">btn_back <span class="ct">(Button)</span></div>
+      <div class="wf-btn-filled">Continue</div>
+      <div class="cn">btn_continue <span class="ct">(Button)</span> — always enabled (optional skip)</div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Palette Selection -->
+  <h3>Step 3: Palette Selection (Optional)</h3>
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">step_3_palette (ColumnPanel) — visible = False until step == 3</span>
+    <div class="wf-heading-lg">Choose Your Color Palette</div>
+    <div class="cn">hdg_step_title <span class="ct">(Heading)</span> <span class="cfixed">"Choose Your Color Palette"</span></div>
+    <div class="wf-text">Select a color scheme that fits your business. You can change this later in Settings.</div>
+    <div class="wf-info">This step links to Settings → Palette tab for detailed editing.</div>
+    <div class="cn">info_box <span class="ct">(ColumnPanel)</span></div>
+    <div class="step-nav">
+      <div class="wf-btn-outlined">Back</div>
+      <div class="cn">btn_back <span class="ct">(Button)</span></div>
+      <div class="wf-btn-filled">Continue</div>
+      <div class="cn">btn_continue <span class="ct">(Button)</span> — always enabled (optional skip)</div>
+    </div>
+  </div>
+
+  <!-- STEP 4: System Currency -->
+  <h3>Step 4: System Currency (Required)</h3>
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">step_4_currency (ColumnPanel) — visible = False until step == 4</span>
+    <div class="wf-heading-lg">System Currency</div>
+    <div class="cn">hdg_step_title <span class="ct">(Heading)</span> <span class="cfixed">"System Currency"</span></div>
+    <div class="wf-text">Select the currency for your business transactions. This cannot be changed after your first transaction.</div>
+    <div class="wf-warning">System currency is immutable after the first transaction. Choose carefully.</div>
+    <div class="cn">warning_box <span class="ct">(ColumnPanel)</span></div>
+    <div class="wf-dd">Select currency...</div>
+    <div class="cn">dd_currency <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+    <div class="wf-btn-filled" style="margin-top: 8px;">Confirm Currency Selection</div>
+    <div class="cn">btn_confirm_currency <span class="ct">(Button)</span> <span class="cfixed">"Confirm Currency Selection"</span> — sets business_profile.system_currency</div>
+    <div class="step-nav">
+      <div class="wf-btn-outlined">Back</div>
+      <div class="cn">btn_back <span class="ct">(Button)</span></div>
+      <div class="wf-btn-filled" style="opacity: 0.5;">Continue</div>
+      <div class="cn">btn_continue <span class="ct">(Button)</span> — <span class="crequired">disabled until currency confirmed</span></div>
+    </div>
+  </div>
+
+  <!-- STEP 5: Legal Acknowledgement -->
+  <h3>Step 5: Legal Acknowledgement (Required)</h3>
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">step_5_legal (ColumnPanel) — visible = False until step == 5</span>
+    <div class="wf-heading-lg">Legal Acknowledgement</div>
+    <div class="cn">hdg_step_title <span class="ct">(Heading)</span> <span class="cfixed">"Legal Acknowledgement"</span></div>
+
+    <div class="wf-text">
+      <strong>Data Governance:</strong> Mybizz retains certain records (Client identity, transaction records) in Mybizz_management for legal and compliance purposes. Your operational data is held in your own instance database.
+    </div>
+    <div class="cn">txt_data_governance <span class="ct">(Text)</span></div>
+
+    <div class="wf-warning">
+      <strong>Legal Responsibility:</strong> You are responsible for configuring your own Privacy Policy and Terms & Conditions. Mybizz does not provide legal advice. Configure these in Settings → Policy Editor after completing onboarding.
+    </div>
+    <div class="cn">warning_box <span class="ct">(ColumnPanel)</span></div>
+
+    <div class="wf-checkbox">I understand I must configure my own Privacy Policy and Terms & Conditions in Settings → Policy Editor. Mybizz is not responsible for the content of those pages.</div>
+    <div class="cn">cb_legal_ack <span class="ct">(CheckBox)</span> — <span class="crequired">Required</span> — sets business_profile.legal_ack_accepted</div>
+
+    <div class="wf-checkbox">I understand that Mybizz retains certain records for legal and compliance purposes as described above.</div>
+    <div class="cn">cb_data_governance_ack <span class="ct">(CheckBox)</span> — <span class="crequired">Required</span> — sets business_profile.data_governance_ack_accepted</div>
+
+    <div class="wf-btn-filled" style="margin-top: 8px; opacity: 0.5;">Confirm Acknowledgement</div>
+    <div class="cn">btn_confirm_legal <span class="ct">(Button)</span> <span class="cfixed">"Confirm Acknowledgement"</span> — <span class="crequired">enabled only when both checkboxes ticked</span></div>
+
+    <div class="wf-warning" style="margin-top: 8px;">
+      <strong>This acknowledgement is recorded once and cannot be reversed.</strong>
+    </div>
+
+    <div class="step-nav">
+      <div class="wf-btn-outlined">Back</div>
+      <div class="cn">btn_back <span class="ct">(Button)</span></div>
+      <div class="wf-btn-filled" style="opacity: 0.5;">Continue</div>
+      <div class="cn">btn_continue <span class="ct">(Button)</span> — <span class="crequired">disabled until both checkboxes ticked and confirmed</span></div>
+    </div>
+  </div>
+
+  <!-- STEP 6: Completion -->
+  <h3>Step 6: Completion</h3>
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">step_6_complete (ColumnPanel) — visible = False until step == 6</span>
+    <div class="wf-heading-lg">You're All Set!</div>
+    <div class="cn">hdg_step_title <span class="ct">(Heading)</span> <span class="cfixed">"You're All Set!"</span></div>
+    <div class="wf-success">Onboarding complete. Your business is ready to go.</div>
+    <div class="cn">success_box <span class="ct">(ColumnPanel)</span></div>
+    <div class="wf-text">You can return to onboarding at any time to review or change your settings.</div>
+    <div class="step-nav">
+      <div></div>
+      <div class="wf-btn-filled">Go to Dashboard</div>
+      <div class="cn">btn_go_dashboard <span class="ct">(Button)</span> <span class="cfixed">"Go to Dashboard"</span> — sets onboarding_status = "completed"</div>
+    </div>
+  </div>
+</div>
+
+<h2>Per-Step Continue Button Logic</h2>
+<table class="props">
+<tr><th>Step</th><th>Continue Button</th><th>Logic</th></tr>
+<tr><td>1 (Welcome)</td><td>Always enabled</td><td>Informational only</td></tr>
+<tr><td>2 (Business Profile)</td><td>Always enabled</td><td>Optional link step — can be skipped</td></tr>
+<tr><td>3 (Palette Selection)</td><td>Always enabled</td><td>Optional link step — can be skipped</td></tr>
+<tr><td>4 (System Currency)</td><td>Disabled until confirmed</td><td>Enabled only after btn_confirm_currency clicked</td></tr>
+<tr><td>5 (Legal Acknowledgement)</td><td>Disabled until confirmed</td><td>Enabled only after both checkboxes ticked and btn_confirm_legal clicked</td></tr>
+<tr><td>6 (Completion)</td><td>"Go to Dashboard"</td><td>Sets onboarding_status = "completed"</td></tr>
+</table>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">Designer-mandatory properties: Write Back toggle (W) must be enabled in Designer Data Bindings panel for DropdownMenu.</div>
+<table class="props">
+<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+<tr><td>dd_currency</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+</table>
+
+</body>
+</html>

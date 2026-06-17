@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Dashboard Analytics Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 1100px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-text-normal { font-size: 12px; color: #333; margin: 4px 0 0; }
+.wf-metric { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff; flex: 1; min-width: 200px; }
+.wf-metric-value { font-size: 28px; font-weight: bold; color: #333; }
+.wf-metric-label { font-size: 12px; color: #888; margin-top: 4px; }
+.wf-metric-trend { font-size: 11px; color: #155724; margin-top: 4px; }
+.wf-metric-trend.down { color: #B3261E; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 160px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-chart { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff; min-height: 300px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 14px; }
+.wf-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.wf-table th { font-size: 11px; font-weight: 500; color: #49454F; text-align: left; padding: 8px 12px; border-bottom: 1px solid #E7E0EC; background: #F3EDF7; }
+.wf-table td { font-size: 12px; color: #1C1B1F; padding: 8px 12px; border-bottom: 1px solid #E7E0EC; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Analytics Wireframes</h1>
+<p class="subtitle">Dashboard Analytics — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>DashboardAnalyticsForm — Enhanced Dashboard</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_content (ColumnPanel) — max-width: 1100px</span>
+
+  <!-- Page Header -->
+  <div class="wf-panel-h">
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Analytics Dashboard</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Analytics Dashboard"</span></div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div class="wf-dd">This Month</div>
+      <div class="cn">dd_period <span class="ct">(DropdownMenu)</span></div>
+      <div class="wf-btn-outlined">Export Report</div>
+      <div class="cn">btn_export <span class="ct">(Button)</span> <span class="cfixed">"Export Report"</span></div>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="wf-panel-h">
+    <span class="wf-label">flow_kpis (FlowPanel) — 4 KPI cards</span>
+
+    <div class="wf-metric">
+      <div class="wf-metric-value">R 24,500</div>
+      <div class="wf-metric-label">Total Revenue</div>
+      <div class="wf-metric-trend">↑ 12% vs last month</div>
+      <div class="cn">kpi_revenue <span class="ct">(MetricCard)</span></div>
+    </div>
+
+    <div class="wf-metric">
+      <div class="wf-metric-value">47</div>
+      <div class="wf-metric-label">Total Bookings</div>
+      <div class="wf-metric-trend">↑ 8% vs last month</div>
+      <div class="cn">kpi_bookings <span class="ct">(MetricCard)</span></div>
+    </div>
+
+    <div class="wf-metric">
+      <div class="wf-metric-value">92%</div>
+      <div class="wf-metric-label">Completion Rate</div>
+      <div class="wf-metric-trend">↑ 3% vs last month</div>
+      <div class="cn">kpi_completion <span class="ct">(MetricCard)</span></div>
+    </div>
+
+    <div class="wf-metric">
+      <div class="wf-metric-value">R 521</div>
+      <div class="wf-metric-label">Avg. Booking Value</div>
+      <div class="wf-metric-trend down">↓ 2% vs last month</div>
+      <div class="cn">kpi_avg_value <span class="ct">(MetricCard)</span></div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="wf-panel-h">
+    <span class="wf-label">charts_row (FlowPanel)</span>
+
+    <!-- Revenue Chart -->
+    <div class="wf-panel" style="flex: 2;">
+      <span class="wf-label">card_revenue_chart (Card)</span>
+      <div class="wf-heading-sm">Revenue Trend</div>
+      <div class="cn">hdg_revenue <span class="ct">(Heading)</span> <span class="cfixed">"Revenue Trend"</span></div>
+      <div class="wf-chart">[Revenue Line Chart]</div>
+      <div class="cn">plot_revenue <span class="ct">(Plot)</span></div>
+    </div>
+
+    <!-- Bookings by Service -->
+    <div class="wf-panel" style="flex: 1;">
+      <span class="wf-label">card_service_chart (Card)</span>
+      <div class="wf-heading-sm">Bookings by Service</div>
+      <div class="cn">hdg_services <span class="ct">(Heading)</span> <span class="cfixed">"Bookings by Service"</span></div>
+      <div class="wf-chart" style="min-height: 200px;">[Pie Chart]</div>
+      <div class="cn">plot_services <span class="ct">(Plot)</span></div>
+    </div>
+  </div>
+
+  <!-- Top Services Table -->
+  <div class="wf-panel">
+    <span class="wf-label">card_top_services (Card)</span>
+    <div class="wf-heading-sm">Top Services</div>
+    <div class="cn">hdg_top_services <span class="ct">(Heading)</span> <span class="cfixed">"Top Services"</span></div>
+
+    <table class="wf-table">
+      <thead>
+        <tr><th>Service</th><th>Bookings</th><th>Revenue</th><th>Avg. Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Initial Consultation</td><td>18</td><td>R 15,300</td><td>R 850</td></tr>
+        <tr><td>Tax Review</td><td>12</td><td>R 14,400</td><td>R 1,200</td></tr>
+        <tr><td>Bookkeeping</td><td>8</td><td>R 20,000</td><td>R 2,500</td></tr>
+        <tr><td>Financial Planning</td><td>9</td><td>R 9,000</td><td>R 1,000</td></tr>
+      </tbody>
+    </table>
+    <div class="cn">dg_top_services <span class="ct">(DataGrid)</span></div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5; text-align: center; padding: 32px;">
+    <span class="wf-label">empty_state (ColumnPanel) — visible = False when data exists</span>
+    <div style="font-size: 48px; margin-bottom: 12px;">&#128202;</div>
+    <div style="font-size: 16px; font-weight: bold; margin-bottom: 8px;">No data yet</div>
+    <div style="font-size: 12px; color: #666;">Analytics will appear here once you have bookings, payments, and contacts in the system.</div>
+    <div class="cn">empty_state <span class="ct">(ColumnPanel)</span></div>
+  </div>
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — all component properties can be set programmatically in code.</div>
+
+</body>
+</html>

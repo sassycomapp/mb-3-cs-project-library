@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Settings Form Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 1000px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-text-normal { font-size: 12px; color: #333; margin: 4px 0 0; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; max-width: 300px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.tab-bar { display: flex; gap: 4px; margin: 16px 0; border-bottom: 2px solid #E7E0EC; padding-bottom: 0; }
+.tab { padding: 8px 16px; font-size: 12px; font-weight: 500; color: #49454F; border-bottom: 2px solid transparent; cursor: pointer; margin-bottom: -2px; }
+.tab.active { color: #21005D; border-bottom-color: #6750A4; background: #EADDFF; border-radius: 4px 4px 0 0; }
+.tab.disabled { color: #aaa; cursor: not-allowed; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Settings Wireframes</h1>
+<p class="subtitle">SettingsForm — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>SettingsForm — 11-Tab Configuration</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_settings (ColumnPanel) — max-width: 1000px</span>
+
+  <!-- Page Header -->
+  <div class="wf-panel-h">
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Settings</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Settings"</span></div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div class="wf-btn-outlined">Return to Onboarding</div>
+      <div class="cn">btn_return_onboarding <span class="ct">(Button)</span> <span class="cfixed">"Return to Onboarding"</span> — visible only when onboarding in progress</div>
+    </div>
+  </div>
+
+  <!-- Tab Bar (M3 button navigation) -->
+  <div class="tab-bar">
+    <div class="tab active">Business Profile</div>
+    <div class="tab">Palette</div>
+    <div class="tab">System Currency</div>
+    <div class="tab">Legal Acknowledgement</div>
+    <div class="tab">Display Currency</div>
+    <div class="tab">Payment Gateway</div>
+    <div class="tab">Services</div>
+    <div class="tab">Users & Permissions</div>
+    <div class="tab">Email Configuration</div>
+    <div class="tab">Theme</div>
+    <div class="tab">Feature Flags</div>
+  </div>
+  <div class="cn">tab_bar <span class="ct">(FlowPanel)</span> — M3 button navigation, RBAC-governed visibility</div>
+
+  <!-- Tab Content: Business Profile (shown) -->
+  <div class="wf-panel">
+    <span class="wf-label">tab_business_profile (ColumnPanel) — visible = True when tab active</span>
+
+    <div class="wf-heading-sm">Business Profile</div>
+    <div class="cn">hdg_tab_title <span class="ct">(Heading)</span> <span class="cfixed">"Business Profile"</span></div>
+
+    <div class="wf-textbox" style="color:#aaa;">Business name</div>
+    <div class="cn">txt_business_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-textbox" style="color:#aaa;">Contact email</div>
+    <div class="cn">txt_contact_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-textbox" style="color:#aaa;">Phone</div>
+    <div class="cn">txt_phone <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-textbox" style="color:#aaa;">Address</div>
+    <div class="cn">txt_address <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-dd">Select timezone...</div>
+    <div class="cn">dd_timezone <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+
+    <div style="margin-top: 12px;">
+      <div class="wf-btn-filled">Save Changes</div>
+      <div class="cn">btn_save <span class="ct">(Button)</span> <span class="cfixed">"Save Changes"</span></div>
+    </div>
+  </div>
+
+  <!-- Tab Content: Other tabs (hidden, shown as dashed) -->
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
+    <span class="wf-label">tab_palette (ColumnPanel) — visible = False until tab selected</span>
+    <div class="wf-heading-sm">Palette</div>
+    <div class="wf-text">[ PaletteSettingsForm — local component for brand colour selection ]</div>
+    <div class="cn">palette_settings <span class="ct">(CustomComponent)</span> — PaletteSettingsForm</div>
+  </div>
+
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
+    <span class="wf-label">tab_currency (ColumnPanel) — visible = False until tab selected</span>
+    <div class="wf-heading-sm">System Currency</div>
+    <div class="wf-text">[ Currency display — locked after first transaction ]</div>
+    <div class="cn">lbl_currency <span class="ct">(Label)</span> — read-only after first transaction</div>
+  </div>
+
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
+    <span class="wf-label">tab_legal (ColumnPanel) — visible = False until tab selected</span>
+    <div class="wf-heading-sm">Legal Acknowledgement</div>
+    <div class="wf-text">[ Read-only view of legal acknowledgement history ]</div>
+    <div class="cn">rp_legal_history <span class="ct">(RepeatingPanel)</span> — read-only</div>
+  </div>
+
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
+    <span class="wf-label">tab_payment (ColumnPanel) — visible = False until tab selected</span>
+    <div class="wf-heading-sm">Payment Gateway</div>
+    <div class="wf-text">[ PaymentGatewayForm — Stripe/Paystack configuration, secret keys in Vault ]</div>
+    <div class="cn">payment_gateway_form <span class="ct">(CustomComponent)</span></div>
+  </div>
+
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
+    <span class="wf-label">tab_services (ColumnPanel) — visible = False until tab selected</span>
+    <div class="wf-heading-sm">Services</div>
+    <div class="wf-text">[ Links to ServiceListForm — service catalogue management ]</div>
+    <div class="cn">nav_services <span class="ct">(Link)</span> <span class="cfixed">"Manage Services"</span></div>
+  </div>
+
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
+    <span class="wf-label">tab_users (ColumnPanel) — visible = False until tab selected</span>
+    <div class="wf-heading-sm">Users & Permissions</div>
+    <div class="wf-text">[ Links to UserManagementForm — user management and RBAC ]</div>
+    <div class="cn">nav_users <span class="ct">(Link)</span> <span class="cfixed">"Manage Users"</span></div>
+  </div>
+</div>
+
+<h2>Tab Structure (11 tabs)</h2>
+<table class="props">
+<tr><th>Tab</th><th>Content</th><th>RBAC Visibility</th></tr>
+<tr><td>Business Profile</td><td>Name, email, phone, address, timezone, entity type</td><td>Owner, Manager</td></tr>
+<tr><td>Palette</td><td>Brand colour selection (PaletteSettingsForm — local component)</td><td>Owner, Manager</td></tr>
+<tr><td>System Currency</td><td>Currency display (locked after first transaction)</td><td>Owner only</td></tr>
+<tr><td>Legal Acknowledgement</td><td>Read-only view of legal acknowledgements</td><td>Owner only</td></tr>
+<tr><td>Display Currency</td><td>Optional per-service currency override</td><td>Owner, Manager</td></tr>
+<tr><td>Payment Gateway</td><td>Stripe/Paystack configuration (API keys in Vault)</td><td>Owner only</td></tr>
+<tr><td>Services</td><td>Service catalogue management</td><td>Owner, Manager, Admin</td></tr>
+<tr><td>Users & Permissions</td><td>User management and RBAC</td><td>Owner only</td></tr>
+<tr><td>Email Configuration</td><td>Brevo SMTP and API settings</td><td>Owner only</td></tr>
+<tr><td>Theme</td><td>M3 theme customisation</td><td>Owner, Manager</td></tr>
+<tr><td>Feature Flags</td><td>Feature activation toggles</td><td>Owner only</td></tr>
+</table>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">Designer-mandatory properties: Write Back toggle (W) must be enabled in Designer Data Bindings panel for TextBox and DropdownMenu components.</div>
+<table class="props">
+<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+<tr><td>txt_business_name</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_contact_email</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_phone</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_address</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>dd_timezone</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Service Viewer Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-text-normal { font-size: 12px; color: #333; margin: 4px 0 0; }
+.wf-kv { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+.wf-kv-label { font-size: 12px; color: #888; }
+.wf-kv-value { font-size: 12px; font-weight: 500; color: #333; }
+.wf-badge { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: 11px; }
+.wf-badge-duration { background: #EADDFF; color: #21005D; }
+.wf-badge-unit { background: #E8DEF8; color: #1D192B; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Services Wireframes</h1>
+<p class="subtitle">Service Viewer — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>ServiceViewerForm — Service Detail</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_content (ColumnPanel) — max-width: 900px</span>
+
+  <!-- Page Header -->
+  <div class="wf-panel-h">
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Service Details</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Service Details"</span></div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div class="wf-btn-outlined">Back to List</div>
+      <div class="cn">btn_back <span class="ct">(Button)</span> <span class="cfixed">"Back to List"</span></div>
+      <div class="wf-btn-filled">Edit</div>
+      <div class="cn">btn_edit <span class="ct">(Button)</span> <span class="cfixed">"Edit"</span></div>
+    </div>
+  </div>
+
+  <!-- Service Header -->
+  <div class="wf-panel">
+    <span class="wf-label">header_info (ColumnPanel)</span>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div class="wf-heading-lg">Initial Consultation</div>
+        <div class="cn">hdg_service_name <span class="ct">(Heading)</span> <span class="cfixed">"Initial Consultation"</span></div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <span class="wf-badge wf-badge-duration">60 min</span>
+        <span style="font-size: 24px; font-weight: bold; color: #6750A4;">R 850</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Details -->
+  <div class="wf-panel">
+    <span class="wf-label">card_details (Card)</span>
+    <div class="wf-heading-sm">Service Information</div>
+    <div class="cn">hdg_details <span class="ct">(Heading)</span> <span class="cfixed">"Service Information"</span></div>
+
+    <div class="wf-kv"><span class="wf-kv-label">Description</span><span class="wf-kv-value">First meeting with new clients to discuss their needs and goals.</span></div>
+    <div class="wf-kv"><span class="wf-kv-label">Category</span><span class="wf-kv-value">Consulting</span></div>
+    <div class="wf-kv"><span class="wf-kv-label">Pricing Model</span><span class="wf-kv-value">Duration (time-based)</span></div>
+    <div class="wf-kv"><span class="wf-kv-label">Price</span><span class="wf-kv-value">R 850</span></div>
+    <div class="wf-kv"><span class="wf-kv-label">Duration</span><span class="wf-kv-value">60 minutes</span></div>
+    <div class="wf-kv"><span class="wf-kv-label">Provider</span><span class="wf-kv-value">Sarah Johnson</span></div>
+    <div class="wf-kv"><span class="wf-kv-label">Meeting Types</span><span class="wf-kv-value">In-Person, Video Call</span></div>
+    <div class="cn">details_panel <span class="ct">(ColumnPanel)</span></div>
+  </div>
+
+  <!-- Media -->
+  <div class="wf-panel">
+    <span class="wf-label">card_media (Card)</span>
+    <div class="wf-heading-sm">Media</div>
+    <div class="cn">hdg_media <span class="ct">(Heading)</span> <span class="cfixed">"Media"</span></div>
+    <div style="height: 200px; background: #E7E0EC; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888;">[Service Image]</div>
+    <div class="cn">img_service <span class="ct">(Image)</span></div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div style="display: flex; gap: 8px; margin-top: 16px;">
+    <div class="wf-btn-filled">Edit Service</div>
+    <div class="cn">btn_edit <span class="ct">(Button)</span> <span class="cfixed">"Edit Service"</span></div>
+    <div class="wf-btn-outlined">Delete Service</div>
+    <div class="cn">btn_delete <span class="ct">(Button)</span> <span class="cfixed">"Delete Service"</span></div>
+  </div>
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — all component properties can be set programmatically in code.</div>
+
+</body>
+</html>

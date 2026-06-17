@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Segment Manager Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-text-normal { font-size: 12px; color: #333; margin: 4px 0 0; }
+.wf-card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff; margin: 8px 0; display: flex; justify-content: space-between; align-items: center; }
+.wf-card-info { flex: 1; }
+.wf-card-title { font-size: 14px; font-weight: bold; color: #333; }
+.wf-card-meta { font-size: 11px; color: #888; }
+.wf-card-count { font-size: 24px; font-weight: bold; color: #6750A4; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: none; background: transparent; color: #555; border-radius: 50%; font-size: 16px; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — CRM Wireframes</h1>
+<p class="subtitle">Segment Manager — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>SegmentManagerForm — Contact Segments</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_content (ColumnPanel) — max-width: 900px</span>
+
+  <!-- Page Header -->
+  <div class="wf-panel-h">
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Segments</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Segments"</span></div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div>
+        <div class="wf-btn-filled">+ Create Segment</div>
+        <div class="cn">btn_create <span class="ct">(Button)</span> <span class="cfixed">"+ Create Segment"</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pre-built Segments -->
+  <div class="wf-panel">
+    <span class="wf-label">card_prebuilt (Card)</span>
+    <div class="wf-heading-sm">Pre-built Segments</div>
+    <div class="cn">hdg_prebuilt <span class="ct">(Heading)</span> <span class="cfixed">"Pre-built Segments"</span></div>
+
+    <div class="wf-card">
+      <div class="wf-card-info">
+        <div class="wf-card-title">New Leads</div>
+        <div class="wf-card-meta">Contacts created in the last 30 days</div>
+        <div class="cn">card_new_leads <span class="ct">(Card)</span></div>
+      </div>
+      <div class="wf-card-count">23</div>
+    </div>
+
+    <div class="wf-card">
+      <div class="wf-card-info">
+        <div class="wf-card-title">Active Customers</div>
+        <div class="wf-card-meta">Contacts with at least 1 booking in the last 90 days</div>
+        <div class="cn">card_active <span class="ct">(Card)</span></div>
+      </div>
+      <div class="wf-card-count">89</div>
+    </div>
+
+    <div class="wf-card">
+      <div class="wf-card-info">
+        <div class="wf-card-title">Inactive Customers</div>
+        <div class="wf-card-meta">No bookings in the last 90 days</div>
+        <div class="cn">card_inactive <span class="ct">(Card)</span></div>
+      </div>
+      <div class="wf-card-count">31</div>
+    </div>
+
+    <div class="wf-card">
+      <div class="wf-card-info">
+        <div class="wf-card-title">High Value</div>
+        <div class="wf-card-meta">Lifetime value over R 5,000</div>
+        <div class="cn">card_high_value <span class="ct">(Card)</span></div>
+      </div>
+      <div class="wf-card-count">12</div>
+    </div>
+  </div>
+
+  <!-- Custom Segments (hidden if none) -->
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5;">
+    <span class="wf-label">card_custom (Card) — visible = False when no custom segments</span>
+    <div class="wf-heading-sm">Custom Segments</div>
+    <div class="cn">hdg_custom <span class="ct">(Heading)</span> <span class="cfixed">"Custom Segments"</span></div>
+    <div class="wf-text">Custom segments will appear here when created.</div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="wf-panel" style="border-style: dashed; opacity: 0.5; text-align: center; padding: 32px;">
+    <span class="wf-label">empty_state (ColumnPanel) — visible = False when segments exist</span>
+    <div style="font-size: 48px; margin-bottom: 12px;">&#128101;</div>
+    <div style="font-size: 16px; font-weight: bold; margin-bottom: 8px;">No custom segments yet</div>
+    <div style="font-size: 12px; color: #666; margin-bottom: 16px;">Segments group your contacts by behaviour or attributes. Pre-built segments are available above.</div>
+    <div class="wf-btn-filled">+ Create Segment</div>
+    <div class="cn">btn_create_first <span class="ct">(Button)</span> <span class="cfixed">"+ Create Segment"</span></div>
+  </div>
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — all component properties can be set programmatically in code.</div>
+
+</body>
+</html>

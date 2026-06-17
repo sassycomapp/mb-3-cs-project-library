@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Blog Post Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-text-normal { font-size: 12px; color: #333; margin: 4px 0 0; line-height: 1.6; }
+.wf-badge { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: 11px; }
+.wf-badge-category { background: #EADDFF; color: #21005D; }
+.wf-post-header { margin-bottom: 24px; }
+.wf-post-title { font-size: 28px; font-weight: bold; color: #333; margin-bottom: 8px; }
+.wf-post-meta { font-size: 12px; color: #888; margin-bottom: 16px; }
+.wf-post-image { width: 100%; height: 300px; background: #E7E0EC; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888; margin-bottom: 24px; }
+.wf-post-content { font-size: 14px; line-height: 1.8; color: #333; }
+.wf-post-content h2 { font-size: 20px; font-weight: bold; margin: 24px 0 12px; }
+.wf-post-content h3 { font-size: 16px; font-weight: bold; margin: 20px 0 8px; }
+.wf-post-content p { margin: 12px 0; }
+.wf-post-content ul { margin: 12px 0; padding-left: 24px; }
+.wf-post-content li { margin: 4px 0; }
+.wf-sidebar { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff; }
+.wf-sidebar-title { font-size: 14px; font-weight: bold; color: #333; margin-bottom: 8px; }
+.wf-sidebar-link { font-size: 12px; color: #6750A4; margin: 4px 0; display: block; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Blog Wireframes</h1>
+<p class="subtitle">Blog Post (Public) — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>BlogPostForm — Public Blog Post View</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">page_blog_post (ColumnPanel) — max-width: 900px, public page</span>
+
+  <!-- Post Header -->
+  <div class="wf-post-header">
+    <span class="wf-badge wf-badge-category">Tax Planning</span>
+    <div class="cn">badge_category <span class="ct">(Label)</span> <span class="cfixed">"Tax Planning"</span></div>
+    <div class="wf-post-title">5 Tips for Better Tax Planning</div>
+    <div class="cn">hdg_title <span class="ct">(Heading)</span> <span class="cfixed">"5 Tips for Better Tax Planning"</span></div>
+    <div class="wf-post-meta">By Sarah Johnson · May 10, 2026 · 5 min read</div>
+    <div class="cn">txt_meta <span class="ct">(Text)</span></div>
+  </div>
+
+  <!-- Featured Image -->
+  <div class="wf-post-image">[Featured Image]</div>
+  <div class="cn">img_featured <span class="ct">(Image)</span></div>
+
+  <!-- Post Content -->
+  <div class="wf-post-content">
+    <p>Tax planning is one of the most important aspects of running a successful business. Whether you're a sole proprietor or running a growing company, understanding how to optimize your tax position can save you thousands of rands each year.</p>
+    <div class="cn">txt_content <span class="ct">(RichText)</span></div>
+
+    <h2>1. Start Early</h2>
+    <p>The best tax planning happens well before the tax deadline. Start reviewing your financial position at least 3 months before year-end.</p>
+
+    <h2>2. Keep Accurate Records</h2>
+    <p>Maintain detailed records of all business expenses. This includes receipts, invoices, and bank statements.</p>
+
+    <h2>3. Understand Deductions</h2>
+    <p>Know which expenses are deductible and which are not. Common deductions include:</p>
+    <ul>
+      <li>Office supplies and equipment</li>
+      <li>Business travel expenses</li>
+      <li>Professional development</li>
+      <li>Insurance premiums</li>
+    </ul>
+
+    <h2>4. Plan for Retirement Contributions</h2>
+    <p>Retirement contributions are tax-deductible. Consider maximizing your contributions to reduce taxable income.</p>
+
+    <h2>5. Consult a Professional</h2>
+    <p>Tax laws change frequently. Working with a qualified tax professional ensures you're taking advantage of all available deductions and credits.</p>
+  </div>
+
+  <!-- Related Posts -->
+  <div style="margin-top: 32px;">
+    <div class="wf-heading-sm">Related Posts</div>
+    <div class="cn">hdg_related <span class="ct">(Heading)</span> <span class="cfixed">"Related Posts"</span></div>
+
+    <div style="display: flex; gap: 16px; margin-top: 12px;">
+      <div style="flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff;">
+        <div style="font-weight: bold; font-size: 14px;">How to Choose the Right Business Structure</div>
+        <div style="font-size: 11px; color: #888; margin-top: 4px;">Apr 28, 2026</div>
+        <div class="cn">card_related_1 <span class="ct">(Card)</span></div>
+      </div>
+      <div style="flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff;">
+        <div style="font-weight: bold; font-size: 14px;">Year-End Financial Checklist</div>
+        <div style="font-size: 11px; color: #888; margin-top: 4px;">Draft</div>
+        <div class="cn">card_related_2 <span class="ct">(Card)</span></div>
+      </div>
+    </div>
+    <div class="cn">flow_related <span class="ct">(FlowPanel)</span></div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top: 32px; padding: 24px; background: #F3EDF7; border-radius: 8px;">
+    <div class="cn">footer <span class="ct">(FooterComponent)</span></div>
+  </div>
+</div>
+
+<h2>Blog Post Templates</h2>
+<div class="prop-note">
+  <strong>Classic Centered:</strong> Single-column article layout. Best for long-form editorial content.<br>
+  <strong>Two-Column with Sidebar:</strong> Main article plus sidebar with author bio, related posts, categories.<br>
+  <strong>Full-Width Immersive:</strong> Full-width visual treatment. Best for image-rich content.
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — all component properties can be set programmatically in code.</div>
+
+</body>
+</html>

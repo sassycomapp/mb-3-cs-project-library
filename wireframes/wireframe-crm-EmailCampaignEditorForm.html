@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Email Campaign Editor Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; max-width: 300px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-step { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff; margin: 8px 0; display: flex; gap: 16px; align-items: flex-start; }
+.wf-step-number { width: 32px; height: 32px; border-radius: 50%; background: #EADDFF; color: #21005D; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+.wf-step-content { flex: 1; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Marketing Wireframes</h1>
+<p class="subtitle">Email Campaign Editor — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>EmailCampaignEditorForm — Campaign Sequence Builder</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_content (ColumnPanel) — max-width: 900px</span>
+
+  <!-- Page Header -->
+  <div class="wf-panel-h">
+    <span class="wf-label">page_header (Header)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Edit Campaign</div>
+      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Edit Campaign"</span></div>
+    </div>
+  </div>
+
+  <!-- Campaign Settings -->
+  <div class="wf-panel">
+    <span class="wf-label">card_settings (Card)</span>
+    <div class="wf-heading-sm">Campaign Settings</div>
+    <div class="cn">hdg_settings <span class="ct">(Heading)</span> <span class="cfixed">"Campaign Settings"</span></div>
+
+    <div class="wf-text">Campaign Name</div>
+    <div class="wf-textbox" style="color: #aaa;">New Client Welcome</div>
+    <div class="cn">txt_campaign_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-text" style="margin-top: 8px;">Trigger</div>
+    <div class="wf-dd">New contact created</div>
+    <div class="cn">dd_trigger <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+
+    <div class="wf-text" style="margin-top: 8px;">Target Segment</div>
+    <div class="wf-dd">All Contacts</div>
+    <div class="cn">dd_segment <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+  </div>
+
+  <!-- Email Sequence -->
+  <div class="wf-panel">
+    <span class="wf-label">card_sequence (Card)</span>
+    <div class="wf-heading-sm">Email Sequence</div>
+    <div class="cn">hdg_sequence <span class="ct">(Heading)</span> <span class="cfixed">"Email Sequence"</span></div>
+
+    <div class="wf-step">
+      <div class="wf-step-number">1</div>
+      <div class="wf-step-content">
+        <div style="font-weight: bold; font-size: 14px;">Welcome Email</div>
+        <div class="cn">step_1 <span class="ct">(ColumnPanel)</span></div>
+        <div class="wf-text">Sent immediately on trigger</div>
+        <div class="wf-textbox" style="color: #aaa;">Subject: Welcome to [Business Name]!</div>
+        <div class="cn">txt_subject_1 <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+        <div class="wf-dd">Template: Welcome Email</div>
+        <div class="cn">dd_template_1 <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+      </div>
+    </div>
+
+    <div class="wf-step">
+      <div class="wf-step-number">2</div>
+      <div class="wf-step-content">
+        <div style="font-weight: bold; font-size: 14px;">Follow-up Email</div>
+        <div class="cn">step_2 <span class="ct">(ColumnPanel)</span></div>
+        <div class="wf-text">Sent 3 days after step 1</div>
+        <div class="wf-textbox" style="color: #aaa;">Subject: How can we help?</div>
+        <div class="cn">txt_subject_2 <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+        <div class="wf-dd">Template: Follow-up</div>
+        <div class="cn">dd_template_2 <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+        <div class="wf-text">Delay (days after previous step)</div>
+        <div class="wf-textbox" style="color: #aaa; width: 80px;">3</div>
+        <div class="cn">txt_delay_2 <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+      </div>
+    </div>
+
+    <div class="wf-step">
+      <div class="wf-step-number">3</div>
+      <div class="wf-step-content">
+        <div style="font-weight: bold; font-size: 14px;">Review Request</div>
+        <div class="cn">step_3 <span class="ct">(ColumnPanel)</span></div>
+        <div class="wf-text">Sent 7 days after step 2</div>
+        <div class="wf-textbox" style="color: #aaa;">Subject: How was your experience?</div>
+        <div class="cn">txt_subject_3 <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+        <div class="wf-dd">Template: Review Request</div>
+        <div class="cn">dd_template_3 <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+        <div class="wf-text">Delay (days after previous step)</div>
+        <div class="wf-textbox" style="color: #aaa; width: 80px;">7</div>
+        <div class="cn">txt_delay_3 <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+      </div>
+    </div>
+
+    <div class="wf-btn-outlined" style="margin-top: 8px;">+ Add Step</div>
+    <div class="cn">btn_add_step <span class="ct">(Button)</span> <span class="cfixed">"+ Add Step"</span></div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div style="display: flex; gap: 8px; margin-top: 16px;">
+    <div class="wf-btn-filled">Save Campaign</div>
+    <div class="cn">btn_save <span class="ct">(Button)</span> <span class="cfixed">"Save Campaign"</span></div>
+    <div class="wf-btn-outlined">Cancel</div>
+    <div class="cn">btn_cancel <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span></div>
+  </div>
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">Designer-mandatory properties: Write Back toggle (W) must be enabled in Designer Data Bindings panel for all input components.</div>
+<table class="props">
+<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+<tr><td>txt_campaign_name</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>dd_trigger</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+<tr><td>dd_segment</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+<tr><td>txt_subject_1 through txt_subject_3</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>dd_template_1 through dd_template_3</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+<tr><td>txt_delay_2, txt_delay_3</td><td>TextBox</td><td>writeback = W</td></tr>
+</table>
+
+</body>
+</html>

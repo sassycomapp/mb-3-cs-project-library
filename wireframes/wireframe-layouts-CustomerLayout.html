@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Customer Layout Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+.nav-group { margin: 12px 0; }
+.nav-group-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.nav-item { font-size: 12px; color: #333; padding: 6px 12px; margin: 2px 0; border-radius: 4px; cursor: pointer; }
+.nav-item:hover { background: #f0f0f0; }
+.nav-item.active { background: #EADDFF; color: #21005D; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Layout Wireframes</h1>
+<p class="subtitle">CustomerLayout — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>CustomerLayout — Customer Portal Shell (V2)</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">layout_root (ColumnPanel) — full viewport</span>
+
+  <!-- App Bar -->
+  <div class="wf-panel" style="display: flex; justify-content: space-between; align-items: center;">
+    <span class="wf-label">app_bar (Container)</span>
+    <div class="wf-heading-sm" style="border: none; margin: 0; padding: 0;">Mybizz</div>
+    <div class="cn">hdg_app_title <span class="ct">(Heading)</span> <span class="cfixed">"Mybizz"</span></div>
+    <div style="display: flex; gap: 8px; align-items: center;">
+      <div style="font-size: 16px;">&#128276;</div>
+      <div class="cn">btn_notifications <span class="ct">(Button)</span> <span class="cfixed">icon-only</span></div>
+      <div style="font-size: 16px;">&#128100;</div>
+      <div class="cn">btn_user_menu <span class="ct">(Button)</span> <span class="cfixed">icon-only</span></div>
+    </div>
+  </div>
+
+  <!-- Body: Sidebar + Content -->
+  <div style="display: flex; gap: 0; margin-top: 8px;">
+
+    <!-- Sidebar -->
+    <div class="wf-panel" style="width: 260px; min-width: 260px; margin-right: 8px; display: flex; flex-direction: column;">
+      <span class="wf-label">sidebar (ColumnPanel) — 260px fixed</span>
+
+      <div class="nav-item active">My Dashboard</div>
+      <div class="cn">lnk_dashboard <span class="ct">(Link)</span> <span class="cfixed">"My Dashboard"</span></div>
+
+      <div class="nav-item">My Bookings</div>
+      <div class="cn">lnk_bookings <span class="ct">(Link)</span> <span class="cfixed">"My Bookings"</span></div>
+
+      <div class="nav-item">My Invoices</div>
+      <div class="cn">lnk_invoices <span class="ct">(Link)</span> <span class="cfixed">"My Invoices"</span></div>
+
+      <div class="nav-item">My Reviews</div>
+      <div class="cn">lnk_reviews <span class="ct">(Link)</span> <span class="cfixed">"My Reviews"</span></div>
+
+      <div class="nav-item">Support Tickets</div>
+      <div class="cn">lnk_support <span class="ct">(Link)</span> <span class="cfixed">"Support Tickets"</span></div>
+
+      <div class="nav-item">Account</div>
+      <div class="cn">lnk_account <span class="ct">(Link)</span> <span class="cfixed">"Account"</span></div>
+
+      <div style="flex: 1;"></div>
+
+      <div class="nav-item" style="color: #B3261E;">Sign Out</div>
+      <div class="cn">lnk_sign_out <span class="ct">(Link)</span> <span class="cfixed">"Sign Out"</span></div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="wf-panel" style="flex: 1;">
+      <span class="wf-label">content_area (ColumnPanel) — customer forms load here</span>
+      <div class="wf-text">[ Customer portal content — deferred to V2 ]</div>
+      <div class="cn">col_content <span class="ct">(ColumnPanel)</span></div>
+    </div>
+  </div>
+</div>
+
+<h2>Usage</h2>
+<div class="prop-note">
+  CustomerLayout is the shell for the customer portal (V2).<br>
+  Customers book via the public site and the business manages all bookings from the admin panel in V1.<br>
+  The customer portal is deferred — this wireframe documents the intended structure for future implementation.<br>
+  Navigation items: My Dashboard, My Bookings, My Invoices, My Reviews, Support Tickets, Account, Sign Out.
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — all component properties can be set programmatically in code.</div>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Privacy Policy Page Wireframe</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-text-normal { font-size: 12px; color: #333; margin: 4px 0 0; line-height: 1.6; }
+.wf-hero { background: linear-gradient(135deg, #EADDFF 0%, #F3EDF7 100%); border-radius: 8px; padding: 48px 32px; text-align: center; margin: 16px 0; }
+.wf-hero-title { font-size: 32px; font-weight: bold; color: #21005D; margin-bottom: 12px; }
+.wf-hero-subtitle { font-size: 16px; color: #49454F; margin-bottom: 24px; }
+.wf-clause { margin: 16px 0; padding: 16px; border-left: 4px solid #EADDFF; background: #fff; border-radius: 0 8px 8px 0; }
+.wf-clause-category { font-size: 11px; font-weight: 500; color: #6750A4; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.wf-clause-title { font-size: 14px; font-weight: bold; color: #333; margin-bottom: 8px; }
+.wf-clause-body { font-size: 12px; color: #666; line-height: 1.6; }
+.wf-footer { background: #F3EDF7; border-radius: 8px; padding: 24px; margin: 16px 0; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Public Pages Wireframes</h1>
+<p class="subtitle">Privacy Policy Page — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>PrivacyPolicyPage — Public Privacy Policy</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">page_privacy (ColumnPanel) — full-width public page</span>
+
+  <!-- Hero Section -->
+  <div class="wf-hero">
+    <div class="wf-hero-title">Privacy Policy</div>
+    <div class="cn">hdg_hero <span class="ct">(Heading)</span> <span class="cfixed">"Privacy Policy"</span></div>
+    <div class="wf-hero-subtitle">Last updated: May 15, 2026</div>
+    <div class="cn">txt_last_updated <span class="ct">(Text)</span></div>
+    <div class="cn">hero_section <span class="ct">(ColumnPanel)</span></div>
+  </div>
+
+  <!-- Policy Clauses -->
+  <div style="max-width: 700px; margin: 0 auto;">
+
+    <div class="wf-clause">
+      <div class="wf-clause-category">Introduction</div>
+      <div class="wf-clause-title">1. Information We Collect</div>
+      <div class="wf-clause-body">We collect information you provide directly to us, such as when you create an account, book a service, or contact us for support. This may include your name, email address, phone number, and payment information.</div>
+      <div class="cn">clause_1 <span class="ct">(ColumnPanel)</span> — from privacy_policy table, is_active = True</div>
+    </div>
+
+    <div class="wf-clause">
+      <div class="wf-clause-category">Data Usage</div>
+      <div class="wf-clause-title">2. How We Use Your Information</div>
+      <div class="wf-clause-body">We use the information we collect to provide, maintain, and improve our services, process transactions, send you technical notices and support messages, and communicate with you about products, services, and promotional offers.</div>
+      <div class="cn">clause_2 <span class="ct">(ColumnPanel)</span></div>
+    </div>
+
+    <div class="wf-clause">
+      <div class="wf-clause-category">Data Sharing</div>
+      <div class="wf-clause-title">3. Information Sharing</div>
+      <div class="wf-clause-body">We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties. This does not include trusted third parties who assist us in operating our website, conducting our business, or servicing you.</div>
+      <div class="cn">clause_3 <span class="ct">(ColumnPanel)</span></div>
+    </div>
+
+    <div class="wf-clause">
+      <div class="wf-clause-category">Data Security</div>
+      <div class="wf-clause-title">4. Data Security</div>
+      <div class="wf-clause-body">We implement a variety of security measures to maintain the safety of your personal information. Your data is stored in encrypted form and access is restricted to authorized personnel only.</div>
+      <div class="cn">clause_4 <span class="ct">(ColumnPanel)</span></div>
+    </div>
+
+    <div class="wf-clause">
+      <div class="wf-clause-category">Your Rights</div>
+      <div class="wf-clause-title">5. Your Rights</div>
+      <div class="wf-clause-body">You have the right to access, correct, or delete your personal data at any time. You can download a copy of your data from your account settings or contact us for assistance.</div>
+      <div class="cn">clause_5 <span class="ct">(ColumnPanel)</span></div>
+    </div>
+
+    <div class="wf-clause">
+      <div class="wf-clause-category">Contact</div>
+      <div class="wf-clause-title">6. Contact Us</div>
+      <div class="wf-clause-body">If you have any questions about this Privacy Policy, please contact us at info@business.com or through our contact page.</div>
+      <div class="cn">clause_6 <span class="ct">(ColumnPanel)</span></div>
+    </div>
+
+  </div>
+  <div class="cn">rp_clauses <span class="ct">(RepeatingPanel)</span> — from privacy_policy table, ordered by sort_order, grouped by category</div>
+
+  <!-- Footer -->
+  <div class="wf-footer">
+    <div class="cn">footer <span class="ct">(FooterComponent)</span></div>
+  </div>
+</div>
+
+<h2>Implementation Notes</h2>
+<div class="prop-note">
+  Reads clauses from the `privacy_policy` table. Only active clauses (`is_active = True`) are displayed.<br>
+  Clauses are ordered by `sort_order` and grouped by `category`.<br>
+  Seeded clauses are provided by the master template. Custom clauses are added by the Owner via the Policy Editor in Settings.<br>
+  The page uses the standard public page layout with FooterComponent.
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — all component properties can be set programmatically in code.</div>
+
+</body>
+</html>
