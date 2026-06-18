@@ -18,7 +18,7 @@ The platform currently has inconsistent onboarding-tier framing in the platform 
 
 ## Decision
 
-**Commercial tiers are Free Trial, Launch, Pioneer, and Business.**
+**Commercial tiers are Launch, Pioneer, and Business.**
 
 These are pricing/business-model constructs. They are separate from setup-service options such as guided self-setup and $100 DFY setup.
 
@@ -26,7 +26,6 @@ These are pricing/business-model constructs. They are separate from setup-servic
 
 | Tier | Clients | Monthly Price | Lifetime Price | Features |
 |---|---|---|---|---|
-| **Free Trial** | Any new signup | $0 | N/A | 30-day trial with limited functionality. No payment required. |
 | **Launch** | First 10 clients | $25/month | Yes — locked at $25/month for life | Full service, full feature access |
 | **Pioneer** | 11th to 50th clients | $35/month | Yes — locked at $35/month for life | Full service, full feature access |
 | **Business** | 51st client onwards | $50/month | No — price may change | Full service, full feature access |
@@ -34,7 +33,7 @@ These are pricing/business-model constructs. They are separate from setup-servic
 ### Architectural Rules
 
 1. **Commercial Tiers:**
-   - Free Trial, Launch, Pioneer, and Business
+   - Launch, Pioneer, and Business
    - Pricing and business-model constructs
    - Define pricing and feature access
    - Launch and Pioneer tiers are grandfathered at their signup price for life

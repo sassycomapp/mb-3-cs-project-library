@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Settings Form (Recreated)</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 1000px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-hidden { border: 2px dashed #aaa; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #f7f7f7; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-label-hidden { position: absolute; top: -10px; left: 10px; background: #f7f7f7; font-size: 11px; font-weight: bold; color: #aaa; padding: 0 4px; }
+.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
+.wf-dd::after { content: " ▾"; color: #aaa; }
+.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
+.wf-checkbox::before { content: "☐ "; }
+.wf-image { border: 2px dashed #ccc; border-radius: 4px; padding: 8px 16px; font-size: 11px; color: #ccc; display: inline-block; margin: 6px 0 0; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-text { background: transparent; color: #333; border: none; padding: 8px 18px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; text-decoration: underline; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.wf-spacer { height: 6px; }
+.wf-tab-active { background: #333; color: #fff; border: 2px solid #333; padding: 8px 14px; border-radius: 4px; font-size: 11px; font-family: Arial; display: inline-block; }
+.wf-tab-inactive { background: #fff; color: #333; border: 2px solid #888; padding: 8px 14px; border-radius: 4px; font-size: 11px; font-family: Arial; display: inline-block; }
+.wf-return-btn { background: #fff; color: #333; border: 2px solid #4a9; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Settings Form (Recreated)</h1>
+<p class="subtitle">Settings & Configuration — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span><br>
+  <span><strong>Green border</strong> = Return to Onboarding button (visible only when onboarding in progress)</span>
+</div>
+
+<h2>SettingsForm — Main Settings Tabbed Interface</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_settings (ColumnPanel)</span>
+
+  <div class="wf-panel-h">
+    <span class="wf-label">flow_header (FlowPanel)</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">Settings</div>
+      <div class="cn">hdg_settings_title <span class="ct">(Heading)</span> <span class="cfixed">"Settings"</span></div>
+    </div>
+    <div>
+      <div class="wf-return-btn">Return to Onboarding</div>
+      <div class="cn">btn_return_onboarding <span class="ct">(Button)</span> <span class="cfixed">"Return to Onboarding"</span></div>
+      <div class="cn" style="color:#4a9;">visible = onboarding_status == "in_progress"</div>
+    </div>
+  </div>
+
+  <div class="wf-panel-h">
+    <span class="wf-label">flow_tabs (FlowPanel)</span>
+    <div><div class="wf-tab-active">Business Profile</div><div class="cn">btn_tab_business <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Palette</div><div class="cn">btn_tab_palette <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">System Currency</div><div class="cn">btn_tab_currency <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Legal Ack</div><div class="cn">btn_tab_legal <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Display Currency</div><div class="cn">btn_tab_display_currency <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Payment Gateway</div><div class="cn">btn_tab_payments <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Services</div><div class="cn">btn_tab_services <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Users</div><div class="cn">btn_tab_users <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Email</div><div class="cn">btn_tab_email <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Theme</div><div class="cn">btn_tab_theme <span class="ct">(Button)</span></div></div>
+    <div><div class="wf-tab-inactive">Features</div><div class="cn">btn_tab_features <span class="ct">(Button)</span></div></div>
+  </div>
+
+  <!-- Tab 1: Business Profile (visible by default) -->
+  <div class="wf-panel">
+    <span class="wf-label">col_business (ColumnPanel)</span>
+    <div class="wf-heading-sm">Business Profile</div>
+    <div class="wf-textbox" style="width:60%;">Business Name</div>
+    <div class="cn">txt_business_name <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:60%;">Contact Email</div>
+    <div class="cn">txt_contact_email <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:60%;">Phone</div>
+    <div class="cn">txt_phone <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:60%;">Address Line 1</div>
+    <div class="cn">txt_address_1 <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:60%;">Address Line 2</div>
+    <div class="cn">txt_address_2 <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:40%;">City</div>
+    <div class="cn">txt_city <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:40%;">Country</div>
+    <div class="cn">txt_country <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:40%;">Postal Code</div>
+    <div class="cn">txt_postal <span class="ct">(TextBox)</span></div>
+    <div class="wf-dd" style="width:50%;">Timezone</div>
+    <div class="cn">dd_timezone <span class="ct">(DropdownMenu)</span></div>
+    <div class="wf-dd" style="width:30%;">Entity Type</div>
+    <div class="cn">dd_entity_type <span class="ct">(DropdownMenu)</span> — Individual / Business</div>
+    <div class="wf-textbox" style="width:60%;">Website URL</div>
+    <div class="cn">txt_website <span class="ct">(TextBox)</span></div>
+
+    <div class="wf-heading-sm" style="margin-top:16px;">Website Videos</div>
+    <div class="wf-textbox" style="width:60%;">https://www.youtube.com/watch?v=...</div>
+    <div class="cn">txt_home_video_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="wf-text" style="margin-bottom:8px;">YouTube URL for home page video. Leave empty to hide.</div>
+    <div class="cn">lbl_home_video_hint <span class="ct">(Label)</span></div>
+
+    <div class="wf-textbox" style="width:60%;">https://www.youtube.com/watch?v=...</div>
+    <div class="cn">txt_services_video_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="wf-text" style="margin-bottom:8px;">YouTube URL for services page video. Leave empty to hide.</div>
+    <div class="cn">lbl_services_video_hint <span class="ct">(Label)</span></div>
+
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Save Business Profile</div>
+    <div class="cn">btn_save_business <span class="ct">(Button)</span></div>
+  </div>
+
+  <!-- Tab 2: Palette (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_palette (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Color Palette</div>
+    <div class="cn">PaletteSettingsForm component embedded here (local to SettingsForm)</div>
+    <div style="border:2px dashed #4a9; border-radius:4px; padding:16px; margin:8px 0; text-align:center; color:#4a9; font-size:12px;">
+      PaletteSettingsForm — 4 palette options with preview swatches<br>
+      (Professional Blue, Warm Coral, Calm Teal, Sophisticated Purple)
+    </div>
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Save Palette</div>
+    <div class="cn">btn_save_palette <span class="ct">(Button)</span></div>
+  </div>
+
+  <!-- Tab 3: System Currency (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_system_currency (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">System Currency</div>
+    <div class="cn">This is a read-only display after first transaction. Editable only before first transaction.</div>
+    <div class="wf-dd" style="width:40%;">System Currency</div>
+    <div class="cn">dd_system_currency <span class="ct">(DropdownMenu)</span></div>
+    <div class="cn" style="color:#c00;">Warning: This becomes immutable after your first transaction.</div>
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Confirm Currency</div>
+    <div class="cn">btn_confirm_currency <span class="ct">(Button)</span></div>
+  </div>
+
+  <!-- Tab 4: Legal Acknowledgement (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_legal (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Legal Acknowledgement</div>
+    <div class="cn">Read-only view of legal and data governance acknowledgements.</div>
+    <div class="wf-text">Legal acknowledgement: Accepted on 2026-XX-XX</div>
+    <div class="wf-text">Data governance acknowledgement: Accepted on 2026-XX-XX</div>
+    <div class="cn">These acknowledgements cannot be reversed once accepted.</div>
+  </div>
+
+  <!-- Tab 5: Display Currency (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_display_currency (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Display Currency</div>
+    <div class="cn">Optional per-service currency override for customer-facing prices.</div>
+    <div class="wf-dd" style="width:40%;">Display Currency</div>
+    <div class="cn">dd_display_currency <span class="ct">(DropdownMenu)</span></div>
+    <div class="cn">This is optional and can be changed at any time.</div>
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Save Display Currency</div>
+    <div class="cn">btn_save_display_currency <span class="ct">(Button)</span></div>
+  </div>
+
+  <!-- Tab 6: Payment Gateway (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_payments (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Payment Gateway</div>
+    <div class="cn">RBAC: Owner only</div>
+    <div class="wf-dd" style="width:40%;">Active Gateway</div>
+    <div class="cn">dd_active_gateway <span class="ct">(DropdownMenu)</span> — Stripe / Paystack</div>
+    <div class="wf-textbox" style="width:60%;">Stripe Publishable Key</div>
+    <div class="cn">txt_stripe_publishable <span class="ct">(TextBox)</span></div>
+    <div class="cn">Secret keys stored exclusively in The Vault (not in this form)</div>
+    <div class="wf-checkbox">Gateway connected and verified</div>
+    <div class="cn">cb_gateway_connected <span class="ct">(CheckBox)</span></div>
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Save Gateway Config</div>
+    <div class="cn">btn_save_gateway <span class="ct">(Button)</span></div>
+  </div>
+
+  <!-- Tab 7: Services (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_services (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Services</div>
+    <div class="cn">RBAC: Owner, Manager, Admin</div>
+    <div class="cn">Service catalogue management — links to ServiceListForm</div>
+    <div class="wf-btn-outlined">Manage Services</div>
+    <div class="cn">btn_manage_services <span class="ct">(Button)</span> — opens ServiceListForm</div>
+  </div>
+
+  <!-- Tab 8: Users (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_users (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Users & Permissions</div>
+    <div class="cn">RBAC: Owner only</div>
+    <div class="cn">User management — invite, edit role, deactivate</div>
+    <div class="wf-btn-outlined">Manage Users</div>
+    <div class="cn">btn_manage_users <span class="ct">(Button)</span> — opens UserManagementForm</div>
+  </div>
+
+  <!-- Tab 9: Email (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_email (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Email Configuration</div>
+    <div class="cn">RBAC: Owner only</div>
+    <div class="wf-textbox" style="width:60%;">From Email</div>
+    <div class="cn">txt_from_email <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:60%;">From Name</div>
+    <div class="cn">txt_from_name <span class="ct">(TextBox)</span></div>
+    <div class="cn">SMTP host/port/encryption are platform constants (Brevo). Credentials stored in Vault.</div>
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-outlined">Test Connection</div>
+    <div class="cn">btn_test_connection <span class="ct">(Button)</span></div>
+    <div class="wf-btn-filled">Save Email Config</div>
+    <div class="cn">btn_save_email <span class="ct">(Button)</span></div>
+  </div>
+
+  <!-- Tab 10: Theme (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_theme (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Theme</div>
+    <div class="cn">RBAC: Owner, Manager</div>
+    <div class="wf-textbox" style="width:40%;">Primary Color</div>
+    <div class="cn">txt_primary_color <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:40%;">Accent Color</div>
+    <div class="cn">txt_accent_color <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox" style="width:40%;">Font Family</div>
+    <div class="cn">txt_font_family <span class="ct">(TextBox)</span></div>
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Save Theme</div>
+    <div class="cn">btn_save_theme <span class="ct">(Button)</span></div>
+  </div>
+
+  <!-- Tab 11: Features (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_features (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">Feature Flags</div>
+    <div class="cn">RBAC: Owner only</div>
+    <div class="wf-checkbox">Bookings Enabled</div>
+    <div class="cn">cb_bookings_enabled <span class="ct">(CheckBox)</span></div>
+    <div class="wf-checkbox">Services Enabled</div>
+    <div class="cn">cb_services_enabled <span class="ct">(CheckBox)</span></div>
+    <div class="wf-checkbox">Marketing Enabled</div>
+    <div class="cn">cb_marketing_enabled <span class="ct">(CheckBox)</span></div>
+    <div class="wf-checkbox">Blog Enabled</div>
+    <div class="cn">cb_blog_enabled <span class="ct">(CheckBox)</span></div>
+    <div class="wf-spacer"></div>
+    <div class="wf-btn-filled">Save Feature Flags</div>
+    <div class="cn">btn_save_features <span class="ct">(Button)</span></div>
+  </div>
+
+</div>
+
+<!-- Properties Table -->
+<h2>Properties Table</h2>
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+
+---
+
+<h2>RBAC Governance</h2>
+
+<div class="wf-panel">
+  <div class="cn" style="font-size:12px; color:#333; font-style:normal; line-height:1.8;">
+    <strong>Owner:</strong> Full access to all tabs<br>
+    <strong>Manager:</strong> Business Profile, Palette, Display Currency, Services, Theme<br>
+    <strong>Admin:</strong> Services only<br>
+    <strong>Staff:</strong> No access to Settings<br>
+    <strong>Customer:</strong> No access to Settings
+  </div>
+</div>
+
+---
+
+*End of wireframe — SettingsForm (recreated with 11 tabs)*

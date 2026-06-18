@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mybizz CS — Invoice Editor Form</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
+h1 { font-size: 22px; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
+.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
+.legend span { margin-right: 24px; }
+h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
+.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
+.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
+.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
+.wf-heading-lg { font-size: 18px; font-weight: bold; color: #222; margin: 0 0 4px; }
+.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
+.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
+.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
+.wf-dd::after { content: " ▾"; color: #aaa; }
+.wf-date { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 200px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: inline-block; box-sizing: border-box; }
+.wf-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 8px 0; }
+.wf-table th { background: #f0f0f0; padding: 8px 12px; text-align: left; font-weight: bold; color: #555; border-bottom: 2px solid #ddd; }
+.wf-table td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+.wf-table td.amount { text-align: right; font-variant-numeric: tabular-nums; }
+.wf-table .wf-input { border: 1px solid #ccc; border-radius: 4px; padding: 4px 8px; font-size: 11px; width: 100%; box-sizing: border-box; }
+.wf-table .wf-input-sm { border: 1px solid #ccc; border-radius: 4px; padding: 4px 8px; font-size: 11px; width: 80px; box-sizing: border-box; }
+.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
+.wf-btn-dashed { background: #fff; color: #6750A4; border: 1px dashed #6750A4; padding: 6px 14px; border-radius: 4px; font-size: 11px; font-family: Arial; display: inline-block; margin-top: 8px; }
+.wf-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }
+.wf-form-row.single { grid-template-columns: 1fr; }
+.wf-form-group { margin-bottom: 8px; }
+.wf-form-label { display: block; font-size: 10px; color: #888; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; }
+.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
+.ct { font-style: italic; color: #bbb; }
+.cfixed { color: #555; font-style: normal; }
+.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
+table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
+table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
+table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+table.props tr:nth-child(even) td { background: #f9f9f9; }
+</style>
+</head>
+<body>
+
+<h1>Mybizz CS — Invoices Wireframes</h1>
+<p class="subtitle">Invoice Management — Anvil Construction Guide</p>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>InvoiceEditorForm — Create/Edit Invoice</h2>
+
+<div class="wf-outer">
+  <span class="wf-label">col_invoice_editor (ColumnPanel)</span>
+
+  <!-- Page Header -->
+  <div style="margin-bottom:16px;">
+    <div class="wf-heading-lg">Create Invoice</div>
+    <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Create Invoice"</span></div>
+  </div>
+
+  <!-- Customer Section -->
+  <div class="wf-panel">
+    <span class="wf-label">card_customer (Card)</span>
+    <div class="wf-heading-sm">Customer</div>
+    <div class="cn">hdg_section_customer <span class="ct">(Heading)</span> <span class="cfixed">"Customer"</span></div>
+    <div class="wf-form-row single">
+      <div class="wf-form-group">
+        <span class="wf-form-label">Customer</span>
+        <div class="cn">lbl_customer <span class="ct">(Label)</span> <span class="cfixed">"Customer"</span></div>
+        <div class="wf-dd">&nbsp;</div>
+        <div class="cn">dd_customer <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Details Section -->
+  <div class="wf-panel">
+    <span class="wf-label">card_details (Card)</span>
+    <div class="wf-heading-sm">Invoice Details</div>
+    <div class="cn">hdg_section_details <span class="ct">(Heading)</span> <span class="cfixed">"Invoice Details"</span></div>
+    <div class="wf-form-row">
+      <div class="wf-form-group">
+        <span class="wf-form-label">Invoice Date</span>
+        <div class="cn">lbl_invoice_date <span class="ct">(Label)</span> <span class="cfixed">"Invoice Date"</span></div>
+        <div class="wf-date">10 May 2026</div>
+        <div class="cn">dp_invoice_date <span class="ct">(DatePicker)</span> <span class="cfixed">(W)</span></div>
+      </div>
+      <div class="wf-form-group">
+        <span class="wf-form-label">Due Date</span>
+        <div class="cn">lbl_due_date <span class="ct">(Label)</span> <span class="cfixed">"Due Date"</span></div>
+        <div class="wf-date">24 May 2026</div>
+        <div class="cn">dp_due_date <span class="ct">(DatePicker)</span> <span class="cfixed">(W)</span></div>
+      </div>
+    </div>
+    <div class="wf-form-row single">
+      <div class="wf-form-group">
+        <span class="wf-form-label">Currency</span>
+        <div class="cn">lbl_currency <span class="ct">(Label)</span> <span class="cfixed">"Currency"</span></div>
+        <div class="wf-dd">ZAR — South African Rand</div>
+        <div class="cn">dd_currency <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Line Items Section -->
+  <div class="wf-panel">
+    <span class="wf-label">card_line_items (Card)</span>
+    <div class="wf-heading-sm">Line Items</div>
+    <div class="cn">hdg_section_items <span class="ct">(Heading)</span> <span class="cfixed">"Line Items"</span></div>
+    <table class="wf-table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th style="width:100px;">Quantity</th>
+          <th style="width:130px;">Unit Price</th>
+          <th style="width:120px;">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" class="wf-input" value="Website Design"></td>
+          <td><input type="number" class="wf-input-sm" value="1"></td>
+          <td><input type="number" class="wf-input-sm" value="15000.00"></td>
+          <td class="amount">R 15,000.00</td>
+        </tr>
+        <tr>
+          <td><input type="text" class="wf-input" value="Hosting (3 months)"></td>
+          <td><input type="number" class="wf-input-sm" value="3"></td>
+          <td><input type="number" class="wf-input-sm" value="450.00"></td>
+          <td class="amount">R 1,350.00</td>
+        </tr>
+        <tr>
+          <td><input type="text" class="wf-input" value="SEO Setup"></td>
+          <td><input type="number" class="wf-input-sm" value="1"></td>
+          <td><input type="number" class="wf-input-sm" value="3500.00"></td>
+          <td class="amount">R 3,500.00</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="cn">dg_line_items <span class="ct">(DataGrid)</span></div>
+    <div class="wf-btn-dashed">+ Add Line Item</div>
+    <div class="cn">btn_add_item <span class="ct">(Button)</span> <span class="cfixed">"+ Add Line Item"</span></div>
+  </div>
+
+  <!-- Notes Section -->
+  <div class="wf-panel">
+    <span class="wf-label">card_notes (Card)</span>
+    <div class="wf-heading-sm">Notes</div>
+    <div class="cn">hdg_section_notes <span class="ct">(Heading)</span> <span class="cfixed">"Notes"</span></div>
+    <div class="wf-form-group" style="margin-bottom:0;">
+      <span class="wf-form-label">Additional notes (visible on invoice)</span>
+      <div class="cn">lbl_notes <span class="ct">(Label)</span> <span class="cfixed">"Additional notes (visible on invoice)"</span></div>
+      <div class="wf-textarea">&nbsp;</div>
+      <div class="cn">txt_notes <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span></div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:16px;">
+    <div>
+      <div class="wf-btn-outlined">Cancel</div>
+      <div class="cn">btn_cancel <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span></div>
+    </div>
+    <div>
+      <div class="wf-btn-outlined">Save Draft</div>
+      <div class="cn">btn_save_draft <span class="ct">(Button)</span> <span class="cfixed">"Save Draft"</span></div>
+    </div>
+    <div>
+      <div class="wf-btn-filled">Send Invoice</div>
+      <div class="cn">btn_send <span class="ct">(Button)</span> <span class="cfixed">"Send Invoice"</span></div>
+    </div>
+  </div>
+  <div class="cn">flow_actions <span class="ct">(FlowPanel)</span></div>
+</div>
+
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>
+<table class="props">
+<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+<tr><td>dd_customer</td><td>DropdownMenu</td><td>writeback = W, items from contacts table</td></tr>
+<tr><td>dp_invoice_date</td><td>DatePicker</td><td>writeback = W</td></tr>
+<tr><td>dp_due_date</td><td>DatePicker</td><td>writeback = W</td></tr>
+<tr><td>dd_currency</td><td>DropdownMenu</td><td>writeback = W, items = ["ZAR", "USD", "EUR", "GBP"]</td></tr>
+<tr><td>txt_notes</td><td>TextArea</td><td>writeback = W, placeholder = "Payment terms, bank details, or a message for the customer..."</td></tr>
+<tr><td>btn_cancel</td><td>Button</td><td>role = "secondary-button"</td></tr>
+<tr><td>btn_save_draft</td><td>Button</td><td>role = "secondary-button"</td></tr>
+<tr><td>btn_send</td><td>Button</td><td>role = "primary-button"</td></tr>
+</table>
+
+</body>
+</html>

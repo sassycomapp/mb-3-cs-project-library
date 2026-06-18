@@ -222,7 +222,10 @@ client_code/
 │   ├── LandingPageListForm/
 │   │   ├── form_template.yaml
 │   │   └── __init__.py
-│   └── LandingPageEditorForm/
+│   ├── LandingPageEditorForm/
+│   │   ├── form_template.yaml
+│   │   └── __init__.py
+│   └── LandingPage/
 │       ├── form_template.yaml
 │       └── __init__.py
 │
@@ -256,10 +259,7 @@ client_code/
 │   ├── PrivacyPolicyPage/
 │   │   ├── form_template.yaml
 │   │   └── __init__.py
-│   ├── TermsConditionsPage/
-│   │   ├── form_template.yaml
-│   │   └── __init__.py
-│   └── LandingPage/
+│   └── TermsConditionsPage/
 │       ├── form_template.yaml
 │       └── __init__.py
 │
@@ -307,9 +307,9 @@ client_code/
 | bookings/ | BookingCalendarForm (+4 sub-templates), BookingListForm, BookingEditorForm, BookingViewerForm ★, AvailabilitySettingsForm | 2 |
 | crm/ | ContactListForm, ContactEditorForm, ContactViewerForm, SegmentManagerForm, TaskListForm, EmailCampaignListForm, EmailCampaignEditorForm, EmailBroadcastForm, LeadCaptureForm | 3 |
 | invoices/ | InvoiceListForm, InvoiceEditorForm, InvoiceViewerForm | 2 |
-| landing_pages/ | LandingPageListForm ★, LandingPageEditorForm ★ | 3 |
+| landing_pages/ | LandingPageListForm ★, LandingPageEditorForm ★, LandingPage (includes 3 layout variants) | 3 |
 | blog/ | BlogListForm (includes tiled/list view panels), BlogPostForm (includes 3 layout variants), BlogEditorForm, CategoryManagementForm, CommentModerationForm ★ | 4 |
-| public_pages/ | HomePage (includes 4 layout variants), AboutPage, ContactPage, PrivacyPolicyPage, TermsConditionsPage, LandingPage (includes 3 layout variants) | 4 |
+| public_pages/ | HomePage (includes 4 layout variants), AboutPage, ContactPage, PrivacyPolicyPage, TermsConditionsPage | 4 |
 | analytics/ | DashboardAnalyticsForm, RevenueReportForm | 5 |
 | components/ | 5 shared custom components (ClauseBuilder, FooterComponent, VideoDisplayComponent, TimeLapseCarouselComponent, ParallaxComponent) ★ | 3, 4 |
 | shared/ | navigation_helpers, validation_utils, formatting_utils | 1 |
