@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — RevenueReportForm Screen</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RevenueReportForm — Screen
+   Design System: Material 3 with MUI Aesthetic Overlay
+   Palette: Professional Blue
+   Generated: 2026-06-18
+   Source wireframe: wireframe-analytics-RevenueReportForm.html
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== M3 TOKEN BLOCK — Professional Blue ===== */
+:root {
+  --primary: #493ef3;
+  --on-primary: #ffffff;
+  --primary-container: #e6dff3;
+  --on-primary-container: #0f0e59;
+  --secondary: #625a74;
+  --on-secondary: #ffffff;
+  --secondary-container: #e8defc;
+  --on-secondary-container: #1e182d;
+  --surface: #fdfcff;
+  --on-surface: #1c1b20;
+  --surface-variant: #e5e0f0;
+  --on-surface-variant: #494552;
+  --surface-container-low: #f5f2fa;
+  --surface-container: #efedf5;
+  --surface-container-high: #eae7ef;
+  --outline: #7a7583;
+  --outline-variant: #c9c4d3;
+  --error: #b42336;
+  --on-error: #ffffff;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+  --divider-color: var(--outline-variant);
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.4286;
+  color: var(--on-surface);
+  background-color: var(--surface);
+}
+
+/* ===== SCREEN CONTAINER ===== */
+.screen-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 2px solid var(--on-surface);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.screen-label {
+  background: var(--on-surface);
+  color: var(--surface);
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== APP BAR ===== */
+.app-bar {
+  min-height: 56px;
+  padding: 0 24px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--divider-color);
+  display: flex;
+  align-items: center;
+}
+.app-bar .title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--on-surface);
+  flex: 1;
+}
+.app-bar-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--on-surface-variant);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-icon:hover { background: rgba(73,62,243,0.08); }
+
+/* ===== PAGE LAYOUT ===== */
+.page-layout { display: flex; min-height: 700px; }
+
+/* ===== LEFT NAV ===== */
+.left-nav {
+  width: 260px;
+  background: var(--surface-container-low);
+  border-right: 1px solid var(--divider-color);
+  padding: 24px 0;
+  flex-shrink: 0;
+}
+.nav-brand {
+  padding: 0 16px 24px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--on-primary-container);
+}
+.nav-group-label {
+  padding: 16px 16px 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 16px;
+  margin: 2px 8px;
+  border-radius: 100px;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 16px;
+}
+.nav-item:hover { background: rgba(73,62,243,0.08); }
+.nav-item.selected {
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+.nav-item-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.nav-divider {
+  border: none;
+  border-top: 1px solid var(--divider-color);
+  opacity: 0.4;
+  margin: 8px 16px;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  flex: 1;
+  padding: 24px;
+  background: var(--surface);
+  overflow-x: auto;
+}
+
+/* ===== CARDS ===== */
+.card {
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.card.elevated {
+  background: var(--surface);
+  box-shadow: var(--mui-shadow-card);
+}
+.card.outlined {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+}
+.card-header {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--on-surface);
+}
+
+/* ===== METRIC CARDS ===== */
+.metric-card {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--mui-shadow-card);
+}
+.metric-card:hover {
+  box-shadow: var(--mui-shadow-raised);
+  transition: box-shadow 200ms ease;
+}
+.metric-label {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin-bottom: 4px;
+}
+.metric-value {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--on-surface);
+}
+
+/* ===== FORM INPUTS ===== */
+.form-group { margin-bottom: 0; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--on-surface);
+}
+.form-input {
+  width: 100%;
+  padding: 8px 16px;
+  min-height: 48px;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: var(--font-family);
+  border: 1px solid var(--outline);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--on-surface);
+}
+.form-input:focus {
+  border-color: var(--primary);
+  border-width: 2px;
+  padding: 7px 15px;
+  outline: none;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 24px;
+  min-height: 40px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-filled {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.btn-filled:hover {
+  background: rgba(73,62,243,0.92);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+}
+
+/* ===== GRID ===== */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+/* ===== DATA GRID ===== */
+.data-grid {
+  border: 1px solid var(--divider-color);
+  border-radius: 24px;
+  overflow: hidden;
+}
+.data-grid-header {
+  background: var(--surface-container-low);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--divider-color);
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+}
+.data-grid-header > div { padding: 8px; flex: 1; }
+.data-grid-row {
+  border-bottom: 1px solid var(--divider-color);
+  padding: 12px 16px;
+  display: flex;
+}
+.data-grid-row:last-child { border-bottom: none; }
+.data-grid-row > div { padding: 8px; flex: 1; }
+
+/* ===== CHART PLACEHOLDER ===== */
+.chart-placeholder {
+  background: var(--surface-container-low);
+  border-radius: 8px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.chart-placeholder .axis-x {
+  position: absolute;
+  bottom: 12px;
+  left: 40px;
+  right: 40px;
+  height: 1px;
+  background: var(--outline-variant);
+}
+.chart-placeholder .axis-y {
+  position: absolute;
+  top: 20px;
+  bottom: 12px;
+  left: 40px;
+  width: 1px;
+  background: var(--outline-variant);
+}
+.chart-placeholder .chart-label {
+  font-size: 12px;
+  color: var(--outline);
+  margin-top: 8px;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--on-surface-variant);
+}
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+.empty-state-heading {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+}
+.empty-state-body {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  max-width: 400px;
+  margin: 0 auto 24px;
+}
+
+/* ===== ANNOTATION ===== */
+.annotation {
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  margin: 16px 0;
+}
+
+/* ===== FILTERS ROW ===== */
+.filters-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 991px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .left-nav { display: none; }
+  .filters-row { flex-direction: column; align-items: stretch; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SCREEN: RevenueReportForm
+     Components per wireframe:
+     col_revenue, hdg_report_title, txt_report_subtitle,
+     flow_filters (dp_date_from W, dp_date_to W, btn_generate),
+     flow_summary_row (3 cards), card_revenue_chart (plot),
+     card_revenue_details (dg), col_empty_state (dashed)
+     ============================================================ -->
+
+<div class="screen-container">
+<div class="screen-label">RevenueReportForm — Revenue Report (col_revenue)</div>
+
+<div class="page-layout">
+
+  <!-- LEFT NAV -->
+  <div class="left-nav">
+    <div class="nav-brand">Mybizz</div>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9632;</span><span>Dashboard</span></a>
+    <div class="nav-group-label">Sales &amp; Operations</div>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9201;</span><span>Bookings</span></a>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9733;</span><span>Services</span></a>
+    <div class="nav-group-label">Customers &amp; Marketing</div>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9823;</span><span>Contacts</span></a>
+    <div class="nav-group-label">Finance &amp; Reports</div>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9781;</span><span>Invoices</span></a>
+    <a href="#" class="nav-item selected"><span class="nav-item-icon">&#9632;</span><span>Analytics</span></a>
+    <hr class="nav-divider">
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9881;</span><span>Settings</span></a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div style="flex: 1; display: flex; flex-direction: column;">
+
+    <!-- APP BAR -->
+    <div class="app-bar">
+      <div class="title">Revenue Report</div>
+      <div class="app-bar-nav">
+        <button class="btn-icon" title="Notifications">&#128276;</button>
+        <button class="btn-icon" title="User">&#128100;</button>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- hdg_report_title -->
+      <h1 style="font-size: 32px; line-height: 40px; font-weight: 600; margin-bottom: 4px;">Revenue Report</h1>
+
+      <!-- txt_report_subtitle -->
+      <p style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 24px;">View revenue breakdown by date range</p>
+
+      <!-- flow_filters — dp_date_from (W), dp_date_to (W), btn_generate -->
+      <div class="filters-row">
+        <div class="form-group" style="min-width: 180px;">
+          <label class="form-label">From</label>
+          <input type="date" class="form-input" value="2026-06-01">
+        </div>
+        <div class="form-group" style="min-width: 180px;">
+          <label class="form-label">To</label>
+          <input type="date" class="form-input" value="2026-06-18">
+        </div>
+        <div>
+          <button class="btn btn-filled">Generate Report</button>
+        </div>
+      </div>
+
+      <!-- flow_summary_row — 3 metric cards -->
+      <div class="grid-3" style="margin-bottom: 24px;">
+
+        <!-- card_total_revenue -->
+        <div class="metric-card">
+          <div class="metric-label">Total Revenue</div>
+          <div class="metric-value">R 8,740</div>
+        </div>
+
+        <!-- card_total_bookings -->
+        <div class="metric-card">
+          <div class="metric-label">Total Bookings</div>
+          <div class="metric-value">34</div>
+        </div>
+
+        <!-- card_avg_order -->
+        <div class="metric-card">
+          <div class="metric-label">Avg Order Value</div>
+          <div class="metric-value">R 257</div>
+        </div>
+
+      </div>
+
+      <!-- card_revenue_chart / plot_revenue_over_time -->
+      <div class="card elevated" style="margin-bottom: 24px;">
+        <div class="card-header">Revenue Over Time</div>
+        <div class="chart-placeholder">
+          <div class="axis-y"></div>
+          <div class="axis-x"></div>
+          <span>Line chart</span>
+          <span class="chart-label">plot_revenue_over_time — daily revenue for selected date range</span>
+        </div>
+      </div>
+
+      <!-- card_revenue_details / dg_revenue_details -->
+      <div class="card elevated">
+        <div class="card-header">Revenue Details</div>
+        <div class="data-grid">
+          <div class="data-grid-header">
+            <div>Date</div>
+            <div>Revenue</div>
+            <div>Bookings</div>
+            <div>Avg Order Value</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 1, 2026</div>
+            <div>R 420</div>
+            <div>2</div>
+            <div>R 210</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 2, 2026</div>
+            <div>R 680</div>
+            <div>3</div>
+            <div>R 227</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 3, 2026</div>
+            <div>R 450</div>
+            <div>2</div>
+            <div>R 225</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 4, 2026</div>
+            <div>R 890</div>
+            <div>4</div>
+            <div>R 223</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 5, 2026</div>
+            <div>R 560</div>
+            <div>2</div>
+            <div>R 280</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 6, 2026</div>
+            <div>R 340</div>
+            <div>1</div>
+            <div>R 340</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 7, 2026</div>
+            <div>R 0</div>
+            <div>0</div>
+            <div>&mdash;</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 8, 2026</div>
+            <div>R 750</div>
+            <div>3</div>
+            <div>R 250</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 9, 2026</div>
+            <div>R 1,200</div>
+            <div>5</div>
+            <div>R 240</div>
+          </div>
+          <div class="data-grid-row">
+            <div>Jun 10, 2026</div>
+            <div>R 680</div>
+            <div>3</div>
+            <div>R 227</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+
+</div><!-- /page-layout -->
+
+<!-- ============================================================
+     EMPTY STATE (col_empty_state — hidden on load in production)
+     Shown here for reference. In Anvil: visible = False by default.
+     This is the pre-generation state: no report has been run yet.
+     ============================================================ -->
+<div style="border-top: 2px dashed var(--outline-variant); padding: 24px;">
+  <div class="annotation">
+    <strong>col_empty_state (ColumnPanel)</strong> — visible = False by default.
+    Shown here for reference. In production, this replaces the report content
+    when no report has been generated yet (pre-generation state).
+  </div>
+
+  <div class="empty-state">
+    <div class="empty-state-icon">&#128196;</div>
+    <div class="empty-state-heading">No revenue data</div>
+    <div class="empty-state-body">Select a date range and generate a report to view revenue details.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="padding: 12px 16px; border-top: 1px solid var(--divider-color); font-size: 11px; color: var(--outline);">
+  screen-analytics-RevenueReportForm.html — Mybizz CS — Material 3 + MUI Aesthetic Overlay — Professional Blue — 2026-06-18
+</div>
+
+</div><!-- /screen-container -->
+
+</body>
+</html>

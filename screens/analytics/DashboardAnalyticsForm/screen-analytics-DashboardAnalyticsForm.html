@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — DashboardAnalyticsForm Screen</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DashboardAnalyticsForm — Screen
+   Design System: Material 3 with MUI Aesthetic Overlay
+   Palette: Professional Blue
+   Generated: 2026-06-18
+   Source wireframe: wireframe-analytics-DashboardAnalyticsForm.html
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ===== M3 TOKEN BLOCK — Professional Blue ===== */
+:root {
+  --primary: #493ef3;
+  --on-primary: #ffffff;
+  --primary-container: #e6dff3;
+  --on-primary-container: #0f0e59;
+  --secondary: #625a74;
+  --on-secondary: #ffffff;
+  --secondary-container: #e8defc;
+  --on-secondary-container: #1e182d;
+  --surface: #fdfcff;
+  --on-surface: #1c1b20;
+  --surface-variant: #e5e0f0;
+  --on-surface-variant: #494552;
+  --surface-container-low: #f5f2fa;
+  --surface-container: #efedf5;
+  --surface-container-high: #eae7ef;
+  --outline: #7a7583;
+  --outline-variant: #c9c4d3;
+  --error: #b42336;
+  --on-error: #ffffff;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+  --divider-color: var(--outline-variant);
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.4286;
+  color: var(--on-surface);
+  background-color: var(--surface);
+}
+
+/* ===== SCREEN CONTAINER ===== */
+.screen-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 2px solid var(--on-surface);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.screen-label {
+  background: var(--on-surface);
+  color: var(--surface);
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== APP BAR ===== */
+.app-bar {
+  min-height: 56px;
+  padding: 0 24px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--divider-color);
+  display: flex;
+  align-items: center;
+}
+.app-bar .title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--on-surface);
+  flex: 1;
+}
+.app-bar-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--on-surface-variant);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-icon:hover { background: rgba(73,62,243,0.08); }
+
+/* ===== PAGE LAYOUT ===== */
+.page-layout { display: flex; min-height: 700px; }
+
+/* ===== LEFT NAV ===== */
+.left-nav {
+  width: 260px;
+  background: var(--surface-container-low);
+  border-right: 1px solid var(--divider-color);
+  padding: 24px 0;
+  flex-shrink: 0;
+}
+.nav-brand {
+  padding: 0 16px 24px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--on-primary-container);
+}
+.nav-group-label {
+  padding: 16px 16px 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 16px;
+  margin: 2px 8px;
+  border-radius: 100px;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 16px;
+}
+.nav-item:hover { background: rgba(73,62,243,0.08); }
+.nav-item.selected {
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+.nav-item-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.nav-divider {
+  border: none;
+  border-top: 1px solid var(--divider-color);
+  opacity: 0.4;
+  margin: 8px 16px;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  flex: 1;
+  padding: 24px;
+  background: var(--surface);
+  overflow-x: auto;
+}
+
+/* ===== METRIC CARDS ===== */
+.metric-card {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--mui-shadow-card);
+}
+.metric-card:hover {
+  box-shadow: var(--mui-shadow-raised);
+  transition: box-shadow 200ms ease;
+}
+.metric-label {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin-bottom: 4px;
+}
+.metric-value {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--on-surface);
+  margin-bottom: 4px;
+}
+.metric-change {
+  font-size: 12px;
+  color: #2E7D32;
+}
+.metric-change.negative { color: var(--error); }
+
+/* ===== CARDS ===== */
+.card {
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.card.elevated {
+  background: var(--surface);
+  box-shadow: var(--mui-shadow-card);
+}
+.card.outlined {
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
+}
+.card-header {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--on-surface);
+}
+
+/* ===== PERIOD SELECTOR ===== */
+.period-selector {
+  display: flex;
+  gap: 0;
+  background: var(--surface-variant);
+  border-radius: 100px;
+  padding: 4px;
+  width: fit-content;
+  margin-bottom: 24px;
+}
+.period-btn {
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-family);
+  cursor: pointer;
+}
+.period-btn.active {
+  background: var(--surface);
+  color: var(--on-surface);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.period-btn:hover:not(.active) { background: rgba(73,62,243,0.08); }
+
+/* ===== GRID ===== */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* ===== DATA GRID ===== */
+.data-grid {
+  border: 1px solid var(--divider-color);
+  border-radius: 24px;
+  overflow: hidden;
+}
+.data-grid-header {
+  background: var(--surface-container-low);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--divider-color);
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+}
+.data-grid-header > div { padding: 8px; flex: 1; }
+.data-grid-row {
+  border-bottom: 1px solid var(--divider-color);
+  padding: 12px 16px;
+  display: flex;
+}
+.data-grid-row:last-child { border-bottom: none; }
+.data-grid-row > div { padding: 8px; flex: 1; }
+
+/* ===== BADGE ===== */
+.badge {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.badge-confirmed { background: #DEFCD3; color: #1B5E20; }
+.badge-pending { background: #FFF3CD; color: #856404; }
+
+/* ===== CHART PLACEHOLDER ===== */
+.chart-placeholder {
+  background: var(--surface-container-low);
+  border-radius: 8px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.chart-placeholder .axis-x {
+  position: absolute;
+  bottom: 12px;
+  left: 40px;
+  right: 40px;
+  height: 1px;
+  background: var(--outline-variant);
+}
+.chart-placeholder .axis-y {
+  position: absolute;
+  top: 20px;
+  bottom: 12px;
+  left: 40px;
+  width: 1px;
+  background: var(--outline-variant);
+}
+.chart-placeholder .chart-label {
+  font-size: 12px;
+  color: var(--outline);
+  margin-top: 8px;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--on-surface-variant);
+}
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+.empty-state-heading {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+}
+.empty-state-body {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ===== ANNOTATION ===== */
+.annotation {
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  margin: 16px 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 991px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+  .left-nav { display: none; }
+}
+@media (max-width: 600px) {
+  .grid-4 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SCREEN: DashboardAnalyticsForm
+     Components per wireframe:
+     col_analytics, hdg_analytics_title, txt_analytics_subtitle,
+     flow_period_selector, flow_metrics_row (4 cards),
+     flow_charts_primary (2 cards), flow_charts_secondary (2 cards),
+     col_empty_state (dashed = hidden on load)
+     ============================================================ -->
+
+<div class="screen-container">
+<div class="screen-label">DashboardAnalyticsForm — Analytics Dashboard (col_analytics)</div>
+
+<div class="page-layout">
+
+  <!-- LEFT NAV (abbreviated — for context only) -->
+  <div class="left-nav">
+    <div class="nav-brand">Mybizz</div>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9632;</span><span>Dashboard</span></a>
+    <div class="nav-group-label">Sales &amp; Operations</div>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9201;</span><span>Bookings</span></a>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9733;</span><span>Services</span></a>
+    <div class="nav-group-label">Customers &amp; Marketing</div>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9823;</span><span>Contacts</span></a>
+    <div class="nav-group-label">Finance &amp; Reports</div>
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9781;</span><span>Invoices</span></a>
+    <a href="#" class="nav-item selected"><span class="nav-item-icon">&#9632;</span><span>Analytics</span></a>
+    <hr class="nav-divider">
+    <a href="#" class="nav-item"><span class="nav-item-icon">&#9881;</span><span>Settings</span></a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div style="flex: 1; display: flex; flex-direction: column;">
+
+    <!-- APP BAR -->
+    <div class="app-bar">
+      <div class="title">Analytics</div>
+      <div class="app-bar-nav">
+        <button class="btn-icon" title="Notifications">&#128276;</button>
+        <button class="btn-icon" title="User">&#128100;</button>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+      <!-- hdg_analytics_title -->
+      <h1 style="font-size: 32px; line-height: 40px; font-weight: 600; margin-bottom: 4px;">Analytics</h1>
+
+      <!-- txt_analytics_subtitle -->
+      <p style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 24px;">Track your business performance and trends</p>
+
+      <!-- flow_period_selector -->
+      <div class="period-selector">
+        <button class="period-btn">Week</button>
+        <button class="period-btn active">Month</button>
+        <button class="period-btn">Quarter</button>
+        <button class="period-btn">Custom</button>
+      </div>
+
+      <!-- flow_metrics_row — 4 metric cards -->
+      <div class="grid-4" style="margin-bottom: 24px;">
+
+        <!-- card_revenue -->
+        <div class="metric-card">
+          <div class="metric-label">Total Revenue</div>
+          <div class="metric-value">R 12,450</div>
+          <div class="metric-change">&#8593; 12.3% vs last month</div>
+        </div>
+
+        <!-- card_bookings -->
+        <div class="metric-card">
+          <div class="metric-label">Total Bookings</div>
+          <div class="metric-value">48</div>
+          <div class="metric-change">&#8593; 8.2% vs last month</div>
+        </div>
+
+        <!-- card_customers -->
+        <div class="metric-card">
+          <div class="metric-label">New Customers</div>
+          <div class="metric-value">23</div>
+          <div class="metric-change">&#8593; 5.6% vs last month</div>
+        </div>
+
+        <!-- card_avg_order -->
+        <div class="metric-card">
+          <div class="metric-label">Avg Order Value</div>
+          <div class="metric-value">R 259</div>
+          <div class="metric-change negative">&#8595; 2.1% vs last month</div>
+        </div>
+
+      </div>
+
+      <!-- flow_charts_primary — 2 chart cards -->
+      <div class="grid-2" style="margin-bottom: 24px;">
+
+        <!-- card_revenue_trend / plot_revenue_trend -->
+        <div class="card elevated">
+          <div class="card-header">Revenue Trend</div>
+          <div class="chart-placeholder">
+            <div class="axis-y"></div>
+            <div class="axis-x"></div>
+            <span>Line chart</span>
+            <span class="chart-label">plot_revenue_trend — daily revenue for selected period</span>
+          </div>
+        </div>
+
+        <!-- card_bookings_by_service / plot_bookings_by_service -->
+        <div class="card elevated">
+          <div class="card-header">Bookings by Service</div>
+          <div class="chart-placeholder">
+            <div class="axis-y"></div>
+            <div class="axis-x"></div>
+            <span>Bar chart</span>
+            <span class="chart-label">plot_bookings_by_service — bookings grouped by service type</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- flow_charts_secondary — 2 cards -->
+      <div class="grid-2" style="margin-bottom: 24px;">
+
+        <!-- card_customer_growth / plot_customer_growth -->
+        <div class="card elevated">
+          <div class="card-header">Customer Growth</div>
+          <div class="chart-placeholder">
+            <div class="axis-y"></div>
+            <div class="axis-x"></div>
+            <span>Line chart</span>
+            <span class="chart-label">plot_customer_growth — cumulative contacts over time</span>
+          </div>
+        </div>
+
+        <!-- card_booking_summary / dg_booking_summary -->
+        <div class="card elevated">
+          <div class="card-header">Booking Summary</div>
+          <div class="data-grid">
+            <div class="data-grid-header">
+              <div>Service</div>
+              <div>Bookings</div>
+              <div>Revenue</div>
+            </div>
+            <div class="data-grid-row">
+              <div>Deep Tissue Massage</div>
+              <div>18</div>
+              <div>R 4,500</div>
+            </div>
+            <div class="data-grid-row">
+              <div>Business Consultation</div>
+              <div>12</div>
+              <div>R 3,600</div>
+            </div>
+            <div class="data-grid-row">
+              <div>Sports Therapy</div>
+              <div>10</div>
+              <div>R 2,500</div>
+            </div>
+            <div class="data-grid-row">
+              <div>Follow-up Session</div>
+              <div>8</div>
+              <div>R 1,850</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+
+</div><!-- /page-layout -->
+
+<!-- ============================================================
+     EMPTY STATE (col_empty_state — hidden on load in production)
+     Shown here for reference. In Anvil: visible = False by default.
+     ============================================================ -->
+<div style="border-top: 2px dashed var(--outline-variant); padding: 24px;">
+  <div class="annotation">
+    <strong>col_empty_state (ColumnPanel)</strong> — visible = False by default.
+    Shown here for reference. In production, this replaces the dashboard content
+    when no analytics data exists yet.
+  </div>
+
+  <div class="empty-state">
+    <div class="empty-state-icon">&#128202;</div>
+    <div class="empty-state-heading">No data yet</div>
+    <div class="empty-state-body">Analytics will appear here once you have bookings, payments, and contacts in the system.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="padding: 12px 16px; border-top: 1px solid var(--divider-color); font-size: 11px; color: var(--outline);">
+  screen-analytics-DashboardAnalyticsForm.html — Mybizz CS — Material 3 + MUI Aesthetic Overlay — Professional Blue — 2026-06-18
+</div>
+
+</div><!-- /screen-container -->
+
+</body>
+</html>
