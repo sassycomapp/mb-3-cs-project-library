@@ -3,20 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mybizz CS — RevenueReportForm Screen</title>
+<title>Mybizz CS — RevenueReportForm</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   RevenueReportForm — Screen
+   MYBIZZ CS — RevenueReportForm Screen
    Design System: Material 3 with MUI Aesthetic Overlay
-   Palette: Professional Blue
-   Generated: 2026-06-18
-   Source wireframe: wireframe-analytics-RevenueReportForm.html
+   Default Palette: Professional Blue
    ============================================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ===== M3 TOKEN BLOCK — Professional Blue ===== */
+/* ===== M3 TOKEN BLOCK — Professional Blue Palette ===== */
 :root {
   --primary: #493ef3;
   --on-primary: #ffffff;
@@ -44,9 +42,12 @@
   --space-6: 24px;
   --space-8: 32px;
   --font-family: 'Roboto', sans-serif;
+  /* MUI Aesthetic Overlay */
   --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
   --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
   --divider-color: var(--outline-variant);
+  --state-hover-opacity: 0.08;
+  --state-pressed-opacity: 0.12;
 }
 
 body {
@@ -55,62 +56,9 @@ body {
   line-height: 1.4286;
   color: var(--on-surface);
   background-color: var(--surface);
-}
-
-/* ===== SCREEN CONTAINER ===== */
-.screen-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  border: 2px solid var(--on-surface);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--surface);
-}
-.screen-label {
-  background: var(--on-surface);
-  color: var(--surface);
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* ===== APP BAR ===== */
-.app-bar {
-  min-height: 56px;
-  padding: 0 24px;
-  background-color: var(--surface);
-  border-bottom: 1px solid var(--divider-color);
   display: flex;
-  align-items: center;
+  min-height: 100vh;
 }
-.app-bar .title {
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--on-surface);
-  flex: 1;
-}
-.app-bar-nav {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.btn-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  color: var(--on-surface-variant);
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.btn-icon:hover { background: rgba(73,62,243,0.08); }
-
-/* ===== PAGE LAYOUT ===== */
-.page-layout { display: flex; min-height: 700px; }
 
 /* ===== LEFT NAV ===== */
 .left-nav {
@@ -119,6 +67,7 @@ body {
   border-right: 1px solid var(--divider-color);
   padding: 24px 0;
   flex-shrink: 0;
+  overflow-y: auto;
 }
 .nav-brand {
   padding: 0 16px 24px;
@@ -145,8 +94,9 @@ body {
   font-size: 14px;
   font-weight: 500;
   gap: 16px;
+  transition: background 150ms;
 }
-.nav-item:hover { background: rgba(73,62,243,0.08); }
+.nav-item:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
 .nav-item.selected {
   background: var(--secondary-container);
   color: var(--on-secondary-container);
@@ -157,7 +107,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 18px;
 }
 .nav-divider {
   border: none;
@@ -165,69 +115,83 @@ body {
   opacity: 0.4;
   margin: 8px 16px;
 }
+.nav-signout {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider-color);
+  opacity: 0.4;
+}
 
-/* ===== CONTENT ===== */
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ===== APP BAR ===== */
+.app-bar {
+  min-height: 56px;
+  padding: 0 24px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--divider-color);
+  display: flex;
+  align-items: center;
+}
+.app-bar .title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--on-surface);
+  flex: 1;
+}
+.app-bar-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ===== CONTENT AREA ===== */
 .content {
   flex: 1;
   padding: 24px;
   background: var(--surface);
-  overflow-x: auto;
+  max-width: 1100px;
 }
 
-/* ===== CARDS ===== */
-.card {
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-.card.elevated {
-  background: var(--surface);
-  box-shadow: var(--mui-shadow-card);
-}
-.card.outlined {
-  background: var(--surface);
-  border: 1px solid var(--outline-variant);
-}
-.card-header {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 16px;
+/* ===== PAGE HEADER ===== */
+.page-title {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
   color: var(--on-surface);
+  margin-bottom: 4px;
 }
-
-/* ===== METRIC CARDS ===== */
-.metric-card {
-  background: var(--surface);
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: var(--mui-shadow-card);
-}
-.metric-card:hover {
-  box-shadow: var(--mui-shadow-raised);
-  transition: box-shadow 200ms ease;
-}
-.metric-label {
+.page-subtitle {
   font-size: 14px;
   color: var(--on-surface-variant);
-  margin-bottom: 4px;
-}
-.metric-value {
-  font-size: 24px;
-  font-weight: 500;
-  color: var(--on-surface);
+  margin-bottom: 24px;
 }
 
-/* ===== FORM INPUTS ===== */
-.form-group { margin-bottom: 0; }
+/* ===== FILTERS BAR ===== */
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 .form-label {
-  display: block;
   font-size: 12px;
   font-weight: 500;
-  margin-bottom: 4px;
-  color: var(--on-surface);
+  color: var(--on-surface-variant);
 }
 .form-input {
-  width: 100%;
   padding: 8px 16px;
   min-height: 48px;
   font-size: 16px;
@@ -237,6 +201,7 @@ body {
   border-radius: 4px;
   background: transparent;
   color: var(--on-surface);
+  width: 200px;
 }
 .form-input:focus {
   border-color: var(--primary);
@@ -259,6 +224,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  text-decoration: none;
+  transition: background 150ms, box-shadow 150ms;
 }
 .btn-filled {
   background: var(--primary);
@@ -268,16 +235,80 @@ body {
   background: rgba(73,62,243,0.92);
   box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
 }
+.btn-outlined {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--outline);
+}
+.btn-outlined:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+.btn-icon {
+  padding: 8px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--on-surface-variant);
+  border: none;
+}
+.btn-icon:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
 
-/* ===== GRID ===== */
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+/* ===== METRIC CARDS GRID ===== */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.metric-card {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--mui-shadow-card);
+  transition: box-shadow 200ms ease;
+}
+.metric-card:hover { box-shadow: var(--mui-shadow-raised); }
+.metric-label {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin-bottom: 8px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--on-surface);
+}
+
+/* ===== CHART CARD ===== */
+.chart-card {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: var(--mui-shadow-card);
+  margin-bottom: 24px;
+}
+.chart-card-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--on-surface);
+  margin-bottom: 16px;
+}
+.chart-placeholder {
+  height: 260px;
+  background: var(--surface-container-low);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+}
 
 /* ===== DATA GRID ===== */
 .data-grid {
   border: 1px solid var(--divider-color);
   border-radius: 24px;
   overflow: hidden;
+  margin-bottom: 16px;
 }
 .data-grid-header {
   background: var(--surface-container-low);
@@ -292,51 +323,32 @@ body {
   border-bottom: 1px solid var(--divider-color);
   padding: 12px 16px;
   display: flex;
+  font-size: 14px;
 }
 .data-grid-row:last-child { border-bottom: none; }
 .data-grid-row > div { padding: 8px; flex: 1; }
+.data-grid-row:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
 
-/* ===== CHART PLACEHOLDER ===== */
-.chart-placeholder {
-  background: var(--surface-container-low);
-  border-radius: 8px;
-  height: 240px;
-  display: flex;
-  flex-direction: column;
+/* ===== BADGES ===== */
+.badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  color: var(--on-surface-variant);
-  font-size: 14px;
-  position: relative;
-  overflow: hidden;
-}
-.chart-placeholder .axis-x {
-  position: absolute;
-  bottom: 12px;
-  left: 40px;
-  right: 40px;
-  height: 1px;
-  background: var(--outline-variant);
-}
-.chart-placeholder .axis-y {
-  position: absolute;
-  top: 20px;
-  bottom: 12px;
-  left: 40px;
-  width: 1px;
-  background: var(--outline-variant);
-}
-.chart-placeholder .chart-label {
+  padding: 4px 10px;
+  border-radius: 8px;
   font-size: 12px;
-  color: var(--outline);
-  margin-top: 8px;
+  font-weight: 500;
 }
+.badge-confirmed { background: #DEFCD3; color: #1B5E20; }
+.badge-pending { background: #FFF3CD; color: #856404; }
 
 /* ===== EMPTY STATE ===== */
 .empty-state {
   text-align: center;
   padding: 48px 24px;
   color: var(--on-surface-variant);
+  border: 2px dashed var(--outline-variant);
+  border-radius: 8px;
+  margin-top: 16px;
 }
 .empty-state-icon {
   font-size: 48px;
@@ -353,244 +365,190 @@ body {
 .empty-state-body {
   font-size: 14px;
   color: var(--on-surface-variant);
-  max-width: 400px;
-  margin: 0 auto 24px;
-}
-
-/* ===== ANNOTATION ===== */
-.annotation {
-  background: var(--surface-container-low);
-  border: 1px solid var(--outline-variant);
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 12px;
-  color: var(--on-surface-variant);
-  margin: 16px 0;
-}
-
-/* ===== FILTERS ROW ===== */
-.filters-row {
-  display: flex;
-  gap: 16px;
-  align-items: flex-end;
-  flex-wrap: wrap;
   margin-bottom: 24px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 991px) {
-  .grid-3 { grid-template-columns: 1fr; }
-  .grid-2 { grid-template-columns: 1fr; }
-  .left-nav { display: none; }
-  .filters-row { flex-direction: column; align-items: stretch; }
+@media (max-width: 768px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  .filters-bar { flex-direction: column; align-items: stretch; }
+  .form-input { width: 100%; }
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     SCREEN: RevenueReportForm
-     Components per wireframe:
-     col_revenue, hdg_report_title, txt_report_subtitle,
-     flow_filters (dp_date_from W, dp_date_to W, btn_generate),
-     flow_summary_row (3 cards), card_revenue_chart (plot),
-     card_revenue_details (dg), col_empty_state (dashed)
-     ============================================================ -->
+<!-- LEFT NAV -->
+<nav class="left-nav">
+  <div class="nav-brand">Mybizz CS</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon">dashboard</span> Dashboard</a>
+  <div class="nav-group-label">Sales &amp; Operations</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon">event</span> Bookings</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon">design_services</span> Services</a>
+  <div class="nav-group-label">Customers &amp; Marketing</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon">contacts</span> Contacts</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon">campaign</span> Campaigns</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon">task</span> Tasks</a>
+  <div class="nav-group-label">Content &amp; Website</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon">article</span> Blog</a>
+  <div class="nav-group-label">Finance &amp; Reports</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon">receipt</span> Invoices</a>
+  <a class="nav-item selected" href="#"><span class="nav-item-icon">analytics</span> Analytics</a>
+  <div class="nav-divider"></div>
+  <a class="nav-item" href="#"><span class="nav-item-icon">settings</span> Settings</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon">lock</span> Vault</a>
+  <a class="nav-item nav-signout" href="#"><span class="nav-item-icon">logout</span> Sign Out</a>
+</nav>
 
-<div class="screen-container">
-<div class="screen-label">RevenueReportForm — Revenue Report (col_revenue)</div>
+<!-- MAIN CONTENT -->
+<div class="main-content">
 
-<div class="page-layout">
+  <!-- APP BAR -->
+  <header class="app-bar">
+    <div class="title">Revenue Report</div>
+    <div class="app-bar-nav">
+      <button class="btn btn-icon">notifications</button>
+      <button class="btn btn-icon">account_circle</button>
+    </div>
+  </header>
 
-  <!-- LEFT NAV -->
-  <div class="left-nav">
-    <div class="nav-brand">Mybizz</div>
-    <a href="#" class="nav-item"><span class="nav-item-icon">&#9632;</span><span>Dashboard</span></a>
-    <div class="nav-group-label">Sales &amp; Operations</div>
-    <a href="#" class="nav-item"><span class="nav-item-icon">&#9201;</span><span>Bookings</span></a>
-    <a href="#" class="nav-item"><span class="nav-item-icon">&#9733;</span><span>Services</span></a>
-    <div class="nav-group-label">Customers &amp; Marketing</div>
-    <a href="#" class="nav-item"><span class="nav-item-icon">&#9823;</span><span>Contacts</span></a>
-    <div class="nav-group-label">Finance &amp; Reports</div>
-    <a href="#" class="nav-item"><span class="nav-item-icon">&#9781;</span><span>Invoices</span></a>
-    <a href="#" class="nav-item selected"><span class="nav-item-icon">&#9632;</span><span>Analytics</span></a>
-    <hr class="nav-divider">
-    <a href="#" class="nav-item"><span class="nav-item-icon">&#9881;</span><span>Settings</span></a>
-  </div>
+  <!-- CONTENT -->
+  <main class="content">
 
-  <!-- MAIN CONTENT -->
-  <div style="flex: 1; display: flex; flex-direction: column;">
+    <!-- Page Header (col_revenue) -->
+    <h1 class="page-title">Revenue Report</h1>
+    <p class="page-subtitle">View revenue breakdown by date range</p>
 
-    <!-- APP BAR -->
-    <div class="app-bar">
-      <div class="title">Revenue Report</div>
-      <div class="app-bar-nav">
-        <button class="btn-icon" title="Notifications">&#128276;</button>
-        <button class="btn-icon" title="User">&#128100;</button>
+    <!-- Filters Bar (flow_filters) -->
+    <div class="filters-bar">
+      <div class="form-group">
+        <label class="form-label">From</label>
+        <input type="date" class="form-input" value="2026-06-01">
+      </div>
+      <div class="form-group">
+        <label class="form-label">To</label>
+        <input type="date" class="form-input" value="2026-06-18">
+      </div>
+      <button class="btn btn-filled" style="align-self:flex-end;">Generate Report</button>
+    </div>
+
+    <!-- Summary Row (flow_summary_row) -->
+    <div class="summary-grid">
+
+      <!-- card_total_revenue -->
+      <div class="metric-card">
+        <div class="metric-label">Total Revenue</div>
+        <div class="metric-value">R 48,750</div>
+      </div>
+
+      <!-- card_total_bookings -->
+      <div class="metric-card">
+        <div class="metric-label">Total Bookings</div>
+        <div class="metric-value">127</div>
+      </div>
+
+      <!-- card_avg_order -->
+      <div class="metric-card">
+        <div class="metric-label">Avg Order Value</div>
+        <div class="metric-value">R 384</div>
+      </div>
+
+    </div>
+
+    <!-- Revenue Chart (card_revenue_chart) -->
+    <div class="chart-card">
+      <div class="chart-card-title">Revenue Over Time</div>
+      <div class="chart-placeholder">
+        <div style="width:100%;padding:16px;">
+          <svg viewBox="0 0 600 200" style="width:100%;height:auto;">
+            <polyline points="30,180 80,160 130,170 180,120 230,130 280,80 330,95 380,60 430,70 480,45 530,55 570,35" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linejoin="round"/>
+            <polyline points="30,180 80,160 130,170 180,120 230,130 280,80 330,95 380,60 430,70 480,45 530,55 570,35 570,200 30,200" fill="var(--primary)" fill-opacity="0.1"/>
+            <!-- X-axis labels -->
+            <text x="30" y="195" font-size="10" fill="var(--on-surface-variant)">1 Jun</text>
+            <text x="130" y="195" font-size="10" fill="var(--on-surface-variant)">4 Jun</text>
+            <text x="230" y="195" font-size="10" fill="var(--on-surface-variant)">7 Jun</text>
+            <text x="330" y="195" font-size="10" fill="var(--on-surface-variant)">10 Jun</text>
+            <text x="430" y="195" font-size="10" fill="var(--on-surface-variant)">13 Jun</text>
+            <text x="530" y="195" font-size="10" fill="var(--on-surface-variant)">16 Jun</text>
+          </svg>
+        </div>
       </div>
     </div>
 
-    <!-- CONTENT -->
-    <div class="content">
-
-      <!-- hdg_report_title -->
-      <h1 style="font-size: 32px; line-height: 40px; font-weight: 600; margin-bottom: 4px;">Revenue Report</h1>
-
-      <!-- txt_report_subtitle -->
-      <p style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 24px;">View revenue breakdown by date range</p>
-
-      <!-- flow_filters — dp_date_from (W), dp_date_to (W), btn_generate -->
-      <div class="filters-row">
-        <div class="form-group" style="min-width: 180px;">
-          <label class="form-label">From</label>
-          <input type="date" class="form-input" value="2026-06-01">
+    <!-- Revenue Details (card_revenue_details) -->
+    <div class="chart-card">
+      <div class="chart-card-title">Revenue Details</div>
+      <div class="data-grid">
+        <div class="data-grid-header">
+          <div>Date</div>
+          <div>Service</div>
+          <div>Bookings</div>
+          <div>Revenue</div>
         </div>
-        <div class="form-group" style="min-width: 180px;">
-          <label class="form-label">To</label>
-          <input type="date" class="form-input" value="2026-06-18">
+        <div class="data-grid-row">
+          <div>18 Jun 2026</div>
+          <div>Swedish Massage</div>
+          <div>5</div>
+          <div>R 3,750</div>
         </div>
-        <div>
-          <button class="btn btn-filled">Generate Report</button>
+        <div class="data-grid-row">
+          <div>18 Jun 2026</div>
+          <div>Hot Stone Therapy</div>
+          <div>3</div>
+          <div>R 2,850</div>
         </div>
-      </div>
-
-      <!-- flow_summary_row — 3 metric cards -->
-      <div class="grid-3" style="margin-bottom: 24px;">
-
-        <!-- card_total_revenue -->
-        <div class="metric-card">
-          <div class="metric-label">Total Revenue</div>
-          <div class="metric-value">R 8,740</div>
+        <div class="data-grid-row">
+          <div>17 Jun 2026</div>
+          <div>Deep Tissue Massage</div>
+          <div>4</div>
+          <div>R 3,600</div>
         </div>
-
-        <!-- card_total_bookings -->
-        <div class="metric-card">
-          <div class="metric-label">Total Bookings</div>
-          <div class="metric-value">34</div>
+        <div class="data-grid-row">
+          <div>17 Jun 2026</div>
+          <div>Aromatherapy Session</div>
+          <div>2</div>
+          <div>R 1,500</div>
         </div>
-
-        <!-- card_avg_order -->
-        <div class="metric-card">
-          <div class="metric-label">Avg Order Value</div>
-          <div class="metric-value">R 257</div>
+        <div class="data-grid-row">
+          <div>16 Jun 2026</div>
+          <div>Swedish Massage</div>
+          <div>6</div>
+          <div>R 4,500</div>
         </div>
-
-      </div>
-
-      <!-- card_revenue_chart / plot_revenue_over_time -->
-      <div class="card elevated" style="margin-bottom: 24px;">
-        <div class="card-header">Revenue Over Time</div>
-        <div class="chart-placeholder">
-          <div class="axis-y"></div>
-          <div class="axis-x"></div>
-          <span>Line chart</span>
-          <span class="chart-label">plot_revenue_over_time — daily revenue for selected date range</span>
+        <div class="data-grid-row">
+          <div>16 Jun 2026</div>
+          <div>Reflexology</div>
+          <div>2</div>
+          <div>R 1,200</div>
         </div>
-      </div>
-
-      <!-- card_revenue_details / dg_revenue_details -->
-      <div class="card elevated">
-        <div class="card-header">Revenue Details</div>
-        <div class="data-grid">
-          <div class="data-grid-header">
-            <div>Date</div>
-            <div>Revenue</div>
-            <div>Bookings</div>
-            <div>Avg Order Value</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 1, 2026</div>
-            <div>R 420</div>
-            <div>2</div>
-            <div>R 210</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 2, 2026</div>
-            <div>R 680</div>
-            <div>3</div>
-            <div>R 227</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 3, 2026</div>
-            <div>R 450</div>
-            <div>2</div>
-            <div>R 225</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 4, 2026</div>
-            <div>R 890</div>
-            <div>4</div>
-            <div>R 223</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 5, 2026</div>
-            <div>R 560</div>
-            <div>2</div>
-            <div>R 280</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 6, 2026</div>
-            <div>R 340</div>
-            <div>1</div>
-            <div>R 340</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 7, 2026</div>
-            <div>R 0</div>
-            <div>0</div>
-            <div>&mdash;</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 8, 2026</div>
-            <div>R 750</div>
-            <div>3</div>
-            <div>R 250</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 9, 2026</div>
-            <div>R 1,200</div>
-            <div>5</div>
-            <div>R 240</div>
-          </div>
-          <div class="data-grid-row">
-            <div>Jun 10, 2026</div>
-            <div>R 680</div>
-            <div>3</div>
-            <div>R 227</div>
-          </div>
+        <div class="data-grid-row">
+          <div>15 Jun 2026</div>
+          <div>Hot Stone Therapy</div>
+          <div>4</div>
+          <div>R 3,800</div>
+        </div>
+        <div class="data-grid-row">
+          <div>15 Jun 2026</div>
+          <div>Swedish Massage</div>
+          <div>3</div>
+          <div>R 2,250</div>
         </div>
       </div>
+    </div>
 
-    </div><!-- /content -->
-  </div><!-- /main -->
+    <!-- Empty State (col_empty_state — hidden on load, shown when no data) -->
+    <div class="empty-state">
+      <div class="empty-state-icon">receipt</div>
+      <h2 class="empty-state-heading">No revenue data</h2>
+      <p class="empty-state-body">Select a date range and generate a report to view revenue details.</p>
+      <button class="btn btn-filled">Create Your First Booking</button>
+    </div>
 
-</div><!-- /page-layout -->
-
-<!-- ============================================================
-     EMPTY STATE (col_empty_state — hidden on load in production)
-     Shown here for reference. In Anvil: visible = False by default.
-     This is the pre-generation state: no report has been run yet.
-     ============================================================ -->
-<div style="border-top: 2px dashed var(--outline-variant); padding: 24px;">
-  <div class="annotation">
-    <strong>col_empty_state (ColumnPanel)</strong> — visible = False by default.
-    Shown here for reference. In production, this replaces the report content
-    when no report has been generated yet (pre-generation state).
-  </div>
-
-  <div class="empty-state">
-    <div class="empty-state-icon">&#128196;</div>
-    <div class="empty-state-heading">No revenue data</div>
-    <div class="empty-state-body">Select a date range and generate a report to view revenue details.</div>
-  </div>
+  </main>
 </div>
-
-<!-- FOOTER -->
-<div style="padding: 12px 16px; border-top: 1px solid var(--divider-color); font-size: 11px; color: var(--outline);">
-  screen-analytics-RevenueReportForm.html — Mybizz CS — Material 3 + MUI Aesthetic Overlay — Professional Blue — 2026-06-18
-</div>
-
-</div><!-- /screen-container -->
 
 </body>
 </html>
