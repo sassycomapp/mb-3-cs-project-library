@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — VideoDisplayComponent</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #493ef3; --on-primary: #ffffff;
+      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff;
+      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5;
+      --outline: #7a7583; --outline-variant: #c9c4d3;
+      --error: #b42336; --on-error: #ffffff;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --divider-color: var(--outline-variant);
+      --state-hover-opacity: 0.08;
+      --state-pressed-opacity: 0.12;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); padding: var(--space-8); }
+
+    .video-container { max-width: 700px; margin: 0 auto; }
+    .video-title { font-size: 22px; font-weight: 600; color: var(--on-surface); text-align: center; margin-bottom: var(--space-2); }
+    .video-subtitle { font-size: 14px; color: var(--on-surface-variant); text-align: center; margin-bottom: var(--space-6); }
+
+    /* Video embed area */
+    .video-embed { position: relative; width: 100%; padding-bottom: 56.25%; /* 16:9 */ height: 0; overflow: hidden; border-radius: 8px; box-shadow: var(--mui-shadow-card); background: #000; }
+    .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+    .video-play-btn { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-3); cursor: pointer; transition: transform 150ms; }
+    .video-play-btn:hover { transform: scale(1.1); }
+    .video-play-btn .material-icons { font-size: 32px; color: #333; margin-left: 4px; }
+    .video-label { font-size: 12px; color: rgba(255,255,255,0.7); }
+
+    /* Caption */
+    .video-caption { text-align: center; margin-top: var(--space-3); font-size: 14px; color: var(--on-surface-variant); }
+
+    /* State labels */
+    .state-label { text-align: center; margin-top: var(--space-6); padding: var(--space-3); border-radius: 8px; font-size: 13px; font-weight: 500; }
+    .state-visible { background: rgba(56,142,60,0.12); color: #155724; }
+    .state-hidden { background: rgba(198,40,40,0.1); color: #721c24; }
+
+    /* Hidden state demo */
+    .video-hidden-demo { margin-top: var(--space-6); padding: var(--space-6); border: 2px dashed var(--outline-variant); border-radius: 8px; text-align: center; color: var(--on-surface-variant); }
+    .video-hidden-demo .material-icons { font-size: 36px; opacity: 0.4; margin-bottom: var(--space-2); }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #cfbdf8; --on-primary: #381e72;
+        --primary-container: #4f378b; --on-primary-container: #eaddff;
+        --secondary: #ccc2dc; --on-secondary: #332d41;
+        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
+        --surface: #1c1b20; --on-surface: #e6e1e5;
+        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
+        --surface-container-low: #1d1b20; --surface-container: #211f26;
+        --outline: #938f99; --outline-variant: #49454f;
+        --error: #f2b8b5; --on-error: #601410;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <!-- VIDEO DISPLAY COMPONENT -->
+  <div class="video-container">
+    <div class="video-title">About Serenity Spa</div>
+    <div class="video-subtitle">Watch our story and see what makes us different</div>
+
+    <!-- STATE 1: Valid video URL (visible) -->
+    <div class="video-embed">
+      <div class="video-placeholder">
+        <div class="video-play-btn"><span class="material-icons">play_arrow</span></div>
+        <div class="video-label">YouTube Video Embed</div>
+      </div>
+    </div>
+    <div class="video-caption">Serenity Spa — Premium Wellness in Sandton</div>
+    <div class="state-label state-visible">State: visible = True (video_url is valid)</div>
+
+    <!-- STATE 2: No video URL (hidden) -->
+    <div class="video-hidden-demo">
+      <span class="material-icons">videocam_off</span>
+      <p>State: visible = False (video_url is empty or invalid)</p>
+      <p>Component is programmatically hidden. No visual output rendered.</p>
+    </div>
+    <div class="state-label state-hidden">State: visible = False — component hidden by host form</div>
+  </div>
+
+</body>
+</html>

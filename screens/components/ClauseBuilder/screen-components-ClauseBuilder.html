@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — ClauseBuilder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      /* Professional Blue palette tokens */
+      --primary: #493ef3; --on-primary: #ffffff;
+      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff;
+      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5;
+      --outline: #7a7583; --outline-variant: #c9c4d3;
+      --error: #b42336; --on-error: #ffffff;
+      /* Spacing */
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-6: 24px; --space-8: 32px;
+      /* Typography */
+      --font-family: 'Roboto', sans-serif;
+      /* MUI aesthetic */
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --divider-color: var(--outline-variant);
+      --state-hover-opacity: 0.08;
+      --state-pressed-opacity: 0.12;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); padding: var(--space-6); }
+
+    .component-container { max-width: 700px; margin: 0 auto; }
+
+    .section-title { font-size: 22px; line-height: 28px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-4); }
+    .section-desc { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-6); }
+
+    /* Filter bar */
+    .filter-bar { display: flex; gap: var(--space-3); align-items: flex-end; margin-bottom: var(--space-6); }
+    .form-label { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); margin-bottom: var(--space-1); }
+    .form-select { padding: var(--space-2) var(--space-4); min-height: 40px; font-size: 14px; font-family: var(--font-family); border: 1px solid var(--outline); border-radius: 4px; background: transparent; color: var(--on-surface); cursor: pointer; }
+
+    /* Buttons */
+    .btn { font-family: var(--font-family); font-size: 14px; font-weight: 500; padding: 10px 24px; min-height: 40px; border-radius: 100px; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); transition: background 150ms, box-shadow 150ms; }
+    .btn-filled { background: var(--primary); color: var(--on-primary); }
+    .btn-filled:hover { background: rgba(73,62,243,0.92); box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15); }
+    .btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
+    .btn-outlined:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .btn-text { background: transparent; color: var(--primary); border: none; padding: 10px 12px; }
+
+    /* Clause cards */
+    .clause-card { background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 8px; padding: var(--space-4); margin-bottom: var(--space-3); box-shadow: var(--mui-shadow-card); display: flex; align-items: flex-start; gap: var(--space-3); }
+    .clause-card.seeded { border-left: 4px solid #388e3c; }
+    .clause-card.custom { border-left: 4px solid var(--primary); }
+    .clause-content { flex: 1; }
+    .clause-title { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-1); }
+    .clause-excerpt { font-size: 13px; color: var(--on-surface-variant); line-height: 20px; }
+    .clause-actions { display: flex; gap: var(--space-2); flex-shrink: 0; }
+    .clause-badge { display: inline-block; padding: 2px 8px; border-radius: 8px; font-size: 11px; font-weight: 500; margin-bottom: var(--space-2); }
+    .badge-seeded { background: rgba(56,142,60,0.12); color: #155724; }
+    .badge-custom { background: var(--primary-container); color: var(--on-primary-container); }
+
+    /* Section headings */
+    .clause-section-heading { font-size: 18px; line-height: 24px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-3); margin-top: var(--space-6); display: flex; align-items: center; gap: var(--space-2); }
+    .clause-section-heading .material-icons { font-size: 20px; color: var(--on-surface-variant); }
+
+    /* Form inputs */
+    .form-input { width: 100%; padding: var(--space-3) var(--space-4); min-height: 48px; font-size: 16px; font-family: var(--font-family); border: 1px solid var(--outline); border-radius: 4px; background: transparent; color: var(--on-surface); transition: border-color 150ms; }
+    .form-input:focus { border-color: var(--primary); border-width: 2px; padding: 11px 15px; outline: none; }
+    textarea.form-input { min-height: 100px; resize: vertical; }
+
+    /* Add/Edit form card */
+    .form-card { background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 8px; padding: var(--space-6); margin-bottom: var(--space-4); box-shadow: var(--mui-shadow-card); display: none; }
+    .form-card.visible { display: block; }
+    .form-card-title { font-size: 18px; line-height: 24px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-4); }
+
+    .form-group { margin-bottom: var(--space-4); }
+
+    .form-actions { display: flex; gap: var(--space-3); margin-top: var(--space-4); }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #cfbdf8; --on-primary: #381e72;
+        --primary-container: #4f378b; --on-primary-container: #eaddff;
+        --secondary: #ccc2dc; --on-secondary: #332d41;
+        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
+        --surface: #1c1b20; --on-surface: #e6e1e5;
+        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
+        --surface-container-low: #1d1b20; --surface-container: #211f26;
+        --outline: #938f99; --outline-variant: #49454f;
+        --error: #f2b8b5; --on-error: #601410;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <div class="component-container">
+
+    <!-- PAGE TITLE -->
+    <h1 class="section-title">Privacy Policy Clauses</h1>
+    <p class="section-desc">Manage the clauses that make up your Privacy Policy. Seeded clauses come from the master template and cannot be deleted. Custom clauses are added by you.</p>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <div style="flex: 1; max-width: 250px;">
+        <div class="form-label">Category</div>
+        <select class="form-select" style="width: 100%;">
+          <option>All Categories</option>
+          <option selected>Data Collection</option>
+          <option>Cookies &amp; Tracking</option>
+          <option>Third Parties</option>
+          <option>Data Retention</option>
+          <option>User Rights</option>
+        </select>
+      </div>
+      <button class="btn btn-outlined"><span class="material-icons">add</span> Add Custom Clause</button>
+    </div>
+
+    <!-- SEEDED CLAUSES SECTION -->
+    <div class="clause-section-heading"><span class="material-icons">lock</span> Seeded Clauses</div>
+
+    <div class="clause-card seeded">
+      <div class="clause-content">
+        <span class="clause-badge badge-seeded">Seeded</span>
+        <div class="clause-title">Information We Collect</div>
+        <div class="clause-excerpt">We collect personal information you provide directly, such as your name, email address, phone number, and billing information when you book appointments or create an account.</div>
+      </div>
+      <div class="clause-actions">
+        <button class="btn btn-text"><span class="material-icons">edit</span> Edit</button>
+      </div>
+    </div>
+
+    <div class="clause-card seeded">
+      <div class="clause-content">
+        <span class="clause-badge badge-seeded">Seeded</span>
+        <div class="clause-title">How We Use Your Information</div>
+        <div class="clause-excerpt">We use your information to provide services, process bookings, send appointment reminders, communicate with you about your account, and improve our platform.</div>
+      </div>
+      <div class="clause-actions">
+        <button class="btn btn-text"><span class="material-icons">edit</span> Edit</button>
+      </div>
+    </div>
+
+    <div class="clause-card seeded">
+      <div class="clause-content">
+        <span class="clause-badge badge-seeded">Seeded</span>
+        <div class="clause-title">Data Retention</div>
+        <div class="clause-excerpt">We retain your personal information for as long as necessary to provide services, comply with legal obligations, resolve disputes, and enforce our agreements.</div>
+      </div>
+      <div class="clause-actions">
+        <button class="btn btn-text"><span class="material-icons">edit</span> Edit</button>
+      </div>
+    </div>
+
+    <!-- CUSTOM CLAUSES SECTION -->
+    <div class="clause-section-heading"><span class="material-icons">edit_note</span> Custom Clauses</div>
+
+    <div class="clause-card custom">
+      <div class="clause-content">
+        <span class="clause-badge badge-custom">Custom</span>
+        <div class="clause-title">Our Cookie Policy</div>
+        <div class="clause-excerpt">We use cookies to enhance your experience on our website. You can control cookie preferences through your browser settings. Essential cookies are required for the site to function properly.</div>
+      </div>
+      <div class="clause-actions">
+        <button class="btn btn-text"><span class="material-icons">edit</span> Edit</button>
+        <button class="btn btn-text" style="color: var(--error);"><span class="material-icons">delete</span> Delete</button>
+      </div>
+    </div>
+
+    <div class="clause-card custom">
+      <div class="clause-content">
+        <span class="clause-badge badge-custom">Custom</span>
+        <div class="clause-title">POPIA Compliance</div>
+        <div class="clause-excerpt">In accordance with the Protection of Personal Information Act (POPIA), you have the right to access, correct, and request deletion of your personal data. Contact us at privacy@serenityspa.co.za.</div>
+      </div>
+      <div class="clause-actions">
+        <button class="btn btn-text"><span class="material-icons">edit</span> Edit</button>
+        <button class="btn btn-text" style="color: var(--error);"><span class="material-icons">delete</span> Delete</button>
+      </div>
+    </div>
+
+    <!-- ADD CLAUSE FORM (hidden by default) -->
+    <div class="form-card" id="addClauseForm">
+      <div class="form-card-title">Add New Clause</div>
+      <div class="form-group">
+        <div class="form-label">Clause Title</div>
+        <input class="form-input" type="text" placeholder="e.g. Your Rights Under POPIA">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Clause Body</div>
+        <textarea class="form-input" placeholder="Enter the full clause text..."></textarea>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-filled">Add Clause</button>
+        <button class="btn btn-text">Cancel</button>
+      </div>
+    </div>
+
+    <!-- EDIT CLAUSE FORM (hidden by default) -->
+    <div class="form-card" id="editClauseForm">
+      <div class="form-card-title">Edit Clause</div>
+      <div class="form-group">
+        <div class="form-label">Clause Title</div>
+        <input class="form-input" type="text" value="Our Cookie Policy">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Clause Body</div>
+        <textarea class="form-input">We use cookies to enhance your experience on our website. You can control cookie preferences through your browser settings. Essential cookies are required for the site to function properly.</textarea>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-filled">Save Changes</button>
+        <button class="btn btn-text">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

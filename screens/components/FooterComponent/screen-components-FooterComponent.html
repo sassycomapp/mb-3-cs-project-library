@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — FooterComponent</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #493ef3; --on-primary: #ffffff;
+      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff;
+      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5;
+      --outline: #7a7583; --outline-variant: #c9c4d3;
+      --error: #b42336; --on-error: #ffffff;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --divider-color: var(--outline-variant);
+      --state-hover-opacity: 0.08;
+      --state-pressed-opacity: 0.12;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); }
+
+    /* Simulated page content above footer */
+    .page-content { padding: var(--space-8) var(--space-6); max-width: 900px; margin: 0 auto; text-align: center; }
+    .page-content h1 { font-size: 32px; font-weight: 600; margin-bottom: var(--space-2); }
+    .page-content p { color: var(--on-surface-variant); }
+
+    /* Footer */
+    .footer { background: var(--surface-container-low); border-top: 1px solid var(--divider-color); padding: var(--space-8) var(--space-6); }
+    .footer-inner { max-width: 900px; margin: 0 auto; }
+
+    .footer-top { display: flex; justify-content: space-between; gap: var(--space-8); margin-bottom: var(--space-6); flex-wrap: wrap; }
+    .footer-brand { display: flex; align-items: center; gap: var(--space-3); }
+    .footer-logo { width: 48px; height: 48px; background: var(--primary-container); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 600; color: var(--primary); }
+    .footer-business-name { font-size: 18px; font-weight: 600; color: var(--on-surface); }
+    .footer-accreditations { display: flex; flex-direction: column; gap: var(--space-1); }
+    .footer-accreditation { font-size: 13px; color: var(--on-surface-variant); display: flex; align-items: center; gap: var(--space-1); }
+    .footer-accreditation .material-icons { font-size: 16px; color: var(--primary); }
+
+    .footer-middle { display: flex; justify-content: space-between; gap: var(--space-8); margin-bottom: var(--space-6); flex-wrap: wrap; }
+    .footer-links { display: flex; flex-direction: column; gap: var(--space-4); }
+    .footer-social { display: flex; gap: var(--space-2); }
+    .social-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--outline-variant); background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 150ms; }
+    .social-btn:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .social-btn .material-icons { font-size: 18px; color: var(--on-surface-variant); }
+    .footer-legal { display: flex; gap: var(--space-4); }
+    .footer-legal a { font-size: 14px; color: var(--primary); text-decoration: none; }
+    .footer-legal a:hover { text-decoration: underline; }
+
+    .footer-contact { min-width: 250px; }
+    .footer-contact-title { font-size: 16px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-3); }
+    .footer-contact-item { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-2); display: flex; align-items: center; gap: var(--space-2); }
+    .footer-contact-item .material-icons { font-size: 16px; color: var(--primary); }
+    .footer-contact a { color: var(--primary); text-decoration: none; }
+    .footer-contact a:hover { text-decoration: underline; }
+
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: var(--space-4); border-top: 1px solid var(--divider-color); }
+    .footer-copyright { font-size: 13px; color: var(--on-surface-variant); }
+    .footer-back-top { font-size: 13px; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: var(--space-1); cursor: pointer; }
+    .footer-back-top:hover { text-decoration: underline; }
+    .footer-back-top .material-icons { font-size: 16px; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #cfbdf8; --on-primary: #381e72;
+        --primary-container: #4f378b; --on-primary-container: #eaddff;
+        --secondary: #ccc2dc; --on-secondary: #332d41;
+        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
+        --surface: #1c1b20; --on-surface: #e6e1e5;
+        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
+        --surface-container-low: #1d1b20; --surface-container: #211f26;
+        --outline: #938f99; --outline-variant: #49454f;
+        --error: #f2b8b5; --on-error: #601410;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+    @media (max-width: 600px) {
+      .footer-top, .footer-middle { flex-direction: column; }
+      .footer-bottom { flex-direction: column; gap: var(--space-2); text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Simulated page content -->
+  <div class="page-content">
+    <h1>Serenity Spa</h1>
+    <p>Premium wellness and beauty services in Sandton, Johannesburg</p>
+  </div>
+
+  <!-- FOOTER COMPONENT -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <!-- TOP ROW: Logo + Business Name | Accreditations -->
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">SS</div>
+          <div class="footer-business-name">Serenity Spa</div>
+        </div>
+        <div class="footer-accreditations">
+          <div class="footer-accreditation"><span class="material-icons">verified</span> CIBTAC Certified Therapist</div>
+          <div class="footer-accreditation"><span class="material-icons">verified</span> CIDESCO International Diploma</div>
+        </div>
+      </div>
+
+      <!-- MIDDLE ROW: Social + Legal Links | Contact Info -->
+      <div class="footer-middle">
+        <div class="footer-links">
+          <div class="footer-social">
+            <button class="social-btn" title="Facebook"><span class="material-icons">facebook</span></button>
+            <button class="social-btn" title="Instagram"><span class="material-icons">instagram</span></button>
+            <button class="social-btn" title="LinkedIn"><span class="material-icons">linkedin</span></button>
+            <button class="social-btn" title="X (Twitter)"><span class="material-icons">twitter</span></button>
+          </div>
+          <div class="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms &amp; Conditions</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <div class="footer-contact-title">Contact Us</div>
+          <div class="footer-contact-item"><span class="material-icons">email</span> info@serenityspa.co.za</div>
+          <div class="footer-contact-item"><span class="material-icons">phone</span> +27 11 234 5678</div>
+          <div class="footer-contact-item"><span class="material-icons">location_on</span> <a href="#">View on Google Maps</a></div>
+          <div class="footer-contact-item"><span class="material-icons">mail</span> <a href="#">Send us a message</a></div>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW: Copyright + Back to Top -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">2026 Serenity Spa. All rights reserved.</div>
+        <a class="footer-back-top"><span class="material-icons">arrow_upward</span> Back to Top</a>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
