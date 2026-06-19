@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — BlogPostForm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #493ef3; --on-primary: #ffffff;
+      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff;
+      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5;
+      --outline: #7a7583; --outline-variant: #c9c4d3;
+      --error: #b42336; --on-error: #ffffff;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --divider-color: var(--outline-variant);
+      --state-hover-opacity: 0.08;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); min-height: 100vh; }
+
+    /* ===== LAYOUT ===== */
+    .post-layout { display: flex; min-height: 100vh; }
+
+    /* ===== LEFT NAV ===== */
+    .left-nav { width: 260px; background: var(--surface-container-low); border-right: 1px solid var(--divider-color); padding: var(--space-6) 0; flex-shrink: 0; overflow-y: auto; display: flex; flex-direction: column; }
+    .nav-brand { padding: 0 var(--space-4) var(--space-6); font-size: 18px; font-weight: 500; color: var(--on-primary-container); }
+    .nav-group-label { padding: var(--space-4) var(--space-4) var(--space-1); font-size: 11px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; }
+    .nav-item { display: flex; align-items: center; padding: var(--space-1) var(--space-4); margin: 2px var(--space-2); border-radius: 100px; color: var(--on-surface-variant); text-decoration: none; font-size: 14px; font-weight: 500; gap: var(--space-4); transition: background 150ms; cursor: pointer; }
+    .nav-item:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .nav-item.selected { background: var(--secondary-container); color: var(--on-secondary-container); }
+    .nav-item .material-icons { font-size: 18px; }
+    .nav-divider { border: none; border-top: 1px solid var(--divider-color); opacity: 0.4; margin: var(--space-2) var(--space-4); }
+    .nav-signout { margin-top: auto; padding-top: var(--space-4); border-top: 1px solid var(--divider-color); opacity: 0.4; }
+
+    .main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .app-bar { min-height: 56px; padding: 0 var(--space-6); background-color: var(--surface); border-bottom: 1px solid var(--divider-color); display: flex; align-items: center; }
+    .app-bar .title { font-size: 20px; font-weight: 500; color: var(--on-surface); flex: 1; }
+    .app-bar-nav { display: flex; gap: var(--space-2); align-items: center; }
+    .btn-icon { padding: var(--space-2); min-width: 40px; min-height: 40px; border-radius: 50%; background: transparent; color: var(--on-surface-variant); border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+    .btn-icon:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .content { flex: 1; padding: var(--space-6); background: var(--surface); overflow-y: auto; }
+
+    /* ===== CARDS ===== */
+    .card { background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 8px; padding: var(--space-4); margin-bottom: var(--space-4); box-shadow: var(--mui-shadow-card); }
+    .card-header { font-size: 18px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 1px solid var(--divider-color); opacity: 0.4; }
+
+    /* ===== POST HEADER ===== */
+    .post-header { margin-bottom: var(--space-6); }
+    .post-category { display: inline-block; background: var(--secondary-container); color: var(--on-secondary-container); border-radius: 8px; padding: 4px 12px; font-size: 12px; font-weight: 500; margin-bottom: var(--space-3); }
+    .post-title { font-size: 32px; line-height: 40px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-2); }
+    .post-meta { font-size: 14px; color: var(--on-surface-variant); display: flex; gap: var(--space-3); align-items: center; }
+    .post-meta .material-icons { font-size: 16px; }
+
+    /* ===== FEATURED IMAGE ===== */
+    .featured-image { width: 100%; height: 400px; background: var(--surface-variant); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--outline); font-size: 48px; margin-bottom: var(--space-6); }
+
+    /* ===== POST CONTENT ===== */
+    .post-content { font-size: 16px; line-height: 28px; color: var(--on-surface); margin-bottom: var(--space-6); }
+    .post-content p { margin-bottom: var(--space-4); }
+
+    /* ===== PULLQUOTE ===== */
+    .pullquote { border-left: 4px solid var(--primary); padding: var(--space-4) var(--space-6); margin: var(--space-6) 0; font-size: 18px; font-style: italic; color: var(--on-surface-variant); line-height: 28px; background: var(--surface-variant); border-radius: 0 8px 8px 0; }
+
+    /* ===== VIDEO EMBED ===== */
+    .video-embed { width: 100%; height: 0; padding-bottom: 56.25%; background: var(--surface-variant); border-radius: 8px; margin-bottom: var(--space-6); position: relative; display: none; }
+    .video-embed .material-icons { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; color: var(--outline); }
+
+    /* ===== SOCIAL SHARING ===== */
+    .social-sharing { display: flex; gap: var(--space-2); margin-bottom: var(--space-6); padding: var(--space-4) 0; border-top: 1px solid var(--divider-color); border-bottom: 1px solid var(--divider-color); }
+
+    /* ===== BUTTONS ===== */
+    .btn { font-family: var(--font-family); font-size: 14px; font-weight: 500; padding: 10px 24px; min-height: 40px; border-radius: 100px; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); transition: background 150ms, box-shadow 150ms; }
+    .btn-filled { background: var(--primary); color: var(--on-primary); }
+    .btn-filled:hover { background: rgba(73,62,243,0.92); box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15); }
+    .btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
+    .btn-outlined:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+
+    /* ===== COMMENTS ===== */
+    .comment { padding: var(--space-4) 0; border-bottom: 1px solid var(--divider-color); }
+    .comment:last-child { border-bottom: none; }
+    .comment-header { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+    .comment-avatar { width: 32px; height: 32px; background: var(--primary-container); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; color: var(--primary); }
+    .comment-name { font-size: 14px; font-weight: 500; color: var(--on-surface); }
+    .comment-date { font-size: 12px; color: var(--outline); }
+    .comment-text { font-size: 14px; color: var(--on-surface-variant); line-height: 20px; }
+
+    /* ===== COMMENT FORM ===== */
+    .comment-form { margin-top: var(--space-6); }
+    .form-group { margin-bottom: var(--space-4); }
+    .form-label { display: block; font-size: 12px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-2); }
+    .form-input { width: 100%; padding: var(--space-3) var(--space-4); min-height: 48px; font-size: 16px; font-family: var(--font-family); border: 1px solid var(--outline); border-radius: 4px; background: transparent; color: var(--on-surface); transition: border-color 150ms; }
+    .form-input:focus { border-color: var(--primary); border-width: 2px; padding: 11px 15px; outline: none; }
+    textarea.form-input { min-height: 100px; resize: vertical; }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar-card { margin-bottom: var(--space-4); }
+    .sidebar-title { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-3); text-transform: uppercase; letter-spacing: 0.5px; }
+    .author-avatar { width: 48px; height: 48px; background: var(--primary-container); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 500; color: var(--primary); margin-bottom: var(--space-3); }
+    .author-name { font-size: 16px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-1); }
+    .author-bio { font-size: 14px; color: var(--on-surface-variant); line-height: 20px; }
+    .related-post { padding: var(--space-3) 0; border-bottom: 1px solid var(--divider-color); }
+    .related-post:last-child { border-bottom: none; }
+    .related-post-title { font-size: 14px; font-weight: 500; color: var(--on-surface); }
+    .related-post-title a { color: inherit; text-decoration: none; }
+    .related-post-title a:hover { color: var(--primary); }
+    .related-post-meta { font-size: 12px; color: var(--outline); margin-top: var(--space-1); }
+    .category-list { list-style: none; }
+    .category-list li { padding: var(--space-2) 0; font-size: 14px; color: var(--on-surface-variant); border-bottom: 1px solid var(--divider-color); }
+    .category-list li:last-child { border-bottom: none; }
+    .newsletter-form { margin-top: var(--space-3); }
+    .newsletter-desc { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-3); }
+
+    /* ===== FOOTER ===== */
+    .footer { background: var(--surface-container-low); border-top: 1px solid var(--divider-color); padding: var(--space-8) var(--space-6); margin-top: var(--space-8); }
+    .footer-content { display: flex; gap: var(--space-8); flex-wrap: wrap; }
+    .footer-col { flex: 1; min-width: 200px; }
+    .footer-title { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-3); }
+    .footer-link { display: block; font-size: 14px; color: var(--on-surface-variant); text-decoration: none; padding: var(--space-1) 0; }
+    .footer-link:hover { color: var(--primary); }
+    .footer-bottom { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--divider-color); font-size: 12px; color: var(--outline); }
+
+    /* ===== COMMENTS EMPTY STATE ===== */
+    .comments-empty { text-align: center; padding: var(--space-8) var(--space-4); color: var(--on-surface-variant); }
+    .comments-empty .material-icons { font-size: 48px; opacity: 0.5; margin-bottom: var(--space-4); }
+    .comments-empty h3 { font-size: 18px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-2); }
+    .comments-empty p { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-4); }
+
+    /* ===== DARK MODE ===== */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #cfbdf8; --on-primary: #381e72;
+        --primary-container: #4f378b; --on-primary-container: #eaddff;
+        --secondary: #ccc2dc; --on-secondary: #332d41;
+        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
+        --surface: #1c1b20; --on-surface: #e6e1e5;
+        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
+        --surface-container-low: #1d1b20; --surface-container: #211f26;
+        --outline: #938f99; --outline-variant: #49454f;
+        --error: #f2b8b5; --on-error: #601410;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <div class="post-layout">
+
+    <!-- LEFT NAV -->
+    <nav class="left-nav" aria-label="Main navigation">
+      <div class="nav-brand">Mybizz</div>
+      <a class="nav-item" href="#"><span class="material-icons">dashboard</span> Dashboard</a>
+      <div class="nav-group-label">Sales &amp; Operations</div>
+      <a class="nav-item" href="#"><span class="material-icons">event</span> Bookings</a>
+      <a class="nav-item" href="#"><span class="material-icons">design_services</span> Services</a>
+      <div class="nav-group-label">Customers &amp; Marketing</div>
+      <a class="nav-item" href="#"><span class="material-icons">contacts</span> Contacts</a>
+      <a class="nav-item" href="#"><span class="material-icons">campaign</span> Campaigns</a>
+      <a class="nav-item" href="#"><span class="material-icons">send</span> Broadcasts</a>
+      <a class="nav-item" href="#"><span class="material-icons">group_work</span> Segments</a>
+      <a class="nav-item" href="#"><span class="material-icons">task</span> Tasks</a>
+      <div class="nav-group-label">Content &amp; Website</div>
+      <a class="nav-item selected" href="#"><span class="material-icons">edit_note</span> Blog</a>
+      <a class="nav-item" href="#"><span class="material-icons">web</span> Pages</a>
+      <div class="nav-group-label">Finance &amp; Reports</div>
+      <a class="nav-item" href="#"><span class="material-icons">receipt_long</span> Invoices</a>
+      <a class="nav-item" href="#"><span class="material-icons">payments</span> Payments</a>
+      <a class="nav-item" href="#"><span class="material-icons">assessment</span> Reports</a>
+      <a class="nav-item" href="#"><span class="material-icons">bar_chart</span> Analytics</a>
+      <div class="nav-divider"></div>
+      <a class="nav-item" href="#"><span class="material-icons">settings</span> Settings</a>
+      <a class="nav-item" href="#"><span class="material-icons">lock</span> Vault</a>
+      <div class="nav-signout">
+        <a class="nav-item" href="#"><span class="material-icons">logout</span> Sign Out</a>
+      </div>
+    </nav>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+      <!-- APP BAR -->
+      <header class="app-bar">
+        <div class="title">Blog Post</div>
+        <div class="app-bar-nav">
+          <button class="btn-icon" title="Notifications"><span class="material-icons">notifications</span></button>
+          <button class="btn-icon" title="User menu"><span class="material-icons">account_circle</span></button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <!-- POST HEADER -->
+        <div class="post-header">
+          <span class="post-category">Massage Therapy</span>
+          <h1 class="post-title">5 Benefits of Regular Deep Tissue Massage</h1>
+          <div class="post-meta">
+            <span class="material-icons">person</span> Thandi Mokoena
+            <span class="material-icons">schedule</span> 12 June 2026
+            <span class="material-icons">visibility</span> 124 views
+          </div>
+        </div>
+
+        <!-- FEATURED IMAGE -->
+        <div class="featured-image"><span class="material-icons">image</span></div>
+
+        <!-- POST CONTENT + SIDEBAR LAYOUT -->
+        <div style="display: flex; gap: var(--space-6); align-items: flex-start;">
+
+          <!-- MAIN CONTENT -->
+          <div style="flex: 3; min-width: 0;">
+
+            <!-- POST CONTENT -->
+            <div class="post-content">
+              <p>Deep tissue massage is one of the most effective therapeutic treatments available at Serenity Spa in Sandton. Unlike a relaxation massage, deep tissue therapy targets the deeper layers of muscle and fascia, using slow, deliberate strokes and firm pressure.</p>
+              <p>At our spa, we've seen hundreds of clients experience significant relief from chronic pain conditions, particularly in the neck, shoulders, and lower back. Here are five key benefits our clients report:</p>
+              <p><strong>1. Chronic Pain Relief</strong> — Deep tissue massage breaks down adhesions (knots) that cause pain and restrict movement. Our therapists use sustained pressure to reach the deeper muscle layers where tension accumulates.</p>
+              <p><strong>2. Stress Reduction</strong> — The firm pressure triggers the release of oxytocin and serotonin, naturally reducing cortisol levels. Many clients report feeling deeply relaxed for days after a session.</p>
+              <p><strong>3. Improved Posture</strong> — By releasing tension in deep muscle layers, your body naturally realigns. This is particularly beneficial for desk workers in Sandton's business district.</p>
+              <p><strong>4. Better Sleep</strong> — Clients consistently report improved sleep quality after sessions. The deep relaxation response helps reset your nervous system.</p>
+              <p><strong>5. Enhanced Athletic Recovery</strong> — Our sports-focused therapists help athletes recover faster from training by breaking down scar tissue and improving blood flow to tired muscles.</p>
+            </div>
+
+            <!-- PULLQUOTE (visible for full_width template) -->
+            <div class="pullquote">
+              "Deep tissue massage changed my life. After three sessions at Serenity Spa, my chronic back pain from years of desk work was finally manageable."
+            </div>
+
+            <!-- VIDEO EMBED (hidden when no video URL) -->
+            <div class="video-embed">
+              <span class="material-icons">play_circle</span>
+            </div>
+
+            <!-- SOCIAL SHARING -->
+            <div class="social-sharing">
+              <button class="btn btn-outlined"><span class="material-icons">share</span> Share</button>
+              <button class="btn btn-outlined"><span class="material-icons">share</span> Tweet</button>
+              <button class="btn btn-outlined"><span class="material-icons">share</span> Share</button>
+            </div>
+
+            <!-- COMMENTS SECTION -->
+            <div class="card">
+              <div class="card-header">Comments</div>
+
+              <!-- Comment 1 -->
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-avatar">NM</div>
+                  <div>
+                    <div class="comment-name">Nomsa Mthembu</div>
+                    <div class="comment-date">14 June 2026</div>
+                  </div>
+                </div>
+                <p class="comment-text">I've been coming to Serenity Spa for deep tissue massage for three months now. The difference in my shoulder tension is incredible. Thandi is amazing!</p>
+              </div>
+
+              <!-- Comment 2 -->
+              <div class="comment">
+                <div class="comment-header">
+                  <div class="comment-avatar">JP</div>
+                  <div>
+                    <div class="comment-name">James Pillay</div>
+                    <div class="comment-date">13 June 2026</div>
+                  </div>
+                </div>
+                <p class="comment-text">Great article. I've been considering deep tissue for my running injuries. Will book a session this week.</p>
+              </div>
+
+              <!-- ADD COMMENT FORM -->
+              <div class="comment-form">
+                <div class="form-group">
+                  <label class="form-label" for="txt_comment_name">Your Name</label>
+                  <input class="form-input" type="text" id="txt_comment_name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="txt_comment_email">Your Email</label>
+                  <input class="form-input" type="email" id="txt_comment_email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="txt_comment_text">Your Comment</label>
+                  <textarea class="form-input" id="txt_comment_text" placeholder="Share your thoughts..." rows="4"></textarea>
+                </div>
+                <button class="btn btn-filled">Submit Comment</button>
+              </div>
+            </div>
+
+            <!-- COMMENTS EMPTY STATE (hidden — shown when no comments exist) -->
+            <div class="comments-empty" style="display: none;">
+              <span class="material-icons">chat_bubble_outline</span>
+              <h3>No comments yet</h3>
+              <p>Be the first to share your thoughts.</p>
+              <button class="btn btn-filled">Write a Comment</button>
+            </div>
+
+          </div>
+
+          <!-- SIDEBAR (visible only for two_column template) -->
+          <div style="flex: 2; min-width: 280px;">
+
+            <!-- Author Bio -->
+            <div class="card sidebar-card">
+              <div class="sidebar-title">Author</div>
+              <div class="author-avatar">TM</div>
+              <div class="author-name">Thandi Mokoena</div>
+              <p class="author-bio">Senior therapist at Serenity Spa with 8 years of experience in deep tissue and sports massage. Passionate about helping clients achieve pain-free living.</p>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="card sidebar-card">
+              <div class="sidebar-title">Related Posts</div>
+              <div class="related-post">
+                <div class="related-post-title"><a href="#">Hot Stone vs Swedish: Which Is Right for You?</a></div>
+                <div class="related-post-meta">28 May 2026 · 156 views</div>
+              </div>
+              <div class="related-post">
+                <div class="related-post-title"><a href="#">Your Guide to Post-Workout Recovery</a></div>
+                <div class="related-post-meta">8 Jun 2026 · 89 views</div>
+              </div>
+              <div class="related-post">
+                <div class="related-post-title"><a href="#">Managing Stress During Tax Season</a></div>
+                <div class="related-post-meta">22 May 2026 · 98 views</div>
+              </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="card sidebar-card">
+              <div class="sidebar-title">Categories</div>
+              <ul class="category-list">
+                <li>Massage Therapy (12)</li>
+                <li>Wellness Tips (8)</li>
+                <li>Beauty &amp; Skincare (6)</li>
+                <li>Spa News (4)</li>
+              </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="card sidebar-card">
+              <div class="sidebar-title">Newsletter</div>
+              <p class="newsletter-desc">Subscribe to receive wellness tips and special offers from Serenity Spa.</p>
+              <div class="newsletter-form">
+                <div class="form-group">
+                  <input class="form-input" type="email" placeholder="Your email address">
+                </div>
+                <button class="btn btn-filled" style="width: 100%;">Subscribe</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+          <div class="footer-content">
+            <div class="footer-col">
+              <div class="footer-title">Serenity Spa</div>
+              <a class="footer-link" href="#">About Us</a>
+              <a class="footer-link" href="#">Our Team</a>
+              <a class="footer-link" href="#">Careers</a>
+            </div>
+            <div class="footer-col">
+              <div class="footer-title">Services</div>
+              <a class="footer-link" href="#">Massage Therapy</a>
+              <a class="footer-link" href="#">Beauty Treatments</a>
+              <a class="footer-link" href="#">Wellness Packages</a>
+            </div>
+            <div class="footer-col">
+              <div class="footer-title">Legal</div>
+              <a class="footer-link" href="#">Privacy Policy</a>
+              <a class="footer-link" href="#">Terms &amp; Conditions</a>
+            </div>
+            <div class="footer-col">
+              <div class="footer-title">Contact</div>
+              <a class="footer-link" href="#">123 Rivonia Road, Sandton</a>
+              <a class="footer-link" href="#">+27 11 234 5678</a>
+              <a class="footer-link" href="#">info@serenityspa.co.za</a>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            &copy; 2026 Serenity Spa. All rights reserved. Powered by Mybizz.
+          </div>
+        </footer>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — CommentModerationForm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #493ef3; --on-primary: #ffffff;
+      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff;
+      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5;
+      --outline: #7a7583; --outline-variant: #c9c4d3;
+      --error: #b42336; --on-error: #ffffff;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --divider-color: var(--outline-variant);
+      --state-hover-opacity: 0.08;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); min-height: 100vh; }
+
+    .admin-layout { display: flex; min-height: 100vh; }
+    .left-nav { width: 260px; background: var(--surface-container-low); border-right: 1px solid var(--divider-color); padding: var(--space-6) 0; flex-shrink: 0; overflow-y: auto; display: flex; flex-direction: column; }
+    .nav-brand { padding: 0 var(--space-4) var(--space-6); font-size: 18px; font-weight: 500; color: var(--on-primary-container); }
+    .nav-group-label { padding: var(--space-4) var(--space-4) var(--space-1); font-size: 11px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; }
+    .nav-item { display: flex; align-items: center; padding: var(--space-1) var(--space-4); margin: 2px var(--space-2); border-radius: 100px; color: var(--on-surface-variant); text-decoration: none; font-size: 14px; font-weight: 500; gap: var(--space-4); transition: background 150ms; cursor: pointer; }
+    .nav-item:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .nav-item.selected { background: var(--secondary-container); color: var(--on-secondary-container); }
+    .nav-item .material-icons { font-size: 18px; }
+    .nav-divider { border: none; border-top: 1px solid var(--divider-color); opacity: 0.4; margin: var(--space-2) var(--space-4); }
+    .nav-signout { margin-top: auto; padding-top: var(--space-4); border-top: 1px solid var(--divider-color); opacity: 0.4; }
+
+    .main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .app-bar { min-height: 56px; padding: 0 var(--space-6); background-color: var(--surface); border-bottom: 1px solid var(--divider-color); display: flex; align-items: center; }
+    .app-bar .title { font-size: 20px; font-weight: 500; color: var(--on-surface); flex: 1; }
+    .app-bar-nav { display: flex; gap: var(--space-2); align-items: center; }
+    .btn-icon { padding: var(--space-2); min-width: 40px; min-height: 40px; border-radius: 50%; background: transparent; color: var(--on-surface-variant); border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+    .btn-icon:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .content { flex: 1; padding: var(--space-6); background: var(--surface); overflow-y: auto; }
+
+    .page-title { font-size: 32px; line-height: 40px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-6); }
+
+    /* ===== FILTER BAR ===== */
+    .filter-bar { display: flex; gap: var(--space-3); margin-bottom: var(--space-6); flex-wrap: wrap; align-items: flex-end; }
+    .filter-group { display: flex; flex-direction: column; gap: var(--space-1); }
+    .filter-label { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); }
+    .filter-select { padding: var(--space-2) var(--space-4); min-height: 40px; font-size: 14px; font-family: var(--font-family); border: 1px solid var(--outline); border-radius: 4px; background: transparent; color: var(--on-surface); cursor: pointer; }
+
+    /* ===== BUTTONS ===== */
+    .btn { font-family: var(--font-family); font-size: 14px; font-weight: 500; padding: 10px 24px; min-height: 40px; border-radius: 100px; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); transition: background 150ms, box-shadow 150ms; }
+    .btn-filled { background: var(--primary); color: var(--on-primary); }
+    .btn-filled:hover { background: rgba(73,62,243,0.92); box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15); }
+    .btn-text { background: transparent; color: var(--primary); border: none; padding: 10px 12px; min-height: 40px; }
+    .btn-text:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+
+    /* ===== STATUS BADGE ===== */
+    .status-badge { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 500; }
+    .status-published { background: var(--primary-container); color: var(--on-primary-container); }
+    .status-pending { background: var(--surface-container); color: var(--on-surface-variant); }
+    .status-spam { background: var(--error); color: var(--on-error); }
+
+    /* ===== DATA GRID ===== */
+    .data-grid { border: 1px solid var(--divider-color); border-radius: 24px; overflow: hidden; margin-bottom: var(--space-4); }
+    .data-grid-header { background: var(--surface-container-low); padding: 12px 16px; border-bottom: 1px solid var(--divider-color); border-radius: 24px 24px 0 0; display: flex; font-weight: 500; font-size: 14px; }
+    .data-grid-header > div { padding: 8px; flex: 1; }
+    .data-grid-header > div:last-child { flex: 0 0 120px; }
+    .data-grid-row { border-bottom: 1px solid var(--divider-color); padding: 12px 16px; display: flex; align-items: flex-start; }
+    .data-grid-row:last-child { border-bottom: none; }
+    .data-grid-row > div { padding: 8px; flex: 1; font-size: 14px; }
+    .data-grid-row > div:last-child { flex: 0 0 120px; display: flex; gap: var(--space-2); }
+    .data-grid-row:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .comment-author { font-weight: 500; color: var(--on-surface); }
+    .comment-email { font-size: 12px; color: var(--on-surface-variant); }
+    .comment-text { font-size: 14px; color: var(--on-surface-variant); line-height: 20px; }
+    .comment-post { font-size: 13px; color: var(--primary); }
+
+    /* ===== PAGINATION ===== */
+    .pagination { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); }
+    .page-btn { min-width: 40px; min-height: 40px; border-radius: 50%; border: none; background: transparent; color: var(--on-surface); font-family: var(--font-family); font-size: 14px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+    .page-btn:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .page-btn.active { background: var(--primary); color: var(--on-primary); }
+    .page-info { font-size: 14px; color: var(--on-surface-variant); }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state { text-align: center; padding: var(--space-8) var(--space-6); color: var(--on-surface-variant); display: none; }
+    .empty-state.visible { display: block; }
+    .empty-state .material-icons { font-size: 48px; opacity: 0.5; margin-bottom: var(--space-4); }
+    .empty-state-heading { font-size: 22px; line-height: 28px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-2); }
+    .empty-state-body { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-6); max-width: 400px; margin-left: auto; margin-right: auto; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #cfbdf8; --on-primary: #381e72;
+        --primary-container: #4f378b; --on-primary-container: #eaddff;
+        --secondary: #ccc2dc; --on-secondary: #332d41;
+        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
+        --surface: #1c1b20; --on-surface: #e6e1e5;
+        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
+        --surface-container-low: #1d1b20; --surface-container: #211f26;
+        --outline: #938f99; --outline-variant: #49454f;
+        --error: #f2b8b5; --on-error: #601410;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- LEFT NAV -->
+    <nav class="left-nav" aria-label="Main navigation">
+      <div class="nav-brand">Mybizz</div>
+      <a class="nav-item" href="#"><span class="material-icons">dashboard</span> Dashboard</a>
+      <div class="nav-group-label">Sales &amp; Operations</div>
+      <a class="nav-item" href="#"><span class="material-icons">event</span> Bookings</a>
+      <a class="nav-item" href="#"><span class="material-icons">design_services</span> Services</a>
+      <div class="nav-group-label">Customers &amp; Marketing</div>
+      <a class="nav-item" href="#"><span class="material-icons">contacts</span> Contacts</a>
+      <a class="nav-item" href="#"><span class="material-icons">campaign</span> Campaigns</a>
+      <a class="nav-item" href="#"><span class="material-icons">send</span> Broadcasts</a>
+      <a class="nav-item" href="#"><span class="material-icons">group_work</span> Segments</a>
+      <a class="nav-item" href="#"><span class="material-icons">task</span> Tasks</a>
+      <div class="nav-group-label">Content &amp; Website</div>
+      <a class="nav-item selected" href="#"><span class="material-icons">edit_note</span> Blog</a>
+      <a class="nav-item" href="#"><span class="material-icons">web</span> Pages</a>
+      <div class="nav-group-label">Finance &amp; Reports</div>
+      <a class="nav-item" href="#"><span class="material-icons">receipt_long</span> Invoices</a>
+      <a class="nav-item" href="#"><span class="material-icons">payments</span> Payments</a>
+      <a class="nav-item" href="#"><span class="material-icons">assessment</span> Reports</a>
+      <a class="nav-item" href="#"><span class="material-icons">bar_chart</span> Analytics</a>
+      <div class="nav-divider"></div>
+      <a class="nav-item" href="#"><span class="material-icons">settings</span> Settings</a>
+      <a class="nav-item" href="#"><span class="material-icons">lock</span> Vault</a>
+      <div class="nav-signout">
+        <a class="nav-item" href="#"><span class="material-icons">logout</span> Sign Out</a>
+      </div>
+    </nav>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+      <!-- APP BAR -->
+      <header class="app-bar">
+        <div class="title">Blog Comments</div>
+        <div class="app-bar-nav">
+          <button class="btn-icon" title="Notifications"><span class="material-icons">notifications</span></button>
+          <button class="btn-icon" title="User menu"><span class="material-icons">account_circle</span></button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <!-- PAGE TITLE -->
+        <h1 class="page-title">Comment Moderation</h1>
+
+        <!-- FILTER BAR -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label class="filter-label" for="dd_status_filter">Status</label>
+            <select class="filter-select" id="dd_status_filter">
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="published">Published</option>
+              <option value="spam">Spam</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="dd_post_filter">Post</label>
+            <select class="filter-select" id="dd_post_filter">
+              <option value="all">All Posts</option>
+              <option value="1">5 Benefits of Regular Deep Tissue Massage</option>
+              <option value="2">Hot Stone vs Swedish: Which Is Right for You?</option>
+              <option value="3">Your Guide to Post-Workout Recovery</option>
+              <option value="4">Managing Stress During Tax Season</option>
+            </select>
+          </div>
+          <div style="align-self: flex-end;">
+            <button class="btn btn-text"><span class="material-icons">filter_list_off</span> Clear Filters</button>
+          </div>
+        </div>
+
+        <!-- COMMENTS DataGrid -->
+        <div class="data-grid">
+          <div class="data-grid-header">
+            <div>Author</div>
+            <div>Comment</div>
+            <div>Post</div>
+            <div>Status</div>
+            <div>Actions</div>
+          </div>
+
+          <!-- Row 1 — Published -->
+          <div class="data-grid-row">
+            <div>
+              <div class="comment-author">Nomsa Dlamini</div>
+              <div class="comment-email">nomsa@example.co.za</div>
+            </div>
+            <div class="comment-text">Great article! I've been getting deep tissue massages monthly and it's made a huge difference for my back pain.</div>
+            <div class="comment-post">5 Benefits of Regular Deep Tissue Massage</div>
+            <div><span class="status-badge status-published">Published</span></div>
+            <div>
+              <button class="btn-icon" title="Delete"><span class="material-icons">delete</span></button>
+              <button class="btn-icon" title="Flag as spam"><span class="material-icons">flag</span></button>
+            </div>
+          </div>
+
+          <!-- Row 2 — Pending -->
+          <div class="data-grid-row">
+            <div>
+              <div class="comment-author">James van der Merwe</div>
+              <div class="comment-email">james.vdm@gmail.com</div>
+            </div>
+            <div class="comment-text">Do you offer couples massage packages? My wife and I are interested in booking for our anniversary next month.</div>
+            <div class="comment-post">Hot Stone vs Swedish: Which Is Right for You?</div>
+            <div><span class="status-badge status-pending">Pending</span></div>
+            <div>
+              <button class="btn-icon" title="Approve"><span class="material-icons">check_circle</span></button>
+              <button class="btn-icon" title="Delete"><span class="material-icons">delete</span></button>
+              <button class="btn-icon" title="Flag as spam"><span class="material-icons">flag</span></button>
+            </div>
+          </div>
+
+          <!-- Row 3 — Published -->
+          <div class="data-grid-row">
+            <div>
+              <div class="comment-author">Lerato Molefe</div>
+              <div class="comment-email">lerato.m@outlook.com</div>
+            </div>
+            <div class="comment-text">Thandi is an amazing therapist! I always leave feeling so much better. Highly recommend Serenity Spa to anyone in Sandton.</div>
+            <div class="comment-post">5 Benefits of Regular Deep Tissue Massage</div>
+            <div><span class="status-badge status-published">Published</span></div>
+            <div>
+              <button class="btn-icon" title="Delete"><span class="material-icons">delete</span></button>
+              <button class="btn-icon" title="Flag as spam"><span class="material-icons">flag</span></button>
+            </div>
+          </div>
+
+          <!-- Row 4 — Pending -->
+          <div class="data-grid-row">
+            <div>
+              <div class="comment-author">Sipho Ndlovu</div>
+              <div class="comment-email">sipho.n@serenityspa.co.za</div>
+            </div>
+            <div class="comment-text">Thanks for the shoutout in this article! Happy to chat about sports recovery techniques with anyone interested.</div>
+            <div class="comment-post">Your Guide to Post-Workout Recovery</div>
+            <div><span class="status-badge status-pending">Pending</span></div>
+            <div>
+              <button class="btn-icon" title="Approve"><span class="material-icons">check_circle</span></button>
+              <button class="btn-icon" title="Delete"><span class="material-icons">delete</span></button>
+              <button class="btn-icon" title="Flag as spam"><span class="material-icons">flag</span></button>
+            </div>
+          </div>
+
+          <!-- Row 5 — Spam -->
+          <div class="data-grid-row">
+            <div>
+              <div class="comment-author">SpamBot3000</div>
+              <div class="comment-email">buy-pills@spam.com</div>
+            </div>
+            <div class="comment-text">Buy cheap supplements online! Visit our website for amazing deals on health products!</div>
+            <div class="comment-post">Managing Stress During Tax Season</div>
+            <div><span class="status-badge status-spam">Spam</span></div>
+            <div>
+              <button class="btn-icon" title="Delete"><span class="material-icons">delete</span></button>
+              <button class="btn-icon" title="Not spam"><span class="material-icons">outlined_flag</span></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+          <span class="page-info">Page 1 of 1</span>
+          <button class="page-btn active">1</button>
+        </div>
+
+        <!-- EMPTY STATE (hidden — shown when no comments match filter) -->
+        <div class="empty-state">
+          <span class="material-icons">chat_bubble_outline</span>
+          <h2 class="empty-state-heading">No comments to moderate</h2>
+          <p class="empty-state-body">Comments will appear here when visitors engage with your blog posts.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

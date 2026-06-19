@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — BlogListListTemplate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #493ef3; --on-primary: #ffffff;
+      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff;
+      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5;
+      --outline: #7a7583; --outline-variant: #c9c4d3;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --divider-color: var(--outline-variant);
+      --state-hover-opacity: 0.08;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); padding: var(--space-8); }
+    .list-template-demo { max-width: 800px; margin: 0 auto; }
+    .demo-label { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: var(--space-4); }
+
+    /* ===== LIST ROW ===== */
+    .list-row {
+      display: flex; gap: var(--space-4); align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--outline-variant);
+      border-radius: 8px; padding: var(--space-4);
+      box-shadow: var(--mui-shadow-card); margin-bottom: var(--space-3);
+      transition: box-shadow 200ms;
+    }
+    .list-row:hover { box-shadow: var(--mui-shadow-raised); }
+    .list-row-image {
+      width: 240px; height: 160px; border-radius: 8px; background: var(--surface-variant);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--outline); font-size: 36px; flex-shrink: 0;
+    }
+    .list-row-content { flex: 1; min-width: 0; }
+    .list-row-category { display: inline-block; background: var(--secondary-container); color: var(--on-secondary-container); border-radius: 8px; padding: 2px 10px; font-size: 12px; font-weight: 500; margin-bottom: var(--space-2); }
+    .list-row-title { font-size: 18px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-2); line-height: 24px; }
+    .list-row-title a { color: inherit; text-decoration: none; }
+    .list-row-title a:hover { color: var(--primary); }
+    .list-row-excerpt { font-size: 14px; color: var(--on-surface-variant); line-height: 20px; margin-bottom: var(--space-3); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .list-row-meta { font-size: 12px; color: var(--outline); display: flex; gap: var(--space-3); align-items: center; flex-wrap: wrap; }
+    .list-row-meta .material-icons { font-size: 14px; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #cfbdf8; --on-primary: #381e72;
+        --primary-container: #4f378b; --on-primary-container: #eaddff;
+        --secondary: #ccc2dc; --on-secondary: #332d41;
+        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
+        --surface: #1c1b20; --on-surface: #e6e1e5;
+        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
+        --surface-container-low: #1d1b20; --surface-container: #211f26;
+        --outline: #938f99; --outline-variant: #49454f;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <div class="list-template-demo">
+    <div class="demo-label">BlogListListTemplate — List with thumbnail layout</div>
+
+    <div class="list-row">
+      <div class="list-row-image"><span class="material-icons">image</span></div>
+      <div class="list-row-content">
+        <span class="list-row-category">Massage Therapy</span>
+        <h3 class="list-row-title"><a href="#">5 Benefits of Regular Deep Tissue Massage</a></h3>
+        <p class="list-row-excerpt">Discover how deep tissue massage can relieve chronic pain, reduce stress, and improve your overall wellbeing at Serenity Spa in Sandton. Our experienced therapists share their expertise on this transformative treatment.</p>
+        <div class="list-row-meta">
+          <span class="material-icons">person</span> Thandi Mokoena
+          <span class="material-icons">schedule</span> 12 Jun 2026
+          <span class="material-icons">visibility</span> 124 views
+        </div>
+      </div>
+    </div>
+
+    <div class="list-row">
+      <div class="list-row-image"><span class="material-icons">image</span></div>
+      <div class="list-row-content">
+        <span class="list-row-category">Wellness Tips</span>
+        <h3 class="list-row-title"><a href="#">Your Guide to Post-Workout Recovery</a></h3>
+        <p class="list-row-excerpt">Learn the best recovery techniques after an intense gym session, from stretching to hydration and massage therapy. Our wellness experts recommend these evidence-based approaches.</p>
+        <div class="list-row-meta">
+          <span class="material-icons">person</span> Sipho Ndlovu
+          <span class="material-icons">schedule</span> 8 Jun 2026
+          <span class="material-icons">visibility</span> 89 views
+        </div>
+      </div>
+    </div>
+
+    <div class="list-row">
+      <div class="list-row-image"><span class="material-icons">image</span></div>
+      <div class="list-row-content">
+        <span class="list-row-category">Beauty &amp; Skincare</span>
+        <h3 class="list-row-title"><a href="#">Summer Skincare Routine for SA Weather</a></h3>
+        <p class="list-row-excerpt">Protect your skin from the harsh South African sun with these expert-recommended skincare tips and professional treatments available at our spa.</p>
+        <div class="list-row-meta">
+          <span class="material-icons">person</span> Lerato Khumalo
+          <span class="material-icons">schedule</span> 3 Jun 2026
+          <span class="material-icons">visibility</span> 203 views
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
