@@ -2,108 +2,282 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Login Form Wireframe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — LoginForm</title>
 <style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-.legend span { margin-right: 24px; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
-.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
-.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
-.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
-.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-checkbox { font-size: 12px; color: #555; margin: 6px 0 0; }
-.wf-checkbox::before { content: "☐ "; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; text-decoration: none; }
-.wf-link { font-size: 11px; color: #6750A4; margin: 4px 0 0; text-decoration: none; }
-.wf-link:hover { text-decoration: underline; }
-.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
-.ct { font-style: italic; color: #bbb; }
-.cfixed { color: #555; font-style: normal; }
-.wf-spacer { height: 6px; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #f5f5f5;
+    color: #1C1B1F;
+    padding: 32px;
+    line-height: 1.5;
+  }
+
+  /* Section 1 — Introduction */
+  .intro {
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+  .intro h1 {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #1C1B1F;
+  }
+  .intro p {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #49454F;
+  }
+  .intro .conventions {
+    background: #E8DEF8;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: #1D192B;
+  }
+  .intro .conventions strong { font-weight: 600; }
+
+  /* Section 2 — Wireframe */
+  .wireframe-section {
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+  .wireframe-section h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    color: #1C1B1F;
+    border-bottom: 2px solid #CAC4D0;
+    padding-bottom: 8px;
+  }
+
+  /* Wireframe container */
+  .wf-root {
+    border: 2px solid #1C1B1F;
+    border-radius: 4px;
+    padding: 24px;
+    background: #FFFBFE;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Component blocks */
+  .wf-component {
+    margin: 4px 0;
+    padding: 4px 8px;
+    font-size: 13px;
+    font-family: 'Roboto Mono', monospace;
+    color: #49454F;
+    position: relative;
+  }
+  .wf-component .name {
+    font-weight: 600;
+    color: #21005D;
+  }
+  .wf-component .type {
+    color: #79747E;
+    font-style: italic;
+  }
+  .wf-component .text {
+    color: #6750A4;
+    font-weight: 500;
+  }
+
+  /* Container indicator */
+  .wf-container {
+    border: 2px solid #6750A4;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
+    position: relative;
+    background: #F5F2FA;
+  }
+  .wf-container > .wf-label {
+    position: absolute;
+    top: -12px;
+    left: 12px;
+    background: #F5F2FA;
+    padding: 0 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6750A4;
+    font-family: 'Roboto Mono', monospace;
+  }
+
+  /* Hidden component indicator */
+  .wf-hidden {
+    border: 2px dashed #CAC4D0;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 4px 0;
+    opacity: 0.7;
+  }
+
+  /* Section 3 — Properties */
+  .properties-section {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .properties-section h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    color: #1C1B1F;
+    border-bottom: 2px solid #CAC4D0;
+    padding-bottom: 8px;
+  }
+  .properties-section .note {
+    font-size: 13px;
+    color: #49454F;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  table.props {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  table.props th {
+    background: #E8DEF8;
+    color: #1D192B;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 12px;
+    border: 1px solid #CAC4D0;
+  }
+  table.props td {
+    padding: 8px 12px;
+    border: 1px solid #CAC4D0;
+    color: #1C1B1F;
+  }
+  table.props tr:nth-child(even) td {
+    background: #F5F2FA;
+  }
 </style>
 </head>
 <body>
 
-<h1>Mybizz CS — Auth Wireframes</h1>
-<p class="subtitle">Authentication Forms — Anvil Construction Guide</p>
-<div class="legend">
-  <span><strong>Solid border</strong> = visible on load</span>
-  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
-  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
-  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
-</div>
+<!-- ============================================================
+     SECTION 1 — INTRODUCTION
+     ============================================================ -->
+<div class="intro">
+  <h1>LoginForm — Wireframe</h1>
+  <p>This wireframe defines the component structure for the LoginForm in the auth package.
+     It is an instructive document, not a visual design. Use it to identify which M3 components
+     to place on the form and how they should be configured.</p>
 
-<h2>LoginForm — Email/Password Login</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_login (ColumnPanel) — centred card, max-width 400px</span>
-
-  <div class="wf-panel">
-    <span class="wf-label">card_login (Card) — elevated, rounded 12px</span>
-
-    <!-- Header -->
-    <div class="wf-heading-lg">Welcome Back</div>
-    <div class="cn">hdg_welcome <span class="ct">(Heading)</span> <span class="cfixed">"Welcome Back"</span></div>
-    <div class="wf-text">Sign in to your Mybizz account</div>
-    <div class="cn">lbl_subtitle <span class="ct">(Text)</span> <span class="cfixed">"Sign in to your Mybizz account"</span></div>
-
-    <div class="wf-spacer"></div>
-
-    <!-- Email field -->
-    <div class="wf-textbox" style="color:#aaa;">Enter your email</div>
-    <div class="cn">txt_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> placeholder="Enter your email"</div>
-
-    <!-- Password field -->
-    <div class="wf-textbox" style="color:#aaa;">Enter your password</div>
-    <div class="cn">txt_password <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> placeholder="Enter your password" hide_text = True</div>
-
-    <div class="wf-spacer"></div>
-
-    <!-- Remember me -->
-    <div class="wf-checkbox">Remember me</div>
-    <div class="cn">cb_remember <span class="ct">(Checkbox)</span> <span class="cfixed">"Remember me"</span></div>
-
-    <div class="wf-spacer"></div>
-
-    <!-- Primary action -->
-    <div class="wf-btn-filled">Sign In</div>
-    <div class="cn">btn_sign_in <span class="ct">(Button)</span> <span class="cfixed">"Sign In"</span> — primary-button</div>
-
-    <div class="wf-spacer"></div>
-
-    <!-- Secondary action -->
-    <a href="#" class="wf-btn-outlined">Forgot password?</a>
-    <div class="cn">btn_forgot_password <span class="ct">(Button)</span> <span class="cfixed">"Forgot password?"</span> — secondary-button (outlined)</div>
-
-    <div class="wf-spacer"></div>
-
-    <!-- Footer link -->
-    <div class="wf-text" style="color:#555;">Don't have an account? <a href="#" class="wf-link">Sign up</a></div>
-    <div class="cn">nav_sign_up <span class="ct">(Link)</span> <span class="cfixed">"Sign up"</span> — tertiary (text link)</div>
+  <div class="conventions">
+    <strong>Conventions used in Section 2:</strong><br>
+    &bull; <strong>Solid border</strong> = component is visible on load.<br>
+    &bull; <strong>Dashed border</strong> = component is hidden on load (<code>visible = False</code>).<br>
+    &bull; Each component annotation shows: <code>component_name (Type) "fixed text"</code>.<br>
+    &bull; Container components show their children indented inside.<br>
+    &bull; <code>(W)</code> = Write Back must be enabled in Designer Data Bindings panel.<br>
+    &bull; <code>hide_text</code> = Password masking must be set in Designer.
   </div>
 </div>
 
-<div class="prop-caption">Properties table</div>
-<div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer Data Bindings panel for all TextBox components. Password masking (hide_text) must be set in Designer.</div>
-<table class="props">
-<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_email</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_password</td><td>TextBox</td><td>writeback = W, hide_text = True</td></tr>
-</table>
+<!-- ============================================================
+     SECTION 2 — WIREFRAME DIAGRAM
+     ============================================================ -->
+<div class="wireframe-section">
+  <h2>Wireframe Diagram</h2>
+
+  <div class="wf-root">
+
+    <!-- Card container — centred, outlined -->
+    <div class="wf-container" style="max-width: 400px; width: 100%;">
+      <span class="wf-label">card_login (Card) [outlined]</span>
+
+      <!-- Page title -->
+      <div class="wf-component">
+        <span class="name">hdg_login_title</span> <span class="type">(Heading)</span> <span class="text">"Log in to your account"</span>
+      </div>
+
+      <!-- Subtitle / helper text -->
+      <div class="wf-component">
+        <span class="name">txt_login_subtitle</span> <span class="type">(Text)</span> <span class="text">"Enter your email and password to continue"</span>
+      </div>
+
+      <!-- Error message — hidden on load -->
+      <div class="wf-hidden">
+        <div class="wf-component">
+          <span class="name">txt_login_error</span> <span class="type">(Text)</span> <span class="text">[error message — hidden on load]</span>
+        </div>
+      </div>
+
+      <!-- Email input -->
+      <div class="wf-component">
+        <span class="name">txt_email</span> <span class="type">(TextBox)</span> <span class="text">(W)</span> appearance="outlined" placeholder="Email address"
+      </div>
+
+      <!-- Password input -->
+      <div class="wf-component">
+        <span class="name">txt_password</span> <span class="type">(TextBox)</span> <span class="text">(W)</span> appearance="outlined" placeholder="Password" <span class="text">hide_text</span>
+      </div>
+
+      <!-- Remember me checkbox -->
+      <div class="wf-component">
+        <span class="name">cb_remember_me</span> <span class="type">(CheckBox)</span> <span class="text">"Remember me"</span>
+      </div>
+
+      <!-- Login button -->
+      <div class="wf-component">
+        <span class="name">btn_login</span> <span class="type">(Button)</span> <span class="text">"Log In"</span> appearance="filled"
+      </div>
+
+      <!-- Forgot password link -->
+      <div class="wf-component">
+        <span class="name">nav_forgot_password</span> <span class="type">(Link)</span> <span class="text">"Forgot password?"</span>
+      </div>
+
+    </div>
+
+    <!-- Sign up link — below card -->
+    <div class="wf-component" style="margin-top: 16px;">
+      <span class="name">txt_signup_prompt</span> <span class="type">(Text)</span> <span class="text">"Don't have an account?"</span>
+      &nbsp;
+      <span class="name">nav_sign_up</span> <span class="type">(Link)</span> <span class="text">"Sign up"</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 3 — PROPERTIES TABLE
+     ============================================================ -->
+<div class="properties-section">
+  <h2>Properties Table</h2>
+  <p class="note">Only Designer-mandated properties are listed below. All other properties
+     (roles, click handlers, colours, spacing) are set programmatically in code.</p>
+
+  <table class="props">
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Type</th>
+        <th>Designer Property</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>txt_email</td>
+        <td>TextBox</td>
+        <td>appearance = outlined<br>writeback = W</td>
+      </tr>
+      <tr>
+        <td>txt_password</td>
+        <td>TextBox</td>
+        <td>appearance = outlined<br>writeback = W<br>hide_text = True</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 </body>
 </html>
