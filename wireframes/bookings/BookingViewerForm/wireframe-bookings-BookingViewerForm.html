@@ -1,196 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Booking Viewer Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-.legend span { margin-right: 24px; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
-.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
-.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
-.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
-.wf-heading-lg { font-size: 18px; font-weight: bold; color: #333; margin: 4px 0 0; }
-.wf-heading-md { font-size: 14px; font-weight: 500; color: #333; margin: 4px 0 8px; }
-.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-badge { display: inline-block; padding: 4px 14px; border-radius: 100px; font-size: 11px; white-space: nowrap; }
-.wf-badge-confirmed { background: #d4edda; color: #155724; }
-.wf-badge-pending { background: #fff3cd; color: #856404; }
-.wf-badge-cancelled { background: #f8d7da; color: #721c24; }
-.wf-badge-paid { background: #d4edda; color: #155724; }
-.wf-detail-section { padding: 16px; border-bottom: 1px solid #E7E0EC; }
-.wf-detail-section:last-of-type { border-bottom: none; }
-.wf-detail-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-.wf-detail-field-label { font-size: 11px; font-weight: 500; color: #49454F; margin-bottom: 2px; }
-.wf-detail-field-value { font-size: 12px; color: #1C1B1F; }
-.wf-detail-field-value.large { font-size: 16px; font-weight: 500; }
-.wf-detail-notes { font-size: 12px; color: #1C1B1F; background: #F3EDF7; padding: 12px; border-radius: 4px; min-height: 48px; }
-.wf-form-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 16px; border-top: 1px solid #E7E0EC; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-text { background: transparent; color: #B3261E; border: none; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
-.ct { font-style: italic; color: #bbb; }
-.cfixed { color: #555; font-style: normal; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — BookingViewerForm</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; color: #1c1b20; background: #fdfcff; padding: 32px; max-width: 960px; margin: 0 auto; }
+    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+    h2 { font-size: 16px; font-weight: 500; margin: 24px 0 8px; color: #494552; border-bottom: 1px solid #e5e0f0; padding-bottom: 4px; }
+    p { margin: 8px 0; color: #494552; }
+    code { background: #f5f2fa; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .wireframe { border: 2px solid #1c1b20; padding: 16px; margin: 16px 0; background: #fff; border-radius: 8px; }
+    .component { border: 1px solid #7a7583; padding: 8px; margin: 6px 0; border-radius: 4px; font-size: 13px; background: #fdfcff; }
+    .container { border: 2px dashed #7a7583; padding: 12px; margin: 8px 0; border-radius: 6px; position: relative; }
+    .container-label { position: absolute; top: -10px; left: 12px; background: #fff; padding: 0 4px; font-size: 11px; color: #7a7583; font-weight: 500; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+    th, td { border: 1px solid #e5e0f0; padding: 6px 8px; text-align: left; }
+    th { background: #f5f2fa; font-weight: 500; }
+  </style>
 </head>
 <body>
 
-<h1>Mybizz CS — Bookings Wireframes</h1>
-<p class="subtitle">Booking Management — Anvil Construction Guide</p>
-<div class="legend">
-  <span><strong>Solid border</strong> = visible on load</span>
-  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
-  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
-  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
-</div>
+  <h1>Wireframe: BookingViewerForm</h1>
+  <p><strong>Package:</strong> bookings/ [Phase 2] ★ NEW</p>
+  <p><strong>Purpose:</strong> Read-only detail view of a single booking. Displays booking information and status-appropriate actions.</p>
+  <p><strong>Source of authority:</strong> scaffold-spec.md, DESIGN.md Booking Design section (Status-based permitted actions), globals-contract.md</p>
 
-<h2>BookingViewerForm — Booking Detail View</h2>
+  <h2>Section 1 — Introduction</h2>
+  <p>To the developer: This wireframe indicates which components to place on the BookingViewerForm and how to configure them.</p>
+  <p><strong>Conventions:</strong></p>
+  <ul>
+    <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+    <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+    <li>Action buttons are shown/hidden based on booking status (see status-based permitted actions table below).</li>
+    <li>This form reads <code>globals.current_booking</code>. If None, redirect to BookingListForm.</li>
+  </ul>
 
-<div class="wf-outer">
-  <span class="wf-label">page_container (main) — max-width: 900px</span>
+  <h2>Section 2 — Wireframe Diagram</h2>
 
-  <!-- Page Header -->
-  <div class="wf-panel-h">
-    <span class="wf-label">page_header (Header)</span>
-    <div style="flex:1; display:flex; align-items:center; gap:12px;">
-      <div class="wf-heading-lg">BK-2026-001</div>
-      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"BK-2026-001"</span></div>
-      <span class="wf-badge wf-badge-confirmed">Confirmed</span>
-      <div class="cn">badge_status <span class="ct">(Badge)</span></div>
+  <div class="wireframe">
+
+    <div class="container">
+      <span class="container-label">ColumnPanel: col_main</span>
+
+      <!-- HEADER ROW -->
+      <div class="container">
+        <span class="container-label">FlowPanel: flow_header</span>
+        <div class="component">hdg_booking_title (Heading) "Booking [BK-YYYY-NNN]"</div>
+        <div class="component">txt_status_badge (Text) "[Confirmed / Pending / Cancelled]"</div>
+        <div class="component">btn_back (Button) appearance="text" "Back to Bookings"</div>
+      </div>
+
+      <!-- BOOKING DETAILS CARD -->
+      <div class="container">
+        <span class="container-label">Card: card_booking_details (outlined)</span>
+        <div class="component">hdg_details_title (Heading) "Booking Details"</div>
+
+        <div class="component">txt_service_label (Text) "Service"</div>
+        <div class="component">txt_service_value (Text) "[Service Name]"</div>
+
+        <div class="component">txt_provider_label (Text) "Provider"</div>
+        <div class="component">txt_provider_value (Text) "[Provider Name]"</div>
+
+        <div class="component">txt_date_label (Text) "Date"</div>
+        <div class="component">txt_date_value (Text) "[DD MMM YYYY]"</div>
+
+        <div class="component">txt_time_label (Text) "Time"</div>
+        <div class="component">txt_time_value (Text) "[HH:MM – HH:MM]"</div>
+
+        <div class="component">txt_meeting_label (Text) "Meeting Type"</div>
+        <div class="component">txt_meeting_value (Text) "[In-Person / Video Call / Phone Call]"</div>
+
+        <div class="component">txt_type_label (Text) "Booking Type"</div>
+        <div class="component">txt_type_value (Text) "[appointment / consulting]"</div>
+
+        <div class="component">txt_price_label (Text) "Total Price"</div>
+        <div class="component">txt_price_value (Text) "[R amount]"</div>
+
+        <div class="component">txt_payment_label (Text) "Payment Status"</div>
+        <div class="component">txt_payment_value (Text) "[paid / pending / failed]"</div>
+
+        <div class="component">txt_special_label (Text) "Special Requests"</div>
+        <div class="component">txt_special_value (Text) "[special requests text or 'None']"</div>
+
+        <div class="component">txt_created_label (Text) "Created"</div>
+        <div class="component">txt_created_value (Text) "[DD MMM YYYY HH:MM]"</div>
+      </div>
+
+      <!-- CUSTOMER CARD -->
+      <div class="container">
+        <span class="container-label">Card: card_customer (outlined)</span>
+        <div class="component">hdg_customer_title (Heading) "Customer"</div>
+        <div class="component">txt_customer_name (Text) "[Customer Name]"</div>
+        <div class="component">txt_customer_email (Text) "[customer@email.com]"</div>
+        <div class="component">txt_customer_phone (Text) "[phone number]"</div>
+        <div class="component">nav_view_contact (Link) "View Contact"</div>
+      </div>
+
+      <!-- ACTION BUTTONS (status-dependent) -->
+      <div class="container">
+        <span class="container-label">FlowPanel: flow_actions</span>
+        <div class="component">btn_edit (Button) appearance="outlined" "Edit Booking"</div>
+        <div class="component">btn_cancel_booking (Button) appearance="outlined" "Cancel Booking"</div>
+        <div class="component">btn_reschedule (Button) appearance="outlined" "Reschedule"</div>
+        <div class="component">btn_view_invoice (Button) appearance="outlined" "View Invoice"</div>
+      </div>
+
     </div>
   </div>
 
-  <!-- Detail Card -->
-  <div class="wf-panel">
-    <span class="wf-label">detail_card (Card) — outlined</span>
+  <h2>Section 3 — Properties Table</h2>
 
-    <!-- Booking Details Section -->
-    <div class="wf-detail-section">
-      <div class="wf-heading-md">Booking Details</div>
-      <div class="cn">hdg_section_details <span class="ct">(Heading)</span> <span class="cfixed">"Booking Details"</span></div>
-      <div class="wf-detail-grid">
-        <div>
-          <div class="wf-detail-field-label">Service</div>
-          <div class="wf-detail-field-value">Initial Consultation</div>
-          <div class="cn">lbl_service <span class="ct">(Label)</span> | val_service <span class="ct">(Text)</span></div>
-        </div>
-        <div>
-          <div class="wf-detail-field-label">Provider</div>
-          <div class="wf-detail-field-value">Jane Smith</div>
-          <div class="cn">lbl_provider <span class="ct">(Label)</span> | val_provider <span class="ct">(Text)</span></div>
-        </div>
-        <div>
-          <div class="wf-detail-field-label">Type</div>
-          <div class="wf-detail-field-value">Video Call</div>
-          <div class="cn">lbl_type <span class="ct">(Label)</span> | val_type <span class="ct">(Text)</span></div>
-        </div>
-      </div>
-    </div>
+  <table>
+    <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+    <tr><td colspan="3"><em>No Designer-only properties. All values are set programmatically from <code>globals.current_booking</code>.</em></td></tr>
+  </table>
 
-    <!-- Schedule Section -->
-    <div class="wf-detail-section">
-      <div class="wf-heading-md">Schedule</div>
-      <div class="cn">hdg_section_schedule <span class="ct">(Heading)</span> <span class="cfixed">"Schedule"</span></div>
-      <div class="wf-detail-grid">
-        <div>
-          <div class="wf-detail-field-label">Date</div>
-          <div class="wf-detail-field-value">May 15, 2026</div>
-          <div class="cn">lbl_date <span class="ct">(Label)</span> | val_date <span class="ct">(Text)</span></div>
-        </div>
-        <div>
-          <div class="wf-detail-field-label">Time</div>
-          <div class="wf-detail-field-value">10:00 — 11:00</div>
-          <div class="cn">lbl_time <span class="ct">(Label)</span> | val_time <span class="ct">(Text)</span></div>
-        </div>
-        <div>
-          <div class="wf-detail-field-label">Duration</div>
-          <div class="wf-detail-field-value">60 min</div>
-          <div class="cn">lbl_duration <span class="ct">(Label)</span> | val_duration <span class="ct">(Text)</span></div>
-        </div>
-      </div>
-    </div>
+  <p><strong>Status-based permitted actions (from DESIGN.md):</strong></p>
 
-    <!-- Contact Section -->
-    <div class="wf-detail-section">
-      <div class="wf-heading-md">Contact</div>
-      <div class="cn">hdg_section_contact <span class="ct">(Heading)</span> <span class="cfixed">"Contact"</span></div>
-      <div class="wf-detail-grid">
-        <div>
-          <div class="wf-detail-field-label">Name</div>
-          <div class="wf-detail-field-value">John Doe</div>
-          <div class="cn">lbl_contact_name <span class="ct">(Label)</span> | val_contact_name <span class="ct">(Text)</span></div>
-        </div>
-        <div>
-          <div class="wf-detail-field-label">Email</div>
-          <div class="wf-detail-field-value">john@email.com</div>
-          <div class="cn">lbl_contact_email <span class="ct">(Label)</span> | val_contact_email <span class="ct">(Text)</span></div>
-        </div>
-        <div>
-          <div class="wf-detail-field-label">Phone</div>
-          <div class="wf-detail-field-value">+27 82 123 4567</div>
-          <div class="cn">lbl_contact_phone <span class="ct">(Label)</span> | val_contact_phone <span class="ct">(Text)</span></div>
-        </div>
-      </div>
-    </div>
+  <table>
+    <tr><th>Status</th><th>Edit</th><th>Cancel</th><th>View Invoice</th><th>Reschedule</th></tr>
+    <tr><td>Pending</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+    <tr><td>Confirmed</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Cancelled</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+  </table>
 
-    <!-- Payment Section -->
-    <div class="wf-detail-section">
-      <div class="wf-heading-md">Payment</div>
-      <div class="cn">hdg_section_payment <span class="ct">(Heading)</span> <span class="cfixed">"Payment"</span></div>
-      <div class="wf-detail-grid">
-        <div>
-          <div class="wf-detail-field-label">Total</div>
-          <div class="wf-detail-field-value large">R 850.00</div>
-          <div class="cn">lbl_total <span class="ct">(Label)</span> | val_total <span class="ct">(Text)</span></div>
-        </div>
-        <div>
-          <div class="wf-detail-field-label">Payment Status</div>
-          <div class="wf-detail-field-value"><span class="wf-badge wf-badge-paid">Paid</span></div>
-          <div class="cn">lbl_payment_status <span class="ct">(Label)</span> | badge_payment_status <span class="ct">(Badge)</span></div>
-        </div>
-        <div>
-          <div class="wf-detail-field-label">Payment ID</div>
-          <div class="wf-detail-field-value">pi_xxxxxxxx</div>
-          <div class="cn">lbl_payment_id <span class="ct">(Label)</span> | val_payment_id <span class="ct">(Text)</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Notes Section -->
-    <div class="wf-detail-section">
-      <div class="wf-heading-md">Special Requests / Notes</div>
-      <div class="cn">hdg_section_notes <span class="ct">(Heading)</span> <span class="cfixed">"Special Requests / Notes"</span></div>
-      <div class="wf-detail-notes">Please bring previous assessment results.</div>
-      <div class="cn">val_notes <span class="ct">(Text)</span></div>
-    </div>
-
-    <!-- Form Actions -->
-    <div class="wf-form-actions">
-      <div class="wf-btn-text">Cancel Booking</div>
-      <div class="cn">btn_cancel_booking <span class="ct">(Button)</span> <span class="cfixed">"Cancel Booking"</span></div>
-      <div class="wf-btn-outlined">Back to List</div>
-      <div class="cn">btn_back_to_list <span class="ct">(Button)</span> <span class="cfixed">"Back to List"</span></div>
-      <div class="wf-btn-filled">Edit Booking</div>
-      <div class="cn">btn_edit <span class="ct">(Button)</span> <span class="cfixed">"Edit Booking"</span></div>
-    </div>
-  </div>
-</div>
-
-<div class="prop-caption">Properties table</div>
-<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+  <p><strong>Programmatic behaviour:</strong></p>
+  <ul>
+    <li>Status badge: background and text color from status lifecycle (Confirmed=#d4edda/#155724, Pending=#fff3cd/#856404, Cancelled=#f8d7da/#721c24).</li>
+    <li>Action button visibility: controlled programmatically per status table above.</li>
+    <li>Edit: opens BookingEditorForm in edit mode.</li>
+    <li>Cancel: confirmation dialog, sets status to "cancelled".</li>
+    <li>Reschedule: opens BookingEditorForm with pre-filled service/provider.</li>
+    <li>View Invoice: opens InvoiceViewerForm with linked invoice.</li>
+    <li>View Contact: opens ContactViewerForm with linked contact.</li>
+    <li>Back: navigates to BookingListForm.</li>
+  </ul>
 
 </body>
 </html>

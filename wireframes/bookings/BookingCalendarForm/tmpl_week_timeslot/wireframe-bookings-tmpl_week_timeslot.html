@@ -1,148 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — tmpl_week_timeslot</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 500px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-.legend span { margin-right: 24px; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
-.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
-.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
-.wf-heading-md { font-size: 14px; font-weight: 500; color: #333; margin: 4px 0 8px; }
-.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-timeslot-row { display: grid; grid-template-columns: 60px 1fr; gap: 8px; border-bottom: 1px solid #E7E0EC; padding: 6px 0; }
-.wf-timeslot-row:last-child { border-bottom: none; }
-.wf-timeslot-label { font-size: 12px; color: #49454F; text-align: right; padding-top: 4px; }
-.wf-timeslot-content { display: flex; flex-direction: column; gap: 4px; }
-.wf-timeslot-event { background: #fff; border-radius: 6px; border-left: 3px solid #6750A4; padding: 4px 8px; cursor: pointer; }
-.wf-timeslot-event:hover { background: #EADDFF; }
-.wf-timeslot-event.confirmed { border-left-color: #388e3c; }
-.wf-timeslot-event.pending { border-left-color: #f9a825; }
-.wf-timeslot-event .wf-event-title { font-size: 11px; color: #1C1B1F; font-weight: 500; }
-.wf-timeslot-event .wf-event-subtitle { font-size: 10px; color: #49454F; }
-.wf-timeslot-spacer { height: 1px; background: #E7E0EC; opacity: 0.5; }
-.wf-template-preview { background: #F3EDF7; border-radius: 12px; padding: 16px; }
-.wf-template-label { font-size: 11px; font-weight: 500; color: #49454F; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
-.ct { font-style: italic; color: #bbb; }
-.cfixed { color: #555; font-style: normal; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — tmpl_week_timeslot</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; color: #1c1b20; background: #fdfcff; padding: 32px; max-width: 960px; margin: 0 auto; }
+    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+    h2 { font-size: 16px; font-weight: 500; margin: 24px 0 8px; color: #494552; border-bottom: 1px solid #e5e0f0; padding-bottom: 4px; }
+    p { margin: 8px 0; color: #494552; }
+    code { background: #f5f2fa; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .wireframe { border: 2px solid #1c1b20; padding: 16px; margin: 16px 0; background: #fff; border-radius: 8px; }
+    .component { border: 1px solid #7a7583; padding: 8px; margin: 6px 0; border-radius: 4px; font-size: 13px; background: #fdfcff; }
+    .container { border: 2px dashed #7a7583; padding: 12px; margin: 8px 0; border-radius: 6px; position: relative; }
+    .container-label { position: absolute; top: -10px; left: 12px; background: #fff; padding: 0 4px; font-size: 11px; color: #7a7583; font-weight: 500; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+    th, td { border: 1px solid #e5e0f0; padding: 6px 8px; text-align: left; }
+    th { background: #f5f2fa; font-weight: 500; }
+  </style>
 </head>
 <body>
 
-<h1>Mybizz CS — Bookings Wireframes</h1>
-<p class="subtitle">Calendar Template — Week Timeslot</p>
-<div class="legend">
-  <span><strong>Solid border</strong> = visible on load</span>
-  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
-  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
-  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
-</div>
+  <h1>Wireframe: tmpl_week_timeslot</h1>
+  <p><strong>Package:</strong> bookings/BookingCalendarForm/ [Phase 2]</p>
+  <p><strong>Purpose:</strong> Template subform for rendering a single time row in the week view of the booking calendar.</p>
+  <p><strong>Source of authority:</strong> DESIGN.md Booking Calendar Architecture section</p>
 
-<h2>tmpl_week_timeslot — Week Timeslot Template</h2>
+  <h2>Section 1 — Introduction</h2>
+  <p>To the developer: This wireframe indicates which components to place on the <code>tmpl_week_timeslot</code> template subform. This template is used inside a grid layout in the week view of BookingCalendarForm.</p>
+  <p><strong>Conventions:</strong></p>
+  <ul>
+    <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+    <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+    <li>Time label column: 60px width. Content column: 1fr.</li>
+    <li>Empty timeslots show a thin spacer line (<code>height: 1px</code>, <code>background: #E7E0EC</code>, <code>opacity: 0.5</code>).</li>
+  </ul>
 
-<div class="wf-outer">
-  <span class="wf-label">tmpl_week_timeslot (Template Subform) — used by RepeatingPanel in week view</span>
+  <h2>Section 2 — Wireframe Diagram</h2>
 
-  <div class="wf-panel">
-    <span class="wf-label">page_header (Header)</span>
-    <div class="wf-heading-md">tmpl_week_timeslot</div>
-    <div class="wf-text">Renders a time row within the week view, containing zero or more events.</div>
-  </div>
+  <div class="wireframe">
 
-  <div class="wf-panel">
-    <span class="wf-label">template_preview (Container)</span>
-    <div class="wf-template-preview">
-      <div class="wf-template-label">Component Preview</div>
+    <div class="container">
+      <span class="container-label">FlowPanel: flow_timeslot_row</span>
 
-      <!-- 9:00 — empty -->
-      <div class="wf-timeslot-row">
-        <div class="wf-timeslot-label">9:00</div>
-        <div class="wf-timeslot-content">
-          <div class="wf-timeslot-spacer"></div>
-          <div class="cn">flow_timeslot_9 <span class="ct">(FlowPanel)</span></div>
-        </div>
+      <div class="component">txt_time_label (Text) "[HH:MM]"</div>
+
+      <div class="container">
+        <span class="container-label">ColumnPanel: col_timeslot_content</span>
+        <div class="component">txt_spacer (Text) ""</div>
+        <div class="component">[RepeatingPanel: rp_timeslot_events — renders tmpl_week_event for bookings in this hour]</div>
       </div>
 
-      <!-- 10:00 — with event -->
-      <div class="wf-timeslot-row">
-        <div class="wf-timeslot-label">10:00</div>
-        <div class="wf-timeslot-content">
-          <div class="wf-timeslot-event confirmed" role="button" tabindex="0">
-            <div class="wf-event-title">Initial Consultation</div>
-            <div class="wf-event-subtitle">John Doe — 60 min</div>
-          </div>
-          <div class="cn">rp_week_events <span class="ct">(RepeatingPanel)</span> — contains tmpl_week_event items</div>
-        </div>
-      </div>
-
-      <!-- 11:00 — empty -->
-      <div class="wf-timeslot-row">
-        <div class="wf-timeslot-label">11:00</div>
-        <div class="wf-timeslot-content">
-          <div class="wf-timeslot-spacer"></div>
-        </div>
-      </div>
-
-      <!-- 12:00 — empty -->
-      <div class="wf-timeslot-row">
-        <div class="wf-timeslot-label">12:00</div>
-        <div class="wf-timeslot-content">
-          <div class="wf-timeslot-spacer"></div>
-        </div>
-      </div>
-
-      <!-- 13:00 — empty -->
-      <div class="wf-timeslot-row">
-        <div class="wf-timeslot-label">13:00</div>
-        <div class="wf-timeslot-content">
-          <div class="wf-timeslot-spacer"></div>
-        </div>
-      </div>
-
-      <!-- 14:00 — with event -->
-      <div class="wf-timeslot-row">
-        <div class="wf-timeslot-label">14:00</div>
-        <div class="wf-timeslot-content">
-          <div class="wf-timeslot-event pending" role="button" tabindex="0">
-            <div class="wf-event-title">Tax Review</div>
-            <div class="wf-event-subtitle">Jane Smith — 90 min</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 15:00 — empty -->
-      <div class="wf-timeslot-row">
-        <div class="wf-timeslot-label">15:00</div>
-        <div class="wf-timeslot-content">
-          <div class="wf-timeslot-spacer"></div>
-        </div>
-      </div>
-
-      <!-- 16:00 — with event -->
-      <div class="wf-timeslot-row">
-        <div class="wf-timeslot-label">16:00</div>
-        <div class="wf-timeslot-content">
-          <div class="wf-timeslot-event confirmed" role="button" tabindex="0">
-            <div class="wf-event-title">Financial Planning</div>
-            <div class="wf-event-subtitle">Thabo Molefe — 60 min</div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-</div>
 
-<div class="prop-caption">Properties table</div>
-<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+  <h2>Section 3 — Properties Table</h2>
+
+  <table>
+    <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+    <tr><td colspan="3"><em>No Designer-only properties. Time label and events are set programmatically.</em></td></tr>
+  </table>
+
+  <p><strong>Programmatic behaviour:</strong></p>
+  <ul>
+    <li>Time label: 60px fixed width, formatted as "HH:MM".</li>
+    <li>Content column: 1fr width, contains event blocks from <code>tmpl_week_event</code>.</li>
+    <li>Empty timeslot: spacer line (<code>height: 1px</code>, <code>background: #E7E0EC</code>, <code>opacity: 0.5</code>).</li>
+    <li>Hover state: <code>background: #EADDFF</code> on timeslot row.</li>
+  </ul>
 
 </body>
 </html>
