@@ -1,197 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Invoice Viewer Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-.legend span { margin-right: 24px; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
-.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
-.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
-.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
-.wf-heading-lg { font-size: 20px; font-weight: bold; color: #222; margin: 0 0 4px; }
-.wf-heading-xl { font-size: 24px; font-weight: bold; color: #222; margin: 0 0 4px; }
-.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-text-normal { font-size: 12px; color: #333; margin: 4px 0 0; }
-.wf-badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: bold; }
-.wf-badge-sent { background: #d3e4fd; color: #004a77; }
-.wf-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 8px 0; }
-.wf-table th { background: #f0f0f0; padding: 8px 12px; text-align: left; font-weight: bold; color: #555; border-bottom: 2px solid #ddd; }
-.wf-table td { padding: 8px 12px; border-bottom: 1px solid #eee; }
-.wf-table td.amount { text-align: right; font-variant-numeric: tabular-nums; }
-.wf-totals { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; margin: 12px 0; }
-.wf-totals-row { display: flex; justify-content: space-between; width: 280px; padding: 4px 0; }
-.wf-totals-row .wf-label-col { font-size: 12px; color: #666; }
-.wf-totals-row .wf-value-col { font-size: 12px; color: #333; font-variant-numeric: tabular-nums; text-align: right; }
-.wf-totals-row.total { border-top: 2px solid #333; padding-top: 8px; margin-top: 4px; }
-.wf-totals-row.total .wf-label-col { font-size: 14px; font-weight: bold; color: #222; }
-.wf-totals-row.total .wf-value-col { font-size: 14px; font-weight: bold; color: #222; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
-.wf-info-block { display: flex; flex-direction: column; gap: 4px; }
-.wf-info-label { font-size: 10px; color: #888; font-weight: bold; text-transform: uppercase; }
-.wf-info-value { font-size: 12px; color: #333; }
-.wf-info-value.name { font-size: 14px; font-weight: bold; }
-.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
-.ct { font-style: italic; color: #bbb; }
-.cfixed { color: #555; font-style: normal; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — InvoiceViewerForm</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5; color: #1c1b20; background: #fdfcff; padding: 32px; max-width: 960px; margin: 0 auto; }
+    h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
+    h2 { font-size: 16px; font-weight: 500; margin: 24px 0 8px; color: #494552; border-bottom: 1px solid #e5e0f0; padding-bottom: 4px; }
+    p { margin: 8px 0; color: #494552; }
+    code { background: #f5f2fa; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .wireframe { border: 2px solid #1c1b20; padding: 16px; margin: 16px 0; background: #fff; border-radius: 8px; }
+    .component { border: 1px solid #7a7583; padding: 8px; margin: 6px 0; border-radius: 4px; font-size: 13px; background: #fdfcff; }
+    .container { border: 2px dashed #7a7583; padding: 12px; margin: 8px 0; border-radius: 6px; position: relative; }
+    .container-label { position: absolute; top: -10px; left: 12px; background: #fff; padding: 0 4px; font-size: 11px; color: #7a7583; font-weight: 500; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 13px; }
+    th, td { border: 1px solid #e5e0f0; padding: 6px 8px; text-align: left; }
+    th { background: #f5f2fa; font-weight: 500; }
+  </style>
 </head>
 <body>
 
-<h1>Mybizz CS — Invoices Wireframes</h1>
-<p class="subtitle">Invoice Management — Anvil Construction Guide</p>
-<div class="legend">
-  <span><strong>Solid border</strong> = visible on load</span>
-  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
-  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
-  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
-</div>
+  <h1>Wireframe: InvoiceViewerForm</h1>
+  <p><strong>Package:</strong> invoices/ [Phase 2]</p>
+  <p><strong>Purpose:</strong> Read-only detail view of a single invoice. Displays all architecturally defined invoice fields with status-appropriate action buttons.</p>
+  <p><strong>Source of authority:</strong> scaffold-spec.md, DESIGN.md InvoiceViewerForm Completeness section, globals-contract.md</p>
 
-<h2>InvoiceViewerForm — Invoice Detail View</h2>
+  <h2>Section 1 — Introduction</h2>
+  <p>To the developer: This wireframe indicates which components to place on the InvoiceViewerForm and how to configure them.</p>
+  <p><strong>Conventions:</strong></p>
+  <ul>
+    <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+    <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+    <li>Action buttons are shown/hidden based on invoice status.</li>
+    <li>This form reads <code>globals.current_invoice</code>. If None, redirect to InvoiceListForm.</li>
+  </ul>
 
-<div class="wf-outer">
-  <span class="wf-label">col_invoice_viewer (ColumnPanel)</span>
+  <h2>Section 2 — Wireframe Diagram</h2>
 
-  <!-- Invoice Header -->
-  <div class="wf-panel">
-    <span class="wf-label">card_invoice (Card)</span>
+  <div class="wireframe">
 
-    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-      <div>
-        <div class="wf-heading-xl">Invoice</div>
-        <div class="cn">hdg_invoice_title <span class="ct">(Heading)</span> <span class="cfixed">"Invoice"</span></div>
-        <div class="wf-heading-sm" style="border:none; margin:0; padding:0;">INV-2026-001</div>
-        <div class="cn">hdg_invoice_number <span class="ct">(Heading)</span> <span class="cfixed">"INV-2026-001"</span></div>
+    <div class="container">
+      <span class="container-label">ColumnPanel: col_invoice_viewer (Component Root)</span>
+
+      <!-- INVOICE HEADER -->
+      <div class="container">
+        <span class="container-label">Card: card_invoice (outlined)</span>
+
+        <!-- Title + Status row -->
+        <div class="container">
+          <span class="container-label">FlowPanel: flow_header</span>
+          <div class="component">hdg_invoice_title (Heading) "Invoice"</div>
+          <div class="component">hdg_invoice_number (Heading) "[INV-YYYY-NNN]"</div>
+          <div class="component">badge_status (Text) "[Status]"</div>
+        </div>
+
+        <!-- Bill To + Dates -->
+        <div class="container">
+          <span class="container-label">FlowPanel: flow_info_grid</span>
+          <div class="container">
+            <span class="container-label">ColumnPanel: col_bill_to</span>
+            <div class="component">lbl_bill_to (Text) "Bill To"</div>
+            <div class="component">hdg_contact_name (Heading) "[Contact Name]"</div>
+            <div class="component">txt_contact_email (Text) "[email]"</div>
+            <div class="component">txt_contact_phone (Text) "[phone]"</div>
+            <div class="component">txt_contact_address (Text) "[address]"</div>
+          </div>
+          <div class="container">
+            <span class="container-label">ColumnPanel: col_dates</span>
+            <div class="component">lbl_invoice_date (Text) "Invoice Date"</div>
+            <div class="component">txt_invoice_date_value (Text) "[date]"</div>
+            <div class="component">lbl_due_date (Text) "Due Date"</div>
+            <div class="component">txt_due_date_value (Text) "[date]"</div>
+            <div class="component">lbl_currency (Text) "Currency"</div>
+            <div class="component">txt_currency_value (Text) "[currency]"</div>
+          </div>
+        </div>
+
+        <!-- Line Items -->
+        <div class="component">hdg_line_items (Heading) "Line Items"</div>
+        <div class="container">
+          <span class="container-label">DataGrid: dg_invoice_items</span>
+          <div class="component">[Columns: Description | Qty | Unit Price | Amount]</div>
+        </div>
+
+        <!-- Totals -->
+        <div class="container">
+          <span class="container-label">ColumnPanel: col_totals</span>
+          <div class="component">lbl_subtotal (Text) "Subtotal"</div>
+          <div class="component">txt_subtotal_value (Text) "[amount]"</div>
+          <div class="component">lbl_tax (Text) "Tax (15%)"</div>
+          <div class="component">txt_tax_value (Text) "[amount]"</div>
+          <div class="component">lbl_total (Text) "Total"</div>
+          <div class="component">txt_total_value (Text) "[amount]"</div>
+        </div>
+
+        <!-- Notes -->
+        <div class="component">hdg_notes (Heading) "Notes"</div>
+        <div class="component">txt_notes (Text) "[notes text]"</div>
       </div>
-      <div>
-        <span class="wf-badge wf-badge-sent">Sent</span>
-        <div class="cn">badge_status <span class="ct">(Label)</span></div>
+
+      <!-- ACTION BUTTONS (status-dependent) -->
+      <div class="container">
+        <span class="container-label">FlowPanel: flow_actions</span>
+        <div class="component">btn_cancel_invoice (Button) appearance="outlined" "Cancel Invoice"</div>
+        <div class="component">btn_download_pdf (Button) appearance="outlined" "Download PDF"</div>
+        <div class="component">btn_record_payment (Button) appearance="filled" "Record Payment"</div>
       </div>
+
     </div>
-
-    <!-- Info Grid -->
-    <div class="wf-info-grid">
-      <div class="wf-info-block">
-        <span class="wf-info-label">Bill To</span>
-        <div class="cn">lbl_bill_to <span class="ct">(Label)</span> <span class="cfixed">"Bill To"</span></div>
-        <span class="wf-info-value name">Jane Smith</span>
-        <div class="cn">hdg_contact_name <span class="ct">(Heading)</span></div>
-        <span class="wf-info-value">jane@email.com</span>
-        <div class="cn">lbl_contact_email <span class="ct">(Label)</span></div>
-        <span class="wf-info-value">+27 82 123 4567</span>
-        <div class="cn">lbl_contact_phone <span class="ct">(Label)</span></div>
-        <span class="wf-info-value">14 Main Road, Cape Town, 8001</span>
-        <div class="cn">lbl_contact_address <span class="ct">(Label)</span></div>
-      </div>
-      <div class="wf-info-block">
-        <span class="wf-info-label">Invoice Date</span>
-        <div class="cn">lbl_invoice_date <span class="ct">(Label)</span> <span class="cfixed">"Invoice Date"</span></div>
-        <span class="wf-info-value">10 May 2026</span>
-        <div class="cn">lbl_invoice_date_value <span class="ct">(Label)</span></div>
-        <span class="wf-info-label" style="margin-top:8px;">Due Date</span>
-        <div class="cn">lbl_due_date <span class="ct">(Label)</span> <span class="cfixed">"Due Date"</span></div>
-        <span class="wf-info-value">24 May 2026</span>
-        <div class="cn">lbl_due_date_value <span class="ct">(Label)</span></div>
-        <span class="wf-info-label" style="margin-top:8px;">Currency</span>
-        <div class="cn">lbl_currency <span class="ct">(Label)</span> <span class="cfixed">"Currency"</span></div>
-        <span class="wf-info-value">ZAR — South African Rand</span>
-        <div class="cn">lbl_currency_value <span class="ct">(Label)</span></div>
-      </div>
-    </div>
-
-    <!-- Line Items -->
-    <div class="wf-heading-sm">Line Items</div>
-    <div class="cn">hdg_line_items <span class="ct">(Heading)</span> <span class="cfixed">"Line Items"</span></div>
-    <table class="wf-table">
-      <thead>
-        <tr>
-          <th>Description</th>
-          <th style="width:80px;">Qty</th>
-          <th style="width:120px;">Unit Price</th>
-          <th style="width:120px;">Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Website Design</td>
-          <td>1</td>
-          <td class="amount">R 15,000.00</td>
-          <td class="amount">R 15,000.00</td>
-        </tr>
-        <tr>
-          <td>Hosting (3 months)</td>
-          <td>3</td>
-          <td class="amount">R 450.00</td>
-          <td class="amount">R 1,350.00</td>
-        </tr>
-        <tr>
-          <td>SEO Setup</td>
-          <td>1</td>
-          <td class="amount">R 3,500.00</td>
-          <td class="amount">R 3,500.00</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="cn">dg_invoice_items <span class="ct">(DataGrid)</span></div>
-
-    <!-- Totals -->
-    <div class="wf-totals">
-      <div class="wf-totals-row">
-        <span class="wf-label-col">Subtotal</span>
-        <span class="wf-value-col">R 19,850.00</span>
-      </div>
-      <div class="wf-totals-row">
-        <span class="wf-label-col">Tax (15%)</span>
-        <span class="wf-value-col">R 2,977.50</span>
-      </div>
-      <div class="wf-totals-row total">
-        <span class="wf-label-col">Total</span>
-        <span class="wf-value-col">R 22,827.50</span>
-      </div>
-    </div>
-    <div class="cn">hdg_subtotal <span class="ct">(Heading)</span> | hdg_tax <span class="ct">(Heading)</span> | hdg_total <span class="ct">(Heading)</span></div>
-
-    <!-- Notes -->
-    <div class="wf-heading-sm">Notes</div>
-    <div class="cn">hdg_notes <span class="ct">(Heading)</span> <span class="cfixed">"Notes"</span></div>
-    <div class="wf-text-normal">Payment due within 14 days. Bank details: FNB, Acc: 123456789, Branch: 250655</div>
-    <div class="cn">txt_notes <span class="ct">(Label)</span></div>
-
-    <!-- Actions -->
-    <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:16px;">
-      <div>
-        <div class="wf-btn-outlined">Cancel Invoice</div>
-        <div class="cn">btn_cancel_invoice <span class="ct">(Button)</span> <span class="cfixed">"Cancel Invoice"</span></div>
-      </div>
-      <div>
-        <div class="wf-btn-outlined">Download PDF</div>
-        <div class="cn">btn_download_pdf <span class="ct">(Button)</span> <span class="cfixed">"Download PDF"</span></div>
-      </div>
-      <div>
-        <div class="wf-btn-filled">Record Payment</div>
-        <div class="cn">btn_record_payment <span class="ct">(Button)</span> <span class="cfixed">"Record Payment"</span></div>
-      </div>
-    </div>
-    <div class="cn">flow_actions <span class="ct">(FlowPanel)</span></div>
   </div>
-</div>
 
-<div class="prop-caption">Properties table</div>
-<div class="prop-note">None — no designer-only required properties. All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+  <h2>Section 3 — Properties Table</h2>
+
+  <table>
+    <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+    <tr><td colspan="3"><em>No Designer-only properties. All values are set programmatically from <code>globals.current_invoice</code>.</em></td></tr>
+  </table>
+
+  <p><strong>Status-based permitted actions (from DESIGN.md):</strong></p>
+
+  <table>
+    <tr><th>Status</th><th>Edit</th><th>Send</th><th>Record Payment</th><th>Cancel</th><th>Download PDF</th></tr>
+    <tr><td>Draft</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Sent</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Paid</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
+    <tr><td>Overdue</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Cancelled</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
+  </table>
+
+  <p><strong>Note:</strong> Action button visibility is controlled programmatically per the status table above. Edit navigates to InvoiceEditorForm. Send triggers email delivery. Record Payment opens a payment dialog. Cancel voids the invoice. Download PDF generates a PDF. Tax is calculated at 15% (SA VAT) as a display-time calculation.</p>
 
 </body>
 </html>
