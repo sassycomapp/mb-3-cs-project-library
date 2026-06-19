@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — tmpl_month_day_cell</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #493ef3; --on-primary: #ffffff;
+      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff;
+      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5;
+      --outline: #7a7583; --outline-variant: #c9c4d3;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --font-family: 'Roboto', sans-serif;
+      --divider-color: var(--outline-variant);
+      --status-confirmed: #388e3c;
+      --status-pending: #f9a825;
+      --status-cancelled: #c62828;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); padding: var(--space-8); }
+    .template-demo { max-width: 600px; margin: 0 auto; }
+    .template-label { font-size: 11px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: var(--space-4); }
+    .day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--divider-color); border: 1px solid var(--divider-color); border-radius: 8px; overflow: hidden; }
+    .day-cell { background: var(--surface); padding: var(--space-2); min-height: 80px; cursor: pointer; }
+    .day-cell:hover { background: rgba(73,62,243,0.08); }
+    .day-cell.today { background: var(--primary-container); }
+    .day-cell.other-month { opacity: 0.4; }
+    .day-number { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-1); }
+    .event-chip { font-size: 11px; padding: 1px 4px; border-radius: 3px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; border-left: 3px solid; }
+    .event-chip.confirmed { background: rgba(56,142,60,0.12); color: var(--status-confirmed); border-left-color: var(--status-confirmed); }
+    .event-chip.pending { background: rgba(249,168,37,0.12); color: #856404; border-left-color: var(--status-pending); }
+    @media (prefers-color-scheme: dark) {
+      :root { --primary: #cfbdf8; --on-primary: #381e72; --primary-container: #4f378b; --on-primary-container: #eaddff; --surface: #1c1b20; --on-surface: #e6e1e5; --surface-variant: #49454f; --on-surface-variant: #cac4d0; --outline: #938f99; --outline-variant: #49454f; }
+    }
+  </style>
+</head>
+<body>
+  <div class="template-demo">
+    <div class="template-label">tmpl_month_day_cell — Month View Day Cells</div>
+    <div class="day-grid">
+      <div class="day-cell other-month"><div class="day-number">25</div></div>
+      <div class="day-cell other-month"><div class="day-number">26</div></div>
+      <div class="day-cell"><div class="day-number">27</div><div class="event-chip confirmed">Deep Tissue</div></div>
+      <div class="day-cell"><div class="day-number">28</div></div>
+      <div class="day-cell"><div class="day-number">29</div><div class="event-chip pending">Swedish</div></div>
+      <div class="day-cell"><div class="day-number">30</div></div>
+      <div class="day-cell"><div class="day-number">31</div></div>
+      <div class="day-cell today"><div class="day-number">18</div><div class="event-chip confirmed">Deep Tissue</div><div class="event-chip confirmed">Hot Stone</div><div class="event-chip pending">Reflexology</div></div>
+      <div class="day-cell"><div class="day-number">19</div><div class="event-chip confirmed">Business Consult</div></div>
+      <div class="day-cell"><div class="day-number">20</div><div class="event-chip confirmed">Swedish</div></div>
+      <div class="day-cell"><div class="day-number">21</div></div>
+      <div class="day-cell"><div class="day-number">22</div></div>
+      <div class="day-cell"><div class="day-number">23</div><div class="event-chip confirmed">Deep Tissue</div></div>
+      <div class="day-cell"><div class="day-number">24</div></div>
+    </div>
+  </div>
+</body>
+</html>
