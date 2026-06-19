@@ -1,236 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Blog Editor Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-.legend span { margin-right: 24px; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
-.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
-.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
-.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
-.wf-heading-lg { font-size: 18px; font-weight: bold; color: #333; margin: 4px 0 8px; }
-.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; position: relative; }
-.wf-dd::after { content: " ▾"; color: #aaa; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #6750A4; border: 1px solid #6750A4; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-text { background: transparent; color: #6750A4; border: none; padding: 4px 8px; font-size: 12px; font-family: Arial; display: inline-block; cursor: pointer; }
-.wf-file-upload { border: 2px dashed #79747E; border-radius: 4px; padding: 24px 16px; text-align: center; color: #49454F; font-size: 11px; cursor: pointer; margin: 6px 0; }
-.wf-file-upload:hover { border-color: #6750A4; }
-.wf-toolbar { display: flex; align-items: center; gap: 2px; padding: 6px 8px; background: #E7E0EC; border: 1px solid #79747E; border-bottom: none; border-radius: 4px 4px 0 0; }
-.wf-toolbar-btn { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; font-size: 12px; font-weight: 700; color: #49454F; background: transparent; border: none; border-radius: 4px; cursor: pointer; }
-.wf-toolbar-btn:hover { background: #FFFBFE; }
-.wf-toolbar-sep { width: 1px; height: 18px; background: #79747E; margin: 0 4px; }
-.wf-toolbar + .wf-textarea { border-top-left-radius: 0; border-top-right-radius: 0; }
-.wf-seo-hint { font-size: 11px; color: #79747E; margin-top: 2px; }
-.wf-seo-count { font-size: 11px; color: #79747E; text-align: right; margin-top: 2px; }
-.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
-.ct { font-style: italic; color: #bbb; }
-.cfixed { color: #555; font-style: normal; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
-.editor-layout { display: grid; grid-template-columns: 1fr 280px; gap: 24px; align-items: start; }
-@media (max-width: 768px) { .editor-layout { grid-template-columns: 1fr; } }
-</style>
+  <meta charset="UTF-8">
+  <title>Wireframe — BlogEditorForm</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 24px; margin: 0; }
+    .wireframe { max-width: 1100px; margin: 0 auto; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    .section-label { font-size: 13px; color: #666; margin-bottom: 16px; }
+    .container { border: 2px solid #333; border-radius: 4px; padding: 16px; margin: 12px 0; position: relative; background: #fff; }
+    .container-label { position: absolute; top: -10px; left: 12px; background: #fff; padding: 0 4px; font-size: 11px; color: #666; font-weight: bold; }
+    .component { border: 1px solid #aaa; border-radius: 3px; padding: 8px 12px; margin: 6px 0; background: #fafafa; font-size: 13px; }
+    .comp-name { font-weight: bold; color: #333; }
+    .comp-type { color: #888; font-style: italic; }
+    .comp-text { color: #555; }
+    .dashed { border-style: dashed; border-color: #bbb; }
+    .row { display: flex; gap: 16px; }
+    .col-main { flex: 2; }
+    .col-side { flex: 1; }
+    .section-title { font-size: 14px; font-weight: bold; color: #444; margin: 12px 0 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+  </style>
 </head>
 <body>
+<div class="wireframe">
 
-<h1>Mybizz CS — Blog Wireframes</h1>
-<p class="subtitle">Blog Management — Anvil Construction Guide</p>
-<div class="legend">
-  <span><strong>Solid border</strong> = visible on load</span>
-  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
-  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
-  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
-</div>
-
-<h2>BlogEditorForm — Create/Edit Blog Post</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_editor (ColumnPanel) — max-width: 900px</span>
-
-  <!-- Page header with action buttons -->
-  <div class="wf-panel-h">
-    <span class="wf-label">page_header (Header)</span>
-    <div style="flex:1;">
-      <div class="wf-heading-lg">Edit Post</div>
-      <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Edit Post"</span></div>
-    </div>
-    <div style="display:flex; gap:8px; align-items:center;">
-      <div>
-        <div class="wf-btn-outlined">Cancel</div>
-        <div class="cn">btn_cancel_header <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span> — secondary-button (Link)</div>
-      </div>
-      <div>
-        <div class="wf-btn-outlined">Save Draft</div>
-        <div class="cn">btn_save_draft_header <span class="ct">(Button)</span> <span class="cfixed">"Save Draft"</span> — secondary-button</div>
-      </div>
-      <div>
-        <div class="wf-btn-filled">Publish</div>
-        <div class="cn">btn_publish_header <span class="ct">(Button)</span> <span class="cfixed">"Publish"</span> — primary-button</div>
-      </div>
-    </div>
+  <!-- Section 1: Introduction -->
+  <h1>BlogEditorForm</h1>
+  <div class="section-label">wireframe-blog-BlogEditorForm.html — Editor form for creating and editing blog posts</div>
+  <div class="section-label" style="margin-bottom: 24px;">
+    Conventions: Solid border = visible on load. Dashed border = hidden on load (visible = False).
+    Each component shows: component_name (Type) "fixed text if set at design time".
   </div>
 
-  <!-- Two-column editor layout -->
-  <div class="editor-layout">
-    <!-- Main content area -->
-    <div>
-      <div class="wf-panel">
-        <span class="wf-label">card_content (Card) — elevated</span>
+  <!-- Section 2: Wireframe Diagram -->
+  <div class="container" style="max-width: 900px;">
+    <span class="container-label">col_editor (ColumnPanel)</span>
 
-        <div class="wf-heading-sm">Post Title</div>
-        <div class="cn">lbl_title <span class="ct">(Label)</span> <span class="cfixed">"Post Title"</span></div>
-        <div class="wf-textbox">How to Optimize Your Business Operations</div>
-        <div class="cn">txt_title <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> role='outlined'</div>
+    <!-- Page title -->
+    <div class="component">
+      <span class="comp-name">hdg_editor_title</span> <span class="comp-type">(Heading)</span>
+      <span class="comp-text">"Blog Editor"</span>
+    </div>
 
-        <div class="wf-heading-sm">Excerpt</div>
-        <div class="cn">lbl_excerpt <span class="ct">(Label)</span> <span class="cfixed">"Excerpt"</span></div>
-        <div class="wf-textbox">Learn practical strategies to streamline your daily business operations and boost productivity.</div>
-        <div class="cn">txt_excerpt <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> role='outlined'</div>
+    <!-- Action bar -->
+    <div class="container">
+      <span class="container-label">flow_actions (FlowPanel)</span>
+      <div class="component">
+        <span class="comp-name">btn_save_draft</span> <span class="comp-type">(Button)</span>
+        <span class="comp-text">"Save Draft"</span> appearance="outlined"
+      </div>
+      <div class="component">
+        <span class="comp-name">btn_publish</span> <span class="comp-type">(Button)</span>
+        <span class="comp-text">"Publish"</span> appearance="filled"
+      </div>
+      <div class="component">
+        <span class="comp-name">btn_cancel</span> <span class="comp-type">(Button)</span>
+        <span class="comp-text">"Cancel"</span> appearance="text"
+      </div>
+    </div>
 
-        <div class="wf-heading-sm">Content</div>
-        <div class="cn">lbl_content <span class="ct">(Label)</span> <span class="cfixed">"Content"</span></div>
+    <!-- Success message — hidden on load -->
+    <div class="component dashed">
+      <span class="comp-name">txt_success_message</span> <span class="comp-type">(Text)</span>
+      <span class="comp-text">"Post saved successfully."</span>
+    </div>
 
-        <!-- Formatting toolbar -->
-        <div class="wf-toolbar">
-          <button class="wf-toolbar-btn" title="Bold">B</button>
-          <button class="wf-toolbar-btn" title="Italic"><em>I</em></button>
-          <button class="wf-toolbar-btn" title="Underline"><u>U</u></button>
-          <span class="wf-toolbar-sep"></span>
-          <button class="wf-toolbar-btn" title="Heading">H</button>
-          <button class="wf-toolbar-btn" title="Bullet list">&bull;</button>
-          <button class="wf-toolbar-btn" title="Numbered list">1.</button>
-          <span class="wf-toolbar-sep"></span>
-          <button class="wf-toolbar-btn" title="Insert link">&#128279;</button>
-          <button class="wf-toolbar-btn" title="Insert image">&#128247;</button>
-          <div class="cn">toolbar_formatting <span class="ct">(FlowPanel)</span> — formatting buttons</div>
+    <!-- Main content + sidebar -->
+    <div class="row">
+
+      <!-- Main content area -->
+      <div class="col-main">
+        <div class="container">
+          <span class="container-label">card_content (Card) [outlined]</span>
+
+          <div class="component">
+            <span class="comp-name">txt_title</span> <span class="comp-type">(TextBox)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="Post Title"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">txt_slug</span> <span class="comp-type">(TextBox)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="URL Slug"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">txt_excerpt</span> <span class="comp-type">(TextArea)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="Excerpt"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">txt_content</span> <span class="comp-type">(TextArea)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="Content"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">fu_featured_image</span> <span class="comp-type">(FileLoader)</span>
+            <span class="comp-text">"Upload Featured Image"</span>
+          </div>
         </div>
-        <div class="wf-textarea" style="height:300px;">Running a business efficiently requires more than just hard work...</div>
-        <div class="cn">txt_content <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span> role='outlined'</div>
-      </div>
-    </div>
-
-    <!-- Sidebar -->
-    <div>
-      <!-- Post Settings card -->
-      <div class="wf-panel" style="margin-bottom:12px;">
-        <span class="wf-label">card_settings (Card) — elevated</span>
-        <div class="wf-heading-sm">Post Settings</div>
-
-        <div class="wf-heading-sm">Category</div>
-        <div class="cn">lbl_category <span class="ct">(Label)</span> <span class="cfixed">"Category"</span></div>
-        <div class="wf-dd">Business Tips</div>
-        <div class="cn">dd_category <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span> role='outlined'</div>
-
-        <div class="wf-heading-sm">Status</div>
-        <div class="cn">lbl_status <span class="ct">(Label)</span> <span class="cfixed">"Status"</span></div>
-        <div class="wf-dd">Draft</div>
-        <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span> role='outlined'</div>
       </div>
 
-      <!-- Featured Image card -->
-      <div class="wf-panel" style="margin-bottom:12px;">
-        <span class="wf-label">card_image (Card) — elevated</span>
-        <div class="wf-heading-sm">Featured Image</div>
-        <div class="wf-file-upload">Click to upload or drag and drop<br>PNG, JPG up to 5MB</div>
-        <div class="cn">fu_featured_image <span class="ct">(FileLoader)</span> — media upload</div>
-        <div class="wf-seo-hint">Uses FileLoader component for image upload</div>
+      <!-- Sidebar -->
+      <div class="col-side">
+        <div class="container">
+          <span class="container-label">card_sidebar (Card) [outlined]</span>
+
+          <div class="section-title">Publishing</div>
+
+          <div class="component">
+            <span class="comp-name">dd_status</span> <span class="comp-type">(DropdownMenu)</span> (W)
+            <span class="comp-text">label_text="Status"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">dd_category</span> <span class="comp-type">(DropdownMenu)</span> (W)
+            <span class="comp-text">label_text="Category"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">dd_template</span> <span class="comp-type">(DropdownMenu)</span> (W)
+            <span class="comp-text">label_text="Post Template"</span>
+          </div>
+
+          <div class="section-title">SEO Settings</div>
+
+          <div class="component">
+            <span class="comp-name">txt_meta_title</span> <span class="comp-type">(TextBox)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="SEO Title"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">txt_meta_description</span> <span class="comp-type">(TextBox)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="SEO Description"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">txt_keywords</span> <span class="comp-type">(TextBox)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="Keywords"</span>
+          </div>
+
+          <div class="section-title">Template Options</div>
+
+          <div class="component">
+            <span class="comp-name">txt_pullquote</span> <span class="comp-type">(TextBox)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="Pullquote"</span>
+          </div>
+
+          <div class="component">
+            <span class="comp-name">txt_video_url</span> <span class="comp-type">(TextBox)</span> (W)
+            <span class="comp-text">appearance="outlined" label_text="Video URL (YouTube)"</span>
+          </div>
+        </div>
       </div>
 
-      <!-- Video Embed card -->
-      <div class="wf-panel" style="margin-bottom:12px;">
-        <span class="wf-label">card_video (Card) — elevated</span>
-        <div class="wf-heading-sm">Video Embed</div>
-
-        <div class="wf-heading-sm">Video Source</div>
-        <div class="cn">lbl_video_source <span class="ct">(Label)</span> <span class="cfixed">"Video Source"</span></div>
-        <div class="wf-dd">YouTube</div>
-        <div class="cn">dd_video_source <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span> role='outlined'</div>
-
-        <div class="wf-heading-sm">Video URL</div>
-        <div class="cn">lbl_video_url <span class="ct">(Label)</span> <span class="cfixed">"Video URL"</span></div>
-        <div class="wf-textbox">Paste video URL here...</div>
-        <div class="cn">txt_video_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> role='outlined'</div>
-        <div class="wf-seo-hint">Paste the full URL from the selected video platform</div>
-
-        <div class="wf-file-upload" style="margin-top:8px;">Or upload a video file<br>MP4, WebM up to 50MB</div>
-        <div class="cn">fu_video_file <span class="ct">(FileLoader)</span> — video file upload</div>
-      </div>
-
-      <!-- SEO Settings card -->
-      <div class="wf-panel">
-        <span class="wf-label">card_seo (Card) — elevated</span>
-        <div class="wf-heading-sm">SEO Settings</div>
-
-        <div class="wf-heading-sm">Meta Title</div>
-        <div class="cn">lbl_meta_title <span class="ct">(Label)</span> <span class="cfixed">"Meta Title"</span></div>
-        <div class="wf-textbox">How to Optimize Your Business | Mybizz Blog</div>
-        <div class="cn">txt_meta_title <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> role='outlined'</div>
-        <div class="wf-seo-count">52 / 60 characters</div>
-
-        <div class="wf-heading-sm">Meta Description</div>
-        <div class="cn">lbl_meta_description <span class="ct">(Label)</span> <span class="cfixed">"Meta Description"</span></div>
-        <div class="wf-textarea" style="height:60px;">Learn practical strategies to streamline your daily business operations and boost productivity with smart tools and workflows.</div>
-        <div class="cn">txt_meta_description <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span> role='outlined'</div>
-        <div class="wf-seo-count">112 / 160 characters</div>
-
-        <div class="wf-heading-sm">Keywords</div>
-        <div class="cn">lbl_keywords <span class="ct">(Label)</span> <span class="cfixed">"Keywords"</span></div>
-        <div class="wf-textbox">business optimization, productivity, workflow</div>
-        <div class="cn">txt_keywords <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> role='outlined'</div>
-        <div class="wf-seo-hint">Separate keywords with commas</div>
-      </div>
     </div>
   </div>
 
-  <!-- Footer action row -->
-  <div class="wf-panel-h" style="justify-content:flex-end; margin-top:16px;">
-    <span class="wf-label">flow_actions (FlowPanel)</span>
-    <div>
-      <div class="wf-btn-outlined">Cancel</div>
-      <div class="cn">btn_cancel <span class="ct">(Button)</span> <span class="cfixed">"Cancel"</span> — secondary-button (Link)</div>
-    </div>
-    <div>
-      <div class="wf-btn-outlined">Save Draft</div>
-      <div class="cn">btn_save_draft <span class="ct">(Button)</span> <span class="cfixed">"Save Draft"</span> — secondary-button</div>
-    </div>
-    <div>
-      <div class="wf-btn-filled">Publish</div>
-      <div class="cn">btn_publish <span class="ct">(Button)</span> <span class="cfixed">"Publish"</span> — primary-button</div>
-    </div>
+  <!-- Section 3: Properties Table -->
+  <h2 style="margin-top: 32px; font-size: 18px;">Properties Table</h2>
+  <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+    Designer-mandatory properties: writeback (W) must be set in Designer Data Bindings panel for all TextBox, TextArea, DropdownMenu components.
   </div>
+  <table style="border-collapse: collapse; width: 100%; font-size: 13px;">
+    <tr style="background: #eee;">
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Component</th>
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Type</th>
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Designer Property</th>
+    </tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_title</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W, appearance = outlined</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_slug</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W, appearance = outlined</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_excerpt</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextArea</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W, appearance = outlined</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_content</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextArea</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W, appearance = outlined</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">dd_status</td><td style="border: 1px solid #ccc; padding: 6px 8px;">DropdownMenu</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">dd_category</td><td style="border: 1px solid #ccc; padding: 6px 8px;">DropdownMenu</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">dd_template</td><td style="border: 1px solid #ccc; padding: 6px 8px;">DropdownMenu</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_meta_title</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_meta_description</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_keywords</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_pullquote</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_video_url</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W</td></tr>
+  </table>
+
 </div>
-
-<div class="prop-caption">Properties table</div>
-<div class="prop-note">Designer-mandatory properties: Write Back toggle must be enabled in Designer Data Bindings panel for all TextBox, TextArea, and DropdownMenu components.</div>
-<table class="props">
-<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_title</td><td>TextBox</td><td>role='outlined', writeback = W</td></tr>
-<tr><td>txt_excerpt</td><td>TextBox</td><td>role='outlined', writeback = W</td></tr>
-<tr><td>txt_content</td><td>TextArea</td><td>role='outlined', writeback = W</td></tr>
-<tr><td>dd_category</td><td>DropdownMenu</td><td>role='outlined', writeback = W</td></tr>
-<tr><td>dd_status</td><td>DropdownMenu</td><td>role='outlined', writeback = W, items=['Draft','Published','Archived']</td></tr>
-<tr><td>txt_meta_title</td><td>TextBox</td><td>role='outlined', writeback = W</td></tr>
-<tr><td>txt_meta_description</td><td>TextArea</td><td>role='outlined', writeback = W</td></tr>
-<tr><td>txt_keywords</td><td>TextBox</td><td>role='outlined', writeback = W</td></tr>
-<tr><td>dd_video_source</td><td>DropdownMenu</td><td>role='outlined', writeback = W, items=['YouTube','Vimeo','Dailymotion','Custom URL']</td></tr>
-<tr><td>txt_video_url</td><td>TextBox</td><td>role='outlined', writeback = W, placeholder='Paste video URL here...'</td></tr>
-</table>
-
 </body>
 </html>

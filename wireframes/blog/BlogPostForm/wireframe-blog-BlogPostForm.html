@@ -1,201 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Blog Post Form</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-.legend span { margin-right: 24px; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
-.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
-.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
-.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
-.wf-heading-lg { font-size: 18px; font-weight: bold; color: #333; margin: 4px 0 8px; }
-.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-textarea { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; height: 52px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-link { color: #6750A4; text-decoration: none; font-size: 12px; }
-.wf-link:hover { text-decoration: underline; }
-.wf-chip { display: inline-block; padding: 2px 10px; background: #E8DEF8; color: #1D192B; border-radius: 100px; font-size: 11px; margin: 2px; }
-.wf-meta { display: flex; gap: 16px; font-size: 11px; color: #49454F; margin: 8px 0; }
-.wf-avatar { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #E8DEF8; color: #1D192B; font-size: 11px; font-weight: 700; flex-shrink: 0; }
-.wf-comment-item { display: flex; gap: 12px; margin: 12px 0; }
-.wf-comment-body { flex: 1; }
-.wf-comment-author { font-size: 12px; font-weight: 500; color: #1C1B1F; }
-.wf-comment-date { font-size: 11px; color: #49454F; margin-left: 8px; }
-.wf-comment-text { font-size: 12px; color: #1C1B1F; margin-top: 4px; line-height: 1.6; }
-.wf-divider { border: none; border-top: 1px solid #E7E0EC; margin: 24px 0; }
-.wf-image-placeholder { border: 2px dashed #ccc; border-radius: 4px; padding: 40px; text-align: center; color: #bbb; font-size: 14px; margin: 6px 0; background: linear-gradient(135deg, #EADDFF, #E8DEF8); }
-.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
-.ct { font-style: italic; color: #bbb; }
-.cfixed { color: #555; font-style: normal; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-.dash { color: #bbb; }
-</style>
+  <meta charset="UTF-8">
+  <title>Wireframe — BlogPostForm</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 24px; margin: 0; }
+    .wireframe { max-width: 1100px; margin: 0 auto; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    .section-label { font-size: 13px; color: #666; margin-bottom: 16px; }
+    .container { border: 2px solid #333; border-radius: 4px; padding: 16px; margin: 12px 0; position: relative; background: #fff; }
+    .container-label { position: absolute; top: -10px; left: 12px; background: #fff; padding: 0 4px; font-size: 11px; color: #666; font-weight: bold; }
+    .component { border: 1px solid #aaa; border-radius: 3px; padding: 8px 12px; margin: 6px 0; background: #fafafa; font-size: 13px; }
+    .comp-name { font-weight: bold; color: #333; }
+    .comp-type { color: #888; font-style: italic; }
+    .comp-text { color: #555; }
+    .dashed { border-style: dashed; border-color: #bbb; }
+    .row { display: flex; gap: 16px; }
+    .col-main { flex: 3; }
+    .col-side { flex: 1; }
+    .section-title { font-size: 14px; font-weight: bold; color: #444; margin: 12px 0 8px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+  </style>
 </head>
 <body>
+<div class="wireframe">
 
-<h1>Mybizz CS — Blog Wireframes</h1>
-<p class="subtitle">Blog Management — Anvil Construction Guide</p>
-<div class="legend">
-  <span><strong>Solid border</strong> = visible on load</span>
-  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
-  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
-  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
-</div>
-
-<h2>BlogPostForm — View Single Blog Post</h2>
-
-<div class="wf-outer">
-  <span class="wf-label">col_post_viewer (ColumnPanel) — max-width: 900px</span>
-
-  <!-- Back link -->
-  <div style="margin-bottom:16px;">
-    <a href="#" class="wf-link">&larr; Back to Blog</a>
-    <div class="cn">nav_back <span class="ct">(Link)</span> <span class="cfixed">"&larr; Back to Blog"</span></div>
+  <!-- Section 1: Introduction -->
+  <h1>BlogPostForm</h1>
+  <div class="section-label">wireframe-blog-BlogPostForm.html — Public blog post detail view with swappable layout templates</div>
+  <div class="section-label" style="margin-bottom: 24px;">
+    Conventions: Solid border = visible on load. Dashed border = hidden on load (visible = False).
+    Each component shows: component_name (Type) "fixed text if set at design time".
   </div>
 
-  <!-- Post card -->
-  <div class="wf-panel">
-    <span class="wf-label">card_post (Card) — elevated, overflow: hidden</span>
+  <!-- Section 2: Wireframe Diagram -->
+  <div class="container">
+    <span class="container-label">col_blog_post (ColumnPanel)</span>
+
+    <!-- Post header -->
+    <div class="container">
+      <span class="container-label">card_post_header (Card) [elevated]</span>
+      <div class="component">
+        <span class="comp-name">txt_category_badge</span> <span class="comp-type">(Text)</span>
+        <span class="comp-text">[category name]</span>
+      </div>
+      <div class="component">
+        <span class="comp-name">hdg_post_title</span> <span class="comp-type">(Heading)</span>
+        <span class="comp-text">[post title]</span>
+      </div>
+      <div class="component">
+        <span class="comp-name">txt_meta</span> <span class="comp-type">(Text)</span>
+        <span class="comp-text">"By [author] | [date] | [view count] views"</span>
+      </div>
+    </div>
 
     <!-- Featured image -->
-    <div class="wf-image-placeholder">Featured Image</div>
-    <div class="cn">img_featured <span class="ct">(Image)</span> — role='img'</div>
+    <div class="component">
+      <span class="comp-name">img_featured</span> <span class="comp-type">(Image)</span>
+      <span class="comp-text">[featured image]</span>
+    </div>
 
-    <!-- Video embed — VideoDisplayComponent -->
-    <div style="padding:16px 32px 0;">
-      <div style="border:2px solid #888; border-radius:4px; padding:0; width:100%; height:0; padding-bottom:56.25%; background:linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); position:relative; overflow:hidden;">
-        <div style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-          <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:rgba(255,255,255,0.9); border-radius:50%;">▶</div>
+    <!-- Post content area -->
+    <div class="row">
+      <!-- Main content -->
+      <div class="col-main">
+        <div class="container">
+          <span class="container-label">card_content (Card) [outlined]</span>
+          <div class="component">
+            <span class="comp-name">txt_post_content</span> <span class="comp-type">(Text)</span>
+            <span class="comp-text">[post content — HTML rendered]</span>
+          </div>
         </div>
-        <span style="position:absolute; bottom:8px; left:8px; font-size:10px; color:rgba(255,255,255,0.8); background:rgba(0,0,0,0.6); padding:2px 8px; border-radius:4px;">YouTube</span>
+
+        <!-- Pullquote (visible only for full_width template) -->
+        <div class="container dashed">
+          <span class="container-label">card_pullquote (Card) [tonal]</span>
+          <div class="component">
+            <span class="comp-name">txt_pullquote</span> <span class="comp-type">(Text)</span>
+            <span class="comp-text">[pullquote text]</span>
+          </div>
+        </div>
+
+        <!-- Video embed (hidden when no video URL) -->
+        <div class="container dashed">
+          <span class="container-label">card_video (Card) [outlined]</span>
+          <div class="component">
+            <span class="comp-name">vid_video_embed</span> <span class="comp-type">(VideoDisplayComponent)</span>
+            <span class="comp-text">[YouTube embed]</span>
+          </div>
+        </div>
+
+        <!-- Social sharing -->
+        <div class="container">
+          <span class="container-label">flow_sharing (FlowPanel)</span>
+          <div class="component">
+            <span class="comp-name">btn_share_facebook</span> <span class="comp-type">(Button)</span>
+            <span class="comp-text">"Share"</span> appearance="outlined"
+          </div>
+          <div class="component">
+            <span class="comp-name">btn_share_twitter</span> <span class="comp-type">(Button)</span>
+            <span class="comp-text">"Tweet"</span> appearance="outlined"
+          </div>
+          <div class="component">
+            <span class="comp-name">btn_share_linkedin</span> <span class="comp-type">(Button)</span>
+            <span class="comp-text">"Share"</span> appearance="outlined"
+          </div>
+        </div>
       </div>
-      <div class="cn">container_video_embed <span class="ct">(HtmlPanel)</span> — VideoDisplayComponent renders iframe based on video_url</div>
-      <div class="wf-text" style="text-align:center; margin-top:4px;">Video — How to Optimize Your Business Operations</div>
+
+      <!-- Sidebar (visible only for two_column template) -->
+      <div class="col-side">
+        <div class="container dashed">
+          <span class="container-label">card_sidebar (Card) [outlined]</span>
+          <div class="section-title">Author</div>
+          <div class="component">
+            <span class="comp-name">txt_author_bio</span> <span class="comp-type">(Text)</span>
+            <span class="comp-text">[author bio]</span>
+          </div>
+          <div class="section-title">Related Posts</div>
+          <div class="component">
+            <span class="comp-name">rp_related_posts</span> <span class="comp-type">(RepeatingPanel)</span>
+            <span class="comp-text">[related posts list]</span>
+          </div>
+          <div class="section-title">Categories</div>
+          <div class="component">
+            <span class="comp-name">rp_categories</span> <span class="comp-type">(RepeatingPanel)</span>
+            <span class="comp-text">[category list]</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!-- Post body -->
-    <div style="padding:32px;">
-      <!-- Post meta -->
-      <div class="wf-meta">
-        <span>By <strong>John Doe</strong></span>
-        <span>May 10, 2026</span>
-        <span>1,245 views</span>
-        <div class="cn">lbl_author <span class="ct">(Label)</span> | lbl_date <span class="ct">(Label)</span> | lbl_views <span class="ct">(Label)</span></div>
-      </div>
-
-      <!-- Post title -->
-      <div class="wf-heading-lg">How to Optimize Your Business Operations</div>
-      <div class="cn">hdg_post_title <span class="ct">(Heading)</span> <span class="cfixed">"How to Optimize Your Business Operations"</span></div>
-
-      <!-- Tags -->
-      <div style="margin:12px 0 24px;">
-        <span class="wf-chip">Business Tips</span>
-        <span class="wf-chip">Optimization</span>
-        <div class="cn">rp_tags <span class="ct">(RepeatingPanel)</span> — tag chips</div>
-      </div>
-
-      <!-- Post content -->
-      <div style="font-size:12px; line-height:1.75; color:#1C1B1F;">
-        <p>Running a business efficiently requires more than just hard work — it demands smart strategies and the right tools. In this post, we explore practical approaches to optimize your daily operations and achieve sustainable growth.</p>
-
-        <h3 style="font-size:16px; font-weight:500; margin:24px 0 12px;">Streamline Your Workflow</h3>
-        <p>Start by identifying bottlenecks in your current processes. Common areas where businesses lose time include manual data entry, scattered communication channels, and inconsistent reporting.</p>
-
-        <h3 style="font-size:16px; font-weight:500; margin:24px 0 12px;">Leverage Technology</h3>
-        <p>Modern business management platforms like Mybizz can centralize your client management, invoicing, and scheduling into a single dashboard.</p>
-
-        <h3 style="font-size:16px; font-weight:500; margin:24px 0 12px;">Delegate Effectively</h3>
-        <p>Not every task requires your personal attention. Build a system of clear responsibilities and handoffs so your team can operate independently.</p>
-        <ul style="margin:8px 0 12px 24px;">
-          <li>Document standard operating procedures for recurring tasks</li>
-          <li>Use role-based access to grant appropriate permissions</li>
-          <li>Set up automated reminders and follow-ups</li>
-          <li>Review and refine processes on a monthly cadence</li>
-        </ul>
-
-        <h3 style="font-size:16px; font-weight:500; margin:24px 0 12px;">Measure and Iterate</h3>
-        <p>Optimization is not a one-time effort. Establish key metrics, track them regularly, and use the data to drive continuous improvement.</p>
-      </div>
-      <div class="cn">txt_content <span class="ct">(TextArea)</span> — rendered post content</div>
-    </div>
-
-    <hr class="wf-divider">
 
     <!-- Comments section -->
-    <div style="padding:0 32px 32px;">
-      <div class="wf-heading-sm">Comments (3)</div>
-      <div class="cn">hdg_comments <span class="ct">(Heading)</span> <span class="cfixed">"Comments (3)"</span></div>
-
-      <!-- Comment form -->
-      <div style="margin-bottom:24px;">
-        <div class="wf-heading-sm">Name</div>
-        <div class="cn">lbl_comment_name <span class="ct">(Label)</span> <span class="cfixed">"Name"</span></div>
-        <div class="wf-textbox">Your name</div>
-        <div class="cn">txt_comment_name <span class="ct">(TextBox)</span> role='outlined'</div>
-
-        <div class="wf-heading-sm">Comment</div>
-        <div class="cn">lbl_comment_text <span class="ct">(Label)</span> <span class="cfixed">"Comment"</span></div>
-        <div class="wf-textarea" style="height:80px;">Write your comment...</div>
-        <div class="cn">txt_comment_text <span class="ct">(TextArea)</span> role='outlined'</div>
-
-        <div style="margin-top:8px;">
-          <div class="wf-btn-filled">Post Comment</div>
-          <div class="cn">btn_post_comment <span class="ct">(Button)</span> <span class="cfixed">"Post Comment"</span> — primary-button</div>
-        </div>
+    <div class="container">
+      <span class="container-label">card_comments (Card) [outlined]</span>
+      <div class="component">
+        <span class="comp-name">hdg_comments_title</span> <span class="comp-type">(Heading)</span>
+        <span class="comp-text">"Comments"</span>
       </div>
-
-      <!-- Comment list -->
-      <div>
-        <div class="wf-comment-item">
-          <div class="wf-avatar">SM</div>
-          <div class="wf-comment-body">
-            <span class="wf-comment-author">Sarah Mitchell</span>
-            <span class="wf-comment-date">May 12, 2026</span>
-            <p class="wf-comment-text">Great article! The section on delegating effectively really resonated with me. I've been trying to document my SOPs and this gave me the push I needed.</p>
-          </div>
-        </div>
-        <div class="wf-comment-item">
-          <div class="wf-avatar">RK</div>
-          <div class="wf-comment-body">
-            <span class="wf-comment-author">Robert Kim</span>
-            <span class="wf-comment-date">May 11, 2026</span>
-            <p class="wf-comment-text">Would love to see a follow-up post on specific tools for workflow automation. Any recommendations for small teams?</p>
-          </div>
-        </div>
-        <div class="wf-comment-item">
-          <div class="wf-avatar">AL</div>
-          <div class="wf-comment-body">
-            <span class="wf-comment-author">Amanda Lee</span>
-            <span class="wf-comment-date">May 10, 2026</span>
-            <p class="wf-comment-text">Very practical advice. I started using Mybizz last month and it has already saved me hours each week on invoicing alone.</p>
-          </div>
-        </div>
-        <div class="cn">rp_comments <span class="ct">(RepeatingPanel)</span> — comment items with avatar, author, date, text</div>
+      <div class="component">
+        <span class="comp-name">rp_comments</span> <span class="comp-type">(RepeatingPanel)</span>
+        <span class="comp-text">[approved comments list]</span>
+      </div>
+      <!-- Add comment form -->
+      <div class="component">
+        <span class="comp-name">txt_comment_name</span> <span class="comp-type">(TextBox)</span> (W)
+        <span class="comp-text">appearance="outlined" label_text="Your Name"</span>
+      </div>
+      <div class="component">
+        <span class="comp-name">txt_comment_email</span> <span class="comp-type">(TextBox)</span> (W)
+        <span class="comp-text">appearance="outlined" label_text="Your Email"</span>
+      </div>
+      <div class="component">
+        <span class="comp-name">txt_comment_text</span> <span class="comp-type">(TextArea)</span> (W)
+        <span class="comp-text">appearance="outlined" label_text="Your Comment"</span>
+      </div>
+      <div class="component">
+        <span class="comp-name">btn_submit_comment</span> <span class="comp-type">(Button)</span>
+        <span class="comp-text">"Submit Comment"</span> appearance="filled"
       </div>
     </div>
+
+    <!-- FooterComponent -->
+    <div class="component">
+      <span class="comp-name">footer_component</span> <span class="comp-type">(FooterComponent)</span>
+      <span class="comp-text">[shared footer]</span>
+    </div>
+
+    <!-- Empty state — hidden on load (for comments) -->
+    <div class="container dashed">
+      <span class="container-label">col_empty_comments (ColumnPanel)</span>
+      <div class="component">
+        <span class="comp-name">ico_empty_comments</span> <span class="comp-type">(Icon)</span>
+        <span class="comp-text">"chat_bubble_outline"</span>
+      </div>
+      <div class="component">
+        <span class="comp-name">hdg_empty_comments</span> <span class="comp-type">(Heading)</span>
+        <span class="comp-text">"No comments yet"</span>
+      </div>
+      <div class="component">
+        <span class="comp-name">txt_empty_comments</span> <span class="comp-type">(Text)</span>
+        <span class="comp-text">"Be the first to share your thoughts."</span>
+      </div>
+      <div class="component">
+        <span class="comp-name">btn_empty_comment_action</span> <span class="comp-type">(Button)</span>
+        <span class="comp-text">"Write a Comment"</span> appearance="filled"
+      </div>
+    </div>
+
   </div>
+
+  <!-- Section 3: Properties Table -->
+  <h2 style="margin-top: 32px; font-size: 18px;">Properties Table</h2>
+  <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+    Designer-mandatory properties: writeback (W) must be set in Designer Data Bindings panel for all TextBox and TextArea components.
+  </div>
+  <table style="border-collapse: collapse; width: 100%; font-size: 13px;">
+    <tr style="background: #eee;">
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Component</th>
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Type</th>
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Designer Property</th>
+    </tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_comment_name</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W, appearance = outlined</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_comment_email</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextBox</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W, appearance = outlined</td></tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;">txt_comment_text</td><td style="border: 1px solid #ccc; padding: 6px 8px;">TextArea</td><td style="border: 1px solid #ccc; padding: 6px 8px;">writeback = W, appearance = outlined</td></tr>
+  </table>
+
 </div>
-
-<div class="prop-caption">Properties table</div>
-<div class="prop-note">Designer-mandatory properties: Write Back toggle must be enabled in Designer Data Bindings panel for TextBox and TextArea components.</div>
-<table class="props">
-<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_comment_name</td><td>TextBox</td><td>role='outlined'</td></tr>
-<tr><td>txt_comment_text</td><td>TextArea</td><td>role='outlined'</td></tr>
-</table>
-
 </body>
 </html>

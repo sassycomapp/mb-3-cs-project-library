@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wireframe — BlogListForm-RowTemplate</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 24px; margin: 0; }
+    .wireframe { max-width: 1100px; margin: 0 auto; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    .section-label { font-size: 13px; color: #666; margin-bottom: 16px; }
+    .container { border: 2px solid #333; border-radius: 4px; padding: 16px; margin: 12px 0; position: relative; background: #fff; }
+    .container-label { position: absolute; top: -10px; left: 12px; background: #fff; padding: 0 4px; font-size: 11px; color: #666; font-weight: bold; }
+    .component { border: 1px solid #aaa; border-radius: 3px; padding: 8px 12px; margin: 6px 0; background: #fafafa; font-size: 13px; }
+    .comp-name { font-weight: bold; color: #333; }
+    .comp-type { color: #888; font-style: italic; }
+    .comp-text { color: #555; }
+    .dashed { border-style: dashed; border-color: #bbb; }
+    .row { display: flex; gap: 16px; align-items: center; }
+    .col-auto { flex: 1; }
+    .col-shrink { flex: 0 0 auto; }
+  </style>
+</head>
+<body>
+<div class="wireframe">
+
+  <!-- Section 1: Introduction -->
+  <h1>BlogListForm-RowTemplate</h1>
+  <div class="section-label">wireframe-blog-BlogListForm-RowTemplate.html — Row template for the blog post DataGrid in BlogListForm</div>
+  <div class="section-label" style="margin-bottom: 24px;">
+    Conventions: Solid border = visible on load. Dashed border = hidden on load (visible = False).
+    Each component shows: component_name (Type) "fixed text if set at design time".
+  </div>
+
+  <!-- Section 2: Wireframe Diagram -->
+  <div class="container">
+    <span class="container-label">rp_blog_row (RepeatingPanel row template)</span>
+
+    <div class="row">
+      <!-- Featured image thumbnail -->
+      <div class="col-shrink">
+        <div class="component">
+          <span class="comp-name">img_featured</span> <span class="comp-type">(Image)</span>
+          <span class="comp-text">[featured image thumbnail]</span>
+        </div>
+      </div>
+
+      <div class="col-auto">
+        <!-- Category badge -->
+        <div class="component">
+          <span class="comp-name">txt_category_badge</span> <span class="comp-type">(Text)</span>
+          <span class="comp-text">[category name]</span>
+        </div>
+
+        <!-- Post title -->
+        <div class="component">
+          <span class="comp-name">nav_post_title</span> <span class="comp-type">(Link)</span>
+          <span class="comp-text">[post title]</span>
+        </div>
+
+        <!-- Excerpt -->
+        <div class="component">
+          <span class="comp-name">txt_excerpt</span> <span class="comp-type">(Text)</span>
+          <span class="comp-text">[excerpt text]</span>
+        </div>
+
+        <!-- Meta row -->
+        <div class="row">
+          <div class="component">
+            <span class="comp-name">txt_author</span> <span class="comp-type">(Text)</span>
+            <span class="comp-text">[author name]</span>
+          </div>
+          <div class="component">
+            <span class="comp-name">txt_date</span> <span class="comp-type">(Text)</span>
+            <span class="comp-text">[published date]</span>
+          </div>
+          <div class="component">
+            <span class="comp-name">txt_view_count</span> <span class="comp-type">(Text)</span>
+            <span class="comp-text">[view count]</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status badge -->
+      <div class="col-shrink">
+        <div class="component">
+          <span class="comp-name">txt_status_badge</span> <span class="comp-type">(Text)</span>
+          <span class="comp-text">[status]</span>
+        </div>
+      </div>
+
+      <!-- Row actions -->
+      <div class="col-shrink">
+        <div class="component">
+          <span class="comp-name">btn_edit</span> <span class="comp-type">(IconButton)</span>
+          <span class="comp-text">icon="edit"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Properties Table -->
+  <h2 style="margin-top: 32px; font-size: 18px;">Properties Table</h2>
+  <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+    All properties are set programmatically in the parent form. No Designer-only properties.
+  </div>
+  <table style="border-collapse: collapse; width: 100%; font-size: 13px;">
+    <tr style="background: #eee;">
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Component</th>
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Type</th>
+      <th style="border: 1px solid #ccc; padding: 6px 8px; text-align: left;">Designer Property</th>
+    </tr>
+    <tr><td style="border: 1px solid #ccc; padding: 6px 8px;" colspan="3"><em>No Designer-only properties. All properties set programmatically.</em></td></tr>
+  </table>
+
+</div>
+</body>
+</html>
