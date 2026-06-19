@@ -1,60 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mybizz CS — Landing Page Editor Wireframe</title>
-<style>
-body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
-h1 { font-size: 22px; margin-bottom: 4px; }
-.subtitle { color: #666; font-size: 13px; margin-bottom: 10px; }
-.legend { font-size: 12px; color: #555; margin-bottom: 30px; line-height: 1.8; }
-.legend span { margin-right: 24px; }
-h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin-top: 60px; margin-bottom: 20px; }
-.wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
-.wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
-.wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
-.wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
-.wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
-.wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
-.wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
-.wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-dd { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 100%; max-width: 300px; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
-.wf-card { border: 1px solid #ddd; border-radius: 8px; padding: 16px; background: #fff; margin: 8px 0; cursor: pointer; }
-.wf-card-selected { border: 2px solid #6750A4; background: #F3EDF7; }
-.wf-card-title { font-size: 14px; font-weight: bold; color: #333; }
-.wf-card-meta { font-size: 11px; color: #888; }
-.wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
-.ct { font-style: italic; color: #bbb; }
-.cfixed { color: #555; font-style: normal; }
-.prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
-.prop-note { font-size: 12px; color: #555; margin-bottom: 10px; font-style: italic; }
-table.props { border-collapse: collapse; font-size: 13px; margin-bottom: 40px; width: 100%; max-width: 720px; }
-table.props th { background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal; }
-table.props td { padding: 6px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
-table.props tr:nth-child(even) td { background: #f9f9f9; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — LandingPageEditorForm</title>
+  <style>
+    :root {
+      --primary: #493ef3;
+      --on-primary: #ffffff;
+      --primary-container: #e6dff3;
+      --on-primary-container: #0f0e59;
+      --secondary: #625a74;
+      --on-secondary: #ffffff;
+      --secondary-container: #e8defc;
+      --on-secondary-container: #1e182d;
+      --surface: #fdfcff;
+      --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0;
+      --on-surface-variant: #494552;
+      --outline: #7a7583;
+      --outline-variant: #c9c4d3;
+      --error: #b42336;
+      --on-error: #ffffff;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.5; color: var(--on-surface); background: var(--surface); padding: 40px; max-width: 900px; }
+    h1 { font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+    h2 { font-size: 22px; font-weight: 600; border-bottom: 1px solid var(--outline-variant); opacity: 0.4; padding-bottom: 6px; margin-top: 48px; margin-bottom: 20px; }
+    .legend { font-size: 12px; color: var(--on-surface-variant); margin-bottom: 32px; line-height: 1.8; background: var(--surface-container-low); padding: 12px 16px; border-radius: 8px; }
+    .legend span { margin-right: 24px; }
+    code { background: var(--surface-container-low); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .wf-outer { border: 2px solid var(--on-surface); border-radius: 8px; padding: 16px; background: var(--surface); position: relative; margin-bottom: 20px; }
+    .wf-panel { border: 2px solid var(--outline); border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: var(--surface); }
+    .wf-panel-h { border: 2px solid var(--outline); border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: var(--surface); display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+    .wf-label { position: absolute; top: -10px; left: 10px; background: var(--surface); font-size: 11px; font-weight: bold; color: var(--outline); padding: 0 4px; }
+    .wf-heading-lg { font-size: 20px; font-weight: 600; margin: 4px 0 0; }
+    .wf-heading-sm { font-size: 14px; font-weight: 600; color: var(--on-surface); border-bottom: 1px solid var(--outline-variant); padding-bottom: 3px; margin: 10px 0 0; }
+    .wf-text { font-size: 12px; color: var(--on-surface-variant); margin: 4px 0 0; font-style: italic; }
+    .wf-textbox { border: 2px solid var(--outline); border-radius: 4px; padding: 7px 10px; width: 100%; margin: 6px 0 0; font-size: 12px; color: var(--on-surface-variant); background: var(--surface); display: block; box-sizing: border-box; }
+    .wf-dd { border: 2px solid var(--outline); border-radius: 4px; padding: 7px 10px; width: 100%; max-width: 300px; margin: 6px 0 0; font-size: 12px; color: var(--on-surface-variant); background: var(--surface); display: block; box-sizing: border-box; }
+    .wf-card { border: 1px solid var(--outline-variant); border-radius: 8px; padding: 16px; background: var(--surface); margin: 8px 0; cursor: pointer; box-shadow: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px; }
+    .wf-card-selected { border: 2px solid var(--primary); background: var(--primary-container); }
+    .wf-card-title { font-size: 14px; font-weight: 500; color: var(--on-surface); }
+    .wf-card-meta { font-size: 11px; color: var(--on-surface-variant); }
+    .wf-btn-filled { background: var(--primary); color: var(--on-primary); border: 2px solid var(--primary); padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: var(--font-family); font-weight: 500; display: inline-block; margin-top: 2px; }
+    .wf-btn-outlined { background: var(--surface); color: var(--on-surface); border: 2px solid var(--outline); padding: 8px 18px; border-radius: 100px; font-size: 12px; font-family: var(--font-family); font-weight: 500; display: inline-block; margin-top: 2px; }
+    .cn { font-size: 10px; color: var(--outline); margin: 2px 0 8px 1px; }
+    .ct { font-style: italic; color: var(--outline-variant); }
+    .cfixed { color: var(--on-surface-variant); font-style: normal; }
+    .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+    .prop-note { font-size: 12px; color: var(--on-surface-variant); margin-bottom: 10px; font-style: italic; }
+  </style>
 </head>
 <body>
 
-<h1>Mybizz CS — Content Wireframes</h1>
-<p class="subtitle">Landing Page Editor — Anvil Construction Guide</p>
+<h1>Wireframe: LandingPageEditorForm</h1>
+<p style="color: var(--on-surface-variant);"><strong>Package:</strong> landing_pages/ [Phase 3]</p>
+<p style="color: var(--on-surface-variant);"><strong>Purpose:</strong> Create or edit a landing page with template selection, content configuration, and publishing controls.</p>
+
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
-  <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
+  <span><strong>Dashed border</strong> = hidden on load (<code>visible = False</code>)</span><br>
   <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>LandingPageEditorForm — Create/Edit Landing Page</h2>
+<h2>Section 1 — Introduction</h2>
+<p>To the developer: This wireframe indicates which components to place on the LandingPageEditorForm and how to configure them.</p>
+<p><strong>Conventions:</strong></p>
+<ul>
+  <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+  <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+</ul>
+
+<h2>Section 2 — Wireframe Diagram</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">col_content (ColumnPanel) — max-width: 900px</span>
+  <span class="wf-label">ColumnPanel: col_content (Component Root)</span>
 
-  <!-- Page Header -->
+  <!-- PAGE HEADER -->
   <div class="wf-panel-h">
-    <span class="wf-label">page_header (Header)</span>
+    <span class="wf-label">FlowPanel: page_header</span>
     <div style="flex:1;">
       <div class="wf-heading-lg">Create Landing Page</div>
       <div class="cn">hdg_page_title <span class="ct">(Heading)</span> <span class="cfixed">"Create Landing Page"</span></div>
@@ -67,20 +95,20 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     </div>
   </div>
 
-  <!-- Basic Settings -->
+  <!-- BASIC SETTINGS -->
   <div class="wf-panel">
-    <span class="wf-label">card_settings (Card)</span>
+    <span class="wf-label">Card: card_settings (outlined)</span>
     <div class="wf-heading-sm">Page Settings</div>
     <div class="cn">hdg_settings <span class="ct">(Heading)</span> <span class="cfixed">"Page Settings"</span></div>
 
     <div class="wf-text">Page Title</div>
-    <div class="wf-textbox" style="color: #aaa;">Summer Special Offer</div>
+    <div class="wf-textbox">[Page Title]</div>
     <div class="cn">txt_title <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div style="display: flex; gap: 16px; margin-top: 8px;">
       <div style="flex: 1;">
         <div class="wf-text">URL Slug</div>
-        <div class="wf-textbox" style="color: #aaa;">summer-special</div>
+        <div class="wf-textbox">[url-slug]</div>
         <div class="cn">txt_slug <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
       </div>
       <div style="flex: 1;">
@@ -91,27 +119,27 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     </div>
   </div>
 
-  <!-- Template Selection -->
+  <!-- TEMPLATE SELECTION -->
   <div class="wf-panel">
-    <span class="wf-label">card_template (Card)</span>
+    <span class="wf-label">Card: card_template (outlined)</span>
     <div class="wf-heading-sm">Template</div>
     <div class="cn">hdg_template <span class="ct">(Heading)</span> <span class="cfixed">"Template"</span></div>
 
     <div style="display: flex; gap: 12px;">
       <div class="wf-card wf-card-selected" style="flex: 1; text-align: center;">
-        <div style="font-size: 24px; margin-bottom: 8px;">&#128200;</div>
+        <div style="font-size: 24px; margin-bottom: 8px;"><span class="material-icons" style="font-size: 24px;">person_add</span></div>
         <div class="wf-card-title">Lead Capture</div>
         <div class="wf-card-meta">Name, email, phone, message</div>
         <div class="cn">card_lead <span class="ct">(Card)</span> — selected</div>
       </div>
       <div class="wf-card" style="flex: 1; text-align: center;">
-        <div style="font-size: 24px; margin-bottom: 8px;">&#128197;</div>
+        <div style="font-size: 24px; margin-bottom: 8px;"><span class="material-icons" style="font-size: 24px;">event</span></div>
         <div class="wf-card-title">Event Registration</div>
         <div class="wf-card-meta">Name, email, event selection</div>
         <div class="cn">card_event <span class="ct">(Card)</span></div>
       </div>
       <div class="wf-card" style="flex: 1; text-align: center;">
-        <div style="font-size: 24px; margin-bottom: 8px;">&#127909;</div>
+        <div style="font-size: 24px; margin-bottom: 8px;"><span class="material-icons" style="font-size: 24px;">play_circle</span></div>
         <div class="wf-card-title">VSL</div>
         <div class="wf-card-meta">Video sales letter + CTA</div>
         <div class="cn">card_vsl <span class="ct">(Card)</span></div>
@@ -119,30 +147,30 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     </div>
   </div>
 
-  <!-- Content Sections -->
+  <!-- CONTENT SECTIONS -->
   <div class="wf-panel">
-    <span class="wf-label">card_content (Card)</span>
+    <span class="wf-label">Card: card_content (outlined)</span>
     <div class="wf-heading-sm">Content</div>
     <div class="cn">hdg_content <span class="ct">(Heading)</span> <span class="cfixed">"Content"</span></div>
 
     <div class="wf-text">Headline</div>
-    <div class="wf-textbox" style="color: #aaa;">Get 20% Off Your First Consultation</div>
+    <div class="wf-textbox">[Headline text]</div>
     <div class="cn">txt_headline <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-text" style="margin-top: 8px;">Subheadline</div>
-    <div class="wf-textbox" style="color: #aaa;">Book your free consultation today and save on your first session.</div>
+    <div class="wf-textbox">[Subheadline text]</div>
     <div class="cn">txt_subheadline <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-text" style="margin-top: 8px;">CTA Button Text</div>
-    <div class="wf-textbox" style="color: #aaa;">Book Now</div>
+    <div class="wf-textbox">[CTA text]</div>
     <div class="cn">txt_cta <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-text" style="margin-top: 8px;">Hero Image URL</div>
-    <div class="wf-textbox" style="color: #aaa;">https://...</div>
+    <div class="wf-textbox">[Image URL]</div>
     <div class="cn">txt_image_url <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
   </div>
 
-  <!-- Action Buttons -->
+  <!-- ACTION BUTTONS -->
   <div style="display: flex; gap: 8px; margin-top: 16px;">
     <div class="wf-btn-filled">Publish</div>
     <div class="cn">btn_publish <span class="ct">(Button)</span> <span class="cfixed">"Publish"</span></div>
@@ -153,17 +181,19 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   </div>
 </div>
 
+<h2>Section 3 — Properties Table</h2>
+
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: Write Back toggle (W) must be enabled in Designer Data Bindings panel for all input components.</div>
-<table class="props">
-<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_title</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_slug</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>dd_status</td><td>DropdownMenu</td><td>writeback = W</td></tr>
-<tr><td>txt_headline</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_subheadline</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_cta</td><td>TextBox</td><td>writeback = W</td></tr>
-<tr><td>txt_image_url</td><td>TextBox</td><td>writeback = W</td></tr>
+<table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 40px; max-width: 720px;">
+  <tr><th style="background: var(--on-surface); color: var(--surface); padding: 7px 12px; text-align: left; font-weight: normal;">Component</th><th style="background: var(--on-surface); color: var(--surface); padding: 7px 12px; text-align: left; font-weight: normal;">Type</th><th style="background: var(--on-surface); color: var(--surface); padding: 7px 12px; text-align: left; font-weight: normal;">Designer Property</th></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">txt_title</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">TextBox</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">writeback = W</td></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">txt_slug</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">TextBox</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">writeback = W</td></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">dd_status</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">DropdownMenu</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">writeback = W, items = ["Draft", "Published"]</td></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">txt_headline</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">TextBox</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">writeback = W</td></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">txt_subheadline</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">TextBox</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">writeback = W</td></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">txt_cta</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">TextBox</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">writeback = W</td></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">txt_image_url</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">TextBox</td><td style="padding: 6px 12px; border-bottom: 1px solid var(--outline-variant);">writeback = W</td></tr>
 </table>
 
 </body>
