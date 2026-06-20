@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — AdminLayout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* M3 Token Block — Professional Blue Palette */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #493ef3;
+      --on-primary: #ffffff;
+      --primary-container: #e6dff3;
+      --on-primary-container: #0f0e59;
+      --secondary: #625a74;
+      --on-secondary: #ffffff;
+      --secondary-container: #e8defc;
+      --on-secondary-container: #1e182d;
+      --surface: #fdfcff;
+      --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0;
+      --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa;
+      --surface-container: #efedf5;
+      --surface-container-high: #eae7ef;
+      --outline: #7a7583;
+      --outline-variant: #c9c4d3;
+      --error: #b42336;
+      --on-error: #ffffff;
+      --error-container: #f4dddc;
+      --on-error-container: #410004;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      /* MUI Aesthetic Overlay Variables */
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+      --divider-color: var(--outline-variant);
+      --state-hover-opacity: 0.08;
+      --state-pressed-opacity: 0.12;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); min-height: 100vh; }
+
+    /* ===== LAYOUT STRUCTURE ===== */
+    .admin-layout { display: flex; min-height: 100vh; }
+
+    /* ===== LEFT NAV (MUI Variable #9) ===== */
+    .left-nav {
+      width: 260px;
+      background: var(--surface-container-low);
+      border-right: 1px solid var(--divider-color);
+      padding: var(--space-6) 0;
+      flex-shrink: 0;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .nav-brand { padding: 0 var(--space-4) var(--space-6); font-size: 18px; font-weight: 500; color: var(--on-primary-container); }
+    .nav-group-label { padding: var(--space-4) var(--space-4) var(--space-1); font-size: 11px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; }
+    .nav-item { display: flex; align-items: center; padding: var(--space-1) var(--space-4); margin: 2px var(--space-2); border-radius: 100px; color: var(--on-surface-variant); text-decoration: none; font-size: 14px; font-weight: 500; gap: var(--space-4); transition: background 150ms; cursor: pointer; }
+    .nav-item:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+    .nav-item.selected { background: var(--secondary-container); color: var(--on-secondary-container); }
+    .nav-item .material-icons { font-size: 18px; }
+    .nav-divider { border: none; border-top: 1px solid var(--divider-color); opacity: 0.4; margin: var(--space-2) var(--space-4); }
+    .nav-signout { margin-top: auto; padding-top: var(--space-4); border-top: 1px solid var(--divider-color); opacity: 0.4; }
+
+    /* ===== MAIN AREA ===== */
+    .main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+    /* ===== APP BAR (MUI Variable #8) ===== */
+    .app-bar {
+      min-height: 56px;
+      padding: 0 var(--space-6);
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--divider-color);
+      display: flex;
+      align-items: center;
+    }
+    .app-bar .title { font-size: 20px; font-weight: 500; color: var(--on-surface); flex: 1; }
+    .app-bar-nav { display: flex; gap: var(--space-2); align-items: center; }
+    .btn-icon { padding: var(--space-2); min-width: 40px; min-height: 40px; border-radius: 50%; background: transparent; color: var(--on-surface-variant); border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+    .btn-icon:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+
+    /* ===== CONTENT ===== */
+    .content { flex: 1; padding: var(--space-6); background: var(--surface); overflow-y: auto; }
+
+    /* ===== SAMPLE CONTENT CARDS ===== */
+    .page-title { font-size: 32px; line-height: 40px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-6); }
+    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6); }
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--divider-color);
+      border-radius: 8px;
+      padding: var(--space-4);
+      box-shadow: var(--mui-shadow-card);
+    }
+    .metric-card:hover { box-shadow: var(--mui-shadow-raised); transition: box-shadow 200ms ease; }
+    .metric-label { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); margin-bottom: var(--space-1); }
+    .metric-value { font-size: 24px; font-weight: 600; color: var(--on-surface); }
+    .metric-change { font-size: 12px; color: var(--on-surface-variant); margin-top: var(--space-1); }
+    .metric-change.up { color: #1b5e1b; }
+    .metric-change.down { color: #b42336; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .left-nav { display: none; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- LEFT NAV -->
+    <nav class="left-nav" aria-label="Main navigation">
+      <div class="nav-brand">Mybizz</div>
+      <a class="nav-item selected" href="#"><span class="material-icons">dashboard</span> Dashboard</a>
+      <div class="nav-group-label">Sales &amp; Operations</div>
+      <a class="nav-item" href="#"><span class="material-icons">event</span> Bookings</a>
+      <a class="nav-item" href="#"><span class="material-icons">design_services</span> Services</a>
+      <div class="nav-group-label">Customers &amp; Marketing</div>
+      <a class="nav-item" href="#"><span class="material-icons">contacts</span> Contacts</a>
+      <a class="nav-item" href="#"><span class="material-icons">campaign</span> Campaigns</a>
+      <a class="nav-item" href="#"><span class="material-icons">send</span> Broadcasts</a>
+      <a class="nav-item" href="#"><span class="material-icons">group_work</span> Segments</a>
+      <a class="nav-item" href="#"><span class="material-icons">task</span> Tasks</a>
+      <div class="nav-group-label">Content &amp; Website</div>
+      <a class="nav-item" href="#"><span class="material-icons">edit_note</span> Blog</a>
+      <a class="nav-item" href="#"><span class="material-icons">web</span> Pages</a>
+      <div class="nav-group-label">Finance &amp; Reports</div>
+      <a class="nav-item" href="#"><span class="material-icons">receipt_long</span> Invoices</a>
+      <a class="nav-item" href="#"><span class="material-icons">payments</span> Payments</a>
+      <a class="nav-item" href="#"><span class="material-icons">assessment</span> Reports</a>
+      <a class="nav-item" href="#"><span class="material-icons">bar_chart</span> Analytics</a>
+      <a class="nav-item" href="#"><span class="material-icons">schedule</span> Time Entries</a>
+      <div class="nav-divider"></div>
+      <a class="nav-item" href="#"><span class="material-icons">settings</span> Settings</a>
+      <a class="nav-item" href="#"><span class="material-icons">lock</span> Vault</a>
+      <div class="nav-signout">
+        <a class="nav-item" href="#"><span class="material-icons">logout</span> Sign Out</a>
+      </div>
+    </nav>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+      <!-- APP BAR -->
+      <header class="app-bar">
+        <div class="title">Dashboard</div>
+        <div class="app-bar-nav">
+          <button class="btn-icon" title="Notifications"><span class="material-icons">notifications</span></button>
+          <button class="btn-icon" title="User menu"><span class="material-icons">account_circle</span></button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="content">
+        <h1 class="page-title">Dashboard</h1>
+
+        <!-- METRICS -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Revenue This Month</div>
+            <div class="metric-value">R 48,750</div>
+            <div class="metric-change up">+12.5% from last month</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Bookings This Month</div>
+            <div class="metric-value">127</div>
+            <div class="metric-change up">+8.3% from last month</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">New Contacts</div>
+            <div class="metric-value">34</div>
+            <div class="metric-change up">+15.2% from last month</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Average Order Value</div>
+            <div class="metric-value">R 384</div>
+            <div class="metric-change down">-2.1% from last month</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
