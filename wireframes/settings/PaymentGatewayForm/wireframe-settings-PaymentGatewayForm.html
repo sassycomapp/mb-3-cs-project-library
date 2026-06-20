@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Payment Gateway Form</title>
+<title>Mybizz CS — Payment Gateway Form Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -43,8 +43,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Settings Wireframes</h1>
-<p class="subtitle">Payment Gateway — Anvil Construction Guide</p>
+<!-- Section 1: Introduction -->
+<h1>Mybizz CS — Payment Gateway Form Wireframe</h1>
+<p class="subtitle">Settings → Payment Gateway — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -52,6 +53,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
+<!-- Section 2: Wireframe Diagram -->
 <h2>PaymentGatewayForm — Gateway Configuration</h2>
 
 <div class="wf-outer">
@@ -62,7 +64,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-heading-lg">Payment Gateway</div>
     <div class="cn">hdg_gateway_title <span class="ct">(Heading)</span> <span class="cfixed">"Payment Gateway"</span></div>
     <div class="wf-text">Connect your payment provider to accept payments</div>
-    <div class="cn">lbl_gateway_subtitle <span class="ct">(Label)</span></div>
+    <div class="cn">txt_gateway_subtitle <span class="ct">(Text)</span></div>
   </div>
 
   <!-- Gateway Selector -->
@@ -81,7 +83,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
         <div class="wf-gateway-desc">Africa-focused</div>
       </div>
     </div>
-    <div class="cn">flow_gateway_options <span class="ct">(FlowPanel)</span> — radio button group</div>
+    <div class="cn">flow_gateway_options <span class="ct">(FlowPanel)</span></div>
   </div>
 
   <!-- Test Mode Toggle -->
@@ -103,14 +105,14 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-textbox" style="width:60%;">Publishable Key</div>
     <div class="cn">txt_publishable_key <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
     <div class="wf-text">This key is safe to expose in client-side code.</div>
-    <div class="cn">lbl_publishable_hint <span class="ct">(Label)</span></div>
+    <div class="cn">txt_publishable_hint <span class="ct">(Text)</span></div>
   </div>
 
   <!-- Vault Notice -->
   <div class="wf-notice">
     Secret keys are stored securely in The Vault. They are never displayed after saving. Access The Vault to manage your secret keys.
   </div>
-  <div class="cn">vault_notice <span class="ct">(Label)</span></div>
+  <div class="cn">txt_vault_notice <span class="ct">(Text)</span></div>
 
   <!-- Save Button -->
   <div style="margin-top:12px;">
@@ -119,6 +121,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   </div>
 </div>
 
+<!-- Section 3: Properties Table -->
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input components.</div>
 <table class="props">

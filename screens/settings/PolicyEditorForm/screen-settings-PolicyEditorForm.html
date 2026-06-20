@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — Policy Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+/* M3 Token Block — Professional Blue Palette */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #493ef3;
+  --on-primary: #ffffff;
+  --primary-container: #e6dff3;
+  --on-primary-container: #0f0e59;
+  --secondary: #625a74;
+  --on-secondary: #ffffff;
+  --secondary-container: #e8defc;
+  --on-secondary-container: #1e182d;
+  --surface: #fdfcff;
+  --on-surface: #1c1b20;
+  --surface-variant: #e5e0f0;
+  --on-surface-variant: #494552;
+  --surface-container-low: #f5f2fa;
+  --surface-container: #efedf5;
+  --surface-container-high: #eae7ef;
+  --outline: #7a7583;
+  --outline-variant: #c9c4d3;
+  --error: #b42336;
+  --on-error: #ffffff;
+  --error-container: #f4dddc;
+  --on-error-container: #410004;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  /* MUI Aesthetic Overlay Variables */
+  --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+  --divider-color: var(--outline-variant);
+  --state-hover-opacity: 0.08;
+  --state-pressed-opacity: 0.12;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.4286;
+  color: var(--on-surface);
+  background-color: var(--surface);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ===== LEFT NAV — MUI Variable #9 ===== */
+.left-nav { width: 260px; background: var(--surface-container-low); border-right: 1px solid var(--divider-color); padding: 24px 0; flex-shrink: 0; overflow-y: auto; display: flex; flex-direction: column; }
+.nav-brand { padding: 0 16px 24px; font-size: 18px; font-weight: 500; color: var(--on-primary-container); }
+.nav-group-label { padding: 16px 16px 4px; font-size: 11px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; }
+.nav-item { display: flex; align-items: center; padding: 4px 16px; margin: 2px 8px; border-radius: 100px; color: var(--on-surface-variant); text-decoration: none; font-size: 14px; font-weight: 500; gap: 16px; transition: background 150ms; cursor: pointer; }
+.nav-item:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+.nav-item.selected { background: var(--secondary-container); color: var(--on-secondary-container); }
+.nav-item-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.nav-divider { border: none; border-top: 1px solid var(--divider-color); opacity: 0.4; margin: 8px 16px; }
+.nav-signout { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--divider-color); opacity: 0.4; }
+
+/* ===== MAIN AREA ===== */
+.main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* ===== APP BAR — MUI Variable #8 ===== */
+.app-bar { min-height: 56px; padding: 0 24px; background-color: var(--surface); border-bottom: 1px solid var(--divider-color); display: flex; align-items: center; }
+.app-bar .title { font-size: 20px; font-weight: 500; color: var(--on-surface); flex: 1; }
+.app-bar-nav { display: flex; gap: 8px; align-items: center; }
+.btn-icon { width: 40px; height: 40px; border-radius: 100px; border: none; background: transparent; color: var(--on-surface-variant); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 150ms; }
+.btn-icon:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+
+/* ===== CONTENT ===== */
+.content { flex: 1; padding: var(--space-6); overflow-y: auto; max-width: 1000px; }
+
+/* ===== HEADER ROW ===== */
+.header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); }
+.page-title { font-size: 32px; line-height: 40px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-1); }
+.page-subtitle { font-size: 14px; color: var(--on-surface-variant); }
+
+/* ===== CARD — MUI Variable #2, #3 ===== */
+.card { background: var(--surface); border-radius: 8px; box-shadow: var(--mui-shadow-card); padding: var(--space-4); margin-bottom: var(--space-4); }
+.card-title { font-size: 18px; line-height: 24px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 1px solid var(--divider-color); opacity: 0.4; }
+
+/* ===== FORM ===== */
+.form-row { display: flex; gap: var(--space-4); align-items: flex-end; margin-bottom: var(--space-4); }
+.form-group { flex: 1; }
+.form-label { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); margin-bottom: var(--space-2); display: block; }
+.form-select { width: 100%; padding: 12px 16px; border: 1px solid var(--outline); border-radius: 4px; font-size: 16px; font-family: var(--font-family); color: var(--on-surface); background: var(--surface); appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a7583'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 24px; min-height: 48px; cursor: pointer; }
+.form-select:focus { outline: none; border-color: var(--primary); border-width: 2px; padding: 11px 15px; }
+.form-input { width: 100%; padding: 12px 16px; border: 1px solid var(--outline); border-radius: 4px; font-size: 16px; font-family: var(--font-family); color: var(--on-surface); background: var(--surface); transition: border-color 150ms; min-height: 48px; }
+.form-input:focus { outline: none; border-color: var(--primary); border-width: 2px; padding: 11px 15px; }
+.form-input::placeholder { color: var(--on-surface-variant); opacity: 0.6; }
+.form-textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--outline); border-radius: 4px; font-size: 16px; font-family: var(--font-family); color: var(--on-surface); background: var(--surface); transition: border-color 150ms; min-height: 120px; resize: vertical; }
+.form-textarea:focus { outline: none; border-color: var(--primary); border-width: 2px; padding: 11px 15px; }
+
+/* ===== CLAUSE ITEM ===== */
+.clause-item { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-3) var(--space-4); border-radius: 8px; margin-bottom: var(--space-3); transition: background 150ms; }
+.clause-item:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+.clause-item.seeded { border-left: 4px solid #2e7d32; background: var(--surface-container-low); }
+.clause-item.custom { border-left: 4px solid var(--primary); background: var(--surface-container-low); }
+.clause-content { flex: 1; }
+.clause-title { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-1); }
+.clause-preview { font-size: 13px; color: var(--on-surface-variant); line-height: 1.5; }
+.clause-actions { display: flex; gap: var(--space-2); flex-shrink: 0; }
+.clause-btn { padding: 6px 12px; border-radius: 100px; font-size: 13px; font-weight: 500; font-family: var(--font-family); cursor: pointer; transition: all 150ms; border: 1px solid var(--outline-variant); background: var(--surface); color: var(--on-surface-variant); }
+.clause-btn:hover { background: rgba(73,62,243,var(--state-hover-opacity)); border-color: var(--primary); color: var(--primary); }
+.clause-btn.delete:hover { background: rgba(180,35,54,0.08); border-color: var(--error); color: var(--error); }
+
+/* ===== CATEGORY FILTER ===== */
+.filter-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
+.filter-select { padding: 8px 16px; border: 1px solid var(--outline); border-radius: 100px; font-size: 14px; font-family: var(--font-family); color: var(--on-surface); background: var(--surface); appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a7583'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px; padding-right: 36px; cursor: pointer; }
+.filter-select:focus { outline: none; border-color: var(--primary); }
+
+/* ===== BUTTONS ===== */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; font-family: var(--font-family); cursor: pointer; transition: all 150ms; min-height: 40px; border: none; }
+.btn-filled { background: var(--primary); color: var(--on-primary); }
+.btn-filled:hover { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15); }
+.btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
+.btn-outlined:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+.btn-text { background: transparent; color: var(--primary); border: none; padding: 10px 12px; }
+.btn-text:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+.btn-return { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+.btn-return:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+
+/* ===== DIVIDER — MUI Variable #5 ===== */
+.divider { border: none; border-top: 1px solid var(--divider-color); opacity: 0.4; margin: var(--space-4) 0; }
+
+/* ===== ACTIONS ROW ===== */
+.actions-row { display: flex; gap: var(--space-3); margin-top: var(--space-6); }
+
+/* ===== VERSION HISTORY ===== */
+.version-item { display: flex; align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--divider-color); }
+.version-item:last-child { border-bottom: none; }
+.version-info { font-size: 14px; color: var(--on-surface); }
+.version-date { font-size: 13px; color: var(--on-surface-variant); }
+
+/* ===== CLAUSE FORM (hidden by default) ===== */
+.clause-form { background: var(--surface-container-low); border-radius: 8px; padding: var(--space-4); margin-bottom: var(--space-4); display: none; }
+.clause-form.active { display: block; }
+.clause-form-title { font-size: 18px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-4); }
+
+/* ===== EMPTY STATE ===== */
+.empty-state { text-align: center; padding: var(--space-8) var(--space-4); }
+.empty-state-icon { font-size: 48px; color: var(--on-surface-variant); margin-bottom: var(--space-4); }
+.empty-state-heading { font-size: 22px; line-height: 28px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-2); }
+.empty-state-body { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-6); max-width: 400px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<!-- LEFT NAV — MUI Variable #9 -->
+<nav class="left-nav">
+  <div class="nav-brand">Mybizz</div>
+  <div class="nav-group-label">Main</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">dashboard</span></span> Dashboard</a>
+  <div class="nav-group-label">Sales & Operations</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">event</span></span> Bookings</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">design_services</span></span> Services</a>
+  <div class="nav-group-label">Customers & Marketing</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">contacts</span></span> Contacts</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">campaign</span></span> Campaigns</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">mail</span></span> Broadcasts</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">group_work</span></span> Segments</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">task</span></span> Tasks</a>
+  <div class="nav-group-label">Content & Website</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">article</span></span> Blog</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">web</span></span> Pages</a>
+  <div class="nav-group-label">Finance & Reports</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">receipt</span></span> Invoices</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">payments</span></span> Payments</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">assessment</span></span> Reports</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">bar_chart</span></span> Analytics</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">schedule</span></span> Time Entries</a>
+  <hr class="nav-divider">
+  <div class="nav-group-label">Settings</div>
+  <a class="nav-item selected" href="#"><span class="nav-item-icon"><span class="material-icons">settings</span></span> Settings</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">lock</span></span> Vault</a>
+  <div class="nav-signout">
+    <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">logout</span></span> Sign Out</a>
+  </div>
+</nav>
+
+<!-- MAIN AREA -->
+<div class="main-area">
+  <!-- APP BAR — MUI Variable #8 -->
+  <header class="app-bar">
+    <div class="title">Settings</div>
+    <div class="app-bar-nav">
+      <button class="btn-icon" title="Notifications"><span class="material-icons">notifications</span></button>
+      <button class="btn-icon" title="User menu"><span class="material-icons">account_circle</span></button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <div class="header-row">
+      <div>
+        <h1 class="page-title">Policy Editor</h1>
+        <p class="page-subtitle">Edit your privacy policy and terms & conditions</p>
+      </div>
+      <button class="btn btn-return"><span class="material-icons" style="font-size:18px;">arrow_back</span> Return to Settings</button>
+    </div>
+
+    <!-- Document Type & Publish -->
+    <div class="card">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Document Type</label>
+          <select class="form-select">
+            <option selected>Privacy Policy</option>
+            <option>Terms & Conditions</option>
+          </select>
+        </div>
+        <div>
+          <button class="btn btn-filled"><span class="material-icons" style="font-size:18px;">publish</span> Publish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ClauseBuilder Component -->
+    <div class="card">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4);">
+        <div class="card-title" style="margin-bottom: 0; padding-bottom: 0; border-bottom: none;">Clauses</div>
+        <button class="btn btn-outlined"><span class="material-icons" style="font-size:18px;">add</span> Add Custom Clause</button>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="filter-row">
+        <span style="font-size:14px; color: var(--on-surface-variant);">Filter by:</span>
+        <select class="filter-select">
+          <option>All Categories</option>
+          <option>Data Collection</option>
+          <option>Data Usage</option>
+          <option>User Rights</option>
+          <option>Cookies</option>
+          <option>Contact Information</option>
+        </select>
+      </div>
+
+      <!-- Seeded Clauses -->
+      <div style="margin-bottom: var(--space-4);">
+        <div style="font-size:12px; font-weight:500; color: var(--on-surface-variant); text-transform:uppercase; letter-spacing:0.5px; margin-bottom: var(--space-3);">Seeded Clauses</div>
+        
+        <div class="clause-item seeded">
+          <div class="clause-content">
+            <div class="clause-title">Information We Collect</div>
+            <div class="clause-preview">We collect personal information you provide directly, including your name, email address, phone number, and payment information when you book our services.</div>
+          </div>
+          <div class="clause-actions">
+            <button class="clause-btn">Edit</button>
+          </div>
+        </div>
+
+        <div class="clause-item seeded">
+          <div class="clause-content">
+            <div class="clause-title">How We Use Your Information</div>
+            <div class="clause-preview">We use your information to provide and improve our services, process bookings, send confirmations, and communicate with you about your appointments.</div>
+          </div>
+          <div class="clause-actions">
+            <button class="clause-btn">Edit</button>
+          </div>
+        </div>
+
+        <div class="clause-item seeded">
+          <div class="clause-content">
+            <div class="clause-title">Data Security</div>
+            <div class="clause-preview">We implement appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction.</div>
+          </div>
+          <div class="clause-actions">
+            <button class="clause-btn">Edit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Clauses -->
+      <div>
+        <div style="font-size:12px; font-weight:500; color: var(--on-surface-variant); text-transform:uppercase; letter-spacing:0.5px; margin-bottom: var(--space-3);">Custom Clauses</div>
+        
+        <div class="clause-item custom">
+          <div class="clause-content">
+            <div class="clause-title">Our Cookie Policy</div>
+            <div class="clause-preview">We use cookies to enhance your experience on our website. You can control cookie settings through your browser preferences.</div>
+          </div>
+          <div class="clause-actions">
+            <button class="clause-btn">Edit</button>
+            <button class="clause-btn delete">Delete</button>
+          </div>
+        </div>
+
+        <div class="clause-item custom">
+          <div class="clause-content">
+            <div class="clause-title">Third-Party Services</div>
+            <div class="clause-preview">We use Stripe and Paystack for payment processing. Your payment information is handled securely by these providers.</div>
+          </div>
+          <div class="clause-actions">
+            <button class="clause-btn">Edit</button>
+            <button class="clause-btn delete">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add/Edit Clause Form (hidden by default) -->
+    <div class="clause-form">
+      <div class="clause-form-title">Add/Edit Clause</div>
+      
+      <div class="form-group">
+        <label class="form-label">Clause Title</label>
+        <input type="text" class="form-input" placeholder="Enter clause title">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Clause Body</label>
+        <textarea class="form-textarea" placeholder="Enter clause text..."></textarea>
+      </div>
+
+      <div class="actions-row">
+        <button class="btn btn-filled"><span class="material-icons" style="font-size:18px;">save</span> Save Clause</button>
+        <button class="btn btn-text">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Version History (hidden by default) -->
+    <div class="card" style="display:none;">
+      <div class="card-title">Version History</div>
+      
+      <div class="version-item">
+        <div>
+          <div class="version-info">Version 3</div>
+          <div class="version-date">Published 15 May 2026 at 14:30</div>
+        </div>
+        <button class="clause-btn">View</button>
+      </div>
+
+      <div class="version-item">
+        <div>
+          <div class="version-info">Version 2</div>
+          <div class="version-date">Published 10 May 2026 at 09:15</div>
+        </div>
+        <button class="clause-btn">View</button>
+      </div>
+
+      <div class="version-item">
+        <div>
+          <div class="version-info">Version 1</div>
+          <div class="version-date">Published 1 May 2026 at 11:00</div>
+        </div>
+        <button class="clause-btn">View</button>
+      </div>
+    </div>
+
+    <!-- Empty State (for when no clauses) -->
+    <div class="empty-state" style="display:none;">
+      <div class="empty-state-icon"><span class="material-icons" style="font-size:48px;">description</span></div>
+      <h2 class="empty-state-heading">No policy clauses yet</h2>
+      <p class="empty-state-body">Start building your privacy policy by adding clauses from the master template or creating your own custom clauses.</p>
+      <button class="btn btn-filled"><span class="material-icons" style="font-size:18px;">add</span> Add Your First Clause</button>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

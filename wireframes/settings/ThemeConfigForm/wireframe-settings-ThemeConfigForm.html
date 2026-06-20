@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Theme Config Form</title>
+<title>Mybizz CS — Theme Config Form Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -39,8 +39,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Settings Wireframes</h1>
-<p class="subtitle">Theme Configuration — Anvil Construction Guide</p>
+<!-- Section 1: Introduction -->
+<h1>Mybizz CS — Theme Config Form Wireframe</h1>
+<p class="subtitle">Settings → Theme — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -48,6 +49,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
+<!-- Section 2: Wireframe Diagram -->
 <h2>ThemeConfigForm — Theme Customization</h2>
 
 <div class="wf-outer">
@@ -58,7 +60,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-heading-lg">Theme Configuration</div>
     <div class="cn">hdg_theme_title <span class="ct">(Heading)</span> <span class="cfixed">"Theme Configuration"</span></div>
     <div class="wf-text">Customize the look and feel of your client-facing pages</div>
-    <div class="cn">lbl_theme_subtitle <span class="ct">(Label)</span></div>
+    <div class="cn">txt_theme_subtitle <span class="ct">(Text)</span></div>
   </div>
 
   <!-- Colors Section -->
@@ -70,23 +72,21 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-panel-h">
       <div style="flex:1;">
         <div class="wf-heading-sm" style="border:none; margin:0; padding:0;">Primary Color</div>
-        <div class="cn">lbl_primary_color <span class="ct">(Label)</span> <span class="cfixed">"Primary Color"</span></div>
+        <div class="cn">hdg_primary_color <span class="ct">(Heading)</span> <span class="cfixed">"Primary Color"</span></div>
         <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
           <span class="wf-color-swatch" style="background:#6750A4;"></span>
           <div class="wf-textbox" style="width:120px;">#6750A4</div>
         </div>
         <div class="cn">txt_primary_color <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-        <div class="wf-text">Used for buttons, links, and key UI elements.</div>
       </div>
       <div style="flex:1;">
         <div class="wf-heading-sm" style="border:none; margin:0; padding:0;">Accent Color</div>
-        <div class="cn">lbl_accent_color <span class="ct">(Label)</span> <span class="cfixed">"Accent Color"</span></div>
+        <div class="cn">hdg_accent_color <span class="ct">(Heading)</span> <span class="cfixed">"Accent Color"</span></div>
         <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
           <span class="wf-color-swatch" style="background:#FF7043;"></span>
           <div class="wf-textbox" style="width:120px;">#FF7043</div>
         </div>
         <div class="cn">txt_accent_color <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
-        <div class="wf-text">Used for highlights and call-to-action elements.</div>
       </div>
     </div>
     <div class="cn">flow_color_fields <span class="ct">(FlowPanel)</span></div>
@@ -99,10 +99,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_section_typography <span class="ct">(Heading)</span> <span class="cfixed">"Typography"</span></div>
 
     <div class="wf-heading-sm" style="border:none; margin:0; padding:0;">Font Family</div>
-    <div class="cn">lbl_font_family <span class="ct">(Label)</span> <span class="cfixed">"Font Family"</span></div>
+    <div class="cn">hdg_font_family <span class="ct">(Heading)</span> <span class="cfixed">"Font Family"</span></div>
     <div class="wf-dd">Roboto</div>
     <div class="cn">dd_font_family <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
-    <div class="wf-text">Select a Google Font for your public pages.</div>
   </div>
 
   <!-- Header Style Section -->
@@ -112,7 +111,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_section_header <span class="ct">(Heading)</span> <span class="cfixed">"Header Style"</span></div>
 
     <div class="wf-heading-sm" style="border:none; margin:0; padding:0;">Header Layout</div>
-    <div class="cn">lbl_header_style <span class="ct">(Label)</span> <span class="cfixed">"Header Layout"</span></div>
+    <div class="cn">hdg_header_style <span class="ct">(Heading)</span> <span class="cfixed">"Header Layout"</span></div>
     <div class="wf-dd">Standard — Logo left, nav right</div>
     <div class="cn">dd_header_style <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span></div>
   </div>
@@ -151,6 +150,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <div class="cn">flow_actions <span class="ct">(FlowPanel)</span></div>
 </div>
 
+<!-- Section 3: Properties Table -->
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input and dropdown components.</div>
 <table class="props">

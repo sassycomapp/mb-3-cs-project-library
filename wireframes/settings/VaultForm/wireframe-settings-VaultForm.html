@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Vault Form</title>
+<title>Mybizz CS — Vault Form Wireframe</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -13,7 +14,9 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-outer { border: 2px solid #333; border-radius: 4px; padding: 16px; background: #fff; position: relative; margin-bottom: 20px; }
 .wf-panel { border: 2px solid #555; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #fafafa; }
 .wf-panel-h { border: 2px solid #555; border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: #fafafa; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.wf-panel-hidden { border: 2px dashed #aaa; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #f7f7f7; }
 .wf-label { position: absolute; top: -10px; left: 10px; background: #fff; font-size: 11px; font-weight: bold; color: #333; padding: 0 4px; }
+.wf-label-hidden { position: absolute; top: -10px; left: 10px; background: #f7f7f7; font-size: 11px; font-weight: bold; color: #aaa; padding: 0 4px; }
 .wf-heading-lg { font-size: 20px; font-weight: bold; margin: 4px 0 0; }
 .wf-heading-sm { font-size: 13px; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; padding-bottom: 3px; margin: 10px 0 0; }
 .wf-text { font-size: 11px; color: #999; margin: 4px 0 0; font-style: italic; }
@@ -29,6 +32,8 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-secret-actions { display: flex; gap: 4px; }
 .wf-icon-btn { width: 28px; height: 28px; border: 1px solid #ccc; border-radius: 4px; background: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; cursor: pointer; }
 .wf-icon-btn.delete { border-color: #B3261E; color: #B3261E; }
+.wf-empty-state { text-align: center; padding: 24px; }
+.wf-empty-icon { font-size: 48px; color: #888; margin-bottom: 8px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
@@ -42,8 +47,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Settings Wireframes</h1>
-<p class="subtitle">Vault & Security — Anvil Construction Guide</p>
+<!-- Section 1: Introduction -->
+<h1>Mybizz CS — Vault Form Wireframe</h1>
+<p class="subtitle">Settings → Vault — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -51,6 +57,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
+<!-- Section 2: Wireframe Diagram -->
 <h2>VaultForm — Secure Credential Storage</h2>
 
 <div class="wf-outer">
@@ -61,14 +68,27 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-heading-lg">The Vault</div>
     <div class="cn">hdg_vault_title <span class="ct">(Heading)</span> <span class="cfixed">"The Vault"</span></div>
     <div class="wf-text">Securely store API keys, passwords, and sensitive credentials</div>
-    <div class="cn">lbl_vault_subtitle <span class="ct">(Label)</span></div>
+    <div class="cn">txt_vault_subtitle <span class="ct">(Text)</span></div>
   </div>
 
-  <!-- TOTP Notice -->
-  <div class="wf-notice">
-    <div class="wf-text-normal"><strong>TOTP Verification Required</strong></div>
-    <div class="wf-text">You must verify with your authenticator app before accessing or modifying vault secrets.</div>
-    <div class="cn">totp_notice <span class="ct">(Custom — alert banner)</span></div>
+  <!-- TOTP Verification (hidden by default - shown before vault access) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_totp_verify (ColumnPanel) — visible = False</span>
+    <div class="wf-heading-sm">TOTP Verification Required</div>
+    <div class="cn">hdg_totp_title <span class="ct">(Heading)</span> <span class="cfixed">"TOTP Verification Required"</span></div>
+    <div class="wf-text">Enter the code from your authenticator app</div>
+    <div class="cn">txt_totp_instructions <span class="ct">(Text)</span></div>
+    <div class="wf-textbox" style="width:200px;">6-digit code</div>
+    <div class="cn">txt_totp_code <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="wf-btn-filled">Verify</div>
+    <div class="cn">btn_verify_totp <span class="ct">(Button)</span> <span class="cfixed">"Verify"</span></div>
+  </div>
+
+  <!-- TOTP Error (hidden by default) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_totp_error (ColumnPanel) — visible = False</span>
+    <div class="wf-text">Invalid code. Please try again.</div>
+    <div class="cn">txt_totp_error <span class="ct">(Text)</span></div>
   </div>
 
   <!-- Stored Secrets List -->
@@ -77,38 +97,36 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-heading-sm">Stored Secrets</div>
     <div class="cn">hdg_secrets_title <span class="ct">(Heading)</span> <span class="cfixed">"Stored Secrets"</span></div>
 
+    <!-- Secret item template (RepeatingPanel) -->
     <div class="wf-secret-item">
       <div class="wf-secret-info">
-        <div class="wf-secret-name">stripe_secret_key</div>
-        <div class="wf-secret-meta">Updated 2026-05-10 &bull; Used by Payment Gateway</div>
+        <div class="wf-secret-name">Secret Name</div>
+        <div class="cn">txt_secret_name <span class="ct">(Text)</span></div>
+        <div class="wf-secret-meta">Updated [date] — Used by [context]</div>
+        <div class="cn">txt_secret_meta <span class="ct">(Text)</span></div>
       </div>
       <div class="wf-secret-actions">
-        <span class="wf-icon-btn" title="View">👁</span>
-        <span class="wf-icon-btn delete" title="Delete">🗑</span>
+        <span class="wf-icon-btn" title="View"><span class="material-icons">visibility</span></span>
+        <span class="cn">btn_view_secret <span class="ct">(Button)</span></span>
+        <span class="wf-icon-btn delete" title="Delete"><span class="material-icons">delete</span></span>
+        <span class="cn">btn_delete_secret <span class="ct">(Button)</span></span>
       </div>
     </div>
-    <div class="cn">rp_secrets <span class="ct">(RepeatingPanel)</span> — secret items</div>
+    <div class="cn">rp_secrets <span class="ct">(RepeatingPanel)</span></div>
+  </div>
 
-    <div class="wf-secret-item">
-      <div class="wf-secret-info">
-        <div class="wf-secret-name">smtp_password</div>
-        <div class="wf-secret-meta">Updated 2026-05-01 &bull; Used by Email Configuration</div>
-      </div>
-      <div class="wf-secret-actions">
-        <span class="wf-icon-btn" title="View">👁</span>
-        <span class="wf-icon-btn delete" title="Delete">🗑</span>
-      </div>
-    </div>
-
-    <div class="wf-secret-item">
-      <div class="wf-secret-info">
-        <div class="wf-secret-name">paystack_secret_key</div>
-        <div class="wf-secret-meta">Updated 2026-04-20 &bull; Used by Payment Gateway</div>
-      </div>
-      <div class="wf-secret-actions">
-        <span class="wf-icon-btn" title="View">👁</span>
-        <span class="wf-icon-btn delete" title="Delete">🗑</span>
-      </div>
+  <!-- Empty State (hidden by default - shown when no secrets) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_empty_state (ColumnPanel) — visible = False</span>
+    <div class="wf-empty-state">
+      <div class="wf-empty-icon"><span class="material-icons" style="font-size:48px;">lock</span></div>
+      <div class="cn">ic_empty_vault <span class="ct">(Icon)</span> <span class="cfixed">"lock"</span></div>
+      <div class="wf-heading-sm">No secrets stored yet</div>
+      <div class="cn">hdg_empty_title <span class="ct">(Heading)</span> <span class="cfixed">"No secrets stored yet"</span></div>
+      <div class="wf-text">Add your API keys and credentials below. They will be encrypted at rest and never displayed after saving.</div>
+      <div class="cn">txt_empty_body <span class="ct">(Text)</span></div>
+      <div class="wf-btn-filled">Add Your First Secret</div>
+      <div class="cn">btn_add_first_secret <span class="ct">(Button)</span> <span class="cfixed">"Add Your First Secret"</span></div>
     </div>
   </div>
 
@@ -119,12 +137,12 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">hdg_add_secret <span class="ct">(Heading)</span> <span class="cfixed">"Add New Secret"</span></div>
 
     <div class="wf-textbox" style="width:60%;">Secret Name</div>
-    <div class="cn">txt_secret_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
+    <div class="cn">txt_secret_name_input <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span></div>
 
     <div class="wf-textbox" style="width:60%;">Secret Value</div>
     <div class="cn">txt_secret_value <span class="ct">(TextBox)</span> <span class="cfixed">(W, hide_text=True)</span></div>
     <div class="wf-text">Values are encrypted at rest and never displayed after saving.</div>
-    <div class="cn">lbl_secret_hint <span class="ct">(Label)</span></div>
+    <div class="cn">txt_secret_hint <span class="ct">(Text)</span></div>
 
     <div style="display:flex; gap:8px; margin-top:12px;">
       <div>
@@ -140,11 +158,13 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   </div>
 </div>
 
+<!-- Section 3: Properties Table -->
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input components. hide_text must be set in Designer for password fields.</div>
 <table class="props">
 <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_secret_name</td><td>TextBox</td><td>writeback = W, placeholder = "e.g. stripe_webhook_secret"</td></tr>
+<tr><td>txt_totp_code</td><td>TextBox</td><td>writeback = W, placeholder = "6-digit code"</td></tr>
+<tr><td>txt_secret_name_input</td><td>TextBox</td><td>writeback = W, placeholder = "e.g. stripe_webhook_secret"</td></tr>
 <tr><td>txt_secret_value</td><td>TextBox</td><td>writeback = W, hide_text = True, placeholder = "Enter the secret value"</td></tr>
 </table>
 

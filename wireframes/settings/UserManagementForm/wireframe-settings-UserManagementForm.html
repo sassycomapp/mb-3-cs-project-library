@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — User Management Form</title>
+<title>Mybizz CS — User Management Form Wireframe</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -50,8 +51,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Settings Wireframes</h1>
-<p class="subtitle">User Management — Anvil Construction Guide</p>
+<!-- Section 1: Introduction -->
+<h1>Mybizz CS — User Management Form Wireframe</h1>
+<p class="subtitle">Settings → Users & Permissions — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -59,6 +61,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
+<!-- Section 2: Wireframe Diagram -->
 <h2>UserManagementForm — Users & Permissions</h2>
 
 <div class="wf-outer">
@@ -95,98 +98,32 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
         </tr>
       </thead>
       <tbody>
+        <!-- Row template (RepeatingPanel) -->
         <tr>
           <td>
-            <div class="wf-user-name">Amara Okafor</div>
+            <div class="wf-user-name">User Name</div>
+            <div class="cn">txt_user_name <span class="ct">(Text)</span></div>
           </td>
           <td>
-            <div class="wf-user-email">amara@mybizz.com</div>
+            <div class="wf-user-email">user@email.com</div>
+            <div class="cn">txt_user_email <span class="ct">(Text)</span></div>
           </td>
-          <td><span class="wf-badge wf-badge-owner">Owner</span></td>
+          <td>
+            <span class="wf-badge wf-badge-owner">Role</span>
+            <div class="cn">txt_user_role <span class="ct">(Text)</span></div>
+          </td>
           <td>
             <span class="wf-status">
               <span class="wf-status-dot active"></span>
-              Active
+              Status
             </span>
+            <div class="cn">txt_user_status <span class="ct">(Text)</span></div>
           </td>
           <td>
-            <span class="wf-icon-btn" title="Edit">✏️</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="wf-user-name">David Mensah</div>
-          </td>
-          <td>
-            <div class="wf-user-email">david@mybizz.com</div>
-          </td>
-          <td><span class="wf-badge wf-badge-manager">Manager</span></td>
-          <td>
-            <span class="wf-status">
-              <span class="wf-status-dot active"></span>
-              Active
-            </span>
-          </td>
-          <td>
-            <span class="wf-icon-btn" title="Edit">✏️</span>
-            <span class="wf-icon-btn" title="Deactivate">🚫</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="wf-user-name">Fatima Bello</div>
-          </td>
-          <td>
-            <div class="wf-user-email">fatima@mybizz.com</div>
-          </td>
-          <td><span class="wf-badge wf-badge-admin">Admin</span></td>
-          <td>
-            <span class="wf-status">
-              <span class="wf-status-dot active"></span>
-              Active
-            </span>
-          </td>
-          <td>
-            <span class="wf-icon-btn" title="Edit">✏️</span>
-            <span class="wf-icon-btn" title="Deactivate">🚫</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="wf-user-name">Chidi Eze</div>
-          </td>
-          <td>
-            <div class="wf-user-email">chidi@mybizz.com</div>
-          </td>
-          <td><span class="wf-badge wf-badge-staff">Staff</span></td>
-          <td>
-            <span class="wf-status">
-              <span class="wf-status-dot pending"></span>
-              Pending
-            </span>
-          </td>
-          <td>
-            <span class="wf-icon-btn" title="Edit">✏️</span>
-            <span class="wf-icon-btn" title="Deactivate">🚫</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="wf-user-name">Ngozi Adeyemi</div>
-          </td>
-          <td>
-            <div class="wf-user-email">ngozi@client.com</div>
-          </td>
-          <td><span class="wf-badge wf-badge-customer">Customer</span></td>
-          <td>
-            <span class="wf-status">
-              <span class="wf-status-dot inactive"></span>
-              Inactive
-            </span>
-          </td>
-          <td>
-            <span class="wf-icon-btn" title="Edit">✏️</span>
-            <span class="wf-icon-btn" title="Reactivate">✅</span>
+            <span class="wf-icon-btn" title="Edit"><span class="material-icons">edit</span></span>
+            <span class="cn">btn_edit_user <span class="ct">(Button)</span></span>
+            <span class="wf-icon-btn" title="Deactivate"><span class="material-icons">person_off</span></span>
+            <span class="cn">btn_deactivate_user <span class="ct">(Button)</span></span>
           </td>
         </tr>
       </tbody>
@@ -195,6 +132,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   </div>
 </div>
 
+<!-- Section 3: Properties Table -->
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for dropdown components.</div>
 <table class="props">

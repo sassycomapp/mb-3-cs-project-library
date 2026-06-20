@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Mybizz CS — Email Setup Form</title>
+<title>Mybizz CS — Email Setup Form Wireframe</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; color: #222; max-width: 900px; }
 h1 { font-size: 22px; margin-bottom: 4px; }
@@ -20,9 +20,8 @@ h2 { font-size: 17px; border-bottom: 2px solid #333; padding-bottom: 6px; margin
 .wf-textbox { border: 2px solid #888; border-radius: 4px; padding: 7px 10px; width: 85%; margin: 6px 0 0; font-size: 12px; color: #ccc; background: #fff; display: block; box-sizing: border-box; }
 .wf-btn-filled { background: #333; color: #fff; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
 .wf-btn-outlined { background: #fff; color: #333; border: 2px solid #333; padding: 8px 18px; border-radius: 4px; font-size: 12px; font-family: Arial; display: inline-block; margin-top: 2px; }
-.wf-test-result { padding: 8px 12px; border-radius: 4px; font-size: 11px; margin-top: 8px; display: none; }
-.wf-test-result.success { display: block; background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
-.wf-test-result.error { display: block; background: #F9DEDC; color: #B3261E; border: 1px solid #F2B8B5; }
+.wf-panel-hidden { border: 2px dashed #aaa; border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: #f7f7f7; }
+.wf-label-hidden { position: absolute; top: -10px; left: 10px; background: #f7f7f7; font-size: 11px; font-weight: bold; color: #aaa; padding: 0 4px; }
 .cn { font-size: 10px; color: #888; margin: 2px 0 8px 1px; }
 .ct { font-style: italic; color: #bbb; }
 .cfixed { color: #555; font-style: normal; }
@@ -36,8 +35,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 </head>
 <body>
 
-<h1>Mybizz CS — Settings Wireframes</h1>
-<p class="subtitle">Email Configuration — Anvil Construction Guide</p>
+<!-- Section 1: Introduction -->
+<h1>Mybizz CS — Email Setup Form Wireframe</h1>
+<p class="subtitle">Settings → Email Configuration — Anvil Construction Guide</p>
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
   <span><strong>Dashed border</strong> = hidden on load (visible = False)</span><br>
@@ -45,6 +45,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
+<!-- Section 2: Wireframe Diagram -->
 <h2>EmailSetupForm — SMTP Configuration</h2>
 
 <div class="wf-outer">
@@ -55,7 +56,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-heading-lg">Email Setup</div>
     <div class="cn">hdg_email_title <span class="ct">(Heading)</span> <span class="cfixed">"Email Setup"</span></div>
     <div class="wf-text">Configure SMTP settings for outgoing emails</div>
-    <div class="cn">lbl_email_subtitle <span class="ct">(Label)</span></div>
+    <div class="cn">txt_email_subtitle <span class="ct">(Text)</span></div>
   </div>
 
   <!-- Sender Information -->
@@ -77,9 +78,16 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">flow_sender_fields <span class="ct">(FlowPanel)</span></div>
   </div>
 
-  <!-- Platform Note -->
-  <div class="wf-text" style="margin:8px 0;">SMTP host, port, and encryption are configured by the platform (Brevo SMTP). Credentials are stored securely in The Vault.</div>
-  <div class="cn">lbl_platform_note <span class="ct">(Label)</span></div>
+  <!-- Platform Constants (hidden - not user-configurable) -->
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">col_platform_constants (ColumnPanel) — visible = False</span>
+    <div class="wf-textbox">smtp-relay.brevo.com</div>
+    <div class="cn">txt_smtp_host <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox">587</div>
+    <div class="cn">txt_smtp_port <span class="ct">(TextBox)</span></div>
+    <div class="wf-textbox">TLS</div>
+    <div class="cn">txt_smtp_encryption <span class="ct">(TextBox)</span></div>
+  </div>
 
   <!-- Actions -->
   <div style="display:flex; gap:8px; margin-top:12px;">
@@ -95,12 +103,17 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <div class="cn">flow_actions <span class="ct">(FlowPanel)</span></div>
 
   <!-- Test Result (hidden by default) -->
-  <div class="wf-test-result success">Connection successful. SMTP server responded as expected.</div>
-  <div class="cn">test_success <span class="ct">(Label)</span> — visible = False by default</div>
-  <div class="wf-test-result error">Connection failed. Please verify your settings and try again.</div>
-  <div class="cn">test_error <span class="ct">(Label)</span> — visible = False by default</div>
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">test_success (Label) — visible = False</span>
+    <div class="wf-text">Connection successful</div>
+  </div>
+  <div class="wf-panel-hidden">
+    <span class="wf-label-hidden">test_error (Label) — visible = False</span>
+    <div class="wf-text">Connection failed</div>
+  </div>
 </div>
 
+<!-- Section 3: Properties Table -->
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input components.</div>
 <table class="props">

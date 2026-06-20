@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — Users & Permissions</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+/* M3 Token Block — Professional Blue Palette */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #493ef3;
+  --on-primary: #ffffff;
+  --primary-container: #e6dff3;
+  --on-primary-container: #0f0e59;
+  --secondary: #625a74;
+  --on-secondary: #ffffff;
+  --secondary-container: #e8defc;
+  --on-secondary-container: #1e182d;
+  --surface: #fdfcff;
+  --on-surface: #1c1b20;
+  --surface-variant: #e5e0f0;
+  --on-surface-variant: #494552;
+  --surface-container-low: #f5f2fa;
+  --surface-container: #efedf5;
+  --surface-container-high: #eae7ef;
+  --outline: #7a7583;
+  --outline-variant: #c9c4d3;
+  --error: #b42336;
+  --on-error: #ffffff;
+  --error-container: #f4dddc;
+  --on-error-container: #410004;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  /* MUI Aesthetic Overlay Variables */
+  --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+  --divider-color: var(--outline-variant);
+  --state-hover-opacity: 0.08;
+  --state-pressed-opacity: 0.12;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.4286;
+  color: var(--on-surface);
+  background-color: var(--surface);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ===== LEFT NAV — MUI Variable #9 ===== */
+.left-nav { width: 260px; background: var(--surface-container-low); border-right: 1px solid var(--divider-color); padding: 24px 0; flex-shrink: 0; overflow-y: auto; display: flex; flex-direction: column; }
+.nav-brand { padding: 0 16px 24px; font-size: 18px; font-weight: 500; color: var(--on-primary-container); }
+.nav-group-label { padding: 16px 16px 4px; font-size: 11px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; }
+.nav-item { display: flex; align-items: center; padding: 4px 16px; margin: 2px 8px; border-radius: 100px; color: var(--on-surface-variant); text-decoration: none; font-size: 14px; font-weight: 500; gap: 16px; transition: background 150ms; cursor: pointer; }
+.nav-item:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+.nav-item.selected { background: var(--secondary-container); color: var(--on-secondary-container); }
+.nav-item-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.nav-divider { border: none; border-top: 1px solid var(--divider-color); opacity: 0.4; margin: 8px 16px; }
+.nav-signout { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--divider-color); opacity: 0.4; }
+
+/* ===== MAIN AREA ===== */
+.main-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* ===== APP BAR — MUI Variable #8 ===== */
+.app-bar { min-height: 56px; padding: 0 24px; background-color: var(--surface); border-bottom: 1px solid var(--divider-color); display: flex; align-items: center; }
+.app-bar .title { font-size: 20px; font-weight: 500; color: var(--on-surface); flex: 1; }
+.app-bar-nav { display: flex; gap: 8px; align-items: center; }
+.btn-icon { width: 40px; height: 40px; border-radius: 100px; border: none; background: transparent; color: var(--on-surface-variant); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 150ms; }
+.btn-icon:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+
+/* ===== CONTENT ===== */
+.content { flex: 1; padding: var(--space-6); overflow-y: auto; max-width: 1100px; }
+.page-title { font-size: 32px; line-height: 40px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-2); }
+.page-subtitle { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-6); }
+
+/* ===== HEADER ROW ===== */
+.header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); }
+.header-actions { display: flex; gap: var(--space-3); align-items: center; }
+
+/* ===== FILTER ===== */
+.filter-select { padding: 10px 16px; border: 1px solid var(--outline); border-radius: 100px; font-size: 14px; font-family: var(--font-family); color: var(--on-surface); background: var(--surface); appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237a7583'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px; padding-right: 36px; cursor: pointer; min-height: 40px; }
+.filter-select:focus { outline: none; border-color: var(--primary); }
+
+/* ===== CARD — MUI Variable #2, #3 ===== */
+.card { background: var(--surface); border-radius: 8px; box-shadow: var(--mui-shadow-card); padding: var(--space-4); margin-bottom: var(--space-4); }
+
+/* ===== DATA TABLE ===== */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th { text-align: left; padding: 12px 16px; font-size: 12px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--divider-color); background: var(--surface-container-low); }
+.data-table td { padding: 12px 16px; border-bottom: 1px solid var(--divider-color); vertical-align: middle; }
+.data-table tr:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+
+/* ===== USER INFO ===== */
+.user-name { font-size: 14px; font-weight: 500; color: var(--on-surface); }
+.user-email { font-size: 13px; color: var(--on-surface-variant); }
+
+/* ===== BADGE ===== */
+.badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 500; }
+.badge-owner { background: var(--primary-container); color: var(--on-primary-container); }
+.badge-manager { background: var(--secondary-container); color: var(--on-secondary-container); }
+.badge-admin { background: var(--secondary-container); color: var(--on-secondary-container); }
+.badge-staff { background: var(--surface-container-high); color: var(--on-surface-variant); }
+.badge-customer { background: var(--surface-container-high); color: var(--on-surface-variant); }
+
+/* ===== STATUS ===== */
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; }
+.status-dot.active { background: #2e7d32; }
+.status-dot.inactive { background: var(--outline); }
+.status-dot.pending { background: #e65100; }
+
+/* ===== ACTION BUTTONS ===== */
+.action-btn { width: 36px; height: 36px; border-radius: 100px; border: 1px solid var(--outline-variant); background: var(--surface); color: var(--on-surface-variant); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: all 150ms; margin-right: 4px; }
+.action-btn:hover { background: rgba(73,62,243,var(--state-hover-opacity)); border-color: var(--primary); color: var(--primary); }
+.action-btn.deactivate:hover { background: rgba(180,35,54,0.08); border-color: var(--error); color: var(--error); }
+
+/* ===== BUTTONS ===== */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; font-family: var(--font-family); cursor: pointer; transition: all 150ms; min-height: 40px; border: none; }
+.btn-filled { background: var(--primary); color: var(--on-primary); }
+.btn-filled:hover { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15); }
+
+/* ===== DIVIDER — MUI Variable #5 ===== */
+.divider { border: none; border-top: 1px solid var(--divider-color); opacity: 0.4; margin: var(--space-4) 0; }
+
+/* ===== EMPTY STATE ===== */
+.empty-state { text-align: center; padding: var(--space-8) var(--space-4); }
+.empty-state-icon { font-size: 48px; color: var(--on-surface-variant); margin-bottom: var(--space-4); }
+.empty-state-heading { font-size: 22px; line-height: 28px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-2); }
+.empty-state-body { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-6); max-width: 400px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<!-- LEFT NAV — MUI Variable #9 -->
+<nav class="left-nav">
+  <div class="nav-brand">Mybizz</div>
+  <div class="nav-group-label">Main</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">dashboard</span></span> Dashboard</a>
+  <div class="nav-group-label">Sales & Operations</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">event</span></span> Bookings</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">design_services</span></span> Services</a>
+  <div class="nav-group-label">Customers & Marketing</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">contacts</span></span> Contacts</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">campaign</span></span> Campaigns</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">mail</span></span> Broadcasts</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">group_work</span></span> Segments</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">task</span></span> Tasks</a>
+  <div class="nav-group-label">Content & Website</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">article</span></span> Blog</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">web</span></span> Pages</a>
+  <div class="nav-group-label">Finance & Reports</div>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">receipt</span></span> Invoices</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">payments</span></span> Payments</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">assessment</span></span> Reports</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">bar_chart</span></span> Analytics</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">schedule</span></span> Time Entries</a>
+  <hr class="nav-divider">
+  <div class="nav-group-label">Settings</div>
+  <a class="nav-item selected" href="#"><span class="nav-item-icon"><span class="material-icons">settings</span></span> Settings</a>
+  <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">lock</span></span> Vault</a>
+  <div class="nav-signout">
+    <a class="nav-item" href="#"><span class="nav-item-icon"><span class="material-icons">logout</span></span> Sign Out</a>
+  </div>
+</nav>
+
+<!-- MAIN AREA -->
+<div class="main-area">
+  <!-- APP BAR — MUI Variable #8 -->
+  <header class="app-bar">
+    <div class="title">Settings</div>
+    <div class="app-bar-nav">
+      <button class="btn-icon" title="Notifications"><span class="material-icons">notifications</span></button>
+      <button class="btn-icon" title="User menu"><span class="material-icons">account_circle</span></button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+    <div class="header-row">
+      <div>
+        <h1 class="page-title">Users & Permissions</h1>
+        <p class="page-subtitle">Manage team members and their access levels</p>
+      </div>
+      <div class="header-actions">
+        <select class="filter-select">
+          <option>All Roles</option>
+          <option>Owner</option>
+          <option>Manager</option>
+          <option>Admin</option>
+          <option>Staff</option>
+          <option>Customer</option>
+        </select>
+        <button class="btn btn-filled"><span class="material-icons" style="font-size:18px;">person_add</span> Invite User</button>
+      </div>
+    </div>
+
+    <!-- Users Table Card -->
+    <div class="card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="user-name">Amara Okafor</div>
+            </td>
+            <td>
+              <div class="user-email">amara@serenitysalon.co.za</div>
+            </td>
+            <td><span class="badge badge-owner">Owner</span></td>
+            <td>
+              <span class="status">
+                <span class="status-dot active"></span>
+                Active
+              </span>
+            </td>
+            <td>
+              <button class="action-btn" title="Edit"><span class="material-icons">edit</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="user-name">David Mensah</div>
+            </td>
+            <td>
+              <div class="user-email">david@serenitysalon.co.za</div>
+            </td>
+            <td><span class="badge badge-manager">Manager</span></td>
+            <td>
+              <span class="status">
+                <span class="status-dot active"></span>
+                Active
+              </span>
+            </td>
+            <td>
+              <button class="action-btn" title="Edit"><span class="material-icons">edit</span></button>
+              <button class="action-btn deactivate" title="Deactivate"><span class="material-icons">person_off</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="user-name">Fatima Bello</div>
+            </td>
+            <td>
+              <div class="user-email">fatima@serenitysalon.co.za</div>
+            </td>
+            <td><span class="badge badge-admin">Admin</span></td>
+            <td>
+              <span class="status">
+                <span class="status-dot active"></span>
+                Active
+              </span>
+            </td>
+            <td>
+              <button class="action-btn" title="Edit"><span class="material-icons">edit</span></button>
+              <button class="action-btn deactivate" title="Deactivate"><span class="material-icons">person_off</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="user-name">Chidi Eze</div>
+            </td>
+            <td>
+              <div class="user-email">chidi@serenitysalon.co.za</div>
+            </td>
+            <td><span class="badge badge-staff">Staff</span></td>
+            <td>
+              <span class="status">
+                <span class="status-dot pending"></span>
+                Pending
+              </span>
+            </td>
+            <td>
+              <button class="action-btn" title="Edit"><span class="material-icons">edit</span></button>
+              <button class="action-btn deactivate" title="Deactivate"><span class="material-icons">person_off</span></button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="user-name">Ngozi Adeyemi</div>
+            </td>
+            <td>
+              <div class="user-email">ngozi@client.com</div>
+            </td>
+            <td><span class="badge badge-customer">Customer</span></td>
+            <td>
+              <span class="status">
+                <span class="status-dot inactive"></span>
+                Inactive
+              </span>
+            </td>
+            <td>
+              <button class="action-btn" title="Edit"><span class="material-icons">edit</span></button>
+              <button class="action-btn" title="Reactivate"><span class="material-icons">person_add</span></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Empty State (for when no users) -->
+    <div class="empty-state" style="display:none;">
+      <div class="empty-state-icon"><span class="material-icons" style="font-size:48px;">group</span></div>
+      <h2 class="empty-state-heading">No team members yet</h2>
+      <p class="empty-state-body">Invite your first team member to start collaborating on managing your business.</p>
+      <button class="btn btn-filled"><span class="material-icons" style="font-size:18px;">person_add</span> Invite Your First Team Member</button>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
