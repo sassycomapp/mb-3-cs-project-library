@@ -1,194 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mybizz CS — CustomerLayout Wireframe</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --primary: #6750A4;
-  --on-primary: #FFFFFF;
-  --primary-container: #EADDFF;
-  --on-primary-container: #21005D;
-  --secondary: #625B71;
-  --on-secondary: #FFFFFF;
-  --secondary-container: #E8DEF8;
-  --on-secondary-container: #1D192B;
-  --surface: #FFFBFE;
-  --on-surface: #1C1B1F;
-  --surface-variant: #E7E0EC;
-  --on-surface-variant: #49454F;
-  --surface-container-low: #F7F2FA;
-  --outline: #79747E;
-  --outline-variant: #CAC4D0;
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --font-family: 'Roboto', sans-serif;
-  --font-headline-small: 22px/28px 500;
-  --font-title: 18px/24px 500;
-  --font-body: 14px/20px 400;
-  --font-label: 12px/16px 500;
-  --font-caption: 12px/16px 400;
-  --radius-card: 12px;
-  --radius-input: 4px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: var(--font-family);
-  font-size: var(--font-body);
-  color: var(--on-surface);
-  background: var(--surface);
-  line-height: 20px;
-  padding: var(--space-8);
-  max-width: 1100px;
-}
-h1 { font: var(--font-headline-small); margin-bottom: var(--space-1); }
-.subtitle { font: var(--font-caption); color: var(--on-surface-variant); margin-bottom: var(--space-6); }
-h2 { font: var(--font-title); margin-top: var(--space-8); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 1px solid var(--outline-variant); }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — CustomerLayout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6750A4;
+      --on-primary: #FFFFFF;
+      --primary-container: #EADDFF;
+      --on-primary-container: #21005D;
+      --secondary: #625B71;
+      --on-secondary: #FFFFFF;
+      --secondary-container: #E8DEF8;
+      --on-secondary-container: #1D192B;
+      --surface: #FFFBFE;
+      --on-surface: #1C1B1F;
+      --surface-variant: #E7E0EC;
+      --on-surface-variant: #49454F;
+      --outline: #79747E;
+      --outline-variant: #CAC4D0;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.5; color: var(--on-surface); background: var(--surface); padding: 40px; max-width: 1100px; }
+    h1 { font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+    h2 { font-size: 22px; font-weight: 600; border-bottom: 1px solid var(--outline-variant); opacity: 0.4; padding-bottom: 6px; margin-top: 48px; margin-bottom: 20px; }
+    .legend { font-size: 12px; color: var(--on-surface-variant); margin-bottom: 32px; line-height: 1.8; background: var(--surface-container-low); padding: 12px 16px; border-radius: 8px; }
+    .legend span { margin-right: 24px; }
+    code { background: var(--surface-container-low); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
 
-.wf-outer {
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-card);
-  padding: var(--space-4);
-  background: var(--surface);
-  position: relative;
-  margin-bottom: var(--space-6);
-}
-.wf-panel {
-  border: 1px solid var(--surface-variant);
-  border-radius: var(--radius-card);
-  padding: var(--space-3);
-  margin: var(--space-2) 0;
-  position: relative;
-  background: var(--surface-container-low);
-}
-.wf-label {
-  position: absolute;
-  top: -10px;
-  left: 10px;
-  background: var(--surface);
-  font: var(--font-label);
-  color: var(--on-surface-variant);
-  padding: 0 var(--space-1);
-}
-.wf-heading-sm { font: var(--font-body); font-weight: 500; color: var(--on-surface); margin: var(--space-2) 0 0; }
-.wf-text { font: var(--font-caption); color: var(--on-surface-variant); margin: var(--space-1) 0 0; }
-.wf-btn-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--outline-variant);
-  background: transparent;
-  border-radius: 50%;
-  font-size: 16px;
-  color: var(--on-surface-variant);
-}
-.cn { font-size: 10px; color: var(--outline); margin: 2px 0 var(--space-2) 1px; }
-.ct { font-style: italic; color: var(--outline); }
-.cfixed { color: var(--on-surface-variant); font-style: normal; }
-.prop-caption { font: var(--font-body); font-weight: 500; margin-bottom: var(--space-1); }
-.prop-note { font: var(--font-caption); color: var(--on-surface-variant); margin-bottom: var(--space-4); }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --surface: #1C1B1F;
-    --on-surface: #E6E1E5;
-    --surface-variant: #49454F;
-    --on-surface-variant: #CAC4D0;
-    --surface-container-low: #1D1B20;
-    --outline: #938F99;
-    --outline-variant: #49454F;
-  }
-}
-</style>
+    /* Wireframe drawing styles */
+    .wf-outer { border: 2px solid var(--on-surface); border-radius: 8px; padding: 16px; background: var(--surface); position: relative; margin-bottom: 20px; }
+    .wf-panel { border: 2px solid var(--outline); border-radius: 4px; padding: 12px; margin: 8px 0; position: relative; background: var(--surface); }
+    .wf-panel-h { border: 2px solid var(--outline); border-radius: 4px; padding: 10px 12px; margin: 8px 0; position: relative; background: var(--surface); display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+    .wf-label { position: absolute; top: -10px; left: 10px; background: var(--surface); font-size: 11px; font-weight: bold; color: var(--outline); padding: 0 4px; }
+    .wf-heading-lg { font-size: 20px; font-weight: 600; margin: 4px 0 0; }
+    .wf-heading-sm { font-size: 14px; font-weight: 600; color: var(--on-surface); margin: 10px 0 0; }
+    .wf-text { font-size: 12px; color: var(--on-surface-variant); margin: 4px 0 0; font-style: italic; }
+    .wf-btn-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 2px solid var(--outline); background: transparent; color: var(--on-surface-variant); border-radius: 50%; font-size: 16px; }
+    .wf-nav-item { font-size: 12px; color: var(--on-surface-variant); margin: 2px 0; padding: 4px 8px; border-radius: 100px; }
+    .wf-divider { border: none; border-top: 1px solid var(--outline-variant); margin: 8px 0; }
+    .cn { font-size: 10px; color: var(--outline); margin: 2px 0 8px 1px; }
+    .ct { font-style: italic; color: var(--outline-variant); }
+    .cfixed { color: var(--on-surface-variant); font-style: normal; }
+    .prop-caption { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+    .prop-note { font-size: 12px; color: var(--on-surface-variant); margin-bottom: 10px; font-style: italic; }
+  </style>
 </head>
 <body>
 
-<h1>CustomerLayout</h1>
-<p class="subtitle">Customer portal shell — custom HtmlTemplate layout with sidebar navigation. Deferred to V2.</p>
+<h1>Wireframe: CustomerLayout</h1>
+<p style="color: var(--on-surface-variant);"><strong>Package:</strong> layouts/ [Phase 1]</p>
+<p style="color: var(--on-surface-variant);"><strong>Purpose:</strong> Customer portal shell — custom HtmlTemplate layout with sidebar navigation. Deferred to V2.</p>
 
-<h2>Structure</h2>
+<div class="legend">
+  <span><strong>Solid border</strong> = visible on load</span>
+  <span><strong>Dashed border</strong> = hidden on load (<code>visible = False</code>)</span><br>
+  <span>Each component shows: <code>component_name (Type) "fixed text if set at design time"</code></span><br>
+  <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
+</div>
+
+<h2>Section 1 — Introduction</h2>
+<p>To the developer: This wireframe indicates which components to place on the CustomerLayout and how to configure them.</p>
+<p><strong>Conventions:</strong></p>
+<ul>
+  <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+  <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+</ul>
+
+<h2>Section 2 — Wireframe Diagram</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">layout_root (ColumnPanel)</span>
+  <span class="wf-label">ColumnPanel: layout_root (Component Root)</span>
 
-  <!-- App Bar -->
-  <div class="wf-panel">
-    <span class="wf-label">app_bar (Container)</span>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <div class="wf-heading-sm">My Customer Portal</div>
-      <div style="display: flex; gap: var(--space-2); align-items: center;">
-        <div class="wf-btn-icon">&#128276;</div>
-        <div class="cn">btn_notifications <span class="ct">(Button)</span> <span class="cfixed">icon-only</span></div>
-        <div class="wf-btn-icon">&#128100;</div>
-        <div class="cn">btn_user_menu <span class="ct">(Button)</span> <span class="cfixed">icon-only</span></div>
-      </div>
+  <!-- APP BAR -->
+  <div class="wf-panel-h">
+    <span class="wf-label">Container: app_bar</span>
+    <div style="flex:1;">
+      <div class="wf-heading-lg">My Customer Portal</div>
+      <div class="cn">hdg_app_title <span class="ct">(Heading)</span> <span class="cfixed">"My Customer Portal"</span></div>
+    </div>
+    <div style="display:flex; gap:8px; align-items:center;">
+      <div class="wf-btn-icon">N</div>
+      <div class="cn">btn_notifications <span class="ct">(IconButton)</span> <span class="cfixed">icon: "notifications"</span></div>
+      <div class="wf-btn-icon">U</div>
+      <div class="cn">btn_user_menu <span class="ct">(IconButton)</span> <span class="cfixed">icon: "account_circle"</span></div>
     </div>
   </div>
 
-  <!-- Body: Sidebar + Content -->
-  <div style="display: flex; gap: 0; margin-top: var(--space-2);">
+  <!-- BODY: SIDEBAR + CONTENT -->
+  <div style="display: flex; gap: 0; margin-top: 8px;">
 
-    <!-- Sidebar -->
-    <div class="wf-panel" style="width: 260px; min-width: 260px; margin-right: var(--space-2);">
-      <span class="wf-label">sidebar (ColumnPanel)</span>
+    <!-- SIDEBAR -->
+    <div class="wf-panel" style="width: 260px; min-width: 260px; margin-right: 8px;">
+      <span class="wf-label">ColumnPanel: sidebar</span>
 
-      <div class="wf-text" style="margin-top: var(--space-1);">My Dashboard</div>
-      <div class="cn">lnk_my_dashboard <span class="ct">(Link)</span> <span class="cfixed">"My Dashboard"</span></div>
+      <div class="wf-nav-item">My Dashboard</div>
+      <div class="cn">nav_my_dashboard <span class="ct">(Link)</span> <span class="cfixed">"My Dashboard"</span></div>
 
-      <div class="wf-text">My Bookings</div>
-      <div class="cn">lnk_my_bookings <span class="ct">(Link)</span> <span class="cfixed">"My Bookings"</span></div>
+      <div class="wf-nav-item">My Bookings</div>
+      <div class="cn">nav_my_bookings <span class="ct">(Link)</span> <span class="cfixed">"My Bookings"</span></div>
 
-      <div class="wf-text">My Invoices</div>
-      <div class="cn">lnk_my_invoices <span class="ct">(Link)</span> <span class="cfixed">"My Invoices"</span></div>
+      <div class="wf-nav-item">My Invoices</div>
+      <div class="cn">nav_my_invoices <span class="ct">(Link)</span> <span class="cfixed">"My Invoices"</span></div>
 
-      <div class="wf-text">My Reviews</div>
-      <div class="cn">lnk_my_reviews <span class="ct">(Link)</span> <span class="cfixed">"My Reviews"</span></div>
+      <div class="wf-nav-item">My Reviews</div>
+      <div class="cn">nav_my_reviews <span class="ct">(Link)</span> <span class="cfixed">"My Reviews"</span></div>
 
-      <div class="wf-text">Support Tickets</div>
-      <div class="cn">lnk_support <span class="ct">(Link)</span> <span class="cfixed">"Support Tickets"</span></div>
+      <div class="wf-nav-item">Support Tickets</div>
+      <div class="cn">nav_support <span class="ct">(Link)</span> <span class="cfixed">"Support Tickets"</span></div>
 
-      <div style="flex: 1;"></div>
+      <div class="wf-divider"></div>
 
-      <div class="wf-text">Account</div>
-      <div class="cn">lnk_account <span class="ct">(Link)</span> <span class="cfixed">"Account"</span></div>
-      <div class="cn">lnk_sign_out <span class="ct">(Link)</span> <span class="cfixed">"Sign Out"</span></div>
+      <div class="wf-nav-item">Account</div>
+      <div class="cn">nav_account <span class="ct">(Link)</span> <span class="cfixed">"Account"</span></div>
+      <div class="wf-nav-item">Sign Out</div>
+      <div class="cn">nav_sign_out <span class="ct">(Link)</span> <span class="cfixed">"Sign Out"</span></div>
     </div>
 
-    <!-- Content -->
+    <!-- CONTENT AREA -->
     <div class="wf-panel" style="flex: 1;">
-      <span class="wf-label">content_area (ColumnPanel)</span>
-      <div class="wf-text">[ Customer portal content loads here ]</div>
+      <span class="wf-label">ColumnPanel: content_area</span>
       <div class="cn">col_content <span class="ct">(ColumnPanel)</span></div>
     </div>
+
   </div>
 </div>
 
-<h2>Properties</h2>
-<div class="prop-caption">Designer-Only Properties</div>
-<div class="prop-note">None — all component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code.</div>
+<h2>Section 3 — Properties Table</h2>
 
-<h2>Navigation Architecture</h2>
-<div class="prop-note">
-  Sidebar navigation uses plain Link components with lambda click handlers. NavigationLink and navigate_to are not used.<br>
-  All items are always visible for all customer roles. Sign Out is at the sidebar bottom.<br>
-  <strong>V2 status:</strong> CustomerLayout is deferred to V2. Customers book via the public site and the business manages all bookings from the admin panel in V1.
-</div>
-
-<h2>Responsiveness</h2>
-<div class="prop-note">
-  Desktop (&ge;998px): Fixed sidebar (260px) + content fills remainder.<br>
-  Mobile (&lt;998px): Sidebar collapses to hamburger drawer overlay. Content is full-width.
-</div>
+<div class="prop-caption">Properties table</div>
+<div class="prop-note">All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code. No Designer-only properties required.</div>
 
 </body>
 </html>
