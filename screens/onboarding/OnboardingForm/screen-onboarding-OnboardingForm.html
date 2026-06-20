@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — OnboardingForm</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+/* M3 Token Block — Professional Blue Palette */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #493ef3;
+  --on-primary: #ffffff;
+  --primary-container: #e6dff3;
+  --on-primary-container: #0f0e59;
+  --secondary: #625a74;
+  --on-secondary: #ffffff;
+  --secondary-container: #e8defc;
+  --on-secondary-container: #1e182d;
+  --surface: #fdfcff;
+  --on-surface: #1c1b20;
+  --surface-variant: #e5e0f0;
+  --on-surface-variant: #494552;
+  --surface-container-low: #f5f2fa;
+  --surface-container: #efedf5;
+  --surface-container-high: #eae7ef;
+  --outline: #7a7583;
+  --outline-variant: #c9c4d3;
+  --error: #b42336;
+  --on-error: #ffffff;
+  --error-container: #f4dddc;
+  --on-error-container: #410004;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  /* MUI Aesthetic Overlay Variables */
+  --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+  --divider-color: var(--outline-variant);
+  --state-hover-opacity: 0.08;
+  --state-pressed-opacity: 0.12;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 1.4286;
+  color: var(--on-surface);
+  background-color: var(--surface); /* MUI: surface distinction */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+/* Onboarding container — centred card, max-width 600px */
+.onboarding-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Header actions */
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-4);
+}
+
+.btn-text {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 100px;
+  transition: background 150ms;
+}
+.btn-text:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+
+/* Title section */
+.title-section {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+.title-section h1 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600; /* MUI: heading weight 600 */
+  color: var(--on-surface);
+  margin-bottom: var(--space-2);
+}
+.title-section .subtitle {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+}
+
+/* Step labels */
+.step-labels {
+  display: flex;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+.step-label {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--outline);
+}
+.step-label.active { color: var(--primary); }
+.step-label.complete { color: var(--secondary); }
+
+/* Progress bar */
+.progress-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--space-4);
+}
+.progress-segment {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-variant);
+}
+.progress-segment.active { background: var(--primary); }
+.progress-segment.complete { background: var(--secondary); }
+
+/* Step counter */
+.step-counter {
+  text-align: center;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--space-6);
+}
+
+/* Step content card */
+.step-card {
+  border-radius: 8px; /* MUI: card radius 8px */
+  padding: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+.step-card.visible {
+  background: var(--surface);
+  box-shadow: var(--mui-shadow-card); /* MUI: card shadow */
+  border: 1px solid var(--divider-color);
+}
+.step-card.hidden {
+  background: var(--surface-container-low);
+  border: 1px dashed var(--outline-variant);
+  opacity: 0.6;
+}
+
+.step-card h2 {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 600; /* MUI: heading weight 600 */
+  color: var(--on-surface);
+  margin-bottom: var(--space-4);
+}
+
+.step-card .step-text {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--space-4);
+  line-height: 20px;
+}
+
+/* Info box */
+.info-box {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  border-radius: 4px;
+  padding: var(--space-3) var(--space-4);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+  line-height: 20px;
+}
+.info-box strong { font-weight: 500; }
+
+/* Warning box */
+.warning-box {
+  background: var(--error-container);
+  color: var(--on-error-container);
+  border-radius: 4px;
+  padding: var(--space-3) var(--space-4);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+  line-height: 20px;
+}
+.warning-box strong { font-weight: 500; }
+
+/* Success box */
+.success-box {
+  background: #D3F0D1;
+  color: #002204;
+  border-radius: 4px;
+  padding: var(--space-3) var(--space-4);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+  line-height: 20px;
+}
+.success-box strong { font-weight: 500; }
+
+/* Settings link button */
+.btn-settings {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 24px;
+  min-height: 40px;
+  border-radius: 100px; /* M3: pill radius */
+  border: 1px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 150ms;
+  margin-bottom: var(--space-4);
+}
+.btn-settings:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+
+/* Form elements */
+.form-input {
+  width: 100%;
+  padding: 8px 16px;
+  min-height: 48px;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: var(--font-family);
+  border: 1px solid var(--outline);
+  border-radius: 4px; /* M3: input radius 4px */
+  background: transparent;
+  color: var(--on-surface);
+  margin-bottom: var(--space-4);
+}
+.form-input:focus {
+  border-color: var(--primary);
+  border-width: 2px;
+  padding: 7px 15px;
+  outline: none;
+}
+
+/* Checkbox */
+.checkbox-group {
+  margin-bottom: var(--space-4);
+}
+.checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+}
+.checkbox-item label {
+  font-size: 14px;
+  color: var(--on-surface);
+  line-height: 20px;
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 24px;
+  min-height: 40px;
+  border-radius: 100px; /* M3: pill radius */
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 150ms, box-shadow 150ms;
+}
+.btn-filled {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.btn-filled:hover {
+  background: rgba(73,62,243,0.92);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+}
+.btn-outlined {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--outline);
+}
+.btn-outlined:hover {
+  background: rgba(73,62,243, var(--state-hover-opacity));
+}
+.btn[disabled] {
+  background: var(--surface-variant);
+  color: var(--outline);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Navigation */
+.step-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--divider-color); /* MUI: divider */
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid var(--divider-color); /* MUI: divider at 40% opacity */
+  opacity: 0.4;
+  margin: var(--space-4) 0;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1C1B1F;
+    --on-surface: #E6E1E5;
+    --surface-variant: #49454F;
+    --on-surface-variant: #CAC4D0;
+    --surface-container-low: #1D1B20;
+    --surface-container: #211F26;
+    --surface-container-high: #2B2930;
+    --outline: #938F99;
+    --outline-variant: #49454F;
+    --primary-container: #4F378B;
+    --on-primary-container: #EADDFF;
+    --secondary-container: #4A4458;
+    --on-secondary-container: #E8DEF8;
+    --error-container: #8C1D18;
+    --on-error-container: #F2B8B5;
+  }
+  .success-box { background: #003910; color: #A8D5A2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="onboarding-container">
+
+  <!-- Header Actions -->
+  <div class="header-actions">
+    <button class="btn-text"><span class="material-icons" style="font-size:18px;">settings</span> Go to Settings</button>
+  </div>
+
+  <!-- Title Section -->
+  <div class="title-section">
+    <h1>Welcome to Mybizz</h1>
+    <p class="subtitle">Let's get your business set up in a few quick steps</p>
+  </div>
+
+  <!-- Step Labels -->
+  <div class="step-labels">
+    <span class="step-label active">Welcome</span>
+    <span class="step-label">Business Profile</span>
+    <span class="step-label">Palette</span>
+    <span class="step-label">System Currency</span>
+    <span class="step-label">Legal</span>
+    <span class="step-label">Completion</span>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6">
+    <div class="progress-segment active"></div>
+    <div class="progress-segment"></div>
+    <div class="progress-segment"></div>
+    <div class="progress-segment"></div>
+    <div class="progress-segment"></div>
+    <div class="progress-segment"></div>
+  </div>
+
+  <!-- Step Counter -->
+  <div class="step-counter">Step 1 of 6</div>
+
+  <!-- STEP 1: WELCOME (visible) -->
+  <div class="step-card visible">
+    <h2>Welcome</h2>
+    <p class="step-text">Welcome to your new Mybizz business platform. Let's get you set up in just a few minutes.</p>
+    <div class="info-box">
+      <strong>Tip:</strong> You can jump to Settings at any time using the "Go to Settings" button above. Use "Return to Onboarding" in Settings to come back here.
+    </div>
+    <div class="step-nav">
+      <div></div>
+      <button class="btn btn-filled">Get Started</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: BUSINESS PROFILE (hidden) -->
+  <div class="step-card hidden">
+    <h2>Business Profile</h2>
+    <p class="step-text">Configure your business name, contact details, address, and timezone.</p>
+    <div class="info-box">
+      Business Profile is configured in Settings. Click the button below to open Settings → Business Profile tab.
+    </div>
+    <button class="btn-settings"><span class="material-icons" style="font-size:18px;">open_in_new</span> Configure in Settings →</button>
+    <div class="step-nav">
+      <button class="btn btn-outlined">← Back</button>
+      <button class="btn btn-filled">Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: PALETTE SELECTION (hidden) -->
+  <div class="step-card hidden">
+    <h2>Colour Palette</h2>
+    <p class="step-text">Choose a colour scheme that fits your business.</p>
+    <div class="info-box">
+      Palette selection is configured in Settings. Click the button below to open Settings → Palette tab.
+    </div>
+    <button class="btn-settings"><span class="material-icons" style="font-size:18px;">open_in_new</span> Choose Palette in Settings →</button>
+    <div class="step-nav">
+      <button class="btn btn-outlined">← Back</button>
+      <button class="btn btn-filled">Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: SYSTEM CURRENCY (hidden) -->
+  <div class="step-card hidden">
+    <h2>System Currency</h2>
+    <p class="step-text">Select the currency your business operates in.</p>
+    <div class="warning-box">
+      <strong>Important:</strong> This selection becomes permanent once your first transaction has been recorded.
+    </div>
+    <select class="form-input" style="cursor:pointer;">
+      <option value="" disabled selected>Select Currency</option>
+      <option>ZAR — South African Rand</option>
+      <option>USD — US Dollar</option>
+      <option>EUR — Euro</option>
+      <option>GBP — British Pound</option>
+    </select>
+    <button class="btn btn-filled" style="margin-bottom:var(--space-4);">Confirm Currency Selection</button>
+    <div class="step-nav">
+      <button class="btn btn-outlined">← Back</button>
+      <button class="btn btn-filled" disabled>Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: LEGAL ACKNOWLEDGEMENT (hidden) -->
+  <div class="step-card hidden">
+    <h2>Legal Acknowledgement</h2>
+    <p class="step-text">Mybizz retains certain records for legal and compliance purposes.</p>
+    <div class="warning-box">
+      <strong>Legal Responsibility:</strong> You are responsible for configuring your own Privacy Policy and Terms & Conditions.
+    </div>
+    <a href="#" style="color:var(--primary);font-size:14px;display:inline-block;margin-bottom:var(--space-4);">Read more about Legal Compliance →</a>
+    <div class="checkbox-group">
+      <div class="checkbox-item">
+        <input type="checkbox" id="cb_legal_ack">
+        <label for="cb_legal_ack">I understand I must configure my own Privacy Policy and Terms & Conditions.</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" id="cb_data_governance_ack">
+        <label for="cb_data_governance_ack">I understand that Mybizz retains certain records for legal and compliance purposes.</label>
+      </div>
+    </div>
+    <button class="btn btn-filled" disabled style="margin-bottom:var(--space-4);">Confirm Acknowledgement</button>
+    <div class="step-nav">
+      <button class="btn btn-outlined">← Back</button>
+      <button class="btn btn-filled" disabled>Continue</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: COMPLETION (hidden) -->
+  <div class="step-card hidden">
+    <h2>Onboarding Complete</h2>
+    <div class="success-box">
+      <strong>Congratulations!</strong> Your Mybizz platform is now set up and ready to use.
+    </div>
+    <p class="step-text">Add your services, configure payment gateway, and start accepting bookings.</p>
+    <div class="step-nav">
+      <button class="btn btn-outlined">← Back</button>
+      <button class="btn btn-filled">Go to Dashboard</button>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

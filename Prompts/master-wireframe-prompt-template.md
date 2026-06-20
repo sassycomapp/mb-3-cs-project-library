@@ -8,11 +8,15 @@ anything else in this template.
 ---
 
 Before starting, use GBrain with source_id 'project-library' to
-search for: [[ REPLACE: 6-8 search terms for this package, e.g.
-"bookings", "booking form", "design rules", "scaffold spec",
-"nomenclature", "m3 component mapping", "empty state",
-"bookings architecture" ]]. Use all findings as the specification
-baseline before touching any file.
+search for: 
+
+Before starting, use GBrain with source_id 'project-library' to
+search for: "[PACKAGE]", "[PACKAGE] form",
+"[PACKAGE] architecture", "design rules", "scaffold spec",
+"nomenclature", "m3 component mapping", "empty state". Use all
+findings as the specification baseline before touching any file.
+
+Use all findings as the specification baseline before touching any file.
 
 ---
 
@@ -33,11 +37,11 @@ creating any wireframe. Do not proceed until all are read:
 6. Any architecture, ADR, or design documents in
    project-library/docs/, project-library/adr/, and
    project-library/implementation/ that bear on the
-   [[ REPLACE: package name, e.g. "bookings" ]] package and its
+   [PACKAGE] package and its
    forms. Use your GBrain findings above as the starting point,
    then read the actual files.
 7. Any relevant prior findings in project-library/gstack-outputs/
-   concerning [[ REPLACE: package name ]] forms, states, flows,
+   concerning [PACKAGE] forms, states, flows,
    or design review findings.
 
 ---
@@ -230,7 +234,7 @@ For each item (in order, one at a time):
    already-complete).
 
 File naming convention:
-wireframe-[[ REPLACE: package name ]]-[FormName].html
+wireframe-[PACKAGE]-[FormName].html
 (Check nomenclature.md for the exact naming standard.)
 
 ---
@@ -251,7 +255,7 @@ FINAL STEPS — REQUIRED, IN THIS ORDER
 2. Commit and push:
    cd /mnt/c/_mb2-cs-app/project-library
    git add -A
-   git commit -m "[[ REPLACE: package name ]] wireframes completed per ADR-27 [[ REPLACE: date ]]"
+   git commit -m "[PACKAGE] wireframes completed per ADR-27 [[ add current date ]]"
    git push origin main
 
 3. Sync GBrain:

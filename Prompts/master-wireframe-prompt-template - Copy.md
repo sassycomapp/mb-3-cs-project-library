@@ -1,4 +1,3 @@
-# MASTER WIREFRAME PROMPT TEMPLATE
 
 **How to use this file:** Copy everything below the line into OpenCode chat.
 Before pasting, replace the four placeholder blocks marked `[[ REPLACE: ... ]]`
@@ -8,11 +7,15 @@ anything else in this template.
 ---
 
 Before starting, use GBrain with source_id 'project-library' to
-search for: [[ REPLACE: 6-8 search terms for this package, e.g.
-"bookings", "booking form", "design rules", "scaffold spec",
-"nomenclature", "m3 component mapping", "empty state",
-"bookings architecture" ]]. Use all findings as the specification
-baseline before touching any file.
+search for: 
+
+Before starting, use GBrain with source_id 'project-library' to
+search for: "landing_pages", "landing_pages form",
+"landing_pages architecture", "design rules", "scaffold spec",
+"nomenclature", "m3 component mapping", "empty state". Use all
+findings as the specification baseline before touching any file.
+
+Use all findings as the specification baseline before touching any file.
 
 ---
 
@@ -33,11 +36,11 @@ creating any wireframe. Do not proceed until all are read:
 6. Any architecture, ADR, or design documents in
    project-library/docs/, project-library/adr/, and
    project-library/implementation/ that bear on the
-   [[ REPLACE: package name, e.g. "bookings" ]] package and its
+   landing_pages package and its
    forms. Use your GBrain findings above as the starting point,
    then read the actual files.
 7. Any relevant prior findings in project-library/gstack-outputs/
-   concerning [[ REPLACE: package name ]] forms, states, flows,
+   concerning landing_pages forms, states, flows,
    or design review findings.
 
 ---
@@ -203,16 +206,16 @@ appropriate. If not applicable, note this in the report.
 TASK
 
 Produce or correct the wireframes for the
-[[ REPLACE: package name, e.g. "bookings" ]] package. The
-complete list of items in scope is:
+landing_pages package. 
 
-[[ REPLACE: full list of every wireframe file path for this
-package, one per line, including all forms and all
-sub-templates/row templates — e.g.:
-/mnt/c/_mb2-cs-app/project-library/wireframes/bookings/AvailabilitySettingsForm/wireframe-bookings-AvailabilitySettingsForm.html
-/mnt/c/_mb2-cs-app/project-library/wireframes/bookings/BookingCalendarForm/wireframe-bookings-BookingCalendarForm.html
-/mnt/c/_mb2-cs-app/project-library/wireframes/bookings/BookingCalendarForm/tmpl_day_event/wireframe-bookings-tmpl_day_event.html
-... etc., list every single file ]]
+The complete list of items in scope is:
+
+- /mnt/c/_mb2-cs-app/project-library/wireframes/landing_pages/LandingPage/wireframe-landing_pages-LandingPage.html"
+- /mnt/c/_mb2-cs-app/project-library/wireframes/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate.html"
+- /mnt/c/_mb2-cs-app/project-library/wireframes/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate.html"
+- /mnt/c/_mb2-cs-app/project-library/wireframes/landing_pages/LandingPage/VslTemplate/VslTemplate.html"
+- /mnt/c/_mb2-cs-app/project-library/wireframes/landing_pages/LandingPageEditorForm/wireframe-landing_pages-LandingPageEditorForm.html"
+- /mnt/c/_mb2-cs-app/project-library/wireframes/landing_pages/LandingPageListForm/wireframe-landing_pages-LandingPageListForm.html"
 
 For each item (in order, one at a time):
 1. Check resume behavior — if it already exists and is ADR-27
@@ -229,7 +232,7 @@ For each item (in order, one at a time):
    already-complete).
 
 File naming convention:
-wireframe-[[ REPLACE: package name ]]-[FormName].html
+wireframe-landing_pages-[FormName].html
 (Check nomenclature.md for the exact naming standard.)
 
 ---
@@ -250,7 +253,7 @@ FINAL STEPS — REQUIRED, IN THIS ORDER
 2. Commit and push:
    cd /mnt/c/_mb2-cs-app/project-library
    git add -A
-   git commit -m "[[ REPLACE: package name ]] wireframes completed per ADR-27 [[ REPLACE: date ]]"
+   git commit -m "landing_pages wireframes completed per ADR-27 [[ add current date ]]"
    git push origin main
 
 3. Sync GBrain:

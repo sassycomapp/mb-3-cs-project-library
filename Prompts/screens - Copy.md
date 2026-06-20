@@ -1,8 +1,7 @@
----
-/design-html
+
 
 Before starting, use GBrain with source_id 'project-library' to 
-search for: "auth", "auth form", "screen production 
+search for: "landing_pages", "landing_pages form", "screen production 
 standard", "DESIGN.md", "MUI aesthetic overlay", "empty state", 
 "palette tokens". Use all findings as context.
 
@@ -20,7 +19,7 @@ Do not proceed until all are read:
    — Pay particular attention to: MUI Aesthetic Implementation 
    section (the 9 adopted variables), Design Tokens, Typography, 
    Spacing/Radius/Elevation, AdminLayout, Empty States, and 
-   any auth-specific sections.
+   any landing_pages-specific sections.
 3. /mnt/c/_mb2-cs-app/project-library/docs/DESIGN_palette_section.md
    — Professional Blue is the default demonstration palette.
 4. /mnt/c/_mb2-cs-app/project-library/docs/theme_patched.css
@@ -40,7 +39,7 @@ Do not proceed until all are read:
     wireframes, wireframes determine screens.
 12. Any architecture, ADR, or design documents in 
     project-library/docs/, project-library/adr/, and 
-    project-library/implementation/ that bear on auth 
+    project-library/implementation/ that bear on landing_pages 
     forms and their content, flows, and states.
 13. MATERIAL ICONS — REQUIRED IN ALL SCREENS
 
@@ -168,27 +167,20 @@ with ZAR currency where financial figures appear.
 
 TASK
 
-Produce screens for the auth package forms. The forms 
+Produce screens for the landing_pages package forms. The forms 
 in scope are:
 
-auth forms and screen output paths:
-  [LIST ALL FORMS AND SUB-TEMPLATES FOR THIS PACKAGE — 
-   SAME LIST AS THE WIREFRAME PROMPT, MINUS ANY THAT 
-   WERE SKIPPED DUE TO NO ARCHITECTURAL BACKING]
-  Example:
-  - LoginForm
-    /mnt/c/_mb2-cs-app/project-library/screens/auth/LoginForm/
-  - PasswordResetCompleteForm
-    /mnt/c/_mb2-cs-app/project-library/screens/auth/PasswordResetCompleteForm/
-  - PasswordResetForm
-    /mnt/c/_mb2-cs-app/project-library/screens/auth/PasswordResetForm/
-  - SignupForm
-    /mnt/c/_mb2-cs-app/project-library/screens/auth/SignupForm/
-
+landing_pages forms and screen output paths:
+- /mnt/c/_mb2-cs-app/project-library/screens/landing_pages/LandingPage/wireframe-landing_pages-LandingPage.html"
+- /mnt/c/_mb2-cs-app/project-library/screens/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate.html"
+- /mnt/c/_mb2-cs-app/project-library/screens/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate.html"
+- /mnt/c/_mb2-cs-app/project-library/screens/landing_pages/LandingPage/VslTemplate/VslTemplate.html"
+- /mnt/c/_mb2-cs-app/project-library/screens/landing_pages/LandingPageEditorForm/wireframe-landing_pages-LandingPageEditorForm.html"
+- /mnt/c/_mb2-cs-app/project-library/screens/landing_pages/LandingPageListForm/wireframe-landing_pages-LandingPageListForm.html"
 
 For each form (in order, one at a time):
 1. Read the corresponding wireframe from:
-   /mnt/c/_mb2-cs-app/project-library/wireframes/auth/[FormName]/
+   /mnt/c/_mb2-cs-app/project-library/wireframes/landing_pages/[FormName]/
 2. Read relevant specification documents.
 3. Produce the screen HTML matching the wireframe structure 
    and the design-reference-screens.html aesthetic.
@@ -197,7 +189,7 @@ For each form (in order, one at a time):
 5. Save the file.
 6. Move to the next form only when the current one is complete.
 
-File naming convention: screen-auth-[FormName].html
+File naming convention: screen-landing_pages-[FormName].html
 (Check nomenclature.md for the exact naming standard.)
 
 ---
@@ -222,7 +214,7 @@ FINAL STEPS — REQUIRED, IN THIS ORDER
 2. Commit and push:
    cd /mnt/c/_mb2-cs-app/project-library
    git add -A
-   git commit -m "auth screens produced per design system 2026-06-18"
+   git commit -m "landing_pages screens produced per design system 2026-06-18"
    git push origin main
 
 3. Sync GBrain:
