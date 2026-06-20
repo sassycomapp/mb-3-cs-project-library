@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — HomePage (Services Template)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #493ef3; --on-primary: #ffffff; --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff; --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20; --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5; --surface-container-high: #eae7ef;
+      --outline: #7a7583; --outline-variant: #c9c4d3; --error: #b42336; --on-error: #ffffff;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+      --divider-color: var(--outline-variant); --state-hover-opacity: 0.08; --state-pressed-opacity: 0.12;
+    }
+    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); }
+    .app-bar { min-height: 56px; padding: 0 var(--space-6); background-color: var(--surface); border-bottom: 1px solid var(--divider-color); display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
+    .app-bar .title { font-size: 20px; font-weight: 500; color: var(--on-surface); flex: 1; }
+    .app-bar-nav { display: flex; gap: var(--space-2); align-items: center; }
+    .nav-link { font-family: var(--font-family); font-size: 14px; font-weight: 500; padding: var(--space-2) var(--space-4); border-radius: 100px; color: var(--on-surface-variant); text-decoration: none; transition: background 150ms; }
+    .nav-link:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+    .nav-link.active { background: var(--secondary-container); color: var(--on-secondary-container); }
+    .hero-section { background: linear-gradient(135deg, var(--primary-container) 0%, var(--surface-container-low) 100%); padding: 64px var(--space-6); text-align: center; }
+    .hero-title { font-size: 36px; line-height: 44px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-4); }
+    .hero-subtitle { font-size: 18px; line-height: 28px; color: var(--on-surface-variant); max-width: 600px; margin: 0 auto var(--space-6); }
+    .hero-actions { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+    .section { padding: var(--space-8) var(--space-6); max-width: 900px; margin: 0 auto; }
+    .section-title { font-size: 22px; line-height: 28px; font-weight: 600; color: var(--on-surface); text-align: center; margin-bottom: var(--space-6); }
+    .section-text { font-size: 16px; line-height: 24px; color: var(--on-surface-variant); text-align: center; max-width: 600px; margin: 0 auto; }
+    .card { background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 8px; padding: var(--space-6); box-shadow: var(--mui-shadow-card); transition: box-shadow 200ms ease; }
+    .card:hover { box-shadow: var(--mui-shadow-raised); }
+    .card-title { font-size: 18px; line-height: 24px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-3); }
+    .card-text { font-size: 14px; line-height: 20px; color: var(--on-surface-variant); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .testimonial-quote { font-style: italic; font-size: 14px; line-height: 20px; color: var(--on-surface-variant); margin-bottom: var(--space-3); }
+    .testimonial-author { font-size: 14px; font-weight: 500; color: var(--on-surface); }
+    .trust-strip { background: var(--surface-variant); padding: var(--space-8) var(--space-6); }
+    .trust-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); text-align: center; }
+    .trust-value { font-size: 32px; line-height: 40px; font-weight: 600; color: var(--primary); }
+    .trust-label { font-size: 14px; color: var(--on-surface-variant); }
+    .cta-band { background: var(--primary-container); padding: var(--space-8) var(--space-6); text-align: center; }
+    .cta-title { font-size: 32px; line-height: 40px; font-weight: 600; color: var(--on-primary-container); margin-bottom: var(--space-4); }
+    .cta-text { font-size: 16px; line-height: 24px; color: var(--on-primary-container); max-width: 500px; margin: 0 auto var(--space-6); }
+    .video-placeholder { background: var(--surface-variant); border-radius: 8px; padding: 48px; text-align: center; color: var(--on-surface-variant); }
+    .video-placeholder .material-icons { font-size: 48px; margin-bottom: var(--space-3); opacity: 0.5; }
+    .btn { font-family: var(--font-family); font-size: 14px; font-weight: 500; padding: 10px 24px; min-height: 40px; border-radius: 100px; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); text-decoration: none; transition: background 150ms, box-shadow 150ms; }
+    .btn-filled { background: var(--primary); color: var(--on-primary); }
+    .btn-filled:hover { background: rgba(73,62,243,0.92); box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15); }
+    .btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
+    .btn-outlined:hover { background: rgba(73,62,243,var(--state-hover-opacity)); }
+    .footer { background: var(--surface-container-low); border-top: 1px solid var(--divider-color); padding: var(--space-8) var(--space-6); }
+    .footer-content { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+    .footer-brand { font-size: 18px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-3); }
+    .footer-tagline { font-size: 14px; color: var(--on-surface-variant); }
+    .footer-heading { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-3); }
+    .footer-links { list-style: none; padding: 0; }
+    .footer-links li { margin-bottom: var(--space-2); }
+    .footer-links a { font-size: 14px; color: var(--on-surface-variant); text-decoration: none; }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-bottom { max-width: 900px; margin: var(--space-6) auto 0; padding-top: var(--space-4); border-top: 1px solid var(--divider-color); text-align: center; font-size: 12px; color: var(--on-surface-variant); }
+    @media (max-width: 768px) { .services-grid, .testimonials-grid { grid-template-columns: 1fr; } .trust-grid { grid-template-columns: repeat(2, 1fr); } .footer-content { grid-template-columns: 1fr 1fr; } .hero-title { font-size: 28px; line-height: 36px; } }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+    @media (prefers-color-scheme: dark) { :root { --surface: #1C1B1F; --on-surface: #E6E1E5; --surface-variant: #49454F; --on-surface-variant: #CAC4D0; --outline: #938F99; --outline-variant: #49454F; } }
+  </style>
+</head>
+<body>
+  <header class="app-bar"><div class="title">Mybizz</div><nav class="app-bar-nav"><a href="#" class="nav-link active">Home</a><a href="#" class="nav-link">About</a><a href="#" class="nav-link">Services</a><a href="#" class="nav-link">Blog</a><a href="#" class="nav-link">Contact</a></nav></header>
+
+  <!-- HERO — shorter, more direct -->
+  <section class="hero-section">
+    <h1 class="hero-title">Expert Services for Your Business</h1>
+    <p class="hero-subtitle">From consulting to financial advisory, we deliver results that matter.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-filled"><span class="material-icons" style="font-size:18px;">design_services</span> Explore Services</a>
+      <a href="#" class="btn btn-outlined"><span class="material-icons" style="font-size:18px;">mail</span> Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- SERVICES — promoted position -->
+  <section class="section">
+    <h2 class="section-title">Our Services</h2>
+    <div class="services-grid">
+      <div class="card"><div class="card-title">Business Consulting</div><p class="card-text">Strategic guidance to streamline operations and drive sustainable growth.</p></div>
+      <div class="card"><div class="card-title">Financial Advisory</div><p class="card-text">Expert financial planning and investment advice for your business.</p></div>
+      <div class="card"><div class="card-title">Marketing Strategy</div><p class="card-text">Data-driven marketing campaigns to reach your target audience.</p></div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <section class="trust-strip">
+    <div class="trust-grid">
+      <div><div class="trust-value">10+</div><div class="trust-label">Years in Business</div></div>
+      <div><div class="trust-value">500+</div><div class="trust-label">Clients Served</div></div>
+      <div><div class="trust-value">98%</div><div class="trust-label">Client Satisfaction</div></div>
+      <div><div class="trust-value">24h</div><div class="trust-label">Response Time</div></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="testimonials-grid">
+      <div class="card"><p class="testimonial-quote">"Their consulting team transformed our operations."</p><div class="testimonial-author">— Nomsa M., Salon Owner</div></div>
+      <div class="card"><p class="testimonial-quote">"Professional, responsive, and results-oriented."</p><div class="testimonial-author">— Thabo K., Fitness Studio</div></div>
+    </div>
+  </section>
+
+  <!-- INTRO — shorter, factual -->
+  <section class="section">
+    <h2 class="section-title">About Us</h2>
+    <p class="section-text">We are a professional consulting and services business dedicated to helping our clients achieve their goals.</p>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <h2 class="cta-title">Ready to Get Started?</h2>
+    <p class="cta-text">Book a free consultation and discover how we can help your business grow.</p>
+    <a href="#" class="btn btn-filled"><span class="material-icons" style="font-size:18px;">calendar_today</span> Book Consultation</a>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="section">
+    <h2 class="section-title">Watch Our Story</h2>
+    <div class="video-placeholder"><span class="material-icons">play_circle</span><p>Video story coming soon</p></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div><div class="footer-brand">Mybizz</div><p class="footer-tagline">Professional consulting and services for growing businesses.</p></div>
+      <div><div class="footer-heading">Quick Links</div><ul class="footer-links"><li><a href="#">Home</a></li><li><a href="#">About</a></li><li><a href="#">Services</a></li><li><a href="#">Blog</a></li></ul></div>
+      <div><div class="footer-heading">Services</div><ul class="footer-links"><li><a href="#">Business Consulting</a></li><li><a href="#">Financial Advisory</a></li><li><a href="#">Marketing Strategy</a></li></ul></div>
+      <div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a href="#">info@mybizz.co.za</a></li><li><a href="#">+27 21 555 0123</a></li><li><a href="#">Cape Town, South Africa</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Mybizz Consulting Services. All rights reserved.</div>
+  </footer>
+</body>
+</html>
