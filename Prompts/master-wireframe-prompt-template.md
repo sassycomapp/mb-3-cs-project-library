@@ -1,3 +1,8 @@
+/design-consultation 
+
+Package: [PACKAGE]
+
+
 # MASTER WIREFRAME PROMPT TEMPLATE
 
 **How to use this file:** Copy everything below the line into OpenCode chat.
