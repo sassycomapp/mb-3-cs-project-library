@@ -1,3 +1,11 @@
+---
+type: concept
+title: Build Plan
+ingested_via: put_page
+ingested_at: '2026-06-20T09:39:12.527Z'
+source_kind: put_page
+---
+
 # Mybizz CS — Build Plan (Definitive)
 
 **Vertical:** Consulting & Services
@@ -877,4 +885,3 @@ For a solo developer, self-review is where bugs hide. Complete the following che
 ---
 
 *End of file — build-plan.md (Definitive)*
-
