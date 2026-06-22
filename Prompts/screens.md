@@ -1,8 +1,7 @@
 Model -Copy this to use
 
-analytics
-- DashboardAnalyticsForm
-- RevenueReportForm
+blog Line 175
+
 
 ---
 /design-html
@@ -48,6 +47,17 @@ Do not proceed until all are read:
     project-library/docs/, project-library/adr/, and 
     project-library/implementation/ that bear on [PACKAGE] 
     forms and their content, flows, and states.
+13. MATERIAL ICONS — REQUIRED IN ALL SCREENS
+
+All screens that include navigation or icon components MUST 
+import the Material Icons font in the HTML head:
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" 
+      rel="stylesheet">
+
+Icon spans must use class="material-icons" and contain the 
+icon ligature name only. Without this import, icon names 
+render as plain text and corrupt the layout.
 
 ---
 
@@ -167,9 +177,6 @@ Produce screens for the [PACKAGE] package forms. The forms
 in scope are:
 
 [PACKAGE] forms and screen output paths:
-  [LIST ALL FORMS AND SUB-TEMPLATES FOR THIS PACKAGE — 
-   SAME LIST AS THE WIREFRAME PROMPT, MINUS ANY THAT 
-   WERE SKIPPED DUE TO NO ARCHITECTURAL BACKING]
   Example:
   - DashboardAnalyticsForm
     /mnt/c/_mb2-cs-app/project-library/screens/[PACKAGE]/DashboardAnalyticsForm/

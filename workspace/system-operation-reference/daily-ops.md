@@ -28,11 +28,16 @@ Then run Start sequence above.
 ```bash
 cd /mnt/c/_mb2-cs-app/project-library
 git add -A
-git commit -m "describe what you did"
+git commit -m "/Plan-eng-review-remediation"
 git push origin main
-gbrain sync
+
+pkill -f "opencode web"
+pkill -f "gbrain serve"
+sleep 3
+gbrain sync --source project-library
 gbrain embed --stale
-```
+
+opencode web --hostname 0.0.0.0
 
 ---
 
