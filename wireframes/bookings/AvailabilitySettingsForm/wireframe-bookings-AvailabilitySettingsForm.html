@@ -52,7 +52,7 @@
       <!-- PROVIDER SELECTOR -->
       <div class="container">
         <span class="container-label">FlowPanel: flow_provider_selector</span>
-        <div class="component">dd_provider (DropdownMenu) label="Provider"</div>
+        <div class="component">dd_provider (DropdownMenu) (W) label="Provider"</div>
         <div class="component">txt_provider_info (Text) "Showing availability for: [provider name]"</div>
       </div>
 
@@ -65,7 +65,7 @@
         <!-- Day rows -->
         <div class="container">
           <span class="container-label">FlowPanel: flow_monday</span>
-          <div class="component">cb_monday_active (Checkbox) "Monday"</div>
+          <div class="component">cb_monday_active (Checkbox) (W) "Monday"</div>
           <div class="component">dp_monday_start (DatePicker) (W) placeholder="09:00"</div>
           <div class="component">txt_to_monday (Text) "to"</div>
           <div class="component">dp_monday_end (DatePicker) (W) placeholder="17:00"</div>
@@ -73,7 +73,7 @@
 
         <div class="container">
           <span class="container-label">FlowPanel: flow_tuesday</span>
-          <div class="component">cb_tuesday_active (Checkbox) "Tuesday"</div>
+          <div class="component">cb_tuesday_active (Checkbox) (W) "Tuesday"</div>
           <div class="component">dp_tuesday_start (DatePicker) (W) placeholder="09:00"</div>
           <div class="component">txt_to_tuesday (Text) "to"</div>
           <div class="component">dp_tuesday_end (DatePicker) (W) placeholder="17:00"</div>
@@ -81,7 +81,7 @@
 
         <div class="container">
           <span class="container-label">FlowPanel: flow_wednesday</span>
-          <div class="component">cb_wednesday_active (Checkbox) "Wednesday"</div>
+          <div class="component">cb_wednesday_active (Checkbox) (W) "Wednesday"</div>
           <div class="component">dp_wednesday_start (DatePicker) (W) placeholder="09:00"</div>
           <div class="component">txt_to_wednesday (Text) "to"</div>
           <div class="component">dp_wednesday_end (DatePicker) (W) placeholder="17:00"</div>
@@ -89,7 +89,7 @@
 
         <div class="container">
           <span class="container-label">FlowPanel: flow_thursday</span>
-          <div class="component">cb_thursday_active (Checkbox) "Thursday"</div>
+          <div class="component">cb_thursday_active (Checkbox) (W) "Thursday"</div>
           <div class="component">dp_thursday_start (DatePicker) (W) placeholder="09:00"</div>
           <div class="component">txt_to_thursday (Text) "to"</div>
           <div class="component">dp_thursday_end (DatePicker) (W) placeholder="17:00"</div>
@@ -97,7 +97,7 @@
 
         <div class="container">
           <span class="container-label">FlowPanel: flow_friday</span>
-          <div class="component">cb_friday_active (Checkbox) "Friday"</div>
+          <div class="component">cb_friday_active (Checkbox) (W) "Friday"</div>
           <div class="component">dp_friday_start (DatePicker) (W) placeholder="09:00"</div>
           <div class="component">txt_to_friday (Text) "to"</div>
           <div class="component">dp_friday_end (DatePicker) (W) placeholder="17:00"</div>
@@ -105,7 +105,7 @@
 
         <div class="container">
           <span class="container-label">FlowPanel: flow_saturday</span>
-          <div class="component">cb_saturday_active (Checkbox) "Saturday"</div>
+          <div class="component">cb_saturday_active (Checkbox) (W) "Saturday"</div>
           <div class="component">dp_saturday_start (DatePicker) (W) placeholder="09:00"</div>
           <div class="component">txt_to_saturday (Text) "to"</div>
           <div class="component">dp_saturday_end (DatePicker) (W) placeholder="13:00"</div>
@@ -113,7 +113,7 @@
 
         <div class="container">
           <span class="container-label">FlowPanel: flow_sunday</span>
-          <div class="component">cb_sunday_active (Checkbox) "Sunday"</div>
+          <div class="component">cb_sunday_active (Checkbox) (W) "Sunday"</div>
           <div class="component">dp_sunday_start (DatePicker) (W) placeholder=""</div>
           <div class="component">txt_to_sunday (Text) "to"</div>
           <div class="component">dp_sunday_end (DatePicker) (W) placeholder=""</div>
@@ -131,11 +131,11 @@
         <div class="component">hdg_rules_title (Heading) "Booking Rules"</div>
 
         <div class="component">txt_buffer_label (Text) "Buffer time between appointments"</div>
-        <div class="component">dd_buffer_time (DropdownMenu) label="Buffer Time" items=["None","15 min","30 min","45 min","60 min"]</div>
+        <div class="component">dd_buffer_time (DropdownMenu) (W) label="Buffer Time" items=["None","15 min","30 min","45 min","60 min"]</div>
         <div class="component">txt_buffer_help (Text) "Time reserved between consecutive bookings for preparation."</div>
 
         <div class="component">txt_advance_label (Text) "Advance booking window"</div>
-        <div class="component">dd_advance_window (DropdownMenu) label="Advance Window" items=["1 week","2 weeks","1 month","3 months","No limit"]</div>
+        <div class="component">dd_advance_window (DropdownMenu) (W) label="Advance Window" items=["1 week","2 weeks","1 month","3 months","No limit"]</div>
         <div class="component">txt_advance_help (Text) "How far in advance clients can book appointments."</div>
 
         <div class="container">
@@ -153,7 +153,7 @@
         <div class="container">
           <span class="container-label">FlowPanel: flow_add_exception</span>
           <div class="component">dp_exception_date (DatePicker) (W) placeholder="Select date"</div>
-          <div class="component">dd_exception_type (DropdownMenu) label="Type" items=["Holiday","Personal","Closure","Other"]</div>
+          <div class="component">dd_exception_type (DropdownMenu) (W) label="Type" items=["Holiday","Personal","Closure","Other"]</div>
           <div class="component">txt_exception_reason (TextBox) (W) placeholder="Reason (optional)"</div>
           <div class="component">btn_add_exception (Button) appearance="outlined" "Block Date"</div>
         </div>
@@ -167,7 +167,7 @@
         <!-- EMPTY STATE -->
         <div class="container hidden">
           <span class="container-label">ColumnPanel: col_empty_state</span>
-          <div class="component">ico_empty_state (Icon) "event_busy"</div>
+          <div class="component">ico_empty_state (IconButton) mi:event_busy</div>
           <div class="component">hdg_empty_state (Heading) "No blocked dates"</div>
           <div class="component">txt_empty_state (Text) "Block dates for holidays or time off to prevent bookings on those days."</div>
           <div class="component">btn_empty_action (Button) appearance="filled" "Block a Date"</div>
@@ -196,10 +196,21 @@
     <tr><td>dp_sunday_start</td><td>DatePicker</td><td>writeback = W</td></tr>
     <tr><td>dp_sunday_end</td><td>DatePicker</td><td>writeback = W</td></tr>
     <tr><td>dp_exception_date</td><td>DatePicker</td><td>writeback = W</td></tr>
+    <tr><td>cb_monday_active</td><td>Checkbox</td><td>writeback = W</td></tr>
+    <tr><td>cb_tuesday_active</td><td>Checkbox</td><td>writeback = W</td></tr>
+    <tr><td>cb_wednesday_active</td><td>Checkbox</td><td>writeback = W</td></tr>
+    <tr><td>cb_thursday_active</td><td>Checkbox</td><td>writeback = W</td></tr>
+    <tr><td>cb_friday_active</td><td>Checkbox</td><td>writeback = W</td></tr>
+    <tr><td>cb_saturday_active</td><td>Checkbox</td><td>writeback = W</td></tr>
+    <tr><td>cb_sunday_active</td><td>Checkbox</td><td>writeback = W</td></tr>
     <tr><td>txt_exception_reason</td><td>TextBox</td><td>writeback = W</td></tr>
+    <tr><td>dd_provider</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+    <tr><td>dd_buffer_time</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+    <tr><td>dd_advance_window</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+    <tr><td>dd_exception_type</td><td>DropdownMenu</td><td>writeback = W</td></tr>
   </table>
 
-  <p><strong>Note:</strong> All DropdownMenu selections (dd_provider, dd_buffer_time, dd_advance_window, dd_exception_type) are populated programmatically. No Designer-only properties beyond items lists.</p>
+  <p><strong>Note:</strong> All DropdownMenu selections (dd_provider, dd_buffer_time, dd_advance_window, dd_exception_type) are populated programmatically. Writeback (W) must be enabled in Designer for all input components.</p>
 
 </body>
 </html>

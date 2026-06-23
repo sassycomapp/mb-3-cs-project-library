@@ -48,7 +48,7 @@
       <!-- CATEGORY FILTER + ADD BUTTON -->
       <div class="container">
         <span class="container-label">FlowPanel: flow_category_filter</span>
-        <div class="component">dd_category (DropdownMenu) label="Category"</div>
+        <div class="component">dd_category (DropdownMenu) (W) label="Category"</div>
         <div class="component">btn_add_clause (Button) appearance="outlined" "+ Add Custom Clause"</div>
       </div>
 
@@ -103,6 +103,7 @@
     <tr><td>txt_clause_body</td><td>TextArea</td><td>writeback = W</td></tr>
     <tr><td>txt_edit_title</td><td>TextBox</td><td>writeback = W</td></tr>
     <tr><td>txt_edit_body</td><td>TextArea</td><td>writeback = W</td></tr>
+    <tr><td>dd_category</td><td>DropdownMenu</td><td>writeback = W</td></tr>
   </table>
 
   <p><strong>Note:</strong> <code>dd_category</code> items populated programmatically from distinct category values in the current document_type table. <code>document_type</code> is a constructor property set by the host form (PolicyEditorForm). Seeded clauses (is_seeded = True) are not deletable. Custom clauses (is_seeded = False) are editable and deletable.</p>

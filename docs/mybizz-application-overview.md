@@ -76,7 +76,13 @@ Developer Reference Document
    - 10.12 [Multi-Source Video Support](#1012-multi-source-video-support)
    - 10.13 [Mybizz Management Platform](#1013-mybizz-management-platform)
    - 10.14 [Platform Capacity Expansion](#1014-platform-capacity-expansion)
-11. [Closing Summary](#11-closing-summary)
+11. The Five-App Structure
+   - App 1: mb-3-cs — Development Workspace
+   - App 2: master_template — The Published Dependency
+   - App 3: blank_client_template — Provisioning Clone Source
+   - App 4: [client-name]-cs — Client Instances (one per client)
+   - App 5: Mybizz_management — Platform Operator Tooling
+12. [Closing Summary](#11-closing-summary)
 
 ---
 
@@ -760,9 +766,45 @@ Expanding beyond the V1 capacity of 100 client businesses, enabling the platform
 
 *Source: positioning-strategy.md*
 
+##  11. The Five-App Structure
+All five apps live on a single mybizz Anvil account on the Business plan (~$89/month). Each has a distinct, non-overlapping role.
+
+App 1: mb-3-cs — Development Workspace
+Role: All feature development happens here.
+Contains: All 36 Data Tables (for dev/testing), all UI forms, all server modules, all application code.
+Updated via: Daily development on GitHub develop branch.
+Key rule: This is the authoring environment, not the publishing environment. It is never a dependency for any client instance.
+
+App 2: master_template — The Published Dependency
+Role: Sole source of all server-side logic AND all UI forms for every client instance.
+Contains: All server modules + all forms + all UI.
+Updated via: Merge develop → stable in GitHub. It tracks the stable branch automatically.
+Key rule: When a client instance calls anvil.server.call('function_name'), the function executes from master_template's server modules. When a client instance displays a form, that form is served from master_template via the dependency. master_template is never given to clients directly — they depend on it.
+
+App 3: blank_client_template — Provisioning Clone Source
+Role: The sole clone source for creating new client instances.
+Contains: All 36 Data Tables (correct schema, no data) + one startup module + master_template as dependency. Zero server modules. Zero forms.
+Updated via: Only when schema changes occur.
+Key rule: Anvil cannot create tables programmatically, so cloning this app gives each new client the required 36-table schema without copying any server code or forms (which would break the update model). Anvil Secrets are left empty — set per instance at provisioning.
+
+App 4: [client-name]-cs — Client Instances (one per client)
+Role: Each paying client gets a dedicated, isolated app instance.
+Contains: 36 Data Tables + one startup module + master_template dependency (active). That's it — nothing else.
+Updated via: Automatic — server logic, UI, and forms all propagate via the dependency. Schema changes are manual only.
+Critical rules:
+Must never contain server modules — Anvil runs the instance's own code instead of the dependency, permanently breaking update propagation.
+Must never contain forms — same precedence problem applies to UI.
+The startup module is the only client-side code allowed.
+
+App 5: Mybizz_management — Platform Operator Tooling
+Role: Internal tooling for mybizz as the platform operator.
+Contains: Client registry, monitoring dashboard, billing status, update distribution controls.
+Status: Deferred — built post-launch.
+Key rule: This app does NOT depend on client instances (inverted architecture). It communicates with clients via bidirectional HTTP endpoints secured with per-client Bearer tokens.
+
 ---
 
-## 11. Closing Summary
+## 12. Closing Summary
 
 Mybizz represents a fundamentally different approach to running a service business online. Instead of forcing business owners to assemble a patchwork of disconnected tools, it delivers everything they need in a single platform — designed from the ground up to work together, priced transparently, and built to give the business owner complete ownership of their data, their clients, and their brand.
 
@@ -771,6 +813,7 @@ The platform is built on Google's Material 3 design system with MUI-inspired ref
 Every feature — from the booking system to the email marketing engine to the Clause Builder for legal policies — is designed to be operated without technical knowledge, with tooltips, contextual help videos, and a guided onboarding flow that gets the business live as quickly as possible.
 
 Mybizz is live at **mybizz.live**. The platform is built. The market is waiting.
+
 
 ---
 

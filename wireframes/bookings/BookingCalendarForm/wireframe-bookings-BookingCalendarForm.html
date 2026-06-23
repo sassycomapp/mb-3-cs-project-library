@@ -49,7 +49,7 @@
       <div class="container">
         <span class="container-label">FlowPanel: flow_header</span>
         <div class="component">hdg_calendar_title (Heading) "Booking Calendar"</div>
-        <div class="component">dd_provider_filter (DropdownMenu) label="Provider"</div>
+        <div class="component">dd_provider_filter (DropdownMenu) (W) label="Provider"</div>
         <div class="component">btn_add_booking (Button) appearance="filled" "+ Add Booking"</div>
         <div class="component">btn_list_view (Button) appearance="outlined" "List View"</div>
       </div>
@@ -60,9 +60,9 @@
         <div class="component">btn_month (Button) appearance="tonal" "Month"</div>
         <div class="component">btn_week (Button) appearance="tonal" "Week"</div>
         <div class="component">btn_day (Button) appearance="tonal" "Day"</div>
-        <div class="component">btn_prev (IconButton) icon="chevron_left"</div>
+        <div class="component">btn_prev (IconButton) mi:chevron_left</div>
         <div class="component">txt_current_period (Text) "[Month Year / Week range / Day date]"</div>
-        <div class="component">btn_next (IconButton) icon="chevron_right"</div>
+        <div class="component">btn_next (IconButton) mi:chevron_right</div>
         <div class="component">btn_today (Button) appearance="text" "Today"</div>
       </div>
 
@@ -103,7 +103,7 @@
       <!-- EMPTY STATE -->
       <div class="container hidden">
         <span class="container-label">ColumnPanel: col_empty_state</span>
-        <div class="component">ico_empty_state (Icon) "event"</div>
+        <div class="component">ico_empty_state (IconButton) mi:event</div>
         <div class="component">hdg_empty_state (Heading) "No bookings yet"</div>
         <div class="component">txt_empty_state (Text) "Your calendar will show bookings once clients start scheduling appointments."</div>
         <div class="component">btn_empty_action (Button) appearance="filled" "Create Booking"</div>
@@ -116,7 +116,8 @@
 
   <table>
     <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-    <tr><td colspan="3"><em>No Designer-only properties. All view toggling, date navigation, and panel visibility are programmatic.</em></td></tr>
+    <tr><td colspan="3"><em>No Designer-only properties beyond writeback. All view toggling, date navigation, and panel visibility are programmatic.</em></td></tr>
+    <tr><td>dd_provider_filter</td><td>DropdownMenu</td><td>writeback = W</td></tr>
   </table>
 
   <p><strong>Note:</strong> The three view panels (col_month_view, col_week_view, col_day_view) are toggled programmatically based on the active view selection. Only one is visible at a time. The SegmentedButton (btn_month, btn_week, btn_day) controls which panel is shown. Provider filter populates from <code>users</code> table where role = "staff".</p>

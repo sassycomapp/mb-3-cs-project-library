@@ -228,7 +228,7 @@
   <div class="cn">warning_box <span class="ct">(ColumnPanel)</span> — error-container background</div>
 
   <div class="wf-dd">Select Currency</div>
-  <div class="cn">dd_system_currency <span class="ct">(DropdownMenu)</span> — <span class="crequired">Required</span></div>
+  <div class="cn">dd_system_currency <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span> — <span class="crequired">Required</span></div>
 
   <div class="wf-btn-filled">Confirm Currency Selection</div>
   <div class="cn">btn_confirm_currency <span class="ct">(Button)</span> <span class="cfixed">"Confirm Currency Selection"</span></div>
@@ -302,7 +302,11 @@
 <h2>Section 3 — Properties Table</h2>
 
 <div class="prop-caption">Properties table</div>
-<div class="prop-note">All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code. No Designer-only properties required.</div>
+<div class="prop-note">All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code. No Designer-only properties required beyond writeback.</div>
+<table class="props">
+<tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
+<tr><td>dd_system_currency</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+</table>
 
 </body>
 </html>

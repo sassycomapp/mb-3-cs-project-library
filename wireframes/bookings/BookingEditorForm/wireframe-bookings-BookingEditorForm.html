@@ -109,7 +109,7 @@
       <div class="container hidden">
         <span class="container-label">ColumnPanel: col_step_4_meeting</span>
         <div class="component">hdg_step_4 (Heading) "Meeting Type"</div>
-        <div class="component">rbg_meeting_type (RadioGroupPanel)</div>
+        <div class="component">rbg_meeting_type (RadioGroupPanel) (W)</div>
         <div class="component">rb_in_person (RadioButton) "In-Person"</div>
         <div class="component">rb_video_call (RadioButton) "Video Call"</div>
         <div class="component">rb_phone_call (RadioButton) "Phone Call"</div>
@@ -166,7 +166,7 @@
       <!-- STEP 7: CONFIRMATION (hidden) -->
       <div class="container hidden">
         <span class="container-label">ColumnPanel: col_step_7_confirmation</span>
-        <div class="component">ico_success (Icon) "check_circle"</div>
+        <div class="component">ico_success (IconButton) mi:check_circle</div>
         <div class="component">hdg_step_7 (Heading) "Booking Confirmed!"</div>
         <div class="component">txt_confirmation_id (Text) "Booking ID: [BK-YYYY-NNN]"</div>
         <div class="component">txt_confirmation_details (Text) "[Service] with [Provider] on [Date] at [Time]"</div>
@@ -186,6 +186,7 @@
     <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
     <tr><td>txt_search_service</td><td>TextBox</td><td>writeback = W</td></tr>
     <tr><td>dp_booking_date</td><td>DatePicker</td><td>writeback = W</td></tr>
+    <tr><td>rbg_meeting_type</td><td>RadioGroupPanel</td><td>writeback = W</td></tr>
   </table>
 
   <p><strong>Note:</strong> All step panels are toggled programmatically. Only one step panel is visible at a time. The progress indicator updates based on current step. The intake form fields (Step 5) are generated dynamically from <code>booking_metadata_schemas</code> table. Time slot buttons (Step 3) are populated from <code>get_available_slots()</code> response (RT2). Service and provider cards (Steps 1-2) are populated from <code>get_booking_context()</code> response (RT1). The confirm button (Step 6) triggers <code>confirm_booking()</code> (RT3) with a processing spinner.</p>

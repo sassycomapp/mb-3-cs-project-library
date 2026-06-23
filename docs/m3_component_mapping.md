@@ -73,13 +73,18 @@ Usage note for agents:
   - Support: Fully supported
 
 - Icon Button
-  - Mapping: `m3.IconButton(icon="icon_name", appearance="outlined")`
+  - Mapping: `m3.IconButton(icon="mi:icon_name", appearance="outlined")`
   - Support: Fully supported
-  - Notes: Use Material Icon names or SVG where supported.
+  - Notes: Use the `mi:` prefix for Material Icons (e.g. `mi:notifications`, `mi:account_circle`). SVG where supported.
 
 - Toggle Icon Button
-  - Mapping: `m3.ToggleIconButton(icon="icon_name", selected=False)`
+  - Mapping: `m3.ToggleIconButton(icon="mi:icon_name", selected=False)`
   - Support: Fully supported
+
+- Icon (decorative / standalone)
+  - Mapping: `m3.IconButton(icon="mi:icon_name")`
+  - Support: Fully supported
+  - Notes: For non-interactive, decorative icon use (e.g. empty-state illustrations). Leave `enabled` at default (`True`); do not bind a `click` event. No hover or click action is intended. Do **not** use `enabled=False` — keep the icon at full opacity and normal color. Use the `mi:` prefix to indicate Material Icons (e.g. `mi:bar_chart`, `mi:receipt`, `mi:event`).
 
 - Floating Action Button (FAB)
   - Mapping: `m3.Button(... )` positioned as FAB via layout/CSS
@@ -112,7 +117,7 @@ Usage note for agents:
 - Navigation Rail
   - Mapping: `m3.NavigationLink` placed in `Navigation Rail Layout`
   - Support: Fully supported
-  - Example: `m3.NavigationLink(text="Home", icon="home", navigate_to=HomeForm)`
+  - Example: `m3.NavigationLink(text="Home", icon="mi:home", navigate_to=HomeForm)`
 
 - Navigation Drawer
   - Mapping: `m3.NavigationLink` placed in `Navigation Drawer Layout`
@@ -137,7 +142,7 @@ Usage note for agents:
   - Support: Fully supported
 
 - Icon Button Menu
-  - Mapping: `m3.IconButtonMenu(icon="more_vert", menu_items=[...])`
+  - Mapping: `m3.IconButtonMenu(icon="mi:more_vert", menu_items=[...])`
   - Support: Fully supported
 
 - Avatar Menu (user menu)
@@ -145,7 +150,7 @@ Usage note for agents:
   - Support: Fully supported
 
 - Menu Item
-  - Mapping: `m3.MenuItem(text="...", leading_icon="...", trailing_icon="...")`
+  - Mapping: `m3.MenuItem(text="...", leading_icon="mi:...", trailing_icon="mi:...")`
   - Support: Fully supported
 
 - Dialog / Modal
@@ -201,7 +206,7 @@ Usage note for agents:
 - Date Picker
   - Mapping: Anvil `DatePicker` (not M3 styled) or custom
   - Support: Partially supported
-  - Notes: Anvil has classic DatePicker but Material 3 style calendar is not native.
+  - Notes: Anvil has classic DatePicker but Material 3 style calendar is not native. Supports Designer writeback (`selected_date` property).
 
 - Time Picker
   - Mapping: custom `TextBox` or external widget
@@ -254,7 +259,7 @@ Usage note for agents:
   - Notes: No native `ListItem` component; assemble via repeating templates.
 
 - App Bar / Top App Bar
-  - Mapping: `Panel` containing `m3.Text`, `m3.IconButton`, `m3.Icon`, etc.
+  - Mapping: `Panel` containing `m3.Text`, `m3.IconButton` (decorative or interactive), etc.
   - Support: Partially supported
   - Notes: Compose with M3 components; no dedicated TopAppBar component.
 
@@ -274,6 +279,31 @@ List of Material 3 components that are not implementable as native Anvil M3 comp
 - Native Chip set (FilterChip / InputChip) — Partially supported via custom composition.
 - Native Snackbar with built-in auto-dismiss & motion — Partially supported via custom panels.
 
+### Designer Data Binding Writeback Support
+
+The following components support the Designer "Write Back" (W) property in the Data Bindings panel. When (W) is enabled, the component's value is automatically bound to a data table column. This is a Designer-only property — it cannot be set or overridden programmatically.
+
+| Component | Writeback Property |
+|---|---|
+| TextBox | `text` |
+| TextArea | `text` |
+| Checkbox | `checked` |
+| Switch | `selected` |
+| RadioGroupPanel | `selected_value` |
+| Slider | `value` |
+| DropdownMenu | `selected_value` |
+| DatePicker | `selected_date` |
+
+**Not writeback-capable** (do NOT add (W) even if they accept user input):
+- RadioButton — configured via RadioGroupPanel, not individually
+- FileLoader — file selection is event-driven, not data-bound
+
+**Display-only** (never require writeback):
+- Text, Link, RichText, Heading
+- LinearProgressIndicator, CircularProgressIndicator
+
+Wireframes must annotate all writeback-capable components with `(W)` in the diagram and include a `writeback = W` row in the Properties Table.
+
 ***
 
 ## Examples (agent / developer snippets)
@@ -286,7 +316,7 @@ save_btn = m3.Button(text="Save", appearance="filled")
 
 - Create an outlined text field with a leading icon:
 ```python
-email = m3.TextBox(appearance="outlined", label_text="Email", leading_icon="email")
+email = m3.TextBox(appearance="outlined", label_text="Email", leading_icon="mi:email")
 ```
 
 - Create an interactive card:
@@ -296,7 +326,7 @@ card = m3.InteractiveCard(appearance="elevated", click=self.open_details)
 
 - Create a navigation link (in Navigation Drawer Layout):
 ```python
-nav = m3.NavigationLink(text="Dashboard", icon="dashboard", navigate_to=DashboardForm)
+nav = m3.NavigationLink(text="Dashboard", icon="mi:dashboard", navigate_to=DashboardForm)
 ```
 
 ***
