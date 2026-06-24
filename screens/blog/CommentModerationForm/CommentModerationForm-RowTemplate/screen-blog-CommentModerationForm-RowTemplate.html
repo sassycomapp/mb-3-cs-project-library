@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mybizz CS — CommentModerationForm Row Template</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===== M3 TOKEN BLOCK — Professional Blue Palette ===== */
+    :root {
+      --primary: #493ef3; --on-primary: #ffffff;
+      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+      --secondary: #625a74; --on-secondary: #ffffff;
+      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
+      --surface: #fdfcff; --on-surface: #1c1b20;
+      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+      --surface-container-low: #f5f2fa; --surface-container: #efedf5;
+      --outline: #7a7583; --outline-variant: #c9c4d3;
+      --error: #b42336; --on-error: #ffffff;
+      --error-container: #f4dddc; --on-error-container: #410004;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-6: 24px; --space-8: 32px;
+      --font-family: 'Roboto', sans-serif;
+      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+      --divider-color: var(--outline-variant);
+      --state-hover-opacity: 0.08;
+      --state-pressed-opacity: 0.12;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 1.4286;
+      color: var(--on-surface);
+      background-color: var(--surface-container-low);
+      padding: var(--space-8);
+    }
+
+    .screen-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== DATA GRID ROW — DataRowPanel: drp_comment_row ===== */
+    .data-grid-row {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px var(--space-4);
+      background: var(--surface);
+      border: 1px solid var(--divider-color);
+      border-radius: 8px;
+      gap: var(--space-4);
+      transition: background 150ms;
+    }
+
+    .data-grid-row:hover {
+      background: rgba(73,62,243, var(--state-hover-opacity));
+    }
+
+    /* Column slots */
+    .col-commenter { flex: 1.2; min-width: 0; }
+    .col-post { flex: 1; min-width: 0; }
+    .col-preview { flex: 1.5; min-width: 0; }
+    .col-status { flex: 0 0 100px; }
+    .col-date { flex: 0 0 100px; }
+    .col-actions { flex: 0 0 120px; display: flex; gap: var(--space-1); align-items: center; justify-content: flex-end; }
+
+    /* txt_commenter_name (Text) */
+    .commenter-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--on-surface);
+      margin-bottom: 2px;
+    }
+
+    /* txt_commenter_email (Text) */
+    .commenter-email {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+    }
+
+    /* txt_post_title (Text) */
+    .post-title {
+      font-size: 13px;
+      color: var(--primary);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .post-title:hover {
+      text-decoration: underline;
+    }
+
+    /* txt_comment_preview (Text) */
+    .comment-preview {
+      font-size: 14px;
+      color: var(--on-surface-variant);
+      line-height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    /* txt_status (Text) — status badge */
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .status-pending {
+      background: var(--surface-container);
+      color: var(--on-surface-variant);
+    }
+    .status-approved {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .status-rejected {
+      background: var(--error-container);
+      color: var(--on-error-container);
+    }
+
+    /* txt_created_at (Text) */
+    .created-at {
+      font-size: 13px;
+      color: var(--on-surface-variant);
+    }
+
+    /* Action buttons — IconButton */
+    .btn-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 150ms;
+    }
+    .btn-icon:hover {
+      background: rgba(73,62,243, var(--state-hover-opacity));
+    }
+    .btn-icon .material-icons {
+      font-size: 20px;
+    }
+    .btn-icon.btn-approve { color: var(--primary); }
+    .btn-icon.btn-flag { color: var(--error); }
+
+    /* Component annotation */
+    .component-label {
+      font-size: 10px;
+      color: var(--outline);
+      margin-top: var(--space-1);
+      font-style: italic;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary: #cfbdf8; --on-primary: #381e72;
+        --primary-container: #4f378b; --on-primary-container: #eaddff;
+        --secondary: #ccc2dc; --on-secondary: #332d41;
+        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
+        --surface: #1c1b20; --on-surface: #e6e1e5;
+        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
+        --surface-container-low: #1d1b20; --surface-container: #211f26;
+        --outline: #938f99; --outline-variant: #49454f;
+        --error: #f2b8b5; --on-error: #601410;
+        --error-container: #5c1414; --on-error-container: #f9dedc;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <div class="screen-label">dg_comments DataRowPanel row template — Pending status</div>
+
+  <!-- drp_comment_row (DataRowPanel) -->
+  <div class="data-grid-row">
+
+    <!-- Column 1: Commenter -->
+    <div class="col-commenter">
+      <div class="commenter-name">Nomsa Dlamini</div>
+      <div class="commenter-email">nomsa@example.co.za</div>
+    </div>
+
+    <!-- Column 2: Post -->
+    <div class="col-post">
+      <a class="post-title" href="#">5 Benefits of Regular Deep Tissue Massage</a>
+    </div>
+
+    <!-- Column 3: Comment Preview -->
+    <div class="col-preview">
+      <div class="comment-preview">Great article! I've been getting deep tissue massages monthly and it's made a huge difference for my back pain.</div>
+    </div>
+
+    <!-- Column 4: Status -->
+    <div class="col-status">
+      <span class="status-badge status-pending">Pending</span>
+    </div>
+
+    <!-- Column 5: Date -->
+    <div class="col-date">
+      <span class="created-at">18 Jun 2026</span>
+    </div>
+
+    <!-- Column 6: Actions -->
+    <div class="col-actions">
+      <!-- btn_approve — visible when status = "pending" -->
+      <button class="btn-icon btn-approve" title="Approve"><span class="material-icons">check_circle</span></button>
+      <!-- btn_delete — visible for all statuses -->
+      <button class="btn-icon" title="Delete"><span class="material-icons">delete</span></button>
+      <!-- btn_flag — visible when status = "pending" or "approved" -->
+      <button class="btn-icon btn-flag" title="Flag as spam"><span class="material-icons">flag</span></button>
+      <!-- btn_unflag — visible only when status = "rejected" (hidden for pending) -->
+      <!-- <button class="btn-icon" title="Not spam"><span class="material-icons">outlined_flag</span></button> -->
+    </div>
+
+  </div>
+
+</body>
+</html>
