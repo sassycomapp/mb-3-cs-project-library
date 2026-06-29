@@ -62,17 +62,18 @@ A screen is a **visual UI mockup**, not a documentation report. It must look lik
 
 ### 3. Layout Patterns by Form Type
 
-| Form type | Layout | Container |
-|---|---|---|
-| Auth forms | Centred card, max-width 400px | `.auth-container > .auth-card` |
-| List forms | Full-width, max-width 1100px | `.list-container` with header + filters + grid |
-| Editor forms | Full-width, max-width 900px | `.editor-container` with sectioned panels |
-| Viewer forms | Full-width, max-width 900px | `.viewer-container` with detail panels |
-| Dashboard | Full-width, max-width 1100px | `.dashboard-container` with metric cards |
-| Public pages | Full-width, max-width 900px | `.page-container` with content sections |
-| Settings | Full-width, max-width 1000px | `.settings-container` with tab bar + panels |
-| Onboarding | Centred card, max-width 600px | `.onboarding-container` with step indicator |
-| Custom components | Embedded, max-width 700px | `.component-container` |
+| Form type | Max Width | Layout | Container |
+|---|---|---|---|
+| Auth forms | 400px | Centred card | `.auth-container > .auth-card` |
+| List forms | 1200px | Full-width | `.list-container` with header + filters + grid |
+| Dashboard | 1200px | Full-width | `.dashboard-container` with metric cards |
+| Editor/Viewer/Forms | 900px | Full-width | `.editor-container` with sectioned panels |
+| Public pages | 900px | Full-width | `.page-container` with content sections |
+| Settings | 1000px | Full-width | `.settings-container` with tab bar + panels |
+| Onboarding | 600px | Centred card | `.onboarding-container` with step indicator |
+| Card (grid item) | 320px | Embedded | `.card-container` |
+| Modal form | 480px | Overlay | `.modal-container` |
+| Modal detail | 640px | Overlay | `.modal-container` |
 
 ### 4. Panel Separation
 

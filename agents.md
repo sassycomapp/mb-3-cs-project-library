@@ -32,24 +32,91 @@ Do not treat this repo as the application implementation workspace.
 | `adr/` | Architecture Decision Records — one decision per file |
 | `docs/` | Durable application documentation, specs, UI standards, DESIGN.md |
 | `wireframes/` | HTML wireframes, mockups, and visual layout references |
-| `gstack-outputs/` | GStack session outputs: reports, task lists, handoff notes |
+| `screens/` | Screen HTML mockups and their compliance checklists |
+| `wip/` | Active work-in-progress: current plans, prompts, and files being prepared for delivery |
+| `gstack-outputs/` | GStack-produced reports, reviews, task lists, and artifacts |
+| `opencode-outputs/` | OpenCode-produced reports, reviews, and artifacts |
+| `matt-skills-output/` | Matt Pocock skill outputs (copies — originals may also go to %TEMP%) |
 | `workspace/gbrain/` | GBrain working files and configuration |
 | `workspace/gstack/` | GStack working files and configuration |
 
-## GStack artifact governance
+## Artifact governance
 
-When GStack or OpenCode produces output artefacts during a session:
+**Principle:** Every session-produced artifact gets saved. The destination depends on
+who produced it and what kind of file it is. Never ask whether to save — always save.
+Confirm the save location in the on-screen response.
 
-- GStack-generated working outputs (office-hours reports, CEO review reports, ENG review reports,
-  planning outputs, task lists, handoff notes) → save to `gstack-outputs/`
-- Durable application documentation promoted from a GStack session → save to `docs/`
-- Architecture decisions → save to `adr/`
-- Visual references, wireframes, mockups → save to `wireframes/`
-- DESIGN.md (produced by /design-consultation) → save to `docs/`
+### Routing by producer
 
-Do not place long-lived app specifications in `gstack-outputs/`.
-Do not place transient planning reports in `docs/` unless explicitly promoted.
-Do not place ADRs inside `docs/` or `gstack-outputs/`.
+| Producer | Destination |
+|---|---|
+| GStack (any gstack-* skill, including OpenClaw variants) | `gstack-outputs/` |
+| OpenCode (direct, not via a skill) | `opencode-outputs/` |
+| Matt Pocock skills | `matt-skills-output/` (see per-skill rules below) |
+
+### Routing by file type (overrides producer routing)
+
+These file types have fixed homes regardless of producer:
+
+| File type | Destination |
+|---|---|
+| Durable application documentation | `docs/` |
+| Architecture Decision Records | `adr/` |
+| Wireframes and visual mockups | `wireframes/` |
+| Screen HTML mockups | `screens/` |
+| Wireframe/screen compliance reports | Same folder as the wireframe or screen it belongs to |
+| DESIGN.md | `docs/` |
+
+### Exclusions
+
+This routing applies to reports, reviews, analyses, task lists, and similar
+session-produced artifacts. It does **not** apply to:
+- Durable docs (`docs/`), ADRs (`adr/`), wireframes (`wireframes/`), screens (`screens/`)
+- Files in `wip/` (those have their own lifecycle)
+- GBrain working files (`workspace/gbrain/`)
+- GStack working files (`workspace/gstack/`)
+
+### Confirmation rule
+
+The on-screen response must confirm the save location explicitly:
+`"Saved to: gstack-outputs/<filename>."` or `"Saved to: opencode-outputs/<filename>."`
+If the save fails, state why — do not silently report success.
+
+### Promotion rules
+
+- Long-lived app specifications must not stay in `gstack-outputs/` — promote to `docs/`
+- Transient planning reports must not go in `docs/` unless explicitly promoted
+- ADRs must not go in `docs/` or `gstack-outputs/` — they belong in `adr/`
+
+## GStack binary path override
+When any GStack skill needs to call gstack-slug, gstack-config, or any other
+gstack-* binary, always use /mnt/c/_mb2-cs-app/gstack/bin/<binary-name> directly.
+Do not attempt host-detection logic (~/.codex/skills/gstack, .agents/skills/gstack,
+or similar) to locate these binaries — that detection has been confirmed to fail
+in this environment. The literal path above is correct and verified.
+
+## Matt Pocock skills artifact governance
+
+These skills are pre-emptive rules, written before any of these skills has
+actually been run. Verify against real output the first time each skill runs,
+and correct this section if behavior differs.
+
+- `domain-modeling`, `grill-with-docs` → context output goes to `CONTEXT.md`
+  at the project root. ADR output goes to `adr/` (overriding these skills'
+  own documented default of `docs/adr/`).
+- `to-prd`, `to-issues`, `triage` → leave at their existing default location,
+  `.scratch/`. No redirect.
+- `triage` rejection records → leave at their existing default, `.out-of-scope/`.
+  No redirect.
+- `setup-matt-pocock-skills` → leave its config output at its existing
+  defaults, `docs/agents/` and `CLAUDE.md`. No redirect.
+- `handoff`, `improve-codebase-architecture` → keep the default save to
+  `%TEMP%` intact. ADDITIONALLY save a copy to `matt-skills-output/`. Never
+  skip the %TEMP% save — only add to it.
+- `teach` → redirect entirely to `C:\_mb2-cs-app\matt-skills-teach` (outside
+  `project-library`), not the skill's own default of the invoking directory.
+- Any Matt Pocock skill not named above → no rule yet. Do not guess; ask the
+  user before saving anywhere.
 
 ## Source of truth for this project
 

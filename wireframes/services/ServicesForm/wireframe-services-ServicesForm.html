@@ -56,7 +56,17 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>ServicesForm — Services List</h2>
+<h2>Section 1 — Introduction</h2>
+<p>To the developer: This wireframe indicates which components to place on the ServicesForm and how to configure them.</p>
+<p><strong>Conventions:</strong></p>
+<ul>
+  <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+  <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+</ul>
+
+<h2>Section 2 — Wireframe Diagram</h2>
+
+<h3>ServicesForm — Services List</h3>
 
 <div class="wf-outer">
   <span class="wf-label">col_content (ColumnPanel)</span>
@@ -104,48 +114,12 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
       </thead>
       <tbody>
         <tr>
-          <td>Initial Consultation</td>
-          <td>Consulting</td>
-          <td>R 850.00</td>
-          <td>60 min</td>
-          <td>Video Call</td>
-          <td><span class="wf-badge wf-badge-active">Active</span></td>
-          <td><span class="wf-icon-btn" title="View">&#128065;</span> <span class="wf-icon-btn" title="Edit">&#9998;</span> <span class="wf-icon-btn" title="Delete">&#128465;</span></td>
-        </tr>
-        <tr>
-          <td>Strategy Workshop</td>
-          <td>Coaching</td>
-          <td>R 2,400.00</td>
-          <td>180 min</td>
-          <td>In Person</td>
-          <td><span class="wf-badge wf-badge-active">Active</span></td>
-          <td><span class="wf-icon-btn" title="View">&#128065;</span> <span class="wf-icon-btn" title="Edit">&#9998;</span> <span class="wf-icon-btn" title="Delete">&#128465;</span></td>
-        </tr>
-        <tr>
-          <td>Tax Return Filing</td>
-          <td>Development</td>
-          <td>R 450.00</td>
-          <td>30 min</td>
-          <td>Phone Call</td>
-          <td><span class="wf-badge wf-badge-active">Active</span></td>
-          <td><span class="wf-icon-btn" title="View">&#128065;</span> <span class="wf-icon-btn" title="Edit">&#9998;</span> <span class="wf-icon-btn" title="Delete">&#128465;</span></td>
-        </tr>
-        <tr>
-          <td>Monthly Bookkeeping</td>
-          <td>Consulting</td>
-          <td>R 1,200.00</td>
-          <td>120 min</td>
-          <td>Video Call</td>
-          <td><span class="wf-badge wf-badge-inactive">Inactive</span></td>
-          <td><span class="wf-icon-btn" title="View">&#128065;</span> <span class="wf-icon-btn" title="Edit">&#9998;</span> <span class="wf-icon-btn" title="Delete">&#128465;</span></td>
-        </tr>
-        <tr>
-          <td>Brand Identity Package</td>
-          <td>Training</td>
-          <td>R 5,800.00</td>
-          <td>—</td>
-          <td>Async</td>
-          <td><span class="wf-badge wf-badge-active">Active</span></td>
+          <td>[Service Name]</td>
+          <td>[Category]</td>
+          <td>[Price]</td>
+          <td>[Duration]</td>
+          <td>[Meeting Type]</td>
+          <td><span class="wf-badge wf-badge-active">[Status]</span></td>
           <td><span class="wf-icon-btn" title="View">&#128065;</span> <span class="wf-icon-btn" title="Edit">&#9998;</span> <span class="wf-icon-btn" title="Delete">&#128465;</span></td>
         </tr>
       </tbody>
@@ -162,9 +136,9 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
       <span class="wf-label">col_carousel (ColumnPanel) — TimeLapseCarouselComponent</span>
 
       <div class="wf-panel">
-        <span class="wf-label">carousel_viewport (HtmlTemplate)</span>
+        <span class="wf-label">carousel_viewport (ColumnPanel)</span>
         <div class="wf-image">[Carousel viewport — overflow hidden, rounded corners]</div>
-        <div class="cn">carousel_viewport <span class="ct">(HtmlTemplate)</span> <span class="cfixed">position: relative, overflow: hidden</span></div>
+        <div class="cn">carousel_viewport <span class="ct">(ColumnPanel)</span> <span class="cfixed">role: carousel-viewport (sets position: relative, overflow: hidden via CSS)</span></div>
 
         <div class="wf-panel">
           <span class="wf-label">flow_track (FlowPanel)</span>
@@ -183,13 +157,13 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
         <div class="wf-panel">
           <span class="wf-label">btn_prev (IconButton)</span>
           <div class="wf-icon-btn">[&#10094;]</div>
-          <div class="cn">btn_prev <span class="ct">(IconButton)</span> <span class="cfixed">mi:chevron_left</span> — absolute positioned left</div>
+          <div class="cn">btn_prev <span class="ct">(IconButton)</span> <span class="cfixed">mi:chevron_left</span></div>
         </div>
 
         <div class="wf-panel">
           <span class="wf-label">btn_next (IconButton)</span>
           <div class="wf-icon-btn">[&#10095;]</div>
-          <div class="cn">btn_next <span class="ct">(IconButton)</span> <span class="cfixed">mi:chevron_right</span> — absolute positioned right</div>
+          <div class="cn">btn_next <span class="ct">(IconButton)</span> <span class="cfixed">mi:chevron_right</span></div>
         </div>
       </div>
 
@@ -218,21 +192,23 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
       <span class="wf-label">col_video (ColumnPanel) — VideoDisplayComponent</span>
 
       <div class="wf-panel">
-        <span class="wf-label">container_video_embed (HtmlPanel)</span>
+        <span class="wf-label">col_video_embed (ColumnPanel)</span>
         <div style="border:2px solid #888; border-radius:4px; padding:0; width:100%; height:0; padding-bottom:56.25%; background:linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); position:relative; overflow:hidden;">
           <div style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
             <div style="display:flex; align-items:center; justify-content:center; width:48px; height:48px; background:rgba(255,255,255,0.9); border-radius:50%;">▶</div>
           </div>
           <span style="position:absolute; bottom:8px; left:8px; font-size:10px; color:rgba(255,255,255,0.8); background:rgba(0,0,0,0.6); padding:2px 8px; border-radius:4px;">YouTube</span>
         </div>
-        <div class="cn">container_video_embed <span class="ct">(HtmlPanel)</span> — renders YouTube iframe from business_profile.services_video_url</div>
+        <div class="cn">col_video_embed <span class="ct">(ColumnPanel)</span> — renders YouTube iframe from business_profile.services_video_url</div>
       </div>
 
       <div class="wf-text" style="text-align:center; margin-top:4px;">Video — See how our services can help your business grow</div>
-      <div class="cn">lbl_video_caption <span class="ct">(Label)</span> — optional caption, hidden if empty</div>
+      <div class="cn">txt_video_caption <span class="ct">(Text)</span> — optional caption, hidden if empty</div>
     </div>
   </div>
 </div>
+
+<h2>Section 3 — Properties Table</h2>
 
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>

@@ -56,7 +56,18 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>TaskListForm — Task Management</h2>
+<h2>Section 1 — Introduction</h2>
+<p>To the developer: This wireframe indicates which components to place on the TaskListForm and how to configure them.</p>
+<p><strong>Conventions:</strong></p>
+<ul>
+  <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+  <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+  <li>Role is set programmatically in code (per ADR-43), not in the Designer Properties Panel.</li>
+</ul>
+
+<h2>Section 2 — Wireframe Diagram</h2>
+
+<h3>TaskListForm — Task Management</h3>
 
 <div class="wf-outer">
   <span class="wf-label">col_content (ColumnPanel) — max-width: 1100px</span>
@@ -109,39 +120,11 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
       </thead>
       <tbody>
         <tr>
-          <td>Follow up with John Doe</td>
-          <td>John Doe</td>
-          <td><span class="wf-badge wf-badge-high">High</span></td>
-          <td>Today</td>
-          <td><span class="wf-badge wf-badge-auto">Auto</span></td>
-          <td>
-            <div class="wf-actions-cell">
-              <span class="wf-btn-icon" title="Complete">&#10003;</span>
-              <span class="wf-btn-icon" title="Edit">&#9998;</span>
-              <span class="wf-btn-icon" title="Delete">&#128465;</span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>Send invoice to Jane Smith</td>
-          <td>Jane Smith</td>
-          <td><span class="wf-badge wf-badge-medium">Medium</span></td>
-          <td>Tomorrow</td>
-          <td>Manual</td>
-          <td>
-            <div class="wf-actions-cell">
-              <span class="wf-btn-icon" title="Complete">&#10003;</span>
-              <span class="wf-btn-icon" title="Edit">&#9998;</span>
-              <span class="wf-btn-icon" title="Delete">&#128465;</span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>Review Thabo's tax documents</td>
-          <td>Thabo Molefe</td>
-          <td><span class="wf-badge wf-badge-low">Low</span></td>
-          <td>Next week</td>
-          <td><span class="wf-badge wf-badge-auto">Auto</span></td>
+          <td>[Task Description]</td>
+          <td>[Contact Name]</td>
+          <td><span class="wf-badge wf-badge-high">[Priority]</span></td>
+          <td>[Due Date]</td>
+          <td><span class="wf-badge wf-badge-auto">[Source]</span></td>
           <td>
             <div class="wf-actions-cell">
               <span class="wf-btn-icon" title="Complete">&#10003;</span>
@@ -169,6 +152,8 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="cn">btn_add_first <span class="ct">(Button)</span> <span class="cfixed">"+ Add Task"</span></div>
   </div>
 </div>
+
+<h2>Section 3 — Properties Table</h2>
 
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: Write Back toggle (W) must be enabled in Designer Data Bindings panel for TextBox and DropdownMenu components.</div>

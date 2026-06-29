@@ -1,7 +1,8 @@
 # ADR-037 — UI Customization Approach
 
-**Status:** Approved  
+**Status:** Superseded by ADR-45  
 **Date:** 2026-06-14  
+**Superseded:** 2026-06-28 — NavigationRailLayout/NavigationDrawerLayout are now used per ADR-45. The project policy is Anvil Material 3 Theme compliance; native M3 Layouts are the standard for layout shells.  
 **Authority:** Derived from platform-overview.md, ADR-015, ADR-027
 
 ---
@@ -72,7 +73,7 @@ MUI (Material-UI) design patterns were evaluated as a potential source of design
 - ✅ No external UI framework dependency — stays within Anvil's native capabilities
 - ✅ Designer usable for rapid prototyping; code used for precision
 - ⚠️ Complex layouts require code overrides — designer is a starting point, not the final word
-- ⚠️ M3 navigation components (NavigationDrawerLayout, NavigationRailLayout) are not used — custom layout approach is locked in
+- ⚠️ M3 navigation components (NavigationDrawerLayout, NavigationRailLayout) — **now used per ADR-45** (this item superseded)
 - ⚠️ CSS overrides must be maintained across M3 theme updates
 
 ---

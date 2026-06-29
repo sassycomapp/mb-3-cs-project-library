@@ -54,7 +54,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <div class="wf-panel-h">
     <span class="wf-label">flow_header (FlowPanel)</span>
     <div style="flex:1;">
-      <div class="wf-heading-sm" style="border-bottom:none; font-size:18px;">Initial Consultation</div>
+      <div class="wf-heading-sm" style="border-bottom:none; font-size:18px;">[Service Name]</div>
       <div class="cn">hdg_service_name <span class="ct">(Heading)</span></div>
     </div>
     <div>
@@ -71,19 +71,19 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
       <div style="flex:1;">
         <div class="wf-text">Category:</div>
         <div class="cn">hdg_category_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight:bold;">Consulting</div>
+        <div class="wf-text" style="font-weight:bold;">[Category]</div>
         <div class="cn">hdg_category <span class="ct">(Heading)</span></div>
       </div>
       <div style="flex:1;">
         <div class="wf-text">Pricing Model:</div>
         <div class="cn">hdg_pricing_model_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight:bold;">Duration-based</div>
+        <div class="wf-text" style="font-weight:bold;">[Pricing Model]</div>
         <div class="cn">hdg_pricing_model <span class="ct">(Heading)</span></div>
       </div>
       <div style="flex:1;">
         <div class="wf-text">Meeting Type:</div>
         <div class="cn">hdg_meeting_type_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight:bold;">Video Call</div>
+        <div class="wf-text" style="font-weight:bold;">[Meeting Type]</div>
         <div class="cn">hdg_meeting_type <span class="ct">(Heading)</span></div>
       </div>
     </div>
@@ -92,19 +92,19 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
       <div style="flex:1;">
         <div class="wf-text">Price:</div>
         <div class="cn">hdg_price_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight:bold; font-size:16px;">R 850.00</div>
+        <div class="wf-text" style="font-weight:bold; font-size:16px;">[Price]</div>
         <div class="cn">hdg_price <span class="ct">(Heading)</span></div>
       </div>
       <div style="flex:1;">
         <div class="wf-text">Duration:</div>
         <div class="cn">hdg_duration_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight:bold;">60 minutes</div>
+        <div class="wf-text" style="font-weight:bold;">[Duration]</div>
         <div class="cn">hdg_duration <span class="ct">(Heading)</span></div>
       </div>
       <div style="flex:1;">
         <div class="wf-text">Provider:</div>
         <div class="cn">hdg_provider_label <span class="ct">(Heading)</span></div>
-        <div class="wf-text" style="font-weight:bold;">Jane Smith</div>
+        <div class="wf-text" style="font-weight:bold;">[Provider Name]</div>
         <div class="cn">hdg_provider <span class="ct">(Heading)</span></div>
       </div>
     </div>
@@ -114,7 +114,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <span class="wf-label">col_description (ColumnPanel)</span>
     <div class="wf-heading-sm">Description</div>
     <div class="wf-text" style="color:#333; font-style:normal; font-size:13px; line-height:1.6;">
-      A comprehensive initial consultation to assess your needs and develop a tailored plan. Includes a detailed review of your current situation and actionable recommendations.
+      [Service description]
     </div>
     <div class="cn">txt_description <span class="ct">(Text)</span></div>
   </div>
@@ -134,7 +134,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
         </div>
         <span style="position:absolute; bottom:8px; left:8px; font-size:10px; color:rgba(255,255,255,0.8); background:rgba(0,0,0,0.6); padding:2px 8px; border-radius:4px;">YouTube</span>
       </div>
-      <div class="cn">container_video_embed <span class="ct">(HtmlPanel)</span> — renders YouTube iframe from services.video_url</div>
+      <div class="cn">col_video_embed <span class="ct">(ColumnPanel)</span> — renders YouTube iframe from services.video_url</div>
     </div>
   </div>
 

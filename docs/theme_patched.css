@@ -1376,5 +1376,25 @@ textarea.anvil-component:focus,
 
 
 /* ============================================================
+   8. REDUCED MOTION SUPPORT
+   Respects the OS/browser-level "reduce motion" accessibility setting.
+   Global rule rather than per-selector: catches every transition and
+   animation in this file (nav drawer slide, hover shadows, app-bar
+   scroll transition, etc.) plus any added later, without needing to
+   be updated every time a new transition is introduced elsewhere in
+   this file or the MUI patch above it.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ============================================================
    END MUI AESTHETIC PATCH
    ============================================================ */

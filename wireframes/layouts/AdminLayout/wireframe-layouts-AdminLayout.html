@@ -62,7 +62,7 @@
 
 <h1>Wireframe: AdminLayout</h1>
 <p style="color: var(--on-surface-variant);"><strong>Package:</strong> layouts/ [Phase 1]</p>
-<p style="color: var(--on-surface-variant);"><strong>Purpose:</strong> Admin panel shell — custom HtmlTemplate layout with sidebar navigation.</p>
+<p style="color: var(--on-surface-variant);"><strong>Purpose:</strong> Admin panel shell — native NavigationRailLayout with sidebar navigation. Replaces custom HtmlTemplate shell per ADR-45.</p>
 
 <div class="legend">
   <span><strong>Solid border</strong> = visible on load</span>
@@ -77,97 +77,87 @@
 <ul>
   <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
   <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+  <li>The native NavigationRailLayout handles the app bar and sidebar automatically. Navigation items use <code>m3.NavigationLink</code> components.</li>
+  <li>On mobile, the rail collapses to a bottom navigation bar automatically.</li>
 </ul>
 
 <h2>Section 2 — Wireframe Diagram</h2>
 
 <div class="wf-outer">
-  <span class="wf-label">ColumnPanel: layout_root (Component Root)</span>
+  <span class="wf-label">NavigationRailLayout: admin_layout (Component Root)</span>
 
-  <!-- APP BAR -->
-  <div class="wf-panel-h">
-    <span class="wf-label">Container: app_bar</span>
-    <div style="flex:1;">
-      <div class="wf-heading-lg">Mybizz CS</div>
-      <div class="cn">hdg_app_title <span class="ct">(Heading)</span> <span class="cfixed">"Mybizz CS"</span></div>
-    </div>
-    <div style="display:flex; gap:8px; align-items:center;">
-      <div class="wf-btn-icon">N</div>
-      <div class="cn">btn_notifications <span class="ct">(IconButton)</span> <span class="cfixed">mi:notifications</span></div>
-      <div class="wf-btn-icon">U</div>
-      <div class="cn">btn_user_menu <span class="ct">(IconButton)</span> <span class="cfixed">mi:account_circle</span></div>
-    </div>
+  <!-- NAVIGATION LINKS — placed inside NavigationRailLayout -->
+  <div class="wf-panel">
+    <span class="wf-label">Navigation Links (inside NavigationRailLayout)</span>
+
+    <div class="wf-nav-item">Dashboard</div>
+    <div class="cn">nav_dashboard <span class="ct">(NavigationLink)</span> <span class="cfixed">"Dashboard" icon="mi:dashboard"</span></div>
+
+    <div class="wf-nav-group">Sales &amp; Operations</div>
+    <div class="wf-nav-item">Bookings</div>
+    <div class="cn">nav_bookings <span class="ct">(NavigationLink)</span> <span class="cfixed">"Bookings" icon="mi:calendar_today"</span></div>
+    <div class="wf-nav-item">Services</div>
+    <div class="cn">nav_services <span class="ct">(NavigationLink)</span> <span class="cfixed">"Services" icon="mi:design_services"</span></div>
+
+    <div class="wf-nav-group">Customers &amp; Marketing</div>
+    <div class="wf-nav-item">Contacts</div>
+    <div class="cn">nav_contacts <span class="ct">(NavigationLink)</span> <span class="cfixed">"Contacts" icon="mi:contacts"</span></div>
+    <div class="wf-nav-item">Campaigns</div>
+    <div class="cn">nav_campaigns <span class="ct">(NavigationLink)</span> <span class="cfixed">"Campaigns" icon="mi:campaign"</span></div>
+    <div class="wf-nav-item">Broadcasts</div>
+    <div class="cn">nav_broadcasts <span class="ct">(NavigationLink)</span> <span class="cfixed">"Broadcasts" icon="mi:broadcast_on_personal"</span></div>
+    <div class="wf-nav-item">Segments</div>
+    <div class="cn">nav_segments <span class="ct">(NavigationLink)</span> <span class="cfixed">"Segments" icon="mi:segment"</span></div>
+    <div class="wf-nav-item">Tasks</div>
+    <div class="cn">nav_tasks <span class="ct">(NavigationLink)</span> <span class="cfixed">"Tasks" icon="mi:task"</span></div>
+
+    <div class="wf-nav-group">Content &amp; Website</div>
+    <div class="wf-nav-item">Blog</div>
+    <div class="cn">nav_blog <span class="ct">(NavigationLink)</span> <span class="cfixed">"Blog" icon="mi:article"</span></div>
+    <div class="wf-nav-item">Pages</div>
+    <div class="cn">nav_pages <span class="ct">(NavigationLink)</span> <span class="cfixed">"Pages" icon="mi:pages"</span></div>
+
+    <div class="wf-nav-group">Finance &amp; Reports</div>
+    <div class="wf-nav-item">Invoices</div>
+    <div class="cn">nav_invoices <span class="ct">(NavigationLink)</span> <span class="cfixed">"Invoices" icon="mi:receipt"</span></div>
+    <div class="wf-nav-item">Payments</div>
+    <div class="cn">nav_payments <span class="ct">(NavigationLink)</span> <span class="cfixed">"Payments" icon="mi:payments"</span></div>
+    <div class="wf-nav-item">Reports</div>
+    <div class="cn">nav_reports <span class="ct">(NavigationLink)</span> <span class="cfixed">"Reports" icon="mi:assessment"</span></div>
+    <div class="wf-nav-item">Analytics</div>
+    <div class="cn">nav_analytics <span class="ct">(NavigationLink)</span> <span class="cfixed">"Analytics" icon="mi:analytics"</span></div>
+    <div class="wf-nav-item">Time Entries</div>
+    <div class="cn">nav_time_entries <span class="ct">(NavigationLink)</span> <span class="cfixed">"Time Entries" icon="mi:timer"</span></div>
+
+    <div class="wf-divider"></div>
+
+    <div class="wf-nav-item">Settings</div>
+    <div class="cn">nav_settings <span class="ct">(NavigationLink)</span> <span class="cfixed">"Settings" icon="mi:settings"</span></div>
+    <div class="wf-nav-item">Vault</div>
+    <div class="cn">nav_vault <span class="ct">(NavigationLink)</span> <span class="cfixed">"Vault" icon="mi:lock"</span></div>
+    <div class="wf-nav-item">Sign Out</div>
+    <div class="cn">nav_sign_out <span class="ct">(NavigationLink)</span> <span class="cfixed">"Sign Out" icon="mi:logout"</span></div>
   </div>
 
-  <!-- BODY: SIDEBAR + CONTENT -->
-  <div style="display: flex; gap: 0; margin-top: 8px;">
-
-    <!-- SIDEBAR -->
-    <div class="wf-panel" style="width: 260px; min-width: 260px; margin-right: 8px;">
-      <span class="wf-label">ColumnPanel: sidebar</span>
-
-      <div class="wf-nav-item">Dashboard</div>
-      <div class="cn">nav_dashboard <span class="ct">(Link)</span> <span class="cfixed">"Dashboard"</span></div>
-
-      <div class="wf-nav-group">Sales &amp; Operations</div>
-      <div class="wf-nav-item">Bookings</div>
-      <div class="cn">nav_bookings <span class="ct">(Link)</span> <span class="cfixed">"Bookings"</span></div>
-      <div class="wf-nav-item">Services</div>
-      <div class="cn">nav_services <span class="ct">(Link)</span> <span class="cfixed">"Services"</span></div>
-
-      <div class="wf-nav-group">Customers &amp; Marketing</div>
-      <div class="wf-nav-item">Contacts</div>
-      <div class="cn">nav_contacts <span class="ct">(Link)</span> <span class="cfixed">"Contacts"</span></div>
-      <div class="wf-nav-item">Campaigns</div>
-      <div class="cn">nav_campaigns <span class="ct">(Link)</span> <span class="cfixed">"Campaigns"</span></div>
-      <div class="wf-nav-item">Broadcasts</div>
-      <div class="cn">nav_broadcasts <span class="ct">(Link)</span> <span class="cfixed">"Broadcasts"</span></div>
-      <div class="wf-nav-item">Segments</div>
-      <div class="cn">nav_segments <span class="ct">(Link)</span> <span class="cfixed">"Segments"</span></div>
-      <div class="wf-nav-item">Tasks</div>
-      <div class="cn">nav_tasks <span class="ct">(Link)</span> <span class="cfixed">"Tasks"</span></div>
-
-      <div class="wf-nav-group">Content &amp; Website</div>
-      <div class="wf-nav-item">Blog</div>
-      <div class="cn">nav_blog <span class="ct">(Link)</span> <span class="cfixed">"Blog"</span></div>
-      <div class="wf-nav-item">Pages</div>
-      <div class="cn">nav_pages <span class="ct">(Link)</span> <span class="cfixed">"Pages"</span></div>
-
-      <div class="wf-nav-group">Finance &amp; Reports</div>
-      <div class="wf-nav-item">Invoices</div>
-      <div class="cn">nav_invoices <span class="ct">(Link)</span> <span class="cfixed">"Invoices"</span></div>
-      <div class="wf-nav-item">Payments</div>
-      <div class="cn">nav_payments <span class="ct">(Link)</span> <span class="cfixed">"Payments"</span></div>
-      <div class="wf-nav-item">Reports</div>
-      <div class="cn">nav_reports <span class="ct">(Link)</span> <span class="cfixed">"Reports"</span></div>
-      <div class="wf-nav-item">Analytics</div>
-      <div class="cn">nav_analytics <span class="ct">(Link)</span> <span class="cfixed">"Analytics"</span></div>
-      <div class="wf-nav-item">Time Entries</div>
-      <div class="cn">nav_time_entries <span class="ct">(Link)</span> <span class="cfixed">"Time Entries"</span></div>
-
-      <div class="wf-divider"></div>
-
-      <div class="wf-nav-item">Settings</div>
-      <div class="cn">nav_settings <span class="ct">(Link)</span> <span class="cfixed">"Settings"</span></div>
-      <div class="wf-nav-item">Vault</div>
-      <div class="cn">nav_vault <span class="ct">(Link)</span> <span class="cfixed">"Vault"</span></div>
-      <div class="wf-nav-item">Sign Out</div>
-      <div class="cn">nav_sign_out <span class="ct">(Link)</span> <span class="cfixed">"Sign Out"</span></div>
-    </div>
-
-    <!-- CONTENT AREA -->
-    <div class="wf-panel" style="flex: 1;">
-      <span class="wf-label">ColumnPanel: content_area</span>
-      <div class="cn">col_content <span class="ct">(ColumnPanel)</span></div>
-    </div>
-
+  <!-- CONTENT AREA — the main content slot -->
+  <div class="wf-panel" style="flex: 1;">
+    <span class="wf-label">ColumnPanel: content_area (Content Slot)</span>
+    <div class="cn">col_content <span class="ct">(ColumnPanel)</span></div>
   </div>
+
 </div>
 
 <h2>Section 3 — Properties Table</h2>
 
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">All component properties (role, text, visible, items, event bindings, layout) can be set programmatically in code. No Designer-only properties required.</div>
+
+<table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 40px;">
+  <tr><th style="background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal;">Component</th><th style="background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal;">Type</th><th style="background: #333; color: #fff; padding: 7px 12px; text-align: left; font-weight: normal;">Designer Property</th></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;">admin_layout</td><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;">NavigationRailLayout</td><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;"><em>None — layout is set via component structure</em></td></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;">nav_* (all NavigationLinks)</td><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;">NavigationLink</td><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;"><em>None — text, icon, and navigate_to set in code</em></td></tr>
+  <tr><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;">col_content</td><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;">ColumnPanel</td><td style="padding: 6px 12px; border-bottom: 1px solid #ddd;"><em>None — content loaded dynamically</em></td></tr>
+</table>
 
 </body>
 </html>

@@ -60,7 +60,7 @@
           <span class="container-label">FlowPanel: flow_info_grid</span>
           <div class="container">
             <span class="container-label">ColumnPanel: col_bill_to</span>
-            <div class="component">lbl_bill_to (Text) "Bill To"</div>
+            <div class="component">txt_bill_to (Text) "Bill To"</div>
             <div class="component">hdg_contact_name (Heading) "[Contact Name]"</div>
             <div class="component">txt_contact_email (Text) "[email]"</div>
             <div class="component">txt_contact_phone (Text) "[phone]"</div>
@@ -68,11 +68,11 @@
           </div>
           <div class="container">
             <span class="container-label">ColumnPanel: col_dates</span>
-            <div class="component">lbl_invoice_date (Text) "Invoice Date"</div>
+            <div class="component">txt_invoice_date (Text) "Invoice Date"</div>
             <div class="component">txt_invoice_date_value (Text) "[date]"</div>
-            <div class="component">lbl_due_date (Text) "Due Date"</div>
+            <div class="component">txt_due_date (Text) "Due Date"</div>
             <div class="component">txt_due_date_value (Text) "[date]"</div>
-            <div class="component">lbl_currency (Text) "Currency"</div>
+            <div class="component">txt_currency (Text) "Currency"</div>
             <div class="component">txt_currency_value (Text) "[currency]"</div>
           </div>
         </div>
@@ -87,11 +87,11 @@
         <!-- Totals -->
         <div class="container">
           <span class="container-label">ColumnPanel: col_totals</span>
-          <div class="component">lbl_subtotal (Text) "Subtotal"</div>
+          <div class="component">txt_subtotal (Text) "Subtotal"</div>
           <div class="component">txt_subtotal_value (Text) "[amount]"</div>
-          <div class="component">lbl_tax (Text) "Tax (15%)"</div>
+          <div class="component">txt_tax (Text) "Tax (15%)"</div>
           <div class="component">txt_tax_value (Text) "[amount]"</div>
-          <div class="component">lbl_total (Text) "Total"</div>
+          <div class="component">txt_total (Text) "Total"</div>
           <div class="component">txt_total_value (Text) "[amount]"</div>
         </div>
 
@@ -117,19 +117,6 @@
     <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
     <tr><td colspan="3"><em>No Designer-only properties. All values are set programmatically from <code>globals.current_invoice</code>.</em></td></tr>
   </table>
-
-  <p><strong>Status-based permitted actions (from DESIGN.md):</strong></p>
-
-  <table>
-    <tr><th>Status</th><th>Edit</th><th>Send</th><th>Record Payment</th><th>Cancel</th><th>Download PDF</th></tr>
-    <tr><td>Draft</td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr>
-    <tr><td>Sent</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-    <tr><td>Paid</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
-    <tr><td>Overdue</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-    <tr><td>Cancelled</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
-  </table>
-
-  <p><strong>Note:</strong> Action button visibility is controlled programmatically per the status table above. Edit navigates to InvoiceEditorForm. Send triggers email delivery. Record Payment opens a payment dialog. Cancel voids the invoice. Download PDF generates a PDF. Tax is calculated at 15% (SA VAT) as a display-time calculation.</p>
 
 </body>
 </html>

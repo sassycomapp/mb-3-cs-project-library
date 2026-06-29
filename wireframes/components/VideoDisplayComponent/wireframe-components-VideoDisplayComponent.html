@@ -47,7 +47,7 @@
       <span class="container-label">ColumnPanel: col_video (visible when video_url is valid)</span>
 
       <div class="container">
-        <span class="container-label">HtmlPanel: container_video_embed</span>
+        <span class="container-label">ColumnPanel: col_video_embed</span>
         <div class="component">[YouTube iframe embed — 16:9 aspect ratio, responsive width]</div>
       </div>
 
@@ -68,8 +68,6 @@
     <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
     <tr><td colspan="3"><em>No Designer-only properties. All properties (video_url, video_type, video_caption, visible) are set programmatically by the host form.</em></td></tr>
   </table>
-
-  <p><strong>Note:</strong> The host form sets <code>video_url</code> and <code>video_type</code> from the data source. If <code>video_url</code> is empty or invalid, the host form sets <code>visible = False</code>. V1 supports YouTube only. Multi-source support (Vimeo, Dailymotion, custom) is deferred to V2.</p>
 
 </body>
 </html>

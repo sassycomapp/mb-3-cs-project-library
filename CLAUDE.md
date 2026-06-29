@@ -48,3 +48,17 @@ Key routing rules:
 - Save progress → invoke /context-save
 - Resume context → invoke /context-restore
 - Author a backlog-ready spec/issue → invoke /spec
+
+## Agent skills
+
+### Issue tracker
+
+Local markdown — issues live as files under `.scratch/<feature>/` in this repo. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Five canonical labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix` (defaults). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — `CONTEXT.md` at repo root + `adr/` for architectural decisions (40+ ADRs, indexed at `docs/adr-index.md`). Two-repo architecture: this repo holds planning/docs, `mb-3-cs` holds app code. See `docs/agents/domain.md`.

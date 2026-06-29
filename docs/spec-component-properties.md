@@ -23,7 +23,7 @@
 | enabled | Code | True | Whether button is clickable |
 | visible | Code | True | Whether button is visible |
 | role | Code | "filled" | M3 role: filled, outlined, text, tonal |
-| icon | Code | None | Icon name (e.g., "save", "delete") |
+| icon | Code | None | Icon name using `mi:` prefix (e.g., `mi:save`, `mi:delete`) |
 | icon_alignment | Code | "leading" | "leading" or "trailing" |
 | on_click | Code | None | Event handler function |
 
@@ -225,7 +225,7 @@
 | Property | Classification | Default | Description |
 |----------|---------------|---------|-------------|
 | visible | Code | True | Whether card is visible |
-| role | Code | "outlined-card" | M3 role: outlined-card, filled-card, tonal-card |
+| role | Code | "outlined-card" | M3 role: outlined-card, filled-card, elevated-card. Note: `tonal-card` is NOT a valid InteractiveCard appearance. |
 | on_click | Code | None | Event handler on click |
 
 **Designer-Only Properties:**
@@ -306,7 +306,9 @@
 
 ## HTMLTemplate Components
 
-### HTMLTemplate
+### HTMLTemplate — BANNED (ADR-45)
+
+**HTMLTemplate is banned.** Use stock Anvil M3 components and the two native M3 Layouts (NavigationRailLayout, NavigationDrawerLayout) in all cases. See `adr/45-htmltemplate-use.md` for the full decision.
 
 | Property | Classification | Default | Description |
 |----------|---------------|---------|-------------|
@@ -321,7 +323,9 @@
 
 ## SidesheetContent Components
 
-### SidesheetContent
+### SidesheetContent — NOT APPROVED
+
+**SidesheetContent is not approved for use in this project.** It is not a standard Anvil M3 component and has not been evaluated for compliance.
 
 | Property | Classification | Default | Description |
 |----------|---------------|---------|-------------|
@@ -376,9 +380,27 @@ The following properties can ONLY be set in Anvil Designer and cannot be set pro
 | DropdownMenu | hide_text | Write Back toggle (W) |
 | DatePicker | hide_text | Write Back toggle (W) |
 | RepeatingPanel | template | Template form assignment |
-| HTMLTemplate | anvil_slot_repeat | Slot name for repeating content |
 
 **Critical Note:** The Write Back toggle (hide_text) must be enabled in the Designer Data Bindings panel for all text input components (TextBox, TextArea, DropdownMenu, DatePicker) to support the `self.item` data binding pattern. This toggle cannot be set in Python code.
+
+---
+
+## Summary: Writeback-Capable Components
+
+The following components support two-way data bindings (Write Back) in the Designer Data Bindings panel. When Write Back is enabled, the component's value is automatically written back to the bound data source when relevant input events fire (e.g., `pressed_enter`, `lost_focus`).
+
+| Component | Writeback Property | Source |
+|---|---|---|
+| TextBox | `text` | Anvil Data Bindings docs |
+| TextArea | `text` | Anvil Data Bindings docs |
+| DropdownMenu | `selected_value` | Anvil M3 docs |
+| DatePicker | `selected_date` | Anvil Data Bindings docs |
+| Checkbox | `checked` | Anvil M3 docs |
+| Switch | `selected` | Anvil M3 docs |
+| RadioGroupPanel | `selected_value` | Anvil M3 docs |
+| Slider | `value` | Anvil M3 docs |
+
+**Not writeback-capable:** RadioButton, FileLoader. Display-only: Text, Link, RichText, Heading, LinearProgressIndicator, CircularProgressIndicator.
 
 ---
 

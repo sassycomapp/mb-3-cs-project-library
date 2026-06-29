@@ -68,6 +68,8 @@ Client and Owner are principally defined as;
 | FlowPanel | `flow_` | `flow_header` |
 | Card | `card_` | `card_details` |
 | DataGrid | `dg_` | `dg_customers` |
+| DataRowPanel | `drp_` | `drp_comment_row` |
+| Icon | `ico_` | `ic_empty_vault` (maps to `IconButton` used decoratively — no click event) |
 | RepeatingPanel | `rp_` | `rp_items` |
 | Plot | `plot_` | `plot_revenue` |
 

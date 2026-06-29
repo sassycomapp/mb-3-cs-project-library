@@ -1,7 +1,7 @@
 # Mybizz CS — ADR Index
 
-**Last Updated:** 2026-06-15
-**Total ADRs:** 39 files (22 Accepted, 7 Confirmed, 2 Superseded, 1 Cancelled, 7 Approved)
+**Last Updated:** 2026-06-28
+**Total ADRs:** 42 files (25 Accepted, 7 Confirmed, 2 Superseded, 1 Cancelled, 7 Approved)
 
 ---
 
@@ -46,6 +46,10 @@
 | `39-pdf-invoice-generation.md` | PDF Invoice Generation | Approved | 2026-06-14 |
 | `40-data-access-patterns.md` | Data Access Patterns and Query Limitations | Approved | 2026-06-14 |
 | `41-dependency-based-not-multi-tenant.md` | Dependency-Based Architecture, Not Multi-Tenant | Confirmed | 2026-06-13 |
+| `42-client-instance-readme-five-app-system.md` | Mandatory README in Every Client Instance Documenting the Five-App System | Accepted | 2026-06-28 |
+| `43-role-property-assignment-mechanism.md` | Role Property Assignment Mechanism (Designer vs. Code) | Accepted | 2026-06-27 |
+| `44-responsive-behaviour-mechanism.md` | Responsive Behaviour Mechanism | Accepted | 2026-06-27 |
+| `45-htmltemplate-use.md` | HTMLTemplate Use | Accepted | 2026-06-27 |
 
 ---
 
@@ -61,6 +65,10 @@
 - **`29-dependency-update-model.md`:** Four-app update flow (mb-3-cs → master_template → client instances). Branch propagation confirmed.
 - **`34-anvil-platform-constraints.md` through `40-data-access-patterns.md`:** Created 2026-06-14. Consolidated decisions from the "Issues to be resolved" section of platform-overview.md.
 - **`41-dependency-based-not-multi-tenant.md`:** Definitive statement that Mybizz CS is a dependency-based SaaS platform, not a multi-tenant application. Prohibits tenant discriminator columns and tenant-filtered queries.
+- **`42-client-instance-readme-five-app-system.md`:** Every client instance must contain a standardized README documenting the five-app architecture and the constraint against adding forms or modules directly to client instances.
+- **`43-role-property-assignment-mechanism.md`:** Resolves contradiction in design-direction.md. `role` property is set via the Designer Properties Panel, not in code. Derived from Anvil documentation analysis.
+- **`44-responsive-behaviour-mechanism.md`:** Resolves contradicting breakpoint models in design-direction.md. Responsive behaviour uses `wrap_on` per-container, not CSS breakpoint tables. Nav collapse is automatic and separate.
+- **`45-htmltemplate-use.md`:** `HTMLTemplate` is banned. All current use cases have native M3 alternatives. Wireframes using it require reworking.
 
 ---
 

@@ -100,17 +100,18 @@ Roles provide reusable styling hooks mapped to `.anvil-role-*` CSS classes. Crea
 }
 ```
 
-**Application in code:**
+**Application (per ADR-43, reversed):**
+
+Roles are set programmatically in code, per the project-wide property-setting rule: if a property can be set programmatically, it must be set programmatically. Anvil's Roles documentation confirms `role` can be set in code.
 
 ```python
-# Designer: assign via role property
-# Code: assign programmatically
+# Role assignment in code
 self.save_button.role = "primary-button"
 self.info_card.role = "surface-card"
 self.page_title.role = "section-header"
 ```
 
-**Rule:** Roles support multiple assignments. Use space-separated strings for compound patterns:
+Components can have multiple roles (space-separated string or list of strings):
 
 ```python
 self.card.role = "surface-card elevated"
@@ -144,7 +145,7 @@ Material 3 in Anvil is **NOT** installed via:
 ```python
 # Material 3 button configuration
 self.save_button.appearance = "filled"
-self.save_button.role = "primary-button"
+# role is set via Designer Properties Panel per ADR-43
 ```
 
 #### 5.2 TextBox and DropdownMenu

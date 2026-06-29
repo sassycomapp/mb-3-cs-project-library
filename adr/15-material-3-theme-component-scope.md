@@ -25,7 +25,7 @@ Components explicitly provided by the M3 theme dependency:
 - `m3.Divider`, `m3.LinearProgressIndicator`, `m3.CircularProgressIndicator`
 - `m3.ButtonMenu`, `m3.IconButtonMenu`, `m3.AvatarMenu`, `m3.MenuItem`
 - All typography components (`m3.Text`, `m3.Heading`)
-- All layout containers (`ColumnPanel`, `FlowPanel`, `RepeatingPanel`, `DataGrid`)
+- All layout containers (`ColumnPanel`, `FlowPanel`, `RepeatingPanel`, `DataGrid`, `DataRowPanel`)
 
 ### Custom Composition (Permitted)
 Components not natively provided by M3 must be composed from permitted primitives:

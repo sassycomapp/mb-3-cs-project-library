@@ -2,9 +2,10 @@
 
 **Status:** Final  
 **Date:** 2026-05-10  
+**Re-issued:** 2026-06-28 — Aligned with ADR-43 (role via Designer), ADR-44 (wrap_on), ADR-45 (HTMLTemplate banned), and final max-width values.  
 **Vertical:** Consulting & Services  
 **Platform:** Anvil.works with Material Design 3 (M3)  
-**Version:** 1.0 (Consolidated & Approved)
+**Version:** 1.1 (Re-issued)
 
 ---
 
@@ -112,7 +113,7 @@ A refined, business-focused Material 3 design emphasizing clarity, efficiency, a
 | Element | Radius | Notes |
 |---------|--------|-------|
 | Buttons | 100px | Pill shape |
-| Cards | 12px | Standard |
+| Cards | 8px | MUI overlay (base M3 is 12px) |
 | Dialogs | 28px | Modal dialogs |
 | Inputs (Outlined) | 4px | Text boxes, dropdowns |
 | Inputs (Filled) | 0px | Bottom border only |
@@ -232,7 +233,7 @@ A refined, business-focused Material 3 design emphasizing clarity, efficiency, a
 | `tonal-data-grid` | Data grids, tables |
 | `metric-display` | Metric cards, KPIs |
 | `chart-container` | Plot/Chart containers |
-| `tag` | Tags, badges |
+| `tag` | Tags, badges — composed from `m3.Button` or `m3.Card` with custom styling (ADR-27 bans legacy Label) |
 | `chip` | **Custom Component** — composed from `m3.Button` or `m3.Card` per `15-material-3-theme-component-scope.md` |
 
 ---
@@ -253,10 +254,10 @@ A refined, business-focused Material 3 design emphasizing clarity, efficiency, a
 
 | Component | Anvil Type | Role | Key Properties | Designer Settings | theme.css | Advanced Notes |
 |-----------|------------|------|----------------|-------------------|-----------|----------------|
-| Surface Card | ColumnPanel | `surface-card` | border: 1px solid, border-radius: 12px | Set border in Designer | `.anvil-role-outlined-card` | Use ColumnPanel for card content |
-| Elevated Card | ColumnPanel | `elevated-card` | border-radius: 12px, shadow: 2dp | Set shadow in Designer | `.anvil-role-elevated-card` | Shadow uses M3 elevation tokens |
-| Tonal Card | ColumnPanel | `tonal-card` | background: Surface Variant, border-radius: 12px | Set background color in Designer | `.anvil-role-tonal-card` | No border for tonal cards |
-| Metric Card | ColumnPanel | `metric-card` | elevated + custom metric layout | Combine elevated-card + metric styling | Extend `elevated-card` | Add metric icon + value + label structure |
+| Surface Card | `m3.Card` | `surface-card` | appearance: outlined | Set role in Designer | `.anvil-role-outlined-card` | Native M3 Card component |
+| Elevated Card | `m3.Card` | `elevated-card` | appearance: elevated | Set role in Designer | `.anvil-role-elevated-card` | Native M3 Card component |
+| Tonal Card | `m3.Card` | `tonal-card` | appearance: filled | Set role in Designer | `.anvil-role-tonal-card` | Native M3 Card component |
+| Metric Card | `m3.Card` | `metric-card` | appearance: elevated | Set role in Designer | Extend `elevated-card` | Add metric icon + value + label structure |
 
 ### Navigation
 
@@ -470,19 +471,23 @@ A refined, business-focused Material 3 design emphasizing clarity, efficiency, a
 
 ### Code Rules
 
-1. **Assign roles in code** — Always assign roles programmatically in `__init__`
+1. **Roles via Designer** — Set `role` via the Designer Properties Panel, not in code (ADR-43). `role` is a static, design-time choice.
 2. **Use theme tokens** — Never hardcode colors in code — use `%color:Token%`
 3. **Validate inputs** — Always validate user input before server calls
 4. **Handle errors** — Always show user-friendly error messages
 5. **Use RBAC** — Always check user roles before showing sensitive data
 
-### Responsive Rules
+### Responsive Rules (ADR-44)
 
-1. **Mobile-first** — Design for mobile first, then expand for desktop
-2. **Breakpoint at 998px** — Mobile < 998px, Desktop >= 998px
-3. **Nav behavior** — Fixed nav on desktop, modal overlay on mobile
-4. **Grid columns** — 1 column mobile, 2 columns tablet, 3+ columns desktop
+Responsive behaviour is achieved via `wrap_on`, set per-container. No CSS breakpoint tables are used.
+
+1. **`wrap_on = mobile`** — Where the wireframe shows wrapping or stacking behaviour
+2. **`wrap_on = never`** — Where the wireframe shows a fixed layout that should not rearrange
+3. **Nav collapse** — NavigationRailLayout and NavigationDrawerLayout auto-collapse on small screens. This is automatic and requires no instruction.
+4. **Grid columns** — Use `wrap_on` on ColumnPanel/FlowPanel to control wrapping behaviour
 5. **Card density** — Compact density on mobile, default on desktop
+
+See `adr/44-responsive-behaviour-mechanism.md` for the full decision.
 
 ### Accessibility Rules (WCAG 2.1 AA)
 
@@ -495,14 +500,12 @@ A refined, business-focused Material 3 design emphasizing clarity, efficiency, a
 
 ### Property-Setting Rule
 
-**Every property that can be set programmatically must be handled programmatically.**
+**Per ADR-43: `role` is set via the Designer Properties Panel, not in code.**
 
-- **Designer:** Only set properties that cannot realistically or safely be set in code
-- **Code:** Set all other properties programmatically in `__init__` or event handlers
+- **Designer:** Set `role`, `appearance`, component text, visibility, and other static design-time properties
+- **Code:** Set data bindings, dynamic text, validation, disabled state, and event handlers
 
-**Examples:**
-- ✅ **Designer:** Component text, appearance (filled/outlined), visibility
-- ✅ **Code:** Roles, data bindings, dynamic text, validation, disabled state
+ADR-43 confirms that `role` is a static, design-time choice. It does not come from a server call and does not change at runtime. Code-based assignment is not used for this property.
 
 ---
 
@@ -629,13 +632,15 @@ All interactive elements must have clear visual states for hover, focus, disable
 
 ## Responsive Behavior
 
-### Breakpoints
+### Responsive Mechanism (ADR-44)
 
-| Breakpoint | Width Range | Layout Behavior |
-|------------|-------------|-----------------|
-| **Mobile** | < 640px | Single column, modal nav, stacked cards |
-| **Tablet** | 640px - 1024px | 2-column grids, collapsible sidebar |
-| **Desktop** | > 1024px | 3-column grids, fixed sidebar |
+Responsive behaviour is achieved via `wrap_on`, set per-container — not CSS breakpoints.
+
+- `wrap_on = mobile` where the wireframe shows wrapping or stacking behaviour
+- `wrap_on = never` where the wireframe shows a fixed layout that should not rearrange
+- NavigationRailLayout and NavigationDrawerLayout auto-collapse on small screens (automatic, no instruction needed)
+
+See `adr/44-responsive-behaviour-mechanism.md` for the full decision.
 
 ### Mobile Layout Rules
 
@@ -786,9 +791,14 @@ All interactive elements must have clear visual states for hover, focus, disable
 
 | Screen Type | Max Width | Notes |
 |-------------|-----------|-------|
+| **Auth** | 400px | Centred card |
+| **List** | 1200px | Full-width with header + filters + grid |
 | **Dashboard** | 1200px | Wide content, charts, tables |
-| **Forms** | 800px | Readable line length |
-| **Cards** | 320px | Individual card width |
-| **Modals** | 480px (forms), 640px (details) | Centered, max-width constrained |
-| **Sidesheets** | 400px | Fixed width, slides from right |
+| **Editor/Viewer/Forms** | 900px | Full-width with sectioned panels |
+| **Public** | 900px | Full-width with content sections |
+| **Settings** | 1000px | Full-width with tab bar + panels |
+| **Onboarding** | 600px | Centred card with step indicator |
+| **Card (grid item)** | 320px | Individual card width |
+| **Modal form** | 480px | Centered, max-width constrained |
+| **Modal detail** | 640px | Centered, max-width constrained |
 

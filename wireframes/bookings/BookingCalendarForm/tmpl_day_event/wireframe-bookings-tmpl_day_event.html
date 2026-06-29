@@ -59,12 +59,5 @@
     <tr><td colspan="3"><em>No Designer-only properties. All values (time, title, customer, meeting type, status) are set programmatically from the bookings table row. Status determines the left border color via code.</em></td></tr>
   </table>
 
-  <p><strong>Programmatic behaviour:</strong></p>
-  <ul>
-    <li>Card left border: 4px solid, color from status (Confirmed=#388e3c, Pending=#f9a825, Cancelled=#c62828 at 0.6 opacity).</li>
-    <li>Card click: opens BookingViewerForm with <code>globals.current_booking</code> set to this booking row.</li>
-    <li>Cancelled events: card opacity set to 0.6.</li>
-  </ul>
-
 </body>
 </html>

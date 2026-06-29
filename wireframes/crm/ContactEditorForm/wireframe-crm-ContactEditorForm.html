@@ -54,7 +54,18 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>ContactEditorForm — Create/Edit Contact</h2>
+<h2>Section 1 — Introduction</h2>
+<p>To the developer: This wireframe indicates which components to place on the ContactEditorForm and how to configure them.</p>
+<p><strong>Conventions:</strong></p>
+<ul>
+  <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+  <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+  <li>Role is set programmatically in code (per ADR-43), not in the Designer Properties Panel.</li>
+</ul>
+
+<h2>Section 2 — Wireframe Diagram</h2>
+
+<h3>ContactEditorForm — Create/Edit Contact</h3>
 
 <div class="wf-outer">
   <span class="wf-label">col_contact_editor (ColumnPanel) — max-width: 720px, page-container</span>
@@ -78,22 +89,22 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-form-grid">
       <div class="wf-form-group">
         <div class="wf-form-label">First Name</div>
-        <div class="wf-textbox">Jane</div>
+        <div class="wf-textbox">[First Name]</div>
         <div class="cn">txt_first_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> — role: outlined-input, placeholder: "Enter first name"</div>
       </div>
       <div class="wf-form-group">
         <div class="wf-form-label">Last Name</div>
-        <div class="wf-textbox">Smith</div>
+        <div class="wf-textbox">[Last Name]</div>
         <div class="cn">txt_last_name <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> — role: outlined-input, placeholder: "Enter last name"</div>
       </div>
       <div class="wf-form-group">
         <div class="wf-form-label">Company</div>
-        <div class="wf-textbox">Smith Consulting</div>
+        <div class="wf-textbox">[Company Name]</div>
         <div class="cn">txt_company <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> — role: outlined-input, placeholder: "Enter company name"</div>
       </div>
       <div class="wf-form-group">
         <div class="wf-form-label">Job Title</div>
-        <div class="wf-textbox">Director</div>
+        <div class="wf-textbox">[Job Title]</div>
         <div class="cn">txt_job_title <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> — role: outlined-input, placeholder: "Enter job title"</div>
       </div>
     </div>
@@ -109,22 +120,22 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-form-grid">
       <div class="wf-form-group">
         <div class="wf-form-label">Email</div>
-        <div class="wf-textbox">jane.smith@email.com</div>
+        <div class="wf-textbox">[Email Address]</div>
         <div class="cn">txt_email <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> — role: outlined-input, input type: email</div>
       </div>
       <div class="wf-form-group">
         <div class="wf-form-label">Phone</div>
-        <div class="wf-textbox">+27 12 345 6789</div>
+        <div class="wf-textbox">[Phone Number]</div>
         <div class="cn">txt_phone <span class="ct">(TextBox)</span> <span class="cfixed">(W)</span> — role: outlined-input, input type: tel</div>
       </div>
       <div class="wf-form-group">
         <div class="wf-form-label">Status</div>
-        <div class="wf-dd">Active</div>
+        <div class="wf-dd">[Status]</div>
         <div class="cn">dd_status <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span> — role: outlined-select, items: ["Active","Inactive","Lead"]</div>
       </div>
       <div class="wf-form-group">
         <div class="wf-form-label">Segment</div>
-        <div class="wf-dd">VIP</div>
+        <div class="wf-dd">[Segment]</div>
         <div class="cn">dd_segment <span class="ct">(DropdownMenu)</span> <span class="cfixed">(W)</span> — role: outlined-select, items: ["VIP","Recurring","New","General"]</div>
       </div>
     </div>
@@ -140,8 +151,8 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
     <div class="wf-form-group">
       <div class="wf-form-label">Contact Tags</div>
       <div class="wf-tag-area">
-        <span class="wf-tag">VIP <span class="wf-tag-remove">&times;</span></span>
-        <span class="wf-tag">Recurring <span class="wf-tag-remove">&times;</span></span>
+        <span class="wf-tag">[Tag 1] <span class="wf-tag-remove">&times;</span></span>
+        <span class="wf-tag">[Tag 2] <span class="wf-tag-remove">&times;</span></span>
         <span class="wf-tag-placeholder">Type to add a tag...</span>
       </div>
       <div class="cn">tag_input_area <span class="ct">(Custom: FlowPanel + RepeatingPanel)</span> — chips with remove buttons</div>
@@ -157,7 +168,7 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
 
     <div class="wf-form-group">
       <div class="wf-form-label">Internal Notes</div>
-      <div class="wf-textarea">Prefers email communication. Has been a client since 2023. Interested in premium services package.</div>
+      <div class="wf-textarea">[Internal notes about this contact]</div>
       <div class="cn">txt_notes <span class="ct">(TextArea)</span> <span class="cfixed">(W)</span> — role: outlined-input, placeholder: "Add internal notes about this contact..."</div>
     </div>
   </div>
@@ -177,19 +188,21 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   </div>
 </div>
 
+<h2>Section 3 — Properties Table</h2>
+
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>
 <table class="props">
 <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_first_name</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
-<tr><td>txt_last_name</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
-<tr><td>txt_company</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
-<tr><td>txt_job_title</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
-<tr><td>txt_email</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
-<tr><td>txt_phone</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
-<tr><td>dd_status</td><td>DropdownMenu</td><td>role='outlined-select', writeback = W</td></tr>
-<tr><td>dd_segment</td><td>DropdownMenu</td><td>role='outlined-select', writeback = W</td></tr>
-<tr><td>txt_notes</td><td>TextArea</td><td>role='outlined-input', writeback = W</td></tr>
+<tr><td>txt_first_name</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_last_name</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_company</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_job_title</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_email</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>txt_phone</td><td>TextBox</td><td>writeback = W</td></tr>
+<tr><td>dd_status</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+<tr><td>dd_segment</td><td>DropdownMenu</td><td>writeback = W</td></tr>
+<tr><td>txt_notes</td><td>TextArea</td><td>writeback = W</td></tr>
 </table>
 
 </body>

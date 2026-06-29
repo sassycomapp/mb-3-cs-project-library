@@ -55,7 +55,18 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   <span>All other properties (role, placeholder, items, etc.) are in the Properties Table only.</span>
 </div>
 
-<h2>EmailCampaignListForm — Campaign List</h2>
+<h2>Section 1 — Introduction</h2>
+<p>To the developer: This wireframe indicates which components to place on the EmailCampaignListForm and how to configure them.</p>
+<p><strong>Conventions:</strong></p>
+<ul>
+  <li>Solid border = visible on load. Dashed border = hidden on load (<code>visible = False</code>).</li>
+  <li>Each component displays: <code>component_name (Type) "fixed text if set at design time"</code>.</li>
+  <li>Role is set programmatically in code (per ADR-43), not in the Designer Properties Panel.</li>
+</ul>
+
+<h2>Section 2 — Wireframe Diagram</h2>
+
+<h3>EmailCampaignListForm — Campaign List</h3>
 
 <div class="wf-outer">
   <span class="wf-label">col_campaigns (ColumnPanel) — max-width: 1100px, page-container</span>
@@ -96,44 +107,12 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
       </thead>
       <tbody>
         <tr>
-          <td><strong>May Newsletter</strong></td>
-          <td><span class="wf-badge wf-type-badge">Sequence</span></td>
-          <td><span class="wf-badge wf-status-active">Active</span></td>
-          <td class="wf-metric">1,248</td>
-          <td class="wf-metric">624 <span class="wf-metric-sub">(50%)</span></td>
-          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span> <span class="wf-action-link">Pause</span></td>
-        </tr>
-        <tr>
-          <td><strong>Welcome Series</strong></td>
-          <td><span class="wf-badge wf-type-badge">Sequence</span></td>
-          <td><span class="wf-badge wf-status-active">Active</span></td>
-          <td class="wf-metric">356</td>
-          <td class="wf-metric">214 <span class="wf-metric-sub">(60%)</span></td>
-          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span> <span class="wf-action-link">Pause</span></td>
-        </tr>
-        <tr>
-          <td><strong>Summer Promotion</strong></td>
-          <td><span class="wf-badge wf-type-badge">Broadcast</span></td>
-          <td><span class="wf-badge wf-status-draft">Draft</span></td>
-          <td class="wf-metric">0</td>
-          <td class="wf-metric">0 <span class="wf-metric-sub">(0%)</span></td>
-          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span></td>
-        </tr>
-        <tr>
-          <td><strong>Re-engagement Drive</strong></td>
-          <td><span class="wf-badge wf-type-badge">Sequence</span></td>
-          <td><span class="wf-badge wf-status-paused">Paused</span></td>
-          <td class="wf-metric">890</td>
-          <td class="wf-metric">312 <span class="wf-metric-sub">(35%)</span></td>
-          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span> <span class="wf-action-link">Resume</span></td>
-        </tr>
-        <tr>
-          <td><strong>Q1 Recap</strong></td>
-          <td><span class="wf-badge wf-type-badge">Broadcast</span></td>
-          <td><span class="wf-badge wf-status-completed">Completed</span></td>
-          <td class="wf-metric">2,100</td>
-          <td class="wf-metric">1,155 <span class="wf-metric-sub">(55%)</span></td>
-          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Duplicate</span></td>
+          <td><strong>[Campaign Name]</strong></td>
+          <td><span class="wf-badge wf-type-badge">[Type]</span></td>
+          <td><span class="wf-badge wf-status-active">[Status]</span></td>
+          <td class="wf-metric">[Sent]</td>
+          <td class="wf-metric">[Opens] <span class="wf-metric-sub">([%])</span></td>
+          <td><span class="wf-action-link">View</span> <span class="wf-action-link">Edit</span> <span class="wf-action-link">[Action]</span></td>
         </tr>
       </tbody>
     </table>
@@ -145,11 +124,13 @@ table.props tr:nth-child(even) td { background: #f9f9f9; }
   </div>
 </div>
 
+<h2>Section 3 — Properties Table</h2>
+
 <div class="prop-caption">Properties table</div>
 <div class="prop-note">Designer-mandatory properties: writeback (W) must be set in Designer for all text input, dropdown, and date picker components.</div>
 <table class="props">
 <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
-<tr><td>txt_search</td><td>TextBox</td><td>role='outlined-input', writeback = W</td></tr>
+<tr><td>txt_search</td><td>TextBox</td><td>writeback = W</td></tr>
 </table>
 
 </body>

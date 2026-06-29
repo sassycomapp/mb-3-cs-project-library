@@ -84,7 +84,7 @@ The intended character is:
 
 - Bright gradients, flashy hero treatments, or decorative visual noise.
 - Childish or overly playful interface language.
-- Dark mode as the primary design target.
+- Dark mode as the primary design target. (Dark mode is deferred to V2, not rejected. It will be addressed in a future design phase.)
 - Heavy animation, glassmorphism, or neumorphism.
 - Complex charts or visual systems in V1 beyond what is operationally useful.
 - Template-specific CSS divergence that breaks the shared design system.

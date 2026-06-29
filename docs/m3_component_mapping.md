@@ -1,5 +1,7 @@
 ***
 
+Material Design 3 (M3) — Dependency ID: 4UK6WHQ6UX7AKE
+
 # m3_component_mapping.md
 
 Title: M3 → Anvil component mapping (Python style)
@@ -92,7 +94,7 @@ Usage note for agents:
   - Notes: No dedicated floating behavior; position with `absolute` panel or container.
 
 - Extended FAB
-  - Mapping: `m3.Button(icon="add", text="New", appearance="filled")` (styled)
+  - Mapping: `m3.Button(icon="mi:add", text="New", appearance="filled")` (styled)
   - Support: Partially supported
 
 ### Surfaces & Containers
@@ -270,6 +272,11 @@ Usage note for agents:
 - Navigation Drawer Layout
   - Mapping: `Navigation Drawer Layout` template (provided)
   - Support: Fully supported
+
+- DataGrid Row Template (DataRowPanel)
+  - Mapping: `DataRowPanel` (used inside DataGrid for custom row layouts)
+  - Support: Fully supported
+  - Notes: Classic Anvil component. Defines the layout of each row in a DataGrid. Use `drp_` prefix in wireframes. One component per column slot.
 
 ### Not supported (native)
 List of Material 3 components that are not implementable as native Anvil M3 components without external libraries, custom JS, or extensive custom CSS/motion:

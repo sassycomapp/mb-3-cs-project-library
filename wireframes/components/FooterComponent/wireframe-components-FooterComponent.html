@@ -71,9 +71,9 @@
           </div>
           <div class="container">
             <span class="container-label">FlowPanel: flow_legal_links</span>
-            <div class="component">lnk_privacy (Link) "Privacy Policy"</div>
-            <div class="component">lnk_terms (Link) "Terms &amp; Conditions"</div>
-            <div class="component">lnk_cookie (Link) "Cookie Policy"</div>
+            <div class="component">nav_privacy (Link) "Privacy Policy"</div>
+            <div class="component">nav_terms (Link) "Terms &amp; Conditions"</div>
+            <div class="component">nav_cookie (Link) "Cookie Policy"</div>
           </div>
         </div>
         <div class="container">
@@ -90,7 +90,7 @@
       <div class="container">
         <span class="container-label">FlowPanel: flow_copyright</span>
         <div class="component">txt_copyright (Text) "[Copyright notice]"</div>
-        <div class="component">lnk_back_top (Link) "Back to Top"</div>
+        <div class="component">nav_back_top (Link) "Back to Top"</div>
       </div>
 
     </div>
@@ -102,8 +102,6 @@
     <tr><th>Component</th><th>Type</th><th>Designer Property</th></tr>
     <tr><td colspan="3"><em>No Designer-only properties. All footer content is rendered programmatically from the business_profile table. The component constructor accepts no parameters.</em></td></tr>
   </table>
-
-  <p><strong>Note:</strong> All text values (business name, email, phone, accreditations, copyright) are populated from <code>business_profile</code> table at runtime. Social links open in new tabs. "View on Google Maps" opens <code>business_profile.google_maps_embed_url</code>. "Send us a message" navigates to ContactPage.</p>
 
 </body>
 </html>
