@@ -21,28 +21,28 @@ You are producing screen HTML/CSS mockups for the Mybizz CS application. Each sc
 Read every file below in full before producing your first screen. Do not proceed until all are read.
 
 ### Instructional documents (for Anvil AI — you must understand what the live builder will follow):
-1. `/mnt/c/_mb2-cs-app/project-library/ui-build-prep/anvil-ui-build-standard.md`
-2. `/mnt/c/_mb2-cs-app/project-library/ui-build-prep/anvil-ui-exception-review-procedure.md`
+1. `/mnt/c/projects/mb-3-cs/project-library/ui-build-prep/anvil-ui-build-standard.md`
+2. `/mnt/c/projects/mb-3-cs/project-library/ui-build-prep/anvil-ui-exception-review-procedure.md`
 
 ### Design and specification documents:
-3. `/mnt/c/_mb2-cs-app/project-library/docs/DESIGN.md`
-4. `/mnt/c/_mb2-cs-app/project-library/docs/design-direction.md`
-5. `/mnt/c/_mb2-cs-app/project-library/docs/screen-production-standard.md`
-6. `/mnt/c/_mb2-cs-app/project-library/docs/m3_component_mapping.md`
-7. `/mnt/c/_mb2-cs-app/project-library/docs/nomenclature.md`
-8. `/mnt/c/_mb2-cs-app/project-library/docs/spec-component-properties.md`
+3. `/mnt/c/projects/mb-3-cs/project-library/docs/DESIGN.md`
+4. `/mnt/c/projects/mb-3-cs/project-library/docs/design-direction.md`
+5. `/mnt/c/projects/mb-3-cs/project-library/docs/screen-production-standard.md`
+6. `/mnt/c/projects/mb-3-cs/project-library/docs/m3_component_mapping.md`
+7. `/mnt/c/projects/mb-3-cs/project-library/docs/nomenclature.md`
+8. `/mnt/c/projects/mb-3-cs/project-library/docs/spec-component-properties.md`
 
 ### Theme and style reference:
-9. `/mnt/c/_mb2-cs-app/project-library/docs/theme_patched.css`
-10. `/mnt/c/_mb2-cs-app/project-library/docs/theme_mui_patch.css`
-11. `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/design-reference-screens.html` — the existing style reference
+9. `/mnt/c/projects/mb-3-cs/project-library/docs/theme_patched.css`
+10. `/mnt/c/projects/mb-3-cs/project-library/docs/theme_mui_patch.css`
+11. `/mnt/c/projects/mb-3-cs/project-library/gstack-outputs/design-reference-screens.html` — the existing style reference
 
 ### ADRs:
-12. `/mnt/c/_mb2-cs-app/project-library/adr/43-role-property-assignment-mechanism.md` — role set in code
-13. `/mnt/c/_mb2-cs-app/project-library/adr/44-responsive-behaviour-mechanism.md` — wrap_on, not breakpoints
-14. `/mnt/c/_mb2-cs-app/project-library/adr/45-htmltemplate-use.md` — HTMLTemplate banned
-15. `/mnt/c/_mb2-cs-app/project-library/adr/15-material-3-theme-component-scope.md` — permitted M3 components
-16. `/mnt/c/_mb2-cs-app/project-library/adr/27-design-rules.md` — wireframe design rules
+12. `/mnt/c/projects/mb-3-cs/project-library/adr/43-role-property-assignment-mechanism.md` — role set in code
+13. `/mnt/c/projects/mb-3-cs/project-library/adr/44-responsive-behaviour-mechanism.md` — wrap_on, not breakpoints
+14. `/mnt/c/projects/mb-3-cs/project-library/adr/45-htmltemplate-use.md` — HTMLTemplate banned
+15. `/mnt/c/projects/mb-3-cs/project-library/adr/15-material-3-theme-component-scope.md` — permitted M3 components
+16. `/mnt/c/projects/mb-3-cs/project-library/adr/27-design-rules.md` — wireframe design rules
 
 ---
 
@@ -150,10 +150,10 @@ If you find a discrepancy between the wireframe and any other document (Standard
 
 ### Step 6: Save the screen and checklist
 Save the screen HTML to:
-`/mnt/c/_mb2-cs-app/project-library/screens/{package}/{FormName}/screen-{package}-{FormName}.html`
+`/mnt/c/projects/mb-3-cs/project-library/screens/{package}/{FormName}/screen-{package}-{FormName}.html`
 
 Save the completed checklist to:
-`/mnt/c/_mb2-cs-app/project-library/screens/{package}/{FormName}/checklist-screen-{package}-{FormName}.md`
+`/mnt/c/projects/mb-3-cs/project-library/screens/{package}/{FormName}/checklist-screen-{package}-{FormName}.md`
 
 ### Step 7: Confirm completion
 Report: screen saved, checklist saved, any discrepancies found (if none, say "no discrepancies").
@@ -203,7 +203,7 @@ After completing Step 7, immediately proceed to the next wireframe in the scaffo
 ## START
 
 Begin with the first wireframe in the scaffold order:
-`/mnt/c/_mb2-cs-app/project-library/wireframes/analytics/DashboardAnalyticsForm/wireframe-analytics-RevenueReportForm.html`
+`/mnt/c/projects/mb-3-cs/project-library/wireframes/analytics/DashboardAnalyticsForm/wireframe-analytics-RevenueReportForm.html`
 
 After completing each screen, Step 8 instructs you to proceed to the next wireframe automatically. Continue until every wireframe has a corresponding screen.
 ```

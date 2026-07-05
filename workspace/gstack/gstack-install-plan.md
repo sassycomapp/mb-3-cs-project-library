@@ -51,7 +51,7 @@ It is not a generic guide; it is specific to this Windows + WSL setup.
      - `opencode serve --hostname 0.0.0.0 --port 4096`.
    - Connect OpenCode Desktop to `http://localhost:4096` as `wsl-opencode`.
    - Confirm agents can:
-     - see `/mnt/c/_mb2-cs-app/project-library` and `/mnt/c/_mb2-cs-app/mb-3-cs`,
+     - see `/mnt/c/projects/mb-3-cs/project-library` and `/mnt/c/projects/mb-3-cs/mb-3-cs`,
      - call GStack-related skills (e.g. `/setup-gbrain`, plan/build/status workflows).
 
 4. **Document the operating model**

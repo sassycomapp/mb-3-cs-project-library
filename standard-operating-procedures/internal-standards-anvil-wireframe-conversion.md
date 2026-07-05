@@ -363,7 +363,7 @@ Approved Anvil Material 3 Theme components:
 
 ## Source File Index
 
-All files verified to exist on disk at `/mnt/c/_mb2-cs-app/project-library/`:
+All files verified to exist on disk at `/mnt/c/projects/mb-3-cs/project-library/`:
 
 | File | Role |
 |------|------|

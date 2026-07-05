@@ -35,7 +35,7 @@ You only need these for normal work:
 **In WSL:**
 A) start sequence to start opencode server and open the opencode web UI:
 	```bash
-	cd /mnt/c/_mb2-cs-app/project-library
+	cd /mnt/c/projects/mb-3-cs/project-library
 	opencode web --hostname 0.0.0.0
 	```
 B) Alternative start sequence to start opencode server and open the opencode web UI:
@@ -70,11 +70,11 @@ Then run Start sequence above.
    - Container for everything (repos, GStack, workspace docs).
 
 2. `C:\_mb2-cs-app\mb-3-cs` — **Git code repo**  
-	`/mnt/c/_mb2-cs-app/mb-3-cs`  
+	`/mnt/c/projects/mb-3-cs/mb-3-cs`  
    - Anvil‑linked production‑adjacent application code.  
 
 3. `C:\_mb2-cs-app\project-library` — **Git docs repo**  
-   `/mnt/c/_mb2-cs-app/project-library`
+   `/mnt/c/projects/mb-3-cs/project-library`
    - Design/planning/architecture documents.  
    - Not Anvil‑linked.
 
@@ -95,7 +95,7 @@ You **do not** switch projects by restarting the server;
 ## Committing to Github after new work 
 **In WSL:**
 	```bash
-	cd /mnt/c/_mb2-cs-app/project-library
+	cd /mnt/c/projects/mb-3-cs/project-library
 	git add -A
 	git commit -m "/Example: Plan-eng-review-remediation" (Create a commit message )
 	git push origin main

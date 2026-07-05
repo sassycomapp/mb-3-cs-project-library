@@ -11,7 +11,7 @@
       "*": "ask"
     },
     "external_directory": {
-      "C:\\_mb2-cs-app\\mb-3-cs\\**": "allow"
+      "C:\\projects\\mb-3-cs\\mb-3-cs\\**": "allow"
     }
   }
 }
