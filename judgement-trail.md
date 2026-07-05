@@ -1,6 +1,32 @@
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
 
+## 2026-07-06 — OpenCode config optimization
+
+**Issue flagged:** `mb-3-cs/AGENTS.md` directly violated global "Plan never writes" rule — granted Plan write access to `prompts/`, `docs/`, `tests/`.
+**Developer decision:** Fixed. Plan write permissions removed. Build agent now covers all writes with explicit-approval gates on `prompts/`, `docs/`, `tests/`, `theme/`.
+
+**Issue flagged:** Global `opencode.jsonc` had hardcoded model block (`xiaomi/mimo-v2.5-pro`). User wants model selected from UI picker.
+**Developer decision:** Model block removed entirely. Provider block retained (OpenRouter API key needed for auth — env var approach previously unreliable).
+
+**Issue flagged:** Global `external_directory` only covered `C:\_mb2-cs-app\**` — didn't cover `C:\projects\**` or `C:\pdlf\**`.
+**Developer decision:** Added both. All projects now accessible from any workspace without per-project config changes.
+
+**Issue flagged:** 4 agent files missing task-completion reporting, devlog/judgement-trail awareness, and environment (Web UI only).
+**Developer decision:** Added `## Task completion` and `## Environment` sections to all 4 agent files.
+
+**Issue flagged:** 52 command files in `.opencode/commands/` — 3 duplicates, 2 broken headers, 5 formatting outliers.
+**Developer decision:** Removed duplicates (`gstack-context-save.md`, `gstack-learn.md`, `gstack-upgrade.md`). Fixed headers (`build.md`, `review.md`). Standardized 5 outliers.
+
+**Issue flagged:** mb-3-cs project library agent files (plan/build) now part of PDLF transition. All projects are PDLF projects.
+**Developer decision:** Project configs (`opencode.json`) created for mb4ecom and mb5pdlf for proper OpenCode operation. PDLF-specific config handled in later pass.
+
+**Issue flagged:** API key in plain text in `opencode.jsonc` and `opencode-10-config-files.md`.
+**Developer decision:** Key redacted from workspace doc. Kept in config file (env var approach was unreliable — this is a known, deliberate trade-off).
+
+**Issue flagged:** Three workspace reference docs had stale paths, Desktop bridge text, model references, and duplicated content blocks.
+**Developer decision:** All three rewritten: `workspace-docmap.md`, `workspace-description.md`, `opencode-10-config-files.md`.
+
 ## 2026-07-05 — Repo migration
 
 **Issue flagged:** GBrain CLI v0.42.44.0 argument parser rejects `--id` flag syntax. "Unknown flag" errors on positional values.

@@ -1,352 +1,205 @@
-# OpenCode System Docmap
+# OpenCode System Docmap — Multi-Project
 
-**What this docmap is / how to use it:**  
-This document registers the relevant OpenCode system, workspace, and integration files with their paths and roles. It is intended to be both human‑readable and agent‑scannable, so it stays path‑focused, explicit, and free of speculative implementation detail.
+**What this docmap is / how to use it:**
+This document registers the relevant OpenCode system, workspace, and integration files with their paths and roles. Human-readable and agent-scannable. Path-focused, explicit, free of speculative implementation detail.
 
 ---
 
 ## 1. Global config & rules
 
-- **Global AGENTS rules**  
-  `C:\Users\dev-p\.config\opencode\AGENTS.md`  
-  Global behavior rules for all OpenCode sessions (Desktop, TUI, IDE). Defines the default interaction style (concise, stepwise, validation‑first) and operating constraints that apply across workspaces.
+- **Global AGENTS rules**
+  `~/.config/opencode/AGENTS.md` (WSL: `/home/dev-p/.config/opencode/AGENTS.md`)
+  Global behavior rules for all OpenCode sessions. Defines Plan/Build roles (Plan never writes), session discipline, behavioral principles, safety rules, task completion reporting, and the project precedence model.
 
-- **Global OpenCode config**  
-  `C:\Users\dev-p\.config\opencode\opencode.json`  
-  Global OpenCode configuration file. Holds provider configuration, global models, default agents (`plan` / `build`), tools, permissions, and any future shared keybinds/commands.
+- **Global OpenCode config**
+  `~/.config/opencode/opencode.jsonc` (WSL: `/home/dev-p/.config/opencode/opencode.jsonc`)
+  Global configuration: OpenRouter provider, conservative permissions (all `ask`), external_directory covering `C:\_mb2-cs-app\**`, `C:\projects\**`, and `C:\pdlf\**`. MCP gbrain enabled. No hardcoded models — model selected from UI picker.
 
-- **Global skills directory (no custom skills yet)**  
-  `C:\Users\dev-p\.config\opencode\skills\`  
-  Placeholder for any future global skills. No custom global skills are defined; the system currently relies on OpenCode defaults.
+- **Global skills directory**
+  `~/.config/opencode/skills/` (WSL: `/home/dev-p/.config/opencode/skills/`)
+  61 skill subdirectories — GStack skills, OpenClaw variants, browser skills, iOS skills, the PDLF orchestrator, and utility skills. Used across all projects.
 
----
+- **Global commands directory**
+  `~/.config/opencode/commands/`
+  Does not exist. Commands are defined at project level.
 
-## 2. Project rules & config — project-library
-
-- **Project AGENTS rules (docs)**  
-  `C:\_mb2-cs-app\project-library\AGENTS.md`  
-  Documentation‑workspace rules file. Defines:
-  - provenance expectations and trust model,
-  - required workflow order (refine ADRs → validate AM1/MM1 / AM2/MM2 → improve working docs),
-  - documentation‑specific behavior and how canonical shared devlog/todo files are used.
-
-- **Project config (docs)**  
-  `C:\_mb2-cs-app\project-library\opencode.json`  
-  Project‑level OpenCode configuration for `project-library`. Sets:
-  - `default_agent` = `plan`,
-  - conservative permissions (`edit` / `webfetch` / `bash` all `ask`),
-  - read access to:
-    - `C:\_mb2-cs-app\mb-3-cs\`
-    - `C:\_mb2-cs-app\devlog\`
-    - `C:\_mb2-cs-app\todo\`
-
-- **Project-local agents (docs)**  
-  `C:\_mb2-cs-app\project-library\.opencode\agents\`  
-  Defines `plan` and `build` for the docs workspace:
-  - `plan` = primary documentation/planning agent (analysis, validation, provenance checks, architectural reasoning, refactor planning).
-  - `build` = tightly scoped helper for non‑live‑code document tasks on explicit request.
-  - `plan` may update canonical devlog/todo files where rules allow; `build` may read but must hand off changes.
-
-- **Project-local commands (docs)**  
-  `C:\_mb2-cs-app\project-library\.opencode\commands\`  
-  Holds project‑local commands (for example, the current `test-config-dir` sandbox command). This is the preferred pattern for commands on this machine, rather than relying on `OPENCODE_CONFIG_DIR`, because Windows environment variables are not automatically visible inside WSL.
+- **Global agents directory**
+  `~/.config/opencode/agents/`
+  Does not exist. Agents are defined at project level.
 
 ---
 
-## 3. Project rules & config — mb-3-cs
+## 2. Shared infrastructure (`C:\_mb2-cs-app\`)
 
-- **Project AGENTS rules (code)**  
-  `C:\_mb2-cs-app\mb-3-cs\AGENTS.md`  
-  Live‑code repository rules file. Defines:
-  - conservative, implementation‑focused behavior,
-  - protected‑file rules,
-  - backup and timestamp expectations,
-  - how this repo uses the canonical shared devlog/todo files.
+Windows: `C:\_mb2-cs-app\` — WSL: `/mnt/c/_mb2-cs-app/`
 
-- **Project config (code)**  
-  `C:\_mb2-cs-app\mb-3-cs\opencode.json`  
-  Project‑level OpenCode configuration for `mb-3-cs`. Sets:
-  - `default_agent` = `build`,
-  - conservative permissions (`edit` / `webfetch` / `bash` all `ask`),
-  - path‑based edit protection for critical files:
-    - `anvil.yaml`
-    - `parameters.yaml`
-    - `templates.yaml`
-    - all `form_template.yaml` files
-  - `standard-page.html` and `theme.css` protected with `ask` permissions only,
-  - read access to:
-    - `C:\_mb2-cs-app\project-library\`
-    - `C:\_mb2-cs-app\devlog\`
-    - `C:\_mb2-cs-app\todo\`
+Formerly the single-project workspace root (mb-3-cs only). Now repurposed as shared infrastructure:
 
-- **Project-local agents (code)**  
-  `C:\_mb2-cs-app\mb-3-cs\.opencode\agents\`  
-  Defines `plan` and `build` for the live repo:
-  - `build` = primary implementation agent for explicit user‑directed code tasks.
-  - `plan` = planning/architecture/analysis agent.
-  - `plan` may update canonical devlog/todo where allowed; `build` may read but must hand off tracking changes.
+| Path | Role |
+|---|---|
+| `_mb2-cs-app/gstack/` | GStack tooling repo — binaries, skills, node_modules |
+| `_mb2-cs-app/gbrain/` | GBrain application (Node.js/Bun project with OpenAI SDK) |
+| `_mb2-cs-app/skills/` | Large collection of ~40+ skill definitions (GStack/OpenCode) |
+| `_mb2-cs-app/scripts/` | Legacy backup scripts |
+| `_mb2-cs-app/matt-skills-teach/` | Empty — intended for `teach` Matt Pocock skill redirects |
+| `_mb2-cs-app/backup-mybizz/` | Pre-migration backup of mb-3-cs repos (old paths) |
+| `_mb2-cs-app/desktop-mybizz/` | Developer desktop companion files (learning, management, temp) |
 
 ---
 
-## 4. Workspace reference docs (project-library /workspace)
+## 3. Projects (`C:\projects\`)
 
-All paths below are relative to:
+Windows: `C:\projects\` — WSL: `/mnt/c/projects/`
 
-- Windows: `C:\_mb2-cs-app\project-library\workspace\`
-- WSL: `/mnt/c/_mb2-cs-app/project-library/workspace/`
+### 3.1 mb-3-cs — Mybizz Consulting Services (GStack-managed)
 
-- **Workspace description**  
-  `workspace-description.md`  
-  Human‑facing description of:
-  - how the dual‑project OpenCode workspace is structured,
-  - how to start sessions on this specific Windows + WSL setup,
-  - how `project-library` and `mb-3-cs` are intended to be used,
-  - where GStack and GBrain fit in the overall picture.
+| Repo | Windows Path | WSL Path | Default Agent |
+|---|---|---|---|
+| project-library | `C:\projects\mb-3-cs\project-library\` | `/mnt/c/projects/mb-3-cs/project-library/` | `plan` |
+| code | `C:\projects\mb-3-cs\mb-3-cs\` | `/mnt/c/projects/mb-3-cs/mb-3-cs/` | `build` |
 
-- **Workspace docmap**  
-  `workspace-docmap.md`  
-  This file. Path‑centric register for setup, config, orchestration, and memory artifacts. Intended to be both human‑readable and agent‑scannable.
+- `project-library/opencode.json`: plan agent, deny anvil.yaml, read from `C:\projects\mb-3-cs\mb-3-cs\**`
+- `mb-3-cs/opencode.json`: build agent, deny anvil.yaml/parameters/templates/form_template.yaml, ask on standard-page.html/theme.css, read from `C:\projects\mb-3-cs\project-library\**`
+- Both have `.opencode/agents/` (plan.md, build.md)
+- `project-library/` has `.opencode/commands/` (49 command files)
+- Tracks via `project-library/devlog-index.md` and `project-library/judgement-trail.md`
+- Currently transitioning to PDLF workflow
 
-- **OpenCode setup & status**  
-  `opencode-setup.md`  
-  Detailed setup log and policy/status tracker for:
-  - OpenCode configuration (global + project),
-  - permissions and protected files,
-  - agents and tools,
-  - WSL server bridge,
-  - GStack and GBrain status and future integration decisions.
+### 3.2 mb4ecom — E-Commerce (PDLF-managed)
 
----
+| Repo | Windows Path | WSL Path | Default Agent |
+|---|---|---|---|
+| project-library | `C:\projects\mb4ecom\mb4ecom-project-library\` | `/mnt/c/projects/mb4ecom/mb4ecom-project-library/` | `plan` |
+| code | `C:\projects\mb4ecom\mb4ecom\` | `/mnt/c/projects/mb4ecom/mb4ecom/` | `build` |
 
-## 5. Shared devlog & todo locations (canonical)
+- `mb4ecom-project-library/opencode.json`: plan agent, deny anvil.yaml, read from `C:\projects\mb4ecom\mb4ecom\**`
+- `mb4ecom/opencode.json`: build agent, deny anvil.yaml/form_template.yaml, read from `C:\projects\mb4ecom\mb4ecom-project-library\**`
+- No per-project agent definitions (uses global agents with plan/build defaults)
+- PDLF state: `~/.gstack/projects/mb4ecom/pdlf-state.md`
 
-These paths are shared across `project-library` and `mb-3-cs` and are treated as canonical:
+### 3.3 mb5pdlf — PDLF Test Project (PDLF-managed)
 
-- **Devlog (canonical):**
-  - `C:\_mb2-cs-app\devlog\README.md`
-  - `C:\_mb2-cs-app\devlog\index.md`
+| Repo | Windows Path | WSL Path | Default Agent |
+|---|---|---|---|
+| project-library | `C:\projects\mb5pdlf\mb5pdlf-project-library\` | `/mnt/c/projects/mb5pdlf/mb5pdlf-project-library/` | `plan` |
+| code | `C:\projects\mb5pdlf\mb5pdlf\` | `/mnt/c/projects/mb5pdlf/mb5pdlf/` | `build` |
 
-- **Todos (canonical):**
-  - Active backlog: `C:\_mb2-cs-app\todo\todo.md`
-  - Archive: `C:\_mb2-cs-app\todo\todo-archive.md`
+- `mb5pdlf-project-library/opencode.json`: plan agent, deny anvil.yaml, read from `C:\projects\mb5pdlf\mb5pdlf\**`
+- `mb5pdlf/opencode.json`: build agent, deny anvil.yaml/form_template.yaml, read from `C:\projects\mb5pdlf\mb5pdlf-project-library\**`
+- Deliberately small app (Daily Intentions Tracker) for testing the PDLF pipeline end-to-end
+- PDLF state: `~/.gstack/projects/mb5pdlf/pdlf-state.md`
 
-Ownership and behavior for these files are defined in each project’s `AGENTS.md` and in the workspace‑level GStack/GBrain docs. In particular:
-- Plan is allowed to write canonical tracking where rules allow.
-- Build may read but must hand off tracking updates.
+### 3.4 scratch — Scratch/Test Workspace
 
----
+| Repo | Windows Path | WSL Path |
+|---|---|---|
+| project-library | `C:\projects\scratch\scratch-project-library\` | `/mnt/c/projects/scratch/scratch-project-library/` |
+| code | `C:\projects\scratch\scratch\` | `/mnt/c/projects/scratch/scratch/` |
 
-## 6. Tools & integrations (system-level)
-
-- **MGrep / WSL / OpenCode Desktop integration**  
-  MGrep, WSL, and OpenCode Desktop are all operational and form the current base environment. MGrep is used from WSL against `/mnt/c/_mb2-cs-app/...` paths so it sees the same repositories as Windows.
-
-- **WSL OpenCode server**  
-  WSL runs the OpenCode server with:
-
-  ```bash
-  opencode serve --hostname 0.0.0.0 --port 4096
-  ```
-
-  Windows can reach that server at:
-
-  ```text
-  http://localhost:4096
-  ```
-
-- **Desktop server entry (wsl-opencode)**  
-  OpenCode Desktop includes a server entry:
-
-  - Name: `wsl-opencode`
-  - Address: `http://localhost:4096`
-
-  When connected to this server, Desktop sessions operate against WSL paths (e.g. `/mnt/c/_mb2-cs-app/project-library`) while still using the Windows UI.
-
-- **Project opening pattern (current reality)**  
-  On this machine, the Desktop “Open project” buttons are unreliable. Projects are opened reliably by sending the WSL path directly in the chat input after connecting to `wsl-opencode`, for example:
-
-  - `project-library`:
-
-    ```text
-    /mnt/c/_mb2-cs-app/project-library
-    ```
-
-  - `mb-3-cs`:
-
-    ```text
-    /mnt/c/_mb2-cs-app/mb-3-cs
-    ```
+- Bare scaffold. No opencode.json, no AGENTS.md, no agent definitions.
 
 ---
 
-## 7. GStack — repo, workspace docs, integration state
+## 4. PDLF orchestrator (`C:\pdlf\`)
 
-### 7.1 Actual GStack repo
+Windows: `C:\pdlf\` — WSL: `/mnt/c/pdlf/`
 
-- **Local GStack repo (Windows)**  
-  `C:\\_mb2-cs-app\\gstack`  
-  Actual local clone of the GStack repository.
+The PDLF orchestrator — a contiguous, stage-gated, memory-compounding development framework. Shared across all projects. Contains:
 
-- **Local GStack repo (WSL)**  
-  `/mnt/c/_mb2-cs-app/gstack`  
-  Linux‑side path used when running GStack from WSL.
+| Path | Role |
+|---|---|
+| `pdlf/skill/` | PDLF skill definitions (SKILL-v4.md) |
+| `pdlf/templates/` | Pre-project document templates |
+| `pdlf/registry/` | Project slug → path resolution (projects.json) |
+| `pdlf/docs/` | PDLF documentation |
+| `pdlf/standards-library/` | Shared standards |
 
-- **Runnable status (WSL)**  
-  Core GStack shell scripts in `bin\\` have been normalized for WSL (CRLF → LF), and commands such as:
-
-  ```bash
-  ./bin/gstack-config --help
-  ```
-
-  are confirmed runnable from within WSL. This validates that the underlying GStack CLI/tooling works in the same environment that OpenCode uses for code execution. [file:575][web:560]
-
-### 7.2 Workspace‑level GStack docs (project-library)
-
-- **Location (Windows)**  
-  `C:\\_mb2-cs-app\\project-library\\workspace\\gstack\\`
-
-- **Key populated docs:**
-  - `gstack-operating-model.md`  
-    Defines the GStack operating model for the dual‑project CS workspace. Clarifies that:
-    - OpenCode remains the runtime host and authority for permissions and protected files.
-    - GStack is a workflow/orchestration layer wrapped around OpenCode.
-    - GBrain is an advisory memory layer with provenance, not a truth source. [file:575][web:568]
-
-  - `gstack-workflows.md`  
-    Defines three main workflows:
-    - `docs-plan` — primary in `project-library` for planning, validation, documentation, and prompt/build‑rules work.
-    - `code-plan-build` — primary in `mb-3-cs` for safe implementation (Plan → Build).
-    - `status-handover` — cross‑workspace status, checkpoint, and handoff workflow.
-
-  - `gstack-handoff-contract.md`  
-    Defines Plan↔Build handoff structure and templates:
-    - Plan→Build handoff (task summary, scope, source context, target change set, risks, instructions, validation expectations, tracking expectations).
-    - Build→Plan handoff (completion status, files changed, backup/protection confirmations, validation result, implementation summary, devlog/todo handoff proposals).
-
-- **Additional GStack docs (scaffolded, awaiting content):**
-  - `gstack-command-map.md`
-  - `gstack-install-plan.md`
-  - `gstack-open-adaption.md`
-  - `gstack-overview.md`
-  - `gstack-role-map.md`
-  - `README.md`
-
-### 7.3 Integration state for GStack
-
-- GStack is **actively used** as the primary workflow/orchestration layer by the OpenCode agents via skills (slash commands), for example: `/office-hours`, `/plan-ceo-review`, `/plan-eng-review`, `/build`, `/investigate`, `/review`, `/ship`, `/setup-gbrain`, and related flows. These skills are available to the agents when sessions are attached to the WSL server. [file:575][web:212][web:560][web:568]
-
-- There is **no GStack‑specific config** yet under:
-
-  - `C:\\Users\\dev-p\\.config\\opencode\\gstack\\` (global), or  
-  - `C:\\_mb2-cs-app\\project-library\\.opencode\\gstack\\` / `C:\\_mb2-cs-app\\mb-3-cs\\.opencode\\gstack\\` (project‑local),
-
-  so GStack is currently integrated **via its skillpack and workspace docs**, not via `.opencode` command wrappers.
-
-- GStack currently functions as:
-  - a documented workflow layer via the workspace docs above, and  
-  - a local tool/skillpack under `/mnt/c/_mb2-cs-app/gstack` that the agents can call when appropriate.
-
-- **Future work:**
-  - Populate the remaining GStack docs with concrete, practiced workflows and examples.
-  - Add project‑local commands in `.opencode\\commands\\` that map directly onto:
-    - `docs-plan`,
-    - `code-plan-build`,
-    - `status-handover`,
-    while preserving OpenCode’s permission model and protected‑file behavior.
----
-
-## 8. GBrain — workspace docs and operating model
-
-### 8.1 Workspace‑level GBrain docs (project-library)
-
-- **Location (Windows)**  
-  `C:\\_mb2-cs-app\\project-library\\workspace\\gbrain\\`
-
-- **Key populated docs:**
-  - `gbrain-operating-model.md`  
-    Defines GBrain as:
-    - an advisory memory and recall layer, not an authoritative truth source,
-    - subordinate in authority to:
-      1. user decisions,
-      2. repo files and canonical tracking,
-      3. OpenCode rules,
-      4. validated current outputs,
-      5. GBrain memory,
-    - requiring provenance, freshness, and explicit conflict handling. [file:575]
-
-  - `gbrain-source-tiers.md`  
-    Defines source tiers for memory ingestion and recall:
-    - Tier A — Authoritative CS specification sources (ADRs, key AM/MM docs, baseline reference files).
-    - Tier B — Canonical shared tracking (`devlog` and `todo` files).
-    - Tier C — Validated workflow outputs (final handoffs, approved summaries).
-    - Tier D — Contextual repo summaries.
-    - Tier E — External advisory sources (vendor docs, web research, etc.).
-    - Off‑limits by default: speculative notes, scratchpads, deleted/legacy material unless explicitly approved.
-
-- **Additional GBrain docs (scaffolded, awaiting content):**
-  - `gbrain-ingestion-plan.md`
-  - `gbrain-install-plan.md`
-  - `gbrain-overview.md`
-  - `gbrain-repo-strategy.md`
-  - `gbrain-sources.md`
-  - `gbrain-sync-policy.md`
-  - `README.md`
-
-### 8.2 Integration state for GBrain
-
-- **Running GBrain instance (runtime configuration):**
-  - `gbrain` version: `v0.18.2` at `~/gbrain/`.  
-  - Engine: **Supabase (PostgreSQL)** project named `project-library` (`fnjcssmqljshckdksvam`), accessed via the Supabase connection/pooler URL configured during `/setup-gbrain`. [web:532][web:541]  
-  - Embeddings: `text-embedding-3-large` via **OpenRouter**, using `OPENAI_API_BASE` set to `https://openrouter.ai/api/v1` and an OpenRouter API key. [web:533][web:538]  
-  - Smoke test: **Passed** — write + embed + search round‑trip confirmed from the GStack `/setup-gbrain` flow. [web:239]
-
-- **Local patch for OpenRouter compatibility:**
-  - The file `~/gbrain/src/core/embedding.ts` has been modified so that the embedding client respects the `OPENAI_API_BASE` environment variable instead of hardcoding `https://api.openai.com`.  
-  - This allows GBrain to talk to OpenRouter’s `text-embedding-3-large` endpoint transparently while still using the OpenAI‑compatible client interface. [web:533][web:538]  
-  - This is a **local fork change** and will be lost on a `gbrain` upgrade unless upstreamed or re‑applied. Any future upgrade must account for this patch explicitly.
-
-- **Integration with GStack and OpenCode:**
-  - GBrain is wired into GStack via the `/setup-gbrain` skill, which configured:
-    - the Supabase engine and connection details,
-    - the embedding model and OpenRouter base URL,
-    - and performed a doctor/smoke‑test run to validate write + embed + search. [web:239][web:466]
-  - GStack-aware workflows (for example, memory‑heavy skills like `/gstack-learn`, context save/restore flows, and other long‑term memory features) can read from and write to this GBrain instance automatically, within the source‑tier and provenance rules defined in the GBrain workspace docs. [web:466][web:542]
-  - GBrain remains an **advisory** layer: recalled content must be treated as context that can inform decisions, but final authority always rests with current repo content, ADRs, and user decisions.
-
-- **Future work:**
-  - Fill in the ingestion and sync plans in:
-    - `gbrain-ingestion-plan.md`
-    - `gbrain-sync-policy.md`
-    - `gbrain-sources.md`
-    - `gbrain-repo-strategy.md`
-  - Add project‑local commands for safe GBrain ingestion/recall (under `.opencode\\commands\\`), aligned with GStack workflows and OpenCode rules, so that common memory workflows can be triggered via explicit commands in addition to GStack skills.
-
-### 8.2 Integration state for GBrain
-
-- GBrain is not yet wired into any live ingestion or recall commands.
-- GBrain docs currently define:
-  - what may be ingested (and at what tier),
-  - how memory must expose provenance and authority,
-  - how recalled memory must defer to current repo content.
-- Future work:
-  - Fill in ingestion and sync plans.
-  - Add project‑local commands for safe GBrain ingestion/recall, aligned with GStack workflows and OpenCode rules.
+PDLF uses a Postgres ledger (database `pdlf`) for project state, not flat files.
 
 ---
 
-## 9. Future placeholders
+## 5. Project registry
 
-- **Possible future GStack config root (global):**  
-  `C:\Users\dev-p\.config\opencode\gstack\`  
-  Reserved as a possible future global GStack config location. Not used at present.
+`C:\projects\_ projects-registry\project-inventory.txt`
+(WSL: `/mnt/c/projects/_ projects-registry/project-inventory.txt`)
 
-- **Possible future project-local GStack config paths:**  
-  - `C:\_mb2-cs-app\project-library\.opencode\gstack\`  
-  - `C:\_mb2-cs-app\mb-3-cs\.opencode\gstack\`  
-  Reserved for potential future per‑project GStack config. No active configs live here yet.
+TSV catalog mapping source IDs to paths and roles. Covers all 4 projects plus the PDLF framework.
 
-- **Additional workspace‑level docs:**  
-  As new orchestration or memory layers are introduced (for example, docs‑focused MCP servers or additional integration tools), new entries should be added here with:
-  - full Windows and WSL paths,
-  - clear role descriptions,
-  - current status (NOT DONE / IN REVIEW / DONE).
+---
+
+## 6. Per-project tracking (devlog & todos)
+
+Each project maintains its own tracking files inside its project-library repo:
+
+| Project | Devlog Index | Judgement Trail | Active Todo |
+|---|---|---|---|
+| mb-3-cs | `project-library/devlog-index.md` | `project-library/judgement-trail.md` | `project-library/wip/todo.md` |
+| mb4ecom | `project-library/pdlf/devlog.md` | Managed by PDLF ledger | — |
+| mb5pdlf | `project-library/pdlf/devlog.md` | Managed by PDLF ledger | — |
+| scratch | — | — | — |
+
+---
+
+## 7. Workspace reference docs (project-library /workspace)
+
+All under `C:\projects\mb-3-cs\project-library\workspace\` (WSL: `/mnt/c/projects/mb-3-cs/project-library/workspace/`):
+
+- **Workspace description** — `workspace/system-operation-reference/system config reference/workspace-description.md`
+  Multi-project workspace description and Web UI usage guide.
+
+- **Workspace docmap** — `workspace/system-operation-reference/system config reference/workspace-docmap.md`
+  This file. Path-centric register of all config, orchestration, and memory artifacts.
+
+- **OpenCode 10 config files** — `workspace/system-operation-reference/system config reference/opencode-10-config-files.md`
+  Full snapshot of all 10 OpenCode configuration files with paths and current content.
+
+- **OpenCode setup & status** — `workspace/system-operation-reference/opencode reference/opencode-setup.md`
+  Detailed setup log and policy/status tracker.
+
+### GStack docs
+`workspace/gstack/` — GStack operating model, workflows, handoff contract, plus scaffolded docs.
+
+### GBrain docs
+`workspace/gbrain/` — GBrain operating model, source tiers, plus scaffolded docs.
+
+### System operation reference
+`workspace/system-operation-reference/` — Reference docs for models, hotkeys, skills, workflows, Cloudflare, Namecheap, and other operational topics.
+
+---
+
+## 8. Environment: Web UI only
+
+- **Interface:** OpenCode Web UI (`opencode web` from WSL). No Desktop app, no Desktop bridge.
+- **Shell:** `/bin/bash` (configured in global `opencode.jsonc`)
+- **Model:** Selected from UI picker. Not hardcoded in config.
+- **WSL paths:** All paths use `/mnt/c/...` notation within WSL. Windows paths (`C:\...`) used in `opencode.json` configs.
+
+---
+
+## 9. GStack — integration state
+
+- **Repo:** `C:\_mb2-cs-app\gstack` (Windows) / `/mnt/c/_mb2-cs-app/gstack` (WSL)
+- **Status:** Operational — shell scripts normalized for WSL, `gstack-config --help` confirmed runnable
+- **Integration:** GStack skills (61 total) available via the global skills directory. Per-project command files in `.opencode/commands/` route to individual GStack skills.
+- **No GStack-specific config** at project or global `.opencode/` level — integrated via skillpack.
+
+---
+
+## 10. GBrain — integration state
+
+- **Location:** `~/gbrain` (WSL: `/home/dev-p/gbrain/`), version `v0.18.2`
+- **Engine:** Supabase (PostgreSQL), project `project-library` (`fnjcssmqljshckdksvam`)
+- **Embeddings:** `text-embedding-3-large` via OpenRouter (`OPENAI_API_BASE` set)
+- **Local patch:** `~/gbrain/src/core/embedding.ts` modified to respect `OPENAI_API_BASE` (will be lost on upgrade unless re-applied)
+- **MCP:** Enabled in global `opencode.jsonc` — `gbrain serve` via `/home/dev-p/.bun/bin/gbrain`
+- **Smoke test:** Passed — write + embed + search round-trip confirmed
+- **Role:** Advisory memory layer. Final authority rests with current repo files, ADRs, and user decisions.
+
+---
+
+## 11. Future placeholders
+
+- **Per-project agent definitions** for mb4ecom, mb5pdlf, and scratch (currently none)
+- **Per-project command files** for mb4ecom, mb5pdlf, and scratch (currently none)
+- **PDLF workflow integration** for mb-3-cs (transitioning from GStack-only to PDLF)
+- **GBrain source-tier ingestion** — scaffolded docs awaiting concrete content
