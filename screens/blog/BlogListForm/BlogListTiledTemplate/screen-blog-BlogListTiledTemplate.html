@@ -1,144 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mybizz CS — BlogListTiledTemplate</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --primary: #493ef3; --on-primary: #ffffff;
-      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
-      --secondary: #625a74; --on-secondary: #ffffff;
-      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
-      --surface: #fdfcff; --on-surface: #1c1b20;
-      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
-      --outline: #7a7583; --outline-variant: #c9c4d3;
-      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
-      --space-6: 24px; --space-8: 32px;
-      --font-family: 'Roboto', sans-serif;
-      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
-      --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
-      --divider-color: var(--outline-variant);
-      --state-hover-opacity: 0.08;
-    }
-    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); padding: var(--space-8); }
-    .tiled-demo { max-width: 900px; margin: 0 auto; }
-    .demo-label { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: var(--space-4); }
-    .tiled-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
-    @media (max-width: 768px) { .tiled-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .tiled-grid { grid-template-columns: 1fr; } }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — Blog Tiled Template</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ===== POST CARD ===== */
-    .post-card {
-      background: var(--surface); border: 1px solid var(--outline-variant);
-      border-radius: 8px; overflow: hidden;
-      box-shadow: var(--mui-shadow-card); transition: box-shadow 200ms;
-    }
-    .post-card:hover { box-shadow: var(--mui-shadow-raised); }
-    .post-card-image { width: 100%; height: 160px; background: var(--surface-variant); display: flex; align-items: center; justify-content: center; color: var(--outline); font-size: 32px; }
-    .post-card-body { padding: var(--space-4); }
-    .post-card-category { display: inline-block; background: var(--secondary-container); color: var(--on-secondary-container); border-radius: 8px; padding: 2px 10px; font-size: 12px; font-weight: 500; margin-bottom: var(--space-2); }
-    .post-card-title { font-size: 16px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-2); line-height: 22px; }
-    .post-card-title a { color: inherit; text-decoration: none; }
-    .post-card-title a:hover { color: var(--primary); }
-    .post-card-excerpt { font-size: 14px; color: var(--on-surface-variant); line-height: 20px; margin-bottom: var(--space-3); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .post-card-meta { font-size: 12px; color: var(--outline); margin-bottom: var(--space-3); }
-    .post-card-readmore { font-size: 14px; font-weight: 500; color: var(--primary); text-decoration: none; display: inline-flex; align-items: center; gap: var(--space-1); }
-    .post-card-readmore:hover { opacity: 0.8; }
-    .post-card-readmore .material-icons { font-size: 16px; }
+:root {
+  --primary: #493ef3; --on-primary: #ffffff;
+  --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+  --secondary: #625a74; --on-secondary-container: #1e182d;
+  --secondary-container: #e8defc;
+  --surface: #fdfcff; --on-surface: #1c1b20;
+  --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+  --surface-container-low: #f5f2fa;
+  --outline: #7a7583; --outline-variant: #c9c4d3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
+  --font-family: 'Roboto', sans-serif;
+  --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+  --divider-color: var(--outline-variant);
+}
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --primary: #cfbdf8; --on-primary: #381e72;
-        --primary-container: #4f378b; --on-primary-container: #eaddff;
-        --secondary: #ccc2dc; --on-secondary: #332d41;
-        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
-        --surface: #1c1b20; --on-surface: #e6e1e5;
-        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
-        --outline: #938f99; --outline-variant: #49454f;
-      }
-    }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-  </style>
+body {
+  font-family: var(--font-family); font-size: 14px; line-height: 1.4286;
+  color: var(--on-surface); background-color: var(--surface);
+  padding: var(--space-6);
+}
+
+/* Tiled grid layout */
+.tiled-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* card_post (Card) [elevated] */
+.card-post {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: var(--mui-shadow-card);
+  overflow: hidden;
+  transition: box-shadow 200ms ease;
+}
+
+.card-post:hover {
+  box-shadow: var(--mui-shadow-raised);
+}
+
+/* img_featured (Image) — 16:9 aspect ratio */
+.img-featured {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--surface-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+}
+
+.img-featured .material-icons {
+  font-size: 32px;
+  opacity: 0.3;
+}
+
+.card-post-body {
+  padding: var(--space-4);
+}
+
+/* txt_category_badge (Text) */
+.txt-category-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--on-primary-container);
+  background: var(--primary-container);
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-bottom: var(--space-2);
+}
+
+/* nav_post_title (Link) */
+.nav-post-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--on-surface);
+  text-decoration: none;
+  margin-bottom: var(--space-2);
+  line-height: 1.4;
+}
+
+.nav-post-title:hover {
+  color: var(--primary);
+}
+
+/* txt_excerpt (Text) */
+.txt-excerpt {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--space-3);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* txt_meta (Text) */
+.txt-meta {
+  font-size: 12px;
+  color: var(--outline);
+  margin-bottom: var(--space-2);
+}
+
+/* nav_read_more (Link) */
+.nav-read-more {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.nav-read-more:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .tiled-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .tiled-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1c1b20; --on-surface: #e6e1e5; --surface-variant: #49454f;
+    --on-surface-variant: #cac4d0; --outline: #938f99; --outline-variant: #49454f;
+    --surface-container-low: #2b2930;
+  }
+}
+</style>
 </head>
 <body>
 
-  <div class="tiled-demo">
-    <div class="demo-label">BlogListTiledTemplate — Tiled grid card layout</div>
+<!-- tmpl_tiled_card (RepeatingPanel row template) -->
+<!-- Shows 3 sample cards to demonstrate the tiled grid pattern -->
 
-    <div class="tiled-grid">
+<div class="tiled-grid">
 
-      <div class="post-card">
-        <div class="post-card-image"><span class="material-icons">image</span></div>
-        <div class="post-card-body">
-          <span class="post-card-category">Massage Therapy</span>
-          <h3 class="post-card-title"><a href="#">5 Benefits of Regular Deep Tissue Massage</a></h3>
-          <p class="post-card-excerpt">Discover how deep tissue massage can relieve chronic pain and improve your overall wellbeing.</p>
-          <div class="post-card-meta">Thandi Mokoena · 12 Jun 2026 · 124 views</div>
-          <a class="post-card-readmore" href="#">Read more <span class="material-icons">arrow_forward</span></a>
-        </div>
-      </div>
-
-      <div class="post-card">
-        <div class="post-card-image"><span class="material-icons">image</span></div>
-        <div class="post-card-body">
-          <span class="post-card-category">Wellness Tips</span>
-          <h3 class="post-card-title"><a href="#">Your Guide to Post-Workout Recovery</a></h3>
-          <p class="post-card-excerpt">Learn the best recovery techniques after an intense gym session.</p>
-          <div class="post-card-meta">Sipho Ndlovu · 8 Jun 2026 · 89 views</div>
-          <a class="post-card-readmore" href="#">Read more <span class="material-icons">arrow_forward</span></a>
-        </div>
-      </div>
-
-      <div class="post-card">
-        <div class="post-card-image"><span class="material-icons">image</span></div>
-        <div class="post-card-body">
-          <span class="post-card-category">Beauty &amp; Skincare</span>
-          <h3 class="post-card-title"><a href="#">Summer Skincare Routine for SA Weather</a></h3>
-          <p class="post-card-excerpt">Protect your skin from the harsh South African sun with expert tips.</p>
-          <div class="post-card-meta">Lerato Khumalo · 3 Jun 2026 · 203 views</div>
-          <a class="post-card-readmore" href="#">Read more <span class="material-icons">arrow_forward</span></a>
-        </div>
-      </div>
-
-      <div class="post-card">
-        <div class="post-card-image"><span class="material-icons">image</span></div>
-        <div class="post-card-body">
-          <span class="post-card-category">Spa News</span>
-          <h3 class="post-card-title"><a href="#">New Aromatherapy Menu Now Available</a></h3>
-          <p class="post-card-excerpt">We are excited to introduce our new aromatherapy treatment menu.</p>
-          <div class="post-card-meta">Admin · 1 Jun 2026 · 67 views</div>
-          <a class="post-card-readmore" href="#">Read more <span class="material-icons">arrow_forward</span></a>
-        </div>
-      </div>
-
-      <div class="post-card">
-        <div class="post-card-image"><span class="material-icons">image</span></div>
-        <div class="post-card-body">
-          <span class="post-card-category">Massage Therapy</span>
-          <h3 class="post-card-title"><a href="#">Hot Stone vs Swedish: Which Is Right for You?</a></h3>
-          <p class="post-card-excerpt">Compare two of our most popular massage treatments.</p>
-          <div class="post-card-meta">Thandi Mokoena · 28 May 2026 · 156 views</div>
-          <a class="post-card-readmore" href="#">Read more <span class="material-icons">arrow_forward</span></a>
-        </div>
-      </div>
-
-      <div class="post-card">
-        <div class="post-card-image"><span class="material-icons">image</span></div>
-        <div class="post-card-body">
-          <span class="post-card-category">Wellness Tips</span>
-          <h3 class="post-card-title"><a href="#">Managing Stress During Tax Season</a></h3>
-          <p class="post-card-excerpt">Practical tips for managing stress during the busy tax season.</p>
-          <div class="post-card-meta">Sipho Ndlovu · 22 May 2026 · 98 views</div>
-          <a class="post-card-readmore" href="#">Read more <span class="material-icons">arrow_forward</span></a>
-        </div>
-      </div>
-
+  <!-- Card 1 -->
+  <div class="card-post">
+    <div class="img-featured">
+      <span class="material-icons">image</span>
+    </div>
+    <div class="card-post-body">
+      <span class="txt-category-badge">Business Tips</span>
+      <a href="#" class="nav-post-title">5 Ways to Grow Your Consulting Business in 2026</a>
+      <p class="txt-excerpt">The consulting industry in South Africa continues to evolve rapidly. As businesses adapt to new market conditions, consultants who embrace digital transformation will thrive.</p>
+      <p class="txt-meta">Thandi Nkosi | 15 Jun 2026 | 1 240 views</p>
+      <a href="#" class="nav-read-more">Read more</a>
     </div>
   </div>
+
+  <!-- Card 2 -->
+  <div class="card-post">
+    <div class="img-featured">
+      <span class="material-icons">image</span>
+    </div>
+    <div class="card-post-body">
+      <span class="txt-category-badge">Wellness</span>
+      <a href="#" class="nav-post-title">Understanding POPIA for Small Businesses</a>
+      <p class="txt-excerpt">Data protection is no longer optional for South African businesses. Learn how POPIA affects your consulting practice and what steps you need to take to comply.</p>
+      <p class="txt-meta">Sipho Dlamini | 10 Jun 2026 | 890 views</p>
+      <a href="#" class="nav-read-more">Read more</a>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card-post">
+    <div class="img-featured">
+      <span class="material-icons">image</span>
+    </div>
+    <div class="card-post-body">
+      <span class="txt-category-badge">Industry News</span>
+      <a href="#" class="nav-post-title">How AI Is Transforming Client Management</a>
+      <p class="txt-excerpt">Artificial intelligence is reshaping how consultants manage client relationships, from automated scheduling to predictive analytics for business growth.</p>
+      <p class="txt-meta">Naledi Mokoena | 5 Jun 2026 | 2 100 views</p>
+      <a href="#" class="nav-read-more">Read more</a>
+    </div>
+  </div>
+
+</div>
 
 </body>
 </html>

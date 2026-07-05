@@ -3,73 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mybizz CS — LoginForm</title>
+<title>Mybizz CS — Log In</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 /* ============================================================
    MYBIZZ CS — LoginForm Screen
    Design System: Material 3 with MUI Aesthetic Overlay
-   Default Palette: Professional Blue
+   Palette: Professional Blue
    ============================================================ */
 
-/* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ===== M3 TOKEN BLOCK — Professional Blue Palette ===== */
 :root {
-  /* Primary */
   --primary: #493ef3;
   --on-primary: #ffffff;
   --primary-container: #e6dff3;
   --on-primary-container: #0f0e59;
-  /* Secondary */
   --secondary: #625a74;
   --on-secondary: #ffffff;
   --secondary-container: #e8defc;
   --on-secondary-container: #1e182d;
-  /* Tertiary */
-  --tertiary: #844f5d;
-  --on-tertiary: #ffffff;
-  --tertiary-container: #ffd9e1;
-  --on-tertiary-container: #380a1a;
-  /* Error */
-  --error: #b42336;
-  --on-error: #ffffff;
-  --error-container: #f4dddc;
-  --on-error-container: #410004;
-  /* Surface & Neutral */
-  --background: #fdfcff;
-  --on-background: #1c1b20;
   --surface: #fdfcff;
   --on-surface: #1c1b20;
   --surface-variant: #e5e0f0;
   --on-surface-variant: #494552;
-  --surface-container-lowest: #ffffff;
   --surface-container-low: #f5f2fa;
   --surface-container: #efedf5;
-  --surface-container-high: #eae7ef;
-  --surface-container-highest: #e4e1e9;
   --outline: #7a7583;
   --outline-variant: #c9c4d3;
-  --inverse-surface: #312f35;
-  --inverse-on-surface: #f2eff7;
-  --inverse-primary: #cfbdf8;
-  /* Spacing */
+  --error: #b42336;
+  --on-error: #ffffff;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
   --space-6: 24px;
   --space-8: 32px;
-  /* Typography */
   --font-family: 'Roboto', sans-serif;
-  /* MUI Aesthetic Overlay — 9 adopted variables */
   --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
-  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
   --divider-color: var(--outline-variant);
-  --state-hover-opacity: 0.08;
-  --state-pressed-opacity: 0.12;
+  --btn-filled-hover: color-mix(in srgb, var(--primary) 92%, transparent);
+  --btn-shadow-hover: hsla(220, 30%, 5%, 0.15) 0px 1px 2px 0px, hsla(220, 25%, 10%, 0.15) 0px 1px 3px 1px;
 }
 
 body {
@@ -82,30 +56,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-6);
+  padding: var(--space-4);
 }
 
-/* ===== AUTH CONTAINER — centred card, max-width 400px ===== */
+/* Auth container — 400px centred */
 .auth-container {
   width: 100%;
   max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-/* ===== CARD — outlined, MUI 8px radius ===== */
-.auth-card {
-  width: 100%;
+/* card_login (Card) — outlined */
+.card-login {
   background: var(--surface);
   border: 1px solid var(--outline-variant);
   border-radius: 8px; /* MUI: card radius 8px */
-  padding: var(--space-8) var(--space-6);
-  box-shadow: var(--mui-shadow-card); /* MUI: dual-layer shadow */
+  padding: var(--space-6);
+  box-shadow: var(--mui-shadow-card);
+  width: 100%;
 }
 
-/* ===== HEADING — MUI weight 600 ===== */
-.auth-card h1 {
+/* hdg_login_title */
+.hdg-login-title {
   font-size: 32px;
   line-height: 40px;
   font-weight: 600; /* MUI: heading weight 600 */
@@ -114,31 +85,32 @@ body {
   text-align: center;
 }
 
-.auth-card .subtitle {
+/* txt_login_subtitle */
+.txt-login-subtitle {
   font-size: 14px;
+  line-height: 20px;
   color: var(--on-surface-variant);
   text-align: center;
   margin-bottom: var(--space-6);
 }
 
-/* ===== ERROR MESSAGE — hidden on load ===== */
-.error-message {
-  display: none;
-  background: var(--error-container);
-  color: var(--on-error-container);
+/* txt_login_error — hidden on load */
+.txt-login-error {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--error);
+  background: var(--error-container, #f4dddc);
   padding: var(--space-3) var(--space-4);
   border-radius: 4px;
-  font-size: 14px;
   margin-bottom: var(--space-4);
-  align-items: center;
-  gap: var(--space-2);
+  display: none; /* hidden on load */
 }
-.error-message .material-icons { font-size: 20px; }
 
-/* ===== FORM GROUPS ===== */
+/* Form groups */
 .form-group {
   margin-bottom: var(--space-4);
 }
+
 .form-label {
   display: block;
   font-size: 12px;
@@ -146,200 +118,185 @@ body {
   color: var(--on-surface);
   margin-bottom: var(--space-2);
 }
+
 .form-input {
   width: 100%;
-  padding: var(--space-3) var(--space-4);
   min-height: 48px;
+  padding: var(--space-2) var(--space-4);
   font-size: 16px;
-  line-height: 1.5;
   font-family: var(--font-family);
   border: 1px solid var(--outline);
-  border-radius: 4px; /* M3: input radius 4px */
+  border-radius: 4px;
   background: transparent;
   color: var(--on-surface);
-  transition: border-color 150ms;
 }
+
 .form-input:focus {
   border-color: var(--primary);
   border-width: 2px;
-  padding: 11px 15px;
+  padding: 7px 15px;
   outline: none;
 }
+
 .form-input::placeholder {
   color: var(--on-surface-variant);
   opacity: 0.7;
 }
 
-/* ===== CHECKBOX ===== */
+/* Checkbox */
 .checkbox-group {
   display: flex;
   align-items: center;
   gap: var(--space-2);
   margin-bottom: var(--space-4);
 }
+
 .checkbox-group input[type="checkbox"] {
   width: 18px;
   height: 18px;
   accent-color: var(--primary);
-  cursor: pointer;
 }
+
 .checkbox-group label {
   font-size: 14px;
-  color: var(--on-surface-variant);
+  color: var(--on-surface);
   cursor: pointer;
 }
 
-/* ===== BUTTONS ===== */
+/* Buttons */
 .btn {
   font-family: var(--font-family);
   font-size: 14px;
   font-weight: 500;
   padding: 10px 24px;
   min-height: 40px;
-  border-radius: 100px; /* M3: pill radius — preserved */
+  border-radius: 100px;
   border: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  text-decoration: none;
   transition: background 150ms, box-shadow 150ms;
   width: 100%;
 }
+
 .btn-filled {
   background: var(--primary);
   color: var(--on-primary);
 }
+
 .btn-filled:hover {
-  background: rgba(73,62,243,0.92);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+  background: var(--btn-filled-hover);
+  box-shadow: var(--btn-shadow-hover);
 }
 
-/* ===== LINKS ===== */
+/* Links */
 .link {
+  font-size: 14px;
   color: var(--primary);
   text-decoration: none;
-  font-size: 14px;
   font-weight: 500;
   transition: opacity 150ms;
 }
+
 .link:hover {
   opacity: 0.8;
+  text-decoration: underline;
 }
 
-.forgot-password-row {
+/* Forgot password — centred below button */
+.forgot-password {
   text-align: center;
-  margin-bottom: var(--space-6);
+  margin-top: var(--space-3);
 }
 
-/* ===== SIGNUP PROMPT ===== */
+/* Sign up prompt — below card */
 .signup-prompt {
   text-align: center;
   margin-top: var(--space-4);
   font-size: 14px;
   color: var(--on-surface-variant);
 }
+
 .signup-prompt .link {
   margin-left: var(--space-1);
 }
 
-/* ===== DARK MODE ===== */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1c1b20;
-    --on-background: #e6e1e5;
     --surface: #1c1b20;
     --on-surface: #e6e1e5;
     --surface-variant: #49454f;
     --on-surface-variant: #cac4d0;
     --outline: #938f99;
     --outline-variant: #49454f;
-    --surface-container-lowest: #0f0d13;
-    --surface-container-low: #1d1b20;
-    --surface-container: #211f26;
-    --surface-container-high: #2b2930;
-    --surface-container-highest: #36343b;
-    --primary: #cfbdf8;
-    --on-primary: #381e72;
-    --primary-container: #4f378b;
-    --on-primary-container: #eaddff;
-    --secondary: #ccc2dc;
-    --on-secondary: #332d41;
-    --secondary-container: #4a4458;
-    --on-secondary-container: #e8def8;
-    --error: #f2b8b5;
-    --on-error: #601410;
-    --error-container: #8c1d18;
-    --on-error-container: #f9dedc;
-    --inverse-surface: #e6e1e5;
-    --inverse-on-surface: #313033;
-    --inverse-primary: #6750a4;
+    --surface-container-low: #2b2930;
   }
-}
-
-/* ===== REDUCED MOTION ===== */
-@media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     LOGIN FORM — Auth screen, centred card layout
-     Per wireframe: wireframe-auth-LoginForm.html
-     ============================================================ -->
-<main class="auth-container" role="main">
-  <div class="auth-card">
+<!-- Auth container — 400px centred -->
+<div class="auth-container">
 
-    <!-- hdg_login_title (Heading) "Log in to your account" -->
-    <h1>Log in to your account</h1>
+  <!-- card_login (Card) — outlined -->
+  <div class="card-login">
 
-    <!-- txt_login_subtitle (Text) "Enter your email and password to continue" -->
-    <p class="subtitle">Enter your email and password to continue</p>
+    <!-- hdg_login_title (Heading) -->
+    <h1 class="hdg-login-title">Log in to your account</h1>
 
-    <!-- txt_login_error (Text) — hidden on load, shown on validation failure -->
-    <div class="error-message" id="login-error" role="alert">
-      <span class="material-icons">error</span>
-      <span>Invalid email or password. Please try again.</span>
+    <!-- txt_login_subtitle (Text) -->
+    <p class="txt-login-subtitle">Enter your email and password to continue</p>
+
+    <!-- txt_login_error (Text) — hidden on load -->
+    <div class="txt-login-error">
+      Invalid email or password. Please try again.
     </div>
 
-    <!-- txt_email (TextBox) (W) appearance="outlined" placeholder="Email address" -->
+    <!-- txt_email (TextBox) — (W) appearance="outlined" -->
     <div class="form-group">
       <label class="form-label" for="txt_email">Email address</label>
-      <input class="form-input" type="email" id="txt_email" placeholder="Email address" autocomplete="email">
+      <input type="email" id="txt_email" class="form-input" placeholder="Email address">
     </div>
 
-    <!-- txt_password (TextBox) (W) appearance="outlined" placeholder="Password" hide_text -->
+    <!-- txt_password (TextBox) — (W) appearance="outlined" hide_text -->
     <div class="form-group">
       <label class="form-label" for="txt_password">Password</label>
-      <input class="form-input" type="password" id="txt_password" placeholder="Password" autocomplete="current-password">
+      <input type="password" id="txt_password" class="form-input" placeholder="Password">
     </div>
 
-    <!-- cb_remember_me (CheckBox) "Remember me" -->
+    <!-- cb_remember_me (CheckBox) -->
     <div class="checkbox-group">
       <input type="checkbox" id="cb_remember_me">
       <label for="cb_remember_me">Remember me</label>
     </div>
 
-    <!-- btn_login (Button) "Log In" appearance="filled" -->
-    <button class="btn btn-filled" type="button">Log In</button>
+    <!-- btn_login (Button) — appearance="filled" -->
+    <button class="btn btn-filled">Log In</button>
 
-    <!-- nav_forgot_password (Link) "Forgot password?" -->
-    <div class="forgot-password-row">
-      <a class="link" href="#">Forgot password?</a>
+    <!-- nav_forgot_password (Link) -->
+    <div class="forgot-password">
+      <a href="#" class="link">Forgot password?</a>
     </div>
 
   </div>
 
   <!-- txt_signup_prompt (Text) + nav_sign_up (Link) -->
   <div class="signup-prompt">
-    <span>Don't have an account?</span>
-    <a class="link" href="#">Sign up</a>
+    Don't have an account?
+    <a href="#" class="link">Sign up</a>
   </div>
 
-</main>
+</div>
 
 </body>
 </html>

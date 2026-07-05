@@ -84,7 +84,7 @@ The intended character is:
 
 - Bright gradients, flashy hero treatments, or decorative visual noise.
 - Childish or overly playful interface language.
-- Dark mode as the primary design target. (Dark mode is deferred to V2, not rejected. It will be addressed in a future design phase.)
+- Dark mode as the primary design target. (Dark mode is included in V1 per ADR-46.)
 - Heavy animation, glassmorphism, or neumorphism.
 - Complex charts or visual systems in V1 beyond what is operationally useful.
 - Template-specific CSS divergence that breaks the shared design system.
@@ -251,10 +251,10 @@ DESIGN_palette_section.md	Full M3 CSS token sets for all 4 palettes. Replaces th
 palette_selector_tokens.md	Python dict blocks for the palette selector component. Contains the same 32 tokens per palette in Python dict format plus the apply_palette usage pattern.	Authoritative
 Source Colors (Locked)
 Palette	Source Hex	Algorithm
-Professional Blue	#2b2ee0	M3 HCT TonalSpot
-Warm Coral	#fa7268	M3 HCT TonalSpot
+Professional Blue	#2563EB	M3 HCT TonalSpot
+Warm Coral	#FF6F61	M3 HCT TonalSpot
 Calm Teal	#008080	M3 HCT TonalSpot
-Sophisticated Purple	#a30dd1	M3 HCT TonalSpot
+Sophisticated Purple	#6B46C1	M3 HCT TonalSpot
 If a source color changes, both reference documents must be regenerated together and this table updated.
 
 ---
@@ -1178,9 +1178,9 @@ The `bookings.status` field supports three values: `pending`, `confirmed`, `canc
 
 | Status | Background | Text |
 |--------|-----------|------|
-| Confirmed | `#d4edda` | `#155724` |
-| Pending | `#fff3cd` | `#856404` |
-| Cancelled | `#f8d7da` | `#721c24` |
+| Confirmed | `#e6f7ee` | `#00b958` |
+| Pending | `#fff0eb` | `#ff9469` |
+| Cancelled | `#ffe6e6` | `#ff000c` |
 
 **Status-based permitted actions in BookingViewerForm:**
 
@@ -1443,7 +1443,7 @@ implementation artifacts for the MUI aesthetic and palette system.
 
 | Palette | Source Hex | Algorithm |
 |---|---|---|
-| Professional Blue | `#2b2ee0` | M3 HCT TonalSpot |
-| Warm Coral | `#fa7268` | M3 HCT TonalSpot |
+| Professional Blue | `#2563EB` | M3 HCT TonalSpot |
+| Warm Coral | `#FF6F61` | M3 HCT TonalSpot |
 | Calm Teal | `#008080` | M3 HCT TonalSpot |
-| Sophisticated Purple | `#a30dd1` | M3 HCT TonalSpot |
+| Sophisticated Purple | `#6B46C1` | M3 HCT TonalSpot |

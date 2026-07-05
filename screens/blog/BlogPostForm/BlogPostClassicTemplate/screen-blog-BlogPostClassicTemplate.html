@@ -1,115 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mybizz CS — BlogPostClassicTemplate</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --primary: #493ef3; --on-primary: #ffffff;
-      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
-      --secondary: #625a74; --on-secondary: #ffffff;
-      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
-      --surface: #fdfcff; --on-surface: #1c1b20;
-      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
-      --surface-container-low: #f5f2fa;
-      --outline: #7a7583; --outline-variant: #c9c4d3;
-      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
-      --space-6: 24px; --space-8: 32px;
-      --font-family: 'Roboto', sans-serif;
-      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
-      --divider-color: var(--outline-variant);
-    }
-    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — Blog Post (Classic)</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ===== CLASSIC CENTERED LAYOUT ===== */
-    .classic-layout { max-width: 720px; margin: 0 auto; padding: var(--space-8) var(--space-6); }
+:root {
+  --primary: #493ef3; --on-primary: #ffffff;
+  --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+  --secondary: #625a74; --on-secondary-container: #1e182d;
+  --secondary-container: #e8defc;
+  --surface: #fdfcff; --on-surface: #1c1b20;
+  --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+  --surface-container-low: #f5f2fa;
+  --outline: #7a7583; --outline-variant: #c9c4d3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+  --divider-color: var(--outline-variant);
+  --btn-outlined-hover: color-mix(in srgb, var(--primary) 8%, transparent);
+}
 
-    /* ===== POST HEADER ===== */
-    .post-category { display: inline-block; background: var(--secondary-container); color: var(--on-secondary-container); border-radius: 8px; padding: 4px 12px; font-size: 12px; font-weight: 500; margin-bottom: var(--space-3); }
-    .post-title { font-size: 32px; line-height: 40px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-2); }
-    .post-meta { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-6); display: flex; gap: var(--space-3); align-items: center; }
-    .post-meta .material-icons { font-size: 16px; }
+body {
+  font-family: var(--font-family); font-size: 14px; line-height: 1.4286;
+  color: var(--on-surface); background-color: var(--surface);
+}
 
-    /* ===== FEATURED IMAGE ===== */
-    .featured-image { width: 100%; max-width: 800px; height: 400px; background: var(--surface-variant); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--outline); font-size: 48px; margin: 0 auto var(--space-6); }
+.col-classic-content { max-width: 900px; margin: 0 auto; padding: var(--space-6); }
 
-    /* ===== POST CONTENT ===== */
-    .post-content { font-size: 16px; line-height: 28px; color: var(--on-surface); margin-bottom: var(--space-6); }
-    .post-content p { margin-bottom: var(--space-4); }
-    .post-content strong { font-weight: 500; }
+.card-post-header {
+  background: var(--surface); border-radius: 8px; padding: var(--space-6);
+  box-shadow: var(--mui-shadow-card); margin-bottom: var(--space-6);
+  text-align: center; transition: box-shadow 200ms ease;
+}
+.card-post-header:hover { box-shadow: var(--mui-shadow-raised); }
 
-    /* ===== VIDEO EMBED ===== */
-    .video-embed { width: 100%; height: 0; padding-bottom: 56.25%; background: var(--surface-variant); border-radius: 8px; margin-bottom: var(--space-6); position: relative; display: none; }
-    .video-embed .material-icons { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; color: var(--outline); }
+.txt-category-badge {
+  display: inline-block; font-size: 12px; font-weight: 500;
+  color: var(--on-primary-container); background: var(--primary-container);
+  padding: 2px 10px; border-radius: 8px; margin-bottom: var(--space-3);
+}
 
-    /* ===== SOCIAL SHARING ===== */
-    .social-sharing { display: flex; gap: var(--space-2); margin-bottom: var(--space-6); padding: var(--space-4) 0; border-top: 1px solid var(--divider-color); border-bottom: 1px solid var(--divider-color); justify-content: center; }
+.hdg-post-title {
+  font-size: 32px; line-height: 40px; font-weight: 600;
+  color: var(--on-surface); margin-bottom: var(--space-2);
+}
 
-    /* ===== BUTTONS ===== */
-    .btn { font-family: var(--font-family); font-size: 14px; font-weight: 500; padding: 10px 24px; min-height: 40px; border-radius: 100px; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); transition: background 150ms; }
-    .btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
-    .btn-outlined:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+.txt-meta { font-size: 14px; color: var(--on-surface-variant); }
 
-    /* ===== DARK MODE ===== */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --primary: #cfbdf8; --on-primary: #381e72;
-        --primary-container: #4f378b; --on-primary-container: #eaddff;
-        --secondary: #ccc2dc; --on-secondary: #332d41;
-        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
-        --surface: #1c1b20; --on-surface: #e6e1e5;
-        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
-        --surface-container-low: #1d1b20;
-        --outline: #938f99; --outline-variant: #49454f;
-      }
-    }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-  </style>
+.img-featured {
+  width: 100%; max-width: 800px; height: 320px; margin: 0 auto var(--space-6);
+  background: var(--surface-variant); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--on-surface-variant);
+}
+.img-featured .material-icons { font-size: 48px; opacity: 0.3; margin-right: var(--space-2); }
+
+.card-content {
+  max-width: 720px; margin: 0 auto var(--space-6);
+  background: var(--surface); border: 1px solid var(--outline-variant);
+  border-radius: 8px; padding: var(--space-6);
+  box-shadow: var(--mui-shadow-card); line-height: 1.8; font-size: 15px;
+}
+
+.flow-sharing {
+  display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap;
+  padding: var(--space-4) 0;
+  border-top: 1px solid var(--divider-color); border-bottom: 1px solid var(--divider-color);
+  opacity: 0.4;
+}
+
+.btn {
+  font-family: var(--font-family); font-size: 14px; font-weight: 500;
+  padding: 8px 20px; min-height: 36px; border-radius: 100px; border: none;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--space-2); transition: background 150ms;
+}
+.btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
+.btn-outlined:hover { background: var(--btn-outlined-hover); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1c1b20; --on-surface: #e6e1e5; --surface-variant: #49454f;
+    --on-surface-variant: #cac4d0; --outline: #938f99; --outline-variant: #49454f;
+    --surface-container-low: #2b2930;
+  }
+}
+</style>
 </head>
 <body>
 
-  <main class="classic-layout">
+<div class="col-classic-content">
+  <div class="card-post-header">
+    <span class="txt-category-badge">Business Tips</span>
+    <h1 class="hdg-post-title">5 Ways to Grow Your Consulting Business in 2026</h1>
+    <p class="txt-meta">By Thandi Nkosi | 15 June 2026 | 1 240 views</p>
+  </div>
 
-    <!-- POST HEADER -->
-    <span class="post-category">Massage Therapy</span>
-    <h1 class="post-title">5 Benefits of Regular Deep Tissue Massage</h1>
-    <div class="post-meta">
-      <span class="material-icons">person</span> Thandi Mokoena
-      <span class="material-icons">schedule</span> 12 June 2026
-      <span class="material-icons">visibility</span> 124 views
-    </div>
+  <div class="img-featured"><span class="material-icons">image</span> img_featured (Image)</div>
 
-    <!-- FEATURED IMAGE — full-width, max 800px -->
-    <div class="featured-image"><span class="material-icons">image</span></div>
+  <div class="card-content">
+    <p>The consulting industry in South Africa continues to evolve rapidly. As businesses adapt to new market conditions, consultants who embrace digital transformation and client-centric approaches will thrive.</p>
+    <p style="margin-top:16px;">In this post, we explore five proven strategies that successful consultants are using to grow their practices, from leveraging technology to building stronger client relationships.</p>
+    <p style="margin-top:16px;">Whether you're just starting out or looking to scale your existing practice, these insights will help you navigate the competitive landscape and deliver exceptional value to your clients.</p>
+  </div>
 
-    <!-- POST CONTENT — single column, max 720px, centred -->
-    <div class="post-content">
-      <p>Deep tissue massage is one of the most effective therapeutic treatments available at Serenity Spa in Sandton. Unlike a relaxation massage, deep tissue therapy targets the deeper layers of muscle and fascia, using slow, deliberate strokes and firm pressure.</p>
-      <p>At our spa, we've seen hundreds of clients experience significant relief from chronic pain conditions, particularly in the neck, shoulders, and lower back. Here are five key benefits our clients report:</p>
-      <p><strong>1. Chronic Pain Relief</strong> — Deep tissue massage breaks down adhesions (knots) that cause pain and restrict movement. Our therapists use sustained pressure to reach the deeper muscle layers where tension accumulates.</p>
-      <p><strong>2. Stress Reduction</strong> — The firm pressure triggers the release of oxytocin and serotonin, naturally reducing cortisol levels. Many clients report feeling deeply relaxed for days after a session.</p>
-      <p><strong>3. Improved Posture</strong> — By releasing tension in deep muscle layers, your body naturally realigns. This is particularly beneficial for desk workers in Sandton's business district.</p>
-      <p><strong>4. Better Sleep</strong> — Clients consistently report improved sleep quality after sessions. The deep relaxation response helps reset your nervous system.</p>
-      <p><strong>5. Enhanced Athletic Recovery</strong> — Our sports-focused therapists help athletes recover faster from training by breaking down scar tissue and improving blood flow to tired muscles.</p>
-    </div>
+  <!-- card_video — hidden on load -->
 
-    <!-- VIDEO EMBED (hidden when no video URL) -->
-    <div class="video-embed">
-      <span class="material-icons">play_circle</span>
-    </div>
-
-    <!-- SOCIAL SHARING -->
-    <div class="social-sharing">
-      <button class="btn btn-outlined"><span class="material-icons">share</span> Share</button>
-      <button class="btn btn-outlined"><span class="material-icons">share</span> Tweet</button>
-      <button class="btn btn-outlined"><span class="material-icons">share</span> Share</button>
-    </div>
-
-  </main>
+  <div class="flow-sharing">
+    <button class="btn btn-outlined">Share</button>
+    <button class="btn btn-outlined">Tweet</button>
+    <button class="btn btn-outlined">Share</button>
+  </div>
+</div>
 
 </body>
 </html>

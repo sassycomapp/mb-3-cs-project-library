@@ -1,204 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mybizz CS — BlogPostTwoColumnTemplate</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --primary: #493ef3; --on-primary: #ffffff;
-      --primary-container: #e6dff3; --on-primary-container: #0f0e59;
-      --secondary: #625a74; --on-secondary: #ffffff;
-      --secondary-container: #e8defc; --on-secondary-container: #1e182d;
-      --surface: #fdfcff; --on-surface: #1c1b20;
-      --surface-variant: #e5e0f0; --on-surface-variant: #494552;
-      --surface-container-low: #f5f2fa;
-      --outline: #7a7583; --outline-variant: #c9c4d3;
-      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
-      --space-6: 24px; --space-8: 32px;
-      --font-family: 'Roboto', sans-serif;
-      --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
-      --divider-color: var(--outline-variant);
-      --state-hover-opacity: 0.08;
-    }
-    body { font-family: var(--font-family); font-size: 14px; line-height: 1.4286; color: var(--on-surface); background-color: var(--surface); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mybizz CS — Blog Post (Two Column)</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ===== TWO-COLUMN LAYOUT ===== */
-    .twocol-layout { max-width: 1100px; margin: 0 auto; padding: var(--space-8) var(--space-6); }
-    .twocol-header { display: flex; gap: var(--space-6); margin-bottom: var(--space-6); align-items: flex-start; }
-    .twocol-header-image { width: 300px; height: 200px; background: var(--surface-variant); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--outline); font-size: 36px; flex-shrink: 0; }
-    .twocol-header-content { flex: 1; }
-    .twocol-body { display: flex; gap: var(--space-6); }
-    .twocol-main { flex: 3; min-width: 0; }
-    .twocol-sidebar { flex: 2; min-width: 280px; }
+:root {
+  --primary: #493ef3; --on-primary: #ffffff;
+  --primary-container: #e6dff3; --on-primary-container: #0f0e59;
+  --secondary: #625a74; --on-secondary-container: #1e182d;
+  --secondary-container: #e8defc;
+  --surface: #fdfcff; --on-surface: #1c1b20;
+  --surface-variant: #e5e0f0; --on-surface-variant: #494552;
+  --surface-container-low: #f5f2fa;
+  --outline: #7a7583; --outline-variant: #c9c4d3;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --font-family: 'Roboto', sans-serif;
+  --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
+  --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
+  --divider-color: var(--outline-variant);
+  --btn-filled-hover: color-mix(in srgb, var(--primary) 92%, transparent);
+  --btn-outlined-hover: color-mix(in srgb, var(--primary) 8%, transparent);
+}
 
-    /* ===== POST HEADER ===== */
-    .post-category { display: inline-block; background: var(--secondary-container); color: var(--on-secondary-container); border-radius: 8px; padding: 4px 12px; font-size: 12px; font-weight: 500; margin-bottom: var(--space-2); }
-    .post-title { font-size: 28px; line-height: 36px; font-weight: 600; color: var(--on-surface); margin-bottom: var(--space-2); }
-    .post-meta { font-size: 14px; color: var(--on-surface-variant); display: flex; gap: var(--space-3); align-items: center; }
-    .post-meta .material-icons { font-size: 16px; }
+body {
+  font-family: var(--font-family); font-size: 14px; line-height: 1.4286;
+  color: var(--on-surface); background-color: var(--surface);
+}
 
-    /* ===== POST CONTENT ===== */
-    .post-content { font-size: 16px; line-height: 28px; color: var(--on-surface); margin-bottom: var(--space-6); }
-    .post-content p { margin-bottom: var(--space-4); }
-    .post-content strong { font-weight: 500; }
+.col-twocol-content { max-width: 900px; margin: 0 auto; padding: var(--space-6); }
 
-    /* ===== VIDEO EMBED ===== */
-    .video-embed { width: 100%; height: 0; padding-bottom: 56.25%; background: var(--surface-variant); border-radius: 8px; margin-bottom: var(--space-6); position: relative; display: none; }
-    .video-embed .material-icons { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; color: var(--outline); }
+.post-header-row {
+  display: flex; gap: var(--space-6); align-items: flex-start;
+  margin-bottom: var(--space-6);
+}
 
-    /* ===== SOCIAL SHARING ===== */
-    .social-sharing { display: flex; gap: var(--space-2); margin-bottom: var(--space-6); padding: var(--space-4) 0; border-top: 1px solid var(--divider-color); border-bottom: 1px solid var(--divider-color); }
+.img-featured {
+  flex: 0 0 300px; height: 200px;
+  background: var(--surface-variant); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--on-surface-variant);
+}
+.img-featured .material-icons { font-size: 32px; opacity: 0.3; }
 
-    /* ===== BUTTONS ===== */
-    .btn { font-family: var(--font-family); font-size: 14px; font-weight: 500; padding: 10px 24px; min-height: 40px; border-radius: 100px; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); transition: background 150ms; }
-    .btn-filled { background: var(--primary); color: var(--on-primary); }
-    .btn-filled:hover { background: rgba(73,62,243,0.92); box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15); }
-    .btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
-    .btn-outlined:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
+.post-header-text { flex: 1; }
 
-    /* ===== SIDEBAR CARDS ===== */
-    .sidebar-card { background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 8px; padding: var(--space-4); margin-bottom: var(--space-4); box-shadow: var(--mui-shadow-card); }
-    .sidebar-title { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-3); text-transform: uppercase; letter-spacing: 0.5px; }
-    .author-avatar { width: 48px; height: 48px; background: var(--primary-container); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 500; color: var(--primary); margin-bottom: var(--space-3); }
-    .author-name { font-size: 16px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-1); }
-    .author-bio { font-size: 14px; color: var(--on-surface-variant); line-height: 20px; }
-    .related-post { padding: var(--space-3) 0; border-bottom: 1px solid var(--divider-color); }
-    .related-post:last-child { border-bottom: none; }
-    .related-post-title { font-size: 14px; font-weight: 500; color: var(--on-surface); }
-    .related-post-title a { color: inherit; text-decoration: none; }
-    .related-post-title a:hover { color: var(--primary); }
-    .related-post-meta { font-size: 12px; color: var(--outline); margin-top: var(--space-1); }
-    .category-list { list-style: none; }
-    .category-list li { padding: var(--space-2) 0; font-size: 14px; color: var(--on-surface-variant); border-bottom: 1px solid var(--divider-color); }
-    .category-list li:last-child { border-bottom: none; }
-    .newsletter-desc { font-size: 14px; color: var(--on-surface-variant); margin-bottom: var(--space-3); }
+.txt-category-badge {
+  display: inline-block; font-size: 12px; font-weight: 500;
+  color: var(--on-primary-container); background: var(--primary-container);
+  padding: 2px 10px; border-radius: 8px; margin-bottom: var(--space-2);
+}
 
-    /* ===== DARK MODE ===== */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --primary: #cfbdf8; --on-primary: #381e72;
-        --primary-container: #4f378b; --on-primary-container: #eaddff;
-        --secondary: #ccc2dc; --on-secondary: #332d41;
-        --secondary-container: #4a4458; --on-secondary-container: #e8def8;
-        --surface: #1c1b20; --on-surface: #e6e1e5;
-        --surface-variant: #49454f; --on-surface-variant: #cac4d0;
-        --surface-container-low: #1d1b20;
-        --outline: #938f99; --outline-variant: #49454f;
-      }
-    }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-    @media (max-width: 768px) {
-      .twocol-header { flex-direction: column; }
-      .twocol-header-image { width: 100%; height: 200px; }
-      .twocol-body { flex-direction: column; }
-    }
-  </style>
+.hdg-post-title {
+  font-size: 28px; line-height: 36px; font-weight: 600;
+  color: var(--on-surface); margin-bottom: var(--space-2);
+}
+
+.txt-meta { font-size: 14px; color: var(--on-surface-variant); }
+
+.two-col-layout {
+  display: grid; grid-template-columns: 3fr 2fr; gap: var(--space-6);
+  align-items: start;
+}
+
+.card-content {
+  background: var(--surface); border: 1px solid var(--outline-variant);
+  border-radius: 8px; padding: var(--space-6);
+  box-shadow: var(--mui-shadow-card); line-height: 1.8; font-size: 15px;
+}
+
+.flow-sharing {
+  display: flex; gap: var(--space-2); flex-wrap: wrap;
+  padding: var(--space-4) 0; margin-top: var(--space-4);
+  border-top: 1px solid var(--divider-color); opacity: 0.4;
+}
+
+.card-sidebar {
+  background: var(--surface); border: 1px solid var(--outline-variant);
+  border-radius: 8px; padding: var(--space-4);
+  box-shadow: var(--mui-shadow-card);
+}
+
+.section-title {
+  font-size: 14px; font-weight: 500; color: var(--on-surface);
+  margin-bottom: var(--space-3); padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--divider-color); opacity: 0.4;
+}
+.section-title:not(:first-child) { margin-top: var(--space-4); }
+
+.author-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--primary-container); display: flex;
+  align-items: center; justify-content: center;
+  color: var(--primary); font-weight: 500; margin-bottom: var(--space-2);
+}
+
+.author-name { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-1); }
+.author-bio { font-size: 13px; color: var(--on-surface-variant); line-height: 1.6; margin-bottom: var(--space-3); }
+
+.rp-placeholder {
+  border: 1px dashed var(--outline-variant); border-radius: 4px;
+  padding: var(--space-3); text-align: center;
+  color: var(--on-surface-variant); font-size: 12px; margin-bottom: var(--space-2);
+}
+
+.newsletter-heading { font-size: 14px; font-weight: 500; color: var(--on-surface); margin-bottom: var(--space-3); }
+
+.form-group { margin-bottom: var(--space-3); }
+.form-input {
+  width: 100%; min-height: 40px; padding: var(--space-2) var(--space-3);
+  font-size: 14px; font-family: var(--font-family);
+  border: 1px solid var(--outline); border-radius: 4px;
+  background: transparent; color: var(--on-surface);
+}
+.form-input:focus { border-color: var(--primary); border-width: 2px; outline: none; }
+
+.btn {
+  font-family: var(--font-family); font-size: 14px; font-weight: 500;
+  padding: 8px 20px; min-height: 36px; border-radius: 100px; border: none;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  transition: background 150ms;
+}
+.btn-filled { background: var(--primary); color: var(--on-primary); }
+.btn-filled:hover { background: var(--btn-filled-hover); }
+.btn-outlined { background: transparent; color: var(--primary); border: 1px solid var(--outline); }
+.btn-outlined:hover { background: var(--btn-outlined-hover); }
+
+@media (max-width: 768px) {
+  .post-header-row { flex-direction: column; }
+  .img-featured { flex: none; width: 100%; }
+  .two-col-layout { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; } }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1c1b20; --on-surface: #e6e1e5; --surface-variant: #49454f;
+    --on-surface-variant: #cac4d0; --outline: #938f99; --outline-variant: #49454f;
+    --surface-container-low: #2b2930;
+  }
+}
+</style>
 </head>
 <body>
 
-  <main class="twocol-layout">
+<div class="col-twocol-content">
+  <div class="post-header-row">
+    <div class="img-featured"><span class="material-icons">image</span></div>
+    <div class="post-header-text">
+      <span class="txt-category-badge">Business Tips</span>
+      <h1 class="hdg-post-title">5 Ways to Grow Your Consulting Business in 2026</h1>
+      <p class="txt-meta">By Thandi Nkosi | 15 June 2026 | 1 240 views</p>
+    </div>
+  </div>
 
-    <!-- POST HEADER — featured image left, title/meta right -->
-    <div class="twocol-header">
-      <div class="twocol-header-image"><span class="material-icons">image</span></div>
-      <div class="twocol-header-content">
-        <span class="post-category">Massage Therapy</span>
-        <h1 class="post-title">5 Benefits of Regular Deep Tissue Massage</h1>
-        <div class="post-meta">
-          <span class="material-icons">person</span> Thandi Mokoena
-          <span class="material-icons">schedule</span> 12 June 2026
-          <span class="material-icons">visibility</span> 124 views
-        </div>
+  <div class="two-col-layout">
+    <div>
+      <div class="card-content">
+        <p>The consulting industry in South Africa continues to evolve rapidly. As businesses adapt to new market conditions, consultants who embrace digital transformation and client-centric approaches will thrive.</p>
+        <p style="margin-top:16px;">In this post, we explore five proven strategies that successful consultants are using to grow their practices.</p>
+      </div>
+      <!-- card_video — hidden on load -->
+      <div class="flow-sharing">
+        <button class="btn btn-outlined">Share</button>
+        <button class="btn btn-outlined">Tweet</button>
+        <button class="btn btn-outlined">Share</button>
       </div>
     </div>
 
-    <!-- TWO-COLUMN BODY -->
-    <div class="twocol-body">
+    <div class="card-sidebar">
+      <div class="section-title">Author</div>
+      <div class="author-avatar">TN</div>
+      <div class="author-name">Thandi Nkosi</div>
+      <p class="author-bio">Business consultant and coach helping South African entrepreneurs scale their practices through digital transformation.</p>
 
-      <!-- MAIN CONTENT COLUMN (60%) -->
-      <div class="twocol-main">
+      <div class="section-title">Related Posts</div>
+      <div class="rp-placeholder">rp_related_posts — row content in BlogPostRelatedPostsTemplate</div>
 
-        <div class="post-content">
-          <p>Deep tissue massage is one of the most effective therapeutic treatments available at Serenity Spa in Sandton. Unlike a relaxation massage, deep tissue therapy targets the deeper layers of muscle and fascia, using slow, deliberate strokes and firm pressure.</p>
-          <p>At our spa, we've seen hundreds of clients experience significant relief from chronic pain conditions, particularly in the neck, shoulders, and lower back. Here are five key benefits:</p>
-          <p><strong>1. Chronic Pain Relief</strong> — Deep tissue massage breaks down adhesions (knots) that cause pain and restrict movement.</p>
-          <p><strong>2. Stress Reduction</strong> — The firm pressure triggers the release of oxytocin and serotonin, naturally reducing cortisol levels.</p>
-          <p><strong>3. Improved Posture</strong> — By releasing tension in deep muscle layers, your body naturally realigns.</p>
-          <p><strong>4. Better Sleep</strong> — Clients consistently report improved sleep quality after sessions.</p>
-          <p><strong>5. Enhanced Athletic Recovery</strong> — Our sports-focused therapists help athletes recover faster from training.</p>
-        </div>
+      <div class="section-title">Categories</div>
+      <div class="rp-placeholder">rp_categories — row content in BlogPostCategoriesTemplate</div>
 
-        <!-- VIDEO EMBED (hidden when no video URL) -->
-        <div class="video-embed">
-          <span class="material-icons">play_circle</span>
-        </div>
-
-        <!-- SOCIAL SHARING -->
-        <div class="social-sharing">
-          <button class="btn btn-outlined"><span class="material-icons">share</span> Share</button>
-          <button class="btn btn-outlined"><span class="material-icons">share</span> Tweet</button>
-          <button class="btn btn-outlined"><span class="material-icons">share</span> Share</button>
-        </div>
+      <div class="section-title">Newsletter</div>
+      <div class="newsletter-heading">Subscribe to our newsletter</div>
+      <div class="form-group">
+        <input type="email" class="form-input" placeholder="Email address">
       </div>
-
-      <!-- SIDEBAR COLUMN (40%) -->
-      <div class="twocol-sidebar">
-
-        <!-- Author Bio -->
-        <div class="sidebar-card">
-          <div class="sidebar-title">Author</div>
-          <div class="author-avatar">TM</div>
-          <div class="author-name">Thandi Mokoena</div>
-          <p class="author-bio">Senior therapist at Serenity Spa with 8 years of experience in deep tissue and sports massage. Passionate about helping clients achieve pain-free living.</p>
-        </div>
-
-        <!-- Related Posts -->
-        <div class="sidebar-card">
-          <div class="sidebar-title">Related Posts</div>
-          <div class="related-post">
-            <div class="related-post-title"><a href="#">Hot Stone vs Swedish: Which Is Right for You?</a></div>
-            <div class="related-post-meta">28 May 2026 · 156 views</div>
-          </div>
-          <div class="related-post">
-            <div class="related-post-title"><a href="#">Your Guide to Post-Workout Recovery</a></div>
-            <div class="related-post-meta">8 Jun 2026 · 89 views</div>
-          </div>
-          <div class="related-post">
-            <div class="related-post-title"><a href="#">Managing Stress During Tax Season</a></div>
-            <div class="related-post-meta">22 May 2026 · 98 views</div>
-          </div>
-        </div>
-
-        <!-- Categories -->
-        <div class="sidebar-card">
-          <div class="sidebar-title">Categories</div>
-          <ul class="category-list">
-            <li>Massage Therapy (12)</li>
-            <li>Wellness Tips (8)</li>
-            <li>Beauty &amp; Skincare (6)</li>
-            <li>Spa News (4)</li>
-          </ul>
-        </div>
-
-        <!-- Newsletter -->
-        <div class="sidebar-card">
-          <div class="sidebar-title">Newsletter</div>
-          <p class="newsletter-desc">Subscribe to receive wellness tips and special offers from Serenity Spa.</p>
-          <div style="margin-top: var(--space-3);">
-            <input class="form-input" type="email" placeholder="Your email address" style="width: 100%; padding: var(--space-3) var(--space-4); min-height: 48px; font-size: 16px; font-family: var(--font-family); border: 1px solid var(--outline); border-radius: 4px; background: transparent; color: var(--on-surface); margin-bottom: var(--space-3);">
-            <button class="btn btn-filled" style="width: 100%;">Subscribe</button>
-          </div>
-        </div>
-
-      </div>
-
+      <button class="btn btn-filled">Subscribe</button>
     </div>
-
-  </main>
+  </div>
+</div>
 
 </body>
 </html>

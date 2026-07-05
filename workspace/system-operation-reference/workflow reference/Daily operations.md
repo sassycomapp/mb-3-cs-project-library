@@ -136,3 +136,9 @@ explorer.exe "$(wslpath -w /home/dev-p/.gstack/projects/)"
 \\wsl.localhost\Ubuntu\home\dev-p\.gstack\projects\
 ```
 ---
+# Agents.MD
+
+**Global**
+\\wsl$\Ubuntu\home\dev-p\.config\opencode\AGENTS.md
+**LOcal**
+"C:\_mb2-cs-app\project-library\agents.md"

@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mybizz CS — RevenueReportForm</title>
+<title>Mybizz CS — Revenue Report</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 /* ============================================================
    MYBIZZ CS — RevenueReportForm Screen
    Design System: Material 3 with MUI Aesthetic Overlay
-   Default Palette: Professional Blue
+   Palette: Professional Blue
    ============================================================ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ===== M3 TOKEN BLOCK — Professional Blue Palette ===== */
 :root {
   --primary: #493ef3;
   --on-primary: #ffffff;
@@ -42,12 +42,12 @@
   --space-6: 24px;
   --space-8: 32px;
   --font-family: 'Roboto', sans-serif;
-  /* MUI Aesthetic Overlay */
   --mui-shadow-card: hsla(220,30%,5%,0.07) 0px 4px 16px 0px, hsla(220,25%,10%,0.07) 0px 8px 16px -5px;
   --mui-shadow-raised: hsla(220,30%,5%,0.10) 0px 6px 20px 0px, hsla(220,25%,10%,0.10) 0px 10px 20px -5px;
   --divider-color: var(--outline-variant);
-  --state-hover-opacity: 0.08;
-  --state-pressed-opacity: 0.12;
+  /* Button state tokens */
+  --btn-filled-hover: color-mix(in srgb, var(--primary) 92%, transparent);
+  --btn-shadow-hover: hsla(220, 30%, 5%, 0.15) 0px 1px 2px 0px, hsla(220, 25%, 10%, 0.15) 0px 1px 3px 1px;
 }
 
 body {
@@ -56,153 +56,68 @@ body {
   line-height: 1.4286;
   color: var(--on-surface);
   background-color: var(--surface);
-  display: flex;
-  min-height: 100vh;
 }
 
-/* ===== LEFT NAV ===== */
-.left-nav {
-  width: 260px;
-  background: var(--surface-container-low);
-  border-right: 1px solid var(--divider-color);
-  padding: 24px 0;
-  flex-shrink: 0;
-  overflow-y: auto;
-}
-.nav-brand {
-  padding: 0 16px 24px;
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--on-primary-container);
-}
-.nav-group-label {
-  padding: 16px 16px 4px;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--on-surface-variant);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.nav-item {
-  display: flex;
-  align-items: center;
-  padding: 4px 16px;
-  margin: 2px 8px;
-  border-radius: 100px;
-  color: var(--on-surface-variant);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  gap: 16px;
-  transition: background 150ms;
-}
-.nav-item:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
-.nav-item.selected {
-  background: var(--secondary-container);
-  color: var(--on-secondary-container);
-}
-.nav-item-icon {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-.nav-divider {
-  border: none;
-  border-top: 1px solid var(--divider-color);
-  opacity: 0.4;
-  margin: 8px 16px;
-}
-.nav-signout {
-  margin-top: auto;
-  padding-top: 16px;
-  border-top: 1px solid var(--divider-color);
-  opacity: 0.4;
-}
-
-/* ===== MAIN CONTENT ===== */
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-/* ===== APP BAR ===== */
-.app-bar {
-  min-height: 56px;
-  padding: 0 24px;
-  background-color: var(--surface);
-  border-bottom: 1px solid var(--divider-color);
-  display: flex;
-  align-items: center;
-}
-.app-bar .title {
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--on-surface);
-  flex: 1;
-}
-.app-bar-nav {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* ===== CONTENT AREA ===== */
-.content {
-  flex: 1;
-  padding: 24px;
+/* col_revenue — outermost container */
+.col-revenue {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6);
   background: var(--surface);
-  max-width: 1100px;
 }
 
-/* ===== PAGE HEADER ===== */
-.page-title {
+/* Page title */
+.hdg-report-title {
   font-size: 32px;
   line-height: 40px;
   font-weight: 600;
   color: var(--on-surface);
-  margin-bottom: 4px;
-}
-.page-subtitle {
-  font-size: 14px;
-  color: var(--on-surface-variant);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-1);
 }
 
-/* ===== FILTERS BAR ===== */
-.filters-bar {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
+.txt-report-subtitle {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--space-6);
 }
+
+/* flow_filters */
+.flow-filters {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+  background: var(--surface-container-low);
+  border-radius: 8px;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-2);
 }
+
 .form-label {
   font-size: 12px;
   font-weight: 500;
   color: var(--on-surface-variant);
 }
+
 .form-input {
-  padding: 8px 16px;
   min-height: 48px;
+  padding: var(--space-2) var(--space-4);
   font-size: 16px;
-  line-height: 1.5;
   font-family: var(--font-family);
   border: 1px solid var(--outline);
   border-radius: 4px;
   background: transparent;
   color: var(--on-surface);
-  width: 200px;
+  min-width: 160px;
 }
+
 .form-input:focus {
   border-color: var(--primary);
   border-width: 2px;
@@ -210,7 +125,7 @@ body {
   outline: none;
 }
 
-/* ===== BUTTONS ===== */
+/* Buttons */
 .btn {
   font-family: var(--font-family);
   font-size: 14px;
@@ -223,331 +138,216 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  text-decoration: none;
+  gap: var(--space-2);
   transition: background 150ms, box-shadow 150ms;
 }
+
 .btn-filled {
   background: var(--primary);
   color: var(--on-primary);
 }
-.btn-filled:hover {
-  background: rgba(73,62,243,0.92);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
-}
-.btn-outlined {
-  background: transparent;
-  color: var(--primary);
-  border: 1px solid var(--outline);
-}
-.btn-outlined:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
-.btn-icon {
-  padding: 8px;
-  min-width: 40px;
-  min-height: 40px;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--on-surface-variant);
-  border: none;
-}
-.btn-icon:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
 
-/* ===== METRIC CARDS GRID ===== */
-.summary-grid {
+.btn-filled:hover {
+  background: var(--btn-filled-hover);
+  box-shadow: var(--btn-shadow-hover);
+}
+
+/* flow_summary_row */
+.flow-summary-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
 }
+
 .metric-card {
   background: var(--surface);
   border-radius: 8px;
-  padding: 16px;
+  padding: var(--space-4);
   box-shadow: var(--mui-shadow-card);
   transition: box-shadow 200ms ease;
 }
-.metric-card:hover { box-shadow: var(--mui-shadow-raised); }
-.metric-label {
-  font-size: 14px;
-  color: var(--on-surface-variant);
-  margin-bottom: 8px;
+
+.metric-card:hover {
+  box-shadow: var(--mui-shadow-raised);
 }
-.metric-value {
-  font-size: 28px;
-  font-weight: 600;
+
+.metric-card-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--space-2);
+}
+
+.metric-card-value {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
   color: var(--on-surface);
 }
 
-/* ===== CHART CARD ===== */
+/* Chart card */
 .chart-card {
   background: var(--surface);
   border-radius: 8px;
-  padding: 16px;
+  padding: var(--space-4);
   box-shadow: var(--mui-shadow-card);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
+  transition: box-shadow 200ms ease;
 }
+
+.chart-card:hover {
+  box-shadow: var(--mui-shadow-raised);
+}
+
 .chart-card-title {
   font-size: 18px;
+  line-height: 24px;
   font-weight: 500;
   color: var(--on-surface);
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
-.chart-placeholder {
-  height: 260px;
-  background: var(--surface-container-low);
-  border-radius: 4px;
+
+.plot-placeholder {
+  height: 220px;
+  background: var(--surface-variant);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--on-surface-variant);
-  font-size: 14px;
+  font-size: 13px;
 }
 
-/* ===== DATA GRID ===== */
+/* DataGrid */
 .data-grid {
   border: 1px solid var(--divider-color);
   border-radius: 24px;
   overflow: hidden;
-  margin-bottom: 16px;
 }
+
 .data-grid-header {
   background: var(--surface-container-low);
-  padding: 12px 16px;
+  padding: var(--space-3) var(--space-4);
   border-bottom: 1px solid var(--divider-color);
+  border-radius: 24px 24px 0 0;
   display: flex;
   font-weight: 500;
   font-size: 14px;
-}
-.data-grid-header > div { padding: 8px; flex: 1; }
-.data-grid-row {
-  border-bottom: 1px solid var(--divider-color);
-  padding: 12px 16px;
-  display: flex;
-  font-size: 14px;
-}
-.data-grid-row:last-child { border-bottom: none; }
-.data-grid-row > div { padding: 8px; flex: 1; }
-.data-grid-row:hover { background: rgba(73,62,243, var(--state-hover-opacity)); }
-
-/* ===== BADGES ===== */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 500;
-}
-.badge-confirmed { background: #DEFCD3; color: #1B5E20; }
-.badge-pending { background: #FFF3CD; color: #856404; }
-
-/* ===== EMPTY STATE ===== */
-.empty-state {
-  text-align: center;
-  padding: 48px 24px;
-  color: var(--on-surface-variant);
-  border: 2px dashed var(--outline-variant);
-  border-radius: 8px;
-  margin-top: 16px;
-}
-.empty-state-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
-  opacity: 0.5;
-}
-.empty-state-heading {
-  font-size: 22px;
-  line-height: 28px;
-  font-weight: 600;
   color: var(--on-surface);
-  margin-bottom: 8px;
-}
-.empty-state-body {
-  font-size: 14px;
-  color: var(--on-surface-variant);
-  margin-bottom: 24px;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-/* ===== RESPONSIVE ===== */
+.data-grid-header > div {
+  flex: 1;
+  padding: var(--space-2);
+}
+
 @media (max-width: 768px) {
-  .summary-grid { grid-template-columns: 1fr; }
-  .filters-bar { flex-direction: column; align-items: stretch; }
-  .form-input { width: 100%; }
+  .flow-summary-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1c1b20;
+    --on-surface: #e6e1e5;
+    --surface-variant: #49454f;
+    --on-surface-variant: #cac4d0;
+    --outline: #938f99;
+    --outline-variant: #49454f;
+    --surface-container-low: #2b2930;
+  }
 }
 </style>
 </head>
 <body>
 
-<!-- LEFT NAV -->
-<nav class="left-nav">
-  <div class="nav-brand">Mybizz CS</div>
-  <a class="nav-item" href="#"><span class="nav-item-icon">dashboard</span> Dashboard</a>
-  <div class="nav-group-label">Sales &amp; Operations</div>
-  <a class="nav-item" href="#"><span class="nav-item-icon">event</span> Bookings</a>
-  <a class="nav-item" href="#"><span class="nav-item-icon">design_services</span> Services</a>
-  <div class="nav-group-label">Customers &amp; Marketing</div>
-  <a class="nav-item" href="#"><span class="nav-item-icon">contacts</span> Contacts</a>
-  <a class="nav-item" href="#"><span class="nav-item-icon">campaign</span> Campaigns</a>
-  <a class="nav-item" href="#"><span class="nav-item-icon">task</span> Tasks</a>
-  <div class="nav-group-label">Content &amp; Website</div>
-  <a class="nav-item" href="#"><span class="nav-item-icon">article</span> Blog</a>
-  <div class="nav-group-label">Finance &amp; Reports</div>
-  <a class="nav-item" href="#"><span class="nav-item-icon">receipt</span> Invoices</a>
-  <a class="nav-item selected" href="#"><span class="nav-item-icon">analytics</span> Analytics</a>
-  <div class="nav-divider"></div>
-  <a class="nav-item" href="#"><span class="nav-item-icon">settings</span> Settings</a>
-  <a class="nav-item" href="#"><span class="nav-item-icon">lock</span> Vault</a>
-  <a class="nav-item nav-signout" href="#"><span class="nav-item-icon">logout</span> Sign Out</a>
-</nav>
+<!-- col_revenue (ColumnPanel) — outermost container -->
+<div class="col-revenue">
 
-<!-- MAIN CONTENT -->
-<div class="main-content">
+  <!-- hdg_report_title (Heading) -->
+  <h1 class="hdg-report-title">Revenue Report</h1>
 
-  <!-- APP BAR -->
-  <header class="app-bar">
-    <div class="title">Revenue Report</div>
-    <div class="app-bar-nav">
-      <button class="btn btn-icon">notifications</button>
-      <button class="btn btn-icon">account_circle</button>
+  <!-- txt_report_subtitle (Text) -->
+  <p class="txt-report-subtitle">View revenue breakdown by date range</p>
+
+  <!-- flow_filters (FlowPanel) -->
+  <div class="flow-filters">
+    <div class="form-group">
+      <label class="form-label" for="dp_date_from">From Date</label>
+      <input type="date" id="dp_date_from" class="form-input" value="2026-06-01">
     </div>
-  </header>
+    <div class="form-group">
+      <label class="form-label" for="dp_date_to">To Date</label>
+      <input type="date" id="dp_date_to" class="form-input" value="2026-06-30">
+    </div>
+    <button class="btn btn-filled">
+      <span class="material-icons" style="font-size:18px;">assessment</span>
+      Generate Report
+    </button>
+  </div>
 
-  <!-- CONTENT -->
-  <main class="content">
+  <!-- flow_summary_row (FlowPanel) -->
+  <div class="flow-summary-row">
 
-    <!-- Page Header (col_revenue) -->
-    <h1 class="page-title">Revenue Report</h1>
-    <p class="page-subtitle">View revenue breakdown by date range</p>
-
-    <!-- Filters Bar (flow_filters) -->
-    <div class="filters-bar">
-      <div class="form-group">
-        <label class="form-label">From</label>
-        <input type="date" class="form-input" value="2026-06-01">
-      </div>
-      <div class="form-group">
-        <label class="form-label">To</label>
-        <input type="date" class="form-input" value="2026-06-18">
-      </div>
-      <button class="btn btn-filled" style="align-self:flex-end;">Generate Report</button>
+    <!-- card_total_revenue (Card) -->
+    <div class="metric-card">
+      <div class="metric-card-label">Total Revenue</div>
+      <div class="metric-card-value">R 42 800</div>
     </div>
 
-    <!-- Summary Row (flow_summary_row) -->
-    <div class="summary-grid">
-
-      <!-- card_total_revenue -->
-      <div class="metric-card">
-        <div class="metric-label">Total Revenue</div>
-        <div class="metric-value">R 48,750</div>
-      </div>
-
-      <!-- card_total_bookings -->
-      <div class="metric-card">
-        <div class="metric-label">Total Bookings</div>
-        <div class="metric-value">127</div>
-      </div>
-
-      <!-- card_avg_order -->
-      <div class="metric-card">
-        <div class="metric-label">Avg Order Value</div>
-        <div class="metric-value">R 384</div>
-      </div>
-
+    <!-- card_total_bookings (Card) -->
+    <div class="metric-card">
+      <div class="metric-card-label">Total Bookings</div>
+      <div class="metric-card-value">164</div>
     </div>
 
-    <!-- Revenue Chart (card_revenue_chart) -->
-    <div class="chart-card">
-      <div class="chart-card-title">Revenue Over Time</div>
-      <div class="chart-placeholder">
-        <div style="width:100%;padding:16px;">
-          <svg viewBox="0 0 600 200" style="width:100%;height:auto;">
-            <polyline points="30,180 80,160 130,170 180,120 230,130 280,80 330,95 380,60 430,70 480,45 530,55 570,35" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linejoin="round"/>
-            <polyline points="30,180 80,160 130,170 180,120 230,130 280,80 330,95 380,60 430,70 480,45 530,55 570,35 570,200 30,200" fill="var(--primary)" fill-opacity="0.1"/>
-            <!-- X-axis labels -->
-            <text x="30" y="195" font-size="10" fill="var(--on-surface-variant)">1 Jun</text>
-            <text x="130" y="195" font-size="10" fill="var(--on-surface-variant)">4 Jun</text>
-            <text x="230" y="195" font-size="10" fill="var(--on-surface-variant)">7 Jun</text>
-            <text x="330" y="195" font-size="10" fill="var(--on-surface-variant)">10 Jun</text>
-            <text x="430" y="195" font-size="10" fill="var(--on-surface-variant)">13 Jun</text>
-            <text x="530" y="195" font-size="10" fill="var(--on-surface-variant)">16 Jun</text>
-          </svg>
-        </div>
+    <!-- card_avg_order (Card) -->
+    <div class="metric-card">
+      <div class="metric-card-label">Avg Order Value</div>
+      <div class="metric-card-value">R 261</div>
+    </div>
+
+  </div>
+
+  <!-- card_revenue_chart (Card) -->
+  <div class="chart-card">
+    <div class="chart-card-title">Revenue Over Time</div>
+    <div class="plot-placeholder">
+      <span class="material-icons" style="font-size:32px;opacity:0.4;">show_chart</span>
+      &nbsp; plot_revenue_over_time (Plot)
+    </div>
+  </div>
+
+  <!-- card_revenue_details (Card) -->
+  <div class="chart-card">
+    <div class="chart-card-title">Revenue Details</div>
+
+    <!-- dg_revenue_details (DataGrid) — row content in separate screen -->
+    <div class="data-grid">
+      <div class="data-grid-header">
+        <div>Date</div>
+        <div>Service</div>
+        <div>Customer</div>
+        <div>Amount</div>
+      </div>
+      <div style="padding: var(--space-6); text-align: center; color: var(--on-surface-variant); font-size: 13px;">
+        <span class="material-icons" style="font-size: 24px; vertical-align: middle; opacity: 0.4;">table_rows</span>
+        &nbsp; dg_revenue_details — row content in separate row-template screen
       </div>
     </div>
+  </div>
 
-    <!-- Revenue Details (card_revenue_details) -->
-    <div class="chart-card">
-      <div class="chart-card-title">Revenue Details</div>
-      <div class="data-grid">
-        <div class="data-grid-header">
-          <div>Date</div>
-          <div>Service</div>
-          <div>Bookings</div>
-          <div>Revenue</div>
-        </div>
-        <div class="data-grid-row">
-          <div>18 Jun 2026</div>
-          <div>Swedish Massage</div>
-          <div>5</div>
-          <div>R 3,750</div>
-        </div>
-        <div class="data-grid-row">
-          <div>18 Jun 2026</div>
-          <div>Hot Stone Therapy</div>
-          <div>3</div>
-          <div>R 2,850</div>
-        </div>
-        <div class="data-grid-row">
-          <div>17 Jun 2026</div>
-          <div>Deep Tissue Massage</div>
-          <div>4</div>
-          <div>R 3,600</div>
-        </div>
-        <div class="data-grid-row">
-          <div>17 Jun 2026</div>
-          <div>Aromatherapy Session</div>
-          <div>2</div>
-          <div>R 1,500</div>
-        </div>
-        <div class="data-grid-row">
-          <div>16 Jun 2026</div>
-          <div>Swedish Massage</div>
-          <div>6</div>
-          <div>R 4,500</div>
-        </div>
-        <div class="data-grid-row">
-          <div>16 Jun 2026</div>
-          <div>Reflexology</div>
-          <div>2</div>
-          <div>R 1,200</div>
-        </div>
-        <div class="data-grid-row">
-          <div>15 Jun 2026</div>
-          <div>Hot Stone Therapy</div>
-          <div>4</div>
-          <div>R 3,800</div>
-        </div>
-        <div class="data-grid-row">
-          <div>15 Jun 2026</div>
-          <div>Swedish Massage</div>
-          <div>3</div>
-          <div>R 2,250</div>
-        </div>
-      </div>
-    </div>
+  <!-- col_empty_state (ColumnPanel) — hidden on load (dashed border) -->
+  <!-- Not rendered: visible = False per wireframe -->
 
-    <!-- Empty State (col_empty_state — hidden on load, shown when no data) -->
-    <div class="empty-state">
-      <div class="empty-state-icon">receipt</div>
-      <h2 class="empty-state-heading">No revenue data</h2>
-      <p class="empty-state-body">Select a date range and generate a report to view revenue details.</p>
-      <button class="btn btn-filled">Create Your First Booking</button>
-    </div>
-
-  </main>
 </div>
 
 </body>

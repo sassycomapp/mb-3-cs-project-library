@@ -257,7 +257,7 @@ Use only when (a) it's one of the five above, and (b) it serves a reusable purpo
 - **Sample/placeholder data:** South African consulting/services vertical, ZAR currency, plausible business data. Never "Lorem ipsum."
 - **Empty state (mandatory on every data-driven form):** exactly 4 components — Icon, Heading, Body text, Primary action button.
 - **RBAC:** Roles are Owner, Manager, Admin, Staff, Customer. Every server function carries `@authenticated_endpoint`.
-- **Dark mode:** Deferred from V1 to V2 — don't build dark-mode variants unless explicitly asked. CSS architecture supports future addition via `@media (prefers-color-scheme: dark)` blocks with alternate token values.
+- **Dark mode:** Included in V1 per ADR-46. All screens must include `@media (prefers-color-scheme: dark)` blocks with alternate token values.
 - **Accessibility:** WCAG 2.1 AA, per `design-direction.md`'s Accessibility section:
   - **Contrast:** ≥4.5:1 for normal text; ≥3:1 for large text (≥18px, or ≥14px bold) and for UI components.
   - **Keyboard:** every function operable via keyboard (Tab, Enter, Escape); logical tab order (top-left → bottom-right); modals/sidesheets trap focus until closed and return focus to the trigger element on close.

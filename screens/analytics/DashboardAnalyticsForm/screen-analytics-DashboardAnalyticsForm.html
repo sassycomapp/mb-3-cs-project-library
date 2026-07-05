@@ -3,22 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mybizz CS — DashboardAnalyticsForm</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Mybizz CS — Dashboard Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
 /* ============================================================
    MYBIZZ CS — DashboardAnalyticsForm Screen
    Design System: Material 3 with MUI Aesthetic Overlay
-   Default Palette: Professional Blue
-   
-   Wireframe: wireframe-analytics-DashboardAnalyticsForm.html
-   Boundary: col_analytics (ColumnPanel) — NO page chrome
+   Palette: Professional Blue
    ============================================================ */
 
+/* Reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ===== M3 TOKEN BLOCK — Professional Blue Palette ===== */
+/* M3 Token Block — Professional Blue */
 :root {
   --primary: #493ef3;
   --on-primary: #ffffff;
@@ -54,6 +52,8 @@
   --divider-color: var(--outline-variant);
   --state-hover-opacity: 0.08;
   --state-pressed-opacity: 0.12;
+  /* Button/link state tokens — derived from primary, not hardcoded */
+  --link-hover-bg: color-mix(in srgb, var(--primary) 8%, transparent);
 }
 
 body {
@@ -63,19 +63,18 @@ body {
   color: var(--on-surface);
   background-color: var(--surface);
   padding: 0;
-  margin: 0;
 }
 
-/* ===== SCREEN CONTAINER (col_analytics boundary) ===== */
-.col_analytics {
+/* col_analytics — outermost container */
+.col-analytics {
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--space-6);
   background: var(--surface);
 }
 
-/* ===== TYPOGRAPHY — Page Title ===== */
-.hdg_analytics_title {
+/* Page title — hdg_analytics_title */
+.hdg-analytics-title {
   font-size: 32px;
   line-height: 40px;
   font-weight: 600; /* MUI: heading weight 600 */
@@ -83,8 +82,8 @@ body {
   margin-bottom: var(--space-1);
 }
 
-/* ===== TYPOGRAPHY — Subtitle ===== */
-.txt_analytics_subtitle {
+/* Subtitle — txt_analytics_subtitle */
+.txt-analytics-subtitle {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -92,45 +91,42 @@ body {
   margin-bottom: var(--space-6);
 }
 
-/* ===== PERIOD SELECTOR (flow_period_selector) ===== */
-.flow_period_selector {
+/* flow_period_selector */
+.flow-period-selector {
   display: flex;
-  gap: var(--space-1);
+  gap: var(--space-2);
   margin-bottom: var(--space-6);
-  background: var(--surface-container-low);
-  border-radius: 100px;
-  padding: var(--space-1);
-  width: fit-content;
+  flex-wrap: wrap;
 }
 
-.flow_period_selector a {
-  padding: 6px 16px;
-  border-radius: 100px;
+.flow-period-selector a {
   font-size: 14px;
   font-weight: 500;
-  color: var(--on-surface-variant);
+  color: var(--primary);
   text-decoration: none;
-  transition: background 150ms, color 150ms;
+  padding: var(--space-2) var(--space-4);
+  border-radius: 100px;
+  transition: background 150ms;
 }
 
-.flow_period_selector a:hover {
-  background: rgba(73,62,243, var(--state-hover-opacity));
+.flow-period-selector a:hover {
+  background: var(--link-hover-bg);
 }
 
-.flow_period_selector a.selected {
+.flow-period-selector a.active {
   background: var(--primary);
   color: var(--on-primary);
 }
 
-/* ===== METRICS ROW (flow_metrics_row) ===== */
-.flow_metrics_row {
+/* flow_metrics_row */
+.flow-metrics-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
   margin-bottom: var(--space-6);
 }
 
-/* ===== METRIC CARD (card_revenue, card_bookings, card_customers, card_avg_order) ===== */
+/* Metric cards */
 .metric-card {
   background: var(--surface);
   border-radius: 8px; /* MUI: card radius 8px */
@@ -143,234 +139,292 @@ body {
   box-shadow: var(--mui-shadow-raised);
 }
 
-.metric-card .hdg_label {
+.metric-card-label {
   font-size: 14px;
   line-height: 20px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--on-surface-variant);
   margin-bottom: var(--space-2);
 }
 
-.metric-card .txt_value {
-  font-size: 28px;
-  line-height: 36px;
-  font-weight: 600;
+.metric-card-value {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
   color: var(--on-surface);
   margin-bottom: var(--space-1);
 }
 
-.metric-card .txt_change {
+.metric-card-change {
   font-size: 12px;
   line-height: 16px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
-.metric-card .txt_change.positive {
-  color: #2E7D32; /* Semantic exception: success green */
+.metric-card-change.positive {
+  color: #2E7D32; /* Semantic exception — status green */
 }
 
-.metric-card .txt_change.negative {
-  color: var(--error); /* Semantic exception: error red */
+.metric-card-change.negative {
+  color: var(--error); /* Semantic exception — status red */
 }
 
-/* ===== CHARTS ROW (flow_charts_primary, flow_charts_secondary) ===== */
-.flow_charts_primary,
-.flow_charts_secondary {
+/* flow_charts_primary / flow_charts_secondary */
+.flow-charts-primary,
+.flow-charts-secondary {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4);
   margin-bottom: var(--space-6);
 }
 
-/* ===== CHART CARD (card_revenue_trend, card_bookings_by_service, card_customer_growth, card_booking_summary) ===== */
+/* Chart cards */
 .chart-card {
   background: var(--surface);
   border-radius: 8px; /* MUI: card radius 8px */
   padding: var(--space-4);
-  box-shadow: var(--mui-shadow-card); /* MUI: dual-layer shadow */
+  box-shadow: var(--mui-shadow-card);
+  transition: box-shadow 200ms ease;
 }
 
-.chart-card .hdg_chart_title {
+.chart-card:hover {
+  box-shadow: var(--mui-shadow-raised);
+}
+
+.chart-card-title {
   font-size: 18px;
   line-height: 24px;
-  font-weight: 500; /* Title role — stays at 500 */
+  font-weight: 500;
   color: var(--on-surface);
   margin-bottom: var(--space-4);
 }
 
-/* ===== PLOT PLACEHOLDER ===== */
-.plot_placeholder {
-  height: 220px;
-  background: var(--surface-container-low);
-  border-radius: 4px;
+/* Plot placeholder (skeleton) */
+.plot-placeholder {
+  height: 200px;
+  background: var(--surface-variant);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--on-surface-variant);
-  font-size: 14px;
+  font-size: 13px;
 }
 
-/* ===== DATA GRID PLACEHOLDER (dg_booking_summary) ===== */
-.dg_placeholder {
-  border: 2px dashed var(--outline-variant);
+/* DataGrid — dg_booking_summary */
+.data-grid {
+  border: 1px solid var(--divider-color); /* MUI: translucent divider */
   border-radius: 24px; /* M3: data grid radius 24px — preserved */
-  padding: var(--space-6);
-  text-align: center;
-  color: var(--on-surface-variant);
-  min-height: 160px;
+  overflow: hidden;
+}
+
+.data-grid-header {
+  background: var(--surface-container-low);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--divider-color);
+  border-radius: 24px 24px 0 0;
   display: flex;
-  flex-direction: column;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--on-surface);
+}
+
+.data-grid-header > div {
+  flex: 1;
+  padding: var(--space-2);
+}
+
+.data-grid-row {
+  display: flex;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--divider-color);
+}
+
+.data-grid-row:last-child {
+  border-bottom: none;
+}
+
+.data-grid-row > div {
+  flex: 1;
+  padding: var(--space-2);
+  font-size: 14px;
+  color: var(--on-surface);
+}
+
+/* Status badges */
+.badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-}
-
-.dg_placeholder .material-icons {
-  font-size: 32px;
-  opacity: 0.5;
-}
-
-.dg_placeholder .dg_label {
+  padding: 2px 10px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 500;
-  color: var(--outline);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-.dg_placeholder .dg_note {
-  font-size: 12px;
-  color: var(--on-surface-variant);
-  font-style: italic;
+.badge-confirmed { background: #DEFCD3; color: #1B5E20; }
+.badge-pending { background: #FFF3CD; color: #856404; }
+.badge-cancelled { background: #FFDAD6; color: var(--error); }
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid var(--divider-color);
+  opacity: 0.4; /* MUI: divider opacity 0.4 */
+  margin: var(--space-4) 0;
 }
 
-/* ===== EMPTY STATE (col_empty_state — hidden on load) ===== */
-.col_empty_state {
-  /* Hidden on load per wireframe (dashed border = visible = False) */
-  display: none;
-}
-
-/* ===== RESPONSIVE ===== */
+/* Responsive */
 @media (max-width: 768px) {
-  .flow_metrics_row {
+  .flow-metrics-row {
     grid-template-columns: repeat(2, 1fr);
   }
-  .flow_charts_primary,
-  .flow_charts_secondary {
+  .flow-charts-primary,
+  .flow-charts-secondary {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .flow-metrics-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #1c1b20;
+    --on-surface: #e6e1e5;
+    --surface-variant: #49454f;
+    --on-surface-variant: #cac4d0;
+    --outline: #938f99;
+    --outline-variant: #49454f;
+    --surface-container-low: #2b2930;
   }
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     SCREEN: DashboardAnalyticsForm
-     Wireframe boundary: col_analytics (ColumnPanel)
-     NO page chrome (sidebar, app bar, footer) — excluded per §9.1
-     ============================================================ -->
-
-<div class="col_analytics">
+<!-- col_analytics (ColumnPanel) — outermost container -->
+<div class="col-analytics">
 
   <!-- hdg_analytics_title (Heading) -->
-  <h1 class="hdg_analytics_title">Analytics</h1>
+  <h1 class="hdg-analytics-title">Analytics</h1>
 
   <!-- txt_analytics_subtitle (Text) -->
-  <p class="txt_analytics_subtitle">Track your business performance and trends</p>
+  <p class="txt-analytics-subtitle">Track your business performance and trends</p>
 
   <!-- flow_period_selector (FlowPanel) -->
-  <div class="flow_period_selector">
-    <a href="#" class="nav_period_week">Week</a>
-    <a href="#" class="nav_period_month selected">Month</a>
-    <a href="#" class="nav_period_quarter">Quarter</a>
-    <a href="#" class="nav_period_custom">Custom</a>
+  <div class="flow-period-selector">
+    <a href="#" class="active">Week</a>
+    <a href="#">Month</a>
+    <a href="#">Quarter</a>
+    <a href="#">Custom</a>
   </div>
 
   <!-- flow_metrics_row (FlowPanel) -->
-  <div class="flow_metrics_row">
+  <div class="flow-metrics-row">
 
-    <!-- card_revenue (Card) — metric-card role -->
+    <!-- card_revenue (Card) -->
     <div class="metric-card">
-      <div class="hdg_label">Total Revenue</div>
-      <div class="txt_value">R 48,750</div>
-      <div class="txt_change positive">+12.5% vs last month</div>
+      <div class="metric-card-label">Total Revenue</div>
+      <div class="metric-card-value">R 12 450</div>
+      <div class="metric-card-change positive">+12% vs last month</div>
     </div>
 
-    <!-- card_bookings (Card) — metric-card role -->
+    <!-- card_bookings (Card) -->
     <div class="metric-card">
-      <div class="hdg_label">Total Bookings</div>
-      <div class="txt_value">127</div>
-      <div class="txt_change positive">+8.3% vs last month</div>
+      <div class="metric-card-label">Total Bookings</div>
+      <div class="metric-card-value">48</div>
+      <div class="metric-card-change positive">+8% vs last month</div>
     </div>
 
-    <!-- card_customers (Card) — metric-card role -->
+    <!-- card_customers (Card) -->
     <div class="metric-card">
-      <div class="hdg_label">New Customers</div>
-      <div class="txt_value">34</div>
-      <div class="txt_change positive">+15.2% vs last month</div>
+      <div class="metric-card-label">New Customers</div>
+      <div class="metric-card-value">23</div>
+      <div class="metric-card-change positive">+5 vs last month</div>
     </div>
 
-    <!-- card_avg_order (Card) — metric-card role -->
+    <!-- card_avg_order (Card) -->
     <div class="metric-card">
-      <div class="hdg_label">Avg Order Value</div>
-      <div class="txt_value">R 384</div>
-      <div class="txt_change negative">-2.1% vs last month</div>
+      <div class="metric-card-label">Avg Order Value</div>
+      <div class="metric-card-value">R 259</div>
+      <div class="metric-card-change negative">-3% vs last month</div>
     </div>
 
   </div>
 
   <!-- flow_charts_primary (FlowPanel) -->
-  <div class="flow_charts_primary">
+  <div class="flow-charts-primary">
 
     <!-- card_revenue_trend (Card) -->
     <div class="chart-card">
-      <div class="hdg_chart_title">Revenue Trend</div>
-      <div class="plot_placeholder">
-        <span class="material-icons" style="font-size:48px;opacity:0.3;">show_chart</span>
+      <div class="chart-card-title">Revenue Trend</div>
+      <div class="plot-placeholder">
+        <span class="material-icons" style="font-size:32px;opacity:0.4;">bar_chart</span>
+        &nbsp; plot_revenue_trend (Plot)
       </div>
     </div>
 
     <!-- card_bookings_by_service (Card) -->
     <div class="chart-card">
-      <div class="hdg_chart_title">Bookings by Service</div>
-      <div class="plot_placeholder">
-        <span class="material-icons" style="font-size:48px;opacity:0.3;">bar_chart</span>
+      <div class="chart-card-title">Bookings by Service</div>
+      <div class="plot-placeholder">
+        <span class="material-icons" style="font-size:32px;opacity:0.4;">pie_chart</span>
+        &nbsp; plot_bookings_by_service (Plot)
       </div>
     </div>
 
   </div>
 
   <!-- flow_charts_secondary (FlowPanel) -->
-  <div class="flow_charts_secondary">
+  <div class="flow-charts-secondary">
 
     <!-- card_customer_growth (Card) -->
     <div class="chart-card">
-      <div class="hdg_chart_title">Customer Growth</div>
-      <div class="plot_placeholder">
-        <span class="material-icons" style="font-size:48px;opacity:0.3;">trending_up</span>
+      <div class="chart-card-title">Customer Growth</div>
+      <div class="plot-placeholder">
+        <span class="material-icons" style="font-size:32px;opacity:0.4;">show_chart</span>
+        &nbsp; plot_customer_growth (Plot)
       </div>
     </div>
 
-    <!-- card_booking_summary (Card) containing dg_booking_summary (DataGrid) -->
+    <!-- card_booking_summary (Card) -->
     <div class="chart-card">
-      <div class="hdg_chart_title">Booking Summary</div>
-      <!-- dg_booking_summary (DataGrid) — row content NOT rendered in host screen per §9.2 -->
-      <div class="dg_placeholder">
-        <span class="material-icons">table_chart</span>
-        <div class="dg_label">dg_booking_summary (DataGrid)</div>
-        <div class="dg_note">Row content belongs to the row-template Form.<br>Wireframe shows: Status, Count, Revenue columns.</div>
+      <div class="chart-card-title">Booking Summary</div>
+
+      <!-- dg_booking_summary (DataGrid) -->
+      <!-- Row template content: separate screen (DashboardAnalyticsFormRowTemplate) -->
+      <div class="data-grid">
+        <div class="data-grid-header">
+          <div>Service</div>
+          <div>Bookings</div>
+          <div>Revenue</div>
+          <div>Status</div>
+        </div>
+        <div style="padding: var(--space-6); text-align: center; color: var(--on-surface-variant); font-size: 13px;">
+          <span class="material-icons" style="font-size: 24px; vertical-align: middle; opacity: 0.4;">table_rows</span>
+          &nbsp; dg_booking_summary — row content in separate row-template screen
+        </div>
       </div>
+
     </div>
 
   </div>
 
-  <!-- col_empty_state (ColumnPanel) — hidden on load per wireframe (dashed border) -->
-  <div class="col_empty_state">
-    <span class="material-icons">bar_chart</span>
-    <h2>No data yet</h2>
-    <p>Analytics will appear here once you have bookings, payments, and contacts in the system.</p>
-    <button>Create Your First Booking</button>
-  </div>
+  <!-- col_empty_state (ColumnPanel) — hidden on load (dashed border in wireframe) -->
+  <!-- Not rendered: visible = False per wireframe -->
 
 </div>
 
