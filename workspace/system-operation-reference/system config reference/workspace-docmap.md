@@ -153,8 +153,20 @@ All under `C:\projects\mb-3-cs\project-library\workspace\` (WSL: `/mnt/c/project
 - **OpenCode 10 config files** — `workspace/system-operation-reference/system config reference/opencode-10-config-files.md`
   Full snapshot of all 10 OpenCode configuration files with paths and current content.
 
+- **GStack config reference** — `workspace/system-operation-reference/system config reference/gstack-config-reference.md`
+  GStack installation, runtime config, skills inventory, project state, binary paths.
+
+- **GBrain config reference** — `workspace/system-operation-reference/system config reference/gbrain-config-reference.md`
+  GBrain engine config, 10 sources (700 pages), MCP, PGLite rules, health, migration history.
+
 - **OpenCode setup & status** — `workspace/system-operation-reference/opencode reference/opencode-setup.md`
   Detailed setup log and policy/status tracker.
+
+- **GStack config reference** — `workspace/system-operation-reference/system config reference/gstack-config-reference.md`
+  Full GStack configuration snapshot: installation paths, runtime config, skills inventory, project state, session data, binary path override, operational notes.
+
+- **GBrain config reference** — `workspace/system-operation-reference/system config reference/gbrain-config-reference.md`
+  Full GBrain configuration snapshot: engine config, 10 registered sources (700 pages), environment variables, MCP configuration, PGLite operational rules, current health, migration history.
 
 ### GStack docs
 `workspace/gstack/` — GStack operating model, workflows, handoff contract, plus scaffolded docs.
@@ -187,12 +199,13 @@ All under `C:\projects\mb-3-cs\project-library\workspace\` (WSL: `/mnt/c/project
 
 ## 10. GBrain — integration state
 
-- **Location:** `~/gbrain` (WSL: `/home/dev-p/gbrain/`), version `v0.18.2`
-- **Engine:** Supabase (PostgreSQL), project `project-library` (`fnjcssmqljshckdksvam`)
-- **Embeddings:** `text-embedding-3-large` via OpenRouter (`OPENAI_API_BASE` set)
-- **Local patch:** `~/gbrain/src/core/embedding.ts` modified to respect `OPENAI_API_BASE` (will be lost on upgrade unless re-applied)
+- **Location:** `~/.bun/bin/gbrain` (WSL), version `v0.42.44.0`
+- **Engine:** PGLite (embedded PostgreSQL 17), data at `~/.gbrain/brain.pglite/` (323 MB)
+- **Sources:** 10 registered — 700 pages, 2901 chunks, 100% embedding coverage
+- **Embeddings:** `text-embedding-3-large` via OpenAI native
+- **Reranker:** ZeroEntropy (`zerank-2`), enabled via `ZEROENTROPY_API_KEY`
 - **MCP:** Enabled in global `opencode.jsonc` — `gbrain serve` via `/home/dev-p/.bun/bin/gbrain`
-- **Smoke test:** Passed — write + embed + search round-trip confirmed
+- **PGLite note:** Single-writer engine. Stop `gbrain serve` before running CLI sync/doctor commands.
 - **Role:** Advisory memory layer. Final authority rests with current repo files, ADRs, and user decisions.
 
 ---

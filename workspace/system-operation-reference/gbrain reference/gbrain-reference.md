@@ -6,7 +6,7 @@ GBrain is the memory layer. It stores and searches your project documents (ADRs,
 
 **Engine:** PGlite (local database on your PC)  
 **Database:** `~/.gbrain/brain.pglite/`  
-**Pages:** 565 (project-library docs + mb-3-cs code + GStack brain)
+**Pages:** 700 (10 sources across all projects, 2901 chunks, all embedded)
 
 ---
 
@@ -39,7 +39,7 @@ gbrain query "onboarding"
 gbrain doctor
 ```
 
-Expected result: Health score ~65/100. Warnings about `pgvector`, `graph_coverage`, and `brain_score` are normal and can be ignored.
+Expected result: Health score ~90/100.
 
 ---
 
@@ -52,7 +52,7 @@ Expected result: Health score ~65/100. Warnings about `pgvector`, `graph_coverag
 gbrain sources list
 ```
 
-Expected result: Shows `default` (565 pages), `gbrain-repo`, and `mb-3-cs` sources.
+Expected result: Shows `default` (143 pages federated), `project-library` (318 pages), `mb-3-cs` (165 pages), plus 7 other project sources.
 
 ---
 
@@ -210,7 +210,9 @@ GBrain organizes content into sources:
 
 | Source | What it contains | Pages |
 |---|---|---|
-| `default` | project-library docs + mb-3-cs code | 565 |
+| `default` | Federated: all project-library + code sources | 143 |
+| `project-library` | mb-3-cs project-library docs | 318 |
+| `mb-3-cs` | mb-3-cs application code | 165 |
 | `gbrain-repo` | GStack working state (learnings, plans, retros) | 0 |
 | `mb-3-cs` | Registered but code imported to `default` | 0 |
 
@@ -227,7 +229,7 @@ The agent uses Grep/Glob when:
 
 ### Health Score
 
-**Current score: 65/100** — This is normal for documentation + code content.
+**Current score: ~90/100** — Normal for a well-maintained documentation + code brain.
 
 | Component | Score | Why it's low |
 |---|---|---|

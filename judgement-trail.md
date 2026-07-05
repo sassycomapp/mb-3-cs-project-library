@@ -1,6 +1,27 @@
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
 
+## 2026-07-06 — GStack + GBrain config optimization
+
+**Issue flagged:** GBrain CLI commands (`sources list`, `sync`, `doctor`, `stats`) all failed silently — `broken-config` status.
+**Root cause:** PGLite is single-writer. `gbrain serve` owned the exclusive database connection. CLI commands couldn't open the database.
+**Developer decision:** Established the PGLite operational pattern: stop serve → run CLI commands → restart serve. Documented in gbrain-config-reference.md §7.
+
+**Issue flagged:** GBrain at v0.42.44.0, PGLite engine. All workspace docs said v0.18.2, Supabase engine, OpenRouter proxy, local `embedding.ts` patch.
+**Developer decision:** Updated 6 files to reflect current reality: `gbrain-install-plan.md`, `gbrain-repo-strategy.md`, `gbrain-log.md`, `gbrain-reference.md`, `gbrain-operating-guide.md`, `opencode-setup.md`. Removed stale references to OpenRouter patch and Supabase project ID.
+
+**Issue flagged:** ZeroEntropy reranker failing (230 audit log entries over 3 weeks) — `ZEROENTROPY_API_KEY` not set.
+**Developer decision:** API key provided by developer. Configured in `~/.bashrc` (persistent) and OpenCode MCP environment (for serve process). Reranker enabled via `gbrain config set search.reranker.enabled true`.
+
+**Issue flagged:** 12 historical sync failures from `default` federated source — `createVersion failed: page not found`.
+**Developer decision:** Auto-resolved. All 10 isolated sources synced successfully. Federation picks up current pages. Failures were from pre-migration path changes.
+
+**Issue flagged:** 2 oversized pages (>50KB: `docs/mybizz-application-overview`, `docs/design`).
+**Developer decision:** Flagged for future maintenance. Pages are embedded and searchable. Chunking would improve retrieval quality but requires re-indexing.
+
+**Issue flagged:** `mb5pdlf/pdlf-state.md` had old pre-migration paths (`/mnt/c/_project-mb5pdlf/`).
+**Developer decision:** Fixed to current paths (`/mnt/c/projects/mb5pdlf/`). Orphaned `~/.gstack/projects/unknown/` state removed.
+
 ## 2026-07-06 — OpenCode config optimization
 
 **Issue flagged:** `mb-3-cs/AGENTS.md` directly violated global "Plan never writes" rule — granted Plan write access to `prompts/`, `docs/`, `tests/`.

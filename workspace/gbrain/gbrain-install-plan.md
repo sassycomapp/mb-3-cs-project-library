@@ -10,21 +10,23 @@ It is not a general tutorial; it is a concrete record of the local setup.
 
 ## 2. Components
 
-- **GBrain CLI**  
-  - Source: cloned to `~/gbrain` in WSL.
-  - Version at initial setup: `v0.18.2`.
+- **GBrain CLI**
+  - Source: installed globally via bun (`~/.bun/bin/gbrain`).
+  - Version at current: `v0.42.44.0`.
 
-- **Database engine**  
-  - Supabase PostgreSQL project:
-    - Project name: `project-library`
-    - Project ID: `fnjcssmqljshckdksvam`
-  - Connection: Supabase pooler URL stored in environment/config for GBrain.
+- **Database engine**
+  - PGLite (embedded PostgreSQL 17)
+  - Data directory: `~/.gbrain/brain.pglite/` (323 MB on disk)
+  - **Note:** PGLite is single-writer. Stop `gbrain serve` before running CLI commands like `gbrain sync` or `gbrain sources list`.
 
-- **Embeddings**  
+- **Embeddings**
   - Model: `text-embedding-3-large`
-  - Provider: OpenRouter
-  - Base URL: `https://openrouter.ai/api/v1` via `OPENAI_API_BASE`
-  - API key: `OPENROUTER_API_KEY` environment variable.
+  - Provider: OpenAI native (no OpenRouter proxy needed in v0.42+)
+  - API key: `OPENAI_API_KEY` environment variable.
+
+- **Reranker**
+  - ZeroEntropy (`zerank-2`), configured via `gbrain config set search.reranker.enabled true`
+  - API key: `ZEROENTROPY_API_KEY` environment variable
 
 ---
 

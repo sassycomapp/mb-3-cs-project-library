@@ -7,9 +7,9 @@ GBrain is the advisory memory layer for the Mybizz CS workspace. It stores and i
 **Current Setup:**
 - Engine: PGlite (local embedded database)
 - Database: `/home/dev-p/.gbrain/brain.pglite`
-- Pages: 263 (262 project documents + 1 GStack brain page)
+- Pages: 700 (10 sources across all projects)
 - Embeddings: 100% coverage
-- Health Score: 70/100 (see [Health Score Explanation](#health-score-explanation))
+- Health Score: ~90/100
 
 ---
 
@@ -355,7 +355,7 @@ Asking questions, research, coding tasks | OpenCode
 git push, gbrain sync, gbrain embed | WSL
 gbrain doctor (health check)| WSL
 
-In OpenCode, GBrain is wired in as MCP tools — the agent can search and query your 627 pages automatically without you doing anything in WSL.
+In OpenCode, GBrain is wired in as MCP tools — the agent can search and query your 700 pages automatically without you doing anything in WSL.
 
 **After Doing Work in Project-Library**
 Run these in WSL in order, every time:

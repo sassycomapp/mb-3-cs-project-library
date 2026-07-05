@@ -10,16 +10,21 @@ This document describes **how GBrain interacts with the repos and workspace stru
 
 Workspace structure (Windows):
 
-- `C:\_mb2-cs-app\project-library` — docs/ADR/refactor planning repo.
-- `C:\_mb2-cs-app\mb-3-cs` — live / production-adjacent code repo.
-- Shared tracking:
-  - To be confirmed
+- `C:\projects\mb-3-cs\project-library` — docs/ADR/refactor planning repo.
+- `C:\projects\mb-3-cs\mb-3-cs` — live / production-adjacent code repo.
+- Tracking (per-project): `devlog-index.md` and `judgement-trail.md` at project-library root.
 
-GBrain’s primary focus:
+Additionally:
+- `C:\projects\mb4ecom\` — E-Commerce project (PDLF-managed)
+- `C:\projects\mb5pdlf\` — PDLF test project
+- `C:\projects\scratch\` — scratch workspace
+- `C:\pdlf\` — PDLF framework
 
-- authoritative documents and ADRs in `project-library`,
-- canonical tracking in project-library,
-- selected validated outputs referencing `mb-3-cs`.
+GBrain's primary focus:
+
+- authoritative documents and ADRs in each project's `project-library`,
+- canonical tracking (devlog-index.md, judgement-trail.md),
+- code repos for implementation context.
 
 ---
 
@@ -32,7 +37,8 @@ GBrain’s primary focus:
   - specific architecture/specification subfolders under `project-library\docs\...`
 
 - Canonical tracking:
-  - `project-library\
+  - `project-library/devlog-index.md`
+  - `project-library/judgement-trail.md`
 
 - Validated workflow outputs:
   - handoffs and summaries explicitly marked as final.

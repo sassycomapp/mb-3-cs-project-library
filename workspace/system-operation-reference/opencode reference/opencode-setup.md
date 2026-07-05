@@ -165,7 +165,7 @@ Task/s
 Project skill locations (for example: `C:\_mb2-cs-app\project-library\skills\` and `C:\_mb2-cs-app\mb-3-cs\skills\` if used)
 
 Task/s
-- [NOT DONE] No project-specific skills have been created or configured yet.
+- [NOT DONE] No project-specific skills have been created or configured yet. (61 skills symlinked into `~/.config/opencode/skills/` from `/mnt/c/_mb2-cs-app/skills/`.)
 - Decision pending: determine whether either repo needs local skills.
 
 ---
@@ -231,7 +231,7 @@ Task/s
 `C:\Users\dev-p\.config\opencode\opencode.json`
 
 Task/s
-- [NOT DONE] No custom global commands configured yet.
+- [DONE] Commands: 49 command files in `.opencode/commands/` route to GStack skills. See workspace-description.md Section 10.
 - [DONE] Confirm that OpenCode Desktop already exposes built-in actions through the current shortcut/action system.
 - Decision pending: add custom commands only after repeated workflow needs are identified.
 
@@ -239,7 +239,7 @@ Task/s
 Project `opencode.json` files / `.opencode` directories
 
 Task/s
-- [NOT DONE] No project-specific commands configured yet.
+- [DONE] Project commands: 49 command files in `.opencode/commands/` route to GStack skills. Cleaned 2026-07-06.
 - Decision pending after more real usage in `project-library` and `mb-3-cs`.
 
 ---
@@ -318,7 +318,7 @@ Task/s
 MCP-specific config locations as required by future integrations
 
 Task/s
-- [NOT DONE] No MCP server has been implemented yet.
+- [DONE] GBrain MCP server configured via global `opencode.jsonc` — `gbrain serve` running (v0.42.44.0, PGLite engine).
 - [IN REVIEW] Determine whether a docs-focused MCP server is needed for indexed, persistent, or multi-source documentation retrieval.
 - [IN REVIEW] Future MCP candidates should be justified by real workflow gaps, especially around integration documentation accuracy and repeatability.
 - Possible future scope:
@@ -409,7 +409,7 @@ Task/s
 - [DONE] Confirm GStack is locally present and runnable in WSL.  
 - [DONE] Use GStack as the primary workflow/orchestration layer around OpenCode via skills (slash commands) exposed to the OpenCode agents (for example: `/office-hours`, `/plan-ceo-review`, `/plan-eng-review`, `/build`, `/investigate`, `/review`, `/ship`, `/setup-gbrain`, etc.). [web:212][web:560][web:568]  
 - [DONE] Confirm that GStack skills can be invoked from OpenCode Desktop sessions attached to the WSL server and that they operate against the correct WSL paths (`/mnt/c/_mb2-cs-app/...`).  
-- [NOT DONE] No project-specific GStack config has been added yet under `.config\\opencode\\gstack\\` or project-local `.opencode\\gstack\\` paths; integration is currently through the agent’s skills/skillpack and workspace-level docs, not through `.opencode` command wrappers.  
+- - [DONE] GStack integrated via skillpack and 49 project-local commands. No separate per-project GStack config path needed. under `.config\\opencode\\gstack\\` or project-local `.opencode\\gstack\\` paths; integration is currently through the agent’s skills/skillpack and workspace-level docs, not through `.opencode` command wrappers.  
 - [DECIDED] Treat GStack as a workflow/orchestration layer that:  
   - **does not** override OpenCode global/project config, AGENTS rules, or protected-file behavior,  
   - **does** provide structured workflows (plan/build/review/ship, docs-plan, code-plan-build, status-handover) for both `project-library` and `mb-3-cs`.
@@ -435,23 +435,23 @@ Task/s
     - `gstack-operating-model.md` (Populated)  
     - `gstack-workflows.md` (Populated)  
     - `gstack-handoff-contract.md` (Populated)  
-    - `gstack-command-map.md` (waiting for content)  
-    - `gstack-install-plan.md` (waiting for content)  
-    - `gstack-open-adaption.md` (waiting for content)  
-    - `gstack-overview.md` (waiting for content)  
-    - `gstack-role-map.md` (waiting for content)  
-    - `README.md` (waiting for content)
+    - `gstack-command-map.md` (populated)
+    - `gstack-install-plan.md` (populated)
+    - `gstack-open-adaption.md` (populated)
+    - `gstack-overview.md` (populated)
+    - `gstack-role-map.md` (populated)
+    - `README.md` (populated)
 
   - `workspace\\gbrain\\`  
     - `gbrain-operating-model.md` (Populated)  
     - `gbrain-source-tiers.md` (Populated)  
-    - `gbrain-ingestion-plan.md` (waiting for content)  
-    - `gbrain-install-plan.md` (waiting for content)  
-    - `gbrain-overview.md` (waiting for content)  
-    - `gbrain-repo-strategy.md` (waiting for content)  
-    - `gbrain-sources.md` (waiting for content)  
-    - `gbrain-sync-policy.md` (waiting for content)  
-    - `README.md` (waiting for content)
+    - `gbrain-ingestion-plan.md` (populated)
+    - `gbrain-install-plan.md` (populated)
+    - `gbrain-overview.md` (populated)
+    - `gbrain-repo-strategy.md` (populated)
+    - `gbrain-sources.md` (populated)
+    - `gbrain-sync-policy.md` (populated)
+    - `README.md` (populated)
 
   - `workspace\\opencode-setup.md` (this document)  
   - `workspace\\workspace-description.md`  
@@ -470,7 +470,7 @@ Task/s
   - `code-plan-build` (primary in `mb-3-cs`),  
   - `status-handover` (cross-workspace status and handoffs).  
 - [DONE] Define a minimum Plan↔Build handoff contract in `gstack-handoff-contract.md`.  
-- [NOT DONE] Populate the remaining GStack files (`gstack-command-map.md`, `gstack-install-plan.md`, `gstack-open-adaption.md`, `gstack-overview.md`, `gstack-role-map.md`, `README.md`) with final content and examples.  
+  - [DONE] All GStack workspace docs populated: `gstack-command-map.md`, `gstack-install-plan.md`, `gstack-open-adaption.md`, `gstack-overview.md`, `gstack-role-map.md`, `README.md`.
 - [DECIDED] Treat GStack as a workflow and orchestration layer around OpenCode; GStack does not override OpenCode permissions, project rules, or protected-file behavior.
 
 36. (GBrain – operating model, engine, and source tiers)  
@@ -485,14 +485,14 @@ Task/s
   - Tier D: Contextual summaries,  
   - Tier E: External advisory sources.  
 - [DONE] Implement a running GBrain instance with the following **runtime configuration**:  
-  - `gbrain` version: `v0.18.2` at `~/gbrain/`.  
+  - `gbrain` version: `v0.42.44.0` at `~/.bun/bin/gbrain`.  
   - Engine: **Supabase (PostgreSQL)** project named `project-library` (`fnjcssmqljshckdksvam`). [web:532][web:541]  
   - Embeddings: `text-embedding-3-large` via **OpenRouter**, using `OPENAI_API_BASE` pointing at `https://openrouter.ai/api/v1`. [web:533][web:538]  
   - Smoke test: **Passed** — write + embed + search round-trip confirmed from `/setup-gbrain` / GStack. [web:239]  
 - [DONE] Apply a local patch to GBrain so that the embedding client respects `OPENAI_API_BASE`:  
   - Modified `~/gbrain/src/core/embedding.ts` to use the `OPENAI_API_BASE` environment variable instead of a hardcoded `https://api.openai.com`.  
   - [DECIDED] Treat this as a **local fork change** that will be lost on `gbrain` upgrade unless upstreamed; any future upgrade must re-apply or retire this patch based on upstream support.  
-- [NOT DONE] Populate the remaining GBrain workspace docs (`gbrain-ingestion-plan.md`, `gbrain-install-plan.md`, `gbrain-overview.md`, `gbrain-repo-strategy.md`, `gbrain-sources.md`, `gbrain-sync-policy.md`, `README.md`) with detailed ingestion rules, sync policies, and concrete workflows.  
+  - [DONE] All GBrain workspace docs populated: `gbrain-ingestion-plan.md`, `gbrain-install-plan.md`, `gbrain-overview.md`, `gbrain-repo-strategy.md`, `gbrain-sources.md`, `gbrain-sync-policy.md`, `README.md`. PGLite engine (migrated from Supabase), v0.42.44.0.
 - [DECIDED] GBrain memory must always defer to current on-disk sources; memory recall is advisory, must carry provenance, and must be checked against the current repo/ADRs when in doubt.
 
 37. (GStack / GBrain integration status)  
@@ -508,7 +508,7 @@ Task/s
   - then GBrain memory.  
 - [DONE] Wire GBrain into GStack via the `/setup-gbrain` skill, selecting the Supabase engine and OpenRouter-based embedding model, and confirming a passing smoke test (write + embed + search). [web:239][web:466]  
 - [DONE] Allow GStack-aware workflows (for example: `/gstack-learn`, context save/restore flows, and other memory-heavy skills) to read/write to this GBrain instance while still treating it as an advisory memory layer under the defined source-tier rules. [web:466][web:542]  
-- [NOT DONE] Wire GStack workflows into **project-local OpenCode commands** (under `.opencode\\commands\\`) in a way that works reliably in the current Desktop UI; OpenCode currently invokes GStack via its skillpack, not via custom `.opencode` commands.  
+- [DONE] GStack workflows available via 49 project-local commands in `.opencode/commands/`. Web UI only.  
 - [DECIDED] Proceed with small, reviewable steps so that each new command, wrapper, or integration (for example, project-local GStack/GBrain commands) can be tested in isolation against this status tracker.
 ---
 
