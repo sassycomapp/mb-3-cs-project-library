@@ -8,7 +8,7 @@
 
 ## 1. The Five-App System
 
-Mybizz runs on five applications within a single Anvil account (see ADR-42):
+Mybizz runs on five applications within a single Anvil account (see `client-instance-readme-five-app-system` ADR):
 
 ### mb-3-cs
 The development workspace. All feature work happens here. Connected to GitHub as the shared
@@ -39,7 +39,7 @@ has been manually onboarded.
 **Note:** mb-2-cs was the original development application and has been deprecated. All
 development has migrated to mb-3-cs.
 
-**See:** `9-multi-vertical-to-single-vertical-conversion.md`, ADR-42 (Mandatory README in Every
+**See:** `9-multi-vertical-to-single-vertical-conversion.md`, `client-instance-readme-five-app-system` ADR (Mandatory README in Every
 Client Instance)
 
 ---
@@ -52,7 +52,7 @@ and permanently overrides the dependency for that instance only, with no error o
 instance stops receiving any future update to `master_template`. If a change is needed for a
 specific client, it belongs in `mb-3-cs`, tested against a private client instance, then merged
 `develop` → `stable` into `master_template` — after which every client instance, including the
-one that prompted the change, receives it automatically. Per ADR-42, every client instance
+one that prompted the change, receives it automatically. Per `client-instance-readme-five-app-system` ADR, every client instance
 carries a README stating this explicitly from the moment of provisioning; if you are working
 directly in a client instance app and don't see that README, stop and locate it before proceeding.
 
@@ -110,7 +110,7 @@ server-side package remains `server_marketing/`.
 
 See `anvil-platform-standards.md` Section 3 for the general Three-Tier Module Pattern (Forms /
 Client Modules / Server Modules / Pure Logic Modules) — not repeated here. This project's specific
-authority for the pattern: ADR-035 (Form Architecture and State Management).
+authority for the pattern: `form-architecture-and-state` ADR (Form Architecture and State Management).
 
 ---
 
@@ -186,7 +186,7 @@ authentication and routes before `init_components()`:
 
 Calling `open_form()` in `__init__` must always be followed by `return`.
 
-**See:** ADR-034 (Anvil Platform Constraints — server call latency)
+**See:** `anvil-platform-constraints` ADR (Anvil Platform Constraints — server call latency)
 
 ---
 
@@ -201,9 +201,9 @@ final step.
 ---
 
 *Architecture v2.0 — Section 1 corrected from three named apps to the actual five-app system
-(ADR-42); Section 2 clarified to state the `blank_client_template` clone lineage explicitly; a
+(`client-instance-readme-five-app-system` ADR); Section 2 clarified to state the `blank_client_template` clone lineage explicitly; a
 warning against modifying client instances added. Sections 5–6 trimmed of content now duplicated
 in the Standards Library (`anvil-platform-standards.md`, `m3-design-standards.md`).*
 
-**Outstanding, not fixed here:** ADR-42 states "the 36-table schema" for `blank_client_template`;
-`authoritative-schema.md` confirms 43 tables. That correction belongs in ADR-42 itself.
+**Outstanding, not fixed here:** `client-instance-readme-five-app-system` ADR states "the 36-table schema" for `blank_client_template`;
+`authoritative-schema.md` confirms 43 tables. That correction belongs in `client-instance-readme-five-app-system` ADR itself.

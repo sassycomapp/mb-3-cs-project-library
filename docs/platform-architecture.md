@@ -37,8 +37,6 @@ Consulting & Services. Products, orders, shopping carts, shipping, room reservat
 tiers, subscription billing, and hospitality-specific features are explicitly out of scope for
 this app.
 
-**See:** `9-multi-vertical-to-single-vertical-conversion.md`
-
 ---
 
 ## 3. This App's Five-App Instances
@@ -133,16 +131,16 @@ Full blog with rich text editor; manual and basic auto-generated tasks; pre-buil
 The platform is designed to work within Anvil's specific parameters. Key constraints:
 
 - **Skulpt client-side runtime:** Not all Python 3 stdlib works. Money and date logic lives in
-  server modules only. See ADR-034.
+  server modules only. See `anvil-platform-constraints` ADR.
 - **No native URL routing:** Public pages use the community routing library. Admin portal uses
-  lambda/Link/`open_form`. See ADR-002, ADR-037.
+  lambda/Link/`open_form`. See `navigation-lambda-link-open-form` ADR, `ui-customization-approach` ADR.
 - **Lazy-loaded Data Table rows:** Never iterate without `.search()` or `.limit_to()`. See
-  ADR-040.
+  `data-access-patterns` ADR.
 - **Server call latency:** Every `anvil.server.call()` is an HTTP round-trip. Minimize in
-  user-facing flows. See ADR-035.
-- **No WebSocket push:** Real-time updates use client-side timer polling. See ADR-036.
+  user-facing flows. See `form-architecture-and-state` ADR.
+- **No WebSocket push:** Real-time updates use client-side timer polling. See `real-time-and-background-tasks` ADR.
 
-**See:** ADR-034 (Anvil Platform Constraints and Design Boundaries)
+**See:** `anvil-platform-constraints` ADR (Anvil Platform Constraints and Design Boundaries)
 
 ---
 

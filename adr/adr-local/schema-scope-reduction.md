@@ -63,4 +63,4 @@ If any removed feature (tickets, knowledge base, reviews, events, expenses) is r
 
 ---
 
-*End of ADR-011*
+*End of `schema-scope-reduction` ADR*

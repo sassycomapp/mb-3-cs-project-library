@@ -1,8 +1,8 @@
-# ADR-032 — Observability Architecture
+# `observability-architecture` ADR — Observability Architecture
 
 **Status:** Confirmed  
 **Date:** 2026-06-13  
-**Authority:** Derived from platform-overview.md, ADR-033, Anvil monitoring feature analysis
+**Authority:** Derived from platform-overview.md, `mybizz-management-visibility` ADR, Anvil monitoring feature analysis
 
 ---
 
@@ -42,13 +42,13 @@ Master_template includes server-side logic that writes key events and metrics to
 | Health heartbeat | Scheduled background task | `health_log` table |
 | Background task completion/failure | On task end | `audit_log` table |
 | Payment event | On payment success/failure | `audit_log` table |
-| Vault access | On every Vault open | `audit_log` table (existing, ADR-003) |
+| Vault access | On every Vault open | `audit_log` table (existing, `payment-security-boundary-vault` ADR) |
 | Error threshold exceeded | On unhandled exception | `error_log` table |
 | Session activity | On user login/logout | `audit_log` table |
 
 ### What Mybizz_management Displays
 
-Mybizz_management queries client instances via HTTP endpoints (see ADR-033) and presents:
+Mybizz_management queries client instances via HTTP endpoints (see `mybizz-management-visibility` ADR) and presents:
 
 - Last active timestamp per client
 - Background task health (last run, success/failure)
@@ -98,10 +98,10 @@ Anvil's built-in observability tools are not replaced — they are complementary
 
 | Document | Relationship |
 |---|---|
-| `adr/3-payment-security-boundary-vault.md` | Audit log pattern (existing) extended by this ADR |
-| `adr/033-mybizz-management-visibility.md` | HTTP endpoint mechanism by which management queries client metrics |
+| ``adr/adr-global/payment-security-boundary-vault.md`` | Audit log pattern (existing) extended by this ADR |
+| ``adr/adr-global/mybizz-management-visibility.md`` | HTTP endpoint mechanism by which management queries client metrics |
 | `docs/platform-overview.md` | Section 9: The Vault; audit log referenced |
 
 ---
 
-*End of ADR-032*
+*End of `observability-architecture` ADR*

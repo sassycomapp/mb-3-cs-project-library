@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-16
 **Source:** CEO review 2026-06-15 Section 6, Engineering review 2026-06-16
-**Authority:** Build plan test framework, ADR-034, ADR-035, ADR-038, ADR-041
+**Authority:** Build plan test framework, `anvil-platform-constraints` ADR, `form-architecture-and-state` ADR, `webhook-architecture` ADR, `dependency-based-not-multi-tenant` ADR
 
 **Note:** General testing methodology (the Level 1/2/3 model, pure-function characteristics, the
 Uplink safety protocol, generic test structure/naming, common test patterns) lives in

@@ -101,10 +101,10 @@ From platform documentation:
 
 ## Related Documents
 
-- `adr/19-payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed.md` — Gateway configuration in Settings
+- ``adr/adr-global/payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed.md`` — Gateway configuration in Settings
 - Platform overview documentation — Current gateway description
 - Payment processing architecture
 
 ---
 
-*End of ADR-024*
+*End of `payment-gateway-mutability` ADR*

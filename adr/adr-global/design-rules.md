@@ -1,4 +1,4 @@
-# ADR-027 — Wireframe Design Rules
+# `design-rules` ADR — Wireframe Design Rules
 
 - **Status:** Accepted
 - **Date:** 2026-06-10
@@ -12,7 +12,7 @@
 
 Before producing or modifying any wireframe, the agent MUST read the following, in this order, and MUST NOT proceed until this is done:
 
-1. This ADR (ADR-027) in full.
+1. This ADR (`design-rules` ADR) in full.
 2. `docs/nomenclature.md` — naming conventions for every component type.
 3. `docs/m3_component_mapping.md` — which Material 3 components are supported, partially supported, or unsupported.
 4. `docs/scaffold-spec.md` — the architectural scaffold the wireframe must conform to.
@@ -144,7 +144,7 @@ txt_password | TextBox | writeback = W, hide_text = True
 
 Before submitting any wireframe, confirm ALL of the following are true:
 
-- [ ] Section 0 reading completed (ADR-027, nomenclature.md, m3_component_mapping.md, scaffold-spec.md, relevant existing client_code, relevant project-library docs/adr/implementation files, relevant gstack-outputs)
+- [ ] Section 0 reading completed (`design-rules` ADR, nomenclature.md, m3_component_mapping.md, scaffold-spec.md, relevant existing client_code, relevant project-library docs/adr/implementation files, relevant gstack-outputs)
 - [ ] Document contains exactly three sections, in the correct order (Section 2.1–2.3)
 - [ ] Document is NOT formatted as a "Screen" type document
 - [ ] No legacy `Label` (`lbl_`) component is used anywhere

@@ -90,4 +90,4 @@ The question arose of what happens after onboarding is completed, whether the Ow
 
 ---
 
-*End of ADR-025*
+*End of `onboarding-finality` ADR (deleted)*

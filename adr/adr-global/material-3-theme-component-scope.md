@@ -71,4 +71,4 @@ Components from excluded categories cannot be used without explicit ADR approval
 
 ---
 
-*End of ADR-015*
+*End of `material-3-theme-component-scope` ADR*

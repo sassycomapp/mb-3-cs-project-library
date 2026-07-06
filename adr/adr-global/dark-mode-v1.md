@@ -1,4 +1,4 @@
-# ADR-46: Dark Mode — V1 Inclusion
+# `dark-mode-v1` ADR: Dark Mode — V1 Inclusion
 
 ## Status
 
@@ -60,4 +60,4 @@ The following references to dark mode deferral are superseded by this ADR:
 
 ---
 
-*End of ADR-46*
+*End of `dark-mode-v1` ADR*

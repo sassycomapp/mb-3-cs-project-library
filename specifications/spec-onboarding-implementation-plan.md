@@ -193,7 +193,7 @@ The onboarding form includes buttons that link to specific Settings tabs:
 | Palette Selection | "Choose Palette in Settings →" | Jump to Settings → Palette tab |
 | Completion | "Configure Gateway in Settings →" | Jump to Settings → Payment Gateway tab (post-onboarding) |
 
-> **Note:** These are convenience navigation affordances within the onboarding form, not required onboarding steps. Payment Gateway configuration is a post-onboarding Settings concern (see ADR-019). The gateway link appears in the completion step as a suggested next action.
+> **Note:** These are convenience navigation affordances within the onboarding form, not required onboarding steps. Payment Gateway configuration is a post-onboarding Settings concern (see `payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed` ADR). The gateway link appears in the completion step as a suggested next action.
 
 **Navigation behaviour:**
 - Clicking the button opens the Settings form with the relevant tab active

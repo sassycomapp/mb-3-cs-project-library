@@ -50,4 +50,4 @@ package was renamed. Do not conflate the two.
 
 ---
 
-*End of ADR-006*
+*End of `crm-package-replaces-marketing` ADR*

@@ -62,4 +62,4 @@ All customers are contacts but not all contacts are customers. The `contacts` ta
 
 ---
 
-*End of ADR-010*
+*End of `single-contacts-table` ADR*

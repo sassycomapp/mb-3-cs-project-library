@@ -1,8 +1,8 @@
-# ADR-033 — Mybizz_management Visibility and Control
+# `mybizz-management-visibility` ADR — Mybizz_management Visibility and Control
 
 **Status:** Confirmed  
 **Date:** 2026-06-13  
-**Authority:** Derived from platform-overview.md, ADR-032
+**Authority:** Derived from platform-overview.md, `observability-architecture` ADR
 
 ---
 
@@ -155,11 +155,11 @@ The following steps are added to the provisioning process:
 
 | Document | Relationship |
 |---|---|
-| `adr/032-observability-architecture.md` | Defines what metrics are written and queried |
-| `adr/028-client-instance-architecture.md` | Confirms server modules (including management endpoints) live in master_template |
+| ``adr/adr-global/observability-architecture.md`` | Defines what metrics are written and queried |
+| ``adr/adr-global/client-instance-architecture.md`` | Confirms server modules (including management endpoints) live in master_template |
 | `implementation/client-activation-runbook.md` | Token generation and registry steps |
 | `docs/platform-overview.md` | Section 3: Application Structure |
 
 ---
 
-*End of ADR-033*
+*End of `mybizz-management-visibility` ADR*

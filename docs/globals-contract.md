@@ -1,6 +1,6 @@
 # Mybizz CS — globals.py Contract
 
-**Authority:** ADR-035 (Form Architecture and State Management)
+**Authority:** `form-architecture-and-state` ADR (Form Architecture and State Management)
 **Status:** Living document — update as new shared state is added during implementation
 
 ---

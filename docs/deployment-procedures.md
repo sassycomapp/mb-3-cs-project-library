@@ -1,6 +1,6 @@
 # Mybizz CS — Deployment Procedures
 
-**Authority:** ADR-029 (Dependency Update Model), ADR-030 (blank_client_template), ADR-034 (Anvil Platform Constraints)
+**Authority:** `dependency-update-model` ADR (Dependency Update Model), `blank-client-template` ADR (blank_client_template), `anvil-platform-constraints` ADR (Anvil Platform Constraints)
 
 ---
 
@@ -8,7 +8,7 @@
 
 This document defines the deployment procedures for the Mybizz CS platform. It covers the update deployment model, schema migration strategy, staged rollout, rollback procedures, and post-deploy verification.
 
-**Key architectural decision:** The platform uses a branch-based update model. Merging `develop` → `stable` in GitHub releases an update to all client instances automatically. See ADR-029.
+**Key architectural decision:** The platform uses a branch-based update model. Merging `develop` → `stable` in GitHub releases an update to all client instances automatically. See `dependency-update-model` ADR.
 
 ---
 
@@ -265,7 +265,7 @@ All 100 client instances are hosted on a single Anvil Business account. This cre
 3. Once restored: verify all instances are healthy
 4. Review `health_log` for any data gaps during outage
 
-**Note:** This is an accepted risk of the platform decision (ADR-034). No self-hosted fallback is planned.
+**Note:** This is an accepted risk of the platform decision (`anvil-platform-constraints` ADR). No self-hosted fallback is planned.
 
 ---
 

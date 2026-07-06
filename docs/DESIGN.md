@@ -84,7 +84,7 @@ The intended character is:
 
 - Bright gradients, flashy hero treatments, or decorative visual noise.
 - Childish or overly playful interface language.
-- Dark mode as the primary design target. (Dark mode is included in V1 per ADR-46.)
+- Dark mode as the primary design target. (Dark mode is included in V1 per `dark-mode-v1` ADR.)
 - Heavy animation, glassmorphism, or neumorphism.
 - Complex charts or visual systems in V1 beyond what is operationally useful.
 - Template-specific CSS divergence that breaks the shared design system.
@@ -449,8 +449,8 @@ This section defines the primary implementation-facing forms and pages in the My
 1. Welcome and orientation.
 2. Business Profile — links to Settings Business Profile tab for detail editing.
 3. Palette Selection — links to Settings Palette tab for detail editing.
-4. System Currency — dropdown plus confirm button. Required. Immutable after first transaction. See ADR-016.
-5. Legal Acknowledgement — two checkboxes plus confirm button. Required. Logged in Mybizz_management. See ADR-018.
+4. System Currency — dropdown plus confirm button. Required. Immutable after first transaction. See `system-currency-selection-and-immutability` ADR.
+5. Legal Acknowledgement — two checkboxes plus confirm button. Required. Logged in Mybizz_management. See `legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR.
 6. Completion — onboarding complete.
 
 **Key design rules:**
@@ -458,8 +458,8 @@ This section defines the primary implementation-facing forms and pages in the My
 - Bidirectional navigation (back and forward) between steps.
 - "Go to Settings" links open the corresponding Settings tab and return to onboarding when done.
 - Legal acknowledgement is a required action in onboarding, not a mutable Settings configuration.
-- Payment gateway configuration is not part of onboarding. Onboarding links to Settings for gateway setup. See ADR-019.
-- Onboarding state is tracked in `business_profile.onboarding_status`. See ADR-023, ADR-025.
+- Payment gateway configuration is not part of onboarding. Onboarding links to Settings for gateway setup. See `payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed` ADR.
+- Onboarding state is tracked in `business_profile.onboarding_status`. See `onboarding-resumability` ADR, `onboarding-finality` ADR (deleted).
 
 **Step 5 — Legal Acknowledgement (two checkboxes):**
 - `cb_legal_ack` (CheckBox) — "I understand I must configure my own Privacy Policy and Terms & Conditions in Settings → Policy Editor. Mybizz is not responsible for the content of those pages." Sets `business_profile.legal_ack_accepted`.
@@ -503,9 +503,9 @@ This section defines the primary implementation-facing forms and pages in the My
 **Key design rules:**
 - Tab visibility is RBAC-governed. Different roles see different tabs.
 - "Return to Onboarding" button in header — visible only when onboarding is in progress.
-- Vault access (within Payment Gateway tab) requires TOTP step-up per ADR-03.
+- Vault access (within Payment Gateway tab) requires TOTP step-up per `payment-security-boundary-vault` ADR.
 - Legal Acknowledgement tab is read-only. It displays acknowledgement history. The acknowledgement action itself belongs to onboarding.
-- Payment gateway configuration is a Settings concern, not an onboarding concern. See ADR-019.
+- Payment gateway configuration is a Settings concern, not an onboarding concern. See `payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed` ADR.
 - PaletteSettingsForm is a local/form-specific component used only within the Palette tab.
 - Business Profile is a tab within SettingsForm, not a standalone form.
 - Services and Users & Permissions tabs are link-only tabs that navigate to their respective forms.
@@ -553,7 +553,7 @@ This section defines the primary implementation-facing forms and pages in the My
 
 **Key design rules:**
 - From Email and From Name are the only per-client editable fields.
-- SMTP host, port, and encryption are platform constants (smtp-relay.brevo.com:587, TLS) — not user-configurable. See ADR-001.
+- SMTP host, port, and encryption are platform constants (smtp-relay.brevo.com:587, TLS) — not user-configurable. See `brevo-replaces-zoho-email` ADR.
 - SMTP credentials (API key) stored in Vault, not in the form or database.
 - Test Connection button verifies SMTP configuration.
 - Success/error result displayed inline after test.
@@ -562,7 +562,7 @@ This section defines the primary implementation-facing forms and pages in the My
 ### PaymentGatewayForm
 
 **Purpose:** Configure active payment gateway (Stripe or Paystack).  
-**Architecture:** Standalone form. One active gateway per client instance (ADR-024). Publishable key stored in `payment_config` table. Secret key stored in Vault (ADR-003).
+**Architecture:** Standalone form. One active gateway per client instance (`payment-gateway-mutability` ADR). Publishable key stored in `payment_config` table. Secret key stored in Vault (`payment-security-boundary-vault` ADR).
 
 **Schema fields (`payment_config`):** `active_gateway`, `stripe_publishable_key`, `stripe_connected`, `stripe_connected_at`, `paystack_connected`, `paystack_connected_at`, `test_mode`, `configured_at`.
 
@@ -570,7 +570,7 @@ This section defines the primary implementation-facing forms and pages in the My
 - Gateway selector with Stripe and Paystack options (radio buttons or cards).
 - Test Mode toggle for sandbox/live key switching.
 - Publishable Key input — safe to expose in client-side code.
-- Secret Key input must NOT be present in the form. Secret keys are stored exclusively in The Vault per ADR-003.
+- Secret Key input must NOT be present in the form. Secret keys are stored exclusively in The Vault per `payment-security-boundary-vault` ADR.
 - Vault notice displayed explaining secret key storage.
 - RBAC: Owner only.
 
@@ -614,7 +614,7 @@ This section defines the primary implementation-facing forms and pages in the My
 - Contains a document type selector (Privacy Policy vs Terms & Conditions).
 - Embeds the ClauseBuilder component, parameterized by document type.
 - Publish/update button writes to `privacy_policy` or `t_and_c` table and publishes to the corresponding public page.
-- See ADR-018.
+- See `legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR.
 
 ### ClauseBuilder (Shared Custom Component)
 
@@ -1232,7 +1232,7 @@ The booking calendar uses 4 template subforms for rendering events across three 
 
 ### 7-Step Booking Flow Per-Step UI Layout
 
-The booking flow uses 3 server round-trips maximum (ADR-035). Each step has a defined UI:
+The booking flow uses 3 server round-trips maximum (`form-architecture-and-state` ADR). Each step has a defined UI:
 
 **Round-trip 1: `get_booking_context(service_id)`**
 

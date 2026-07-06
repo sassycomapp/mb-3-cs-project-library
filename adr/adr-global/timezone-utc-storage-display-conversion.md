@@ -50,4 +50,4 @@ should be centralised — not duplicated per function.
 
 ---
 
-*End of ADR-005*
+*End of `timezone-utc-storage-display-conversion` ADR*

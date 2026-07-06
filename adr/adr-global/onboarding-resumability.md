@@ -98,10 +98,10 @@ The onboarding flow captures substantial business information but may not suppor
 
 ## Related Documents
 
-- `adr/17-onboarding-vs-settings-boundary.md` — Onboarding scope definition
+- ``adr/adr-global/onboarding-vs-settings-boundary.md`` — Onboarding scope definition
 - User experience documentation
 - Onboarding flow documentation
 
 ---
 
-*End of ADR-023*
+*End of `onboarding-resumability` ADR*

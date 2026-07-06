@@ -96,4 +96,4 @@ These are pricing/business-model constructs. They are separate from setup-servic
 
 ---
 
-*End of ADR-022*
+*End of `tiers-model` ADR*

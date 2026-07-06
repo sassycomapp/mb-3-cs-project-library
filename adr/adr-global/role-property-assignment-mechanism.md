@@ -1,4 +1,4 @@
-# ADR-43: Role Property Assignment Mechanism (Designer vs. Code)
+# `role-property-assignment-mechanism` ADR: Role Property Assignment Mechanism (Designer vs. Code)
 
 ## Status
 
@@ -48,4 +48,4 @@ Components can have multiple roles (space-separated string or list of strings).
 
 ---
 
-*End of ADR-43 (superseded)*
+*End of `role-property-assignment-mechanism` ADR (superseded)*

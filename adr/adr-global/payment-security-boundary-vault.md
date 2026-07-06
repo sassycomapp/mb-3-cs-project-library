@@ -75,4 +75,4 @@ from the outbound dict entirely.
 
 ---
 
-*End of ADR-003*
+*End of `payment-security-boundary-vault` ADR*

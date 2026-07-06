@@ -1,8 +1,8 @@
-# ADR-036 — Real-Time Updates and Background Task Architecture
+# `real-time-and-background-tasks` ADR — Real-Time Updates and Background Task Architecture
 
 **Status:** Approved  
 **Date:** 2026-06-14  
-**Authority:** Derived from platform-overview.md, ADR-032, ADR-034, integration-architecture.md
+**Authority:** Derived from platform-overview.md, `observability-architecture` ADR, `anvil-platform-constraints` ADR, integration-architecture.md
 
 ---
 
@@ -197,13 +197,13 @@ def process_webhook(event_id):
 
 | Document | Relationship |
 |---|---|
-| `adr/032-observability-architecture.md` | Health heartbeat task feeds observability metrics |
-| `adr/034-anvil-platform-constraints.md` | Background task limits and server call latency constraints |
-| `adr/038-webhook-architecture.md` | Detailed webhook handling pattern |
+| ``adr/adr-global/observability-architecture.md`` | Health heartbeat task feeds observability metrics |
+| ``adr/adr-global/anvil-platform-constraints.md`` | Background task limits and server call latency constraints |
+| ``adr/adr-global/webhook-architecture.md`` | Detailed webhook handling pattern |
 | `integration-architecture.md` | Section 4: Background Tasks (existing task inventory) |
 | `docs/platform-overview.md` | Section 5.7: Email & Campaigns (campaign enrollment task) |
 | `docs/deployment-procedures.md` | Operational procedures for task failure recovery |
 
 ---
 
-*End of ADR-036*
+*End of `real-time-and-background-tasks` ADR*

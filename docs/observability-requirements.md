@@ -1,6 +1,6 @@
 # Mybizz CS — Observability Requirements
 
-**Authority:** ADR-032 (Observability Architecture), ADR-033 (Mybizz_management Visibility and Control)
+**Authority:** `observability-architecture` ADR (Observability Architecture), `mybizz-management-visibility` ADR (Mybizz_management Visibility and Control)
 
 ---
 
@@ -8,7 +8,7 @@
 
 This document defines the observability requirements for the Mybizz CS platform. Observability is delivered through application-level metrics written to each client instance's Data Tables, queried by Mybizz_management via HTTP endpoints.
 
-**Key architectural decision:** External monitoring tools (Prometheus, Grafana, Datadog) were evaluated and rejected as unnecessary at this scale and inconsistent with the hosted-only infrastructure model. See ADR-032.
+**Key architectural decision:** External monitoring tools (Prometheus, Grafana, Datadog) were evaluated and rejected as unnecessary at this scale and inconsistent with the hosted-only infrastructure model. See `observability-architecture` ADR.
 
 Anvil's built-in observability tools (App Logs, CPU/Memory tabs, Profiling and Tracing) remain in use for per-app diagnostic investigation. They are complementary to, not a replacement for, the consolidated Mybizz_management monitoring layer.
 
@@ -60,9 +60,9 @@ All logs must be structured (JSON format) for easy parsing and aggregation:
 
 ## Metrics
 
-### Application-Level Metrics (ADR-032)
+### Application-Level Metrics (`observability-architecture` ADR)
 
-Metrics are written to designated Data Tables within each client instance by master_template server modules. Mybizz_management queries these tables via management HTTP endpoints (ADR-033).
+Metrics are written to designated Data Tables within each client instance by master_template server modules. Mybizz_management queries these tables via management HTTP endpoints (`mybizz-management-visibility` ADR).
 
 **Health metrics (written to `health_log` table):**
 - Health heartbeat — scheduled background task, every 15 minutes
@@ -82,7 +82,7 @@ Metrics are written to designated Data Tables within each client instance by mas
 
 ### Business Metrics (Pre-Computed)
 
-Complex aggregations are computed by background tasks and stored in summary tables (ADR-040):
+Complex aggregations are computed by background tasks and stored in summary tables (`data-access-patterns` ADR):
 
 **Daily summary (`daily_summary` table):**
 - Total revenue
@@ -102,7 +102,7 @@ Complex aggregations are computed by background tasks and stored in summary tabl
 
 ## Alerts
 
-### Mybizz_management Dashboard (ADR-033)
+### Mybizz_management Dashboard (`mybizz-management-visibility` ADR)
 
 Mybizz_management presents a consolidated dashboard across all client instances:
 

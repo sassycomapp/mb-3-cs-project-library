@@ -100,10 +100,10 @@ Payment gateway configuration could be placed in onboarding or settings, with un
 
 ## Related Documents
 
-- `adr/17-onboarding-vs-settings-boundary.md` — Onboarding vs settings boundary
+- ``adr/adr-global/onboarding-vs-settings-boundary.md`` — Onboarding vs settings boundary
 - Security architecture documentation
 - RBAC implementation guidelines
 
 ---
 
-*End of ADR-019*
+*End of `payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed` ADR*

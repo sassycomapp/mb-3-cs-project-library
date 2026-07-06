@@ -1,4 +1,4 @@
-# ADR-031 — 30-Day Free Trial Abandoned
+# `free-trial-abandoned` ADR — 30-Day Free Trial Abandoned
 
 **Status:** Confirmed  
 **Date:** 2026-06-13  
@@ -63,4 +63,4 @@ All paying clients receive a properly provisioned instance on the Anvil Business
 
 ---
 
-*End of ADR-031*
+*End of `free-trial-abandoned` ADR*

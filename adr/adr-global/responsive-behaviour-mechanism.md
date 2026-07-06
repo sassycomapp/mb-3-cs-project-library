@@ -1,4 +1,4 @@
-# ADR-44: Responsive Behaviour Mechanism
+# `responsive-behaviour-mechanism` ADR: Responsive Behaviour Mechanism
 
 ## Status
 
@@ -45,9 +45,9 @@ No breakpoint-pixel table is used. Navigation collapse remains separately automa
 | Document | Relationship |
 |---|---|
 | `docs/design-direction.md` | Source of the contradicting breakpoint models this ADR supersedes |
-| `adr/27-design-rules.md` | Wireframe design rules; wireframes must annotate `wrap_on` where applicable |
-| `adr/37-ui-customization-approach.md` | Broader UI customization approach; this ADR is a specific responsive instance |
+| ``adr/adr-global/design-rules.md`` | Wireframe design rules; wireframes must annotate `wrap_on` where applicable |
+| ``adr/adr-global/ui-customization-approach.md`` | Broader UI customization approach; this ADR is a specific responsive instance |
 
 ---
 
-*End of ADR-44*
+*End of `responsive-behaviour-mechanism` ADR*

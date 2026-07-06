@@ -1,8 +1,8 @@
-# ADR-41 — Mybizz CS is a Dependency-Based Architecture, Not a Multi-Tenant Architecture
+# `dependency-based-not-multi-tenant` ADR — Mybizz CS is a Dependency-Based Architecture, Not a Multi-Tenant Architecture
 
 **Status:** Confirmed — Sealed  
 **Date:** 2026-06-13  
-**Authority:** Derived from ADR-28, ADR-29, ADR-30, live testing 2026-06-13  
+**Authority:** Derived from `client-instance-architecture` ADR, `dependency-update-model` ADR, `blank-client-template` ADR, live testing 2026-06-13  
 **Audience:** All developers and AI coding assistants working on this codebase
 
 ---
@@ -258,12 +258,12 @@ If you find an existing function that includes a `client_id`, `tenant_id`, or eq
 
 | Document | Relationship |
 |---|---|
-| `adr/28-client-instance-architecture.md` | Defines client instance structure and app_tables test |
-| `adr/29-dependency-update-model.md` | How master_template updates reach all client instances |
-| `adr/30-blank-client-template.md` | Provisioning — how client instances are created |
+| ``adr/adr-global/client-instance-architecture.md`` | Defines client instance structure and app_tables test |
+| ``adr/adr-global/dependency-update-model.md`` | How master_template updates reach all client instances |
+| ``adr/adr-global/blank-client-template.md`` | Provisioning — how client instances are created |
 | `docs/platform-establishment-report-2026-06-13.md` | Full architectural narrative and rationale |
 | `HANDOVER-opencode-2026-06-13.md` | Technical handover for OpenCode |
 
 ---
 
-*End of ADR-041*
+*End of `dependency-based-not-multi-tenant` ADR*

@@ -1,7 +1,7 @@
 # Mybizz CS — Design Direction (Canonical)
 
 **Status:** Final
-**Re-issued:** 2026-06-28 — Aligned with ADR-43, ADR-44, ADR-45
+**Re-issued:** 2026-06-28 — Aligned with `role-property-assignment-mechanism` ADR, `responsive-behaviour-mechanism` ADR, `htmltemplate-use` ADR
 **Vertical:** Consulting & Services
 
 **Note:** Generic M3 rules (typography scale, spacing scale, elevation, accessibility
@@ -38,7 +38,7 @@ there; nothing project-specific to state here.
 
 ## Anvil Role Map (this project's actual role names)
 
-Reference: ADR-37 (UI Customization Approach). The *pattern* of defining named roles per component
+Reference: `ui-customization-approach` ADR (UI Customization Approach). The *pattern* of defining named roles per component
 category is a general standard (see `m3-design-standards.md`); the specific names below are this
 project's chosen implementation of that pattern.
 

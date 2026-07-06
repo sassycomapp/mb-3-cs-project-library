@@ -1,8 +1,8 @@
-# ADR-029 — Dependency Update Model
+# `dependency-update-model` ADR — Dependency Update Model
 
 **Status:** Confirmed  
 **Date:** 2026-06-13  
-**Authority:** Derived from platform-overview.md, ADR-028, Anvil documentation
+**Authority:** Derived from platform-overview.md, `client-instance-architecture` ADR, Anvil documentation
 
 ---
 
@@ -106,7 +106,7 @@ Branch-based update propagation has not yet been verified by live test. The foll
 - ✅ Staged rollout available via version tags without infrastructure changes
 - ✅ Single Anvil account; single IDE; single billing relationship
 - ⚠️ Merge to `stable` is a production action — release discipline is mandatory
-- ✅ UI and form updates propagate automatically via master_template dependency (confirmed by Test B — see ADR-028)
+- ✅ UI and form updates propagate automatically via master_template dependency (confirmed by Test B — see `client-instance-architecture` ADR)
 - ⚠️ Schema changes require separate migration process for existing client instances
 
 ---
@@ -115,11 +115,11 @@ Branch-based update propagation has not yet been verified by live test. The foll
 
 | Document | Relationship |
 |---|---|
-| `adr/028-client-instance-architecture.md` | Defines what lives in client instance vs master_template |
-| `adr/030-blank-client-template.md` | Provisioning clone source |
-| `adr/031-free-trial-abandoned.md` | Trial model replaced; all clients on stable from day one |
+| ``adr/adr-global/client-instance-architecture.md`` | Defines what lives in client instance vs master_template |
+| ``adr/adr-global/blank-client-template.md`` | Provisioning clone source |
+| ``adr/adr-global/free-trial-abandoned.md`` | Trial model replaced; all clients on stable from day one |
 | `implementation/client-activation-runbook.md` | Includes dependency configuration step at provisioning |
 
 ---
 
-*End of ADR-029*
+*End of `dependency-update-model` ADR*

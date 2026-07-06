@@ -409,7 +409,7 @@ If a form is used in only one parent form (even with multiple data contexts or v
 
 | Component | Parent forms | Places | Justification |
 |---|---|---|---|
-| ClauseBuilder | PolicyEditorForm (privacy_policy + t_and_c) | 2 data contexts, parameterised by document_type | Architecturally defined as shared (ADR-018) |
+| ClauseBuilder | PolicyEditorForm (privacy_policy + t_and_c) | 2 data contexts, parameterised by document_type | Architecturally defined as shared (`legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR) |
 | FooterComponent | HomePage, AboutPage, ContactPage, PrivacyPolicyPage, TermsConditionsPage, LandingPage | 6+ | Same footer on every public page |
 | VideoDisplayComponent | BlogPostForm, HomePage | 2 | YouTube embed in blog posts and homepage |
 | TimeLapseCarouselComponent | HomePage, ServicesForm | 2 | Auto-rotating carousel on homepage and services |

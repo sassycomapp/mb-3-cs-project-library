@@ -369,5 +369,5 @@ Surface and neutral tokens are palette-specific and must be included in every pa
 
 ### Dark Mode
 
-Per ADR-46, dark mode is incorporated into V1. Each palette includes dark mode token overrides.
+Per `dark-mode-v1` ADR, dark mode is incorporated into V1. Each palette includes dark mode token overrides.
 Screens must include `@media (prefers-color-scheme: dark)` blocks with the dark mode token values above.

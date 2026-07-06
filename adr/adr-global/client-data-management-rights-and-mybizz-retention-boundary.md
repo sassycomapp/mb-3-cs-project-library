@@ -105,4 +105,4 @@ The platform needs to clearly distinguish between owner-held client-instance dat
 
 ---
 
-*End of ADR-021*
+*End of `client-data-management-rights-and-mybizz-retention-boundary` ADR*

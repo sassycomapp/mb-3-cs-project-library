@@ -2,7 +2,7 @@
 
 **Scope:** Mybizz-wide. This is the single authoritative document on the Vault system — its architecture, pattern, enforcement rules, and implementation. All other documents reference this one; none duplicate or restate its content.
 
-**Authority:** ADR-003 (`payment-security-boundary-vault.md`)
+**Authority:** `payment-security-boundary-vault` ADR (`payment-security-boundary-vault.md`)
 
 **Source:** Consolidated from `spec-security.md` (the generic security pattern) and the original `docs/vault-system.md` (the CS-specific implementation), merged into one authoritative document.
 
@@ -95,7 +95,7 @@ If the Owner loses their TOTP device, the following recovery path applies:
 - Only Mybizz_management can reset TOTP — no self-service recovery
 - The reset event is permanently logged for audit
 
-**Source:** ADR-034, CEO review 2026-06-15 Section 3
+**Source:** `anvil-platform-constraints` ADR, CEO review 2026-06-15 Section 3
 
 ## Related Documents
 

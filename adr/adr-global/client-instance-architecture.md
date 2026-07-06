@@ -1,9 +1,9 @@
-# ADR-028 — Client Instance Architecture
+# `client-instance-architecture` ADR — Client Instance Architecture
 
 **Status:** Confirmed — architecturally tested (Tests A and B)  
 **Date:** 2026-06-13  
 **Last updated:** 2026-06-13 — revised following Test B (startup form from dependency)  
-**Authority:** Derived from platform-overview.md, ADR-003, and live testing conducted 2026-06-13
+**Authority:** Derived from platform-overview.md, `payment-security-boundary-vault` ADR, and live testing conducted 2026-06-13
 
 ---
 
@@ -99,10 +99,10 @@ open_form(MainForm())
 | Document | Relationship |
 |---|---|
 | `platform-overview.md` | Section 7.4: Dependency app_tables Resolution — Verified |
-| `adr/029-dependency-update-model.md` | How updates flow from mb-3-cs to client instances |
-| `adr/030-blank-client-template.md` | The provisioning source for new client instances |
+| ``adr/adr-global/dependency-update-model.md`` | How updates flow from mb-3-cs to client instances |
+| ``adr/adr-global/blank-client-template.md`` | The provisioning source for new client instances |
 | `implementation/client-activation-runbook.md` | Step-by-step provisioning process |
 
 ---
 
-*End of ADR-028*
+*End of `client-instance-architecture` ADR*

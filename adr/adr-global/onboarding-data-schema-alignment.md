@@ -99,9 +99,9 @@ The authoritative schema (`authoritative-schema.md`) defines the database struct
 ## Related Documents
 
 - `authoritative-schema.md` — Sole source of truth for database schema
-- `adr/17-onboarding-vs-settings-boundary.md` — Onboarding scope definition
+- ``adr/adr-global/onboarding-vs-settings-boundary.md`` — Onboarding scope definition
 - Database architecture documentation
 
 ---
 
-*End of ADR-020*
+*End of `onboarding-data-schema-alignment` ADR*

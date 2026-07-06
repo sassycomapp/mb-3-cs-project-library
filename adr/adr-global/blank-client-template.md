@@ -1,9 +1,9 @@
-# ADR-030 — blank_client_template as Provisioning Clone Source
+# `blank-client-template` ADR — blank_client_template as Provisioning Clone Source
 
 **Status:** Confirmed — revised following Test B (2026-06-13)  
 **Date:** 2026-06-13  
 **Last updated:** 2026-06-13  
-**Authority:** Derived from ADR-028, ADR-029, platform-overview.md, Test B result
+**Authority:** Derived from `client-instance-architecture` ADR, `dependency-update-model` ADR, platform-overview.md, Test B result
 
 ---
 
@@ -13,7 +13,7 @@ Every new client instance requires 36 pre-defined Data Tables with the correct s
 
 Three options were evaluated for how a new client instance acquires its 36 tables:
 
-1. **Clone master_template** — produces a full code copy; client instance then has its own server modules which take precedence over the dependency, permanently breaking update propagation (see ADR-028)
+1. **Clone master_template** — produces a full code copy; client instance then has its own server modules which take precedence over the dependency, permanently breaking update propagation (see `client-instance-architecture` ADR)
 2. **Manual table creation per client** — 36 manual steps per new client; not workable at scale
 3. **A dedicated blank provisioning app** — pre-configured with 36 tables, master_template as dependency, and no server modules of its own
 
@@ -76,7 +76,7 @@ A schema change must never be merged to `stable` (master_template) without a doc
 
 | Alternative | Reason rejected |
 |---|---|
-| Clone master_template | Copies server module code; breaks dependency update model (ADR-028) |
+| Clone master_template | Copies server module code; breaks dependency update model (`client-instance-architecture` ADR) |
 | Manual table creation | 36 steps per client; error-prone; not scalable |
 | Programmatic table creation | Not supported in Anvil — tables cannot be created via code |
 | Clone an existing client instance | Risks copying live client data; requires data wipe; error-prone |
@@ -111,10 +111,10 @@ A schema change must never be merged to `stable` (master_template) without a doc
 
 | Document | Relationship |
 |---|---|
-| `adr/028-client-instance-architecture.md` | Defines why server modules must not exist in client instances |
-| `adr/029-dependency-update-model.md` | Update propagation model that blank_client_template preserves |
+| ``adr/adr-global/client-instance-architecture.md`` | Defines why server modules must not exist in client instances |
+| ``adr/adr-global/dependency-update-model.md`` | Update propagation model that blank_client_template preserves |
 | `implementation/client-activation-runbook.md` | Uses blank_client_template as step 1 of provisioning |
 
 ---
 
-*End of ADR-030*
+*End of `blank-client-template` ADR*

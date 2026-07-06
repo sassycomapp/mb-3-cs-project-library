@@ -99,10 +99,10 @@ The platform needs to support policy creation and publication while maintaining 
 
 ## Related Documents
 
-- `adr/17-onboarding-vs-settings-boundary.md` — Onboarding vs settings boundary
+- ``adr/adr-global/onboarding-vs-settings-boundary.md`` — Onboarding vs settings boundary
 - Legal documentation requirements
 - Platform terms of service
 
 ---
 
-*End of ADR-018*
+*End of `legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR*

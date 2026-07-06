@@ -1,8 +1,8 @@
-# ADR-038 — Webhook Architecture
+# `webhook-architecture` ADR — Webhook Architecture
 
 **Status:** Approved  
 **Date:** 2026-06-14  
-**Authority:** Derived from platform-overview.md, ADR-036, integration-architecture.md
+**Authority:** Derived from platform-overview.md, `real-time-and-background-tasks` ADR, integration-architecture.md
 
 ---
 
@@ -98,7 +98,7 @@ def process_stripe_webhook(event_row_id):
         
     except Exception as e:
         event_row.error_message = str(e)
-        # Push error event to Mybizz_management (ADR-033)
+        # Push error event to Mybizz_management (`mybizz-management-visibility` ADR)
         push_management_event('webhook_processing_error', {
             'source': 'stripe',
             'event_id': event_row_id,
@@ -132,7 +132,7 @@ def handle_payment_success(event):
 
 **Reconciled with authoritative schema (2026-06-16).** The authoritative schema is the source of truth.
 
-| Authoritative Schema Column | Type | Purpose | ADR-038 Alias |
+| Authoritative Schema Column | Type | Purpose | `webhook-architecture` ADR Alias |
 |-----|------|---------|---------------|
 | `gateway` | string | `stripe`, `paystack`, or `brevo` | `source` |
 | `event_type` | string | e.g., `payment_intent.succeeded` | — |
@@ -247,11 +247,11 @@ This ensures webhooks are never silently lost due to dispatch failures.
 
 | Document | Relationship |
 |---|---|
-| `adr/036-real-time-and-background-tasks.md` | Background task architecture and limits |
-| `adr/033-mybizz-management-visibility.md` | Error events pushed to Mybizz_management |
+| ``adr/adr-global/real-time-and-background-tasks.md`` | Background task architecture and limits |
+| ``adr/adr-global/mybizz-management-visibility.md`` | Error events pushed to Mybizz_management |
 | `integration-architecture.md` | Section 1: Payment Gateway Architecture; Section 3: Brevo CRM Integration |
 | `docs/client-activation-runbook.md` | §4.9: Webhook URL registration during provisioning |
 
 ---
 
-*End of ADR-038*
+*End of `webhook-architecture` ADR*

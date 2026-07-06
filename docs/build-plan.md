@@ -240,7 +240,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - Navigation helpers prevent lambda capture bugs and ensure consistent patterns
 - AdminLayout uses NavigationRailLayout with plain Link components (not NavigationLink)
 - Navigation structure follows the spec in architecture.md
-- **See:** ADR-035 (Form Architecture and State Management)
+- **See:** `form-architecture-and-state` ADR (Form Architecture and State Management)
 
 ### Stage 1.4: Settings & Configuration
 
@@ -267,14 +267,14 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Settings form uses 11-tab layout with M3 button navigation
 - ✅ RBAC governance enforced per tab
 - ✅ "Return to Onboarding" button visible only when onboarding in progress
-- ✅ Edge case: user closes browser mid-onboarding — onboarding resumable from last completed step (ADR-023); no session expiry for incomplete onboarding
+- ✅ Edge case: user closes browser mid-onboarding — onboarding resumable from last completed step (`onboarding-resumability` ADR); no session expiry for incomplete onboarding
 - ✅ All unit tests passing
 
 **Implementation Notes:**
 - SettingsForm uses sub-sections for better maintainability
 - Currency becomes immutable after first transaction
 - Feature flags control navigation item visibility
-- **See:** ADR-037 (UI Customization Approach)
+- **See:** `ui-customization-approach` ADR (UI Customization Approach)
 
 ### Stage 1.5: The Vault
 
@@ -387,7 +387,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
   - Meeting type and intake form are client-side selections from pre-loaded data — no server call
   - Confirmation display is client-side — no server call
   - Cache `get_booking_context()` response in `globals.py` for flow duration (see `docs/globals-contract.md`)
-- **See:** ADR-035 (Form Architecture — booking flow latency management)
+- **See:** `form-architecture-and-state` ADR (Form Architecture — booking flow latency management)
 - **See:** `docs/test-specifications.md` (E2E booking test spec, error path tests, RBAC matrix)
 
 ### Stage 2.4: Payment Integration
@@ -409,7 +409,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Payment ID stored in booking
 - ✅ Test/Live mode switching working
 - ✅ External service failure handling implemented (TODO 12: Retry logic with backoff)
-- **See:** ADR-038 (Webhook Architecture), ADR-036 (Real-Time and Background Tasks)
+- **See:** `webhook-architecture` ADR (Webhook Architecture), `real-time-and-background-tasks` ADR (Real-Time and Background Tasks)
 
 ### Stage 2.5: Invoicing System
 
@@ -429,7 +429,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Invoice statuses working (Draft, Sent, Paid, Overdue, Cancelled)
 - ✅ Payment recording updates invoice status
 - ✅ Multi-currency display working
-- **See:** ADR-039 (PDF Invoice Generation)
+- **See:** `pdf-invoice-generation` ADR (PDF Invoice Generation)
 
 ---
 
@@ -467,7 +467,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Edge case: landing page lead submitted with duplicate email — updates existing contact, does not reject
 - ✅ Database indexes added (TODO 8: contacts.email, bookings.contact_id, bookings.service_id indexed)
 - ✅ Pagination added to large lists (TODO 9: 50 items per page)
-- **See:** ADR-040 (Data Access Patterns — pagination, denormalization)
+- **See:** `data-access-patterns` ADR (Data Access Patterns — pagination, denormalization)
 
 ### Stage 3.2: Email Marketing (Brevo Campaigns)
 
@@ -489,7 +489,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Open/click tracking via webhooks working
 - ✅ Broadcast emails functional
 - ✅ Unsubscribe handling working
-- **See:** ADR-036 (Real-Time and Background Tasks — campaign enrollment task)
+- **See:** `real-time-and-background-tasks` ADR (Real-Time and Background Tasks — campaign enrollment task)
 
 ### Stage 3.3: Segmentation
 
@@ -640,7 +640,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Period selector working (week, month, quarter, custom)
 - ✅ Real-time data refresh working
 - ✅ Charts rendering correctly
-- **See:** ADR-040 (Data Access Patterns — pre-computed aggregations)
+- **See:** `data-access-patterns` ADR (Data Access Patterns — pre-computed aggregations)
 
 ### Stage 5.2: Security Hardening
 
@@ -742,7 +742,7 @@ Phase 0 (Pre-Implementation) → Phase 1 (Foundation) → Phase 2 (Transactional
 - `email_campaigns` table (Phase 3) → contact_campaigns
 - `landing_pages` table (Phase 3) → leads → contacts
 
-**See:** ADR-034 (Anvil Platform Constraints) for platform-specific implementation guidance.
+**See:** `anvil-platform-constraints` ADR (Anvil Platform Constraints) for platform-specific implementation guidance.
 
 ---
 
@@ -768,7 +768,7 @@ Phase 0 (Pre-Implementation) → Phase 1 (Foundation) → Phase 2 (Transactional
 - **Contact deduplication:** Addressed in Phase 3 — mitigated
 - **RBAC coverage:** Addressed in Phase 1 (TODO 11) — mitigated
 - **External service failures:** Addressed in Phase 2 (TODO 12) — mitigated
-- **Anvil platform constraints:** All phases — ADR-034 documents Skulpt limits, lazy rows, server latency, background tasks
+- **Anvil platform constraints:** All phases — `anvil-platform-constraints` ADR documents Skulpt limits, lazy rows, server latency, background tasks
 
 ### Operational Risks (All Addressed)
 - **Onboarding friction:** Keep Phase 1 simple and intuitive

@@ -52,4 +52,4 @@ lead creation — it is never null for a successfully captured lead.
 
 ---
 
-*End of ADR-004*
+*End of `lead-capture-simultaneous-creation` ADR*

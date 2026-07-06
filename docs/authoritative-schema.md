@@ -488,7 +488,7 @@ Payment gateway webhook history.
 | `error_message` | string | If processing failed |
 | `received_at` | datetime | UTC |
 
-**Note:** ADR-038 (Webhook Architecture) defines an alternative column set for this table. The columns above represent the actual implementation. The ADR's `source` maps to `gateway`, `status` maps to `verified` + `processed`, and `idempotency_key` is handled via `event_type` + `gateway` dedup. See ADR-038 for the design rationale.
+**Note:** `webhook-architecture` ADR (Webhook Architecture) defines an alternative column set for this table. The columns above represent the actual implementation. The ADR's `source` maps to `gateway`, `status` maps to `verified` + `processed`, and `idempotency_key` is handled via `event_type` + `gateway` dedup. See `webhook-architecture` ADR for the design rationale.
 
 ---
 
@@ -678,7 +678,7 @@ Time tracking for services.
 ## 7. Summary Tables (5)
 
 ### 7.1 `daily_summary`
-Pre-computed daily analytics. Populated by daily background task (ADR-036, ADR-040).
+Pre-computed daily analytics. Populated by daily background task (`real-time-and-background-tasks` ADR, `data-access-patterns` ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -691,7 +691,7 @@ Pre-computed daily analytics. Populated by daily background task (ADR-036, ADR-0
 | `created_at` | datetime | UTC |
 
 ### 7.2 `service_performance`
-Pre-computed per-service analytics. Populated by daily background task (ADR-040).
+Pre-computed per-service analytics. Populated by daily background task (`data-access-patterns` ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -703,7 +703,7 @@ Pre-computed per-service analytics. Populated by daily background task (ADR-040)
 | `created_at` | datetime | UTC |
 
 ### 7.3 `provider_performance`
-Pre-computed per-provider analytics. Populated by daily background task (ADR-040).
+Pre-computed per-provider analytics. Populated by daily background task (`data-access-patterns` ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -715,7 +715,7 @@ Pre-computed per-provider analytics. Populated by daily background task (ADR-040
 | `created_at` | datetime | UTC |
 
 ### 7.4 `campaign_metrics`
-Pre-computed campaign analytics. Populated by hourly background task (ADR-040).
+Pre-computed campaign analytics. Populated by hourly background task (`data-access-patterns` ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -728,7 +728,7 @@ Pre-computed campaign analytics. Populated by hourly background task (ADR-040).
 | `created_at` | datetime | UTC |
 
 ### 7.5 `health_log`
-Instance health metrics. Written every 15 minutes by health heartbeat background task (ADR-036).
+Instance health metrics. Written every 15 minutes by health heartbeat background task (`real-time-and-background-tasks` ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|

@@ -1,9 +1,9 @@
-# ADR-037 — UI Customization Approach
+# `ui-customization-approach` ADR — UI Customization Approach
 
-**Status:** Superseded by ADR-45  
+**Status:** Superseded by `htmltemplate-use` ADR  
 **Date:** 2026-06-14  
-**Superseded:** 2026-06-28 — NavigationRailLayout/NavigationDrawerLayout are now used per ADR-45. The project policy is Anvil Material 3 Theme compliance; native M3 Layouts are the standard for layout shells.  
-**Authority:** Derived from platform-overview.md, ADR-015, ADR-027
+**Superseded:** 2026-06-28 — NavigationRailLayout/NavigationDrawerLayout are now used per `htmltemplate-use` ADR. The project policy is Anvil Material 3 Theme compliance; native M3 Layouts are the standard for layout shells.  
+**Authority:** Derived from platform-overview.md, `material-3-theme-component-scope` ADR, `design-rules` ADR
 
 ---
 
@@ -34,17 +34,17 @@ The platform uses the M3 theme dependency as the foundation. Customization is ac
 
 | Capability | M3 Support | Customization |
 |---|---|---|
-| Color system | Dynamic color, light/dark theme | Palette selector (ADR-027) |
+| Color system | Dynamic color, light/dark theme | Palette selector (`design-rules` ADR) |
 | Typography | Material type scale | Font selection via tokens |
 | Components | Buttons, cards, dialogs, data grids, etc. | Styling via CSS classes |
 | Elevation | Shadow system | Token-based |
-| Layout | Navigation drawer, rail, top app bar | Not used (custom layout, ADR-002) |
+| Layout | Navigation drawer, rail, top app bar | Not used (custom layout, `navigation-lambda-link-open-form` ADR) |
 
 ### What Requires Custom Work
 
 | Area | Approach |
 |---|---|
-| Admin layout sidebar | Custom HtmlTemplate + plain Link components (ADR-002) |
+| Admin layout sidebar | Custom HtmlTemplate + plain Link components (`navigation-lambda-link-open-form` ADR) |
 | Content panel | ColumnPanel inside AdminLayout |
 | Public page layouts | Anvil Routing dependency with custom layouts |
 | Landing page templates | BlankLayout with template-specific design |
@@ -73,7 +73,7 @@ MUI (Material-UI) design patterns were evaluated as a potential source of design
 - ✅ No external UI framework dependency — stays within Anvil's native capabilities
 - ✅ Designer usable for rapid prototyping; code used for precision
 - ⚠️ Complex layouts require code overrides — designer is a starting point, not the final word
-- ⚠️ M3 navigation components (NavigationDrawerLayout, NavigationRailLayout) — **now used per ADR-45** (this item superseded)
+- ⚠️ M3 navigation components (NavigationDrawerLayout, NavigationRailLayout) — **now used per `htmltemplate-use` ADR** (this item superseded)
 - ⚠️ CSS overrides must be maintained across M3 theme updates
 
 ---
@@ -82,12 +82,12 @@ MUI (Material-UI) design patterns were evaluated as a potential source of design
 
 | Document | Relationship |
 |---|---|
-| `adr/015-material-3-theme-component-scope.md` | Which M3 components are in scope |
-| `adr/027-design-rules.md` | Design rules and palette system |
-| `adr/2-navigation-lambda-link-open-form.md` | Why M3 navigation components are not used |
+| ``adr/adr-global/material-3-theme-component-scope.md`` | Which M3 components are in scope |
+| ``adr/adr-global/design-rules.md`` | Design rules and palette system |
+| ``adr/adr-global/navigation-lambda-link-open-form.md`` | Why M3 navigation components are not used |
 | `docs/ui-standards.md` | UI standards and component usage |
 | `docs/spec-material-3-theme.md` | M3 theme specification |
 
 ---
 
-*End of ADR-037*
+*End of `ui-customization-approach` ADR*

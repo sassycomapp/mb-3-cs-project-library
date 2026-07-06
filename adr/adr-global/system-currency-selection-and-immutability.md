@@ -2,7 +2,7 @@
 Date: 2026-05-29
 Status: Accepted
 Source: Consolidated from `013-system-currency-setting.md` and `016-system-currency-selection-and-immutability.md`
-Updated: 2026-06-01 — Merged ADR-13 (currency architecture, conversion strategy, schema changes) with ADR-16 (immutability enforcement, display currency separation)
+Updated: 2026-06-01 — Merged `system-currency-setting` ADR (deleted) (currency architecture, conversion strategy, schema changes) with `system-currency-selection-and-immutability` ADR (immutability enforcement, display currency separation)
 Supersedes: `013-system-currency-setting.md`
 
 ---
@@ -182,4 +182,4 @@ INVOICE: transaction currency + system_currency_amount (for reporting)
 
 ---
 
-*End of ADR-016 — Consolidated from ADR-013 and ADR-016*
+*End of `system-currency-selection-and-immutability` ADR — Consolidated from `system-currency-setting` ADR (deleted) and `system-currency-selection-and-immutability` ADR*
