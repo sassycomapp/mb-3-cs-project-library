@@ -177,6 +177,20 @@ All under `C:\projects\mb-3-cs\project-library\workspace\` (WSL: `/mnt/c/project
 ### System operation reference
 `workspace/system-operation-reference/` — Reference docs for models, hotkeys, skills, workflows, Cloudflare, Namecheap, and other operational topics.
 
+### Config reference documents (6 files)
+
+All in `workspace/system-operation-reference/system config reference/`:
+
+| File | Scope |
+|---|---|
+| `workspace-docmap.md` | This file — path register for all system artefacts |
+| `workspace-description.md` | Multi-project usage guide |
+| `opencode-10-config-files.md` | OpenCode configuration snapshot (all 10 files) |
+| `gstack-config-reference.md` | GStack installation, runtime config, skills, commands |
+| `gbrain-config-reference.md` | GBrain engine config, 10 sources, MCP, PGLite rules |
+| `matt-skills-config-reference.md` | Matt Pocock skills installation, routing, per-project state |
+| `matt-skills-operations-guide.md` | Matt skills user guide + cheatsheet |
+
 ---
 
 ## 8. Environment: Web UI only

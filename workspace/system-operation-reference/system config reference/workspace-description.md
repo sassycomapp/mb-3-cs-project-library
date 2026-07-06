@@ -206,7 +206,27 @@ All projects are PDLF projects or transitioning to PDLF. The PDLF orchestrator (
 
 ---
 
-## 9. GBrain (current role)
+## 9. Matt Pocock Skills (engineering discipline)
+
+- **Install:** 18 skills at `~/.agents/skills/` (WSL: `/home/dev-p/.agents/skills/`)
+- **Role:** Engineering fundamentals — domain modeling, TDD, architecture review, debugging, handoffs. Not vibe coding.
+- **Access:** All 18 appear in OpenCode skill picker. Globally available across all projects.
+- **Per-project setup:** `docs/agents/` (3 config files), Agent skills block in `CLAUDE.md`/`AGENTS.md`, `.scratch/` (issue tracker), `.out-of-scope/`, `matt-skills-output/`.
+- **Projects configured:** mb-3-cs, mb4ecom, mb5pdlf (all three)
+- **Docs:** `workspace/system-operation-reference/system config reference/matt-skills-config-reference.md` and `matt-skills-operations-guide.md`
+
+### Key workflows
+- **New Feature**: `/grill-with-docs` → `/prototype` → `/to-prd` → `/to-issues` → `/tdd`
+- **Bug Fix**: `/triage` → `/diagnosing-bugs`
+- **Architecture Health**: `/improve-codebase-architecture` → `/handoff`
+- **Learning**: `/teach`
+
+### Integration with PDLF
+PDLF orchestrates Matt skills at specific stages: Step 2 (`/to-prd`), Step 5 (`/domain-modeling`), Step 7 (`/to-issues`), Step 16 (`/tdd`), Step 21 (`/improve-codebase-architecture`).
+
+---
+
+## 10. GBrain (current role)
 
 - **Location:** `~/gbrain`, version `v0.18.2`
 - **Engine:** Supabase (PostgreSQL), project `project-library`

@@ -6,15 +6,13 @@ the target agent
 **Confirmed install location (WSL):** `~/.agents/skills/<skill-name>/SKILL.md`
 **Confirmed discoverable in OpenCode:** yes — appear as `/skill-name` slash
 commands tagged "skill" (verified directly in the OpenCode `/commands` list)
+**Date configured:** 2026-06-24 (initial install), 2026-07-06 (multi-project setup, documentation)
+**Projects configured:** mb-3-cs, mb4ecom, mb5pdlf
 
-**Verification status — read before relying on the tables below:** Only
-`setup-matt-pocock-skills` has actually been run and its output confirmed on
-disk. Every other save-location entry below is sourced from the skill's
-published `SKILL.md` text or general documentation, **not** from an observed
-run. Given everything learned investigating GStack's save-path behavior, treat
-every unverified row as a hypothesis — confirm it against real output the
-first time each skill is actually used, and correct this document if reality
-differs.
+**Verification status:** `setup-matt-pocock-skills` has been run and confirmed on
+mb-3-cs. Per-project setup files replicated to mb4ecom and mb5pdlf project-libraries
+on 2026-07-06. CONTEXT.md bootstrapped for mb-3-cs. All required directories created
+for all three projects.
 
 ---
 
@@ -91,17 +89,17 @@ model-invoked one, never another user-invoked one.
 
 | # | Skill | Artifact | Default Windows path | Verified? |
 |---|---|---|---|---|
-| 7 | `domain-modeling` | Glossary terms | `C:\_mb2-cs-app\project-library\CONTEXT.md` (created lazily) | No |
-| 8 | `domain-modeling` | Architecture decisions | `C:\_mb2-cs-app\project-library\docs\adr\` (numbered ADRs) | No |
+| 7 | `domain-modeling` | Glossary terms | `C:\projects\mb-3-cs\project-library\CONTEXT.md` (created lazily) | No |
+| 8 | `domain-modeling` | Architecture decisions | `C:\projects\mb-3-cs\project-library\docs\adr\` (numbered ADRs) | No |
 | 9 | `grill-with-docs` | Same as `domain-modeling` (calls it internally) | `CONTEXT.md` + `docs\adr\` | No |
 | 10 | `to-prd` | PRD document | `C:\_mb2-cs-OK app\project-library\.scratch\<feature>\<prd-slug>.md` | No |
-| 11 | `to-issues` | Individual issue files | `C:\_mb2-cs-app\project-library\.scratch\<feature>\<issue-slug>.md` | No |
+| 11 | `to-issues` | Individual issue files | `C:\projects\mb-3-cs\project-library\.scratch\<feature>\<issue-slug>.md` | No |
 | 12 | `triage` | Issue updates (comments, labels) | In-place on the issue file in `.scratch\` | No |
-| 13 | `triage` | Rejection records | `C:\_mb2-cs-app\project-library\.out-of-scope\<topic>.md` | No |
-| 14 | `setup-matt-pocock-skills` | Issue tracker config | `C:\_mb2-cs-app\project-library\docs\agents\issue-tracker.md` | **Yes** |
-| 15 | `setup-matt-pocock-skills` | Triage labels | `C:\_mb2-cs-app\project-library\docs\agents\triage-labels.md` | **Yes** |
-| 16 | `setup-matt-pocock-skills` | Domain doc rules | `C:\_mb2-cs-app\project-library\docs\agents\domain.md` | **Yes** |
-| 17 | `setup-matt-pocock-skills` | Agent skills section | `C:\_mb2-cs-app\project-library\CLAUDE.md` (edits existing) | **Yes** |
+| 13 | `triage` | Rejection records | `C:\projects\mb-3-cs\project-library\.out-of-scope\<topic>.md` | No |
+| 14 | `setup-matt-pocock-skills` | Issue tracker config | `C:\projects\mb-3-cs\project-library\docs\agents\issue-tracker.md` | **Yes** |
+| 15 | `setup-matt-pocock-skills` | Triage labels | `C:\projects\mb-3-cs\project-library\docs\agents\triage-labels.md` | **Yes** |
+| 16 | `setup-matt-pocock-skills` | Domain doc rules | `C:\projects\mb-3-cs\project-library\docs\agents\domain.md` | **Yes** |
+| 17 | `setup-matt-pocock-skills` | Agent skills section | `C:\projects\mb-3-cs\project-library\CLAUDE.md` (edits existing) | **Yes** |
 | 18 | `tdd` | Tests + implementation | In-place in the codebase | No |
 
 ### Skills that write to TEMP, outside the repo
@@ -157,14 +155,14 @@ deliberately chosen and are now live in this project's `AGENTS.md`, under
 
 | Destination | Skills that write there |
 |---|---|
-| `C:\_mb2-cs-app\project-library\.scratch\` | `to-prd`, `to-issues`, `triage` |
-| `C:\_mb2-cs-app\project-library\CONTEXT.md` | `domain-modeling`, `grill-with-docs` |
-| `C:\_mb2-cs-app\project-library\adr\` | `domain-modeling`, `grill-with-docs` *(post-override)* |
-| `C:\_mb2-cs-app\project-library\docs\agents\` | `setup-matt-pocock-skills` |
-| `C:\_mb2-cs-app\project-library\CLAUDE.md` | `setup-matt-pocock-skills` |
-| `C:\_mb2-cs-app\project-library\.out-of-scope\` | `triage` (rejected items only) |
+| `C:\projects\mb-3-cs\project-library\.scratch\` | `to-prd`, `to-issues`, `triage` |
+| `C:\projects\mb-3-cs\project-library\CONTEXT.md` | `domain-modeling`, `grill-with-docs` |
+| `C:\projects\mb-3-cs\project-library\adr\` | `domain-modeling`, `grill-with-docs` *(post-override)* |
+| `C:\projects\mb-3-cs\project-library\docs\agents\` | `setup-matt-pocock-skills` |
+| `C:\projects\mb-3-cs\project-library\CLAUDE.md` | `setup-matt-pocock-skills` |
+| `C:\projects\mb-3-cs\project-library\.out-of-scope\` | `triage` (rejected items only) |
 | `%TEMP%` (outside repo) | `handoff`, `improve-codebase-architecture` |
-| `C:\_mb2-cs-app\project-library\matt-skills-output\` | `handoff`, `improve-codebase-architecture` *(added copy, post-override)* |
+| `C:\projects\mb-3-cs\project-library\matt-skills-output\` | `handoff`, `improve-codebase-architecture` *(added copy, post-override)* |
 | `C:\_mb2-cs-app\matt-skills-teach` (outside `project-library`) | `teach` *(post-override)* |
 | Teaching workspace, invoking directory | `teach` *(pre-override default — superseded above)* |
 | In-place codebase changes | `tdd`, `diagnosing-bugs`, `prototype` |
@@ -172,13 +170,10 @@ deliberately chosen and are now live in this project's `AGENTS.md`, under
 
 ---
 
-## Open Items
+## Open Items (updated 2026-07-06)
 
-1. `find-skills` — not documented in the source repo's main skill table.
-   Purpose and invocation type unconfirmed; behavior unknown until run.
-2. Every row marked "No" under Verified above is a documentation-sourced
-   claim, not an observed result. Confirm each the first time its skill is
-   actually used in this project, and update this file accordingly.
-3. Folders referenced by the governance overrides that may not yet exist on
-   disk: `opencode-outputs\`, `matt-skills-output\`, `screens\`,
-   `C:\_mb2-cs-app\matt-skills-teach\`.
+1. **CONTEXT.md** — bootstrapped for mb-3-cs (2026-07-06). Not yet created for mb4ecom or mb5pdlf — skills will create lazily when `/domain-modeling` or `/grill-with-docs` is first run there.
+2. **Multi-project setup** — mb4ecom and mb5pdlf project-libraries configured with `docs/agents/`, `.scratch/`, `matt-skills-output/`, `.out-of-scope/`, and Agent skills block in AGENTS.md (2026-07-06).
+3. **Folders verified on disk** — all required directories exist for all three projects: `.scratch/`, `matt-skills-output/`, `.out-of-scope/`, `docs/agents/`, `C:\_mb2-cs-app\matt-skills-teach`.
+4. **find-skills** — confirmed as model-invoked skill from `vercel-labs/skills`. Listed in installed skills but not part of the main Matt Pocock workflow.
+5. Every row marked "No" under Verified is a documentation-sourced claim, not an observed result. Confirm each the first time its skill is used, and update this file accordingly.
