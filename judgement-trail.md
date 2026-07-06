@@ -1,6 +1,29 @@
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
 
+## 2026-07-06 — Docs reorganization consolidated
+
+**Issue flagged:** Devlog/todo system status unresolved — handover questioned whether `C:\mybizz\devlog\` and `C:\mybizz\todo\` were still live.
+**Developer decision:** Old system at `C:\mybizz\` does not exist on disk — superseded. Replacement established in AGENTS.md: `devlog-index.md` + `judgement-trail.md` + `wip/todo.md` at project root. These files are actively maintained.
+
+**Issue flagged:** `docs/security-architecture.md` contained app-specific framing ("Mybizz CS," "this app's") but the content (RBAC role limits, token security, regulatory posture) applies Mybizz-wide.
+**Developer decision:** Elevated to global. Moved to `specifications/spec-security-architecture.md`. Multi-tenant language corrected per `dependency-based-not-multi-tenant` ADR.
+
+**Issue flagged:** HtmlTemplate ban (per `htmltemplate-use` ADR) contradicted by 10 documents still referencing custom HtmlTemplate for navigation/shells.
+**Developer decision:** Resolved across all 10 documents. Layout shells now use NavigationRailLayout/NavigationDrawerLayout. `adr/adr-global/navigation-lambda-link-open-form.md` marked partially superseded (navigation pattern unchanged, layout shell decision superseded by `htmltemplate-use` ADR). Calendar-feature-spec.md requires full redesign — deferred.
+
+**Issue flagged:** Vault system split between `docs/vault-system.md` and `spec-security.md` — duplication between `spec-anvil-platform-standards.md` §10-11 and `spec-security.md` §1-2.
+**Developer decision:** Consolidated into single authoritative `specifications/spec-vault-system.md`. Duplicate sections removed from both `spec-security.md` and `spec-anvil-platform-standards.md`. Original `docs/vault-system.md` deleted.
+
+**Issue flagged:** ADR numbers used throughout project — all 40 ADRs dropped numeric prefixes.
+**Developer decision:** Replaced all `ADR-NN` and `adr/NN-slug.md` references across 50+ files with slug names. Python script executed to ensure consistency.
+
+**Issue flagged:** Template blanks in `termplates-checklists/` — full document copies, not blanks. Folder name had typo.
+**Developer decision:** Folder renamed to `templates-checklists/`. 20 files emptied (zero-byte) and renamed with `tmp-` prefix. Naming convention: `tmp-` for templates, `chk-` for checklists.
+
+**Issue flagged:** `(2)`-suffixed spec files — `spec-m3-design-standards (2).md` and `spec-anvil-platform-standards (2).md` lingered after handover said they were removed.
+**Developer decision:** `(2)` versions confirmed as v1.2 superseding originals. Originals deleted, `(2)` suffixes dropped.
+
 ## 2026-07-06 — ADR reorganization
 
 **Issue flagged:** Initial classification was wrong — treated many ADRs as local when the architecture, technology, and standards are shared across all Mybizz apps. Only the business context changes per app.

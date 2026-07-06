@@ -30,10 +30,10 @@ Task/s
 - [DONE] Enforce required workflow order (refine ADRs, validate `am1/mm1` and `am2/mm2` against baselines, then improve working docs).
 - [DONE] Keep this file focused on documentation and planning behavior, not live code execution rules.
 - [DONE] Update canonical shared tracking references to:
-  - `C:\mybizz\devlog\README.md`
-  - `C:\mybizz\devlog\index.md`
-  - `C:\mybizz\todo\todo.md`
-  - `C:\mybizz\todo\todo-archive.md`
+  - `devlog-index.md` at project root
+  - `judgement-trail.md` at project root
+  - `wip/todo.md` at project root
+  - (archive tracked via git history)
 
 3. (Repository AGENTS.md – code)  
 `C:\mybizz\mb-3-cs\AGENTS.md`
@@ -189,8 +189,8 @@ Task/s
   - `build` = secondary agent for tightly scoped document/support tasks only when explicitly instructed.
 - [DONE] Allow cross-repo read access to:
   - `C:\mybizz\mb-3-cs\`
-  - `C:\mybizz\devlog\`
-  - `C:\mybizz\todo\`
+  - `devlog-index.md + judgement-trail.md at project root`
+  - `wip/todo.md at project root`
 
 16. (opencode.json – code project)  
 `C:\mybizz\mb-3-cs\opencode.json`
@@ -207,8 +207,8 @@ Task/s
   - `build` = primary coding and test-oriented agent for explicit user-directed implementation tasks only.
 - [DONE] Add path-based edit protection for critical files and allow cross-repo read access to:
   - `C:\mybizz\project-library\`
-  - `C:\mybizz\devlog\`
-  - `C:\mybizz\todo\`
+  - `devlog-index.md + judgement-trail.md at project root`
+  - `wip/todo.md at project root`
 
 ---
 

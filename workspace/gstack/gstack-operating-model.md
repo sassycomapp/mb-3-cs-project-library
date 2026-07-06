@@ -37,10 +37,10 @@ GStack is not responsible for:
 ## Workspace scope
 This operating model applies to:
 
-- `C:\mybizz\project-library`
-- `C:\mybizz\mb-3-cs`
-- `C:\mybizz\devlog\`
-- `C:\mybizz\todo\`
+- `C:\projects\mb-3-cs\project-library`
+- `C:\projects\mb-3-cs\mb-3-cs`
+- `devlog-index.md` + `judgement-trail.md` at project root
+- `wip/todo.md` at project root
 - `C:\mybizz\gstack`
 - the running GBrain instance (Supabase + OpenRouter) configured for this workspace
 
@@ -93,10 +93,10 @@ Build is responsible for:
 ### Shared tracking rule
 Canonical shared tracking remains:
 
-- `C:\mybizz\devlog\README.md`
-- `C:\mybizz\devlog\index.md`
-- `C:\mybizz\todo\todo.md`
-- `C:\mybizz\todo\todo-archive.md`
+- `devlog-index.md` at project root
+- `judgement-trail.md` at project root
+- `wip/todo.md` at project root
+- (archive tracked via git history)
 
 Rules:
 

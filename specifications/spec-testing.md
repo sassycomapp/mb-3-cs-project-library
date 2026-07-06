@@ -6,9 +6,8 @@
 
 **Note:** General testing methodology (the Level 1/2/3 model, pure-function characteristics, the
 Uplink safety protocol, generic test structure/naming, common test patterns) lives in
-`testing-methodology-standards.md` and is not repeated here. This document contains only this
-project's specific flows, roles, and data — the actual test plan Step 4 (`/plan-eng-review`)
-should produce and Step 19 (`/qa`) should consume.
+`spec-testing-methodology-standards.md` and is not repeated here. This document contains only this
+project's specific flows, roles, and data — the actual test plan.
 
 ---
 

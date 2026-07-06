@@ -7,17 +7,10 @@
 
 ## Docs Reorganization — Deferred (Phase 2)
 
-1. **Template blanks** — `termplates-checklists/` still contains full document copies, not blank templates. 20 files listed in handover §5. Convert each to a blank template.
-2. **`termplates-checklists/` rename** — typo fix to `templates-checklists-global`
-3. **README.md rewrite** — still describes old structure, old `C:\mybizz\` paths, references unresolved devlog/todo system
-4. **Devlog/todo system status** — is `C:\mybizz\devlog\` + `todo\` still live or superseded? Not yet answered
-5. **Populate 17 empty spec placeholder files** — zero-byte files in `specifications/`: spec-adr.md, spec-anvil.md, spec-api-specification.md, spec-build-plan.md, spec-custom-components.md, spec-data.md, spec-deployment.md, spec-design.md, spec-gates.md, spec-integration.md, spec-navigation.md, spec-observability.md, spec-pdlf-preparation.md, spec-scaffold.md, spec-screens.md, spec-ui.md, spec-wireframes.md
-6. **Audit all `instance_id` references** — `dependency-based-not-multi-tenant` ADR prohibits tenant discriminator patterns. Found in `spec-anvil-platform-standards.md` §10 and §13. GBrain query needed to find all instances across all documents
-7. **Checklist templates** — no equivalent list ever produced for the checklists folder (handover §5 flagged this)
-8. **Replace all numeric ADR references with slug names** — found in ~15+ files across `specifications/`, `docs/`. ADR numbers no longer exist. Files affected: spec-client-activation-runbook.md, spec-component-properties.md, spec-material-3-theme.md, spec-onboarding-implementation-plan.md, spec-testing.md, spec-vault-system.md, architecture.md, authoritative-schema.md, build-plan.md, deployment-procedures.md, design-direction.md
-9. **Verify handover split: `test-specifications.md` → `spec-testing.md`** — not verified
-10. **Verify handover split: `platform-architecture.md` → `spec-five-app-architecture-model.md`** — not verified
-11. **Redesign `calendar-feature-spec.md` re HTMLTemplate ban** — `docs/calendar-feature-spec.md` uses HTMLTemplate with CSS Grid for the month grid (10+ references). This is the last substantive HTMLTemplate use case. Needs redesign using native M3 components (ColumnPanel with role-driven CSS, or another M3-native grid pattern). Per `htmltemplate-use` ADR, a new ADR would be needed if no native alternative is feasible.
+1. **README.md rewrite** — still describes old structure, old `C:\mybizz\` paths, references unresolved devlog/todo system
+2. **Populate 17 empty spec placeholder files** — zero-byte files in `specifications/`: spec-adr.md, spec-anvil.md, spec-api-specification.md, spec-build-plan.md, spec-custom-components.md, spec-data.md, spec-deployment.md, spec-design.md, spec-gates.md, spec-integration.md, spec-navigation.md, spec-observability.md, spec-pdlf-preparation.md, spec-scaffold.md, spec-screens.md, spec-ui.md, spec-wireframes.md
+3. **Audit all `instance_id` references** — `dependency-based-not-multi-tenant` ADR prohibits tenant discriminator patterns. Found in `spec-anvil-platform-standards.md` §10 and §13. GBrain query needed to find all instances across all documents
+4. **Checklist templates** — no equivalent list ever produced for the checklists folder (handover §5 flagged this)
 
 ---
 

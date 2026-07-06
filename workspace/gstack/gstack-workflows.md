@@ -23,7 +23,7 @@ Use this workflow when the primary task is in `project-library` and the work is 
 - canonical devlog/todo maintenance.
 
 ### Default workspace
-- `C:\mybizz\project-library`
+- `C:\projects\mb-3-cs\project-library`
 
 ### Default agent
 - `plan`
@@ -32,7 +32,7 @@ Use this workflow when the primary task is in `project-library` and the work is 
 At the start of any docs-plan workflow:
 
 1. **Consult `todo.md`**
-   - Open `C:\mybizz\todo\todo.md`.
+   - Open ``wip/todo.md` at project root`.
    - Identify any entries relevant to the current task.
    - Incorporate them into the current work where appropriate.
    - When such tasks are completed, mark them as `[DONE]` and move them to `todo-archive.md`.
@@ -88,7 +88,7 @@ Use this workflow when the primary task is in `mb-3-cs` and the task requires:
 - controlled file edits under repo rules.
 
 ### Default workspace
-- `C:\mybizz\mb-3-cs`
+- `C:\projects\mb-3-cs\mb-3-cs`
 
 ### Default flow
 1. Start with `plan` if the task is architectural, risky, unclear, or affects multiple files.
@@ -102,7 +102,7 @@ At the start of any code-plan-build workflow:
    - Ensure the workspace is `mb-3-cs` (via `pwd` or equivalent).
 
 2. **Consult `todo.md`**
-   - Check `C:\mybizz\todo\todo.md` for items related to the current code area.
+   - Check ``wip/todo.md` at project root` for items related to the current code area.
    - Fold them into the current task where appropriate.
    - Completed items are marked `[DONE]` and moved to `todo-archive.md`.
 
