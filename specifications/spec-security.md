@@ -1,38 +1,15 @@
 # PDLF Standards Library — Security Specification
 
-**Location:** `C:\pdlf\standards-library\spec-security.md`
+**Location:** `specifications/spec-security.md`
+**Vault System:** `specifications/spec-vault-system.md` — the single authoritative Vault document.
 **Scope:** Project-agnostic security patterns. A project's specific role limits, regulatory
 posture, and implementation details belong in that project's own canonical security document.
 
 ---
 
-## 1. Two-Level Secrets Model
+**The Vault System:** The two-level secrets model, enforcement/masking pattern, and Vault implementation are now the single authoritative document `spec-vault-system.md`. This file does not duplicate that content — reference `spec-vault-system.md` for all Vault-related patterns.
 
-- **Platform Secrets** (e.g. Anvil Secrets) holds exactly one item: a master encryption key, set
-  at provisioning, never changed, used only inside a dedicated vault-service module. No other
-  code accesses the platform secrets facility directly.
-- **The Vault** (an application-level encrypted Data Table) holds every other credential.
-  Retrieved only via a `get_vault_secret(name)` function, never accessed directly by integration
-  modules.
-- **Access control:** restrict Vault access to the Owner role, require step-up authentication
-  (e.g. TOTP) on every open with no grace period, and send a notification on every access.
-
-## 2. Secret Enforcement and Masking
-
-```python
-_PAYMENT_SECRET_COLUMNS = frozenset({
-    'stripe_secret_key', 'paystack_secret_key', 'paypal_secret'
-})
-assert not (_PAYMENT_SECRET_COLUMNS & set(data.keys())), (
-    f"Secret key columns must not be saved here: "
-    f"{_PAYMENT_SECRET_COLUMNS & set(data.keys())}"
-)
-```
-
-`AssertionError` must always be re-raised before any broader exception handler. Any function
-returning configuration containing a secret field returns `'***'`, never the real value.
-
-## 3. RBAC and Data Access
+## 1. RBAC and Data Access
 
 - Every server function operating on application data carries an RBAC decorator.
 - Role enforcement is always server-side. Client-side navigation visibility is a UX convenience
@@ -40,12 +17,12 @@ returning configuration containing a secret field returns `'***'`, never the rea
 - All Data Tables are set to "No access" for client code — all data access goes through server
   functions.
 
-## 4. Rate Limiting
+## 2. Rate Limiting
 
 Enforce via a Data Table, not an in-memory counter, so limits survive server restarts and work
 across a multi-server environment.
 
-## 5. Shared Numeric Security Standards
+## 3. Shared Numeric Security Standards
 
 | Standard | Value |
 |---|---|
@@ -58,7 +35,4 @@ across a multi-server environment.
 
 ---
 
-*Security Specification v1.0. Moved from spec-anvil-platform-standards.md Sections 10–14 into
-its own file. A project's Vault implementation details go in that project's own canonical Vault
-document (e.g. vault-system.md); its role limits and regulatory posture go in its own canonical
-security document.*
+*Security Specification v1.1 — Vault content (two-level secrets model, enforcement/masking) moved to `spec-vault-system.md`. Remaining content: RBAC/data access, rate limiting, shared numeric security standards.*

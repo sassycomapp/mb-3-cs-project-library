@@ -422,7 +422,7 @@ Onboarding is personal at this stage. The founder conducts every call. This is n
 | Email | Anvil built-in (system), Brevo SMTP (transactional), Brevo Campaigns (marketing) |
 | Authentication | Anvil Users service, RBAC via custom decorators |
 | Secrets | The Vault — encrypted store, `encryption_key` in Anvil Secrets only |
-| Navigation | Custom HtmlTemplate + plain Link components + lambda click handlers (admin); Anvil Routing (public) |
+| Navigation | NavigationRailLayout/NavigationDrawerLayout + plain Link components + lambda click handlers (admin); Anvil Routing (public) |
 
 ---
 

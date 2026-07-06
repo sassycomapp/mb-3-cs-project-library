@@ -1,6 +1,18 @@
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
 
+## 2026-07-06 — ADR reorganization
+
+**Issue flagged:** Initial classification was wrong — treated many ADRs as local when the architecture, technology, and standards are shared across all Mybizz apps. Only the business context changes per app.
+**Developer decision:** Reclassified: 39 global, 1 local. Key corrections: lead-capture, CRM, payment gateways, invoices, onboarding, free-trial-abandoned are all global (company-wide decisions). Tiers-model is global (Mybizz-centric). Schema-scope-reduction is the sole local ADR (CS-specific table set).
+**Deletions:** 9 (multi-vertical — historical, no longer relevant), 12 (superseded build sequence), 13 (superseded by 16), 25 (onboarding finality, fully reversed by 26). ADR-37 kept as global despite partial supersession (still contains valid M3/CSS customization approach).
+
+## 2026-07-06 — VS Code remnants cleanup
+
+**Issue flagged:** `rm -rf` via WSL on `/mnt/c/Users/dev-p/AppData/Roaming/Code/` failed with "Permission denied" on 15 Git `askpass` scripts — Windows filesystem permission locks prevented deletion even after `chmod +w`.
+**Developer decision:** Used `cmd.exe /c rmdir /s /q` — Windows-native deletion that bypasses the WSL/Windows permission boundary. Successful on first attempt.
+**Scope note:** No `.code` directory found anywhere on the system; user can safely ignore that concern.
+
 ## 2026-07-06 — GStack + GBrain config optimization
 
 **Issue flagged:** GBrain CLI commands (`sources list`, `sync`, `doctor`, `stats`) all failed silently — `broken-config` status.

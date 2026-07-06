@@ -1,5 +1,5 @@
 # Getting To Work
-
+python3 -c "import sqlite3;c=sqlite3.connect('/home/dev-p/.local/share/opencode/opencode.db');c.execute(\"UPDATE project SET worktree='/mnt/c/projects/mb-3-cs/project-library' WHERE id='c99de7a1276539abb02da8ac80ac3878025bd1cd'\");c.commit();print('done')"
 ## Apps list
 
 You only need these for normal work:
@@ -29,7 +29,7 @@ You only need these for normal work:
 
    - running the OpenCode server,  
    - running Git,  
-   - inspecting the repos under `/mnt/c/_mb2-cs-app/...`.  
+   - inspecting the repos under `/mnt/c/mybizz/...`.  
  
  ## OPENCODE START Sequence
 **In WSL:**
@@ -40,7 +40,7 @@ A) start sequence to start opencode server and open the opencode web UI:
 	```
 B) Alternative start sequence to start opencode server and open the opencode web UI:
 	```bash
-	cd /mnt/c/_mb2-cs-app/gstack
+	cd /mnt/c/mybizz/gstack
 	opencode web --hostname 0.0.0.0
 	```
 You will receive the following message in WSL :
@@ -60,29 +60,32 @@ pkill -f "opencode web"
 ```
 Then run Start sequence above.
 
+Important: serve daemon note
+The gbrain serve process was restarted as a daemon (PID 21415) after maintenance. When you start your next OpenCode session, the MCP config will try to start a SECOND serve process — this will fail because PGLite is single-writer. Before starting a new session, kill the daemon: kill 21415. OpenCode will start serve fresh via MCP.
+
 ---
 ***
 
 ## Active repos  (Windows side)
 
-1. `C:\_mb2-cs-app` — **Workspace folder**  
+1. `C:\mybizz` — **Workspace folder**  
    - Not a Git repo.  
    - Container for everything (repos, GStack, workspace docs).
 
-2. `C:\_mb2-cs-app\mb-3-cs` — **Git code repo**  
+2. `C:\mybizz\mb-3-cs` — **Git code repo**  
 	`/mnt/c/projects/mb-3-cs/mb-3-cs`  
    - Anvil‑linked production‑adjacent application code.  
 
-3. `C:\_mb2-cs-app\project-library` — **Git docs repo**  
+3. `C:\mybizz\project-library` — **Git docs repo**  
    `/mnt/c/projects/mb-3-cs/project-library`
    - Design/planning/architecture documents.  
    - Not Anvil‑linked.
 
-4. `C:\_mb2-cs-app\gstack` — **GStack repo**  
-   `/mnt/c/_mb2-cs-app/gstack` 
+4. `C:\mybizz\gstack` — **GStack repo**  
+   `/mnt/c/mybizz/gstack` 
    - Workflow/skillpack used by the agents inside OpenCode.
    
-5. `C:\_mb2-cs-app\gbrain` — **GBrain repo**  
+5. `C:\mybizz\gbrain` — **GBrain repo**  
    - Workflow/skillpack used by the agents inside OpenCode.
 
 ***
@@ -116,7 +119,7 @@ You **do not** switch projects by restarting the server;
 
 ## WHERE SKILL OUTPUTS ARE SAVED
 	[Bare commands follow Gstack default save protocol: [\\wsl.localhost\Ubuntu\home\dev-p\.gstack\projects]
-	Named  skills save to gstack-outputs by custom instruction in AGENTS.MD ["C:\_mb2-cs-app\project-library\gstack-outputs"]]
+	Named  skills save to gstack-outputs by custom instruction in AGENTS.MD ["C:\mybizz\project-library\gstack-outputs"]]
 
 ---
 ### Opening the GStack projects folder
@@ -141,4 +144,5 @@ explorer.exe "$(wslpath -w /home/dev-p/.gstack/projects/)"
 **Global**
 \\wsl$\Ubuntu\home\dev-p\.config\opencode\AGENTS.md
 **LOcal**
-"C:\_mb2-cs-app\project-library\agents.md"
+"C:\mybizz\project-library\agents.md"
+

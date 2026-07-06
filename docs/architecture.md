@@ -122,16 +122,15 @@ choices and menu structures:
 
 | Area | System |
 |---|---|
-| Admin & customer portal | Custom HtmlTemplate + plain Link components + lambda click handlers |
+| Admin & customer portal | Native M3 Layouts (`NavigationRailLayout` / `NavigationDrawerLayout`) + plain Link components + lambda click handlers |
 | Public website pages | Anvil Routing dependency (`@router.route`) |
 
-**This project does not use native M3 navigation components** (`NavigationDrawerLayoutTemplate`,
-`NavigationLink`, `NavigationRailLayout`) even though the M3 theme dependency fully supports them
-— this is a usage decision based on the custom layout approach, not a platform limitation. If a
-future architecture review determines native M3 navigation layouts are better suited, this may
-change without requiring an ADR update.
+**This project uses native M3 Layouts** (`NavigationRailLayout`, `NavigationDrawerLayout`) for
+layout shells, per the `htmltemplate-use` ADR. `HTMLTemplate` is banned — all layout-shell cases
+use the native M3 Layouts. Sidebar navigation uses plain `Link` components with lambda click
+handlers (not `NavigationLink`). `navigate_to` is not used.
 
-**See:** `2-navigation-lambda-link-open-form.md`, ADR-037 (UI Customization Approach)
+**See:** `htmltemplate-use` ADR, `navigation-lambda-link-open-form` ADR, `ui-customization-approach` ADR
 
 ### AdminLayout Navigation Structure
 ```

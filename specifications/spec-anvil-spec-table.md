@@ -29,14 +29,14 @@
 
 | Topic | Specification |
 |---|---|
-| ADR | `2-navigation-lambda-link-open-form.md` |
-| Layout type | Custom `HtmlTemplate` only (`AdminLayoutTemplate`, `CustomerLayoutTemplate`) |
+| ADR | `navigation-lambda-link-open-form.md` (navigation pattern), `htmltemplate-use.md` (layout shell) |
+| Layout type | Native M3 Layouts (`NavigationRailLayout` for admin, `NavigationDrawerLayout` for customer portal) |
 | Sidebar nav component | Plain `Link` components |
 | Sidebar nav creation | Built programmatically in `build_navigation()` |
 | Navigation action | `open_form(string)` via lambda click handler |
 | Variable capture | **MANDATORY**: `lambda e, fn=form_name, a=attr_name: self._nav_click(fn, a)` |
-| NEVER use | `NavigationDrawerLayoutTemplate`, `NavigationLink`, `navigate_to` |
-| Reason | `navigate_to` requires instantiated Forms and is incompatible with Mybizz custom HtmlTemplate pattern |
+| NEVER use | `navigate_to`, `HTMLTemplate` (banned per `htmltemplate-use` ADR) |
+| Reason | `navigate_to` requires instantiated Forms; `HTMLTemplate` banned — native M3 Layouts and components only |
 
 ```python
 class AdminLayout(AdminLayoutTemplate):
@@ -96,8 +96,8 @@ open_form('ContactDetailForm', contact_id=self.item['id'])
 
 | Need | Layout Used | Notes |
 |---|---|---|
-| Admin interface | Custom `HtmlTemplate` | Sidebar via `build_navigation()` + lambda |
-| Customer portal | Custom `HtmlTemplate` | Same as admin pattern |
+| Admin interface | `NavigationRailLayout` | Sidebar via `build_navigation()` + lambda |
+| Customer portal | `NavigationDrawerLayout` | Same as admin pattern |
 | Auth pages | Custom Form | No layout shell required |
 | Error pages | Custom Form | Minimal chrome |
 | Guided step workflow | `NavigationRailLayout` with sidesheet | Separate from sidebar navigation |
@@ -798,7 +798,7 @@ def process_email_campaigns():
 | Exceptions | No bare except, no `except pass` |
 | Tracebacks | Preserve with `raise` / `raise ... from e` |
 | Testing | Pure logic first, integration second, backup before Uplink |
-| M3 layouts | Custom HtmlTemplate for admin/customer shell |
+| M3 layouts | NavigationRailLayout/NavigationDrawerLayout for admin/customer shell |
 | Designer | `FlowPanel.orientation` in code; TextBox appearance/hide_text in Designer |
 | DropdownMenu | Items in code, not Designer |
 | Cards | Use CardContentContainer |
@@ -834,7 +834,7 @@ def process_email_campaigns():
 
 | Question | Answer |
 |---|---|
-| Default app shell? | Custom `HtmlTemplate` |
+| Default app shell? | NavigationRailLayout (admin) / NavigationDrawerLayout (customer) |
 | Sidebar component? | Plain `Link` |
 | Nav handler? | Lambda with variable capture |
 | Internal navigation? | `open_form()` |

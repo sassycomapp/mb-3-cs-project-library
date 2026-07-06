@@ -1,20 +1,17 @@
-# Mybizz CS — Security & Secrets Architecture
+# Mybizz — Security & Secrets Architecture
 
-**Related ADRs:** ADR-003 (Vault), ADR-028 (Client Instance Architecture), ADR-033
-(Mybizz_management Visibility)
+**Related ADRs:** `payment-security-boundary-vault` (Vault), `client-instance-architecture`, `mybizz-management-visibility`
 
 **Note:** Reusable security patterns (the two-level secrets model, secret enforcement/masking,
-RBAC/data access pattern, rate limiting) live in `specifications/spec-security.md`. The
+RBAC/data access pattern, rate limiting) live in `spec-security.md`. The
 regulatory baseline (POPIA, GDPR, PCI DSS, standard retention periods) is Mybizz-wide — see
-`specifications/regulatory-compliance-baseline.md`. This document contains only what is specific
-to this app's actual architecture.
+`spec-regulatory-compliance-baseline.md`. This document contains the Mybizz-wide security architecture and token model that applies to every application.
 
 ---
 
-## 1. RBAC — This App's Role Limits
+## 1. RBAC — Role Limits
 
-Five roles, per the standard RBAC pattern (see `specifications/spec-security.md`). This app's
-specific per-instance limits:
+Five roles, per the standard RBAC pattern (see `spec-security.md`). The standard per-instance limits that apply to all Mybizz applications:
 
 | Role | Access | Instance Limit |
 |---|---|---|
@@ -24,11 +21,11 @@ specific per-instance limits:
 | Staff | Own calendar and bookings only | 0–20 per instance |
 | Customer | Own bookings, invoices, account in the customer portal | Unlimited |
 
-## 2. Mybizz_management Token Security (ADR-033)
+## 2. Mybizz_management Token Security (per `mybizz-management-visibility` ADR)
 
 Mybizz_management communicates with client instances via bidirectional HTTP endpoints secured
-with per-client Bearer tokens. This entire section is specific to this app's multi-tenant
-architecture — there is no reusable pattern here beyond the general "use Bearer tokens for
+with per-client Bearer tokens. This is the standard Mybizz service-to-service authentication
+pattern — there is no reusable pattern here beyond the general "use Bearer tokens for
 service-to-service auth" idea, which isn't specific enough to be worth extracting.
 
 ### Token Types
@@ -62,16 +59,14 @@ service-to-service auth" idea, which isn't specific enough to be worth extractin
 ## 3. Regulatory Compliance
 
 The regulatory baseline (POPIA, GDPR, PCI DSS, standard retention periods) is Mybizz-wide — see
-`specifications/regulatory-compliance-baseline.md`. This app's specific facts:
+`spec-regulatory-compliance-baseline.md`. The standard applicability:
 
-- **PCI DSS applies to this app** — `mb-3-cs` processes payments via Stripe and Paystack, placing
+- **PCI DSS applies** — Mybizz processes payments via Stripe and Paystack, placing
   it in SAQ A scope per the Mybizz-wide standard.
-- **GDPR applies conditionally** — if this app serves EU customers (determined by actual client
+- **GDPR applies conditionally** — if an app serves EU customers (determined by actual client
   base, not fixed at build time).
-- No data categories beyond the Mybizz-wide retention defaults are tracked by this app.
+- No data categories beyond the Mybizz-wide retention defaults are tracked.
 
 ---
 
-*Security & Secrets Architecture v3.0 — Regulatory content extracted to
-`specifications/regulatory-compliance-baseline.md`. This document contains only this app's RBAC
-limits and Mybizz_management token architecture.*
+*Security & Secrets Architecture v3.1 — Elevated from app-specific to Mybizz-wide. Multi-tenant language corrected per `dependency-based-not-multi-tenant` ADR. Regulatory content references `spec-regulatory-compliance-baseline.md`.*

@@ -217,7 +217,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 ### Stage 1.3: Dashboard & Navigation
 
 **Deliverables:**
-- `AdminLayout` — custom HtmlTemplate layout with navigation
+- `AdminLayout` — NavigationRailLayout with navigation
 - `DashboardForm` — main admin dashboard with metrics
 - Navigation structure implemented (Dashboard, Sales & Operations, Customers & Marketing, Content & Website, Finance & Reports, Settings)
 - `shared/navigation_helpers.py` — navigation utility functions (lambda click handlers, open_form wrappers)
@@ -238,7 +238,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 
 **Implementation Notes:**
 - Navigation helpers prevent lambda capture bugs and ensure consistent patterns
-- AdminLayout uses custom HtmlTemplate with plain Link components (not NavigationLink)
+- AdminLayout uses NavigationRailLayout with plain Link components (not NavigationLink)
 - Navigation structure follows the spec in architecture.md
 - **See:** ADR-035 (Form Architecture and State Management)
 

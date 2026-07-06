@@ -669,7 +669,7 @@ The layout system should support variation without duplicating the design system
 ### Content Panel Pattern
 
 ```text
-Public Layout (HtmlTemplate)
+Public Layout (NavigationDrawerLayout)
 ├── App Bar
 ├── Navigation
 └── ContentPanel
@@ -743,7 +743,7 @@ Hides: carousel, full services grid, full testimonials, video. Uses fewer text b
 
 **Structure:**
 ```text
-ErrorLayout (HtmlTemplate)
+ErrorLayout (BlankLayout)
 └── error_container (ColumnPanel) — max-width: 480px, centred
     ├── txt_error_code (Label) — Display typography (57px), color: primary
     ├── hdg_error_title (Heading) — Headline Large (32px)
@@ -770,12 +770,12 @@ ErrorLayout (HtmlTemplate)
 
 ### AdminLayout
 
-**Purpose:** Admin panel shell — custom HtmlTemplate layout with sidebar navigation.
-**Architecture:** Custom HtmlTemplate with sidebar + content panel pattern. Uses plain Link components with lambda click handlers (not NavigationLink).
+**Purpose:** Admin panel shell — native M3 `NavigationRailLayout` with sidebar navigation.
+**Architecture:** NavigationRailLayout with sidebar + content panel pattern. Uses plain Link components with lambda click handlers (not NavigationLink). HTMLTemplate is banned per the `htmltemplate-use` ADR.
 
 **Structure:**
 ```text
-AdminLayout (HtmlTemplate)
+AdminLayout (NavigationRailLayout)
 ├── app_bar (Container) — "Mybizz CS" title, notifications icon, user menu icon
 ├── sidebar (ColumnPanel) — 260px fixed width, navigation groups below
 └── content_area (ColumnPanel) — forms load here via content panel pattern

@@ -1117,7 +1117,7 @@ All components follow the prefix convention:
 
 ## Navigation Architecture
 
-### AdminLayout (Custom HtmlTemplate)
+### AdminLayout (NavigationRailLayout)
 
 ```
 Dashboard                          (always)

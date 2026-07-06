@@ -77,8 +77,10 @@ guideline — more than one filled button on a screen is a compliance failure, n
 
 ## 7. Navigation Patterns
 
+**Layout shell:** Use the native M3 Layouts — `NavigationRailLayout` or `NavigationDrawerLayout` — for the admin and customer portal shells. `HTMLTemplate` is banned per the `htmltemplate-use` ADR.
+
 **Authenticated (internal) navigation:**
-- Plain `Link` components, not `NavigationLink`.
+- Plain `Link` components in the sidebar, not `NavigationLink`.
 - Lambda click handlers with **mandatory loop-variable capture**:
   ```python
   lambda e, fn=form_name, a=attr_name: self._nav_click(fn, a)
@@ -93,12 +95,9 @@ guideline — more than one filled button on a screen is a compliance failure, n
 - Route constructor signature: `def __init__(self, routing_context, **properties)`.
 - Access route parameters via `routing_context.params['id']`.
 
-**Never use** `NavigationDrawerLayoutTemplate`, `NavigationLink`, or `navigate_to` for internal
-navigation in a custom-shell architecture — `navigate_to` requires instantiated Forms and is
-incompatible with a custom HtmlTemplate navigation pattern. (Native M3 navigation components are
-still fully supported by the theme dependency and are a legitimate choice for a project that
-doesn't use a custom shell — this is a usage decision per architecture, not a platform
-limitation.)
+**`navigate_to` is never used** — it is not compatible with the content panel navigation pattern.
+**`NavigationLink` is not used for sidebar navigation** — the `nav_` prefix in component naming
+refers to Link components styled for sidebar use, not NavigationLink components.
 
 ## 8. Sidesheet
 
@@ -216,9 +215,20 @@ rather than restate it, to avoid the two independently-drifting copies found dur
 - **Touch targets:** minimum 44×44px, recommended 48×48px, minimum 8px between adjacent targets.
 - **Motion:** respect `prefers-reduced-motion`; respect `prefers-color-scheme` for dark mode.
 
+## 18. M3 Component Support Levels
+
+The M3 theme dependency fully supports these components natively — use them directly, no custom
+composition needed: `Switch`, `Slider`, `RadioButton`, `Checkbox`, `Button`, `IconButton`,
+`NavigationLink`, all input components (`TextBox`, `TextArea`, `DropdownMenu`), all layout
+components (`ColumnPanel`, `FlowPanel`, `DataGrid`, `Card`).
+
+These components are only **partially** supported and require custom composition via Panels,
+Cards, and Buttons: Chips, Snackbar, Bottom Sheet, Tabs, Date Picker. Do not expect a drop-in
+native version of these — build them from the fully-supported primitives above.
+
 ---
 
-*M3 Design Standards v1.1 — Sections 10–17 added, extracted from a project's design-direction
-document during a canonical/standards split. Section 16 is now the single source for
-screen-type layout widths; other files should reference it, not restate it.*
+*M3 Design Standards v1.2 — Section 18 added, consolidating the M3 component support-level list
+extracted from spec-development-policy.md. This was the only content in that file not already
+covered elsewhere in the Standards Library or in anvil-platform-standards.md.*
 

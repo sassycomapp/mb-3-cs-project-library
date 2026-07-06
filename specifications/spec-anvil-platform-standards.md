@@ -110,39 +110,9 @@ Anvil AI can build a competent Designer UI, but needs three specific inputs, not
 
 Given all three, it also wires components to their code-behind functions as part of the build.
 
-## 10. Two-Level Secrets Model (Pattern)
+**Vault System:** For the two-level secrets model, enforcement/masking pattern, implementation, and TOTP recovery — see `spec-vault-system.md`. This document does not duplicate that content.
 
-- **Anvil Secrets** holds exactly one item: a master encryption key, set at provisioning, never
-  changed, used exclusively inside a dedicated vault-service module to encrypt/decrypt
-  application-level secrets. No other code calls `anvil.secrets.get_secret()` directly.
-- **The Vault** (an application-level encrypted Data Table) holds every other credential — client
-  API keys, integration tokens. Retrieved only via a `get_vault_secret(name)` function, never
-  accessed directly by integration modules.
-- **Access control:** restrict Vault access to the Owner role, require step-up authentication
-  (e.g. TOTP) on every open with no grace period, and send a notification on every access.
-
-## 11. Secret Enforcement and Masking Pattern
-
-Enforce at the point of persistence, not just at the point of retrieval — use a hard-fail assert
-so a secret can never be accidentally saved outside the Vault:
-
-```python
-_PAYMENT_SECRET_COLUMNS = frozenset({
-    'stripe_secret_key', 'paystack_secret_key', 'paypal_secret'
-})
-assert not (_PAYMENT_SECRET_COLUMNS & set(data.keys())), (
-    f"Secret key columns must not be saved here: "
-    f"{_PAYMENT_SECRET_COLUMNS & set(data.keys())}"
-)
-```
-
-`AssertionError` must always be re-raised before any broader exception handler — never swallowed.
-
-**Masking:** any function returning configuration containing a secret field returns `'***'` for
-that field, never the real value. Client-side save methods must never include a secret field in
-an outbound payload, even a masked one — omit the field entirely rather than round-trip it.
-
-## 12. RBAC and Data Access Pattern
+## 10. RBAC and Data Access Pattern
 
 - Every server function operating on application data carries an RBAC decorator
   (`@require_role` / `@require_permission` or equivalent).
@@ -152,14 +122,14 @@ an outbound payload, even a masked one — omit the field entirely rather than r
   goes through server functions, which enforce `instance_id` filtering, authentication, and input
   validation that direct client access would bypass.
 
-## 13. Rate Limiting Pattern
+## 11. Rate Limiting Pattern
 
 Enforce rate limits via a Data Table, not an in-memory counter — a Data Table survives server
 restarts and works correctly across Anvil's multi-server environment; an in-memory counter does
 not. Clean up expired rate-limit records on a background task schedule rather than letting the
 table grow unbounded.
 
-## 14. Shared Numeric Security Standards
+## 12. Shared Numeric Security Standards
 
 These values are fixed platform defaults — the same values referenced by both a project's
 canonical security document and its development policy, so they exist in exactly one place:
@@ -177,9 +147,60 @@ canonical security document and its development policy, so they exist in exactly
 A project may override any of these explicitly in its own canonical document, stating the
 override and the reason — never silently diverge.
 
+## 13. Data Table Access Patterns
+
+- **Row identification:** use Anvil's built-in Row IDs (`row.get_id()`). Do not create custom
+  auto-increment columns.
+- **Table linking:** store Row objects directly in link columns, not integer IDs:
+  ```python
+  contact = app_tables.contacts.add_row(instance_id=user, email='jane@example.com')
+  booking = app_tables.bookings.add_row(instance_id=user, contact=contact)
+  ```
+- **Data isolation:** every query must filter by `instance_id=user`. Never trust a
+  client-provided `instance_id`.
+- **Mandatory columns:** every table has `instance_id` (link → users), `created_at` (datetime),
+  and `updated_at` (datetime, if the row is mutable).
+- **Query patterns:** `get()` for a single record (returns `None` if not found); `search()` for
+  multiple records (returns a `SearchIterator`); paginate with slicing (`[:50]`); sort with
+  `tables.order_by()`; avoid converting a `SearchIterator` to a list unless actually necessary.
+- **Transactions:** use `@tables.in_transaction` for counter increments and any multi-step
+  operation that requires atomicity.
+
+## 14. Constants
+
+No hardcoded URLs, API keys, or magic strings in code. Use a dedicated `constants.py` module.
+Sensitive values go in Anvil Secrets or the Vault (see `spec-vault-system.md`), never in `constants.py` itself.
+
+## 15. Global Client-Side Error Handler
+
+Register one global handler rather than relying solely on per-call `try/except`:
+
+```python
+def global_error_handler(err):
+    anvil.server.call('log_error_to_server', repr(err))
+    alert("An unexpected error occurred. Please try again.", title="System Error")
+
+anvil.set_default_error_handling(global_error_handler)
+```
+
+## 16. File and Module Naming Conventions
+
+| Element | Convention | Example |
+|---|---|---|
+| Folders | PascalCase | `ServerAuth`, `ContactListForm` |
+| Files | lowercase_with_underscores | `contact_service.py` |
+| Server modules | `{purpose}_service.py` | `booking_service.py` |
+| Integration modules | `{purpose}_integration.py` | `brevo_integration.py` |
+| Client modules | `{purpose}_utils.py` | `validation_utils.py` |
+| Database tables | lowercase_snake | `contacts`, `bookings` |
+| Link columns | `{table}_id` or singular name | `contact_id`, `service_id` |
+
+A project's own terminology mapping (e.g. what "Client" vs "Customer" means for that business)
+belongs in that project's own nomenclature document, not here — this table is the reusable
+file/module naming pattern only.
+
 ---
 
-*Anvil Platform Standards v1.1 — Sections 10–14 added, extracted from a project's
-security-architecture and development-policy documents during a canonical/standards
-reconciliation. Section 14 resolves a duplication previously present in both source documents.*
+*Anvil Platform Standards v1.3 — Vault content (Sections 10–11) moved to `spec-vault-system.md`. Sections 12–18 renumbered to 10–16. Original v1.2 added Sections 15–18 (now 13–16), consolidating spec-coding-standards.md.*
+
 

@@ -3,7 +3,7 @@
 **Scope:** Mybizz-wide. This posture applies because Mybizz-the-company is based in South Africa
 and operates a multi-tenant SaaS model — it does not depend on what any individual app does.
 App-specific facts (e.g., whether a given app actually processes payments, and therefore whether
-PCI DSS applies to it) are recorded in that app's own `docs/security-architecture.md`, which
+PCI DSS applies to it) are recorded in `spec-security-architecture.md`, which
 should reference this baseline rather than restate it.
 
 ---
@@ -47,5 +47,5 @@ above is shared.
 
 ---
 
-*Regulatory Compliance Baseline v1.0. Extracted from security-architecture.md as Mybizz-wide
+*Regulatory Compliance Baseline v1.0. Extracted from `spec-security-architecture.md` as Mybizz-wide
 content, confirmed applicable to every Mybizz product.*

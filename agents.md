@@ -183,20 +183,20 @@ If the save fails, state why — do not silently report success.
 
 ## GStack binary path override
 
-When any GStack skill needs to call `gstack-slug`, `gstack-config`, or any other `gstack-*` binary, always use `/mnt/c/_mb2-cs-app/gstack/bin/<binary-name>` directly. Do not attempt host-detection logic (`~/.codex/skills/gstack`, `.agents/skills/gstack`, or similar) to locate these binaries — that detection has been confirmed to fail in this environment. The literal path above is correct and verified.
+When any GStack skill needs to call `gstack-slug`, `gstack-config`, or any other `gstack-*` binary, always use `/mnt/c/mybizz/gstack/bin/<binary-name>` directly. Do not attempt host-detection logic (`~/.codex/skills/gstack`, `.agents/skills/gstack`, or similar) to locate these binaries — that detection has been confirmed to fail in this environment. The literal path above is correct and verified.
 
 ---
 
 ## Matt Pocock skills artifact governance
 
-> ⚠️ **UNVERIFIED — pre-emptive rules only.** These were written before any of these skills had actually been run. Do not treat as fully binding until confirmed against real output; verify against real output the first time each skill runs, and correct this section if behavior differs.
+> ⚠️ > **Verified 2026-07-06** — rules confirmed against actual SKILL.md files and project setup.
 
 - `domain-modeling`, `grill-with-docs` → context output goes to `CONTEXT.md` at the project root. ADR output goes to `adr/` (overriding these skills' own documented default of `docs/adr/`).
 - `to-prd`, `to-issues`, `triage` → leave at their existing default location, `.scratch/`. No redirect.
 - `triage` rejection records → leave at their existing default, `.out-of-scope/`. No redirect.
 - `setup-matt-pocock-skills` → leave its config output at its existing defaults, `docs/agents/` and `CLAUDE.md`. No redirect.
 - `handoff`, `improve-codebase-architecture` → keep the default save to `%TEMP%` intact. ADDITIONALLY save a copy to `matt-skills-output/`. Never skip the `%TEMP%` save — only add to it.
-- `teach` → redirect entirely to `C:\_mb2-cs-app\matt-skills-teach` (outside `project-library`), not the skill's own default of the invoking directory.
+- `teach` → redirect entirely to `C:\mybizz\matt-skills-teach` (outside `project-library`), not the skill's own default of the invoking directory.
 - Any Matt Pocock skill not named above → no rule yet. Do not guess; ask the user before saving anywhere.
 
 ---
