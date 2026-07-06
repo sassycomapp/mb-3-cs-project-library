@@ -30,7 +30,7 @@ Path: `/home/dev-p/.config/opencode/opencode.jsonc`
     "webfetch": "ask",
     "bash": { "*": "ask" },
     "external_directory": {
-      "C:\\_mb2-cs-app\\**": "allow",
+      "C:\\mybizz\\**": "allow",
       "C:\\projects\\**": "allow",
       "C:\\pdlf\\**": "allow"
     }
@@ -51,7 +51,7 @@ Path: `/home/dev-p/.config/opencode/opencode.jsonc`
 
 Key points:
 - **No models block** — model selected from UI picker
-- **external_directory** covers shared infrastructure (`_mb2-cs-app`), all projects (`projects`), and PDLF framework (`pdlf`)
+- **external_directory** covers shared infrastructure (`mybizz`), all projects (`projects`), and PDLF framework (`pdlf`)
 - API key hardcoded (deliberate decision — env var approach was unreliable with OpenRouter in prior attempts)
 - GBrain MCP enabled via bun binary at full path
 - All permissions: conservative (`ask`)
@@ -88,7 +88,7 @@ Path: `/mnt/c/projects/mb-3-cs/project-library/AGENTS.md`
 - **12 Hard Rules:** anvil.yaml protection, no time-based references, no hardcoded colors (CSS custom properties only, MUI palette), Plan reads/Build writes boundary, no writes to mb-3-cs, skill ownership, no batching, no deviation from task, binding documents, zero gate-jumping, checklist integrity, default-to-ask
 - **Workspace structure:** 10 folders — `adr/`, `docs/`, `wireframes/`, `screens/`, `wip/`, `gstack-outputs/`, `opencode-outputs/`, `matt-skills-output/`, `workspace/gbrain/`, `workspace/gstack/`
 - **Artifact governance:** Routing by producer (GStack/OpenCode/Matt Pocock) and by file type. Promotion rules. Exclusions.
-- **GStack binary path override:** `/mnt/c/_mb2-cs-app/gstack/bin/<binary-name>` (always use this literal path)
+- **GStack binary path override:** `/mnt/c/mybizz/gstack/bin/<binary-name>` (always use this literal path)
 - **Matt Pocock skills artifact governance:** Per-skill save location rules (pre-emptive, unverified for some skills)
 - **Source of truth:** `adr/`, `docs/`, `wireframes/` in project-library; `mb-3-cs/` for code (read-only context)
 - **Prescribed standards:** Anvil.works, Material 3 theme, M3 dependency, MUI overlay

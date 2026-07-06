@@ -13,7 +13,7 @@ This document registers the relevant OpenCode system, workspace, and integration
 
 - **Global OpenCode config**
   `~/.config/opencode/opencode.jsonc` (WSL: `/home/dev-p/.config/opencode/opencode.jsonc`)
-  Global configuration: OpenRouter provider, conservative permissions (all `ask`), external_directory covering `C:\_mb2-cs-app\**`, `C:\projects\**`, and `C:\pdlf\**`. MCP gbrain enabled. No hardcoded models — model selected from UI picker.
+  Global configuration: OpenRouter provider, conservative permissions (all `ask`), external_directory covering `C:\mybizz\**`, `C:\projects\**`, and `C:\pdlf\**`. MCP gbrain enabled. No hardcoded models — model selected from UI picker.
 
 - **Global skills directory**
   `~/.config/opencode/skills/` (WSL: `/home/dev-p/.config/opencode/skills/`)
@@ -29,21 +29,21 @@ This document registers the relevant OpenCode system, workspace, and integration
 
 ---
 
-## 2. Shared infrastructure (`C:\_mb2-cs-app\`)
+## 2. Shared infrastructure (`C:\mybizz\`)
 
-Windows: `C:\_mb2-cs-app\` — WSL: `/mnt/c/_mb2-cs-app/`
+Windows: `C:\mybizz\` — WSL: `/mnt/c/mybizz/`
 
 Formerly the single-project workspace root (mb-3-cs only). Now repurposed as shared infrastructure:
 
 | Path | Role |
 |---|---|
-| `_mb2-cs-app/gstack/` | GStack tooling repo — binaries, skills, node_modules |
-| `_mb2-cs-app/gbrain/` | GBrain application (Node.js/Bun project with OpenAI SDK) |
-| `_mb2-cs-app/skills/` | Large collection of ~40+ skill definitions (GStack/OpenCode) |
-| `_mb2-cs-app/scripts/` | Legacy backup scripts |
-| `_mb2-cs-app/matt-skills-teach/` | Empty — intended for `teach` Matt Pocock skill redirects |
-| `_mb2-cs-app/backup-mybizz/` | Pre-migration backup of mb-3-cs repos (old paths) |
-| `_mb2-cs-app/desktop-mybizz/` | Developer desktop companion files (learning, management, temp) |
+| `mybizz/gstack/` | GStack tooling repo — binaries, skills, node_modules |
+| `mybizz/gbrain/` | GBrain application (Node.js/Bun project with OpenAI SDK) |
+| `mybizz/skills/` | Large collection of ~40+ skill definitions (GStack/OpenCode) |
+| `mybizz/scripts/` | Legacy backup scripts |
+| `mybizz/matt-skills-teach/` | Empty — intended for `teach` Matt Pocock skill redirects |
+| `mybizz/backup-mybizz/` | Pre-migration backup of mb-3-cs repos (old paths) |
+| `mybizz/desktop-mybizz/` | Developer desktop companion files (learning, management, temp) |
 
 ---
 
@@ -204,7 +204,7 @@ All in `workspace/system-operation-reference/system config reference/`:
 
 ## 9. GStack — integration state
 
-- **Repo:** `C:\_mb2-cs-app\gstack` (Windows) / `/mnt/c/_mb2-cs-app/gstack` (WSL)
+- **Repo:** `C:\mybizz\gstack` (Windows) / `/mnt/c/mybizz/gstack` (WSL)
 - **Status:** Operational — shell scripts normalized for WSL, `gstack-config --help` confirmed runnable
 - **Integration:** GStack skills (61 total) available via the global skills directory. Per-project command files in `.opencode/commands/` route to individual GStack skills.
 - **No GStack-specific config** at project or global `.opencode/` level — integrated via skillpack.

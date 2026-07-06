@@ -1,7 +1,7 @@
 # OpenCode Setup & Status Tracker
 
 **What this document is:**  
-This is the current OpenCode setup, policy, and status tracker for the dual-project workspace under `C:\_mb2-cs-app`. It is aligned with OpenCode Desktop on Windows, the current WSL bridge, and the current 10-file config set now in use. [web:1083][web:1098]
+This is the current OpenCode setup, policy, and status tracker for the dual-project workspace under `C:\mybizz`. It is aligned with OpenCode Desktop on Windows, the current WSL bridge, and the current 10-file config set now in use. [web:1083][web:1098]
 
 ---
 
@@ -23,20 +23,20 @@ Task/s
 - [DONE] Add a global numbering rule: never use `§` for numbering; always use period-style numbering when a symbol is needed (for example: `1.`, `2.`, `3.`).
 
 2. (Repository AGENTS.md – docs)  
-`C:\_mb2-cs-app\project-library\AGENTS.md`
+`C:\mybizz\project-library\AGENTS.md`
 
 Task/s
 - [DONE] Define the documentation workspace trust model and document provenance rules.
 - [DONE] Enforce required workflow order (refine ADRs, validate `am1/mm1` and `am2/mm2` against baselines, then improve working docs).
 - [DONE] Keep this file focused on documentation and planning behavior, not live code execution rules.
 - [DONE] Update canonical shared tracking references to:
-  - `C:\_mb2-cs-app\devlog\README.md`
-  - `C:\_mb2-cs-app\devlog\index.md`
-  - `C:\_mb2-cs-app\todo\todo.md`
-  - `C:\_mb2-cs-app\todo\todo-archive.md`
+  - `C:\mybizz\devlog\README.md`
+  - `C:\mybizz\devlog\index.md`
+  - `C:\mybizz\todo\todo.md`
+  - `C:\mybizz\todo\todo-archive.md`
 
 3. (Repository AGENTS.md – code)  
-`C:\_mb2-cs-app\mb-3-cs\AGENTS.md`
+`C:\mybizz\mb-3-cs\AGENTS.md`
 
 Task/s
 - [DONE] Define live code repo behavior: conservative, minimal, implementation-focused.
@@ -114,7 +114,7 @@ Task/s
 - [DONE] Confirm that new Desktop sessions start with the `plan` agent active when no project-level default overrides it. [web:1083][web:1098]
 
 9. (project-local agents – docs)  
-`C:\_mb2-cs-app\project-library\.opencode\agents\`
+`C:\mybizz\project-library\.opencode\agents\`
 
 Task/s
 - [DONE] Create project-local `plan` and `build` agent files for `project-library`.
@@ -125,7 +125,7 @@ Task/s
   - Build may read but must hand off changes.
 
 10. (project-local agents – code)  
-`C:\_mb2-cs-app\mb-3-cs\.opencode\agents\`
+`C:\mybizz\mb-3-cs\.opencode\agents\`
 
 Task/s
 - [DONE] Create project-local `plan` and `build` agent files for `mb-3-cs`.
@@ -162,10 +162,10 @@ Task/s
 - Current state: relying on OpenCode/Desktop defaults and built-in behavior.
 
 14. (skills – per project)  
-Project skill locations (for example: `C:\_mb2-cs-app\project-library\skills\` and `C:\_mb2-cs-app\mb-3-cs\skills\` if used)
+Project skill locations (for example: `C:\mybizz\project-library\skills\` and `C:\mybizz\mb-3-cs\skills\` if used)
 
 Task/s
-- [NOT DONE] No project-specific skills have been created or configured yet. (61 skills symlinked into `~/.config/opencode/skills/` from `/mnt/c/_mb2-cs-app/skills/`.)
+- [NOT DONE] No project-specific skills have been created or configured yet. (61 skills symlinked into `~/.config/opencode/skills/` from `/mnt/c/mybizz/skills/`.)
 - Decision pending: determine whether either repo needs local skills.
 
 ---
@@ -175,7 +175,7 @@ Task/s
 Status: Project-level `opencode.json` files are implemented for both main workspaces, and project configs are the highest-precedence standard config layer. [web:1083][web:1098]
 
 15. (opencode.json – docs project)  
-`C:\_mb2-cs-app\project-library\opencode.json`
+`C:\mybizz\project-library\opencode.json`
 
 Task/s
 - [DONE] Create the project config for the documentation workspace.
@@ -188,12 +188,12 @@ Task/s
   - `plan` = primary agent for document analysis, validation, provenance checks, architectural reasoning, and refactor planning.
   - `build` = secondary agent for tightly scoped document/support tasks only when explicitly instructed.
 - [DONE] Allow cross-repo read access to:
-  - `C:\_mb2-cs-app\mb-3-cs\`
-  - `C:\_mb2-cs-app\devlog\`
-  - `C:\_mb2-cs-app\todo\`
+  - `C:\mybizz\mb-3-cs\`
+  - `C:\mybizz\devlog\`
+  - `C:\mybizz\todo\`
 
 16. (opencode.json – code project)  
-`C:\_mb2-cs-app\mb-3-cs\opencode.json`
+`C:\mybizz\mb-3-cs\opencode.json`
 
 Task/s
 - [DONE] Create the project config for the live code repository.
@@ -206,9 +206,9 @@ Task/s
   - `plan` = planning, architectural reasoning, and implementation analysis agent.
   - `build` = primary coding and test-oriented agent for explicit user-directed implementation tasks only.
 - [DONE] Add path-based edit protection for critical files and allow cross-repo read access to:
-  - `C:\_mb2-cs-app\project-library\`
-  - `C:\_mb2-cs-app\devlog\`
-  - `C:\_mb2-cs-app\todo\`
+  - `C:\mybizz\project-library\`
+  - `C:\mybizz\devlog\`
+  - `C:\mybizz\todo\`
 
 ---
 
@@ -259,7 +259,7 @@ Task/s
 - Rationale: automatic formatting should not be introduced into this project until formatting rules are deliberately defined and accepted for the local repo.
 
 21. (protected-file edit controls for mb-3-cs)  
-`C:\_mb2-cs-app\mb-3-cs\opencode.json`
+`C:\mybizz\mb-3-cs\opencode.json`
 
 Task/s
 - [DONE] Confirm that `.gitignore` is not a sufficient protection against OpenCode editing tracked files.
@@ -362,7 +362,7 @@ OpenCode Desktop session via `wsl-opencode`
 
 Task/s
 - [DONE] Confirm Desktop sessions can operate against WSL/Linux-side paths.
-- [DONE] Confirm a session can inspect `/mnt/c/_mb2-cs-app/project-library`.
+- [DONE] Confirm a session can inspect `/mnt/c/mybizz/project-library`.
 - [DONE] Treat the Windows Desktop UI + WSL server combination as a validated working mode for this workspace.
 
 ---
@@ -374,16 +374,16 @@ Task/s
 Status: GStack is locally installed, WSL-compatible, and actively used as the primary workflow/orchestration layer via skills (slash commands) in OpenCode. It remains subordinate to OpenCode’s permissions, AGENTS rules, and protected-file policies. [web:212][web:560]
 
 30. (GStack repo location)  
-`C:\\_mb2-cs-app\\gstack`  
-WSL path: `/mnt/c/_mb2-cs-app/gstack`
+`C:\\mybizz\\gstack`  
+WSL path: `/mnt/c/mybizz/gstack`
 
 Task/s  
-- [DONE] Clone or place the GStack repo locally under `C:\\_mb2-cs-app\\gstack`.  
+- [DONE] Clone or place the GStack repo locally under `C:\\mybizz\\gstack`.  
 - [DONE] Confirm repo contents include `bin/`, `node_modules/`, and the expected support files.  
 - [DONE] Keep this repo as the authoritative source for GStack code and documentation on this machine.
 
 31. (WSL shell compatibility for GStack scripts)  
-`/mnt/c/_mb2-cs-app/gstack/bin/*`
+`/mnt/c/mybizz/gstack/bin/*`
 
 Task/s  
 - [DONE] Identify CRLF line-ending issues causing `bash\r` execution failures in WSL.  
@@ -393,7 +393,7 @@ Task/s
 - [DONE] Confirm that core GStack scripts run cleanly under the WSL shell (no `^M` / CRLF artefacts).
 
 32. (GStack command validation – base CLI)  
-`/mnt/c/_mb2-cs-app/gstack`
+`/mnt/c/mybizz/gstack`
 
 Task/s  
 - [DONE] Confirm:  
@@ -408,7 +408,7 @@ Workspace integration decision
 Task/s  
 - [DONE] Confirm GStack is locally present and runnable in WSL.  
 - [DONE] Use GStack as the primary workflow/orchestration layer around OpenCode via skills (slash commands) exposed to the OpenCode agents (for example: `/office-hours`, `/plan-ceo-review`, `/plan-eng-review`, `/build`, `/investigate`, `/review`, `/ship`, `/setup-gbrain`, etc.). [web:212][web:560][web:568]  
-- [DONE] Confirm that GStack skills can be invoked from OpenCode Desktop sessions attached to the WSL server and that they operate against the correct WSL paths (`/mnt/c/_mb2-cs-app/...`).  
+- [DONE] Confirm that GStack skills can be invoked from OpenCode Desktop sessions attached to the WSL server and that they operate against the correct WSL paths (`/mnt/c/mybizz/...`).  
 - - [DONE] GStack integrated via skillpack and 49 project-local commands. No separate per-project GStack config path needed. under `.config\\opencode\\gstack\\` or project-local `.opencode\\gstack\\` paths; integration is currently through the agent’s skills/skillpack and workspace-level docs, not through `.opencode` command wrappers.  
 - [DECIDED] Treat GStack as a workflow/orchestration layer that:  
   - **does not** override OpenCode global/project config, AGENTS rules, or protected-file behavior,  
@@ -425,11 +425,11 @@ Task/s
 Status: Core operating models and workspace scaffolding are in place for both GStack and GBrain. GStack is actively used as an orchestration layer via skills in OpenCode, and GBrain is fully implemented as a Supabase-backed brain with OpenRouter-based embeddings and a passing smoke test. Some workspace docs and optional `.opencode` command wrappers remain to be populated. [file:574][web:239][web:532][web:533]
 
 34. (GStack / GBrain workspace scaffold)  
-`C:\\_mb2-cs-app\\project-library\\workspace\\`
+`C:\\mybizz\\project-library\\workspace\\`
 
 Task/s  
 - [DONE] Create a dedicated workspace-level area under `project-library\\workspace\\` for GStack, GBrain, and workspace meta-docs.  
-- [DONE] Establish the following structure on Windows (WSL uses `/mnt/c/_mb2-cs-app/project-library/workspace`):
+- [DONE] Establish the following structure on Windows (WSL uses `/mnt/c/mybizz/project-library/workspace`):
 
   - `workspace\\gstack\\`  
     - `gstack-operating-model.md` (Populated)  
@@ -461,7 +461,7 @@ Task/s
 - [DECIDED] Use `workspace\\gbrain\\` for memory and provenance rules, not for runtime state.
 
 35. (GStack – operating model and workflows)  
-`C:\\_mb2-cs-app\\project-library\\workspace\\gstack\\`
+`C:\\mybizz\\project-library\\workspace\\gstack\\`
 
 Task/s  
 - [DONE] Define GStack’s operating role for the dual-project CS workspace in `gstack-operating-model.md` — OpenCode remains the runtime host and authority for permissions and protected files; GStack is a workflow layer around it. [file:574][web:568]  
@@ -474,7 +474,7 @@ Task/s
 - [DECIDED] Treat GStack as a workflow and orchestration layer around OpenCode; GStack does not override OpenCode permissions, project rules, or protected-file behavior.
 
 36. (GBrain – operating model, engine, and source tiers)  
-`C:\\_mb2-cs-app\\project-library\\workspace\\gbrain\\`
+`C:\\mybizz\\project-library\\workspace\\gbrain\\`
 
 Task/s  
 - [DONE] Define GBrain’s operating role as an advisory memory layer, not a truth source, in `gbrain-operating-model.md`.  
@@ -543,8 +543,8 @@ Task/s
 - [DONE] Confirm that the Windows project directories are reachable via `/mnt/c`:
 
   ```bash
-  ls /mnt/c/_mb2-cs-app/project-library
-  ls /mnt/c/_mb2-cs-app/mb-3-cs
+  ls /mnt/c/mybizz/project-library
+  ls /mnt/c/mybizz/mb-3-cs
   ```
 
 - [DONE] Confirm that `project-library` contains the expected workspace structure:
@@ -582,13 +582,13 @@ Task/s
   - For `project-library`:
 
     ```text
-    /mnt/c/_mb2-cs-app/project-library
+    /mnt/c/mybizz/project-library
     ```
 
   - For `mb-3-cs`:
 
     ```text
-    /mnt/c/_mb2-cs-app/mb-3-cs
+    /mnt/c/mybizz/mb-3-cs
     ```
 
   as direct path messages to open the corresponding workspace when connected to `wsl-opencode`.  
@@ -609,14 +609,14 @@ Task/s
   3. To work in `project-library`, send:
 
      ```text
-     /mnt/c/_mb2-cs-app/project-library
+     /mnt/c/mybizz/project-library
      ```
 
      in the Desktop chat input to open the workspace.  
   4. To work in `mb-3-cs`, send:
 
      ```text
-     /mnt/c/_mb2-cs-app/mb-3-cs
+     /mnt/c/mybizz/mb-3-cs
      ```
 
      in the Desktop chat input.  
@@ -643,7 +643,7 @@ Task/s
 - [DONE] Confirm visibility from a fresh PowerShell:
 
   - Expected User value (example):  
-    `C:\_mb2-cs-app\opencode-integration`
+    `C:\mybizz\opencode-integration`
 
 - [DONE] Confirm that the WSL environment does **not** automatically see this Windows variable, and that project-local `.opencode\commands\` is therefore the more reliable pattern:
 
@@ -654,14 +654,14 @@ Task/s
 - [DONE] Confirm that the WSL paths and repo contents are consistent:
 
   ```bash
-  ls /mnt/c/_mb2-cs-app/project-library/workspace/gstack
-  ls /mnt/c/_mb2-cs-app/project-library/workspace/gbrain
+  ls /mnt/c/mybizz/project-library/workspace/gstack
+  ls /mnt/c/mybizz/project-library/workspace/gbrain
   ```
 
 - [DECIDED] Use project-local `.opencode\commands\` rather than cross-OS `OPENCODE_CONFIG_DIR` for this machine.
 
 44. (Project-local commands – verification)  
-`C:\_mb2-cs-app\project-library\.opencode\commands\`
+`C:\mybizz\project-library\.opencode\commands\`
 
 Task/s  
 - [DONE] Create `.opencode\commands\` for `project-library`.  

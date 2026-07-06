@@ -63,8 +63,8 @@ Updated `/mnt/c/pdlf/registry/projects.json`:
 |---|---|
 | Updated registry | `/mnt/c/pdlf/registry/projects.json` |
 | Completion report | `opencode-outputs/project-registration-20260704.md` |
-| Bootstrapped devlog-index | `/mnt/c/_mb2-cs-app/project-library/devlog-index.md` |
-| Bootstrapped judgement-trail | `/mnt/c/_mb2-cs-app/project-library/judgement-trail.md` |
+| Bootstrapped devlog-index | `/mnt/c/mybizz/project-library/devlog-index.md` |
+| Bootstrapped judgement-trail | `/mnt/c/mybizz/project-library/judgement-trail.md` |
 
 ## 6. Decisions Made
 

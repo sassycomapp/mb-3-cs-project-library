@@ -14,7 +14,7 @@ GStack here is a **workflow and orchestration layer** around OpenCode. It does n
 
 ## 1. Role of this folder
 
-This folder contains the **design and operating docs** for GStack in this workspace. It is not the GStack code itself (which lives in `C:\_mb2-cs-app\gstack`), and it is not a live config directory.
+This folder contains the **design and operating docs** for GStack in this workspace. It is not the GStack code itself (which lives in `C:\mybizz\gstack`), and it is not a live config directory.
 
 Use these docs to answer:
 

@@ -62,7 +62,7 @@ Expected result: Shows `default` (143 pages federated), `project-library` (318 p
 **Path:** any directory
 
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --once
 ```
 
 This pushes learnings, plans, and retros to the private git repo.
@@ -91,7 +91,7 @@ If you add new files to project-library or mb-3-cs and want GBrain to index them
 
 ```bash
 # Re-index project-library docs
-gbrain sync --repo /mnt/c/_mb2-cs-app/project-library
+gbrain sync --repo /mnt/c/mybizz/project-library
 
 # Embed new/changed chunks
 gbrain embed --stale
@@ -106,10 +106,10 @@ gbrain embed --stale
 GBrain's `sync` command only handles markdown files by default. Code files require a direct import.
 
 **Apply in:** WSL terminal  
-**Path:** `/mnt/c/_mb2-cs-app/gbrain`
+**Path:** `/mnt/c/mybizz/gbrain`
 
 ```bash
-cd /mnt/c/_mb2-cs-app/gbrain
+cd /mnt/c/mybizz/gbrain
 export OPENAI_API_KEY="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"
 bun -e "
 import { PGLiteEngine } from './src/core/pglite-engine.ts';
@@ -117,7 +117,7 @@ import { importCodeFile } from './src/core/import-file.ts';
 import { isCodeFilePath } from './src/core/sync.ts';
 import { readFileSync, readdirSync, statSync } from 'fs';
 import { relative, join } from 'path';
-const REPO = '/mnt/c/_mb2-cs-app/mb-3-cs';
+const REPO = '/mnt/c/mybizz/mb-3-cs';
 const engine = new PGLiteEngine();
 await engine.connect({ engine: 'pglite', database_path: '/home/dev-p/.gbrain/brain.pglite' });
 function walk(dir) {
@@ -181,7 +181,7 @@ Then retry the command that failed.
 **Path:** any directory
 
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-gbrain-detect
+bash /mnt/c/mybizz/gstack/bin/gstack-gbrain-detect
 ```
 
 Expected result: JSON showing `gbrain_on_path: true`, `gbrain_engine: "pglite"`, `gbrain_doctor_ok: true`, `gstack_brain_sync_mode: "full"`, `gstack_brain_git: true`.
@@ -281,7 +281,7 @@ What does NOT sync: credentials, browser profiles, caches, question preferences.
 | GStack home | `~/.gstack/` |
 | GStack brain remote | `~/.gstack-brain-remote.txt` |
 | GStack brain worktree | `~/.gstack-brain-worktree/` |
-| GStack bin scripts | `/mnt/c/_mb2-cs-app/gstack/bin/` |
+| GStack bin scripts | `/mnt/c/mybizz/gstack/bin/` |
 | OPENAI_API_KEY | `~/.bashrc` |
 
 ### Open GStack Folder in Windows Explorer
@@ -328,7 +328,7 @@ gbrain extract timeline --source db
 **Path:** any directory
 
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --status
 cd ~/.gstack && git status
 cd ~/.gstack && git fetch origin
 ```
@@ -338,10 +338,10 @@ cd ~/.gstack && git fetch origin
 If you see `Another sync is in progress`:
 
 **Apply in:** WSL terminal  
-**Path:** `/mnt/c/_mb2-cs-app/gbrain`
+**Path:** `/mnt/c/mybizz/gbrain`
 
 ```bash
-cd /mnt/c/_mb2-cs-app/gbrain
+cd /mnt/c/mybizz/gbrain
 bun -e "
 import { PGLiteEngine } from './src/core/pglite-engine.ts';
 const engine = new PGLiteEngine();

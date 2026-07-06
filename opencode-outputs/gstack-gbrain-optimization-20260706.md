@@ -63,7 +63,7 @@ Edge extraction: 692 pages processed, 0 links, 0 timeline entries.
 | File | Changes |
 |---|---|
 | `gbrain-install-plan.md` | Supabase → PGLite, v0.18.2 → v0.42.44.0, removed OpenRouter proxy/patch references |
-| `gbrain-repo-strategy.md` | Fixed paths (`C:\_mb2-cs-app\` → `C:\projects\mb-3-cs\`), resolved "To be confirmed", fixed truncated paths |
+| `gbrain-repo-strategy.md` | Fixed paths (`C:\mybizz\` → `C:\projects\mb-3-cs\`), resolved "To be confirmed", fixed truncated paths |
 | `gbrain-log.md` | Populated from scratch with engine migration history, source inventory, config state |
 | `gbrain-reference.md` | Fixed page counts (565 → 700), health score (65 → 90), source table |
 | `gbrain-operating-guide.md` | Fixed page counts (263/627 → 700), health score (70 → 90) |

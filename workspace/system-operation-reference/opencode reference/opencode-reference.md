@@ -25,11 +25,11 @@ Switch between modes by pressing **Tab**.
 
 ```bash
 # For project-library (planning)
-cd /mnt/c/_mb2-cs-app/project-library
+cd /mnt/c/mybizz/project-library
 opencode web --hostname 0.0.0.0
 
 # For mb-3-cs (code)
-cd /mnt/c/_mb2-cs-app/mb-3-cs
+cd /mnt/c/mybizz/mb-3-cs
 opencode web --hostname 0.0.0.0
 ```
 
@@ -170,7 +170,7 @@ Press **Ctrl+G** to stop the agent mid-response.
 
 ### Skills Installation
 
-**Location:** `~/.config/opencode/skills/` (symlinked to `/mnt/c/_mb2-cs-app/skills/`)
+**Location:** `~/.config/opencode/skills/` (symlinked to `/mnt/c/mybizz/skills/`)
 
 **Total skills:** 59 (54 top-level + 4 openclaw + 1 browser-skills)
 
@@ -184,7 +184,7 @@ ls ~/.config/opencode/skills/ | wc -l
 **To update skills:**
 ```bash
 # Skills are symlinked — updates to the source files are automatic
-# Just edit the SKILL.md in /mnt/c/_mb2-cs-app/skills/
+# Just edit the SKILL.md in /mnt/c/mybizz/skills/
 ```
 
 **To undo:**
@@ -229,7 +229,7 @@ nano ~/.config/opencode/opencode.jsonc
     "edit": { "*": "ask" },
     "webfetch": "ask",
     "bash": { "*": "ask" },
-    "external_directory": { "C:\\_mb2-cs-app\\**": "allow" }
+    "external_directory": { "C:\\mybizz\\**": "allow" }
   },
   "mcp": {
     "gbrain": {
@@ -258,14 +258,14 @@ Global behavior rules that apply to all sessions:
 
 ### File 4: project-library opencode.json
 
-**Path:** `/mnt/c/_mb2-cs-app/project-library/opencode.json`
+**Path:** `/mnt/c/mybizz/project-library/opencode.json`
 
 ```json
 {
   "default_agent": "plan",
   "permission": {
     "edit": { "**/anvil.yaml": "deny", "*": "ask" },
-    "external_directory": { "C:\\_mb2-cs-app\\mb-3-cs\\**": "allow" }
+    "external_directory": { "C:\\mybizz\\mb-3-cs\\**": "allow" }
   }
 }
 ```
@@ -274,7 +274,7 @@ Global behavior rules that apply to all sessions:
 
 ### File 8: mb-3-cs opencode.json
 
-**Path:** `/mnt/c/_mb2-cs-app/mb-3-cs/opencode.json`
+**Path:** `/mnt/c/mybizz/mb-3-cs/opencode.json`
 
 ```json
 {
@@ -289,7 +289,7 @@ Global behavior rules that apply to all sessions:
       "standard-page.html": "ask",
       "theme.css": "ask"
     },
-    "external_directory": { "C:\\_mb2-cs-app\\project-library\\**": "allow" }
+    "external_directory": { "C:\\mybizz\\project-library\\**": "allow" }
   }
 }
 ```
@@ -484,12 +484,12 @@ GBrain is registered as an MCP server in the WSL config. When the agent needs to
 | Global config | `/home/dev-p/.config/opencode/opencode.jsonc` | `\\wsl.localhost\Ubuntu\home\dev-p\.config\opencode\` |
 | Global AGENTS.md | `/home/dev-p/.config/opencode/AGENTS.md` | `\\wsl.localhost\Ubuntu\home\dev-p\.config\opencode\` |
 | Global skills | `/home/dev-p/.config/opencode/skills/` | `\\wsl.localhost\Ubuntu\home\dev-p\.config\opencode\skills\` |
-| Skills source | `/mnt/c/_mb2-cs-app/skills/` | `C:\_mb2-cs-app\skills\` |
-| project-library config | `/mnt/c/_mb2-cs-app/project-library/opencode.json` | `C:\_mb2-cs-app\project-library\opencode.json` |
-| project-library agents | `/mnt/c/_mb2-cs-app/project-library/.opencode/agents/` | `C:\_mb2-cs-app\project-library\.opencode\agents\` |
-| project-library commands | `/mnt/c/_mb2-cs-app/project-library/.opencode/commands/` | `C:\_mb2-cs-app\project-library\.opencode\commands\` |
-| mb-3-cs config | `/mnt/c/_mb2-cs-app/mb-3-cs/opencode.json` | `C:\_mb2-cs-app\mb-3-cs\opencode.json` |
-| mb-3-cs agents | `/mnt/c/_mb2-cs-app/mb-3-cs/.opencode/agents/` | `C:\_mb2-cs-app\mb-3-cs\.opencode\agents\` |
+| Skills source | `/mnt/c/mybizz/skills/` | `C:\mybizz\skills\` |
+| project-library config | `/mnt/c/mybizz/project-library/opencode.json` | `C:\mybizz\project-library\opencode.json` |
+| project-library agents | `/mnt/c/mybizz/project-library/.opencode/agents/` | `C:\mybizz\project-library\.opencode\agents\` |
+| project-library commands | `/mnt/c/mybizz/project-library/.opencode/commands/` | `C:\mybizz\project-library\.opencode\commands\` |
+| mb-3-cs config | `/mnt/c/mybizz/mb-3-cs/opencode.json` | `C:\mybizz\mb-3-cs\opencode.json` |
+| mb-3-cs agents | `/mnt/c/mybizz/mb-3-cs/.opencode/agents/` | `C:\mybizz\mb-3-cs\.opencode\agents\` |
 
 ---
 

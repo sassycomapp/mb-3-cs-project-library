@@ -13,14 +13,14 @@ It is a companion to `gbrain-source-tiers.md`.
 Primary high-trust inputs:
 
 - ADRs:
-  - `C:\_mb2-cs-app\project-library\adr\**\*.md`
+  - `C:\mybizz\project-library\adr\**\*.md`
 
 - Anvil and Mybizz method docs:
-  - `C:\_mb2-cs-app\project-library\docs\am1-anvil-methods\**\*.md`
-  - `C:\_mb2-cs-app\project-library\docs\mm1-mybizz-methods\**\*.md`
+  - `C:\mybizz\project-library\docs\am1-anvil-methods\**\*.md`
+  - `C:\mybizz\project-library\docs\mm1-mybizz-methods\**\*.md`
 
 - Reference Anvil file:
-  - `C:\_mb2-cs-app\project-library\docs\reference-anvil.yaml\anvil.yaml`
+  - `C:\mybizz\project-library\docs\reference-anvil.yaml\anvil.yaml`
 
 Ingestion guideline:
 - Prefer well-structured sections and decisions, not whole-directory dumps.
@@ -31,14 +31,14 @@ Ingestion guideline:
 
 Devlog:
 
-- `C:\_mb2-cs-app\devlog\README.md`
-- `C:\_mb2-cs-app\devlog\index.md`
+- `C:\mybizz\devlog\README.md`
+- `C:\mybizz\devlog\index.md`
 - Any additional structured devlog entries as they are added.
 
 Todo:
 
-- `C:\_mb2-cs-app\todo\todo.md`
-- `C:\_mb2-cs-app\todo\todo-archive.md`
+- `C:\mybizz\todo\todo.md`
+- `C:\mybizz\todo\todo-archive.md`
 
 Ingestion guideline:
 - Ingest completed entries or stable summaries, not half-finished drafts.
@@ -55,7 +55,7 @@ Examples (paths may vary):
 
 When you create such outputs, add them here with their actual paths, for example:
 
-- `C:\_mb2-cs-app\project-library\docs\handoffs\2026-05-03-feature-X.md`
+- `C:\mybizz\project-library\docs\handoffs\2026-05-03-feature-X.md`
 
 ---
 
@@ -64,7 +64,7 @@ When you create such outputs, add them here with their actual paths, for example
 Potential future candidates:
 
 - Summaries under a dedicated folder, for example:
-  - `C:\_mb2-cs-app\project-library\docs\code-summaries\**\*.md`
+  - `C:\mybizz\project-library\docs\code-summaries\**\*.md`
 
 These should:
 - clearly state which modules/paths they refer to,

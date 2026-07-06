@@ -38,7 +38,7 @@ echo "GSTACK_STATE_ROOT=${GSTACK_STATE_ROOT:-NOT_SET}"
 
 **Result:** the binary **exists** —
 `-rwxrwxrwx 1 dev-p dev-p 2420 Jun 15 23:41 /home/dev-p/.claude/skills/gstack/bin/gstack-slug`,
-reachable via a symlink (`~/.claude/skills/gstack → /mnt/c/_mb2-cs-app/gstack`).
+reachable via a symlink (`~/.claude/skills/gstack → /mnt/c/mybizz/gstack`).
 Both `GSTACK_HOME` and `GSTACK_STATE_ROOT` were unset in both the manual
 terminal and the agent's own shell. `$HOME`, the binary's existence, and
 every other measured value were identical between the manual terminal and
@@ -63,7 +63,7 @@ cat ~/.gstack/slug-cache/*
 | Cache file | Decoded value | Written |
 |---|---|---|
 | `_home_dev-p` | `dev-p` | Jun 25 21:54 |
-| `_mnt_c__mb2-cs-app_project-library` | `sassycomapp-project-library` | Jun 26 00:34 |
+| `_mnt_c_mybizz_project-library` | `sassycomapp-project-library` | Jun 26 00:34 |
 
 **Conclusion at this point:** the cache for this exact project directory
 holds `sassycomapp-project-library` — **not** `project-library`, the value
@@ -78,8 +78,8 @@ never went through this cache or binary at all — pointing toward a
 ## 3. Test: Rule Out a Second Slug Binary
 
 ```bash
-grep -n "slug" /mnt/c/_mb2-cs-app/skills/context-save/SKILL.md
-grep -n "slug" /mnt/c/_mb2-cs-app/skills/health/SKILL.md
+grep -n "slug" /mnt/c/mybizz/skills/context-save/SKILL.md
+grep -n "slug" /mnt/c/mybizz/skills/health/SKILL.md
 ```
 
 **Result:** both files contain the **identical** call —
@@ -141,7 +141,7 @@ executed for slug resolution during each skill run, with raw output.
 
 ### `/health`'s actual call:
 ```bash
-cd /mnt/c/_mb2-cs-app/project-library && _ROOT=$(git rev-parse --show-toplevel 2>/dev/null) && \
+cd /mnt/c/mybizz/project-library && _ROOT=$(git rev-parse --show-toplevel 2>/dev/null) && \
 GSTACK_ROOT="$HOME/.codex/skills/gstack" && \
 [ -n "$_ROOT" ] && [ -d "$_ROOT/.agents/skills/gstack" ] && GSTACK_ROOT="$_ROOT/.agents/skills/gstack" && \
 GSTACK_BIN="$GSTACK_ROOT/bin" && \
@@ -234,7 +234,7 @@ machine:
 ```
 ## GStack binary path override
 When any GStack skill needs to call gstack-slug, gstack-config, or any
-other gstack-* binary, always use /mnt/c/_mb2-cs-app/gstack/bin/<binary-name>
+other gstack-* binary, always use /mnt/c/mybizz/gstack/bin/<binary-name>
 directly. Do not attempt host-detection logic (~/.codex/skills/gstack,
 .agents/skills/gstack, or similar) — that detection has been confirmed to
 fail in this environment. The path above is correct and verified.

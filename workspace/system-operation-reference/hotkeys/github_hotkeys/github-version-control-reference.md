@@ -12,16 +12,16 @@ This is your reference for Git and GitHub operations across all three repos. It 
 
 | Repo | Local Path | Remote | Branch | Purpose | Anvil Sync |
 |---|---|---|---|---|---|
-| project-library | `/mnt/c/_mb2-cs-app/project-library` | `github.com/sassycomapp/project-library` | `main` | Planning & documentation | No |
-| mb-3-cs | `/mnt/c/_mb2-cs-app/mb-3-cs` | `github.com/sassycomapp/mb-3-cs` | `master` | App code (Anvil.works) | Yes (both ways) |
+| project-library | `/mnt/c/mybizz/project-library` | `github.com/sassycomapp/project-library` | `main` | Planning & documentation | No |
+| mb-3-cs | `/mnt/c/mybizz/mb-3-cs` | `github.com/sassycomapp/mb-3-cs` | `master` | App code (Anvil.works) | Yes (both ways) |
 | gbrain-repo | Auto-managed by GStack | `github.com/sassycomapp/gbrain-repo` | `main` | GStack brain sync | No (auto-managed) |
 
 **Windows paths:**
 
 | Repo | Windows Path |
 |---|---|
-| project-library | `C:\_mb2-cs-app\project-library` |
-| mb-3-cs | `C:\_mb2-cs-app\mb-3-cs` |
+| project-library | `C:\mybizz\project-library` |
+| mb-3-cs | `C:\mybizz\mb-3-cs` |
 
 ---
 
@@ -89,7 +89,7 @@ This is your reference for Git and GitHub operations across all three repos. It 
 
 **Common pattern:**
 ```bash
-cd /mnt/c/_mb2-cs-app/mb-3-cs
+cd /mnt/c/mybizz/mb-3-cs
 git pull    # get latest from GitHub
 # ... make changes ...
 git add .
@@ -202,7 +202,7 @@ test: add unit tests for availability settings
 
 **If Anvil has changes you don't have locally:**
 ```bash
-cd /mnt/c/_mb2-cs-app/mb-3-cs
+cd /mnt/c/mybizz/mb-3-cs
 git pull
 ```
 
@@ -223,12 +223,12 @@ git pull    # may need to resolve merge conflicts
 
 **To check status:**
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --status
 ```
 
 **To force a sync:**
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --once
 ```
 
 ---
@@ -415,10 +415,10 @@ This is out of scope for now. Focus on getting the workflow solid first.
 
 | Command | What it does | Repo |
 |---|---|---|
-| `cd /mnt/c/_mb2-cs-app/project-library && git pull` | Get latest docs | project-library |
-| `cd /mnt/c/_mb2-cs-app/mb-3-cs && git pull` | Get latest from Anvil | mb-3-cs |
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once` | Force brain sync | gbrain-repo |
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status` | Check brain sync | gbrain-repo |
+| `cd /mnt/c/mybizz/project-library && git pull` | Get latest docs | project-library |
+| `cd /mnt/c/mybizz/mb-3-cs && git pull` | Get latest from Anvil | mb-3-cs |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --once` | Force brain sync | gbrain-repo |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --status` | Check brain sync | gbrain-repo |
 
 ### Open Code Commands
 
@@ -503,12 +503,12 @@ git push
 
 **Check status:**
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --status
 ```
 
 **Force sync:**
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --once
 ```
 
 ---

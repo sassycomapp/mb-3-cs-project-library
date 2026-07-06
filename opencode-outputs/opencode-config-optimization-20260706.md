@@ -16,7 +16,7 @@ Optimized OpenCode configuration for a multi-project environment (4 projects: mb
 
 ### Global config (`~/.config/opencode/opencode.jsonc`)
 - Removed hardcoded model block (`xiaomi/mimo-v2.5-pro`) — model now selected from UI picker only
-- Updated `external_directory` to cover `C:\projects\**` and `C:\pdlf\**` in addition to `C:\_mb2-cs-app\**`
+- Updated `external_directory` to cover `C:\projects\**` and `C:\pdlf\**` in addition to `C:\mybizz\**`
 - API key retained (deliberate decision — env var approach previously unreliable)
 
 ### mb-3-cs/AGENTS.md — Plan-write conflict fix
@@ -40,7 +40,7 @@ Added to each `plan.md` and `build.md` (both project-library and mb-3-cs):
 - Removed 3 duplicates: `gstack-context-save.md`, `gstack-learn.md`, `gstack-upgrade.md`
 - Fixed headers: `build.md` (`/build-gstack` → `/build`), `review.md` (`/review-gstack` → `/review`)
 - Standardized format across 5 outliers: `office-hours.md`, `plan-ceo-review.md`, `plan-eng-review.md`, `qa.md`, `setup-gbrain.md`, `setup-gbrain-doctor.md`, `sync-gbrain.md`
-- Fixed `test-config-dir.md` — stale `C:\_mb2-cs-app\` paths replaced with current
+- Fixed `test-config-dir.md` — stale `C:\mybizz\` paths replaced with current
 
 ### Registry
 - `project-inventory.txt` — fixed mb-3-cs paths, removed non-existent `pdlf-project-library` entry
@@ -98,7 +98,7 @@ Added to each `plan.md` and `build.md` (both project-library and mb-3-cs):
 - All 4 agent files: task completion and environment sections present
 - mb4ecom/mb5pdlf: both repos have `opencode.json` with correct paths and protections
 - 49 command files: no duplicates, all headers match filenames, standardized format
-- `test-config-dir.md`: no stale `_mb2-cs-app` paths
+- `test-config-dir.md`: no stale `mybizz` paths
 - `project-inventory.txt`: all paths current, no non-existent entries
 - All 3 workspace docs: current paths, Web UI only, no model references, no duplicated content
 - `devlog-index.md` and `judgement-trail.md`: this task logged

@@ -9,9 +9,9 @@ The source tier determines how much trust may be placed in recalled information.
 These are the highest-trust GBrain inputs for the current CS application.
 
 Approved Tier A sources are:
-  - `C:\_mb2-cs-app\project-library\adr\`,
-  - `C:\_mb2-cs-app\project-library\docs\`,
-  - `C:\_mb2-cs-app\project-library\developer-rules\`.
+  - `C:\mybizz\project-library\adr\`,
+  - `C:\mybizz\project-library\docs\`,
+  - `C:\mybizz\project-library\developer-rules\`.
 
 
 
@@ -21,14 +21,14 @@ Tier A recall may be treated as high-confidence advisory memory, but the underly
 These are authoritative tracking sources for shared work state.
 
 Approved Tier B sources are:
-  - `C:\_mb2-cs-app\project-library\implementation\`.
+  - `C:\mybizz\project-library\implementation\`.
   
 Tier B recall may be used for work history, task state, and handoff context.
 
 ## Tier C — Validated workflow outputs
 These are validated outputs produced by approved workflows.
-  - `C:\_mb2-cs-app\project-library\gstack-outputs\`.
-  - `C:\_mb2-cs-app\project-library\workspace\gbrain\gbrain-log.md`.
+  - `C:\mybizz\project-library\gstack-outputs\`.
+  - `C:\mybizz\project-library\workspace\gbrain\gbrain-log.md`.
 Examples:
 - final Plan handoffs,
 - final Build handoffs,

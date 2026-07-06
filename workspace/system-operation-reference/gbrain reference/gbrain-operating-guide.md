@@ -113,25 +113,25 @@ GStack brain sync commands are run in **WSL** from the GStack bin directory.
 
 | Command | Purpose | Run In | Path |
 |---|---|---|---|
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-init` | One-time setup (creates git repo + remote) | WSL | Any directory |
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once` | Sync pending changes to remote | WSL | Any directory |
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status` | Check sync health and queue depth | WSL | Any directory |
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-restore` | Pull brain from remote to new machine | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-brain-init` | One-time setup (creates git repo + remote) | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --once` | Sync pending changes to remote | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --status` | Check sync health and queue depth | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-brain-restore` | Pull brain from remote to new machine | WSL | Any directory |
 
 #### Configuration
 
 | Command | Purpose | Run In | Path |
 |---|---|---|---|
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-config set gbrain_sync_mode full` | Enable full sync (everything) | WSL | Any directory |
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-config set gbrain_sync_mode off` | Disable sync | WSL | Any directory |
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-config get gbrain_sync_mode` | Check current sync mode | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-config set gbrain_sync_mode full` | Enable full sync (everything) | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-config set gbrain_sync_mode off` | Disable sync | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-config get gbrain_sync_mode` | Check current sync mode | WSL | Any directory |
 
 #### Diagnostics
 
 | Command | Purpose | Run In | Path |
 |---|---|---|---|
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-gbrain-detect` | JSON status of both GBrain and GStack sync | WSL | Any directory |
-| `bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-gbrain-source-wireup` | Register GStack brain as GBrain source | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-gbrain-detect` | JSON status of both GBrain and GStack sync | WSL | Any directory |
+| `bash /mnt/c/mybizz/gstack/bin/gstack-gbrain-source-wireup` | Register GStack brain as GBrain source | WSL | Any directory |
 
 ### OpenCode Commands
 
@@ -221,10 +221,10 @@ If `gbrain` is not on PATH:
 which gbrain
 
 # If not found, check the repo
-ls /mnt/c/_mb2-cs-app/gbrain/src/cli.ts
+ls /mnt/c/mybizz/gbrain/src/cli.ts
 
 # Run via bun
-cd /mnt/c/_mb2-cs-app/gbrain && bun run src/cli.ts doctor
+cd /mnt/c/mybizz/gbrain && bun run src/cli.ts doctor
 ```
 
 ### Embedding Fails
@@ -248,7 +248,7 @@ If sync fails:
 
 ```bash
 # Check status
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --status
 
 # Check git status
 cd ~/.gstack && git status
@@ -284,7 +284,7 @@ gbrain query "onboarding flow"
 gbrain doctor
 
 # Sync GStack working state (happens automatically during GStack workflows)
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --once
 ```
 
 ### After Adding New Content
@@ -301,10 +301,10 @@ gbrain doctor
 
 ```bash
 # Sync working state to remote
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --once
 
 # Verify sync
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --status
 ```
 
 ---
@@ -330,8 +330,8 @@ Both are connected via the `gbrain-repo` federated source in GBrain. Your workin
 | GStack home | `~/.gstack/` |
 | GStack brain remote | `~/.gstack-brain-remote.txt` |
 | GStack brain worktree | `~/.gstack-brain-worktree/` |
-| GStack bin scripts | `/mnt/c/_mb2-cs-app/gstack/bin/` |
-| GBrain repo | `/mnt/c/_mb2-cs-app/gbrain/` |
+| GStack bin scripts | `/mnt/c/mybizz/gstack/bin/` |
+| GBrain repo | `/mnt/c/mybizz/gbrain/` |
 
 ---
 
@@ -360,7 +360,7 @@ In OpenCode, GBrain is wired in as MCP tools — the agent can search and query 
 **After Doing Work in Project-Library**
 Run these in WSL in order, every time:
 bash 
-1. cd /mnt/c/_mb2-cs-app/project-library
+1. cd /mnt/c/mybizz/project-library
 2. git add -A
 3. git commit -m "/plan-ceo-review done"
 4. git push origin main

@@ -33,7 +33,7 @@ GStack is surfaced to you through **skills inside OpenCode** (slash commands) ra
 Typical pattern:
 
 - You start OpenCode Desktop, connected to the WSL server.
-- You open `project-library` or `mb-3-cs` using the `/mnt/c/_mb2-cs-app/...` path.
+- You open `project-library` or `mb-3-cs` using the `/mnt/c/mybizz/...` path.
 - You give the agent an opening instruction that allows it to call GStack skills (e.g. `/office-hours`, `/plan-ceo-review`, `/build`, `/investigate`, `/review`, `/ship`, `/setup-gbrain`) when needed.
 
 The agent then chooses which workflows to run:
@@ -101,7 +101,7 @@ Each of these can be driven manually (by naming the workflow) or indirectly via 
 
 The `workspace\gstack\` folder contains **policy and design docs** for GStack in this workspace. It does not:
 
-- contain the GStack code (that is in `C:\_mb2-cs-app\gstack`),
+- contain the GStack code (that is in `C:\mybizz\gstack`),
 - act as a live config directory.
 
 Instead it:

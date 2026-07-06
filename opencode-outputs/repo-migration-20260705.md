@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Migrate two repos from `C:\_mb2-cs-app\` to `C:\projects\mb-3-cs\`:
+Migrate two repos from `C:\mybizz\` to `C:\projects\mb-3-cs\`:
 1. **project-library** (docs repo): move in-place after committing unpushed work
 2. **mb-3-cs** (code repo): clone from GitHub + transfer gitignored local files
 
@@ -16,7 +16,7 @@ Migrate two repos from `C:\_mb2-cs-app\` to `C:\projects\mb-3-cs\`:
 - Pushed to `origin/main`: `68c3947..947fb8b`
 
 ### Phase 2: Move project-library in-place
-- Copied from `C:\_mb2-cs-app\project-library` to `C:\projects\mb-3-cs\project-library`
+- Copied from `C:\mybizz\project-library` to `C:\projects\mb-3-cs\project-library`
 - WSL-to-Windows `cp -r` timed out on node_modules; completed with `rsync`
 - Verified: 52 commands, 2 agents, 24 node_modules packages, `.git` intact
 
@@ -33,8 +33,8 @@ All gitignored items copied from old to new location:
 
 ### Phase 5: Update path references
 Updated in 3 files + 5 operational documents:
-- `mb-3-cs/opencode.json`: `C:\_mb2-cs-app\project-library\**` → `C:\projects\mb-3-cs\project-library\**`
-- `project-library/opencode.json`: `C:\_mb2-cs-app\mb-3-cs\**` → `C:\projects\mb-3-cs\mb-3-cs\**`
+- `mb-3-cs/opencode.json`: `C:\mybizz\project-library\**` → `C:\projects\mb-3-cs\project-library\**`
+- `project-library/opencode.json`: `C:\mybizz\mb-3-cs\**` → `C:\projects\mb-3-cs\mb-3-cs\**`
 - `pdlf/registry/projects.json`: updated `library_path` and `code_path`
 - `prompts/screen-production-prompt.md`: 19 path references updated
 - `standard-operating-procedures/internal-standards-anvil-wireframe-conversion.md`: 1 ref updated
@@ -70,7 +70,7 @@ The old gbrain `mb-3-cs` source had 240 pages (including Python code files). The
 
 - Start gbrain daemon from a persistent terminal: `gbrain serve` — **User**
 - Re-run mb-3-cs Python code import for full code search — **Build**
-- After verification, delete old `C:\_mb2-cs-app\project-library` and `C:\_mb2-cs-app\mb-3-cs` — **User**
+- After verification, delete old `C:\mybizz\project-library` and `C:\mybizz\mb-3-cs` — **User**
 - Consider running `gbrain extract --stale` for graph edges if link coverage is needed — **Build**
 
 Saved to: `opencode-outputs/repo-migration-20260705.md`

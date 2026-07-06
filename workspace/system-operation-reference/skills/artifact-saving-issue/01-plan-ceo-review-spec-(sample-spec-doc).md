@@ -1,6 +1,6 @@
 # plan-ceo-review — Skill Spec
 
-**Source:** `/mnt/c/_mb2-cs-app/skills/plan-ceo-review/SKILL.md`
+**Source:** `/mnt/c/mybizz/skills/plan-ceo-review/SKILL.md`
 **Total lines read:** 1434 (lines 1–1434, confirmed complete — file ends at line 1434 with no truncation)
 **Date:** 2026-06-26
 

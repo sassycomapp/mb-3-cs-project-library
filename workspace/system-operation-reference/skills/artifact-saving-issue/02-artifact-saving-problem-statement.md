@@ -1,6 +1,6 @@
 # Problem Statement: GStack Artifact Saving Inconsistency
 
-**Project:** project-library (`/mnt/c/_mb2-cs-app/project-library`)
+**Project:** project-library (`/mnt/c/mybizz/project-library`)
 **Date opened:** 2026-06-25
 **Status:** Under active investigation — root cause partially identified, not yet fixed
 **Severity:** Moderate — no data loss observed, but artifact discovery between
@@ -25,29 +25,29 @@ investigation does not need to be repeated or re-derived from memory.
 
 | Item | Path |
 |---|---|
-| Project repo (WSL) | `/mnt/c/_mb2-cs-app/project-library` |
-| Project repo (Windows) | `C:\_mb2-cs-app\project-library` |
-| Preferred output folder | `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/` |
-| AGENTS.md | `/mnt/c/_mb2-cs-app/project-library/AGENTS.md` |
-| AGENTS.md backup | `/mnt/c/_mb2-cs-app/project-library/AGENTS.md.backup-20260625` |
-| CLAUDE.md | `/mnt/c/_mb2-cs-app/project-library/CLAUDE.md` |
-| GStack install root | `/mnt/c/_mb2-cs-app/gstack/` |
-| GStack bin scripts | `/mnt/c/_mb2-cs-app/gstack/bin/` |
-| **Live/canonical skill source** | `/mnt/c/_mb2-cs-app/skills/` |
+| Project repo (WSL) | `/mnt/c/mybizz/project-library` |
+| Project repo (Windows) | `C:\mybizz\project-library` |
+| Preferred output folder | `/mnt/c/mybizz/project-library/gstack-outputs/` |
+| AGENTS.md | `/mnt/c/mybizz/project-library/AGENTS.md` |
+| AGENTS.md backup | `/mnt/c/mybizz/project-library/AGENTS.md.backup-20260625` |
+| CLAUDE.md | `/mnt/c/mybizz/project-library/CLAUDE.md` |
+| GStack install root | `/mnt/c/mybizz/gstack/` |
+| GStack bin scripts | `/mnt/c/mybizz/gstack/bin/` |
+| **Live/canonical skill source** | `/mnt/c/mybizz/skills/` |
 | Skills symlink (what OpenCode actually reads) | `~/.config/opencode/skills/` → symlinked to the line above |
 | GStack home | `~/.gstack/` (i.e. `/home/dev-p/.gstack/`) |
 | GStack config file | `~/.gstack/config.yaml` |
-| `gstack-config` binary | `/mnt/c/_mb2-cs-app/gstack/bin/gstack-config` |
-| `gstack-slug` script | `/mnt/c/_mb2-cs-app/gstack/bin/gstack-slug` |
+| `gstack-config` binary | `/mnt/c/mybizz/gstack/bin/gstack-config` |
+| `gstack-slug` script | `/mnt/c/mybizz/gstack/bin/gstack-slug` |
 | Slug cache directory | `~/.gstack/slug-cache/` |
-| Skill audit/spec output folder | `C:\_mb2-cs-app\project-library\workspace\system-operation-reference\skills\{skill-name}-spec.md` |
+| Skill audit/spec output folder | `C:\mybizz\project-library\workspace\system-operation-reference\skills\{skill-name}-spec.md` |
 
-**Note on skill source duplication:** `/mnt/c/_mb2-cs-app/gstack/` also contains
+**Note on skill source duplication:** `/mnt/c/mybizz/gstack/` also contains
 nine duplicate copies of every skill, one per supported AI agent
 (`.agents`, `.cursor`, `.factory`, `.gbrain`, `.hermes`, `.kiro`, `.openclaw`,
 `.opencode`, `.slate`). These are **not** the live source — they appear to be
 build/dev artifacts. The live source confirmed by the user's own
-`gstack-reference.md` is `/mnt/c/_mb2-cs-app/skills/`. This was a significant
+`gstack-reference.md` is `/mnt/c/mybizz/skills/`. This was a significant
 false trail during investigation and should not be revisited.
 
 **Note on SKILL.md generation:** Every skill folder contains both `SKILL.md`
@@ -55,7 +55,7 @@ and `SKILL.md.tmpl`. Identical-second file timestamps and an explicit
 in-file comment (`<!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit
 directly --> <!-- Regenerate: bun run gen:skill-docs -->`) confirm `SKILL.md`
 is generated from `SKILL.md.tmpl` plus shared resolver logic at
-`/mnt/c/_mb2-cs-app/skills/scripts/resolvers/*.ts`. Direct edits to `SKILL.md`
+`/mnt/c/mybizz/skills/scripts/resolvers/*.ts`. Direct edits to `SKILL.md`
 or to gstack's own source were explicitly ruled out as a fix — not our
 codebase to rewrite, and edits would be overwritten on regeneration.
 
@@ -85,7 +85,7 @@ codebase to rewrite, and edits would be overwritten on regeneration.
 3. **A skill that saved to a location matching none of four documented
    claims.** Running `/retro` produced the on-screen confirmation: *"Retro
    history saved to `memory/retro-2026-06-26.json`."* Verified actual path:
-   `C:\_mb2-cs-app\project-library\memory\retro-2026-06-26.json`. This
+   `C:\mybizz\project-library\memory\retro-2026-06-26.json`. This
    matches **none** of:
    - the user-facing reference doc's claim: `~/.gstack/projects/$SLUG/retros/`
    - a full-repo automated audit's claim: `~/.gstack/projects/$SLUG/retros/*.md`
@@ -130,14 +130,14 @@ resolved (see §7, Open Questions).
 | 1 | `/health` | None | Diagnostic dashboard only, no save mentioned | Yes, after locating correct slug folder | `~/.gstack/projects/unknown/health-history.jsonl` |
 | 2 | `/context-save` | None | "Context saved... File: ..." | Yes | `~/.gstack/projects/project-library/checkpoints/20260625-220726-5-app-system-gbrain-query.md` |
 | 3 | `/plan-ceo-review` (after removing the `gstack-outputs` bullet from AGENTS.md) | None | Asked "Shall I save... to gstack-outputs/?" | **No — declined, nothing saved anywhere** | n/a |
-| 4 | `/retro` (after AGENTS.md updated with new dual-save rule) | None | "Retro history saved to `memory/retro-2026-06-26.json`" | Yes | `C:\_mb2-cs-app\project-library\memory\retro-2026-06-26.json` |
+| 4 | `/retro` (after AGENTS.md updated with new dual-save rule) | None | "Retro history saved to `memory/retro-2026-06-26.json`" | Yes | `C:\mybizz\project-library\memory\retro-2026-06-26.json` |
 
 **Diagnostic command used to check the default location** (must `cd` into the
 project first — running from home directory silently produces a wrong slug):
 
 ```bash
-cd /mnt/c/_mb2-cs-app/project-library
-eval "$(/mnt/c/_mb2-cs-app/gstack/bin/gstack-slug 2>/dev/null)"
+cd /mnt/c/mybizz/project-library
+eval "$(/mnt/c/mybizz/gstack/bin/gstack-slug 2>/dev/null)"
 echo "SLUG: $SLUG"
 ls -la ~/.gstack/projects/"$SLUG"/ 2>/dev/null
 ```
@@ -202,14 +202,14 @@ a bare value.
 | 3 | The user-facing `gstack-skills-reference.md` omits real disk writes confirmed present in the actual `SKILL.md` (CEO plan file, spec review metrics, stale plan archival, the entire spec-review-subagent section) | reference doc vs. targeted spec (Q10) |
 | 4 | `$SLUG` resolves to ≥3 different values for one project depending on invocation context | see Symptom 1 |
 | 5 | `gstack-config resolve-user-slug` and `gbrain doctor` both hang indefinitely when run directly in WSL | unresolved, not root-caused |
-| 6 | Nine duplicate skill-source folders exist inside the gstack repo; only one (`/mnt/c/_mb2-cs-app/skills/`) is actually live | confirmed via user's own `gstack-reference.md`; false trail consumed significant investigation time |
+| 6 | Nine duplicate skill-source folders exist inside the gstack repo; only one (`/mnt/c/mybizz/skills/`) is actually live | confirmed via user's own `gstack-reference.md`; false trail consumed significant investigation time |
 | 7 | No `gstack-config` key exists for output location at all | confirmed via `gstack-config list` / `gstack-config defaults` — no path-related setting among ~14 existing keys |
 
 ---
 
 ## 8. Leading Hypothesis on Root Cause (Unconfirmed)
 
-`/mnt/c/_mb2-cs-app/gstack/bin/gstack-slug` computes `$SLUG` in this order:
+`/mnt/c/mybizz/gstack/bin/gstack-slug` computes `$SLUG` in this order:
 
 1. Check a cache file keyed by the **exact absolute working directory** the
    script was run from (`~/.gstack/slug-cache/<encoded-cwd>`)

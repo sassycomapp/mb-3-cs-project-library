@@ -112,18 +112,18 @@ GStack's binaries at a *different* location entirely:
 
 This user's environment is OpenCode-based — confirmed by the user's own
 `gstack-reference.md` and by the live symlink at
-`~/.config/opencode/skills/` → `/mnt/c/_mb2-cs-app/skills/`. **No Claude
+`~/.config/opencode/skills/` → `/mnt/c/mybizz/skills/`. **No Claude
 Code install path has been confirmed to exist on this machine.**
 
 **This exact hardcoded literal path was independently confirmed present, by
 direct inspection, in this project's own live skill files** — not merely
 in the official upstream copy:
 
-- `/mnt/c/_mb2-cs-app/skills/autoplan/SKILL.md`, confirmed via a direct
+- `/mnt/c/mybizz/skills/autoplan/SKILL.md`, confirmed via a direct
   `diff` against `SKILL.md.tmpl` (problem-statement investigation), shows
   the literal line:
   `eval "$(~/.claude/skills/gstack/bin/gstack-slug 2>/dev/null)" 2>/dev/null || true`
-- `/mnt/c/_mb2-cs-app/skills/plan-ceo-review/SKILL.md`, line 1243, per the
+- `/mnt/c/mybizz/skills/plan-ceo-review/SKILL.md`, line 1243, per the
   targeted skill-spec audit, shows:
   `eval "$(~/.claude/skills/gstack/bin/gstack-slug 2>/dev/null)" && mkdir -p ~/.gstack/projects/$SLUG/ceo-plans`
 
@@ -186,7 +186,7 @@ environment) rather than further documentation review.
 
 The problem statement (§2, "Note on skill source duplication") had
 characterized the nine duplicate skill-source folders found inside
-`/mnt/c/_mb2-cs-app/gstack/` (`.cursor`, `.factory`, `.gbrain`, `.hermes`,
+`/mnt/c/mybizz/gstack/` (`.cursor`, `.factory`, `.gbrain`, `.hermes`,
 `.kiro`, `.openclaw`, `.opencode`, `.slate`, plus `.agents`) as "likely
 build/dev artifacts" and a "false trail."
 
@@ -196,7 +196,7 @@ multi-agent installation mechanism (the same table quoted in §2 above).
 **This characterization should be corrected**: these folders are real and
 intentional; they were simply not the live source for *this* project's
 OpenCode-driven setup, which instead reads from a separately-maintained
-`/mnt/c/_mb2-cs-app/skills/` folder whose relationship to GStack's own
+`/mnt/c/mybizz/skills/` folder whose relationship to GStack's own
 official per-host generation process is not yet established (see §4 below).
 
 ### 3.4 — `gstack-analytics` exists as a standalone diagnostic binary, untried so far
@@ -230,7 +230,7 @@ unexplained by anything found in the official docs (see §4).
    prompt's likely origin (conversational/chat-context influence rather
    than a file-based instruction) remains unconfirmed either way.
 
-2. **Whether `/mnt/c/_mb2-cs-app/skills/` was ever generated through
+2. **Whether `/mnt/c/mybizz/skills/` was ever generated through
    GStack's official `./setup --host opencode` process**, or assembled by
    some other means. If it was generated through the official process, the
    hardcoded Claude-only paths found in §2 above would represent a genuine

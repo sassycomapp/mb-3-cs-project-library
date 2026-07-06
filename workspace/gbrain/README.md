@@ -111,10 +111,10 @@ OpenCode remains the main runtime environment. Its authority comes from:
   - `C:\Users\dev-p\.config\opencode\opencode.json`
 
 - project rules in:
-  - `C:\_mb2-cs-app\project-library\AGENTS.md`
-  - `C:\_mb2-cs-app\project-library\opencode.json`
-  - `C:\_mb2-cs-app\mb-3-cs\AGENTS.md`
-  - `C:\_mb2-cs-app\mb-3-cs\opencode.json`
+  - `C:\mybizz\project-library\AGENTS.md`
+  - `C:\mybizz\project-library\opencode.json`
+  - `C:\mybizz\mb-3-cs\AGENTS.md`
+  - `C:\mybizz\mb-3-cs\opencode.json`
 
 GBrain must always operate **under** those rules and never bypass protected-file or permission policies.
 
@@ -150,7 +150,7 @@ GBrain should defer to current source material, especially:
 - `project-library` docs and ADRs,
 - `mb-3-cs` current repo state,
 - canonical shared tracking:
-  - `C:\_mb2-cs-app\project-library\`
+  - `C:\mybizz\project-library\`
  
 Memory is useful for recall and continuity, but the current source files remain authoritative. When conflicts appear, the policy in `gbrain-operating-model.md` and `gbrain-sync-policy.md` explains how to resolve them (files and ADRs win; stale memory is re‑ingested or invalidated).
 

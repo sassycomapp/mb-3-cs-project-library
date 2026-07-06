@@ -12,7 +12,7 @@ GStack is the workflow layer. It provides slash commands (skills) for planning, 
 ---
 ## The GStack projects folder
 	[**Currently gstack is saving all outputs in gstack-outputs folder :**
-	"C:\_mb2-cs-app\project-library\gstack-outputs"
+	"C:\mybizz\project-library\gstack-outputs"
 	Skills DO NOT save their output to `~/.gstack/projects/` automatically]
 
 .  
@@ -37,7 +37,7 @@ explorer.exe "$(wslpath -w /home/dev-p/.gstack/projects/)"
 
 ## Skills Installation
 
-**Location:** `~/.config/opencode/skills/` (symlinked to `/mnt/c/_mb2-cs-app/skills/`)
+**Location:** `~/.config/opencode/skills/` (symlinked to `/mnt/c/mybizz/skills/`)
 
 **Total skills:** 59 (54 top-level + 4 openclaw + 1 browser-skills)
 
@@ -51,7 +51,7 @@ ls ~/.config/opencode/skills/ | wc -l
 **To update skills:**
 ```bash
 # Skills are symlinked — updates to the source files are automatic
-# Just edit the SKILL.md in /mnt/c/_mb2-cs-app/skills/
+# Just edit the SKILL.md in /mnt/c/mybizz/skills/
 ```
 
 **To undo:**
@@ -75,7 +75,7 @@ GStack brain sync pushes working state (learnings, plans, retros) to a private g
 **Path:** any directory
 
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --once
 ```
 
 ### Check Sync Status
@@ -84,7 +84,7 @@ bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --once
 **Path:** any directory
 
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status
+bash /mnt/c/mybizz/gstack/bin/gstack-brain-sync --status
 ```
 
 ### Check Both GBrain and GStack Status
@@ -93,7 +93,7 @@ bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-brain-sync --status
 **Path:** any directory
 
 ```bash
-bash /mnt/c/_mb2-cs-app/gstack/bin/gstack-gbrain-detect
+bash /mnt/c/mybizz/gstack/bin/gstack-gbrain-detect
 ```
 
 ---
@@ -147,15 +147,15 @@ explorer.exe "$(wslpath -w /home/dev-p/.gstack/projects/)"
 
 | Item | Location |
 |---|---|
-| GStack repo | `/mnt/c/_mb2-cs-app/gstack/` |
-| GStack bin scripts | `/mnt/c/_mb2-cs-app/gstack/bin/` |
-| GStack skills source | `/mnt/c/_mb2-cs-app/skills/` |
+| GStack repo | `/mnt/c/mybizz/gstack/` |
+| GStack bin scripts | `/mnt/c/mybizz/gstack/bin/` |
+| GStack skills source | `/mnt/c/mybizz/skills/` |
 | GStack skills (symlinked) | `~/.config/opencode/skills/` |
 | GStack home | `~/.gstack/` |
 | GStack brain remote | `~/.gstack-brain-remote.txt` |
 | GStack brain worktree | `~/.gstack-brain-worktree/` |
-| OpenCode commands | `/mnt/c/_mb2-cs-app/project-library/.opencode/commands/` |
-| GStack outputs | `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/` |
+| OpenCode commands | `/mnt/c/mybizz/project-library/.opencode/commands/` |
+| GStack outputs | `/mnt/c/mybizz/project-library/gstack-outputs/` |
 
 ### Open GStack Home in Windows Explorer
 

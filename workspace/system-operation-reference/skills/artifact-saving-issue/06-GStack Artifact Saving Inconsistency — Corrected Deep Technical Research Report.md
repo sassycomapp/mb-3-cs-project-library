@@ -1,7 +1,7 @@
 # GStack Artifact Saving Inconsistency — Corrected Deep Technical Research Report
 
 **Report Date:** 2026-06-26 (corrected revision)  
-**Project:** MB3-CS (`/mnt/c/_mb2-cs-app/project-library`)  
+**Project:** MB3-CS (`/mnt/c/mybizz/project-library`)  
 **Severity:** Design-critical — affects all skill-to-skill artifact chaining  
 **Status:** Root cause confirmed with primary-source evidence; resolution pathway identified  
 **Correction note:** This report supersedes the prior version. Every factual claim is backed by a primary source cited inline. Claims not yet verifiable by primary source are explicitly marked **[SPECULATION]** or **[UNVERIFIED — requires local test]**.
@@ -63,7 +63,7 @@ The same `TODOS.md` entry also states the preamble already defines `GSTACK_ROOT`
 
 ### 1.3 Confirming the Failure on This Machine
 
-The live skill files at `/mnt/c/_mb2-cs-app/skills/` were confirmed in the `plan-ceo-review-spec-sample-spec-doc.md` audit to contain the exact hardcoded Claude path at line 1243:[^6]
+The live skill files at `/mnt/c/mybizz/skills/` were confirmed in the `plan-ceo-review-spec-sample-spec-doc.md` audit to contain the exact hardcoded Claude path at line 1243:[^6]
 
 ```bash
 eval "$(~/.claude/skills/gstack/bin/gstack-slug 2>/dev/null)" && mkdir -p ~/.gstack/projects/$SLUG/ceo-plans
@@ -82,7 +82,7 @@ If this returns `No such file or directory`, the root cause is confirmed for thi
 **Leak audit command (run this second):**
 
 ```bash
-grep -rl '~/.claude/skills/gstack' /mnt/c/_mb2-cs-app/skills/ | wc -l
+grep -rl '~/.claude/skills/gstack' /mnt/c/mybizz/skills/ | wc -l
 ```
 
 If this returns a count equal to the number of active skills (~52 per `TODOS.md`), the entire skill set was generated without the OpenCode host adapter's `pathRewrites` being applied.[^5]
@@ -117,12 +117,12 @@ CACHE_KEY=$(printf '%s' "$PROJECT_DIR" | tr '/' '_')
 CACHE_FILE="${CACHE_DIR}/${CACHE_KEY}"
 ```
 
-Forward slashes are replaced with underscores. A path like `/mnt/c/_mb2-cs-app/project-library` becomes `_mnt_c__mb2-cs-app_project-library`.
+Forward slashes are replaced with underscores. A path like `/mnt/c/mybizz/project-library` becomes `_mnt_c_mybizz_project-library`.
 
 **Correct cache verification command:**
 
 ```bash
-CACHE_KEY=$(printf '%s' "/mnt/c/_mb2-cs-app/project-library" | tr '/' '_')
+CACHE_KEY=$(printf '%s' "/mnt/c/mybizz/project-library" | tr '/' '_')
 cat ~/.gstack/slug-cache/"$CACHE_KEY"
 ```
 
@@ -185,7 +185,7 @@ The official save path for `/retro` in project mode is `.context/retros/` — co
 
 ### What remains unresolved [SPECULATION — requires verification]
 
-The actual observed output path during testing was `C:\_mb2-cs-app\project-library\memory\retro-2026-06-26.json` — which matches neither the official `.context/retros/` path nor any path mentioned in AGENTS.md. The problem statement offers a hypothesis that the AGENTS.md dual-save instruction redirected the write, but AGENTS.md's `## GStack artifact governance` section directs saves to `gstack-outputs/`, not `memory/`. **The specific reason the agent chose `memory/` is not explained by any verified source.** This remains open.[^7]
+The actual observed output path during testing was `C:\mybizz\project-library\memory\retro-2026-06-26.json` — which matches neither the official `.context/retros/` path nor any path mentioned in AGENTS.md. The problem statement offers a hypothesis that the AGENTS.md dual-save instruction redirected the write, but AGENTS.md's `## GStack artifact governance` section directs saves to `gstack-outputs/`, not `memory/`. **The specific reason the agent chose `memory/` is not explained by any verified source.** This remains open.[^7]
 
 ***
 
@@ -269,7 +269,7 @@ After slug computation is verified working, add a guard assertion:
 ```
 ## GStack slug verification
 Before running any GStack skill:
-1. Run: eval "$(/mnt/c/_mb2-cs-app/gstack/bin/gstack-slug 2>&1)" && echo "SLUG: $SLUG"
+1. Run: eval "$(/mnt/c/mybizz/gstack/bin/gstack-slug 2>&1)" && echo "SLUG: $SLUG"
 2. If $SLUG is empty or "unknown", STOP and report: "Slug computation failed."
 3. Only proceed with skill execution if $SLUG = "project-library" for this project.
 ```
@@ -287,8 +287,8 @@ GStack's `TODOS.md` P1 item #1882 acknowledges that the proper fix requires modi
 Replace the hardcoded Claude path with the actual path of the `gstack-slug` binary on this machine across all skill files:
 
 ```bash
-find /mnt/c/_mb2-cs-app/skills -name 'SKILL.md' | xargs sed -i \
-  's|~/.claude/skills/gstack/bin/|/mnt/c/_mb2-cs-app/gstack/bin/|g'
+find /mnt/c/mybizz/skills -name 'SKILL.md' | xargs sed -i \
+  's|~/.claude/skills/gstack/bin/|/mnt/c/mybizz/gstack/bin/|g'
 ```
 
 **Caveat:** `SKILL.md` files are auto-generated (`<!-- AUTO-GENERATED from SKILL.md.tmpl — do not edit directly -->`). This edit will be overwritten by any future `bun run gen:skill-docs` invocation. Track it as a local patch that must be reapplied after upgrades.[^7]
@@ -298,7 +298,7 @@ find /mnt/c/_mb2-cs-app/skills -name 'SKILL.md' | xargs sed -i \
 Pin the slug in the project's `.env` or AGENTS.md to prevent all downstream inconsistency without touching any skill files:
 
 ```bash
-# In /mnt/c/_mb2-cs-app/project-library AGENTS.md or a sourced .env:
+# In /mnt/c/mybizz/project-library AGENTS.md or a sourced .env:
 export SLUG=project-library
 ```
 
@@ -307,26 +307,26 @@ This bypasses the entire `gstack-slug` binary call and guarantees slug consisten
 ### 11.4 Option C: Regenerate via Official Generator (Invasive — Modifies gstack Repo)
 
 ```bash
-cd /mnt/c/_mb2-cs-app/gstack
+cd /mnt/c/mybizz/gstack
 bun run gen:skill-docs --host opencode
 
 # Mandatory leak check (must return zero lines):
 grep -r '.claude/skills' .opencode/skills/ | head -5
 ```
 
-This is the "correct" fix per `ADDING_A_HOST.md` but requires touching GStack's own tooling. It also may not be available if the `gstack` repo at `/mnt/c/_mb2-cs-app/gstack/` does not have `bun` dependencies installed.[^3]
+This is the "correct" fix per `ADDING_A_HOST.md` but requires touching GStack's own tooling. It also may not be available if the `gstack` repo at `/mnt/c/mybizz/gstack/` does not have `bun` dependencies installed.[^3]
 
 ### 11.5 Populate the Slug Cache Correctly
 
 Once Option A, B, or C is in place and slug computation succeeds, pre-populate the cache from inside the project directory to guarantee future consistency:[^8]
 
 ```bash
-cd /mnt/c/_mb2-cs-app/project-library
-eval "$(/mnt/c/_mb2-cs-app/gstack/bin/gstack-slug 2>&1)"
+cd /mnt/c/mybizz/project-library
+eval "$(/mnt/c/mybizz/gstack/bin/gstack-slug 2>&1)"
 echo "Slug set to: $SLUG"
 
 # Verify the cache file:
-CACHE_KEY=$(printf '%s' "/mnt/c/_mb2-cs-app/project-library" | tr '/' '_')
+CACHE_KEY=$(printf '%s' "/mnt/c/mybizz/project-library" | tr '/' '_')
 cat ~/.gstack/slug-cache/"$CACHE_KEY"
 ```
 
@@ -339,8 +339,8 @@ Run these in a fresh agent session, reporting raw output at each step:
 | # | Command | What it confirms |
 |---|---|---|
 | 1 | `ls -la ~/.claude/skills/gstack/bin/gstack-slug 2>&1` | Whether the hardcoded Claude binary exists |
-| 2 | `grep -rl '~/.claude/skills/gstack' /mnt/c/_mb2-cs-app/skills/ \| wc -l` | How many skill files carry the leaking path |
-| 3 | `cd /mnt/c/_mb2-cs-app/project-library && pwd && git remote get-url origin 2>&1` | Agent's CWD and git remote visibility |
+| 2 | `grep -rl '~/.claude/skills/gstack' /mnt/c/mybizz/skills/ \| wc -l` | How many skill files carry the leaking path |
+| 3 | `cd /mnt/c/mybizz/project-library && pwd && git remote get-url origin 2>&1` | Agent's CWD and git remote visibility |
 | 4 | `echo $HOME && echo $PATH \| tr ':' '\n' \| head -20` | Whether agent shell environment matches WSL terminal |
 | 5 | `echo "GSTACK_HOME=${GSTACK_HOME:-NOT_SET}"; echo "GSTACK_STATE_ROOT=${GSTACK_STATE_ROOT:-NOT_SET}"` | Which state-dir env vars, if any, are set |
 | 6 | `ls -la ~/.claude/skills/ 2>&1; ls -la ~/.config/opencode/skills/ 2>&1` | Whether both skill locations exist and OpenCode may be loading the wrong one |
@@ -406,7 +406,7 @@ Run these in a fresh agent session, reporting raw output at each step:
 
 6. [plan-ceo-review-spec-sample-spec-doc.md](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/50806054/20af1b7e-f7af-4dab-ad90-41bb0c0b797e/plan-ceo-review-spec-sample-spec-doc.md?AWSAccessKeyId=ASIA2F3EMEYEZLW7RLCE&Signature=wGlg07fO2rxnMaeKaLm%2F74j4Flc%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEJf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEv4x0r%2FrNGT1NBRjGH6jnGTdS%2Bd0oZVmWNuukL0XDGxAiEAnjYHbvGumX6AQryaKr7wUxukJtvnvxHR4q%2BNXlVhDxQq8wQIXxABGgw2OTk3NTMzMDk3MDUiDMFTUGjyZRFUaGNhsirQBJCKQV38f3u7GlmahZLC4mK3sNlw4%2Bk%2F7uw986TCkXPN%2B0NY7mXOPcTEyYYYp96w08R3kkmNyAkRQydNjxoyWBx0gSgXKLQchuVxYUie%2B7RqIj0K8kg67bvLhc7wOw7FEoLe4KQrn2bcBCzAkZArNa%2BIZefdnpG9%2F2zr%2FP9RxA1uBqlueqmXAEYOSYpjTdfgZrrFtVsCoaqp26dJpFdv%2FHpkJRJHM5%2Fwj25yHlDEB%2Frq%2FX%2FbvFkqtBDiFWuqXZS8EFvxNVSJOxf9ndH6i%2FvH60kjuzQwp4gs9eM%2FTeD9sAX7KWPn0rZPCIKm4Y13JMFhtmW%2FEQfqNKFttUpYGZyyJfqDky35D%2Fs7bat1EhJSk6p9fjyx6fb1K2xqW8Nin62qwFFsxioXVtDWCnO%2BFURo90I28HXjSYs%2B%2BeqRaMd8tUVO5owGLs2K2%2BG02dTE%2BUE%2BiXbQNNHVyHlosH7g20ucvhTskmO5fAzywzc0M5qAt1jYjv16PhGqsPlZ8OVakm4%2B%2F1andC2GK%2B9Z6IIQ63UHTMe9r76CUcjPHwpJDTyCh6Dh3Sj8p4Fqfbc5lQQeAjnXLtb%2Fe6BehGzzMXnDw3hV1d7vDXCTMQPAe9fMEw3dhG5K2T44w4WKvNnik97vjfrD8DZG7heoMgLFknIjAsFjiu%2Bex%2FdjyE%2B9TbuxDfvrjHYCcvkZGWst8I278afMUlHazD%2BGuvJFd3%2FJwvrboTjv9jSpMED3cb2tVeFSgUw1w8CTeVd%2FGDS4GJlqVdOuIQmr%2FXJPGqKyAQLEJrZZLV6jlfMwk7L40QY6mAGkjLKX%2FMsd0GI480zk73nOCpI%2B8ch0nhUye2iFEaheVAxqMVtPnoEcexdK8mCtt2FeNy%2FwRhuUG5cu4wAqxin2V1XCJEX0peHyz1girmEwxpM8w8sAJeRtvawMXgzkWZxbZ3T5IUREg%2B%2BPY%2Ba15otXFVNF9aQtv2yvMzvOA1gTc5UKVaXxL3Z54SWV%2F%2FQAENxvQ0LFB2Y9SQ%3D%3D&Expires=1782458086) - # plan-ceo-review — Skill Spec
 
-**Source:** `/mnt/c/_mb2-cs-app/skills/plan-ceo-review/SKILL.md`
+**Source:** `/mnt/c/mybizz/skills/plan-ceo-review/SKILL.md`
 **T...
 
 7. [artifact-saving-problem-statement.md](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/50806054/2d24e9f7-7ed5-4038-adc7-b004546284fb/artifact-saving-problem-statement.md?AWSAccessKeyId=ASIA2F3EMEYEZLW7RLCE&Signature=4U4Xh%2BCPquVIdWq5CPWS1duUb10%3D&x-amz-security-token=IQoJb3JpZ2luX2VjEJf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIEv4x0r%2FrNGT1NBRjGH6jnGTdS%2Bd0oZVmWNuukL0XDGxAiEAnjYHbvGumX6AQryaKr7wUxukJtvnvxHR4q%2BNXlVhDxQq8wQIXxABGgw2OTk3NTMzMDk3MDUiDMFTUGjyZRFUaGNhsirQBJCKQV38f3u7GlmahZLC4mK3sNlw4%2Bk%2F7uw986TCkXPN%2B0NY7mXOPcTEyYYYp96w08R3kkmNyAkRQydNjxoyWBx0gSgXKLQchuVxYUie%2B7RqIj0K8kg67bvLhc7wOw7FEoLe4KQrn2bcBCzAkZArNa%2BIZefdnpG9%2F2zr%2FP9RxA1uBqlueqmXAEYOSYpjTdfgZrrFtVsCoaqp26dJpFdv%2FHpkJRJHM5%2Fwj25yHlDEB%2Frq%2FX%2FbvFkqtBDiFWuqXZS8EFvxNVSJOxf9ndH6i%2FvH60kjuzQwp4gs9eM%2FTeD9sAX7KWPn0rZPCIKm4Y13JMFhtmW%2FEQfqNKFttUpYGZyyJfqDky35D%2Fs7bat1EhJSk6p9fjyx6fb1K2xqW8Nin62qwFFsxioXVtDWCnO%2BFURo90I28HXjSYs%2B%2BeqRaMd8tUVO5owGLs2K2%2BG02dTE%2BUE%2BiXbQNNHVyHlosH7g20ucvhTskmO5fAzywzc0M5qAt1jYjv16PhGqsPlZ8OVakm4%2B%2F1andC2GK%2B9Z6IIQ63UHTMe9r76CUcjPHwpJDTyCh6Dh3Sj8p4Fqfbc5lQQeAjnXLtb%2Fe6BehGzzMXnDw3hV1d7vDXCTMQPAe9fMEw3dhG5K2T44w4WKvNnik97vjfrD8DZG7heoMgLFknIjAsFjiu%2Bex%2FdjyE%2B9TbuxDfvrjHYCcvkZGWst8I278afMUlHazD%2BGuvJFd3%2FJwvrboTjv9jSpMED3cb2tVeFSgUw1w8CTeVd%2FGDS4GJlqVdOuIQmr%2FXJPGqKyAQLEJrZZLV6jlfMwk7L40QY6mAGkjLKX%2FMsd0GI480zk73nOCpI%2B8ch0nhUye2iFEaheVAxqMVtPnoEcexdK8mCtt2FeNy%2FwRhuUG5cu4wAqxin2V1XCJEX0peHyz1girmEwxpM8w8sAJeRtvawMXgzkWZxbZ3T5IUREg%2B%2BPY%2Ba15otXFVNF9aQtv2yvMzvOA1gTc5UKVaXxL3Z54SWV%2F%2FQAENxvQ0LFB2Y9SQ%3D%3D&Expires=1782458086) - # Problem Statement: GStack Artifact Saving Inconsistency

@@ -75,7 +75,7 @@ Matt Pocock's skills are a set of 18 engineering and productivity tools designed
 | `setup-matt-pocock-skills` | `docs/agents/` + `CLAUDE.md` | Run once per repo |
 | `handoff` | `%TEMP%` + copy to `matt-skills-output/` | Temp save + permanent copy |
 | `improve-codebase-architecture` | `%TEMP%` + copy to `matt-skills-output/` | HTML report |
-| `teach` | `C:\_mb2-cs-app\matt-skills-teach` | Shared teaching workspace |
+| `teach` | `C:\mybizz\matt-skills-teach` | Shared teaching workspace |
 | `tdd`, `diagnosing-bugs`, `prototype` | In-place in codebase | Modify code directly |
 
 ## The Domain Model System
@@ -178,4 +178,4 @@ Matt Pocock skills complement GStack and PDLF — they don't replace them:
 | Agent doesn't know domain terms | `CONTEXT.md` missing or empty — run `/grill-with-docs` |
 | `/triage` errors about .out-of-scope/ | Create directory: `mkdir .out-of-scope` |
 | Handoff output not saved | Check `matt-skills-output/` exists |
-| `/teach` writes to wrong directory | Check AGENTS.md governance: should redirect to `C:\_mb2-cs-app\matt-skills-teach` |
+| `/teach` writes to wrong directory | Check AGENTS.md governance: should redirect to `C:\mybizz\matt-skills-teach` |

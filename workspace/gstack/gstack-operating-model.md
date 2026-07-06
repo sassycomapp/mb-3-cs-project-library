@@ -37,11 +37,11 @@ GStack is not responsible for:
 ## Workspace scope
 This operating model applies to:
 
-- `C:\_mb2-cs-app\project-library`
-- `C:\_mb2-cs-app\mb-3-cs`
-- `C:\_mb2-cs-app\devlog\`
-- `C:\_mb2-cs-app\todo\`
-- `C:\_mb2-cs-app\gstack`
+- `C:\mybizz\project-library`
+- `C:\mybizz\mb-3-cs`
+- `C:\mybizz\devlog\`
+- `C:\mybizz\todo\`
+- `C:\mybizz\gstack`
 - the running GBrain instance (Supabase + OpenRouter) configured for this workspace
 
 ## Core principle
@@ -93,10 +93,10 @@ Build is responsible for:
 ### Shared tracking rule
 Canonical shared tracking remains:
 
-- `C:\_mb2-cs-app\devlog\README.md`
-- `C:\_mb2-cs-app\devlog\index.md`
-- `C:\_mb2-cs-app\todo\todo.md`
-- `C:\_mb2-cs-app\todo\todo-archive.md`
+- `C:\mybizz\devlog\README.md`
+- `C:\mybizz\devlog\index.md`
+- `C:\mybizz\todo\todo.md`
+- `C:\mybizz\todo\todo-archive.md`
 
 Rules:
 

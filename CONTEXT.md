@@ -62,4 +62,4 @@ This project is part of a multi-project workspace under `C:\projects\`:
 - **mb5pdlf** — PDLF test project (Daily Intentions Tracker)
 - **scratch** — test/experiment workspace
 
-Shared infrastructure at `C:\_mb2-cs-app\`: GStack tools, GBrain database, skills directory, Matt Pocock skills teaching workspace.
+Shared infrastructure at `C:\mybizz\`: GStack tools, GBrain database, skills directory, Matt Pocock skills teaching workspace.

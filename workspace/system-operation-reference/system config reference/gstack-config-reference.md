@@ -5,12 +5,12 @@
 | Property | Value |
 |---|---|
 | **Version** | 1.58.1.0 |
-| **Install location** | `/mnt/c/_mb2-cs-app/gstack` (Windows: `C:\_mb2-cs-app\gstack`) |
+| **Install location** | `/mnt/c/mybizz/gstack` (Windows: `C:\mybizz\gstack`) |
 | **Repository** | Git repo with full skill ecosystem |
-| **Skills source** | `/mnt/c/_mb2-cs-app/skills/` (70 entries, 61 symlinked to OpenCode) |
-| **Binary directory** | `/mnt/c/_mb2-cs-app/gstack/bin/` (87 executables) |
-| **OpenCode skills** | `~/.config/opencode/skills/` — 61 symlinks → `/mnt/c/_mb2-cs-app/skills/` |
-| **Claude skills** | `~/.claude/skills/gstack` — symlink → `/mnt/c/_mb2-cs-app/gstack` |
+| **Skills source** | `/mnt/c/mybizz/skills/` (70 entries, 61 symlinked to OpenCode) |
+| **Binary directory** | `/mnt/c/mybizz/gstack/bin/` (87 executables) |
+| **OpenCode skills** | `~/.config/opencode/skills/` — 61 symlinks → `/mnt/c/mybizz/skills/` |
+| **Claude skills** | `~/.claude/skills/gstack` — symlink → `/mnt/c/mybizz/gstack` |
 | **Updates** | `gstack-update-check` — UP_TO_DATE |
 
 ## 2. Runtime Config — `~/.gstack/config.yaml`
@@ -67,7 +67,7 @@ plan_tune_hooks: prompt
 
 ## 5. Skills Inventory
 
-**61 skills available to OpenCode**, symlinked from `/mnt/c/_mb2-cs-app/skills/`:
+**61 skills available to OpenCode**, symlinked from `/mnt/c/mybizz/skills/`:
 
 | Category | Skills |
 |---|---|
@@ -99,7 +99,7 @@ When you run this command, you should:
 
 ## 7. Binary Path Override
 
-Per `AGENTS.md` Hard Rule: always use `/mnt/c/_mb2-cs-app/gstack/bin/<binary-name>` for any GStack binary. Do not attempt host-detection logic — the literal path is correct and verified.
+Per `AGENTS.md` Hard Rule: always use `/mnt/c/mybizz/gstack/bin/<binary-name>` for any GStack binary. Do not attempt host-detection logic — the literal path is correct and verified.
 
 Key binaries:
 - `gstack-config` — config get/set

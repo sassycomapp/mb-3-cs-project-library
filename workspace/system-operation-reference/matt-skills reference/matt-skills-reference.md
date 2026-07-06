@@ -146,7 +146,7 @@ deliberately chosen and are now live in this project's `AGENTS.md`, under
 | `triage` rejections | `.out-of-scope\` | No change — confirmed as-is |
 | `setup-matt-pocock-skills` | `docs\agents\`, `CLAUDE.md` | No change — confirmed as-is |
 | `handoff`, `improve-codebase-architecture` | `%TEMP%` only | %TEMP% kept **+** copy added to `matt-skills-output\` |
-| `teach` | Invoking directory | Redirected entirely to `C:\_mb2-cs-app\matt-skills-teach` (outside `project-library`) |
+| `teach` | Invoking directory | Redirected entirely to `C:\mybizz\matt-skills-teach` (outside `project-library`) |
 | Any skill not listed above | — | No rule yet — do not guess; ask before saving |
 
 ---
@@ -163,7 +163,7 @@ deliberately chosen and are now live in this project's `AGENTS.md`, under
 | `C:\projects\mb-3-cs\project-library\.out-of-scope\` | `triage` (rejected items only) |
 | `%TEMP%` (outside repo) | `handoff`, `improve-codebase-architecture` |
 | `C:\projects\mb-3-cs\project-library\matt-skills-output\` | `handoff`, `improve-codebase-architecture` *(added copy, post-override)* |
-| `C:\_mb2-cs-app\matt-skills-teach` (outside `project-library`) | `teach` *(post-override)* |
+| `C:\mybizz\matt-skills-teach` (outside `project-library`) | `teach` *(post-override)* |
 | Teaching workspace, invoking directory | `teach` *(pre-override default — superseded above)* |
 | In-place codebase changes | `tdd`, `diagnosing-bugs`, `prototype` |
 | Nothing on disk | `ask-matt`, `codebase-design`, `grilling`, `grill-me`, `find-skills`, `writing-great-skills` |
@@ -174,6 +174,6 @@ deliberately chosen and are now live in this project's `AGENTS.md`, under
 
 1. **CONTEXT.md** — bootstrapped for mb-3-cs (2026-07-06). Not yet created for mb4ecom or mb5pdlf — skills will create lazily when `/domain-modeling` or `/grill-with-docs` is first run there.
 2. **Multi-project setup** — mb4ecom and mb5pdlf project-libraries configured with `docs/agents/`, `.scratch/`, `matt-skills-output/`, `.out-of-scope/`, and Agent skills block in AGENTS.md (2026-07-06).
-3. **Folders verified on disk** — all required directories exist for all three projects: `.scratch/`, `matt-skills-output/`, `.out-of-scope/`, `docs/agents/`, `C:\_mb2-cs-app\matt-skills-teach`.
+3. **Folders verified on disk** — all required directories exist for all three projects: `.scratch/`, `matt-skills-output/`, `.out-of-scope/`, `docs/agents/`, `C:\mybizz\matt-skills-teach`.
 4. **find-skills** — confirmed as model-invoked skill from `vercel-labs/skills`. Listed in installed skills but not part of the main Matt Pocock workflow.
 5. Every row marked "No" under Verified is a documentation-sourced claim, not an observed result. Confirm each the first time its skill is used, and update this file accordingly.

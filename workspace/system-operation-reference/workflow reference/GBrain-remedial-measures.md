@@ -58,7 +58,7 @@ Your `git push` already backed up the project-library. Nothing to worry about.
 
 **In WSL:**
 ```bash
-cd /mnt/c/_mb2-cs-app/project-library
+cd /mnt/c/mybizz/project-library
 git status
 ```
 
@@ -88,7 +88,7 @@ Before starting, search GBrain for: [your topic here]
 Restart OpenCode from WSL:
 ```bash
 pkill -f "opencode web"
-cd /mnt/c/_mb2-cs-app/project-library
+cd /mnt/c/mybizz/project-library
 opencode web --hostname 0.0.0.0
 ```
 

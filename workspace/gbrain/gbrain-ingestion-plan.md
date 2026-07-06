@@ -15,12 +15,12 @@ The aim is to start small with high-trust sources and expand only when behavior 
 Start with:
 
 - **Tier A** — Authoritative CS specification sources:
-  - `C:\_mb2-cs-app\project-library\adr\`
-  - `C:\_mb2-cs-app\project-library\docs\`
-  - `C:\_mb2-cs-app\project-library\developer-rules`
+  - `C:\mybizz\project-library\adr\`
+  - `C:\mybizz\project-library\docs\`
+  - `C:\mybizz\project-library\developer-rules`
 
 - **Tier B** — Canonical tracking:
-  - `C:\_mb2-cs-app\project-library\implementation`
+  - `C:\mybizz\project-library\implementation`
 
 Rules for Phase 1:
 - Ingest only content that is:
@@ -31,7 +31,7 @@ Rules for Phase 1:
 
 ### 2.2 Phase 2 — Validated workflow outputs
 - **Tier C** — Validated workflow outputs:
-  - `C:\_mb2-cs-app\project-library\gstack-outputs`
+  - `C:\mybizz\project-library\gstack-outputs`
   
 
 Once Phase 1 behavior is understood:

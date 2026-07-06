@@ -68,7 +68,7 @@ rename tools, rewrite paths, done."*
 `~/.claude/skills/gstack/...` paths" as a real, known, specifically-tested-for
 failure mode — not a hypothetical. This strengthens, on community/maintainer
 authority, the theory that this project's live skill files
-(`/mnt/c/_mb2-cs-app/skills/`) may never have been correctly generated for
+(`/mnt/c/mybizz/skills/`) may never have been correctly generated for
 the OpenCode host, and instead carry the Claude-only literal paths that the
 official tooling is specifically designed to rewrite.
 

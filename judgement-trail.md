@@ -30,7 +30,7 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 **Issue flagged:** Global `opencode.jsonc` had hardcoded model block (`xiaomi/mimo-v2.5-pro`). User wants model selected from UI picker.
 **Developer decision:** Model block removed entirely. Provider block retained (OpenRouter API key needed for auth — env var approach previously unreliable).
 
-**Issue flagged:** Global `external_directory` only covered `C:\_mb2-cs-app\**` — didn't cover `C:\projects\**` or `C:\pdlf\**`.
+**Issue flagged:** Global `external_directory` only covered `C:\mybizz\**` — didn't cover `C:\projects\**` or `C:\pdlf\**`.
 **Developer decision:** Added both. All projects now accessible from any workspace without per-project config changes.
 
 **Issue flagged:** 4 agent files missing task-completion reporting, devlog/judgement-trail awareness, and environment (Web UI only).

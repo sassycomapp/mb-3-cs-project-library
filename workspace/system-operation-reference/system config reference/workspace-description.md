@@ -26,7 +26,7 @@
 
 | Tool | Location | Status |
 |---|---|---|
-| GStack | `C:\_mb2-cs-app\gstack` | Operational — 61 skills available |
+| GStack | `C:\mybizz\gstack` | Operational — 61 skills available |
 | GBrain | `~/gbrain` (v0.18.2) | Operational — Supabase + OpenRouter embeddings |
 | PDLF | `C:\pdlf` | Framework — staging for rollout across all projects |
 
@@ -45,7 +45,7 @@
 - **Config:** `~/.config/opencode/opencode.jsonc`
   - Default agent: `plan`
   - All permissions: `ask` (conservative)
-  - External directory access: `C:\_mb2-cs-app\**`, `C:\projects\**`, `C:\pdlf\**`
+  - External directory access: `C:\mybizz\**`, `C:\projects\**`, `C:\pdlf\**`
   - MCP: GBrain enabled
   - No model hardcoded — selected from UI picker
 
@@ -199,7 +199,7 @@ All projects are PDLF projects or transitioning to PDLF. The PDLF orchestrator (
 
 ## 8. GStack (current role)
 
-- **Repo:** `C:\_mb2-cs-app\gstack` / `/mnt/c/_mb2-cs-app/gstack`
+- **Repo:** `C:\mybizz\gstack` / `/mnt/c/mybizz/gstack`
 - **Skills:** 61 skill directories in `~/.config/opencode/skills/`
 - **Role:** Workflow/orchestration layer accessed via skills. Key workflows: planning, implementation, review, QA, release, GBrain setup, learning, context management.
 - **Docs:** `project-library/workspace/gstack/` — operating model, workflows, handoff contract

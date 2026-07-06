@@ -15,10 +15,10 @@ This document defines **when and how GBrain memory is refreshed, re-embedded, or
   - if a file changes significantly,
 
 For Tier A and Tier B, if:
-  - `C:\_mb2-cs-app\project-library\adr\` is edited,
-  - `C:\_mb2-cs-app\project-library\docs\` is edited,
-  - `C:\_mb2-cs-app\project-library\developer-rules` is edited,
-  - `C:\_mb2-cs-app\project-library\adr\` ADR status changes (e.g., “Accepted” → “Superseded”). 
+  - `C:\mybizz\project-library\adr\` is edited,
+  - `C:\mybizz\project-library\docs\` is edited,
+  - `C:\mybizz\project-library\developer-rules` is edited,
+  - `C:\mybizz\project-library\adr\` ADR status changes (e.g., “Accepted” → “Superseded”). 
 
  memory connected to that file should be:
   - re-ingested, or
@@ -89,7 +89,7 @@ This should be reflected in how recall results are ranked and presented.
 
 - Any automation or scripts that operate on GBrain should:
   - log what they ingest or invalidate,
-  - keep a small audit trail (for example, in devlog or a dedicated GBrain log) ["C:\_mb2-cs-app\project-library\workspace\gbrain\gbrain-log.md"].
+  - keep a small audit trail (for example, in devlog or a dedicated GBrain log) ["C:\mybizz\project-library\workspace\gbrain\gbrain-log.md"].
 
 ---
 

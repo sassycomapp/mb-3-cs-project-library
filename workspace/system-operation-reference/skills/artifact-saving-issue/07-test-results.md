@@ -8,7 +8,7 @@
 ## Command 1: `pwd`
 
 ```
-/mnt/c/_mb2-cs-app/project-library
+/mnt/c/mybizz/project-library
 ```
 
 ---

@@ -6,7 +6,7 @@ This is the complete catalog of all 59 GStack skills. Each skill entry shows wha
 
 **How to invoke:** Type the skill name in OpenCode web UI chat (e.g., `/office-hours`)
 
-**Where skills live:** `~/.config/opencode/skills/<name>/SKILL.md` (symlinked from `/mnt/c/_mb2-cs-app/skills/`)
+**Where skills live:** `~/.config/opencode/skills/<name>/SKILL.md` (symlinked from `/mnt/c/mybizz/skills/`)
 
 ---
 

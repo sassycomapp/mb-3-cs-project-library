@@ -64,8 +64,8 @@ Stock GStack might assume more freedom over file edits. Here:
 Instead of letting GStack manage its own tracking, this workspace:
 
 - uses the shared devlog/todo at:
-  - `C:\_mb2-cs-app\devlog\*`
-  - `C:\_mb2-cs-app\todo\*`
+  - `C:\mybizz\devlog\*`
+  - `C:\mybizz\todo\*`
 
 - requires:
   - Plan → allowed to update devlog/todo.

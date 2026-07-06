@@ -77,7 +77,7 @@ Applied per `AGENTS.md` § Matt Pocock skills artifact governance. These overrid
 | `setup-matt-pocock-skills` | Agent config | `docs/agents/` + `CLAUDE.md`/`AGENTS.md` | No — default |
 | `handoff`, `improve-codebase-architecture` | Primary output | `%TEMP%` | No — default kept |
 | `handoff`, `improve-codebase-architecture` | Additional copy | `matt-skills-output/` | **Yes** — copy added |
-| `teach` | All teaching artefacts | `C:\_mb2-cs-app\matt-skills-teach` | **Yes** — redirected from invoking directory |
+| `teach` | All teaching artefacts | `C:\mybizz\matt-skills-teach` | **Yes** — redirected from invoking directory |
 | Other skills | Varies | — | **No rule yet** — ask before saving |
 
 ## 5. Per-Project Setup State
@@ -95,7 +95,7 @@ Applied per `AGENTS.md` § Matt Pocock skills artifact governance. These overrid
 | `matt-skills-output/` | project-library | Created — empty |
 | `.out-of-scope/` | project-library | Created 2026-07-06 |
 | `adr/` | project-library | 47 ADRs |
-| `C:\_mb2-cs-app\matt-skills-teach` | shared | Created — empty (shared across all projects) |
+| `C:\mybizz\matt-skills-teach` | shared | Created — empty (shared across all projects) |
 
 ### mb4ecom
 
@@ -135,6 +135,6 @@ Applied per `AGENTS.md` § Matt Pocock skills artifact governance. These overrid
 
 - **Issue tracker**: All three projects use local markdown issues in `.scratch/`. No GitHub Issues integration.
 - **Triage labels**: All three projects use the same 5 default labels.
-- **`teach` redirect**: `C:\_mb2-cs-app\matt-skills-teach` is shared across all projects — only one teaching workspace for the whole system.
+- **`teach` redirect**: `C:\mybizz\matt-skills-teach` is shared across all projects — only one teaching workspace for the whole system.
 - **`handoff` output**: Saved to `%TEMP%` AND copied to `matt-skills-output/`. The `%TEMP%` save is the skill's native behavior; the copy is added by AGENTS.md governance.
 - **CONTEXT.md per project**: Only mb-3-cs has a bootstrapped CONTEXT.md. The other projects' CONTEXT.md files will be created lazily by the skills when first needed.

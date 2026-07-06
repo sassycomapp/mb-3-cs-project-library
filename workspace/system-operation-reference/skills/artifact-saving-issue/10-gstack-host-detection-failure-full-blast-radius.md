@@ -25,7 +25,7 @@ this machine), `AGENTS.md` was amended with an explicit override:
 ```
 ## GStack binary path override
 When any GStack skill needs to call gstack-slug, gstack-config, or any
-other gstack-* binary, always use /mnt/c/_mb2-cs-app/gstack/bin/<binary-name>
+other gstack-* binary, always use /mnt/c/mybizz/gstack/bin/<binary-name>
 directly. Do not attempt host-detection logic (~/.codex/skills/gstack,
 .agents/skills/gstack, or similar) — that detection has been confirmed to
 fail in this environment.
@@ -56,7 +56,7 @@ eval "$($GSTACK_BIN/gstack-slug 2>/dev/null)" 2>/dev/null || true
 ```
 
 The agent confirmed directly: it did **not** use
-`/mnt/c/_mb2-cs-app/gstack/bin/` as instructed. It ran the skill's own
+`/mnt/c/mybizz/gstack/bin/` as instructed. It ran the skill's own
 preamble host-detection logic verbatim instead — and this time guessed yet
 **a third different path** (`.gbrain/skills/gstack`), distinct from the
 `.codex/skills/gstack` and `.agents/skills/gstack` guesses observed in
@@ -150,7 +150,7 @@ the outcome:
 
 ```
 Before running any GStack skill in this session, override GSTACK_BIN to
-/mnt/c/_mb2-cs-app/gstack/bin for every invocation. Do not run the skill's
+/mnt/c/mybizz/gstack/bin for every invocation. Do not run the skill's
 own host-detection logic for this variable. Confirm this override before
 each skill's preamble executes.
 ```

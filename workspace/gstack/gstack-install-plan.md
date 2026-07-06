@@ -11,8 +11,8 @@ It is not a generic guide; it is specific to this Windows + WSL setup.
 ## 2. Components
 
 - **GStack repository**
-  - Windows: `C:\_mb2-cs-app\gstack`
-  - WSL: `/mnt/c/_mb2-cs-app/gstack`
+  - Windows: `C:\mybizz\gstack`
+  - WSL: `/mnt/c/mybizz/gstack`
   - Status:
     - Repo cloned.
     - `node_modules` present.
@@ -36,8 +36,8 @@ It is not a generic guide; it is specific to this Windows + WSL setup.
 ## 3. Install steps (completed)
 
 1. **Clone GStack repo**
-   - Clone upstream GStack into `C:\_mb2-cs-app\gstack`.
-   - Ensure WSL sees it at `/mnt/c/_mb2-cs-app/gstack`.
+   - Clone upstream GStack into `C:\mybizz\gstack`.
+   - Ensure WSL sees it at `/mnt/c/mybizz/gstack`.
 
 2. **Normalize scripts for WSL**
    - Convert `gstack\bin\*.sh` to LF endings.

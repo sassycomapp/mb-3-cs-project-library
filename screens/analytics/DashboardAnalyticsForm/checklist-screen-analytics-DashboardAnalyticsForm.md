@@ -1,7 +1,7 @@
 # Compliance Checklist — screen-analytics-DashboardAnalyticsForm
 
-**Screen:** `/mnt/c/_mb2-cs-app/project-library/screens/analytics/DashboardAnalyticsForm/screen-analytics-DashboardAnalyticsForm.html`
-**Wireframe:** `/mnt/c/_mb2-cs-app/project-library/wireframes/analytics/DashboardAnalyticsForm/wireframe-analytics-DashboardAnalyticsForm.html`
+**Screen:** `/mnt/c/mybizz/project-library/screens/analytics/DashboardAnalyticsForm/screen-analytics-DashboardAnalyticsForm.html`
+**Wireframe:** `/mnt/c/mybizz/project-library/wireframes/analytics/DashboardAnalyticsForm/wireframe-analytics-DashboardAnalyticsForm.html`
 **Date:** 2026-07-02
 **Revised:** 2026-07-02 — audit found 2 issues, fixed
 

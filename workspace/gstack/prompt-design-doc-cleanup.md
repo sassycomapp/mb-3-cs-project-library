@@ -4,7 +4,7 @@
 `design-doc-cleanup-v1`
 
 ## Purpose
-Rationalize and clean up existing design documentation for `project-library`. Produce a clear, minimal, and current design documentation set. Redundant, superseded, or obsolete files must be moved to `/mnt/c/_mb2-cs-app/project-library/Obsolete`.
+Rationalize and clean up existing design documentation for `project-library`. Produce a clear, minimal, and current design documentation set. Redundant, superseded, or obsolete files must be moved to `/mnt/c/mybizz/project-library/Obsolete`.
 
 ## Agent
 `plan` (primary)
@@ -13,7 +13,7 @@ Rationalize and clean up existing design documentation for `project-library`. Pr
 `docs-plan`
 
 ## Workspace
-`/mnt/c/_mb2-cs-app/project-library`
+`/mnt/c/mybizz/project-library`
 
 ---
 
@@ -23,18 +23,18 @@ Rationalize and clean up existing design documentation for `project-library`. Pr
 
 Rationalize and clean up existing design documentation for `project-library`. Produce a clear, minimal, and current design documentation set. Any redundant, superseded, or obsolete files must be moved to:
 
-`/mnt/c/_mb2-cs-app/project-library/Obsolete`
+`/mnt/c/mybizz/project-library/Obsolete`
 
 Wireframes and screen documents are currently non-compliant and must not be treated as acceptable examples. Do not create new wireframes or screens in this task; only classify and document their status.
 
 ### Scope
 
 - Repository root:
-  `/mnt/c/_mb2-cs-app/project-library`
+  `/mnt/c/mybizz/project-library`
 
 - In-scope folders:
-  - `/mnt/c/_mb2-cs-app/project-library/gstack-outputs`
-  - `/mnt/c/_mb2-cs-app/project-library/docs`
+  - `/mnt/c/mybizz/project-library/gstack-outputs`
+  - `/mnt/c/mybizz/project-library/docs`
 
 - Primary design direction:
   - Material UI (MUI) and Material Design 3 decisions already captured in the documentation are the authoritative direction for the system.
@@ -45,31 +45,31 @@ The following files must be explicitly inspected and classified. None of them ma
 
 From `gstack-outputs`:
 
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/plan-tune-verification-report.md`
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/wireframe-reconciliation-audit.md`
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/wireframe-screen-coverage-report.md`
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/DESIGN.md`
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/design-consultation-plan-descriprive.md`
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/design-consultation-plan-workflows.md`
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/design-consultation-screen-standard-report.md`
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/design-html-report.md`
-- `/mnt/c/_mb2-cs-app/project-library/gstack-outputs/design-review-report.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/plan-tune-verification-report.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/wireframe-reconciliation-audit.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/wireframe-screen-coverage-report.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/DESIGN.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/design-consultation-plan-descriprive.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/design-consultation-plan-workflows.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/design-consultation-screen-standard-report.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/design-html-report.md`
+- `/mnt/c/mybizz/project-library/gstack-outputs/design-review-report.md`
 
 From `docs`:
 
-- `/mnt/c/_mb2-cs-app/project-library/docs/ui-standards.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/custom-component-requirements-matrix.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/DESIGN_md_additions.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/DESIGN_palette_section.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/design-direction.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/m3_component_mapping.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/palette_selector_tokens.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/platform-overview.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/screen-production-standard.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/spec-component-properties.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/spec-material-3-theme.md`
-- `/mnt/c/_mb2-cs-app/project-library/docs/theme_mui_patch.css`
-- `/mnt/c/_mb2-cs-app/project-library/docs/theme_patched.css`
+- `/mnt/c/mybizz/project-library/docs/ui-standards.md`
+- `/mnt/c/mybizz/project-library/docs/custom-component-requirements-matrix.md`
+- `/mnt/c/mybizz/project-library/docs/DESIGN_md_additions.md`
+- `/mnt/c/mybizz/project-library/docs/DESIGN_palette_section.md`
+- `/mnt/c/mybizz/project-library/docs/design-direction.md`
+- `/mnt/c/mybizz/project-library/docs/m3_component_mapping.md`
+- `/mnt/c/mybizz/project-library/docs/palette_selector_tokens.md`
+- `/mnt/c/mybizz/project-library/docs/platform-overview.md`
+- `/mnt/c/mybizz/project-library/docs/screen-production-standard.md`
+- `/mnt/c/mybizz/project-library/docs/spec-component-properties.md`
+- `/mnt/c/mybizz/project-library/docs/spec-material-3-theme.md`
+- `/mnt/c/mybizz/project-library/docs/theme_mui_patch.css`
+- `/mnt/c/mybizz/project-library/docs/theme_patched.css`
 
 ### Constraints
 
@@ -96,7 +96,7 @@ From `docs`:
    - Classification, chosen from:
      - `CANONICAL` -- keep as-is or with focused updates; part of the target architecture.
      - `MERGE_SOURCE` -- content to be merged into another document; source can then be moved to `Obsolete`.
-     - `OBSOLETE` -- redundant, superseded, or no longer relevant; move to `/mnt/c/_mb2-cs-app/project-library/Obsolete`.
+     - `OBSOLETE` -- redundant, superseded, or no longer relevant; move to `/mnt/c/mybizz/project-library/Obsolete`.
    - If `MERGE_SOURCE`, specify:
      - Target canonical document file path.
      - Concrete merge instructions (which sections, what to extract, what to drop).
@@ -105,7 +105,7 @@ From `docs`:
 
 3. **Obsolete and cleanup actions**
 
-   - List all files (beyond the high-priority list, if applicable) that should be moved to `/mnt/c/_mb2-cs-app/project-library/Obsolete`, with a short reason per file.
+   - List all files (beyond the high-priority list, if applicable) that should be moved to `/mnt/c/mybizz/project-library/Obsolete`, with a short reason per file.
    - Provide a stepwise cleanup plan that can be executed in the repo, including:
      - Moves/renames.
      - Merge operations.
@@ -170,13 +170,13 @@ When a file is classified as `MERGE_SOURCE`:
 
 ### Obsolete execution
 When a file is classified as `OBSOLETE`:
-1. Move it to `/mnt/c/_mb2-cs-app/project-library/Obsolete/`.
+1. Move it to `/mnt/c/mybizz/project-library/Obsolete/`.
 2. Preserve the original filename.
 3. Note the reason for obsolescence in the cleanup actions output.
 
 ### Output location
 Save the analysis report to:
-`/mnt/c/_mb2-cs-app/project-library/gstack-outputs/design-doc-cleanup-report.md`
+`/mnt/c/mybizz/project-library/gstack-outputs/design-doc-cleanup-report.md`
 
 ### Handoff
 After completing the analysis:
