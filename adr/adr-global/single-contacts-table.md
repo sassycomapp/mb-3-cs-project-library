@@ -42,7 +42,7 @@ All customers are contacts but not all contacts are customers. The `contacts` ta
 - CRM: `status`, `source`, `lifecycle_stage`, `tags`, `internal_notes`, `preferences`
 - Financial: `total_spent`, `total_transactions`, `average_order_value`
 - Tracking: `date_added`, `last_contact_date`, `created_at`, `updated_at`
-- Multi-tenant: `instance_id` → `users`
+
 
 ---
 

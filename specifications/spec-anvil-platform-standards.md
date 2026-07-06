@@ -119,7 +119,7 @@ Given all three, it also wires components to their code-behind functions as part
 - Role enforcement is always server-side. Client-side navigation visibility (hiding a nav link
   for a restricted role) is a UX convenience only — never the actual security boundary.
 - All Data Tables are set to "No access" for client code, without exception. All data access
-  goes through server functions, which enforce `instance_id` filtering, authentication, and input
+  goes through server functions, which enforce authentication and input
   validation that direct client access would bypass.
 
 ## 11. Rate Limiting Pattern
@@ -151,15 +151,11 @@ override and the reason — never silently diverge.
 
 - **Row identification:** use Anvil's built-in Row IDs (`row.get_id()`). Do not create custom
   auto-increment columns.
-- **Table linking:** store Row objects directly in link columns, not integer IDs:
-  ```python
-  contact = app_tables.contacts.add_row(instance_id=user, email='jane@example.com')
-  booking = app_tables.bookings.add_row(instance_id=user, contact=contact)
-  ```
-- **Data isolation:** every query must filter by `instance_id=user`. Never trust a
-  client-provided `instance_id`.
-- **Mandatory columns:** every table has `instance_id` (link → users), `created_at` (datetime),
-  and `updated_at` (datetime, if the row is mutable).
+- **Table linking:** store Row objects directly in link columns, not integer IDs. Each client
+  instance has its own isolated database — no tenant discriminator columns or tenant-filtered
+  queries are needed. See `dependency-based-not-multi-tenant` ADR.
+- **Mandatory columns:** `created_at` (datetime) and `updated_at` (datetime, if the row is
+  mutable) on every table.
 - **Query patterns:** `get()` for a single record (returns `None` if not found); `search()` for
   multiple records (returns a `SearchIterator`); paginate with slicing (`[:50]`); sort with
   `tables.order_by()`; avoid converting a `SearchIterator` to a list unless actually necessary.
@@ -201,6 +197,6 @@ file/module naming pattern only.
 
 ---
 
-*Anvil Platform Standards v1.3 — Vault content (Sections 10–11) moved to `spec-vault-system.md`. Sections 12–18 renumbered to 10–16. Original v1.2 added Sections 15–18 (now 13–16), consolidating spec-coding-standards.md.*
+*Anvil Platform Standards v1.4 — Removed all `instance_id` references per `dependency-based-not-multi-tenant` ADR. Dependency-based architecture does not use tenant discriminator columns. Vault content (Sections 10–11) moved to `spec-vault-system.md`. Original v1.2 added Sections 15–18 (now 13–16).*
 
 

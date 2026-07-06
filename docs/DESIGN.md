@@ -1041,7 +1041,6 @@ Expected fields include:
 
 Expected fields include:
 
-- `instance_id`
 - `post_id`
 - `commenter_name`
 - `commenter_email`
@@ -1054,7 +1053,6 @@ Expected fields include:
 
 Expected fields include:
 
-- `instance_id`
 - `category`
 - `title`
 - `clause`
@@ -1068,7 +1066,6 @@ Expected fields include:
 
 Expected fields include:
 
-- `instance_id`
 - `category`
 - `title`
 - `clause`

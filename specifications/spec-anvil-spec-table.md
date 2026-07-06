@@ -275,8 +275,6 @@ Write Back must be enabled in the Designer Data Bindings panel (W toggle). Canno
 | Primary key | Use built-in Row ID via `row.get_id()` / documented Row ID pattern |
 | Custom auto-increment PKs | Never create unless explicit human-readable ID required |
 | Relationships | Store Row objects, not integer IDs |
-| Multi-tenancy | Every table must have `instance_id` linked to users |
-| Query security | Every query must filter by `instance_id` |
 | Client access | All tables set to `No access` for client code |
 
 ### 4.2 Row Identification
@@ -288,13 +286,13 @@ Anvil manages primary keys automatically. Every row has a built-in unique ID acc
 Store Row objects directly in link columns — not integer IDs:
 
 ```python
-contact = app_tables.contacts.add_row(instance_id=user, email='jane@example.com')
-booking = app_tables.bookings.add_row(instance_id=user, contact=contact)
+contact = app_tables.contacts.add_row(email='jane@example.com')
+booking = app_tables.bookings.add_row(contact=contact)
 ```
 
-### 4.4 Data Isolation (Multi-Tenant Security)
+### 4.4 Data Access (Dependency-Based Architecture)
 
-Every table MUST have `instance_id` column linked to `users` table. Every query MUST filter by `instance_id`:
+Each client instance is a separate Anvil app with its own isolated database. No tenant discriminator columns or tenant-filtered queries are needed — see `dependency-based-not-multi-tenant` ADR:
 
 ```python
 @anvil.server.callable
@@ -302,7 +300,7 @@ def get_all_contacts():
     user = anvil.users.get_user()
     if not user:
         raise Exception("Not authenticated")
-    return app_tables.contacts.search(instance_id=user)
+    return app_tables.contacts.search()
 ```
 
 ### 4.5 Query Standards
@@ -350,7 +348,6 @@ def get_next_contact_number():
 
 | Column | Rule |
 |---|---|
-| `instance_id` | Mandatory on every tenant-owned table |
 | `created_at` | Mandatory |
 | `updated_at` | Mandatory if record is mutable |
 
@@ -358,7 +355,6 @@ def get_next_contact_number():
 
 | Mistake | Rule |
 |---|---|
-| Query without `instance_id` | Security violation |
 | Store tuple/int IDs instead of Row objects | Never |
 | Load all records then take first | Use `get()` |
 | Convert SearchIterator too early | Avoid unless needed |
@@ -597,7 +593,7 @@ def create_order(customer_email: str, price: float):
         raise Exception("Authentication required")
     order_calc = calculate_order_total(price, DEFAULT_TAX_RATE, MAX_ORDER_TOTAL)
     order = app_tables.orders.add_row(
-        instance_id=user, total=order_calc["total"], status="pending"
+        total=order_calc["total"], status="pending"
     )
     return order
 ```
@@ -790,8 +786,6 @@ def process_email_campaigns():
 | Startup redirect | `open_form()` followed by `return` |
 | Form state | `self.item` + Designer Write Back |
 | Settings forms | No write-back binding |
-| Tables | `instance_id` on every tenant table |
-| Queries | Always filter by `instance_id` |
 | Relationships | Store Row objects, not IDs |
 | Table permissions | No client access |
 | Logging | Use logging, never `print` in server code |

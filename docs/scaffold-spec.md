@@ -709,7 +709,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
 | `contact_id` | string | |
-| `instance_id` | link_single → users | |
 | `first_name` | string | |
 | `last_name` | string | |
 | `email` | string | |
@@ -764,7 +763,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
 | `campaign_id` | string | |
-| `instance_id` | link_single → users | |
 | `campaign_name` | string | |
 | `campaign_type` | string | |
 | `status` | string | |
@@ -782,7 +780,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
 | `segment_id` | string | |
-| `instance_id` | link_single → users | |
 | `segment_name` | string | |
 | `segment_type` | string | |
 | `filter_criteria` | simpleObject | |
@@ -795,7 +792,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
 | `task_id` | string | |
-| `instance_id` | link_single → users | |
 | `contact_id` | link_single → contacts | |
 | `task_title` | string | |
 | `task_type` | string | |
@@ -811,7 +807,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
 | `lead_id` | string | |
-| `instance_id` | link_single → users | |
 | `email` | string | |
 | `name` | string | |
 | `phone` | string | |
@@ -827,7 +822,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
 | `capture_id` | string | |
-| `instance_id` | link_single → users | |
 | `capture_name` | string | |
 | `capture_type` | string | |
 | `trigger_settings` | simpleObject | |
@@ -924,7 +918,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
 | `page_id` | string | |
-| `instance_id` | link_single → users | |
 | `title` | string | |
 | `slug` | string | |
 | `template_type` | string | "lead_capture", "event_registration", "vsl" |
@@ -959,7 +952,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
-| `instance_id` | link_single → users | Client identifier |
 | `category` | string | e.g., "Data Collection", "Cookies", "Third Parties" |
 | `title` | string | Clause heading |
 | `clause` | string | Body text / rich text |
@@ -973,7 +965,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
-| `instance_id` | link_single → users | Client identifier |
 | `category` | string | e.g., "Service Terms", "Payment Terms", "Liability" |
 | `title` | string | Clause heading |
 | `clause` | string | Body text / rich text |
@@ -987,7 +978,6 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 
 | Column | Anvil Type | Notes |
 |--------|-----------|-------|
-| `instance_id` | link_single → users | Client identifier |
 | `post_id` | link_single → blog_posts | Parent post |
 | `commenter_name` | string | Required |
 | `commenter_email` | string | Required |

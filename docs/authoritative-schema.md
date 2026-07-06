@@ -308,7 +308,6 @@ Unified contact database (leads and customers).
 | Field | Type | Notes |
 |-------|------|-------|
 | `contact_id` | string | Human-readable (C-{number}) |
-| `instance_id` | link → users | Client identifier |
 | `first_name` | string | |
 | `last_name` | string | |
 | `email` | string | Indexed, nullable for walk-ins |
@@ -367,7 +366,6 @@ Email marketing campaigns.
 | Field | Type | Notes |
 |-------|------|-------|
 | `campaign_id` | string | Unique ID |
-| `instance_id` | link → users | Client identifier |
 | `campaign_name` | string | |
 | `campaign_type` | string | "sequence" or "broadcast" |
 | `status` | string | "draft", "active", "paused", "completed" |
@@ -386,7 +384,6 @@ Contact segmentation.
 | Field | Type | Notes |
 |-------|------|-------|
 | `segment_id` | string | Unique ID |
-| `instance_id` | link → users | Client identifier |
 | `segment_name` | string | |
 | `segment_type` | string | "prebuilt" or "custom" |
 | `filter_criteria` | simpleObject | JSON filter rules |
@@ -400,7 +397,6 @@ CRM tasks and follow-ups.
 | Field | Type | Notes |
 |-------|------|-------|
 | `task_id` | string | Unique ID |
-| `instance_id` | link → users | Client identifier |
 | `contact_id` | link → contacts | |
 | `task_title` | string | |
 | `task_type` | string | "manual" or "auto" |
@@ -417,7 +413,6 @@ Captured leads (simultaneous creation with contacts).
 | Field | Type | Notes |
 |-------|------|-------|
 | `lead_id` | string | Unique ID |
-| `instance_id` | link → users | Client identifier |
 | `email` | string | |
 | `name` | string | |
 | `phone` | string | |
@@ -434,7 +429,6 @@ Lead capture form configurations.
 | Field | Type | Notes |
 |-------|------|-------|
 | `capture_id` | string | Unique ID |
-| `instance_id` | link → users | Client identifier |
 | `capture_name` | string | |
 | `capture_type` | string | "lead_form", "event_registration", "vsl" |
 | `trigger_settings` | simpleObject | Form field mappings |
@@ -537,7 +531,6 @@ Blog post comments.
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `instance_id` | link → users | Client identifier |
 | `post_id` | link → blog_posts | Blog post |
 | `commenter_name` | string | |
 | `commenter_email` | string | |
@@ -552,7 +545,6 @@ Marketing landing pages.
 | Field | Type | Notes |
 |-------|------|-------|
 | `page_id` | string | Unique ID |
-| `instance_id` | link → users | Client identifier |
 | `title` | string | |
 | `slug` | string | URL-friendly, unique |
 | `template_type` | string | "lead_capture", "event_registration", "vsl" |
@@ -589,7 +581,6 @@ Privacy policy clause data for the Owner's public-facing privacy policy page.
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `instance_id` | link → users | Client identifier |
 | `category` | string | Logical grouping (e.g., "Data Collection", "Cookies", "Third Parties") |
 | `title` | string | Clause heading |
 | `clause` | string | Body text / rich text |
@@ -604,7 +595,6 @@ Terms and conditions clause data for the Owner's public-facing T&Cs page.
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `instance_id` | link → users | Client identifier |
 | `category` | string | Logical grouping (e.g., "Service Terms", "Payment Terms", "Liability") |
 | `title` | string | Clause heading |
 | `clause` | string | Body text / rich text |
@@ -682,7 +672,6 @@ Pre-computed daily analytics. Populated by daily background task (`real-time-and
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `instance_id` | link → users | Client identifier |
 | `date` | date | Summary date |
 | `total_revenue` | number | Revenue for the day |
 | `revenue_by_service` | simpleObject | JSON breakdown by service |
@@ -695,7 +684,6 @@ Pre-computed per-service analytics. Populated by daily background task (`data-ac
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `instance_id` | link → users | Client identifier |
 | `service_id` | link → services | |
 | `date` | date | Summary date |
 | `revenue` | number | Revenue for the service |
@@ -707,7 +695,6 @@ Pre-computed per-provider analytics. Populated by daily background task (`data-a
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `instance_id` | link → users | Client identifier |
 | `provider_id` | link → users | Staff provider |
 | `date` | date | Summary date |
 | `revenue` | number | Revenue for the provider |
@@ -719,7 +706,6 @@ Pre-computed campaign analytics. Populated by hourly background task (`data-acce
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `instance_id` | link → users | Client identifier |
 | `campaign_id` | link → email_campaigns | |
 | `date` | date | Summary date |
 | `opens` | number | Email opens |
@@ -732,7 +718,6 @@ Instance health metrics. Written every 15 minutes by health heartbeat background
 
 | Field | Type | Notes |
 |-------|------|-------|
-| `instance_id` | link → users | Client identifier |
 | `timestamp` | datetime | UTC — when health check ran |
 | `status` | string | "healthy", "degraded", "unhealthy" |
 | `metrics` | simpleObject | JSON health metrics |
@@ -745,8 +730,9 @@ Instance health metrics. Written every 15 minutes by health heartbeat background
 ### UTC Storage & Timezone Display
 All `datetime` fields stored in UTC. Display conversion uses `business_profile.timezone` (IANA string).
 
-### Multi-Tenant Isolation
-Tables with `instance_id` → `users` enforce client data isolation. Some tables (`bookings`, `invoice`, `time_entries`) use `contact_id` or `staff_id` instead — verify schema before querying.
+### Data Isolation
+
+Each client instance is a separate Anvil app with its own isolated database. Data isolation is structural — one client instance cannot access another's tables. See `dependency-based-not-multi-tenant` ADR.
 
 ### Secret Management
 Payment gateway secret keys stored in `vault` table only (encrypted at rest). Credentials retrieved via `get_vault_secret()` in server code.

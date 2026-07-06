@@ -90,7 +90,7 @@ Client and Owner are principally defined as;
 
 - **Table names:** lowercase_snake, no prefix
 - **Link columns:** `{table}_id` or singular name matching target table
-- **System columns:** `instance_id`, `created_at`, `updated_at` (mandatory on most tables)
+- **System columns:** `created_at`, `updated_at` (mandatory on most tables)
 
 ---
 
