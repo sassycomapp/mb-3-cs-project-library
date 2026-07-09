@@ -82,7 +82,7 @@ Client business information.
 | `data_governance_ack_accepted` | bool | Data governance boundary acknowledgement |
 | `data_governance_ack_accepted_at` | datetime | UTC — when acknowledgement recorded |
 
-> **See:** `implementation/onboarding-implementation-plan.md` for full onboarding field definitions.
+> **See:** `specifications-global/spec-onboarding-implementation-plan.md` for full onboarding field definitions.
 
 #### Design and website fields (added per DESIGN.md)
 
@@ -604,7 +604,7 @@ Terms and conditions clause data for the Owner's public-facing T&Cs page.
 | `created_at` | datetime | UTC |
 | `updated_at` | datetime | UTC |
 
-> **See:** `18-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture.md` for the clause builder architecture.
+> **See:** `legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR for the clause builder architecture.
 
 ---
 
@@ -752,10 +752,10 @@ Each client instance is a separate Anvil app with its own isolated database. Dat
 ### Secret Management
 Payment gateway secret keys stored in `vault` table only (encrypted at rest). Credentials retrieved via `get_vault_secret()` in server code.
 
-### Lead Capture (`4-lead-capture-simultaneous-creation.md`)
+### Lead Capture (`lead-capture-simultaneous-creation` ADR)
 When lead submitted from landing page: both `leads` and `contacts` rows created simultaneously. `leads.converted_to_contact_id` set immediately. Contact auto-enrolled in welcome campaign.
 
-### Email Architecture (`1-brevo-replaces-zoho-email.md`)
+### Email Architecture (`brevo-replaces-zoho-email` ADR)
 - Brevo SMTP — Transactional email
 - Brevo Campaigns API — Marketing email
 - All clients use identical SMTP host (smtp-relay.brevo.com:587)
@@ -765,9 +765,9 @@ When lead submitted from landing page: both `leads` and `contacts` rows created 
 Mybizz_management (the platform operator's internal tooling) maintains an **append-only amendment log** of credential and configuration changes. It never overwrites. It always holds the latest values plus the full history. This is outside the client instance scope but is a system-level behaviour required for audit and compliance.
 
 ### Onboarding Model
-Onboarding is a separate form with required elements (currency selection, legal acknowledgement). Settings is a single tabbed form for all configuration. Bidirectional navigation between Onboarding and Settings. **[`25-onboarding-finality.md`]**
+Onboarding is a separate form with required elements (currency selection, legal acknowledgement). Settings is a single tabbed form for all configuration. Bidirectional navigation between Onboarding and Settings. **[`onboarding-finality` ADR]**
 
-**See:** `implementation/onboarding-implementation-plan.md` for full onboarding specification.
+**See:** `specifications-global/spec-onboarding-implementation-plan.md` for full onboarding specification.
 
 ---
 

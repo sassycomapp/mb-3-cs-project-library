@@ -28,7 +28,7 @@ This file has been reconciled against:
 - `sanity-audit-final-report.md` (2026-06-01)
 - `plan-tune-verification-report.md` (2026-06-01)
 - `wireframe-reconciliation-audit.md` (2026-06-01)
-- `platform-overview.md` (current)
+- `platform-architecture.md` (current)
 - `nomenclature.md` (current)
 
 Key corrections applied:
@@ -1081,7 +1081,7 @@ Expected fields include:
 
 Mybizz_management is **out of scope** for this project. The following is recorded as architectural context only. Mybizz_management is a separate Anvil application for platform operator tooling — client provisioning, health monitoring, billing automation, and update distribution. It is not part of master_template and is built only after the master template reaches launch.
 
-Relevant architectural context is documented in `platform-overview.md` section 17.
+Relevant architectural context is documented in `platform-architecture.md`.
 
 ---
 
@@ -1259,7 +1259,7 @@ The booking flow uses 3 server round-trips maximum (`form-architecture-and-state
 | 7. Confirmation | Success card with check icon, booking ID, details summary. "View Booking" and "Book Another" buttons. | None — client-side |
 
 **Global booking flow rules:**
-- globals.py `booking_flow_state` preserves selections across steps (see `docs/globals-contract.md`).
+- globals.py `booking_flow_state` preserves selections across steps (see `docs-standard-global/globals-contract.md`).
 - Back navigation preserves state — no re-fetch if data is cached in `booking_flow_state.cached_context`.
 - Step transitions show a brief loading indicator (LinearProgressIndicator or spinner) during server calls.
 - 30-second timeout on any server call — shows "Connection timed out. Please try again." with retry button.

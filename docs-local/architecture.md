@@ -43,8 +43,7 @@ communicate with them when built. **See:** `spec-api-specification.md` (API Spec
 **Note:** mb-2-cs was the original development application and has been deprecated. All
 development has migrated to mb-3-cs.
 
-**See:** `9-multi-vertical-to-single-vertical-conversion.md`, `client-instance-readme-five-app-system` ADR (Mandatory README in Every
-Client Instance)
+**See:** `client-instance-readme-five-app-system` ADR (Mandatory README in Every Client Instance)
 
 ---
 
@@ -106,7 +105,7 @@ server_code/
 **Note:** The client-side CRM and marketing package is named `crm/` — not `marketing/`. The
 server-side package remains `server_marketing/`.
 
-**See:** `6-crm-package-replaces-marketing.md`
+**See:** `crm-package-replaces-marketing` ADR
 
 ---
 
@@ -120,7 +119,7 @@ authority for the pattern: `form-architecture-and-state` ADR (Form Architecture 
 
 ## 6. Navigation Architecture
 
-See `m3-design-standards.md` Section 7 for the general authenticated/public navigation patterns
+See `specifications-global/spec-m3-design-standards.md` Section 7 for the general authenticated/public navigation patterns
 (plain `Link` vs. Routing, lambda loop-capture) — not repeated here. This project's specific
 choices and menu structures:
 
@@ -221,7 +220,7 @@ final step.
 *Architecture v2.0 — Section 1 corrected from three named apps to the actual five-app system
 (`client-instance-readme-five-app-system` ADR); Section 2 clarified to state the `blank_client_template` clone lineage explicitly; a
 warning against modifying client instances added. Sections 5–6 trimmed of content now duplicated
-in the Standards Library (`anvil-platform-standards.md`, `m3-design-standards.md`).*
+in the Standards Library (`specifications-global/spec-anvil-platform-standards.md`, `specifications-global/spec-m3-design-standards.md`).*
 
 **Outstanding, not fixed here:** `client-instance-readme-five-app-system` ADR states "the 36-table schema" for `blank_client_template`;
 `authoritative-schema.md` confirms 44 tables. That correction belongs in `client-instance-readme-five-app-system` ADR itself.

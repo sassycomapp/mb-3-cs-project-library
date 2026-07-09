@@ -8,7 +8,7 @@
 
 **Note:** The five-app dependency model (development workspace / master_template /
 blank_client_template / client instances / platform-operator tooling) is Mybizz-wide — see
-`specifications/five-app-architecture-model.md`. This document contains only this app's specific
+`spec-five-app-architecture-model.md`. This document contains only this app's specific
 instantiation of that model and its own feature set.
 
 ---
@@ -41,7 +41,7 @@ this app.
 
 ## 3. This App's Five-App Instances
 
-Per the Mybizz-wide model (`specifications/five-app-architecture-model.md`), this app's actual
+Per the Mybizz-wide model (`spec-five-app-architecture-model.md`), this app's actual
 instance names:
 
 | App | Instance Name |
@@ -158,5 +158,5 @@ The platform is designed to work within Anvil's specific parameters. Key constra
 ---
 
 *Platform Architecture v3.0 — Five-app model extracted to
-`specifications/five-app-architecture-model.md`. This document contains only this app's specific
+`spec-five-app-architecture-model.md`. This document contains only this app's specific
 instances, feature scope, and business model.*

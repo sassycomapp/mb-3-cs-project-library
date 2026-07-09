@@ -6,7 +6,7 @@
 
 **Note:** Generic M3 rules (typography scale, spacing scale, elevation, accessibility
 requirements, the `wrap_on` responsive mechanism, state-specification patterns) live in
-`0-m3-design-standards.md` and are not repeated here. This document contains only what is
+`specifications-global/spec-m3-design-standards.md` and are not repeated here. This document contains only what is
 specific to this project's actual choices.
 
 ---
@@ -33,13 +33,13 @@ neumorphism.
 anywhere, without exception.**
 
 Semantic status roles (`status-success`, `status-pending`, `status-error`) are a fixed platform
-standard — see `m3-design-standards.md` Section 10. This project uses those roles as defined
+standard — see `specifications-global/spec-m3-design-standards.md` Section 10. This project uses those roles as defined
 there; nothing project-specific to state here.
 
 ## Anvil Role Map (this project's actual role names)
 
 Reference: `ui-customization-approach` ADR (UI Customization Approach). The *pattern* of defining named roles per component
-category is a general standard (see `m3-design-standards.md`); the specific names below are this
+category is a general standard (see `specifications-global/spec-m3-design-standards.md`); the specific names below are this
 project's chosen implementation of that pattern.
 
 ### Buttons
@@ -77,4 +77,4 @@ deviation is visible, not silently inherited):
 ---
 
 *Design Direction (Canonical) v2.0 — split from the original design-direction.md. Generic content
-moved to `0-m3-design-standards.md`.*
+moved to `specifications-global/spec-m3-design-standards.md`.*

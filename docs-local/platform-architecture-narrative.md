@@ -698,31 +698,31 @@ The AI assistant is designed as a contextual floating helper — it opens on the
 
 A self-service portal where customers can manage their own bookings, view invoices, update their profile, and access their history without contacting the business owner. This shifts routine administrative tasks from the business owner to the customer.
 
-*Source: positioning-strategy.md, platform-overview.md*
+*Source: positioning-strategy.md, platform-architecture.md*
 
 ### 10.4 Advanced Analytics
 
 Extended reporting beyond the V1 dashboard: revenue breakdown by service and by provider, marketing ROI tracking, export to PDF and CSV, and scheduled report delivery via email.
 
-*Source: positioning-strategy.md, platform-overview.md*
+*Source: positioning-strategy.md, platform-architecture.md*
 
 ### 10.5 PayPal Integration
 
 Adding PayPal as a third payment gateway option alongside Stripe and Paystack, expanding payment method coverage for international customers.
 
-*Source: positioning-strategy.md, platform-overview.md*
+*Source: positioning-strategy.md, platform-architecture.md*
 
 ### 10.6 Time Tracking
 
 Logging billable hours against bookings and services, with the ability to generate invoices from tracked time. Useful for consultants and advisors who bill by the hour.
 
-*Source: platform-overview.md, authoritative-schema.md*
+*Source: platform-architecture.md, authoritative-schema.md*
 
 ### 10.7 Custom Segment Builder
 
 An advanced segment builder that allows more complex filtering by tags, status, spend, booking history, and other criteria beyond the pre-built segments available in V1.
 
-*Source: positioning-strategy.md, platform-overview.md*
+*Source: positioning-strategy.md, platform-architecture.md*
 
 ### 10.8 Additional Homepage Templates
 
@@ -758,7 +758,7 @@ Extending video embed support beyond YouTube to include Vimeo, Dailymotion, and 
 
 A separate internal platform for Mybizz operators to manage client provisioning, health monitoring, billing automation, update distribution, and consolidated visibility across all client businesses.
 
-*Source: platform-overview.md*
+*Source: platform-architecture.md*
 
 ### 10.14 Platform Capacity Expansion
 
@@ -819,5 +819,5 @@ Mybizz is live at **mybizz.live**. The platform is built. The market is waiting.
 
 *Document owner: Mybizz founder*
 *Status: Comprehensive developer reference treatise — covers all V1 features, user flows, and V2 roadmap*
-*Based on: positioning-strategy.md, platform-overview.md, scaffold-spec.md, DESIGN.md, V2/mybizz-ai-implementation-spec.md, and other authoritative project documents*
+*Based on: positioning-strategy.md, platform-architecture.md, scaffold-spec.md, DESIGN.md, V2/mybizz-ai-implementation-spec.md, and other authoritative project documents*
 *To be updated as features are added or product positioning evolves*
