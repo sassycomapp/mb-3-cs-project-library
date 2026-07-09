@@ -4,7 +4,7 @@
 **Architecture:** Single vertical, dependency-based (master_template → client instances)
 **UI Theme:** Material Design 3 (M3)
 **Platform Capacity:** 100 clients (V1.x)
-**Schema:** 43 tables (see `authoritative-schema.md`)
+**Schema:** 44 tables (see `authoritative-schema.md`)
 
 **Note:** The five-app dependency model (development workspace / master_template /
 blank_client_template / client instances / platform-operator tooling) is Mybizz-wide — see
@@ -98,7 +98,7 @@ Two pricing models — both fully supported:
 
 ### 4.7 Email & Campaigns
 Three distinct email systems — Anvil built-in (system emails), Brevo SMTP (transactional),
-Brevo Campaigns (marketing).
+Brevo Campaigns (marketing). **See:** `spec-integration.md` (Integration — Brevo patterns).
 
 ### 4.8 Blog & Content, Tasks & Segmentation
 Full blog with rich text editor; manual and basic auto-generated tasks; pre-built segments.
@@ -111,7 +111,7 @@ Full blog with rich text editor; manual and basic auto-generated tasks; pre-buil
 |---|---|---|
 | Platform | Anvil.works | Full-stack Python, built-in hosting & HTTPS |
 | UI | Material Design 3 (M3) | Dependency ID: 4UK6WHQ6UX7AKELK |
-| Database | Anvil Data Tables | PostgreSQL-backed, 43 tables |
+| Database | Anvil Data Tables | PostgreSQL-backed, 44 tables |
 | Authentication | Anvil Users service | Built-in, RBAC via custom decorators |
 | Anvil Secrets | `encryption_key` only | One item only — used by `vault_service.py` |
 
@@ -141,6 +141,19 @@ The platform is designed to work within Anvil's specific parameters. Key constra
 - **No WebSocket push:** Real-time updates use client-side timer polling. See `real-time-and-background-tasks` ADR.
 
 **See:** `anvil-platform-constraints` ADR (Anvil Platform Constraints and Design Boundaries)
+
+---
+
+## Related Specifications
+
+| Specification | Relevance |
+|---|---|
+| `spec-five-app-architecture-model.md` | Five-app architecture model (Mybizz-wide) |
+| `spec-client-activation-runbook.md` | Client provisioning and activation procedures |
+| `spec-nomenclature.md` | Naming conventions for files, forms, components, tables |
+| `spec-integration.md` | Brevo, Stripe, Paystack integration patterns |
+| `spec-regulatory-compliance-baseline.md` | POPIA, GDPR, PCI DSS compliance |
+| `spec-security-architecture.md` | RBAC role limits, token security |
 
 ---
 
