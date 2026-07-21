@@ -1,6 +1,11 @@
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
 
+## 2026-07-07 — dev-pdlf project registration
+
+**Issue flagged:** Running `gbrain sync --repo /mnt/c/projects/dev-pdlf` without `--source` overwrote the `project-library` GBrain source repo path to point to dev-pdlf instead of `/mnt/c/projects/mb-3-cs/project-library`.
+**Developer decision:** Resynced `project-library` with explicit `--source project-library` and correct repo path (restored to 328 pages). Created `dev-pdlf` source via `gbrain sources add` before syncing separately. Mitigation: always use `gbrain sources add <id>` first, then `gbrain sync --source <id>` for new project registration.
+
 ## 2026-07-06 — Docs reorganization consolidated
 
 **Issue flagged:** Devlog/todo system status unresolved — handover questioned whether `C:\mybizz\devlog\` and `C:\mybizz\todo\` were still live.
