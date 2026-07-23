@@ -43,7 +43,7 @@ Tag every GBrain result with its source project. Cross-project decisions require
 Use Phase > Stage > Task > Sub-task hierarchy. Not "2 weeks" or "3 days."
 
 ### 5. No hardcoded colors
-Every color through CSS custom properties. See `docs/DESIGN_palette_section.md`.
+Every color through CSS custom properties. See `docs-local/DESIGN_palette_section.md`.
 
 ### 6. Plan reads, Build writes (enforced by opencode.json)
 Plan never writes. Build writes only with user approval.
@@ -66,16 +66,14 @@ Read `README.md` before every task.
 
 | Folder | Purpose |
 |---|---|
-| `adr/` | Architecture Decision Records |
-| `docs/` | Durable documentation, specs, UI standards |
+| `adr-local/` | Architecture Decision Records |
+| `docs-local/` | Durable documentation, specs, UI standards |
 | `wireframes/` | HTML wireframes and mockups |
 | `screens/` | Screen HTML mockups and compliance checklists |
 | `wip/` | Active work-in-progress |
-| `gstack-outputs/` | GStack-produced reports |
-| `opencode-outputs/` | OpenCode-produced reports |
-| `matt-skills-output/` | Matt Pocock skill outputs |
-| `workspace/gbrain/` | GBrain working files |
-| `workspace/gstack/` | GStack working files |
+| `output-gstack/` | GStack-produced reports |
+| `output-opencode/` | OpenCode-produced reports |
+| `output-matt-skills/` | Matt Pocock skill outputs |
 
 ---
 
@@ -85,13 +83,13 @@ Every artifact gets saved. Build actions only. Confirm save location in response
 
 | Producer | Destination |
 |---|---|
-| GStack | `gstack-outputs/` |
-| OpenCode | `opencode-outputs/` |
-| Matt Pocock skills | `matt-skills-output/` |
+| GStack | `output-gstack/` |
+| OpenCode | `output-opencode/` |
+| Matt Pocock skills | `output-matt-skills/` |
 
 File type overrides: docs → `docs/`, ADRs → `adr/`, wireframes → `wireframes/`, screens → `screens/`.
 
-Promotion: long-lived specs from `gstack-outputs/` → `docs/`. ADRs belong in `adr/`.
+Promotion: long-lived specs from `output-gstack/` → `docs-local/`. ADRs belong in `adr-local/`.
 
 ---
 
@@ -106,7 +104,7 @@ Use `/mnt/c/mybizz/gstack/bin/<binary-name>` directly.
 - `domain-modeling`, `grill-with-docs` → `CONTEXT.md` + `adr/`.
 - `to-tickets`, `triage` → `.scratch/`.
 - `setup-matt-pocock-skills` → `docs/agents/` + `AGENTS.md`.
-- `handoff`, `improve-codebase-architecture` → `%TEMP%` + `matt-skills-output/`.
+- `handoff`, `improve-codebase-architecture` → `%TEMP%` + `output-matt-skills/`.
 - `teach` → `C:\mybizz\matt-skills-teach`.
 - Others → ask the user.
 
@@ -114,8 +112,8 @@ Use `/mnt/c/mybizz/gstack/bin/<binary-name>` directly.
 
 ## Source of truth
 
-- `project-library/adr/` — architectural decisions
-- `project-library/docs/` — documentation and specs
+- `project-library/adr-local/` — architectural decisions
+- `project-library/docs-local/` — documentation and specs
 - `project-library/wireframes/` — visual references
 - `mb-3-cs/` — live code (read-only context)
 
