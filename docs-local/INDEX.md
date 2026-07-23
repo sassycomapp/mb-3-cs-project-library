@@ -1,8 +1,8 @@
 # Mybizz CS — Local Documentation Index
 
 **Project:** mb-3-cs (Consulting & Services)
-**Last Updated:** 2026-07-09
-**Total Docs:** 16
+**Last Updated:** 2026-07-22
+**Total Docs:** 17
 
 Project-specific documentation for mb-3-cs. Check this index before writing feature specs, design decisions, or build plans. Read only the specific document relevant to the current task.
 
@@ -52,6 +52,7 @@ Global resources referenced from these documents live in:
 |---|---|---|
 | `positioning-strategy.md` | Business Strategy & Positioning | Target market, competitive landscape, pricing, go-to-market, brand identity, support model |
 | `pricing-strategy-consultation.md` | Pricing Strategy Consultation | Market position, pricing comparison, messaging themes, strategic options |
+| `founder-strategic-review.md` | Founder Strategic Review | Strategic product review and direction |
 
 ---
 
