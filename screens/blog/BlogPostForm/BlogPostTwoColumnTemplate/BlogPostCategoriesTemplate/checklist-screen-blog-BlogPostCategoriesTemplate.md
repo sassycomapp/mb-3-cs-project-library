@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-blog-BlogPostCategoriesTemplate
+doc-id: mb-3-cs-0056
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-blog-BlogPostCategoriesTemplate
 
 **Screen:** `screens/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/screen-blog-BlogPostCategoriesTemplate.html`

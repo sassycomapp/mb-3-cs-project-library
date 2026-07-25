@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-blog-CategoryManagementTemplate
+doc-id: mb-3-cs-0060
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-blog-CategoryManagementTemplate
 
 **Screen:** `screens/blog/CategoryManagementForm/CategoryManagementTemplate/screen-blog-CategoryManagementTemplate.html`

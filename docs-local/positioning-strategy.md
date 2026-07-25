@@ -1,3 +1,10 @@
+---
+document: Mybizz — Business Strategy & Positioning Document
+doc-id: mb-3-cs-0026
+state: Live
+date-created: 2026-07-06T161158+0200
+---
+
 # Mybizz — Business Strategy & Positioning Document
 **mybizz.live**
 Version 1.0 | Pre-Launch | 2026

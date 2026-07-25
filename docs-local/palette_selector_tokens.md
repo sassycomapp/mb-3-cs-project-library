@@ -1,3 +1,10 @@
+---
+document: Palette Selector — Token Swap Blocks
+doc-id: mb-3-cs-0023
+state: Live
+date-created: 2026-07-06T171413+0200
+---
+
 # Palette Selector — Token Swap Blocks
 
 These are the CSS custom property blocks your palette selector

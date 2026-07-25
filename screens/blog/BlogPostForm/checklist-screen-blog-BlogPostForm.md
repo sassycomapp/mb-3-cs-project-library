@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-blog-BlogPostForm
+doc-id: mb-3-cs-0059
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-blog-BlogPostForm
 
 **Screen:** `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/screens/blog/BlogPostForm/screen-blog-BlogPostForm.html`

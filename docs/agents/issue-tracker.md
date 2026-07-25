@@ -1,3 +1,10 @@
+---
+document: Issue tracker: Local markdown
+doc-id: mb-3-cs-0038
+state: Live
+date-created: 2026-07-08T161131+0200
+---
+
 # Issue tracker: Local markdown
 
 Issues and PRDs for this repo live as markdown files under `.scratch/`.

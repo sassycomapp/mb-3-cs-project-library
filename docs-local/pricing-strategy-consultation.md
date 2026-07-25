@@ -1,3 +1,10 @@
+---
+document: Pricing Strategy Consultation
+doc-id: mb-3-cs-0027
+state: Live
+date-created: 2026-05-25T100505+0200
+---
+
 ## 1. Market Position — Do their clients own their data?
 
 No. And this is the sharpest differentiator Mybizz has.

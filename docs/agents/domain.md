@@ -1,3 +1,10 @@
+---
+document: Domain Docs
+doc-id: mb-3-cs-0037
+state: Live
+date-created: 2026-07-25T152306+0200
+---
+
 # Domain Docs
 
 How the engineering skills should consume this repo's domain documentation when exploring the codebase.

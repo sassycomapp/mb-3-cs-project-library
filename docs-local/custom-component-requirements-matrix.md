@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — Custom Component Requirements Matrix
+doc-id: mb-3-cs-0020
+state: Live
+date-created: 2026-06-01
+---
+
 # Mybizz CS — Custom Component Requirements Matrix
 
 **Date:** 2026-06-01

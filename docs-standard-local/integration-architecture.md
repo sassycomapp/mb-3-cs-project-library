@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — Integration Architecture
+doc-id: mb-3-cs-0032
+state: Live
+date-created: 2026-07-06T171413+0200
+---
+
 # Mybizz CS — Integration Architecture
 
 **Authority:** Mandatory — all integration implementation must conform

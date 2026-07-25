@@ -1,3 +1,10 @@
+---
+document: CLAUDE.md
+doc-id: mb-3-cs-0002
+state: Live
+date-created: 2026-06-25T073307+0200
+---
+
 # CLAUDE.md
 
 ## GBrain Configuration (configured by /setup-gbrain)

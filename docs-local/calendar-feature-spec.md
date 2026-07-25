@@ -1,3 +1,10 @@
+---
+document: Calendar Feature Spec
+doc-id: mb-3-cs-0019
+state: Live
+date-created: 2026-06-01T103431+0200
+---
+
 Calendar Feature Plan — Anvil + Material 3
 Core Decision
 

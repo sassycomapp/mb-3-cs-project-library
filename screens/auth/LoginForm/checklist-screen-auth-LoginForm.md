@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-auth-LoginForm
+doc-id: mb-3-cs-0046
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-auth-LoginForm
 
 **Screen:** `screens/auth/LoginForm/screen-auth-LoginForm.html`

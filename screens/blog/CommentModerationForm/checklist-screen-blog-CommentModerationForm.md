@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-blog-CommentModerationForm
+doc-id: mb-3-cs-0063
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-blog-CommentModerationForm
 
 **Screen:** `screens/blog/CommentModerationForm/screen-blog-CommentModerationForm.html`

@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — Founder Strategic Review
+doc-id: mb-3-cs-0022
+state: Live
+date-created: 2026-07-22T164933+0200
+---
+
 # Mybizz CS — Founder Strategic Review
 
 **Document type:** Personal strategic reference — founder only

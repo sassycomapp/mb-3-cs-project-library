@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — User Flows
+doc-id: mb-3-cs-0028
+state: Live
+date-created: 2026-07-09T144411+0200
+---
+
 # Mybizz CS — User Flows
 
 **Authority:** Reference — defines intended behaviour for all user flows  

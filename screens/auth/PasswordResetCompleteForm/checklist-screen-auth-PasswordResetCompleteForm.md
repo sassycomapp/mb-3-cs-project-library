@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-auth-PasswordResetCompleteForm
+doc-id: mb-3-cs-0047
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-auth-PasswordResetCompleteForm
 
 **Screen:** `screens/auth/PasswordResetCompleteForm/screen-auth-PasswordResetCompleteForm.html`

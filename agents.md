@@ -1,3 +1,10 @@
+---
+document: AGENTS.md — mb-3-cs-project-library [mb-3-cs]
+doc-id: mb-3-cs-0001
+state: Live
+date-created: 2026-07-25T180953+0200
+---
+
 # AGENTS.md — mb-3-cs-project-library [mb-3-cs]
 
 > Inherits Global `AGENTS.md` in full. This file adds project-specific rules only.

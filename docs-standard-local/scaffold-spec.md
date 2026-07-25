@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — Scaffold Specification
+doc-id: mb-3-cs-0035
+state: Live
+date-created: 2026-07-06T184444+0200
+---
+
 # Mybizz CS — Scaffold Specification
 
 **Vertical:** Consulting & Services

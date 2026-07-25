@@ -1,3 +1,10 @@
+---
+document: DESIGN Palette Section
+doc-id: mb-3-cs-0014
+state: Live
+date-created: 2026-07-06T171413+0200
+---
+
 ## Palette System
 
 ### Palette Strategy

@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-analytics-RevenueReportForm
+doc-id: mb-3-cs-0045
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-analytics-RevenueReportForm
 
 **Screen:** `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/screens/analytics/RevenueReportForm/screen-analytics-RevenueReportForm.html`

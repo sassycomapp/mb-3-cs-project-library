@@ -1,3 +1,10 @@
+---
+document: Package Name: crm/ Replaces marketing/
+doc-id: mb-3-cs-0006
+state: Live
+date-created: 2026-03-18
+---
+
 # Package Name: crm/ Replaces marketing/
 Date: 2026-03-18
 Status: Accepted

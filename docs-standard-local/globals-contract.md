@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — globals.py Contract
+doc-id: mb-3-cs-0031
+state: Live
+date-created: 2026-07-06T171413+0200
+---
+
 # Mybizz CS — globals.py Contract
 
 **Authority:** `form-architecture-and-state` ADR (Form Architecture and State Management)

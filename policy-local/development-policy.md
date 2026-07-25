@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — Development Policy
+doc-id: mb-3-cs-0041
+state: Live
+date-created: 2026-07-05T141307+0200
+---
+
 # Mybizz CS — Development Policy
 
 **Category:** Policy (not Specification — see note below)

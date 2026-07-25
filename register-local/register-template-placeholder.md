@@ -1,4 +1,11 @@
 ---
+document: Register — {PROJECT-NAME or project-library-global}
+doc-id: mb-3-cs-0043
+state: Live
+date-created: 2026-07-25T165533+0200
+---
+
+---
 document: Register Template
 version: V1
 status: template

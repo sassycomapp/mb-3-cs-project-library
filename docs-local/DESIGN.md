@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — DESIGN
+doc-id: mb-3-cs-0013
+state: Live
+date-created: 2026-06-02
+---
+
 # Mybizz CS — DESIGN
 
 **Status:** Reconciled canonical design system  

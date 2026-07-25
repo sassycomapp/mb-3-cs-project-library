@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — Authoritative Database Schema
+doc-id: mb-3-cs-0017
+state: Live
+date-created: 2026-06-01
+---
+
 # Mybizz CS — Authoritative Database Schema
 
 **Date:** 2026-06-01

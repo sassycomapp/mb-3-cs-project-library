@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — Deployment Procedures
+doc-id: mb-3-cs-0030
+state: Live
+date-created: 2026-07-06T171413+0200
+---
+
 # Mybizz CS — Deployment Procedures
 
 **Authority:** `dependency-update-model` ADR (Dependency Update Model), `blank-client-template` ADR (blank_client_template), `anvil-platform-constraints` ADR (Anvil Platform Constraints)

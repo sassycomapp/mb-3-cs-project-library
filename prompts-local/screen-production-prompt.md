@@ -1,3 +1,10 @@
+---
+document: Screen Production Prompt — /design-html
+doc-id: mb-3-cs-0042
+state: Live
+date-created: 2026-06-28
+---
+
 
 # Screen Production Prompt — /design-html
 

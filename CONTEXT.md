@@ -1,3 +1,10 @@
+---
+document: CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
+doc-id: mb-3-cs-0003
+state: Live
+date-created: 2026-07-25T152305+0200
+---
+
 # CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
 
 Domain glossary and key concepts for agent skills that need project context (`domain-modeling`, `grill-with-docs`, `tdd`, `diagnosing-bugs`, `improve-codebase-architecture`, `codebase-design`).

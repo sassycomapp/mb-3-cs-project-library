@@ -1,3 +1,10 @@
+---
+document: Mybizz CS — Platform Architecture
+doc-id: mb-3-cs-0025
+state: Live
+date-created: 2026-07-09T144255+0200
+---
+
 # Mybizz CS — Platform Architecture
 
 **Vertical:** Consulting & Services

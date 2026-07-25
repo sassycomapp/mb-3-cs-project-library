@@ -1,3 +1,10 @@
+---
+document: Triage Labels
+doc-id: mb-3-cs-0010
+state: Live
+date-created: 2026-06-25T073251+0200
+---
+
 # Triage Labels
 
 The skills speak in terms of five canonical triage roles. This file maps those roles to the actual label strings used in this repo's issue tracker.

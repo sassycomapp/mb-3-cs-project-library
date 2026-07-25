@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-blog-BlogEditorForm
+doc-id: mb-3-cs-0050
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-blog-BlogEditorForm
 
 **Screen:** `screens/blog/BlogEditorForm/screen-blog-BlogEditorForm.html`

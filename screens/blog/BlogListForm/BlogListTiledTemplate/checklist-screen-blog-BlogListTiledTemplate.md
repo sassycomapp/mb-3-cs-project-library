@@ -1,3 +1,10 @@
+---
+document: Compliance Checklist — screen-blog-BlogListTiledTemplate
+doc-id: mb-3-cs-0052
+state: Live
+date-created: 2026-07-02
+---
+
 # Compliance Checklist — screen-blog-BlogListTiledTemplate
 
 **Screen:** `screens/blog/BlogListForm/BlogListTiledTemplate/screen-blog-BlogListTiledTemplate.html`

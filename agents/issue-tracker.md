@@ -1,3 +1,10 @@
+---
+document: Issue tracker: Local markdown
+doc-id: mb-3-cs-0009
+state: Live
+date-created: 2026-06-25T073251+0200
+---
+
 # Issue tracker: Local markdown
 
 Issues and PRDs for this repo live as markdown files under `.scratch/`. This is a planning/documentation repo without a GitHub Issues workflow — issue tracking happens locally.
