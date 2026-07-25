@@ -6,7 +6,7 @@ Domain glossary and key concepts for agent skills that need project context (`do
 
 Two repos, one application:
 
-- **`project-library`** (this repo) — documentation, ADRs, wireframes, design artefacts. The planning authority. Does not go to Anvil.
+- **`mb-3-cs-project-library`** — documentation, ADRs, wireframes, design artefacts. The planning authority. Does not go to Anvil.
 - **`mb-3-cs`** — live application code (Python/Anvil). Build agent writes here under explicit approval. Pushed to Anvil via GitHub VC.
 
 ## Anvil.works context

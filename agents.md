@@ -1,4 +1,4 @@
-# AGENTS.md — project-library [mb-3-cs]
+# AGENTS.md — mb-3-cs-project-library [mb-3-cs]
 
 > Inherits Global `AGENTS.md` in full. This file adds project-specific rules only.
 
@@ -10,7 +10,7 @@ Planning, documentation, design, and GStack workflow workspace for the Mybizz Co
 
 ## Definitions
 
-- **project-library** — this repo (planning/documentation/design). **mb-3-cs** — the separate live application code repo.
+- **mb-3-cs-project-library** — this repo (planning/documentation/design). **mb-3-cs** — the separate live application code repo.
 - Other definitions as per Global `AGENTS.md`.
 
 ---
@@ -32,7 +32,7 @@ Planning, documentation, design, and GStack workflow workspace for the Mybizz Co
 Never write to `anvil.yaml`.
 
 ### 2. Two-repo separation
-- `project-library/` = planning, docs, ADRs, wireframes. Does NOT go to Anvil.
+- `mb-3-cs-project-library/` = planning, docs, ADRs, wireframes. Does NOT go to Anvil.
 - `mb-3-cs/` = live Anvil code + `anvil.yaml`. Goes to Anvil via GitHub VC.
 - Write to code repo only during coding phase, only for code files, never `anvil.yaml`.
 
@@ -112,9 +112,9 @@ Use `/mnt/c/mybizz/gstack/bin/<binary-name>` directly.
 
 ## Source of truth
 
-- `project-library/adr-local/` — architectural decisions
-- `project-library/docs-local/` — documentation and specs
-- `project-library/wireframes/` — visual references
+- `mb-3-cs-project-library/adr-local/` — architectural decisions
+- `mb-3-cs-project-library/docs-local/` — documentation and specs
+- `mb-3-cs-project-library/wireframes/` — visual references
 - `mb-3-cs/` — live code (read-only context)
 
 Fact rule: do not use training data for project-specific facts. Validate GBrain research before use.
@@ -124,7 +124,7 @@ Fact rule: do not use training data for project-specific facts. Validate GBrain 
 ## Access model
 
 - Plan: may read both repos. Never writes.
-- Build: writes in `project-library` with user approval. Writes in `mb-3-cs` only during coding phase with case-by-case permission.
+- Build: writes in `mb-3-cs-project-library` with user approval. Writes in `mb-3-cs` only during coding phase with case-by-case permission.
 
 ---
 

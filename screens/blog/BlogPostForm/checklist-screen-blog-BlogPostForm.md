@@ -1,7 +1,7 @@
 # Compliance Checklist — screen-blog-BlogPostForm
 
-**Screen:** `/mnt/c/mybizz/project-library/screens/blog/BlogPostForm/screen-blog-BlogPostForm.html`
-**Wireframe:** `/mnt/c/mybizz/project-library/wireframes/blog/BlogPostForm/wireframe-blog-BlogPostForm.html`
+**Screen:** `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/screens/blog/BlogPostForm/screen-blog-BlogPostForm.html`
+**Wireframe:** `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/wireframes/blog/BlogPostForm/wireframe-blog-BlogPostForm.html`
 **Date:** 2026-07-02
 **Revised:** 2026-07-02 — honest audit, 3 issues found and fixed
 

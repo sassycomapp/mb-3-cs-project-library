@@ -6,7 +6,7 @@ How the engineering skills should consume this repo's domain documentation when 
 
 This application spans two repos:
 
-- **`project-library`** (this repo) — planning, documentation, ADRs, wireframes, design artefacts
+- **`mb-3-cs-project-library`** — planning, documentation, ADRs, wireframes, design artefacts
 - **`mb-3-cs`** — live application code (Python/Anvil)
 
 Both repos apply to the same application. When a skill needs implementation context, it should read from `mb-3-cs`. When it needs architectural decisions or design context, it reads from this repo.

@@ -1,7 +1,7 @@
 # Compliance Checklist — screen-analytics-RevenueReportForm
 
-**Screen:** `/mnt/c/mybizz/project-library/screens/analytics/RevenueReportForm/screen-analytics-RevenueReportForm.html`
-**Wireframe:** `/mnt/c/mybizz/project-library/wireframes/analytics/RevenueReportForm/wireframe-analytics-RevenueReportForm.html`
+**Screen:** `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/screens/analytics/RevenueReportForm/screen-analytics-RevenueReportForm.html`
+**Wireframe:** `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/wireframes/analytics/RevenueReportForm/wireframe-analytics-RevenueReportForm.html`
 **Date:** 2026-07-02
 **Revised:** 2026-07-02 — audit found 2 issues, fixed
 

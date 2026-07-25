@@ -1,8 +1,8 @@
 # Internal Standards & Specifications — Anvil Wireframe Conversion
 
 **Audit date:** 2026-06-27
-**Scope:** Existing project-library documentation covering rules, conventions, and specs that apply to converting ~70 HTML/CSS wireframes with PNG screenshots into native Anvil Forms.
-**Method:** GBrain search across project-library docs, ADRs, gstack-outputs, and prompts; filesystem verification of all cited files.
+**Scope:** Existing mb-3-cs-project-library documentation covering rules, conventions, and specs that apply to converting ~70 HTML/CSS wireframes with PNG screenshots into native Anvil Forms.
+**Method:** GBrain search across mb-3-cs-project-library docs, ADRs, gstack-outputs, and prompts; filesystem verification of all cited files.
 
 ---
 
@@ -42,7 +42,7 @@
 
 **Not found — needs external research.**
 
-No responsive breakpoint specification was found in the project-library docs, ADRs, or DESIGN.md. Screen-production-standard.md and DESIGN.md define layout max-widths (e.g. 400px for auth cards, 900px for editor forms, 1100px for list forms) but no explicit responsive breakpoint values.
+No responsive breakpoint specification was found in the mb-3-cs-project-library docs, ADRs, or DESIGN.md. Screen-production-standard.md and DESIGN.md define layout max-widths (e.g. 400px for auth cards, 900px for editor forms, 1100px for list forms) but no explicit responsive breakpoint values.
 
 ---
 
@@ -94,7 +94,7 @@ No responsive breakpoint specification was found in the project-library docs, AD
 
 **Not found — needs external research.**
 
-No naming convention for Anvil event handlers (e.g. `btn_save_click`, `txt_email_change`) was found in the project-library documentation.
+No naming convention for Anvil event handlers (e.g. `btn_save_click`, `txt_email_change`) was found in the mb-3-cs-project-library documentation.
 
 ---
 
@@ -143,7 +143,7 @@ Key mappings observed across production reports:
 
 **Not found — needs external research.**
 
-No dedicated accessibility specification (WCAG level targets, ARIA requirements, keyboard navigation rules, contrast ratio minimums, focus management) was found in the project-library docs or ADRs.
+No dedicated accessibility specification (WCAG level targets, ARIA requirements, keyboard navigation rules, contrast ratio minimums, focus management) was found in the mb-3-cs-project-library docs or ADRs.
 
 ### 4.2 Dark Mode
 
@@ -363,7 +363,7 @@ Approved Anvil Material 3 Theme components:
 
 ## Source File Index
 
-All files verified to exist on disk at `/mnt/c/projects/mb-3-cs/project-library/`:
+All files verified to exist on disk at `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/`:
 
 | File | Role |
 |------|------|
