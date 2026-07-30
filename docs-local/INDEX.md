@@ -14,8 +14,8 @@ date-created: 2026-07-23T094939+0200
 Project-specific documentation for mb-3-cs. Check this index before writing feature specs, design decisions, or build plans. Read only the specific document relevant to the current task.
 
 Global resources referenced from these documents live in:
-- `adr-global/` — Architecture Decision Records (40 ADRs)
-- `specifications-global/` — Binding specifications (23 specs)
+- `adr-global/` — Architecture Decision Records
+- `specifications-global/` — Binding specifications
 - `docs-standard-global/` — Standard document templates and contracts (placeholder — in development)
 
 ---
