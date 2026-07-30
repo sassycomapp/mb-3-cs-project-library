@@ -36,7 +36,7 @@ Planning, documentation, design, and GStack workflow workspace for the Mybizz Co
 ## Hard rules
 
 ### 1. anvil.yaml protection (enforced by opencode.json)
-Never write to `anvil.yaml`.
+Never write to `anvil.yaml`. Anvil.yaml is always READ ONLY.
 
 ### 2. Two-repo separation
 - `mb-3-cs-project-library/` = planning, docs, ADRs, wireframes. Does NOT go to Anvil.
