@@ -1,6 +1,6 @@
 ---
 document: 11 — Schema Scope Reduction
-doc-id: mb-3-cs-0007
+doc-id: schema-scope-reduction
 state: Live
 date-created: 2026-05-03
 ---

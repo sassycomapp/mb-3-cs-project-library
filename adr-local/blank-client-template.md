@@ -1,6 +1,6 @@
 ---
 document: `blank-client-template` ADR — blank_client_template as Provisioning Clone Source
-doc-id: mb-3-cs-0005
+doc-id: blank-client-template
 state: Live
 date-created: 2026-06-13
 ---

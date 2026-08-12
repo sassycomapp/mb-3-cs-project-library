@@ -1,158 +1,89 @@
 ---
-document: AGENTS.md — mb-3-cs-project-library [mb-3-cs]
-doc-id: mb-3-cs-0001
+document: AGENTS.md — mb-3-cs-project-library
 state: Live
-date-created: 2026-07-25T180953+0200
 ---
 
-# AGENTS.md — mb-3-cs-project-library [mb-3-cs]
+# AGENTS.md — mb-3-cs-project-library
 
-> Inherits Global `AGENTS.md` in full. This file adds project-specific rules only.
+> Inherits `~/.config/opencode/AGENTS.md` in full. This file may only
+> tighten those rules for this specific repo, never loosen them.
 
-## Project purpose
+## Project Purpose
 
-Planning, documentation, design, and GStack workflow workspace for the Mybizz Consulting Services application (mb-3-cs). Not the live code repository. Live code lives in `mb-3-cs`.
-
----
+`mb-3-cs-project-library` — the planning, documentation, and design
+corpus for the `mb-3-cs` (Mybizz Consulting Services) Anvil application.
+The upstream planning authority for that app; `mb-3-cs` implements what
+this repo specifies.
 
 ## Definitions
 
-- **mb-3-cs-project-library** — this repo (planning/documentation/design). **mb-3-cs** — the separate live application code repo.
-- Other definitions as per Global `AGENTS.md`.
+- **This repo** — the docs/planning repo, paired with the code repo
+  `mb-3-cs`.
+- **Code repo** — `mb-3-cs`, read-only context from here; never write
+  into it from this repo.
 
----
+## Precedence Order
 
-## Precedence order (highest to lowest)
+User instruction → global `AGENTS.md` → this file's hard rules → ADRs
+→ project docs → skill defaults.
 
-1. Explicit user instruction in the current session
-2. Global `AGENTS.md` rules
-3. Hard Rules in this file
-4. ADRs (`adr/`)
-5. Specifications (`docs/`)
-6. A skill's own default behavior
+## Hard Rules
 
----
+- **The build agent in this repo writes only here** — never into
+  `mb-3-cs` (the code repo). The code repo has its own, separate
+  build agent for that.
+- **The plan agent never writes anywhere, in any repo, under any
+  circumstance.**
+- **Mandatory UTC+2 timestamp headers** on any touched file, per the
+  Timestamp Standard below.
 
-## Hard rules
+## Workspace Structure
 
-### 1. anvil.yaml protection (enforced by opencode.json)
-Never write to `anvil.yaml`. Anvil.yaml is always READ ONLY.
-
-### 2. Two-repo separation
-- `mb-3-cs-project-library/` = planning, docs, ADRs, wireframes. Does NOT go to Anvil.
-- `mb-3-cs/` = live Anvil code + `anvil.yaml`. Goes to Anvil via GitHub VC.
-- Write to code repo only during coding phase, only for code files, never `anvil.yaml`.
-
-### 3. GBrain cross-contamination discipline
-Tag every GBrain result with its source project. Cross-project decisions require explicit human confirmation. Scope queries with `--source mb-3-cs`.
-
-### 4. No time-based references
-Use Phase > Stage > Task > Sub-task hierarchy. Not "2 weeks" or "3 days."
-
-### 5. No hardcoded colors
-Every color through CSS custom properties. See `docs-local/DESIGN_palette_section.md`.
-
-### 6. Plan reads, Build writes (enforced by opencode.json)
-Plan never writes. Build writes only with user approval.
-
-### 7. Skill ownership
-Ask which skill to use before starting any task.
-
-### 8. No deviation from the given task
-Execute as specified. Propose deviations before acting.
-
-### 9. Binding documents
-ADRs, specs, rule files are binding. Check before starting. Flag conflicts.
-
-### 10. Mandatory project context reading
-Read `README.md` before every task.
-
----
-
-## Workspace structure
-
-| Folder | Purpose |
+| Folder | Contents |
 |---|---|
-| `adr-local/` | Architecture Decision Records |
-| `docs-local/` | Durable documentation, specs, UI standards |
-| `wireframes/` | HTML wireframes and mockups |
-| `screens/` | Screen HTML mockups and compliance checklists |
-| `wip/` | Active work-in-progress |
-| `output-gstack/` | GStack-produced reports |
-| `output-opencode/` | OpenCode-produced reports |
-| `output-matt-skills/` | Matt Pocock skill outputs |
+| `docs-local/` | Project documentation, including `DESIGN.md` |
+| `adr-local/` | Architecture decision records specific to this project |
+| `wireframes/` | Wireframe and visual references |
+| `output-gstack/` | GStack pipeline outputs (CEO/ENG/design review reports) |
+| `output-opencode/` | Task completion reports |
 
----
+## Artifact Governance
 
-## Artifact governance
+- GStack session outputs (reports, task lists, handoff notes) →
+  `output-gstack/`.
+- Promoted durable documentation → `docs-local/`.
+- Architecture decisions → `adr-local/`.
+- Wireframes and visual references → `wireframes/`.
+- Never save transient session outputs into `docs-local/` or
+  `adr-local/`.
 
-Every artifact gets saved. Build actions only. Confirm save location in response.
+## Source of Truth
 
-| Producer | Destination |
-|---|---|
-| GStack | `output-gstack/` |
-| OpenCode | `output-opencode/` |
-| Matt Pocock skills | `output-matt-skills/` |
+This repo is the upstream planning authority for `mb-3-cs`. Decisions
+made here govern what gets implemented in the code repo, not the
+reverse.
 
-File type overrides: docs → `docs/`, ADRs → `adr/`, wireframes → `wireframes/`, screens → `screens/`.
+## Task Completion Reporting
 
-Promotion: long-lived specs from `output-gstack/` → `docs-local/`. ADRs belong in `adr-local/`.
-
----
-
-## GStack binary path override
-
-Use `/mnt/c/mybizz/gstack/bin/<binary-name>` directly.
-
----
-
-## Matt Pocock skills artifact governance
-
-- `domain-modeling`, `grill-with-docs` → `CONTEXT.md` + `adr/`.
-- `to-tickets`, `triage` → `.scratch/`.
-- `setup-matt-pocock-skills` → `docs/agents/` + `AGENTS.md`.
-- `handoff`, `improve-codebase-architecture` → `%TEMP%` + `output-matt-skills/`.
-- `teach` → `C:\mybizz\matt-skills-teach`.
-- Others → ask the user.
-
----
-
-## Source of truth
-
-- `mb-3-cs-project-library/adr-local/` — architectural decisions
-- `mb-3-cs-project-library/docs-local/` — documentation and specs
-- `mb-3-cs-project-library/wireframes/` — visual references
-- `mb-3-cs/` — live code (read-only context)
-
-Fact rule: do not use training data for project-specific facts. Validate GBrain research before use.
-
----
-
-## Access model
-
-- Plan: may read both repos. Never writes.
-- Build: writes in `mb-3-cs-project-library` with user approval. Writes in `mb-3-cs` only during coding phase with case-by-case permission.
-
----
-
-## Task completion reporting
-
-- Reports saved as `.md` in producer's output folder.
-- `devlog-index.md` — reverse-chronological index of all reports.
-- `judgement-trail.md` — flagged issues and developer decisions per task.
-- If `devlog-index.md` or `judgement-trail.md` doesn't exist, create with header only (one-time scaffold exception).
-
----
+Every task produces a completion report saved to `output-opencode/`.
+Update `devlog-index.md` and `judgement-trail.md` here. Ask the two
+housekeeping questions (commit/push, GBrain sync) separately at every
+task completion.
 
 ## Timestamp Standard
 
-Every date or timestamp this agent generates for a build artefact — front matter, register entries, alignment logs, learnings entries, backup folder names, devlog entries, or any other system-internal record — must follow the format and conversion method defined in:
+Every date or timestamp generated for a build artefact must follow the
+format and conversion method defined in the
+`timezone-utc-storage-display-conversion` ADR. Read that document
+before generating any such timestamp. If anything about the required
+method is unclear, stop and ask the developer.
 
-`C:\dev\project-library-global\adr-global\timezone-utc-storage-display-conversion.md`
+## Environment
 
-This ADR specifies one mandatory method for generating the timestamp, with no fallback and no alternative. Read that document before generating any such timestamp. If anything about the required method is unclear, stop and ask the developer — do not improvise or substitute a different method.
-
-This does not apply to client-facing data (bookings, invoices, activity logs, etc.), which follows the IANA-timezone-based rule in the same ADR's main Decision section, not this build-artefact standard.
+- Web UI only: `opencode web` from WSL. No Desktop app, no Desktop
+  bridge.
+- Workspace root: `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/`.
+- Code repo (read-only context): `/mnt/c/dev/dev-mb-3-cs/mb-3-cs/`.
 
 ## Agent skills
 

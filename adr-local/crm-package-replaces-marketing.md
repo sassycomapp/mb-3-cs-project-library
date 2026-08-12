@@ -1,6 +1,6 @@
 ---
 document: Package Name: crm/ Replaces marketing/
-doc-id: mb-3-cs-0006
+doc-id: crm-package-replaces-marketing
 state: Live
 date-created: 2026-03-18
 ---
