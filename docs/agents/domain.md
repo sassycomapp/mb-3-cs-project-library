@@ -2,7 +2,7 @@
 document: Domain Docs
 doc-id: mb-3-cs-0037
 state: Live
-date-created: 2026-07-25T152306+0200
+date-created: 2026-08-12T212422+0200
 ---
 
 # Domain Docs
@@ -20,8 +20,8 @@ Both repos apply to the same application. When a skill needs implementation cont
 
 ## Before exploring, read these
 
-- **`CONTEXT.md`** at the repo root — domain glossary and key concepts (create lazily via `/domain-modeling` when needed).
-- **`adr/`** at the repo root — Architecture Decision Records.
+- **`docs-local/CONTEXT.md`** — domain glossary and key concepts (create lazily via `/domain-modeling` when needed).
+- **`adr-local/`** — Architecture Decision Records for this project.
 
 If any of these files don't exist, **proceed silently**. The `/domain-modeling` skill creates them lazily when terms or decisions actually get resolved.
 
@@ -29,23 +29,34 @@ If any of these files don't exist, **proceed silently**. The `/domain-modeling` 
 
 ```
 /
-├── CONTEXT.md                ← domain glossary (created lazily)
-├── adr/                      ← Architecture Decision Records
+├── docs-local/               ← Project documentation, incl. CONTEXT.md (glossary)
+├── adr-local/                ← Architecture Decision Records
 ├── docs/
-│   └── agents/               ← Agent configuration
-├── gstack-outputs/           ← GStack-produced reports
-├── matt-skills-output/       ← Matt Pocock skill outputs
-├── .scratch/                 ← Issue tracker
+│   └── agents/               ← Agent configuration (issue tracker, triage labels, domain)
+├── output-gstack/            ← GStack-produced reports
+├── output-opencode/          ← Task completion reports
+├── output-matt-skills/       ← Matt Pocock skill outputs
+├── pdlf/                     ← PDLF ledger and workflow state
+├── ui/                       ← Screen/mockup references
+├── register-local/           ← Project registry
+├── policy-local/             ← Project policies
+├── prompts-local/            ← Project prompts
+├── docs-standard-local/      ← Standard process docs (SRS, PRD, BRD, …)
+├── standard-operating-procedures-local/ ← Project SOPs
+├── obsolete/                 ← Superseded documents (developer purges only)
+├── .scratch/                 ← Working scratch (issue tracker history)
 ├── .out-of-scope/            ← Rejected issues
-├── wireframes/               ← HTML wireframes
-├── screens/                  ← Screen HTML mockups
 └── wip/                      ← Work in progress
 ```
 
 ## Use the glossary's vocabulary
 
-When your output names a domain concept, use the term as defined in `CONTEXT.md`. Don't drift to synonyms the glossary explicitly avoids.
+When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `docs-local/CONTEXT.md`. Don't drift to synonyms the glossary explicitly avoids.
+
+If the concept you need isn't in the glossary yet, that's a signal — either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
 
 ## Flag ADR conflicts
 
-If your output contradicts an existing ADR, surface it explicitly rather than silently overriding.
+If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
+
+> _Contradicts the `client-instance-architecture` ADR (client instance architecture) — but worth reopening because…_

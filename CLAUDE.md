@@ -58,14 +58,4 @@ Key routing rules:
 
 ## Agent skills
 
-### Issue tracker
-
-Local markdown — issues live as files under `.scratch/<feature>/` in this repo. See `docs/agents/issue-tracker.md`.
-
-### Triage labels
-
-Five canonical labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix` (defaults). See `docs/agents/triage-labels.md`.
-
-### Domain docs
-
-Single-context — `CONTEXT.md` at repo root + `adr/` for architectural decisions (40+ ADRs, indexed at `docs/adr-index.md`). Two-repo architecture: this repo holds planning/docs, `mb-3-cs` holds app code. See `docs/agents/domain.md`.
+This project's canonical agent configuration lives in `AGENTS.md` (see its `## Agent skills` section) and in `docs/agents/*.md`. Keep this section in sync with those.

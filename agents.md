@@ -153,3 +153,17 @@ Every date or timestamp this agent generates for a build artefact — front matt
 This ADR specifies one mandatory method for generating the timestamp, with no fallback and no alternative. Read that document before generating any such timestamp. If anything about the required method is unclear, stop and ask the developer — do not improvise or substitute a different method.
 
 This does not apply to client-facing data (bookings, invoices, activity logs, etc.), which follows the IANA-timezone-based rule in the same ADR's main Decision section, not this build-artefact standard.
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues via the `gh` CLI — issues and PRDs live in this repo's GitHub Issues. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Five canonical labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix` (defaults). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — `docs-local/CONTEXT.md` + `adr-local/` for architectural decisions. Two-repo architecture: this repo holds planning/docs, `mb-3-cs` holds app code. See `docs/agents/domain.md`.

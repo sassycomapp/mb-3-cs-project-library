@@ -2,7 +2,7 @@
 document: CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
 doc-id: mb-3-cs-0003
 state: Live
-date-created: 2026-07-25T152305+0200
+date-created: 2026-08-12T212422+0200
 ---
 
 # CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
@@ -46,7 +46,7 @@ The mb-3-cs application serves Mybizz Consulting Services, a consulting practice
 
 ### Key ADR topics
 
-47 Architecture Decision Records in `adr/`. Indexed at `docs/adr-index.md`. Major architectural decisions include:
+Architecture Decision Records live in `adr-local/` (currently 3). Major architectural decisions include:
 - Material 3 theme component scope
 - Single contacts table design
 - Consolidated build sequence
