@@ -1,6 +1,11 @@
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
 
+## 2026-08-14 — WP10 Graphify + GBrain MCP verification
+
+**Issue flagged:** Graphify MCP tools (`graph_stats`, `get_node`, `get_neighbors`, `shortest_path`, `query_graph`) are not present in this session's agent tool list, even though the server is configured (`opencode.json` → `mcp.graphify`, `type: local`, `enabled: true`), installed (`graphify 0.9.40`), and responds correctly when invoked directly over stdio (537 nodes / 434 edges; both path edges EXTRACTED).
+**Agent action:** No configuration modified, nothing installed (per instruction). Verified the server side-by-side via a direct stdio MCP handshake to complete the read-only checks, and reported the tool-exposure absence as the key finding. Most likely cause: session not (re)loaded the project-level `mcp.graphify` config — a session restart is the candidate next step, deferred to Plan/developer.
+
 ## 2026-08-12 — Matt Pocock skills configuration
 
 **Issue flagged:** Existing `## Agent skills` config targeted CLAUDE.md and claimed a Local markdown issue tracker + `CONTEXT.md`/`adr/` at repo root (40+/47 ADRs, `docs/adr-index.md`) — none of which matched the on-disk layout (`docs-local/CONTEXT.md`, `adr-local/` with 3 ADRs, `output-gstack/`, `ui/`).
