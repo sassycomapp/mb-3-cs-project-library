@@ -98,3 +98,15 @@ Five canonical labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-f
 ### Domain docs
 
 Single-context — `docs-local/CONTEXT.md` + `adr-local/` for architectural decisions. Two-repo architecture: this repo holds planning/docs, `mb-3-cs` holds app code. See `docs/agents/domain.md`.
+
+---
+
+## Anvil Agent References (skills available via ~/.agents/skills/)
+
+Anvil skills (`server-code`, `client-forms`, `client-modules`, `data-models`, `anvil-yaml`) are installed and available. Source checkout: `/mnt/c/mybizz/anvil-agent-references/`.
+
+Resource paths, per the source repo's own AGENTS.md:
+- Anvil client stubs: `/mnt/c/mybizz/anvil-agent-references/stubs/client/`
+- Anvil server stubs: `/mnt/c/mybizz/anvil-agent-references/stubs/server/`
+- Anvil type references: `/mnt/c/mybizz/anvil-agent-references/reference/types/`
+- Anvil agent docs: `/mnt/c/mybizz/anvil-agent-references/docs/`
