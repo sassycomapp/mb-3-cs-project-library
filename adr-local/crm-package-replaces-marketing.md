@@ -1,5 +1,5 @@
 ---
-document: Package Name: crm/ Replaces marketing/
+document: "Package Name: crm/ Replaces marketing/"
 doc-id: crm-package-replaces-marketing
 state: Live
 date-created: 2026-03-18
