@@ -74,7 +74,7 @@ task completion.
 
 Every date or timestamp generated for a build artefact must follow the
 format and conversion method defined in the
-`timezone-utc-storage-display-conversion` ADR. Read that document
+`adr-timezone-utc-storage-display-conversion` ADR. Read that document
 before generating any such timestamp. If anything about the required
 method is unclear, stop and ask the developer.
 
