@@ -1,13 +1,13 @@
 ---
-document: "Checklist — LandingPage"
-doc-id: checklist-landing_pages-LandingPage
+document: "HomePage-screen-chklist"
+doc-id: HomePage-screen-chklist
 state: Live
 date-created: 2026-09-10
 ---
 
-# Checklist — LandingPage
+# Checklist — HomePage
 
-**Wireframe:** `wireframes/landing_pages/LandingPage/wireframe-landing_pages-LandingPage.html`
+**Wireframe:** `wireframes/public_pages/HomePage/HomePage-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 
@@ -15,7 +15,7 @@ date-created: 2026-09-10
 
 ## A. ADR-43 — Role assignment (reversed)
 
-- [x] Properties table does NOT list `role` as a Designer property — PASS (lines 131-135: only writeback = W listed)
+- [x] Properties table does NOT list `role` as a Designer property — PASS (line 167: "None — all component properties can be set programmatically")
 - [x] Component annotations do not say "set role in Designer" — PASS
 
 ## B. ADR-44 — Responsive behaviour (wrap_on)
@@ -36,11 +36,11 @@ date-created: 2026-09-10
 
 ## F. M3 component standard
 
-- [x] Every component is in the approved M3 list or approved custom list — PASS (ColumnPanel, Heading, Text, TextBox, TextArea, DropdownMenu, Button, FooterComponent (custom) — all approved)
+- [x] Every component is in the approved M3 list or approved custom list — PASS (ColumnPanel, FlowPanel, Heading, Text, Button, Card, Image, ParallaxComponent (custom), TimeLapseCarouselComponent (custom), VideoDisplayComponent (custom), FooterComponent (custom) — all approved)
 - [x] InteractiveCard uses only `elevated`, `filled`, or `outlined` — N/A
 - [x] No `SidesheetContent` component — PASS
 - [x] No `Label` component — PASS
-- [x] Card uses `Card` component — N/A
+- [x] Card uses `Card` component — PASS
 - [x] No `HtmlPanel` component — PASS
 
 ## G. Icon component
@@ -53,12 +53,12 @@ date-created: 2026-09-10
 
 ## I. Writeback properties
 
-- [x] Properties table includes writeback (W) for all 8 components — PASS (txt_name, txt_email, txt_phone, txt_message, dd_event all have writeback = W)
+- [x] Properties table includes writeback (W) for all 8 components — N/A
 - [x] No writeback listed for non-writeback components — PASS
 
 ## J. Max-width values
 
-- [x] Max-width annotations match final values — N/A
+- [x] Max-width annotations match final values — N/A (public page, max-width 900px per Standard)
 
 ## K. Card radius
 
@@ -74,13 +74,13 @@ date-created: 2026-09-10
 
 ## N. Carousel viewport
 
-- [x] Carousel viewport uses ColumnPanel with role-driven CSS — N/A
+- [x] Carousel viewport uses ColumnPanel with role-driven CSS — N/A (uses TimeLapseCarouselComponent custom component)
 
 ## O. Section structure (ADR-27)
 
-- [x] Section 1 — Introduction present — PASS (line 69)
-- [x] Section 2 — Wireframe Diagram present — PASS (line 78)
-- [x] Section 3 — Properties Table present — PASS (line 125)
+- [x] Section 1 — Introduction present — PASS (line 51)
+- [x] Section 2 — Wireframe Diagram present — PASS (line 55)
+- [x] Section 3 — Properties Table present — PASS (line 165)
 - [x] No sample data in wireframe — PASS
 - [x] No behaviour text in wireframe diagram — PASS
 - [x] Containers drawn as containers with names inset in border — PASS

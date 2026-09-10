@@ -1,13 +1,13 @@
 ---
-document: "Checklist — AvailabilitySettingsForm"
-doc-id: checklist-bookings-AvailabilitySettingsForm
+document: "AvailabilitySettingsForm-screen-chklist"
+doc-id: AvailabilitySettingsForm-screen-chklist
 state: Live
 date-created: 2026-09-10
 ---
 
 # Checklist — AvailabilitySettingsForm
 
-**Wireframe:** `wireframes/bookings/AvailabilitySettingsForm/wireframe-bookings-AvailabilitySettingsForm.html`
+**Wireframe:** `wireframes/bookings/AvailabilitySettingsForm/AvailabilitySettingsForm-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 

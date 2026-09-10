@@ -1,13 +1,13 @@
 ---
-document: "Checklist — CategoryManagementForm"
-doc-id: checklist-blog-CategoryManagementForm
+document: "BlogPostTwoColumnTemplate-screen-chklist"
+doc-id: BlogPostTwoColumnTemplate-screen-chklist
 state: Live
 date-created: 2026-09-10
 ---
 
-# Checklist — CategoryManagementForm
+# Checklist — BlogPostTwoColumnTemplate
 
-**Wireframe:** `wireframes/blog/CategoryManagementForm/wireframe-blog-CategoryManagementForm.html`
+**Wireframe:** `wireframes/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostTwoColumnTemplate-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 
@@ -15,7 +15,7 @@ date-created: 2026-09-10
 
 ## A. ADR-43 — Role assignment (reversed)
 
-- [x] Properties table does NOT list `role` as a Designer property — PASS (lines 128-130: only writeback and appearance listed)
+- [x] Properties table does NOT list `role` as a Designer property — PASS (line 165: only writeback and appearance listed)
 - [x] Component annotations do not say "set role in Designer" — PASS
 
 ## B. ADR-44 — Responsive behaviour (wrap_on)
@@ -36,7 +36,7 @@ date-created: 2026-09-10
 
 ## F. M3 component standard
 
-- [x] Every component is in the approved M3 list or approved custom list — PASS (ColumnPanel, FlowPanel, Card, Heading, TextBox, TextArea, Button, DataGrid — all approved)
+- [x] Every component is in the approved M3 list or approved custom list — PASS (Card, Heading, Text, Image, Link, TextBox, Button, RepeatingPanel, VideoDisplayComponent (custom) — all approved)
 - [x] InteractiveCard uses only `elevated`, `filled`, or `outlined` — N/A
 - [x] No `SidesheetContent` component — PASS
 - [x] No `Label` component — PASS
@@ -53,7 +53,7 @@ date-created: 2026-09-10
 
 ## I. Writeback properties
 
-- [x] Properties table includes writeback (W) for all 8 components — PASS (txt_category_name, txt_category_slug, txt_category_description all have writeback = W)
+- [x] Properties table includes writeback (W) for all 8 components — PASS (txt_newsletter_email has writeback = W)
 - [x] No writeback listed for non-writeback components — PASS
 
 ## J. Max-width values
@@ -79,8 +79,8 @@ date-created: 2026-09-10
 ## O. Section structure (ADR-27)
 
 - [x] Section 1 — Introduction present — PASS (line 28)
-- [x] Section 2 — Wireframe Diagram present — PASS (line 34)
-- [x] Section 3 — Properties Table present — PASS (line 117)
+- [x] Section 2 — Wireframe Diagram present — PASS (line 35)
+- [x] Section 3 — Properties Table present — PASS (line 155)
 - [x] No sample data in wireframe — PASS
 - [x] No behaviour text in wireframe diagram — PASS
 - [x] Containers drawn as containers with names inset in border — PASS

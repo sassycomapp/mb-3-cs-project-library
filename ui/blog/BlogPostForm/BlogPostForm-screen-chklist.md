@@ -1,13 +1,13 @@
 ---
-document: "Checklist — BookingListForm"
-doc-id: checklist-bookings-BookingListForm
+document: "BlogPostForm-screen-chklist"
+doc-id: BlogPostForm-screen-chklist
 state: Live
 date-created: 2026-09-10
 ---
 
-# Checklist — BookingListForm
+# Checklist — BlogPostForm
 
-**Wireframe:** `wireframes/bookings/BookingListForm/wireframe-bookings-BookingListForm.html`
+**Wireframe:** `wireframes/blog/BlogPostForm/BlogPostForm-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 
@@ -15,58 +15,53 @@ date-created: 2026-09-10
 
 ## A. ADR-43 — Role assignment (reversed)
 
-- [x] Properties table does NOT list `role` as a Designer property — PASS (lines 96-100: only writeback = W listed)
+- [x] Properties table does NOT list `role` as a Designer property — PASS (lines 203-205: only writeback and appearance listed)
 - [x] Component annotations do not say "set role in Designer" — PASS
-- [x] If role is mentioned in annotations, it is noted as set in code — PASS
 
 ## B. ADR-44 — Responsive behaviour (wrap_on)
 
 - [x] No breakpoint tables or pixel-based responsive rules — PASS
-- [x] No references to 998px, 640px, or 1024px breakpoints — PASS
 
 ## C. ADR-45 — HTMLTemplate banned
 
 - [x] No `HtmlTemplate` component anywhere in the wireframe — PASS
-- [x] No references to `anvil_slot_repeat` property — PASS
 
 ## D. ADR-37 superseded
 
 - [x] No references to "custom layout approach" — PASS
-- [x] No references to "HtmlTemplate shell" — PASS
 
 ## E. DataRowPanel
 
-- [x] DataRowPanel uses `drp_` prefix — N/A (DataGrid uses a separate row template)
+- [x] DataRowPanel uses `drp_` prefix — N/A
 - [x] DataRowPanel is used for DataGrid row templates — N/A
-- [x] DataRowPanel is listed in the component annotations — N/A
 
 ## F. M3 component standard
 
-- [x] Every component is in the approved M3 list or approved custom list — PASS (ColumnPanel, FlowPanel, Heading, Text, TextBox, DropdownMenu, Button, IconButton, DataGrid — all approved)
+- [x] Every component is in the approved M3 list or approved custom list — PASS (Card, Heading, Text, Link, Image, TextBox, TextArea, Button, RepeatingPanel, VideoDisplayComponent (custom) — all approved)
 - [x] InteractiveCard uses only `elevated`, `filled`, or `outlined` — N/A
 - [x] No `SidesheetContent` component — PASS
 - [x] No `Label` component — PASS
-- [x] Card uses `Card` component — N/A (no Card in this wireframe)
+- [x] Card uses `Card` component — PASS
 - [x] No `HtmlPanel` component — PASS
 
 ## G. Icon component
 
-- [x] Icon components use `ico_` prefix — PASS (ico_empty_state on line 84)
-- [x] Icon is understood as `IconButton` used decoratively — PASS (type is `IconButton` on line 84)
+- [x] Icon components use `ico_` prefix — N/A
+- [x] Icon is understood as `IconButton` used decoratively — N/A
 
 ## H. mi: prefix for icons
 
-- [x] All icon annotations use `mi:` prefix — PASS (mi:event on line 84)
+- [x] All icon annotations use `mi:` prefix — N/A
 - [x] No plain icon names without `mi:` prefix — PASS
 
 ## I. Writeback properties
 
-- [x] Properties table includes writeback (W) for all 8 components — PASS (txt_search, dd_status_filter, dd_date_range all have writeback = W)
+- [x] Properties table includes writeback (W) for all 8 components — PASS (txt_comment_name, txt_comment_email, txt_comment_text all have writeback = W)
 - [x] No writeback listed for non-writeback components — PASS
 
 ## J. Max-width values
 
-- [x] Max-width annotations match final values — N/A (form type is List, max-width 1200px per Standard)
+- [x] Max-width annotations match final values — N/A
 
 ## K. Card radius
 
@@ -87,9 +82,9 @@ date-created: 2026-09-10
 
 ## O. Section structure (ADR-27)
 
-- [x] Section 1 — Introduction present — PASS (line 31)
-- [x] Section 2 — Wireframe Diagram present — PASS (line 40)
-- [x] Section 3 — Properties Table present — PASS (line 93)
+- [x] Section 1 — Introduction present — PASS (line 28)
+- [x] Section 2 — Wireframe Diagram present — PASS (line 35)
+- [x] Section 3 — Properties Table present — PASS (line 192)
 - [x] No sample data in wireframe — PASS
 - [x] No behaviour text in wireframe diagram — PASS
 - [x] Containers drawn as containers with names inset in border — PASS

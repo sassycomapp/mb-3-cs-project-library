@@ -1,13 +1,13 @@
 ---
-document: "Checklist — HomePage"
-doc-id: checklist-public_pages-HomePage
+document: "BlogListForm-screen-chklist"
+doc-id: BlogListForm-screen-chklist
 state: Live
 date-created: 2026-09-10
 ---
 
-# Checklist — HomePage
+# Checklist — BlogListForm
 
-**Wireframe:** `wireframes/public_pages/HomePage/wireframe-public_pages-HomePage.html`
+**Wireframe:** `wireframes/blog/BlogListForm/BlogListForm-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 
@@ -15,12 +15,13 @@ date-created: 2026-09-10
 
 ## A. ADR-43 — Role assignment (reversed)
 
-- [x] Properties table does NOT list `role` as a Designer property — PASS (line 167: "None — all component properties can be set programmatically")
+- [x] Properties table does NOT list `role` as a Designer property — PASS (lines 133-134: only writeback and appearance listed)
 - [x] Component annotations do not say "set role in Designer" — PASS
 
 ## B. ADR-44 — Responsive behaviour (wrap_on)
 
 - [x] No breakpoint tables or pixel-based responsive rules — PASS
+- [x] No references to 998px, 640px, or 1024px breakpoints — PASS
 
 ## C. ADR-45 — HTMLTemplate banned
 
@@ -33,32 +34,35 @@ date-created: 2026-09-10
 ## E. DataRowPanel
 
 - [x] DataRowPanel uses `drp_` prefix — N/A
+- [x] DataRowPanel is used for DataGrid row templates — N/A
 
 ## F. M3 component standard
 
-- [x] Every component is in the approved M3 list or approved custom list — PASS (ColumnPanel, FlowPanel, Heading, Text, Button, Card, Image, ParallaxComponent (custom), TimeLapseCarouselComponent (custom), VideoDisplayComponent (custom), FooterComponent (custom) — all approved)
+- [x] Every component is in the approved M3 list or approved custom list — PASS (ColumnPanel, FlowPanel, Heading, Text, TextBox, DropdownMenu, Button, RepeatingPanel — all approved)
 - [x] InteractiveCard uses only `elevated`, `filled`, or `outlined` — N/A
 - [x] No `SidesheetContent` component — PASS
 - [x] No `Label` component — PASS
-- [x] Card uses `Card` component — PASS
+- [x] Card uses `Card` component — N/A
 - [x] No `HtmlPanel` component — PASS
 
 ## G. Icon component
 
 - [x] Icon components use `ico_` prefix — N/A
+- [x] Icon is understood as `IconButton` used decoratively — N/A
 
 ## H. mi: prefix for icons
 
 - [x] All icon annotations use `mi:` prefix — N/A
+- [x] No plain icon names without `mi:` prefix — PASS
 
 ## I. Writeback properties
 
-- [x] Properties table includes writeback (W) for all 8 components — N/A
+- [x] Properties table includes writeback (W) for all 8 components — PASS (txt_search and dd_category_filter both have writeback = W)
 - [x] No writeback listed for non-writeback components — PASS
 
 ## J. Max-width values
 
-- [x] Max-width annotations match final values — N/A (public page, max-width 900px per Standard)
+- [x] Max-width annotations match final values — N/A
 
 ## K. Card radius
 
@@ -66,6 +70,7 @@ date-created: 2026-09-10
 
 ## L. Tag/badge composition
 
+- [x] Tag/badge components use `m3.Button` or `m3.Card` composition — N/A
 - [x] No `Label` component used for tags or badges — PASS
 
 ## M. Dark mode
@@ -74,13 +79,13 @@ date-created: 2026-09-10
 
 ## N. Carousel viewport
 
-- [x] Carousel viewport uses ColumnPanel with role-driven CSS — N/A (uses TimeLapseCarouselComponent custom component)
+- [x] Carousel viewport uses ColumnPanel with role-driven CSS — N/A
 
 ## O. Section structure (ADR-27)
 
-- [x] Section 1 — Introduction present — PASS (line 51)
-- [x] Section 2 — Wireframe Diagram present — PASS (line 55)
-- [x] Section 3 — Properties Table present — PASS (line 165)
+- [x] Section 1 — Introduction present — PASS (line 27)
+- [x] Section 2 — Wireframe Diagram present — PASS (line 34)
+- [x] Section 3 — Properties Table present — PASS (line 122)
 - [x] No sample data in wireframe — PASS
 - [x] No behaviour text in wireframe diagram — PASS
 - [x] Containers drawn as containers with names inset in border — PASS
