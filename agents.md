@@ -1,6 +1,8 @@
 ---
 document: AGENTS.md — mb-3-cs-project-library
 state: Live
+doc-id: AGENTS
+date-created: 2026-09-10
 ---
 
 # AGENTS.md — mb-3-cs-project-library
