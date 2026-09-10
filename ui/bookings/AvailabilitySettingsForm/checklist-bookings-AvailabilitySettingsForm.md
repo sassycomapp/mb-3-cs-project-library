@@ -1,3 +1,10 @@
+---
+document: "Checklist — AvailabilitySettingsForm"
+doc-id: checklist-bookings-AvailabilitySettingsForm
+state: Live
+date-created: 2026-09-10
+---
+
 # Checklist — AvailabilitySettingsForm
 
 **Wireframe:** `wireframes/bookings/AvailabilitySettingsForm/wireframe-bookings-AvailabilitySettingsForm.html`

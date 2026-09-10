@@ -1,3 +1,10 @@
+---
+document: "Checklist — CommentModerationForm"
+doc-id: checklist-blog-CommentModerationForm
+state: Live
+date-created: 2026-09-10
+---
+
 # Checklist — CommentModerationForm
 
 **Wireframe:** `wireframes/blog/CommentModerationForm/wireframe-blog-CommentModerationForm.html`

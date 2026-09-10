@@ -1,3 +1,10 @@
+---
+document: "Checklist — CategoryManagementForm"
+doc-id: checklist-blog-CategoryManagementForm
+state: Live
+date-created: 2026-09-10
+---
+
 # Checklist — CategoryManagementForm
 
 **Wireframe:** `wireframes/blog/CategoryManagementForm/wireframe-blog-CategoryManagementForm.html`

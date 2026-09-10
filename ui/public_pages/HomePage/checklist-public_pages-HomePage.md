@@ -1,3 +1,10 @@
+---
+document: "Checklist — HomePage"
+doc-id: checklist-public_pages-HomePage
+state: Live
+date-created: 2026-09-10
+---
+
 # Checklist — HomePage
 
 **Wireframe:** `wireframes/public_pages/HomePage/wireframe-public_pages-HomePage.html`

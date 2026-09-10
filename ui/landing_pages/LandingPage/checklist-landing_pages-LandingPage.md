@@ -1,3 +1,10 @@
+---
+document: "Checklist — LandingPage"
+doc-id: checklist-landing_pages-LandingPage
+state: Live
+date-created: 2026-09-10
+---
+
 # Checklist — LandingPage
 
 **Wireframe:** `wireframes/landing_pages/LandingPage/wireframe-landing_pages-LandingPage.html`

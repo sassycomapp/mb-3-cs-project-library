@@ -1,3 +1,10 @@
+---
+document: "Checklist — BlogPostForm"
+doc-id: checklist-blog-BlogPostForm
+state: Live
+date-created: 2026-09-10
+---
+
 # Checklist — BlogPostForm
 
 **Wireframe:** `wireframes/blog/BlogPostForm/wireframe-blog-BlogPostForm.html`

@@ -1,3 +1,10 @@
+---
+document: "Checklist — BookingCalendarForm"
+doc-id: checklist-bookings-BookingCalendarForm
+state: Live
+date-created: 2026-09-10
+---
+
 # Checklist — BookingCalendarForm
 
 **Wireframe:** `wireframes/bookings/BookingCalendarForm/wireframe-bookings-BookingCalendarForm.html`

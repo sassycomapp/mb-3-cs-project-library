@@ -1,3 +1,10 @@
+---
+document: "Checklist — BlogPostTwoColumnTemplate"
+doc-id: checklist-blog-BlogPostTwoColumnTemplate
+state: Live
+date-created: 2026-09-10
+---
+
 # Checklist — BlogPostTwoColumnTemplate
 
 **Wireframe:** `wireframes/blog/BlogPostForm/BlogPostTwoColumnTemplate/wireframe-blog-BlogPostTwoColumnTemplate.html`
