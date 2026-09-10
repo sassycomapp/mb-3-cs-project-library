@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — DESIGN
-doc-id: mb-3-cs-0013
+doc-id: DESIGN
 state: Live
 date-created: 2026-06-02
 ---

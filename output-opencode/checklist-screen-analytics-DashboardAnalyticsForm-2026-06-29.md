@@ -1,3 +1,10 @@
+---
+document: "Compliance Checklist — DashboardAnalyticsForm Screen"
+doc-id: checklist-screen-analytics-DashboardAnalyticsForm-2026-06-29
+state: Live
+date-created: 2026-09-10
+---
+
 # Compliance Checklist — DashboardAnalyticsForm Screen
 
 **Screen file:** `screen-analytics-DashboardAnalyticsForm.html`

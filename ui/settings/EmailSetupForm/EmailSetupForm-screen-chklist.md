@@ -1,6 +1,6 @@
 ---
 document: EmailSetupForm — Screen Checklist
-doc-id: mb-3-cs-0259
+doc-id: EmailSetupForm-screen-chklist
 state: Live
 date-created: 2026-07-27T171825+0200
 ---

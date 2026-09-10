@@ -1,3 +1,10 @@
+---
+document: "Wireframe Alignment Audit — Final Report"
+doc-id: wireframe-alignment-audit-final-report-2026-06-28
+state: Live
+date-created: 2026-09-10
+---
+
 # Wireframe Alignment Audit — Final Report
 
 **Date:** 2026-06-28

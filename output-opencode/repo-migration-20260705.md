@@ -1,3 +1,10 @@
+---
+document: "Repo Migration — Completion Report"
+doc-id: repo-migration-20260705
+state: Live
+date-created: 2026-09-10
+---
+
 # Repo Migration — Completion Report
 
 **Date:** 2026-07-05

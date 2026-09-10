@@ -1,6 +1,6 @@
 ---
 document: CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
-doc-id: mb-3-cs-0003
+doc-id: CONTEXT
 state: Live
 date-created: 2026-08-12T212422+0200
 ---

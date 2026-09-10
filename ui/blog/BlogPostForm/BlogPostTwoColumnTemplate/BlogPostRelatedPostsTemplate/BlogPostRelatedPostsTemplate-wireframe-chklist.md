@@ -1,6 +1,6 @@
 ---
 document: BlogPostRelatedPostsTemplate — Wireframe Checklist
-doc-id: mb-3-cs-0102
+doc-id: BlogPostRelatedPostsTemplate-wireframe-chklist
 state: Live
 date-created: 2026-07-27T171825+0200
 ---

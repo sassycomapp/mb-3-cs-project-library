@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Founder Strategic Review
-doc-id: mb-3-cs-0022
+doc-id: founder-strategic-review
 state: Live
 date-created: 2026-07-22T164933+0200
 ---

@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Design Direction (Canonical)
-doc-id: mb-3-cs-0021
+doc-id: design-direction
 state: Live
 date-created: 2026-07-09T144326+0200
 ---

@@ -1,6 +1,6 @@
 ---
 document: GStack Artifact Governance
-doc-id: mb-3-cs-0040
+doc-id: gstack-artifact-governance
 state: Live
 date-created: 2026-05-23T110132+0200
 ---

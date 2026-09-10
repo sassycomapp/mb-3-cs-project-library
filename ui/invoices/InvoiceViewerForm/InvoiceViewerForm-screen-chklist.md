@@ -1,6 +1,6 @@
 ---
 document: InvoiceViewerForm — Screen Checklist
-doc-id: mb-3-cs-0190
+doc-id: InvoiceViewerForm-screen-chklist
 state: Live
 date-created: 2026-07-27T171825+0200
 ---

@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Local Documentation Index
-doc-id: mb-3-cs-0015
+doc-id: INDEX
 state: Live
 date-created: 2026-07-23T094939+0200
 ---

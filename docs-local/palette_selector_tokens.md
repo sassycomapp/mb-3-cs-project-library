@@ -1,6 +1,6 @@
 ---
 document: Palette Selector — Token Swap Blocks
-doc-id: mb-3-cs-0023
+doc-id: palette_selector_tokens
 state: Live
 date-created: 2026-07-06T171413+0200
 ---

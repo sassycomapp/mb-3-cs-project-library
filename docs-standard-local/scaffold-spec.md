@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Scaffold Specification
-doc-id: mb-3-cs-0035
+doc-id: scaffold-spec
 state: Live
 date-created: 2026-07-06T184444+0200
 ---

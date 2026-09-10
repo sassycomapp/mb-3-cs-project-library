@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Observability Requirements
-doc-id: mb-3-cs-0033
+doc-id: observability-requirements
 state: Live
 date-created: 2026-07-06T171413+0200
 ---

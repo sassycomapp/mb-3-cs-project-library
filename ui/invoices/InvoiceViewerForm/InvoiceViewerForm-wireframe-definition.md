@@ -1,6 +1,6 @@
 ---
 document: InvoiceViewerForm — Wireframe Definition
-doc-id: mb-3-cs-0188
+doc-id: InvoiceViewerForm-wireframe-definition
 state: Live
 date-created: 2026-07-27T171825+0200
 ---

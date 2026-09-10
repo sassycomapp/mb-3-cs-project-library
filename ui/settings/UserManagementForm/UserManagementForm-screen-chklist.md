@@ -1,6 +1,6 @@
 ---
 document: UserManagementForm — Screen Checklist
-doc-id: mb-3-cs-0274
+doc-id: UserManagementForm-screen-chklist
 state: Live
 date-created: 2026-07-27T171825+0200
 ---

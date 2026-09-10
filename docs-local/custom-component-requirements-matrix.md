@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Custom Component Requirements Matrix
-doc-id: mb-3-cs-0020
+doc-id: custom-component-requirements-matrix
 state: Live
 date-created: 2026-06-01
 ---

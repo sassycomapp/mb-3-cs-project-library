@@ -1,6 +1,6 @@
 ---
 document: Triage Labels
-doc-id: mb-3-cs-0039
+doc-id: triage-labels
 state: Live
 date-created: 2026-07-08T161133+0200
 ---

@@ -1,3 +1,10 @@
+---
+document: "Work Package 10 — Verify Graphify and GBrain MCP Tools"
+doc-id: wp10-verify-graphify-gbrain-mcp-2026-08-14
+state: Live
+date-created: 2026-08-14
+---
+
 # Work Package 10 — Verify Graphify and GBrain MCP Tools
 
 **Date:** 2026-08-14T151511+0200

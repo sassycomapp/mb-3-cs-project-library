@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Architecture
-doc-id: mb-3-cs-0016
+doc-id: architecture
 state: Live
 date-created: 2026-07-09T144429+0200
 ---

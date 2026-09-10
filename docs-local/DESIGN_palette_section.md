@@ -1,6 +1,6 @@
 ---
 document: DESIGN Palette Section
-doc-id: mb-3-cs-0014
+doc-id: DESIGN_palette_section
 state: Live
 date-created: 2026-07-06T171413+0200
 ---

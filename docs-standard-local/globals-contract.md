@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — globals.py Contract
-doc-id: mb-3-cs-0031
+doc-id: globals-contract
 state: Live
 date-created: 2026-07-06T171413+0200
 ---

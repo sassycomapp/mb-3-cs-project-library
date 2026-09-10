@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Development Policy
-doc-id: mb-3-cs-0041
+doc-id: development-policy
 state: Live
 date-created: 2026-07-05T141307+0200
 ---

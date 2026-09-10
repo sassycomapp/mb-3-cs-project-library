@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — User Flows
-doc-id: mb-3-cs-0028
+doc-id: user-flows
 state: Live
 date-created: 2026-07-09T144411+0200
 ---

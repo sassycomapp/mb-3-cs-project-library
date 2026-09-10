@@ -1,3 +1,10 @@
+---
+document: "Setup Report: Matt Pocock Engineering Skills Configuration"
+doc-id: setup-matt-skills-config-2026-08-12
+state: Live
+date-created: 2026-08-12
+---
+
 # Setup Report: Matt Pocock Engineering Skills Configuration
 
 **Date:** 2026-08-12T212422+0200

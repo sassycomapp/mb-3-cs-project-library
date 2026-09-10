@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Build Plan (Definitive)
-doc-id: mb-3-cs-0018
+doc-id: build-plan
 state: Live
 date-created: 2026-07-09T144317+0200
 ---

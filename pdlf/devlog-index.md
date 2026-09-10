@@ -1,3 +1,10 @@
+---
+document: "Devlog Index"
+doc-id: devlog-index
+state: Live
+date-created: 2026-09-10
+---
+
 # Devlog Index
 Reverse-chronological list of task completion reports.
 

@@ -1,6 +1,6 @@
 ---
 document: "Issue tracker: Local markdown"
-doc-id: mb-3-cs-0009
+doc-id: issue-tracker
 state: Live
 date-created: 2026-06-25T073251+0200
 ---

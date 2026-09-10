@@ -1,6 +1,6 @@
 ---
 document: Pricing Strategy Consultation
-doc-id: mb-3-cs-0027
+doc-id: pricing-strategy-consultation
 state: Live
 date-created: 2026-05-25T100505+0200
 ---

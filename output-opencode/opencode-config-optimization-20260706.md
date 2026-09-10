@@ -1,3 +1,10 @@
+---
+document: "OpenCode Config Optimization — Completion Report"
+doc-id: opencode-config-optimization-20260706
+state: Live
+date-created: 2026-09-10
+---
+
 # OpenCode Config Optimization — Completion Report
 
 **Date:** 2026-07-06

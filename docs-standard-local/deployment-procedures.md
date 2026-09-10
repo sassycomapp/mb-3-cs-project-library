@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Deployment Procedures
-doc-id: mb-3-cs-0030
+doc-id: deployment-procedures
 state: Live
 date-created: 2026-07-06T171413+0200
 ---

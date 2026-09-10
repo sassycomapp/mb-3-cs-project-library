@@ -1,6 +1,6 @@
 ---
 document: Internal Standards & Specifications — Anvil Wireframe Conversion
-doc-id: mb-3-cs-0064
+doc-id: internal-standards-anvil-wireframe-conversion
 state: Live
 date-created: 2026-07-25T152345+0200
 ---

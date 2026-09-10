@@ -1,6 +1,6 @@
 ---
 document: "Issue tracker: GitHub"
-doc-id: mb-3-cs-0038
+doc-id: issue-tracker
 state: Live
 date-created: 2026-08-12T212422+0200
 ---

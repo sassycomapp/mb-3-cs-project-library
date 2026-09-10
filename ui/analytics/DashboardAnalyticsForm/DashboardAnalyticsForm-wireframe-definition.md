@@ -1,6 +1,6 @@
 ---
 document: DashboardAnalyticsForm — Wireframe Definition
-doc-id: mb-3-cs-0065
+doc-id: DashboardAnalyticsForm-wireframe-definition
 state: Live
 date-created: 2026-07-27T171825+0200
 ---

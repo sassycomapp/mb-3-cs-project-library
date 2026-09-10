@@ -1,6 +1,6 @@
 ---
 document: Mybizz — Comprehensive Application Treatise
-doc-id: mb-3-cs-0024
+doc-id: platform-architecture-narrative
 state: Live
 date-created: 2026-07-09T144443+0200
 ---

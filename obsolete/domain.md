@@ -1,6 +1,6 @@
 ---
 document: Domain Docs
-doc-id: mb-3-cs-0008
+doc-id: domain
 state: Live
 date-created: 2026-07-25T152307+0200
 ---

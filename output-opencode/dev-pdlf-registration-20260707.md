@@ -1,3 +1,10 @@
+---
+document: "Task Completion Report: dev-pdlf Project Registration & Setup"
+doc-id: dev-pdlf-registration-20260707
+state: Live
+date-created: 2026-09-10
+---
+
 # Task Completion Report: dev-pdlf Project Registration & Setup
 
 **Date:** 2026-07-07  

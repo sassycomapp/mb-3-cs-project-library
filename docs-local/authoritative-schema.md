@@ -1,6 +1,6 @@
 ---
 document: Mybizz CS — Authoritative Database Schema
-doc-id: mb-3-cs-0017
+doc-id: authoritative-schema
 state: Live
 date-created: 2026-06-01
 ---

@@ -1,6 +1,6 @@
 ---
 document: LeadCaptureTemplate — Screen Checklist
-doc-id: mb-3-cs-0196
+doc-id: LeadCaptureTemplate-screen-chklist
 state: Live
 date-created: 2026-07-27T171825+0200
 ---

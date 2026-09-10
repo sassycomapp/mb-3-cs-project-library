@@ -1,6 +1,6 @@
 ---
 document: tmpl_day_event — Screen Checklist
-doc-id: mb-3-cs-0115
+doc-id: tmpl_day_event-screen-chklist
 state: Live
 date-created: 2026-07-27T171825+0200
 ---

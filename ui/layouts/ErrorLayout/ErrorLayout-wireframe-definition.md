@@ -1,6 +1,6 @@
 ---
 document: ErrorLayout — Wireframe Definition
-doc-id: mb-3-cs-0215
+doc-id: ErrorLayout-wireframe-definition
 state: Live
 date-created: 2026-07-27T171825+0200
 ---
