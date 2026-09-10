@@ -1,3 +1,10 @@
+---
+document: "Mybizz AI Implementation Specification"
+doc-id: mybizz-ai-implementation-spec (1.0)
+state: Live
+date-created: 2026-07-22
+---
+
 # Mybizz AI Implementation Specification
 
 ## Purpose
