@@ -118,9 +118,9 @@ A schema change must never be merged to `stable` (master_template) without a doc
 
 | Document | Relationship |
 |---|---|
-| ``adr/adr-global/client-instance-architecture.md`` | Defines why server modules must not exist in client instances |
-| ``adr/adr-global/dependency-update-model.md`` | Update propagation model that blank_client_template preserves |
-| `implementation/client-activation-runbook.md` | Uses blank_client_template as step 1 of provisioning |
+| `adr-global/adr-client-instance-architecture.md` | Defines why server modules must not exist in client instances |
+| `adr-global/adr-dependency-update-model.md` | Update propagation model that blank_client_template preserves |
+| `specifications-global/spec-client-activation-runbook.md` | Uses blank_client_template as step 1 of provisioning |
 
 ---
 

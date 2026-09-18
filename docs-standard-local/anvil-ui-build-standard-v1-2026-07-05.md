@@ -1,3 +1,10 @@
+---
+document: "Anvil UI Build Standard (Consolidated) — v1"
+doc-id: anvil-ui-build-standard-v1-2026-07-05
+state: Live
+date-created: 2026-09-12
+---
+
 # Anvil UI Build Standard (Consolidated) — v1
 
 **Purpose:** Single reference to accompany the per-UI prompt sent to Anvil's AI agent when converting each of the 70 HTML wireframes + screenshots into native Anvil Forms.

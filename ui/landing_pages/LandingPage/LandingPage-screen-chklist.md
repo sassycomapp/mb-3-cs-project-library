@@ -7,7 +7,7 @@ date-created: 2026-09-10
 
 # Checklist — LandingPage
 
-**Wireframe:** `wireframes/landing_pages/LandingPage/LandingPage-wireframe.html`
+**Wireframe:** `LandingPage-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 

@@ -7,7 +7,7 @@ date-created: 2026-09-10
 
 # Checklist — BlogPostTwoColumnTemplate
 
-**Wireframe:** `wireframes/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostTwoColumnTemplate-wireframe.html`
+**Wireframe:** `BlogPostTwoColumnTemplate-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 

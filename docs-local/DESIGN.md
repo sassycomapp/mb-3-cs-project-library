@@ -1266,7 +1266,7 @@ The booking flow uses 3 server round-trips maximum (`form-architecture-and-state
 | 7. Confirmation | Success card with check icon, booking ID, details summary. "View Booking" and "Book Another" buttons. | None — client-side |
 
 **Global booking flow rules:**
-- globals.py `booking_flow_state` preserves selections across steps (see `docs-standard-global/globals-contract.md`).
+- globals.py `booking_flow_state` preserves selections across steps (see `docs-standard-global/docstd-globals-contract.md`).
 - Back navigation preserves state — no re-fetch if data is cached in `booking_flow_state.cached_context`.
 - Step transitions show a brief loading indicator (LinearProgressIndicator or spinner) during server calls.
 - 30-second timeout on any server call — shows "Connection timed out. Please try again." with retry button.

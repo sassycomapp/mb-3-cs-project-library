@@ -44,7 +44,7 @@ source_kind: put_page
 | **Schema** | 100% Complete | See `authoritative-schema.md` |
 | **Wireframes** | ✅ 100% Complete | 50 HTML screens created |
 | **Design Direction** | ✅ 100% Complete | M3 design approved |
-| **ADR Documentation** | 100% Complete | See `adr-global/adr-index.md` for current ADR count and status |
+| **ADR Documentation** | 100% Complete | See the project-library-global register (`register-global/register-global.md`, adr rows) for current ADR count and status |
 | **Positioning Strategy** | ✅ 100% Complete | Business model documented |
 | **Phase 0** | ✅ 100% Complete | All TODOs implemented |
 | **Phase 1** | 🔄 In Progress | Foundation implementation started |
@@ -61,7 +61,7 @@ source_kind: put_page
 **CEO Review:** 2026-06-15 — 11 sections reviewed, 14 TODO items captured (see todo.md section 8), plan changes applied
 **Eng Review:** 2026-06-16 — 5 dilemmas reviewed, 4 completable items executed (see todo.md section 9)
 **Test Specs:** Testing specifications consolidated into this build plan (see Phase 5.4 Testing & QA, build-plan.md Stage 5.4 completion criteria, and self-review checklists). Separate testing specifications are in `specifications-global/spec-testing-methodology-standards.md` and `specifications-global/spec-testing.md`.
-**State Contract:** `docs-standard-global/globals-contract.md` — shared state variables and defensive loading pattern
+**State Contract:** `docs-standard-global/docstd-globals-contract.md` — shared state variables and defensive loading pattern
 
 ---
 
@@ -437,7 +437,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
   - Call 3: `confirm_booking(booking_data)` → booking confirmation, payment result
   - Meeting type and intake form are client-side selections from pre-loaded data — no server call
   - Confirmation display is client-side — no server call
-  - Cache `get_booking_context()` response in `globals.py` for flow duration (see `docs-standard-global/globals-contract.md`)
+  - Cache `get_booking_context()` response in `globals.py` for flow duration (see `docs-standard-global/docstd-globals-contract.md`)
 - **See:** `form-architecture-and-state` ADR (Form Architecture — booking flow latency management)
 - **See:** `specifications-global/spec-testing-methodology-standards.md` (E2E booking test spec, error path tests, RBAC matrix)
 

@@ -802,6 +802,9 @@ All other fields are permanent from first registration.
 | eng-review-2026-06-16 | output-gstack/eng-review-2026-06-16.md | output-gstack | report | Live | 2026-09-10 | 2026-09-10 | | |
 | devlog-index | pdlf/devlog-index.md | pdlf | document | Live | 2026-09-10 | 2026-09-10 | | |
 | judgement-trail | pdlf/judgement-trail.md | pdlf | document | Live | 2026-09-10 | 2026-09-10 | | |
+| anvil-ui-build-standard-v1-2026-07-05 | docs-standard-local/anvil-ui-build-standard-v1-2026-07-05.md | docs-standard-local | standard | Live | 2026-09-18T132533+0200 | 2026-09-18T132533+0200 |  | relocated from wip\ by align-docs run 2026-09-18T132533+0200 (developer-approved; newest of three wip variants — referenced by the screen-production prompt); FM added at registration |
+| anvil-ui-exception-review-procedure | docs-standard-local/anvil-ui-exception-review-procedure.md | docs-standard-local | sop | Live | 2026-09-18T132533+0200 | 2026-09-18T132533+0200 |  | relocated from wip\ by align-docs run 2026-09-18T132533+0200 (developer-approved; referenced by the screen-production prompt); FM added at registration |
+| design-reference-screens-old | output-gstack/design-reference-screens-old.html | output-gstack | rendering | Live | 2026-09-18T132533+0200 | 2026-09-18T132533+0200 |  | registered by align-docs run 2026-09-18T132533+0200 (developer-approved): only surviving visual style reference (no non-old version exists — es.exe verified 2026-09-18); row-only identity (HTML carries no front matter) |
 
 ## Field definitions
 

@@ -1,3 +1,10 @@
+---
+document: "Per-UI Exception Review Procedure"
+doc-id: anvil-ui-exception-review-procedure
+state: Live
+date-created: 2026-06-29
+---
+
 # Per-UI Exception Review Procedure
 
 What I do with each new wireframe HTML + screenshot pair, before filling in the Template's

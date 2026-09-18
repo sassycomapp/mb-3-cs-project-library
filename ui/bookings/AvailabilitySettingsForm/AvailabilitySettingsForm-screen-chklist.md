@@ -7,7 +7,7 @@ date-created: 2026-09-10
 
 # Checklist — AvailabilitySettingsForm
 
-**Wireframe:** `wireframes/bookings/AvailabilitySettingsForm/AvailabilitySettingsForm-wireframe.html`
+**Wireframe:** `AvailabilitySettingsForm-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 

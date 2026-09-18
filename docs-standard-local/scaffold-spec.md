@@ -14,21 +14,21 @@ date-created: 2026-07-06T184444+0200
 **Last Updated:** 2026-06-03 v2 — Corrected component classification. Layout variants removed from components/; only true shared components remain.
 
 **Related Documents:**
-- `scaffold-workflow.md` — Step-by-step scaffolding instructions
+- scaffold-workflow.md (retired — no longer on disk anywhere, verified 2026-09-18); the scaffolding sequence is covered by this file's build phases and `docs-local/build-plan.md`
 - `authoritative-schema.md` — Complete 38-table schema specifications
-- `implementation/build-plan.md` — Phased build sequence
-- `gstack-outputs/DESIGN.md` — Canonical design system
+- `docs-local/build-plan.md` — Phased build sequence
+- `docs-local/DESIGN.md` — Canonical design system
 
 ---
 
 ## Reconciliation Notes (2026-06-03)
 
 This file has been reconciled against:
-- `gstack-outputs/eng-review-alignment-report.md` (2026-06-03)
-- `docs/authoritative-schema.md` (current)
+- `output-gstack/eng-review-2026-06-16.md` (the surviving eng review — the 2026-06-03 alignment report no longer exists anywhere, verified 2026-09-18)
+- `docs-local/authoritative-schema.md` (current)
 - `gstack-outputs/DESIGN.md` (current)
-- `implementation/build-plan.md` (current)
-- `gstack-outputs/design-consultation-plan-workflows.md` (current)
+- `docs-local/build-plan.md` (current)
+- `docs-local/DESIGN.md` (current — design-consultation-plan-workflows no longer exists anywhere, verified 2026-09-18; the design system's canonical record is DESIGN.md)
 
 Key changes (v1):
 - Table count updated from 36 to 38 (added `privacy_policy`, `t_and_c`, `blog_comments`)
@@ -63,9 +63,9 @@ This document specifies the exact package structure, forms, modules, and table d
 
 **M3 Compliance:** All UI work uses Material Design 3 exclusively. Native M3 components from the theme dependency are fully supported. Custom composition is required for components not natively provided (Chips, Snackbar, Bottom Sheet, Tabs).
 
-**Build Phases:** Each form and table is annotated with its build phase (Phase 1–5). Build sequentially — each phase depends on the prior phase being complete. See `implementation/build-plan.md` for full details.
+**Build Phases:** Each form and table is annotated with its build phase (Phase 1–5). Build sequentially — each phase depends on the prior phase being complete. See `docs-local/build-plan.md` for full details.
 
-**Note for Developers:** Use `scaffold-workflow.md` for step-by-step instructions. Use `authoritative-schema.md` for complete table specifications.
+**Note for Developers:** The former scaffold-workflow.md no longer exists (verified 2026-09-18); this file's build phases and `docs-local/build-plan.md` cover the sequence. Use `authoritative-schema.md` for complete table specifications.
 
 ---
 

@@ -7,7 +7,7 @@ date-created: 2026-09-10
 
 # Checklist — BookingCalendarForm
 
-**Wireframe:** `wireframes/bookings/BookingCalendarForm/BookingCalendarForm-wireframe.html`
+**Wireframe:** `BookingCalendarForm-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 

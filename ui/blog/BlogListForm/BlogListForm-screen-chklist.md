@@ -7,7 +7,7 @@ date-created: 2026-09-10
 
 # Checklist — BlogListForm
 
-**Wireframe:** `wireframes/blog/BlogListForm/BlogListForm-wireframe.html`
+**Wireframe:** `BlogListForm-wireframe.html`
 **Date:** 2026-06-28
 **Auditor:** Build agent
 
