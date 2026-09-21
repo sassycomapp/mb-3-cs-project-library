@@ -329,7 +329,7 @@ The CEO review flagged a mismatch between ADR-038's `webhook_log` column definit
 | `error_message` | Text |
 | `idempotency_key` | Text |
 
-**Action:** Before Phase 2 begins, reconcile these definitions against `docs/authoritative-schema.md`. If the authoritative schema is missing columns, add them. If ADR-038 is wrong, update it. This is a 15-minute documentation task.
+**Action:** Before Phase 2 begins, reconcile these definitions against [[authoritative-schema|Authoritative Database Schema]]. If the authoritative schema is missing columns, add them. If ADR-038 is wrong, update it. This is a 15-minute documentation task.
 
 **Status:** TODO ITEM 8.12. Must be resolved before Stage 2.4 (Payment Integration).
 

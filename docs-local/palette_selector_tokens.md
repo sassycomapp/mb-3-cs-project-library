@@ -196,7 +196,7 @@ def apply_palette(palette_key):
 
 ---
 
-## Dark Mode Token Blocks (per `dark-mode-v1` ADR)
+## Dark Mode Token Blocks (per [[adr-dark-mode-v1|Dark Mode — V1 Inclusion]] ADR)
 
 Each palette includes dark mode overrides. Apply these tokens inside a `@media (prefers-color-scheme: dark)` block.
 

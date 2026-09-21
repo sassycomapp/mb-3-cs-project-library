@@ -28,16 +28,16 @@ You are producing screen HTML/CSS mockups for the Mybizz CS application. Each sc
 Read every file below in full before producing your first screen. Do not proceed until all are read.
 
 ### Instructional documents (for Anvil AI — you must understand what the live builder will follow):
-1. `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-standard-local/anvil-ui-build-standard-v1-2026-07-05.md`
-2. `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-standard-local/anvil-ui-exception-review-procedure.md`
+1. [[anvil-ui-build-standard-v1-2026-07-05|v1]]
+2. [[anvil-ui-exception-review-procedure|Per-UI Exception Review Procedure]]
 
 ### Design and specification documents:
-3. `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/DESIGN.md`
-4. `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/design-direction.md`
-5. `/mnt/c/dev/project-library-global/specifications-global/spec-screen-production-standard.md`
-6. `/mnt/c/dev/project-library-global/specifications-global/spec-m3_component_mapping.md`
+3. [[DESIGN|DESIGN]]
+4. [[design-direction|Design Direction (Canonical)]]
+5. [[spec-screen-production-standard|Screen Production Standard]]
+6. [[spec-m3_component_mapping|m3_component_mapping.md]]
 7. `/mnt/c/dev/project-library-global/specifications-global/spec-nomenclature.md`
-8. `/mnt/c/dev/project-library-global/specifications-global/spec-component-properties.md`
+8. [[spec-component-properties|Component Properties Specification]]
 
 ### Theme and style reference:
 9. `~~/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/docs/theme_patched.css~~ — removed; no longer on disk anywhere (verified 2026-09-18). Use the M3 theme dependency + global design standards above for token values.`
@@ -45,11 +45,11 @@ Read every file below in full before producing your first screen. Do not proceed
 11. `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-library/output-gstack/design-reference-screens-old.html` — the existing style reference
 
 ### ADRs:
-12. `/mnt/c/dev/project-library-global/adr-global/adr-role-property-assignment-mechanism.md` — role set in code
-13. `/mnt/c/dev/project-library-global/adr-global/adr-responsive-behaviour-mechanism.md` — wrap_on, not breakpoints
-14. `/mnt/c/dev/project-library-global/adr-global/adr-htmltemplate-use.md` — HTMLTemplate banned
-15. `/mnt/c/dev/project-library-global/adr-global/adr-material-3-theme-component-scope.md` — permitted M3 components
-16. `/mnt/c/dev/project-library-global/adr-global/adr-design-rules.md` — wireframe design rules
+12. [[adr-role-property-assignment-mechanism|Role Property Assignment Mechanism (Designer vs. Code)]] — role set in code
+13. [[adr-responsive-behaviour-mechanism|Responsive Behaviour Mechanism]] — wrap_on, not breakpoints
+14. [[adr-htmltemplate-use|HTMLTemplate Use]] — HTMLTemplate banned
+15. [[adr-material-3-theme-component-scope|Material 3 Theme Component Scope]] — permitted M3 components
+16. [[adr-design-rules|Wireframe Design Rules]] — wireframe design rules
 
 ---
 
@@ -168,7 +168,7 @@ Report: screen saved, checklist saved, any discrepancies found (if none, say "no
 ### Step 8: Move to the next wireframe
 After completing Step 7, immediately proceed to the next wireframe in the scaffold order and repeat Steps 1–7 for that wireframe. Do not wait for user confirmation to continue — the goal is a screen for every wireframe.
 
-**Scaffold order:** Follow the package sequence defined in `docs/scaffold-spec.md`:
+**Scaffold order:** Follow the package sequence defined in [[scaffold-spec|Scaffold Specification]]:
 1. `auth/` — LoginForm, SignupForm, PasswordResetForm, PasswordResetCompleteForm
 2. `onboarding/` — OnboardingForm
 3. `dashboard/` — DashboardForm, MetricCard, ActivityFeed

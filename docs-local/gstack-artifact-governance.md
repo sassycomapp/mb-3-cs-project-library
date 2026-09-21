@@ -74,7 +74,7 @@ These files are design references, not policy documents and not session outputs.
 
 ## Special Notes
 
-- `DESIGN.md` belongs in `docs/` because it is an application UI design document, not a general repository artifact.
+- [[DESIGN|DESIGN]] belongs in `docs/` because it is an application UI design document, not a general repository artifact.
 - Do not place long-lived app specifications in `gstack-outputs/`.
 - Do not place transient planning reports in `docs/` unless they have been promoted into durable documentation.
 - Do not place ADRs inside `docs/` or `gstack-outputs/`.

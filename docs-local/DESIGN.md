@@ -22,7 +22,7 @@ It exists to provide the single design reference that GStack expects as `DESIGN.
 
 This document is consolidated from the following approved design consultation outputs:
 
-- `design-direction.md` — primary source for visual direction, tokens, typography, spacing, elevation, Anvil role map, and component styling rules.
+- [[design-direction|Design Direction (Canonical)]] — primary source for visual direction, tokens, typography, spacing, elevation, Anvil role map, and component styling rules.
 - `design-consultation-plan-workflows.md` — source for workflow-specific component definitions, template inventory, implementation notes, schema additions, and design documentation expectations.
 - `design-consultation-plan-descriprive.md` — source for workstream framing, palette strategy, blog template strategy, layout architecture, and client-facing customization model.
 
@@ -35,7 +35,7 @@ This file has been reconciled against:
 - `sanity-audit-final-report.md` (2026-06-01)
 - `plan-tune-verification-report.md` (2026-06-01)
 - `wireframe-reconciliation-audit.md` (2026-06-01)
-- `platform-architecture.md` (current)
+- [[platform-architecture|Platform Architecture]] (current)
 - `nomenclature.md` (current)
 
 Key corrections applied:
@@ -91,7 +91,7 @@ The intended character is:
 
 - Bright gradients, flashy hero treatments, or decorative visual noise.
 - Childish or overly playful interface language.
-- Dark mode as the primary design target. (Dark mode is included in V1 per `dark-mode-v1` ADR.)
+- Dark mode as the primary design target. (Dark mode is included in V1 per [[adr-dark-mode-v1|Dark Mode — V1 Inclusion]] ADR.)
 - Heavy animation, glassmorphism, or neumorphism.
 - Complex charts or visual systems in V1 beyond what is operationally useful.
 - Template-specific CSS divergence that breaks the shared design system.
@@ -456,8 +456,8 @@ This section defines the primary implementation-facing forms and pages in the My
 1. Welcome and orientation.
 2. Business Profile — links to Settings Business Profile tab for detail editing.
 3. Palette Selection — links to Settings Palette tab for detail editing.
-4. System Currency — dropdown plus confirm button. Required. Immutable after first transaction. See `system-currency-selection-and-immutability` ADR.
-5. Legal Acknowledgement — two checkboxes plus confirm button. Required. Logged in Mybizz_management. See `legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR.
+4. System Currency — dropdown plus confirm button. Required. Immutable after first transaction. See [[adr-system-currency-selection-and-immutability|System Currency, Display Currency, and Immutability]] ADR.
+5. Legal Acknowledgement — two checkboxes plus confirm button. Required. Logged in Mybizz_management. See [[adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture|Legal Policy Responsibility Acknowledgement and Clause-Builder Architecture]] ADR.
 6. Completion — onboarding complete.
 
 **Key design rules:**
@@ -465,8 +465,8 @@ This section defines the primary implementation-facing forms and pages in the My
 - Bidirectional navigation (back and forward) between steps.
 - "Go to Settings" links open the corresponding Settings tab and return to onboarding when done.
 - Legal acknowledgement is a required action in onboarding, not a mutable Settings configuration.
-- Payment gateway configuration is not part of onboarding. Onboarding links to Settings for gateway setup. See `payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed` ADR.
-- Onboarding state is tracked in `business_profile.onboarding_status`. See `onboarding-resumability` ADR, `onboarding-finality` ADR (deleted).
+- Payment gateway configuration is not part of onboarding. Onboarding links to Settings for gateway setup. See [[adr-payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed|Payment Gateway Configuration Is a Settings Function and Is RBAC-Governed]] ADR.
+- Onboarding state is tracked in `business_profile.onboarding_status`. See [[adr-onboarding-resumability|Onboarding Resumability]] ADR, [[adr-onboarding-finality|Onboarding Finality]] ADR (deleted).
 
 **Step 5 — Legal Acknowledgement (two checkboxes):**
 - `cb_legal_ack` (CheckBox) — "I understand I must configure my own Privacy Policy and Terms & Conditions in Settings → Policy Editor. Mybizz is not responsible for the content of those pages." Sets `business_profile.legal_ack_accepted`.
@@ -510,9 +510,9 @@ This section defines the primary implementation-facing forms and pages in the My
 **Key design rules:**
 - Tab visibility is RBAC-governed. Different roles see different tabs.
 - "Return to Onboarding" button in header — visible only when onboarding is in progress.
-- Vault access (within Payment Gateway tab) requires TOTP step-up per `payment-security-boundary-vault` ADR.
+- Vault access (within Payment Gateway tab) requires TOTP step-up per [[adr-payment-security-boundary-vault|Payment Security Boundary: Secret Keys Deferred to the Vault]] ADR.
 - Legal Acknowledgement tab is read-only. It displays acknowledgement history. The acknowledgement action itself belongs to onboarding.
-- Payment gateway configuration is a Settings concern, not an onboarding concern. See `payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed` ADR.
+- Payment gateway configuration is a Settings concern, not an onboarding concern. See [[adr-payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed|Payment Gateway Configuration Is a Settings Function and Is RBAC-Governed]] ADR.
 - PaletteSettingsForm is a local/form-specific component used only within the Palette tab.
 - Business Profile is a tab within SettingsForm, not a standalone form.
 - Services and Users & Permissions tabs are link-only tabs that navigate to their respective forms.
@@ -560,7 +560,7 @@ This section defines the primary implementation-facing forms and pages in the My
 
 **Key design rules:**
 - From Email and From Name are the only per-client editable fields.
-- SMTP host, port, and encryption are platform constants (smtp-relay.brevo.com:587, TLS) — not user-configurable. See `brevo-replaces-zoho-email` ADR.
+- SMTP host, port, and encryption are platform constants (smtp-relay.brevo.com:587, TLS) — not user-configurable. See [[adr-brevo-replaces-zoho-email|Brevo Replaces All Zoho Products]] ADR.
 - SMTP credentials (API key) stored in Vault, not in the form or database.
 - Test Connection button verifies SMTP configuration.
 - Success/error result displayed inline after test.
@@ -569,7 +569,7 @@ This section defines the primary implementation-facing forms and pages in the My
 ### PaymentGatewayForm
 
 **Purpose:** Configure active payment gateway (Stripe or Paystack).  
-**Architecture:** Standalone form. One active gateway per client instance (`payment-gateway-mutability` ADR). Publishable key stored in `payment_config` table. Secret key stored in Vault (`payment-security-boundary-vault` ADR).
+**Architecture:** Standalone form. One active gateway per client instance ([[adr-payment-gateway-mutability|Payment Gateway Mutability]] ADR). Publishable key stored in `payment_config` table. Secret key stored in Vault ([[adr-payment-security-boundary-vault|Payment Security Boundary: Secret Keys Deferred to the Vault]] ADR).
 
 **Schema fields (`payment_config`):** `active_gateway`, `stripe_publishable_key`, `stripe_connected`, `stripe_connected_at`, `paystack_connected`, `paystack_connected_at`, `test_mode`, `configured_at`.
 
@@ -577,7 +577,7 @@ This section defines the primary implementation-facing forms and pages in the My
 - Gateway selector with Stripe and Paystack options (radio buttons or cards).
 - Test Mode toggle for sandbox/live key switching.
 - Publishable Key input — safe to expose in client-side code.
-- Secret Key input must NOT be present in the form. Secret keys are stored exclusively in The Vault per `payment-security-boundary-vault` ADR.
+- Secret Key input must NOT be present in the form. Secret keys are stored exclusively in The Vault per [[adr-payment-security-boundary-vault|Payment Security Boundary: Secret Keys Deferred to the Vault]] ADR.
 - Vault notice displayed explaining secret key storage.
 - RBAC: Owner only.
 
@@ -621,7 +621,7 @@ This section defines the primary implementation-facing forms and pages in the My
 - Contains a document type selector (Privacy Policy vs Terms & Conditions).
 - Embeds the ClauseBuilder component, parameterized by document type.
 - Publish/update button writes to `privacy_policy` or `t_and_c` table and publishes to the corresponding public page.
-- See `legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR.
+- See [[adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture|Legal Policy Responsibility Acknowledgement and Clause-Builder Architecture]] ADR.
 
 ### ClauseBuilder (Shared Custom Component)
 
@@ -778,7 +778,7 @@ ErrorLayout (BlankLayout)
 ### AdminLayout
 
 **Purpose:** Admin panel shell — native M3 `NavigationRailLayout` with sidebar navigation.
-**Architecture:** NavigationRailLayout with sidebar + content panel pattern. Uses plain Link components with lambda click handlers (not NavigationLink). HTMLTemplate is banned per the `htmltemplate-use` ADR.
+**Architecture:** NavigationRailLayout with sidebar + content panel pattern. Uses plain Link components with lambda click handlers (not NavigationLink). HTMLTemplate is banned per the [[adr-htmltemplate-use|HTMLTemplate Use]] ADR.
 
 **Structure:**
 ```text
@@ -1088,7 +1088,7 @@ Expected fields include:
 
 Mybizz_management is **out of scope** for this project. The following is recorded as architectural context only. Mybizz_management is a separate Anvil application for platform operator tooling — client provisioning, health monitoring, billing automation, and update distribution. It is not part of master_template and is built only after the master template reaches launch.
 
-Relevant architectural context is documented in `platform-architecture.md`.
+Relevant architectural context is documented in [[platform-architecture|Platform Architecture]].
 
 ---
 
@@ -1103,7 +1103,7 @@ The `invoice` and `invoice_items` schema tables do not contain dedicated tax fie
 - Tax = subtotal × tax rate (display calculation)
 - `invoice.total_amount` = subtotal + tax (the final stored amount)
 
-For V1, the tax rate is fixed at **15%** (South African VAT). This rate is used for display calculation only and is not stored per invoice. If a configurable tax rate is needed in future, it should be added to the `business_profile` or `config` table.
+For V1, the tax rate is fixed at **15%** (South African VAT). This rate is used for display calculation only and is not stored per invoice. If a configurable tax rate is needed in future, it should be added to the `business_profile` or [[config|Config]] table.
 
 ### Invoice Status Lifecycle
 
@@ -1236,7 +1236,7 @@ The booking calendar uses 4 template subforms for rendering events across three 
 
 ### 7-Step Booking Flow Per-Step UI Layout
 
-The booking flow uses 3 server round-trips maximum (`form-architecture-and-state` ADR). Each step has a defined UI:
+The booking flow uses 3 server round-trips maximum ([[adr-form-architecture-and-state|Form Architecture and State Management]] ADR). Each step has a defined UI:
 
 **Round-trip 1: `get_booking_context(service_id)`**
 
@@ -1266,7 +1266,7 @@ The booking flow uses 3 server round-trips maximum (`form-architecture-and-state
 | 7. Confirmation | Success card with check icon, booking ID, details summary. "View Booking" and "Book Another" buttons. | None — client-side |
 
 **Global booking flow rules:**
-- globals.py `booking_flow_state` preserves selections across steps (see `docs-standard-global/docstd-globals-contract.md`).
+- globals.py `booking_flow_state` preserves selections across steps (see [[docstd-globals-contract|globals.py Contract]]).
 - Back navigation preserves state — no re-fetch if data is cached in `booking_flow_state.cached_context`.
 - Step transitions show a brief loading indicator (LinearProgressIndicator or spinner) during server calls.
 - 30-second timeout on any server call — shows "Connection timed out. Please try again." with retry button.
@@ -1374,7 +1374,7 @@ This section records how the source files map into this consolidated design auth
 
 | Source file | Primary contribution to this document |
 |---|---|
-| `design-direction.md` | Core visual direction, tokens, spacing, typography, elevations, role map |
+| [[design-direction|Design Direction (Canonical)]] | Core visual direction, tokens, spacing, typography, elevations, role map |
 | `design-consultation-plan-workflows.md` | Workflow details, custom components, schema additions, implementation notes |
 | `design-consultation-plan-descriprive.md` | Workstreams, palette model, blog template strategy, layout architecture |
 
@@ -1438,8 +1438,8 @@ implementation artifacts for the MUI aesthetic and palette system.
 
 | File | Location | Purpose | Status |
 |---|---|---|---|
-| `DESIGN_palette_section.md` | `docs/` | Full M3 CSS token sets for all 4 palettes | Authoritative |
-| `palette_selector_tokens.md` | `docs/` | Python dict blocks for palette selector | Authoritative |
+| [[DESIGN_palette_section|DESIGN Palette Section]] | `docs/` | Full M3 CSS token sets for all 4 palettes | Authoritative |
+| [[palette_selector_tokens|Token Swap Blocks]] | `docs/` | Python dict blocks for palette selector | Authoritative |
 | `theme_mui_patch.css` | `docs/` | MUI aesthetic patch (reference only) | Reference |
 | `theme_patched.css` | `docs/` | Deployment-ready theme.css with MUI patch | Deploy |
 
@@ -1458,10 +1458,10 @@ implementation artifacts for the MUI aesthetic and palette system.
 
 | Specification | Relevance |
 |---|---|
-| `spec-component-properties.md` | Component property standards, Designer vs Code classification |
-| `spec-m3-design-standards.md` | M3 design standards, typography, spacing, accessibility |
-| `spec-m3_component_mapping.md` | M3 to Anvil component mapping, support levels |
-| `spec-material-3-theme.md` | M3 theme implementation, token structure, CSS overrides |
-| `spec-screen-and-wireframe-production-standards.md` | Screen and wireframe production rules |
-| `spec-screen-production-standard.md` | Screen production process, M3 token block |
-| `spec-ui-standards.md` | UI standards, component naming, form types |
+| [[spec-component-properties|Component Properties Specification]] | Component property standards, Designer vs Code classification |
+| [[spec-m3-design-standards|M3 Design & Component Standards]] | M3 design standards, typography, spacing, accessibility |
+| [[spec-m3_component_mapping|m3_component_mapping.md]] | M3 to Anvil component mapping, support levels |
+| [[spec-material-3-theme|Material 3 Theme Specification]] | M3 theme implementation, token structure, CSS overrides |
+| [[spec-screen-and-wireframe-production-standards|Screen & Wireframe Production Standards]] | Screen and wireframe production rules |
+| [[spec-screen-production-standard|Screen Production Standard]] | Screen production process, M3 token block |
+| [[spec-ui-standards|UI Standards]] | UI standards, component naming, form types |

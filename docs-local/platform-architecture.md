@@ -11,11 +11,11 @@ date-created: 2026-07-09T144255+0200
 **Architecture:** Single vertical, dependency-based (master_template → client instances)
 **UI Theme:** Material Design 3 (M3)
 **Platform Capacity:** 100 clients (V1.x)
-**Schema:** 44 tables (see `authoritative-schema.md`)
+**Schema:** 44 tables (see [[authoritative-schema|Authoritative Database Schema]])
 
 **Note:** The five-app dependency model (development workspace / master_template /
 blank_client_template / client instances / platform-operator tooling) is Mybizz-wide — see
-`spec-five-app-architecture-model.md`. This document contains only this app's specific
+[[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]. This document contains only this app's specific
 instantiation of that model and its own feature set.
 
 ---
@@ -48,7 +48,7 @@ this app.
 
 ## 3. This App's Five-App Instances
 
-Per the Mybizz-wide model (`spec-five-app-architecture-model.md`), this app's actual
+Per the Mybizz-wide model ([[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]), this app's actual
 instance names:
 
 | App | Instance Name |
@@ -105,7 +105,7 @@ Two pricing models — both fully supported:
 
 ### 4.7 Email & Campaigns
 Three distinct email systems — Anvil built-in (system emails), Brevo SMTP (transactional),
-Brevo Campaigns (marketing). **See:** `spec-integration.md` (Integration — Brevo patterns).
+Brevo Campaigns (marketing). **See:** [[spec-integration|Integration Specification]] (Integration — Brevo patterns).
 
 ### 4.8 Blog & Content, Tasks & Segmentation
 Full blog with rich text editor; manual and basic auto-generated tasks; pre-built segments.
@@ -138,16 +138,16 @@ Full blog with rich text editor; manual and basic auto-generated tasks; pre-buil
 The platform is designed to work within Anvil's specific parameters. Key constraints:
 
 - **Skulpt client-side runtime:** Not all Python 3 stdlib works. Money and date logic lives in
-  server modules only. See `anvil-platform-constraints` ADR.
+  server modules only. See [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR.
 - **No native URL routing:** Public pages use the community routing library. Admin portal uses
-  lambda/Link/`open_form`. See `navigation-lambda-link-open-form` ADR, `ui-customization-approach` ADR.
+  lambda/Link/`open_form`. See [[adr-navigation-lambda-link-open-form|Navigation Standard: Lambda/Link/open_form]] ADR, [[adr-ui-customization-approach|UI Customization Approach]] ADR.
 - **Lazy-loaded Data Table rows:** Never iterate without `.search()` or `.limit_to()`. See
-  `data-access-patterns` ADR.
+  [[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR.
 - **Server call latency:** Every `anvil.server.call()` is an HTTP round-trip. Minimize in
-  user-facing flows. See `form-architecture-and-state` ADR.
-- **No WebSocket push:** Real-time updates use client-side timer polling. See `real-time-and-background-tasks` ADR.
+  user-facing flows. See [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR.
+- **No WebSocket push:** Real-time updates use client-side timer polling. See [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR.
 
-**See:** `anvil-platform-constraints` ADR (Anvil Platform Constraints and Design Boundaries)
+**See:** [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints and Design Boundaries)
 
 ---
 
@@ -155,15 +155,15 @@ The platform is designed to work within Anvil's specific parameters. Key constra
 
 | Specification | Relevance |
 |---|---|
-| `spec-five-app-architecture-model.md` | Five-app architecture model (Mybizz-wide) |
-| `spec-client-activation-runbook.md` | Client provisioning and activation procedures |
+| [[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]] | Five-app architecture model (Mybizz-wide) |
+| [[spec-client-activation-runbook|Client Instance Activation Runbook]] | Client provisioning and activation procedures |
 | `spec-nomenclature.md` | Naming conventions for files, forms, components, tables |
-| `spec-integration.md` | Brevo, Stripe, Paystack integration patterns |
-| `spec-regulatory-compliance-baseline.md` | POPIA, GDPR, PCI DSS compliance |
-| `spec-security-architecture.md` | RBAC role limits, token security |
+| [[spec-integration|Integration Specification]] | Brevo, Stripe, Paystack integration patterns |
+| [[spec-regulatory-compliance-baseline|Regulatory Compliance Baseline (Specification)]] | POPIA, GDPR, PCI DSS compliance |
+| [[spec-security-architecture|Security & Secrets Architecture]] | RBAC role limits, token security |
 
 ---
 
 *Platform Architecture v3.0 — Five-app model extracted to
-`spec-five-app-architecture-model.md`. This document contains only this app's specific
+[[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]. This document contains only this app's specific
 instances, feature scope, and business model.*

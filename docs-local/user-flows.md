@@ -8,7 +8,7 @@ date-created: 2026-07-09T144411+0200
 # Mybizz CS — User Flows
 
 **Authority:** Reference — defines intended behaviour for all user flows  
-**Related ADRs:** `form-architecture-and-state` ADR (Form Architecture and State Management), `webhook-architecture` ADR (Webhook Architecture)
+**Related ADRs:** [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture and State Management), [[adr-webhook-architecture|Webhook Architecture]] ADR (Webhook Architecture)
 
 ---
 
@@ -59,7 +59,7 @@ date-created: 2026-07-09T144411+0200
 
 ### Owner Onboarding (Onboarding Form — guided first-run)
 
-> **Note:** Onboarding is a separate form from Settings. It links to Settings for specific configuration tasks. See `specifications-global/spec-onboarding-implementation-plan.md` for full details.
+> **Note:** Onboarding is a separate form from Settings. It links to Settings for specific configuration tasks. See [[spec-onboarding-implementation-plan|Mybizz CS Onboarding System - Engineering Plan]] for full details.
 
 1. **Owner logs in** → Onboarding form opens with welcome and progress indicator
 2. **Business Profile** — Link to Settings → Business Profile tab
@@ -88,9 +88,9 @@ date-created: 2026-07-09T144411+0200
 
 **Post-confirmation:** Offer recurring appointment option (weekly / bi-weekly / monthly).
 
-**Performance note:** The booking flow has multiple steps, each potentially requiring a server call. To avoid sluggish UX, data is pre-loaded where possible and related operations are batched. See `form-architecture-and-state` ADR (Form Architecture — booking flow latency management).
+**Performance note:** The booking flow has multiple steps, each potentially requiring a server call. To avoid sluggish UX, data is pre-loaded where possible and related operations are batched. See [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture — booking flow latency management).
 
-**See:** `anvil-platform-constraints` ADR (Anvil Platform Constraints — Skulpt limits on date/money logic)
+**See:** [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints — Skulpt limits on date/money logic)
 
 ---
 
@@ -111,10 +111,10 @@ Vault (Owner only)
 
 **Processing a booking:** Open detail → verify details and payment status → Confirm (PENDING → CONFIRMED) → system sends confirmation email and creates calendar event.
 
-**Payment webhooks:** Stripe and Paystack POST webhooks to the client instance. Handlers return HTTP 200 immediately and defer processing to background tasks. See `webhook-architecture` ADR (Webhook Architecture).
+**Payment webhooks:** Stripe and Paystack POST webhooks to the client instance. Handlers return HTTP 200 immediately and defer processing to background tasks. See [[adr-webhook-architecture|Webhook Architecture]] ADR (Webhook Architecture).
 
-**See:** `real-time-and-background-tasks` ADR (Real-Time and Background Tasks — polling intervals)
-**See:** `pdf-invoice-generation` ADR (PDF Invoice Generation) for invoice creation on booking completion.
+**See:** [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR (Real-Time and Background Tasks — polling intervals)
+**See:** [[adr-pdf-invoice-generation|PDF Invoice Generation]] ADR (PDF Invoice Generation) for invoice creation on booking completion.
 
 ---
 
@@ -190,7 +190,7 @@ Vault (Owner only)
 6. Configure final CTA — headline, subheadline, button text + link.
 7. Preview → Save → live immediately.
 
-Auto-saves every 30 seconds. Configuration stored in `config` table with `key = 'home_config'`.
+Auto-saves every 30 seconds. Configuration stored in [[config|Config]] table with `key = 'home_config'`.
 
 ---
 

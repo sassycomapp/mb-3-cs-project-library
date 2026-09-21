@@ -9,13 +9,13 @@ date-created: 2026-07-09T144429+0200
 
 **Vertical:** Consulting & Services only
 **Architecture:** Dependency-based (master_template → client instances)
-**Schema:** 44 tables (see `authoritative-schema.md`)
+**Schema:** 44 tables (see [[authoritative-schema|Authoritative Database Schema]])
 
 ---
 
 ## 1. The Five-App System
 
-Mybizz runs on five applications within a single Anvil account (see `client-instance-readme-five-app-system` ADR):
+Mybizz runs on five applications within a single Anvil account (see [[adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]] ADR):
 
 ### mb-3-cs
 The development workspace. All feature work happens here. Connected to GitHub as the shared
@@ -44,13 +44,13 @@ Deferred to post-launch; built only after `master_template` reaches launch and t
 has been manually onboarded.
 
 Client instances expose management HTTP endpoints from day one so that Mybizz_management can
-communicate with them when built. **See:** `spec-api-specification.md` (API Specification — management endpoints),
-`mybizz-management-visibility` ADR.
+communicate with them when built. **See:** [[spec-api-specification|API Specification (HTTP Endpoints)]] (API Specification — management endpoints),
+[[adr-mybizz-management-visibility|Mybizz_management Visibility and Control]] ADR.
 
 **Note:** mb-2-cs was the original development application and has been deprecated. All
 development has migrated to mb-3-cs.
 
-**See:** `client-instance-readme-five-app-system` ADR (Mandatory README in Every Client Instance)
+**See:** [[adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]] ADR (Mandatory README in Every Client Instance)
 
 ---
 
@@ -62,7 +62,7 @@ and permanently overrides the dependency for that instance only, with no error o
 instance stops receiving any future update to `master_template`. If a change is needed for a
 specific client, it belongs in `mb-3-cs`, tested against a private client instance, then merged
 `develop` → `stable` into `master_template` — after which every client instance, including the
-one that prompted the change, receives it automatically. Per `client-instance-readme-five-app-system` ADR, every client instance
+one that prompted the change, receives it automatically. Per [[adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]] ADR, every client instance
 carries a README stating this explicitly from the moment of provisioning; if you are working
 directly in a client instance app and don't see that README, stop and locate it before proceeding.
 
@@ -112,21 +112,21 @@ server_code/
 **Note:** The client-side CRM and marketing package is named `crm/` — not `marketing/`. The
 server-side package remains `server_marketing/`.
 
-**See:** `crm-package-replaces-marketing` ADR
+**See:** [[crm-package-replaces-marketing|Package Name: crm/ Replaces marketing/]] ADR
 
 ---
 
 ## 5. Module Architecture
 
-See `anvil-platform-standards.md` Section 3 for the general Three-Tier Module Pattern (Forms /
+See [[spec-anvil-platform-standards|Anvil Platform Mechanics]] Section 3 for the general Three-Tier Module Pattern (Forms /
 Client Modules / Server Modules / Pure Logic Modules) — not repeated here. This project's specific
-authority for the pattern: `form-architecture-and-state` ADR (Form Architecture and State Management).
+authority for the pattern: [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture and State Management).
 
 ---
 
 ## 6. Navigation Architecture
 
-See `specifications-global/spec-m3-design-standards.md` Section 7 for the general authenticated/public navigation patterns
+See [[spec-m3-design-standards|M3 Design & Component Standards]] Section 7 for the general authenticated/public navigation patterns
 (plain `Link` vs. Routing, lambda loop-capture) — not repeated here. This project's specific
 choices and menu structures:
 
@@ -136,11 +136,11 @@ choices and menu structures:
 | Public website pages | Anvil Routing dependency (`@router.route`) |
 
 **This project uses native M3 Layouts** (`NavigationRailLayout`, `NavigationDrawerLayout`) for
-layout shells, per the `htmltemplate-use` ADR. `HTMLTemplate` is banned — all layout-shell cases
+layout shells, per the [[adr-htmltemplate-use|HTMLTemplate Use]] ADR. `HTMLTemplate` is banned — all layout-shell cases
 use the native M3 Layouts. Sidebar navigation uses plain `Link` components with lambda click
 handlers (not `NavigationLink`). `navigate_to` is not used.
 
-**See:** `htmltemplate-use` ADR, `navigation-lambda-link-open-form` ADR, `ui-customization-approach` ADR
+**See:** [[adr-htmltemplate-use|HTMLTemplate Use]] ADR, [[adr-navigation-lambda-link-open-form|Navigation Standard: Lambda/Link/open_form]] ADR, [[adr-ui-customization-approach|UI Customization Approach]] ADR
 
 ### AdminLayout Navigation Structure
 ```
@@ -196,7 +196,7 @@ authentication and routes before `init_components()`:
 
 Calling `open_form()` in `__init__` must always be followed by `return`.
 
-**See:** `anvil-platform-constraints` ADR (Anvil Platform Constraints — server call latency)
+**See:** [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints — server call latency)
 
 ---
 
@@ -214,20 +214,20 @@ final step.
 
 | Specification | Relevance |
 |---|---|
-| `spec-anvil-platform-standards.md` | Platform mechanics, server patterns, data access |
-| `spec-anvil-spec-table.md` | Comprehensive Anvil component and pattern reference |
-| `spec-five-app-architecture-model.md` | Five-app architecture (Mybizz-wide) |
+| [[spec-anvil-platform-standards|Anvil Platform Mechanics]] | Platform mechanics, server patterns, data access |
+| [[spec-anvil-spec-table|Anvil Specification Table]] | Comprehensive Anvil component and pattern reference |
+| [[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]] | Five-app architecture (Mybizz-wide) |
 | `spec-nomenclature.md` | Naming conventions for files, forms, components, tables |
-| `spec-security-architecture.md` | RBAC role limits, token security, regulatory posture |
-| `spec-security.md` | General security patterns, rate limiting, numeric standards |
-| `spec-vault-system.md` | Vault architecture, two-level secrets model |
+| [[spec-security-architecture|Security & Secrets Architecture]] | RBAC role limits, token security, regulatory posture |
+| [[spec-security|Security Specification]] | General security patterns, rate limiting, numeric standards |
+| [[spec-vault-system|The Vault System]] | Vault architecture, two-level secrets model |
 
 ---
 
 *Architecture v2.0 — Section 1 corrected from three named apps to the actual five-app system
-(`client-instance-readme-five-app-system` ADR); Section 2 clarified to state the `blank_client_template` clone lineage explicitly; a
+([[adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]] ADR); Section 2 clarified to state the `blank_client_template` clone lineage explicitly; a
 warning against modifying client instances added. Sections 5–6 trimmed of content now duplicated
-in the Standards Library (`specifications-global/spec-anvil-platform-standards.md`, `specifications-global/spec-m3-design-standards.md`).*
+in the Standards Library ([[spec-anvil-platform-standards|Anvil Platform Mechanics]], [[spec-m3-design-standards|M3 Design & Component Standards]]).*
 
-**Outstanding, not fixed here:** `client-instance-readme-five-app-system` ADR states "the 36-table schema" for `blank_client_template`;
-`authoritative-schema.md` confirms 44 tables. That correction belongs in `client-instance-readme-five-app-system` ADR itself.
+**Outstanding, not fixed here:** [[adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]] ADR states "the 36-table schema" for `blank_client_template`;
+[[authoritative-schema|Authoritative Database Schema]] confirms 44 tables. That correction belongs in [[adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]] ADR itself.

@@ -7,7 +7,7 @@ date-created: 2026-07-06T171413+0200
 
 # Mybizz CS — globals.py Contract
 
-**Authority:** `form-architecture-and-state` ADR (Form Architecture and State Management)
+**Authority:** [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture and State Management)
 **Status:** Living document — update as new shared state is added during implementation
 
 ---

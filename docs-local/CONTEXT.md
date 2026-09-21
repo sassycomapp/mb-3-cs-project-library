@@ -7,7 +7,7 @@ date-created: 2026-08-12T212422+0200
 
 # CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
 
-Domain glossary and key concepts for agent skills that need project context (`domain-modeling`, `grill-with-docs`, `tdd`, `diagnosing-bugs`, `improve-codebase-architecture`, `codebase-design`).
+Domain glossary and key concepts for agent skills that need project context ([[step-16-domain-modeling|Step 16 Domain Modeling]], `grill-with-docs`, `tdd`, `diagnosing-bugs`, [[step-40-improve-codebase-architecture|Step 40 Improve Codebase Architecture]], `codebase-design`).
 
 ## Repository architecture
 
@@ -59,7 +59,7 @@ Architecture Decision Records live in `adr-local/` (currently 3). Major architec
 
 - **Devlog index**: `devlog-index.md` — reverse-chronological task completion log
 - **Judgement trail**: `judgement-trail.md` — flagged issues, decisions, approved deviations
-- **Active todo**: `wip/todo.md`
+- **Active todo**: [[dev-makepdlf-todo|Active PDLF To-Do List]]
 
 ## Multi-project context
 

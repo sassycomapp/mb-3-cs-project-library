@@ -11,7 +11,7 @@ date-created: 2026-06-01
 **Version:** V1 (Consulting & Services only)
 **Total Tables:** 44
 **Platform:** Anvil.works
-**Source:** Consolidated from `database-schema.md`, `scaffold-spec.md`, and `build-plan.md`
+**Source:** Consolidated from `database-schema.md`, [[scaffold-spec|Scaffold Specification]], and [[build-plan|Build Plan (Definitive)]]
 
 ---
 
@@ -89,7 +89,7 @@ Client business information.
 | `data_governance_ack_accepted` | bool | Data governance boundary acknowledgement |
 | `data_governance_ack_accepted_at` | datetime | UTC — when acknowledgement recorded |
 
-> **See:** `specifications-global/spec-onboarding-implementation-plan.md` for full onboarding field definitions.
+> **See:** [[spec-onboarding-implementation-plan|Mybizz CS Onboarding System - Engineering Plan]] for full onboarding field definitions.
 
 #### Design and website fields (added per DESIGN.md)
 
@@ -103,7 +103,7 @@ Client business information.
 | `accreditations` | string | Business accreditations text |
 | `google_maps_embed_url` | string | Google Maps embed URL for contact page |
 
-###[DONE] 1.3 `config`
+###[DONE] 1.3 [[config|Config]]
 Key-value configuration storage.
 
 | Field | Type | Notes |
@@ -188,7 +188,7 @@ System users and staff (extends Anvil Users service).
 | `role` | string | "owner", "manager", "admin", "staff", "customer" |
 | `account_status` | string | "active", "suspended", "deleted" |
 | `phone` | string | |
-| `permissions` | simpleObject | JSON permission flags |
+| [[permissions|User Permissions]] | simpleObject | JSON permission flags |
 | `created_at` | datetime | UTC |
 | `signed_up` | datetime | UTC |
 | `email_confirmation_key` | string | |
@@ -489,7 +489,7 @@ Payment gateway webhook history.
 | `error_message` | string | If processing failed |
 | `received_at` | datetime | UTC |
 
-**Note:** `webhook-architecture` ADR (Webhook Architecture) defines an alternative column set for this table. The columns above represent the actual implementation. The ADR's `source` maps to `gateway`, `status` maps to `verified` + `processed`, and `idempotency_key` is handled via `event_type` + `gateway` dedup. See `webhook-architecture` ADR for the design rationale.
+**Note:** [[adr-webhook-architecture|Webhook Architecture]] ADR (Webhook Architecture) defines an alternative column set for this table. The columns above represent the actual implementation. The ADR's `source` maps to `gateway`, `status` maps to `verified` + `processed`, and `idempotency_key` is handled via `event_type` + `gateway` dedup. See [[adr-webhook-architecture|Webhook Architecture]] ADR for the design rationale.
 
 ---
 
@@ -555,7 +555,7 @@ Marketing landing pages.
 | `title` | string | |
 | `slug` | string | URL-friendly, unique |
 | `template_type` | string | "lead_capture", "event_registration", "vsl" |
-| `config` | simpleObject | Template configuration |
+| [[config|Config]] | simpleObject | Template configuration |
 | `status` | string | "draft", "published" |
 | `created_at` | datetime | UTC |
 | `published_at` | datetime | UTC |
@@ -611,7 +611,7 @@ Terms and conditions clause data for the Owner's public-facing T&Cs page.
 | `created_at` | datetime | UTC |
 | `updated_at` | datetime | UTC |
 
-> **See:** `legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR for the clause builder architecture.
+> **See:** [[adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture|Legal Policy Responsibility Acknowledgement and Clause-Builder Architecture]] ADR for the clause builder architecture.
 
 ---
 
@@ -675,7 +675,7 @@ Time tracking for services.
 ## 7. Summary Tables (5)
 
 ### 7.1 `daily_summary`
-Pre-computed daily analytics. Populated by daily background task (`real-time-and-background-tasks` ADR, `data-access-patterns` ADR).
+Pre-computed daily analytics. Populated by daily background task ([[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR, [[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -687,7 +687,7 @@ Pre-computed daily analytics. Populated by daily background task (`real-time-and
 | `created_at` | datetime | UTC |
 
 ### 7.2 `service_performance`
-Pre-computed per-service analytics. Populated by daily background task (`data-access-patterns` ADR).
+Pre-computed per-service analytics. Populated by daily background task ([[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -698,7 +698,7 @@ Pre-computed per-service analytics. Populated by daily background task (`data-ac
 | `created_at` | datetime | UTC |
 
 ### 7.3 `provider_performance`
-Pre-computed per-provider analytics. Populated by daily background task (`data-access-patterns` ADR).
+Pre-computed per-provider analytics. Populated by daily background task ([[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -709,7 +709,7 @@ Pre-computed per-provider analytics. Populated by daily background task (`data-a
 | `created_at` | datetime | UTC |
 
 ### 7.4 `campaign_metrics`
-Pre-computed campaign analytics. Populated by hourly background task (`data-access-patterns` ADR).
+Pre-computed campaign analytics. Populated by hourly background task ([[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -721,7 +721,7 @@ Pre-computed campaign analytics. Populated by hourly background task (`data-acce
 | `created_at` | datetime | UTC |
 
 ### 7.5 `health_log`
-Instance health metrics. Written every 15 minutes by health heartbeat background task (`real-time-and-background-tasks` ADR).
+Instance health metrics. Written every 15 minutes by health heartbeat background task ([[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -731,7 +731,7 @@ Instance health metrics. Written every 15 minutes by health heartbeat background
 | `created_at` | datetime | UTC |
 
 ### 7.6 `error_log`
-Application error tracking. Written by server functions when unhandled exceptions occur or error thresholds are exceeded (`observability-architecture` ADR, `real-time-and-background-tasks` ADR).
+Application error tracking. Written by server functions when unhandled exceptions occur or error thresholds are exceeded ([[adr-observability-architecture|Observability Architecture]] ADR, [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR).
 
 | Field | Type | Notes |
 |-------|------|-------|
@@ -754,15 +754,15 @@ All `datetime` fields stored in UTC. Display conversion uses `business_profile.t
 
 ### Data Isolation
 
-Each client instance is a separate Anvil app with its own isolated database. Data isolation is structural — one client instance cannot access another's tables. See `dependency-based-not-multi-tenant` ADR.
+Each client instance is a separate Anvil app with its own isolated database. Data isolation is structural — one client instance cannot access another's tables. See [[adr-dependency-based-not-multi-tenant|Mybizz CS is a Dependency-Based Architecture, Not a Multi-Tenant Architecture]] ADR.
 
 ### Secret Management
 Payment gateway secret keys stored in `vault` table only (encrypted at rest). Credentials retrieved via `get_vault_secret()` in server code.
 
-### Lead Capture (`lead-capture-simultaneous-creation` ADR)
+### Lead Capture ([[adr-lead-capture-simultaneous-creation|Lead Capture: Simultaneous leads + contacts Creation]] ADR)
 When lead submitted from landing page: both `leads` and `contacts` rows created simultaneously. `leads.converted_to_contact_id` set immediately. Contact auto-enrolled in welcome campaign.
 
-### Email Architecture (`brevo-replaces-zoho-email` ADR)
+### Email Architecture ([[adr-brevo-replaces-zoho-email|Brevo Replaces All Zoho Products]] ADR)
 - Brevo SMTP — Transactional email
 - Brevo Campaigns API — Marketing email
 - All clients use identical SMTP host (smtp-relay.brevo.com:587)
@@ -772,9 +772,9 @@ When lead submitted from landing page: both `leads` and `contacts` rows created 
 Mybizz_management (the platform operator's internal tooling) maintains an **append-only amendment log** of credential and configuration changes. It never overwrites. It always holds the latest values plus the full history. This is outside the client instance scope but is a system-level behaviour required for audit and compliance.
 
 ### Onboarding Model
-Onboarding is a separate form with required elements (currency selection, legal acknowledgement). Settings is a single tabbed form for all configuration. Bidirectional navigation between Onboarding and Settings. **[`onboarding-finality` ADR]**
+Onboarding is a separate form with required elements (currency selection, legal acknowledgement). Settings is a single tabbed form for all configuration. Bidirectional navigation between Onboarding and Settings. **[[adr-onboarding-finality|Onboarding Finality]] ADR**
 
-**See:** `specifications-global/spec-onboarding-implementation-plan.md` for full onboarding specification.
+**See:** [[spec-onboarding-implementation-plan|Mybizz CS Onboarding System - Engineering Plan]] for full onboarding specification.
 
 ---
 

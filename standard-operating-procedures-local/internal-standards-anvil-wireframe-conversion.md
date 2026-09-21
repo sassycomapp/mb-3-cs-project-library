@@ -21,7 +21,7 @@ date-created: 2026-07-25T152345+0200
 
 | Source | Rule |
 |--------|------|
-| `docs-local/DESIGN_palette_section.md` | Professional Blue is the default demonstration palette. 19 CSS custom properties defined (e.g. `--primary: #493ef3`, `--surface: #fdfcff`). Four palettes available; Professional Blue is the default. |
+| [[DESIGN_palette_section|DESIGN Palette Section]] | Professional Blue is the default demonstration palette. 19 CSS custom properties defined (e.g. `--primary: #493ef3`, `--surface: #fdfcff`). Four palettes available; Professional Blue is the default. |
 | `docs/theme_patched.css` | Deployment-ready theme with MUI patch. All CSS custom properties in screen output MUST derive from this file. |
 | `docs/theme_mui_patch.css` | MUI patch in isolation (7 sections, 9 variables). |
 
@@ -35,7 +35,7 @@ date-created: 2026-07-25T152345+0200
 
 | Source | Rule |
 |--------|------|
-| `docs-local/DESIGN.md` | Full M3 typography scale: Display (57px), Headline Large (32px), Headline Small (24px), Title Large (22px), Title Medium (16px), Body Large (16px), Body Medium (14px), Body Small (12px), Label Large (14px), Label Medium (12px), Label Small (11px). Font family: `'Roboto', sans-serif`. |
+| [[DESIGN|DESIGN]] | Full M3 typography scale: Display (57px), Headline Large (32px), Headline Small (24px), Title Large (22px), Title Medium (16px), Body Large (16px), Body Medium (14px), Body Small (12px), Label Large (14px), Label Medium (12px), Label Small (11px). Font family: `'Roboto', sans-serif`. |
 
 ### 1.3 Spacing Scale
 
@@ -43,7 +43,7 @@ date-created: 2026-07-25T152345+0200
 
 | Source | Rule |
 |--------|------|
-| `docs-local/DESIGN.md` | 4px base grid. Spacing tokens: `--space-xs: 4px`, `--space-sm: 8px`, `--space-md: 16px`, `--space-lg: 24px`, `--space-xl: 32px`, `--space-2xl: 48px`. Border radius tokens: `--radius-sm: 4px`, `--radius-md: 8px`, `--radius-lg: 12px`, `--radius-xl: 16px`, `--radius-full: 100px`. |
+| [[DESIGN|DESIGN]] | 4px base grid. Spacing tokens: `--space-xs: 4px`, `--space-sm: 8px`, `--space-md: 16px`, `--space-lg: 24px`, `--space-xl: 32px`, `--space-2xl: 48px`. Border radius tokens: `--radius-sm: 4px`, `--radius-md: 8px`, `--radius-lg: 12px`, `--radius-xl: 16px`, `--radius-full: 100px`. |
 
 ### 1.4 Breakpoints
 
@@ -111,7 +111,7 @@ No naming convention for Anvil event handlers (e.g. `btn_save_click`, `txt_email
 
 | Source | Rule |
 |--------|------|
-| `specifications-global/spec-m3_component_mapping.md` (global) | Authoritative mapping of Anvil Material 3 Theme components to their Anvil classes, usage notes, and writeback support. |
+| [[spec-m3_component_mapping|m3_component_mapping.md]] (global) | Authoritative mapping of Anvil Material 3 Theme components to their Anvil classes, usage notes, and writeback support. |
 
 Key mappings observed across production reports:
 
@@ -159,9 +159,9 @@ No dedicated accessibility specification (WCAG level targets, ARIA requirements,
 | Source | Rule |
 |--------|------|
 | Production reports (2026-06-24) | Screens include `@media (prefers-color-scheme: dark)` dark mode support. |
-| `adr-global/adr-dark-mode-v1.md` (global) | Dark mode included in V1 per ADR-46. |
+| [[adr-dark-mode-v1|Dark Mode — V1 Inclusion]] (global) | Dark mode included in V1 per ADR-46. |
 
-**Note:** Dark mode is included in V1 per ADR-46. All screens must include dark mode token overrides. Authoritative dark-mode tokens defined in `docs-local/DESIGN_palette_section.md`.
+**Note:** Dark mode is included in V1 per ADR-46. All screens must include dark mode token overrides. Authoritative dark-mode tokens defined in [[DESIGN_palette_section|DESIGN Palette Section]].
 
 ### 4.3 Reduced Motion
 
@@ -179,7 +179,7 @@ No detailed reduced-motion specification found.
 
 | Source | Rule |
 |--------|------|
-| `specifications-global/spec-security-architecture.md` (global) | RBAC role limits and security posture. The former docs/test-specifications.md (full per-form RBAC access matrix, Owner/Manager/Admin/Staff/Customer, `@authenticated_endpoint` requirement) was retired — no longer on disk anywhere (verified 2026-09-18); its content was elevated to the global spec. |
+| [[spec-security-architecture|Security & Secrets Architecture]] (global) | RBAC role limits and security posture. The former docs/test-specifications.md (full per-form RBAC access matrix, Owner/Manager/Admin/Staff/Customer, `@authenticated_endpoint` requirement) was retired — no longer on disk anywhere (verified 2026-09-18); its content was elevated to the global spec. |
 
 ### 4.5 QA Verification Checklist
 
@@ -187,7 +187,7 @@ No detailed reduced-motion specification found.
 
 | Source | Rule |
 |--------|------|
-| `adr-global/adr-design-rules.md` (global) Section 7 | 15-item compliance checklist applied to every wireframe. |
+| [[adr-design-rules|Wireframe Design Rules]] (global) Section 7 | 15-item compliance checklist applied to every wireframe. |
 
 ---
 
@@ -221,17 +221,17 @@ Two canonical prompt templates exist in gbrain (not on disk):
 
 | # | Document |
 |---|----------|
-| 1 | `specifications-global/spec-screen-production-standard.md` (global) |
-| 2 | `docs-local/DESIGN.md` |
-| 3 | `docs-local/DESIGN_palette_section.md` |
+| 1 | [[spec-screen-production-standard|Screen Production Standard]] (global) |
+| 2 | [[DESIGN|DESIGN]] |
+| 3 | [[DESIGN_palette_section|DESIGN Palette Section]] |
 | 4 | `docs/theme_patched.css` |
 | 5 | `docs/theme_mui_patch.css` |
-| 6 | `specifications-global/spec-m3_component_mapping.md` (global) |
-| 7 | `specifications-global/spec-ui-standards.md` (global) |
-| 8 | `specifications-global/spec-material-3-theme.md` (global) |
+| 6 | [[spec-m3_component_mapping|m3_component_mapping.md]] (global) |
+| 7 | [[spec-ui-standards|UI Standards]] (global) |
+| 8 | [[spec-material-3-theme|Material 3 Theme Specification]] (global) |
 | 9 | `adr/37-ui-customization-approach.md` |
-| 10 | `adr-global/adr-material-3-theme-component-scope.md` (global) |
-| 11 | `adr-global/adr-design-rules.md` (global) |
+| 10 | [[adr-material-3-theme-component-scope|Material 3 Theme Component Scope]] (global) |
+| 11 | [[adr-design-rules|Wireframe Design Rules]] (global) |
 | 12 | Package-specific architecture/ADR docs |
 | 13 | Material Icons import (mandatory in all screens) |
 
@@ -243,12 +243,12 @@ Two canonical prompt templates exist in gbrain (not on disk):
 
 | Source | Rule |
 |--------|------|
-| `specifications-global/spec-m3_component_mapping.md` (global) | Authoritative list of approved M3 components and their Anvil classes. |
-| `specifications-global/spec-material-3-theme.md` (global) | Theme architecture, dependency details, customization hierarchy. |
-| `specifications-global/spec-ui-standards.md` (global) | M3 mandate, component naming, Designer-only properties. |
-| `adr-global/adr-material-3-theme-component-scope.md` (global) | Permitted M3 components, custom composition rules. |
+| [[spec-m3_component_mapping|m3_component_mapping.md]] (global) | Authoritative list of approved M3 components and their Anvil classes. |
+| [[spec-material-3-theme|Material 3 Theme Specification]] (global) | Theme architecture, dependency details, customization hierarchy. |
+| [[spec-ui-standards|UI Standards]] (global) | M3 mandate, component naming, Designer-only properties. |
+| [[adr-material-3-theme-component-scope|Material 3 Theme Component Scope]] (global) | Permitted M3 components, custom composition rules. |
 
-### Writeback Support (from `m3_component_mapping.md`)
+### Writeback Support (from [[spec-m3_component_mapping|m3_component_mapping.md]])
 
 | Component | Writeback Property |
 |-----------|-------------------|
@@ -276,9 +276,9 @@ Only Designer-mandatory properties appear in wireframe properties tables. `write
 
 | Source | Rule |
 |--------|------|
-| `docs-local/DESIGN.md` (MUI Aesthetic Implementation section) | Authoritative — 9 adopted MUI variables. |
+| [[DESIGN|DESIGN]] (MUI Aesthetic Implementation section) | Authoritative — 9 adopted MUI variables. |
 | `adr/37-ui-customization-approach.md` | ADR decision: MUI is aesthetic-only CSS overlay, not a component library. Approach 2 adopted (M3 with custom CSS overrides). |
-| `output-gstack/eng-review-2026-06-16.md` (the surviving gstack review report — the 2026-06-16 plan-design-review report no longer exists anywhere, verified 2026-09-18) | MUI findings report with full comparison table. |
+| [[eng-review-2026-06-16|Mybizz CS V1]] (the surviving gstack review report — the 2026-06-16 plan-design-review report no longer exists anywhere, verified 2026-09-18) | MUI findings report with full comparison table. |
 
 ### The 9 MUI Aesthetic Variables (mandatory in every screen)
 
@@ -320,8 +320,8 @@ Only Designer-mandatory properties appear in wireframe properties tables. `write
 
 | Source | Rule |
 |--------|------|
-| `specifications-global/spec-m3_component_mapping.md` (global) | Authoritative approved component list. |
-| `adr-global/adr-material-3-theme-component-scope.md` (global) | Permitted components and custom composition rules. |
+| [[spec-m3_component_mapping|m3_component_mapping.md]] (global) | Authoritative approved component list. |
+| [[adr-material-3-theme-component-scope|Material 3 Theme Component Scope]] (global) | Permitted components and custom composition rules. |
 
 Approved Anvil Material 3 Theme components:
 - ColumnPanel, FlowPanel, Card, DataRowPanel
@@ -340,8 +340,8 @@ Approved Anvil Material 3 Theme components:
 
 | Restriction | Source |
 |-------------|--------|
-| Legacy `Label` (`lbl_`) component — **BANNED** | `adr-global/adr-design-rules.md` (global) Section 3.2, all production reports |
-| Any component not in the approved M3 list — **BANNED** | `adr-global/adr-design-rules.md` (global) Section 3.1 |
+| Legacy `Label` (`lbl_`) component — **BANNED** | [[adr-design-rules|Wireframe Design Rules]] (global) Section 3.2, all production reports |
+| Any component not in the approved M3 list — **BANNED** | [[adr-design-rules|Wireframe Design Rules]] (global) Section 3.1 |
 
 ### 8.3 Custom HTML Components
 
@@ -349,12 +349,12 @@ Approved Anvil Material 3 Theme components:
 
 | Source | Rule |
 |--------|------|
-| `docs-standard-local/scaffold-spec.md` | 5 shared custom components defined: `ClauseBuilder`, `FooterComponent`, `VideoDisplayComponent`, `TimeLapseCarouselComponent`, `ParallaxComponent`. |
+| [[scaffold-spec|Scaffold Specification]] | 5 shared custom components defined: `ClauseBuilder`, `FooterComponent`, `VideoDisplayComponent`, `TimeLapseCarouselComponent`, `ParallaxComponent`. |
 | `obsolete/revised-anvil-worklist` | Component inventory with usage contexts. |
-| `output-gstack/eng-review-2026-06-16.md` (the surviving gstack review report — the 2026-06-16 plan-design-review report no longer exists anywhere, verified 2026-09-18) | 5 custom components noted; some lack interaction specs, wireframes, and state definitions. |
+| [[eng-review-2026-06-16|Mybizz CS V1]] (the surviving gstack review report — the 2026-06-16 plan-design-review report no longer exists anywhere, verified 2026-09-18) | 5 custom components noted; some lack interaction specs, wireframes, and state definitions. |
 
 **When custom HTML components are allowed:**
-- Only when specified in `scaffold-spec.md` as a shared custom component.
+- Only when specified in [[scaffold-spec|Scaffold Specification]] as a shared custom component.
 - Only when the component serves a reusable purpose across multiple forms (e.g. `FooterComponent` on all public pages).
 - Layout variants (e.g. `BlogListTiledTemplate`, `BlogPostClassicTemplate`) are NOT standalone components — they are content panels built INTO the parent form per scaffold-spec v2.
 
@@ -364,7 +364,7 @@ Approved Anvil Material 3 Theme components:
 
 | Source | Rule |
 |--------|------|
-| `adr-global/adr-design-rules.md` (global) Section 3.3 | FlowPanel for horizontal layout, ColumnPanel for vertical layout, DataRowPanel for DataGrid row templates. Containers must be drawn as containers with components inside. |
+| [[adr-design-rules|Wireframe Design Rules]] (global) Section 3.3 | FlowPanel for horizontal layout, ColumnPanel for vertical layout, DataRowPanel for DataGrid row templates. Containers must be drawn as containers with components inside. |
 
 ---
 
@@ -374,19 +374,19 @@ All files verified to exist on disk at `/mnt/c/dev/dev-mb-3-cs/mb-3-cs-project-l
 
 | File | Role |
 |------|------|
-| `docs-local/DESIGN.md` | Canonical design system — tokens, typography, spacing, roles, empty states, MUI section |
+| [[DESIGN|DESIGN]] | Canonical design system — tokens, typography, spacing, roles, empty states, MUI section |
 | `specifications-global/spec-nomenclature.md` (global) | Component naming conventions and prefixes |
-| `specifications-global/spec-m3_component_mapping.md` (global) | Approved M3 components, Anvil classes, writeback support |
-| `specifications-global/spec-ui-standards.md` (global) | M3 mandate, component naming, Designer-only properties |
-| `specifications-global/spec-screen-production-standard.md` (global) | Screen production rules — M3 token block, layout patterns, form components |
-| `specifications-global/spec-material-3-theme.md` (global) | Theme architecture, dependency details, customization hierarchy |
-| `docs-standard-local/scaffold-spec.md` | Form inventory, component classification, architecture backing |
-| `docs-local/DESIGN_palette_section.md` | Professional Blue palette tokens (19 tokens) |
+| [[spec-m3_component_mapping|m3_component_mapping.md]] (global) | Approved M3 components, Anvil classes, writeback support |
+| [[spec-ui-standards|UI Standards]] (global) | M3 mandate, component naming, Designer-only properties |
+| [[spec-screen-production-standard|Screen Production Standard]] (global) | Screen production rules — M3 token block, layout patterns, form components |
+| [[spec-material-3-theme|Material 3 Theme Specification]] (global) | Theme architecture, dependency details, customization hierarchy |
+| [[scaffold-spec|Scaffold Specification]] | Form inventory, component classification, architecture backing |
+| [[DESIGN_palette_section|DESIGN Palette Section]] | Professional Blue palette tokens (19 tokens) |
 | `docs/theme_patched.css` | Production theme.css with MUI patch |
 | `docs/theme_mui_patch.css` | MUI patch in isolation |
-| `specifications-global/spec-security-architecture.md` (global) | RBAC role limits, security posture (the former docs/test-specifications.md RBAC matrix was retired — verified absent 2026-09-18; content elevated to the global spec) |
-| `adr-global/adr-design-rules.md` (global) | Governing document for every wireframe (9 rules, 15-item compliance checklist) |
-| `adr-global/adr-material-3-theme-component-scope.md` (global) | Permitted M3 components, custom composition rules |
+| [[spec-security-architecture|Security & Secrets Architecture]] (global) | RBAC role limits, security posture (the former docs/test-specifications.md RBAC matrix was retired — verified absent 2026-09-18; content elevated to the global spec) |
+| [[adr-design-rules|Wireframe Design Rules]] (global) | Governing document for every wireframe (9 rules, 15-item compliance checklist) |
+| [[adr-material-3-theme-component-scope|Material 3 Theme Component Scope]] (global) | Permitted M3 components, custom composition rules |
 | `adr/37-ui-customization-approach.md` | MUI is aesthetic-only CSS overlay decision |
 | `output-gstack/design-reference-screens-old.html` | Canonical visual style reference |
 

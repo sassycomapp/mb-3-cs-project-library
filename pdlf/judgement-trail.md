@@ -15,13 +15,13 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 
 ## 2026-08-12 — Matt Pocock skills configuration
 
-**Issue flagged:** Existing `## Agent skills` config targeted CLAUDE.md and claimed a Local markdown issue tracker + `CONTEXT.md`/`adr/` at repo root (40+/47 ADRs, `docs/adr-index.md`) — none of which matched the on-disk layout (`docs-local/CONTEXT.md`, `adr-local/` with 3 ADRs, `output-gstack/`, `ui/`).
+**Issue flagged:** Existing `## Agent skills` config targeted CLAUDE.md and claimed a Local markdown issue tracker + [[CONTEXT|mb-3-cs (Mybizz Consulting Services)]]/`adr/` at repo root (40+/47 ADRs, `docs/adr-index.md`) — none of which matched the on-disk layout ([[CONTEXT|mb-3-cs (Mybizz Consulting Services)]], `adr-local/` with 3 ADRs, `output-gstack/`, `ui/`).
 **Developer decision:** Project uses AGENTS.md, not CLAUDE.md — `## Agent skills` block added to AGENTS.md; CLAUDE.md's block replaced with a pointer to AGENTS.md as the single source of truth. Issue tracker switched to GitHub Issues (`gh` CLI). Domain consumer rules corrected to the real layout.
 
 **Issue flagged:** Stale `agents/` copies (doc-ids mb-3-cs-0008/0009) predated the move to `docs/agents/`.
 **Developer decision:** Nothing gets deleted — moved to `obsolete/` via `git mv` (recorded as renames).
 
-**Issue flagged:** `docs-local/CONTEXT.md` claimed "47 Architecture Decision Records in `adr/`. Indexed at `docs/adr-index.md`" — neither exists on disk; docs-manager removed similar counts repo-wide on 2026-07-30 but CONTEXT.md kept the claim.
+**Issue flagged:** [[CONTEXT|mb-3-cs (Mybizz Consulting Services)]] claimed "47 Architecture Decision Records in `adr/`. Indexed at `docs/adr-index.md`" — neither exists on disk; docs-manager removed similar counts repo-wide on 2026-07-30 but CONTEXT.md kept the claim.
 **Developer decision:** Corrected to "ADRs live in `adr-local/` (currently 3)". Flagged that the timezone-utc-storage-display-conversion ADR required by AGENTS.md's Timestamp Standard is not on disk — timestamps matched the established `date-created: YYYY-MM-DDTHHMMSS+0200` frontmatter convention.
 
 ## 2026-07-07 — dev-pdlf project registration
@@ -32,16 +32,16 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 ## 2026-07-06 — Docs reorganization consolidated
 
 **Issue flagged:** Devlog/todo system status unresolved — handover questioned whether `C:\mybizz\devlog\` and `C:\mybizz\todo\` were still live.
-**Developer decision:** Old system at `C:\mybizz\` does not exist on disk — superseded. Replacement established in AGENTS.md: `devlog-index.md` + `judgement-trail.md` + `wip/todo.md` at project root. These files are actively maintained.
+**Developer decision:** Old system at `C:\mybizz\` does not exist on disk — superseded. Replacement established in AGENTS.md: `devlog-index.md` + `judgement-trail.md` + [[dev-makepdlf-todo|Active PDLF To-Do List]] at project root. These files are actively maintained.
 
-**Issue flagged:** `docs/security-architecture.md` contained app-specific framing ("Mybizz CS," "this app's") but the content (RBAC role limits, token security, regulatory posture) applies Mybizz-wide.
-**Developer decision:** Elevated to global. Moved to `specifications/spec-security-architecture.md`. Multi-tenant language corrected per `dependency-based-not-multi-tenant` ADR.
+**Issue flagged:** [[spec-security-architecture|Security & Secrets Architecture]] contained app-specific framing ("Mybizz CS," "this app's") but the content (RBAC role limits, token security, regulatory posture) applies Mybizz-wide.
+**Developer decision:** Elevated to global. Moved to [[spec-security-architecture|Security & Secrets Architecture]]. Multi-tenant language corrected per [[adr-dependency-based-not-multi-tenant|Mybizz CS is a Dependency-Based Architecture, Not a Multi-Tenant Architecture]] ADR.
 
-**Issue flagged:** HtmlTemplate ban (per `htmltemplate-use` ADR) contradicted by 10 documents still referencing custom HtmlTemplate for navigation/shells.
-**Developer decision:** Resolved across all 10 documents. Layout shells now use NavigationRailLayout/NavigationDrawerLayout. `adr/adr-global/navigation-lambda-link-open-form.md` marked partially superseded (navigation pattern unchanged, layout shell decision superseded by `htmltemplate-use` ADR). Calendar-feature-spec.md requires full redesign — deferred.
+**Issue flagged:** HtmlTemplate ban (per [[adr-htmltemplate-use|HTMLTemplate Use]] ADR) contradicted by 10 documents still referencing custom HtmlTemplate for navigation/shells.
+**Developer decision:** Resolved across all 10 documents. Layout shells now use NavigationRailLayout/NavigationDrawerLayout. [[adr-navigation-lambda-link-open-form|Navigation Standard: Lambda/Link/open_form]] marked partially superseded (navigation pattern unchanged, layout shell decision superseded by [[adr-htmltemplate-use|HTMLTemplate Use]] ADR). Calendar-feature-spec.md requires full redesign — deferred.
 
-**Issue flagged:** Vault system split between `docs/vault-system.md` and `spec-security.md` — duplication between `spec-anvil-platform-standards.md` §10-11 and `spec-security.md` §1-2.
-**Developer decision:** Consolidated into single authoritative `specifications/spec-vault-system.md`. Duplicate sections removed from both `spec-security.md` and `spec-anvil-platform-standards.md`. Original `docs/vault-system.md` deleted.
+**Issue flagged:** Vault system split between [[spec-vault-system|The Vault System]] and [[spec-security|Security Specification]] — duplication between [[spec-anvil-platform-standards|Anvil Platform Mechanics]] §10-11 and [[spec-security|Security Specification]] §1-2.
+**Developer decision:** Consolidated into single authoritative [[spec-vault-system|The Vault System]]. Duplicate sections removed from both [[spec-security|Security Specification]] and [[spec-anvil-platform-standards|Anvil Platform Mechanics]]. Original [[spec-vault-system|The Vault System]] deleted.
 
 **Issue flagged:** ADR numbers used throughout project — all 40 ADRs dropped numeric prefixes.
 **Developer decision:** Replaced all `ADR-NN` and `adr/NN-slug.md` references across 50+ files with slug names. Python script executed to ensure consistency.
@@ -71,7 +71,7 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 **Developer decision:** Established the PGLite operational pattern: stop serve → run CLI commands → restart serve. Documented in gbrain-config-reference.md §7.
 
 **Issue flagged:** GBrain at v0.42.44.0, PGLite engine. All workspace docs said v0.18.2, Supabase engine, OpenRouter proxy, local `embedding.ts` patch.
-**Developer decision:** Updated 6 files to reflect current reality: `gbrain-install-plan.md`, `gbrain-repo-strategy.md`, `gbrain-log.md`, `gbrain-reference.md`, `gbrain-operating-guide.md`, `opencode-setup.md`. Removed stale references to OpenRouter patch and Supabase project ID.
+**Developer decision:** Updated 6 files to reflect current reality: `gbrain-install-plan.md`, `gbrain-repo-strategy.md`, [[gbrain-log|Log]], [[gbrain-reference|Reference: Commands, Mechanics, Incidents, Troubleshooting]], `gbrain-operating-guide.md`, `opencode-setup.md`. Removed stale references to OpenRouter patch and Supabase project ID.
 
 **Issue flagged:** ZeroEntropy reranker failing (230 audit log entries over 3 weeks) — `ZEROENTROPY_API_KEY` not set.
 **Developer decision:** API key provided by developer. Configured in `~/.bashrc` (persistent) and OpenCode MCP environment (for serve process). Reranker enabled via `gbrain config set search.reranker.enabled true`.
@@ -100,7 +100,7 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 **Developer decision:** Added `## Task completion` and `## Environment` sections to all 4 agent files.
 
 **Issue flagged:** 52 command files in `.opencode/commands/` — 3 duplicates, 2 broken headers, 5 formatting outliers.
-**Developer decision:** Removed duplicates (`gstack-context-save.md`, `gstack-learn.md`, `gstack-upgrade.md`). Fixed headers (`build.md`, `review.md`). Standardized 5 outliers.
+**Developer decision:** Removed duplicates (`gstack-context-save.md`, `gstack-learn.md`, `gstack-upgrade.md`). Fixed headers ([[step-32-physical-scaffold-build|Step 32 Physical Scaffold Build]], `review.md`). Standardized 5 outliers.
 
 **Issue flagged:** mb-3-cs project library agent files (plan/build) now part of PDLF transition. All projects are PDLF projects.
 **Developer decision:** Project configs (`opencode.json`) created for mb4ecom and mb5pdlf for proper OpenCode operation. PDLF-specific config handled in later pass.

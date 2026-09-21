@@ -30,7 +30,7 @@ Payment is integrated into the booking flow. No separate checkout. Central-accou
 
 System currency is set at onboarding and immutable after the first transaction.
 
-**See:** `webhook-architecture` ADR (Webhook Architecture), `anvil-platform-constraints` ADR (Anvil Platform Constraints)
+**See:** [[adr-webhook-architecture|Webhook Architecture]] ADR (Webhook Architecture), [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints)
 
 ---
 
@@ -93,7 +93,7 @@ Each client creates their own Brevo account and stores SMTP and API keys in the 
 
 ## 4. Background Tasks
 
-Seven scheduled and event-driven background tasks (see `real-time-and-background-tasks` ADR):
+Seven scheduled and event-driven background tasks (see [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR):
 
 | Task | Schedule | Purpose |
 |------|----------|---------|
@@ -107,11 +107,11 @@ Seven scheduled and event-driven background tasks (see `real-time-and-background
 
 Any operation expected to exceed 22 seconds must use `@anvil.server.background_task`. Background tasks have no timeout limit.
 
-**See:** `real-time-and-background-tasks` ADR (Real-Time and Background Task Architecture)
+**See:** [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR (Real-Time and Background Task Architecture)
 
-**See:** `pdf-invoice-generation` ADR (PDF Invoice Generation) for invoice PDF approach.
+**See:** [[adr-pdf-invoice-generation|PDF Invoice Generation]] ADR (PDF Invoice Generation) for invoice PDF approach.
 
-**See:** `data-access-patterns` ADR (Data Access Patterns) for denormalization and pre-computed aggregation patterns.
+**See:** [[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR (Data Access Patterns) for denormalization and pre-computed aggregation patterns.
 
 ---
 

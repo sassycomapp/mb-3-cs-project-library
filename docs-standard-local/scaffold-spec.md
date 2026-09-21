@@ -14,21 +14,21 @@ date-created: 2026-07-06T184444+0200
 **Last Updated:** 2026-06-03 v2 — Corrected component classification. Layout variants removed from components/; only true shared components remain.
 
 **Related Documents:**
-- scaffold-workflow.md (retired — no longer on disk anywhere, verified 2026-09-18); the scaffolding sequence is covered by this file's build phases and `docs-local/build-plan.md`
-- `authoritative-schema.md` — Complete 38-table schema specifications
-- `docs-local/build-plan.md` — Phased build sequence
-- `docs-local/DESIGN.md` — Canonical design system
+- scaffold-workflow.md (retired — no longer on disk anywhere, verified 2026-09-18); the scaffolding sequence is covered by this file's build phases and [[build-plan|Build Plan (Definitive)]]
+- [[authoritative-schema|Authoritative Database Schema]] — Complete 38-table schema specifications
+- [[build-plan|Build Plan (Definitive)]] — Phased build sequence
+- [[DESIGN|DESIGN]] — Canonical design system
 
 ---
 
 ## Reconciliation Notes (2026-06-03)
 
 This file has been reconciled against:
-- `output-gstack/eng-review-2026-06-16.md` (the surviving eng review — the 2026-06-03 alignment report no longer exists anywhere, verified 2026-09-18)
-- `docs-local/authoritative-schema.md` (current)
-- `gstack-outputs/DESIGN.md` (current)
-- `docs-local/build-plan.md` (current)
-- `docs-local/DESIGN.md` (current — design-consultation-plan-workflows no longer exists anywhere, verified 2026-09-18; the design system's canonical record is DESIGN.md)
+- [[eng-review-2026-06-16|Mybizz CS V1]] (the surviving eng review — the 2026-06-03 alignment report no longer exists anywhere, verified 2026-09-18)
+- [[authoritative-schema|Authoritative Database Schema]] (current)
+- [[DESIGN|DESIGN]] (current)
+- [[build-plan|Build Plan (Definitive)]] (current)
+- [[DESIGN|DESIGN]] (current — design-consultation-plan-workflows no longer exists anywhere, verified 2026-09-18; the design system's canonical record is DESIGN.md)
 
 Key changes (v1):
 - Table count updated from 36 to 38 (added `privacy_policy`, `t_and_c`, `blog_comments`)
@@ -63,9 +63,9 @@ This document specifies the exact package structure, forms, modules, and table d
 
 **M3 Compliance:** All UI work uses Material Design 3 exclusively. Native M3 components from the theme dependency are fully supported. Custom composition is required for components not natively provided (Chips, Snackbar, Bottom Sheet, Tabs).
 
-**Build Phases:** Each form and table is annotated with its build phase (Phase 1–5). Build sequentially — each phase depends on the prior phase being complete. See `docs-local/build-plan.md` for full details.
+**Build Phases:** Each form and table is annotated with its build phase (Phase 1–5). Build sequentially — each phase depends on the prior phase being complete. See [[build-plan|Build Plan (Definitive)]] for full details.
 
-**Note for Developers:** The former scaffold-workflow.md no longer exists (verified 2026-09-18); this file's build phases and `docs-local/build-plan.md` cover the sequence. Use `authoritative-schema.md` for complete table specifications.
+**Note for Developers:** The former scaffold-workflow.md no longer exists (verified 2026-09-18); this file's build phases and [[build-plan|Build Plan (Definitive)]] cover the sequence. Use [[authoritative-schema|Authoritative Database Schema]] for complete table specifications.
 
 ---
 
@@ -416,7 +416,7 @@ If a form is used in only one parent form (even with multiple data contexts or v
 
 | Component | Parent forms | Places | Justification |
 |---|---|---|---|
-| ClauseBuilder | PolicyEditorForm (privacy_policy + t_and_c) | 2 data contexts, parameterised by document_type | Architecturally defined as shared (`legal-policy-responsibility-acknowledgement-and-clause-builder-architecture` ADR) |
+| ClauseBuilder | PolicyEditorForm (privacy_policy + t_and_c) | 2 data contexts, parameterised by document_type | Architecturally defined as shared ([[adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture|Legal Policy Responsibility Acknowledgement and Clause-Builder Architecture]] ADR) |
 | FooterComponent | HomePage, AboutPage, ContactPage, PrivacyPolicyPage, TermsConditionsPage, LandingPage | 6+ | Same footer on every public page |
 | VideoDisplayComponent | BlogPostForm, HomePage | 2 | YouTube embed in blog posts and homepage |
 | TimeLapseCarouselComponent | HomePage, ServicesForm | 2 | Auto-rotating carousel on homepage and services |
@@ -603,7 +603,7 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | `role` | string | "owner", "manager", "admin", "staff", "customer" |
 | `account_status` | string | "active", "suspended", "deleted" |
 | `phone` | string | |
-| `permissions` | simpleObject | JSON permission flags |
+| [[permissions|User Permissions]] | simpleObject | JSON permission flags |
 | `created_at` | datetime | UTC |
 | `signed_up` | datetime | UTC |
 | `email_confirmation_key` | string | |
@@ -928,7 +928,7 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | `title` | string | |
 | `slug` | string | |
 | `template_type` | string | "lead_capture", "event_registration", "vsl" |
-| `config` | simpleObject | |
+| [[config|Config]] | simpleObject | |
 | `status` | string | "draft", "published" |
 | `created_at` | datetime | UTC |
 | `published_at` | datetime | UTC |
@@ -1108,7 +1108,7 @@ All components follow the prefix convention:
 
 **Native M3 components** (fully supported): `m3.Switch`, `m3.Slider`, `m3.RadioButton`, `m3.Checkbox`, `m3.Button`, `m3.IconButton`, `m3.NavigationLink`, all input and layout components.
 
-**Custom composition required** (partially supported): Chips, Snackbar, Bottom Sheet, Tabs, Date Picker. See `m3_component_mapping.md` for implementation guidance.
+**Custom composition required** (partially supported): Chips, Snackbar, Bottom Sheet, Tabs, Date Picker. See [[spec-m3_component_mapping|m3_component_mapping.md]] for implementation guidance.
 
 ---
 
