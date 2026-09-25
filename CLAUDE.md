@@ -1,10 +1,7 @@
 ---
-document: CLAUDE.md
-doc-id: CLAUDE
-state: Live
-date-created: 2026-06-25T073307+0200
+title: "CLAUDE"
+doc-id: "CLAUDE"
 ---
-
 # CLAUDE.md
 
 ## GBrain Configuration (configured by /setup-gbrain)

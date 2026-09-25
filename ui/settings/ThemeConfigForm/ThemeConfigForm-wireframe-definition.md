@@ -1,7 +1,4 @@
 ---
-document: ThemeConfigForm — Wireframe Definition
-doc-id: ThemeConfigForm-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "ThemeConfigForm-wireframe-definition"
+doc-id: "ThemeConfigForm-wireframe-definition"
 ---
-

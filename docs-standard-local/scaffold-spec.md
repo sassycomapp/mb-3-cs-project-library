@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Scaffold Specification
-doc-id: scaffold-spec
-state: Live
-date-created: 2026-07-06T184444+0200
+title: "scaffold-spec"
+doc-id: "scaffold-spec"
 ---
-
 # Mybizz CS — Scaffold Specification
 
 **Vertical:** Consulting & Services

@@ -1,7 +1,4 @@
 ---
-document: VideoDisplayComponent — Screen Checklist
-doc-id: VideoDisplayComponent-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "VideoDisplayComponent-screen-chklist"
+doc-id: "VideoDisplayComponent-screen-chklist"
 ---
-

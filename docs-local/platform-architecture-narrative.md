@@ -1,10 +1,7 @@
 ---
-document: Mybizz — Comprehensive Application Treatise
-doc-id: platform-architecture-narrative
-state: Live
-date-created: 2026-07-09T144443+0200
+title: "platform-architecture-narrative"
+doc-id: "platform-architecture-narrative"
 ---
-
 # Mybizz — Comprehensive Application Treatise
 
 **mybizz.live**

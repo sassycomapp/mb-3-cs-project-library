@@ -1,10 +1,7 @@
 ---
-document: AGENTS.md — mb-3-cs-project-library
-state: Live
-doc-id: AGENTS
-date-created: 2026-09-10
+title: "AGENTS"
+doc-id: "AGENTS"
 ---
-
 # AGENTS.md — mb-3-cs-project-library
 
 > Inherits `~/.config/opencode/AGENTS.md` in full. This file may only

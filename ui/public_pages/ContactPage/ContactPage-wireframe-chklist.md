@@ -1,7 +1,4 @@
 ---
-document: ContactPage — Wireframe Checklist
-doc-id: ContactPage-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "ContactPage-wireframe-chklist"
+doc-id: "ContactPage-wireframe-chklist"
 ---
-

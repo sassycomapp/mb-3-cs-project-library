@@ -1,10 +1,7 @@
 ---
-document: "GStack + GBrain Config Optimization — Completion Report"
-doc-id: gstack-gbrain-optimization-20260706
-state: Live
-date-created: 2026-09-10
+title: "gstack-gbrain-optimization-20260706"
+doc-id: "gstack-gbrain-optimization-20260706"
 ---
-
 # GStack + GBrain Config Optimization — Completion Report
 
 **Date:** 2026-07-06

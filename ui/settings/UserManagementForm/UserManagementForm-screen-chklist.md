@@ -1,7 +1,4 @@
 ---
-document: UserManagementForm — Screen Checklist
-doc-id: UserManagementForm-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "UserManagementForm-screen-chklist"
+doc-id: "UserManagementForm-screen-chklist"
 ---
-

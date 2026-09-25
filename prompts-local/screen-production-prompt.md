@@ -1,11 +1,7 @@
 ---
-document: Screen Production Prompt — /design-html
-doc-id: screen-production-prompt
-state: Live
-date-created: 2026-06-28
+title: "screen-production-prompt"
+doc-id: "screen-production-prompt"
 ---
-
-
 # Screen Production Prompt — /design-html
 
 **Purpose:** Produce screen HTML/CSS mockups that are true representations of wireframes, with MUI aesthetic overlay applied, for conversion to PNG screenshots that Anvil AI will use as visual references when building the live UI.

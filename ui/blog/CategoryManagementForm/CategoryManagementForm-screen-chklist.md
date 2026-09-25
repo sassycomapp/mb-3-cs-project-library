@@ -1,10 +1,7 @@
 ---
-document: "CategoryManagementForm-screen-chklist"
-doc-id: CategoryManagementForm-screen-chklist
-state: Live
-date-created: 2026-09-10
+title: "CategoryManagementForm-screen-chklist"
+doc-id: "CategoryManagementForm-screen-chklist"
 ---
-
 # Checklist — CategoryManagementForm
 
 **Wireframe:** `CategoryManagementForm-wireframe.html`

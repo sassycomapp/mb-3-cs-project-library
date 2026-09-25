@@ -1,10 +1,7 @@
 ---
-document: "Rename Report: project-library → mb-3-cs-project-library"
-doc-id: rename-report-project-library-to-mb-3-cs-2026-07-25
-state: Live
-date-created: 2026-07-27
+title: "rename-report-project-library-to-mb-3-cs-2026-07-25"
+doc-id: "rename-report-project-library-to-mb-3-cs-2026-07-25"
 ---
-
 # Rename Report: project-library → mb-3-cs-project-library
 
 **Date:** 2026-07-25

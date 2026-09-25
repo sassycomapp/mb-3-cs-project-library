@@ -1,7 +1,4 @@
 ---
-document: AdminLayout — Wireframe Definition
-doc-id: AdminLayout-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "AdminLayout-wireframe-definition"
+doc-id: "AdminLayout-wireframe-definition"
 ---
-

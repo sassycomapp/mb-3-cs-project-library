@@ -1,10 +1,7 @@
 ---
-document: "Judgement Trail"
-doc-id: judgement-trail
-state: Live
-date-created: 2026-09-10
+title: "judgement-trail"
+doc-id: "judgement-trail"
 ---
-
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
 

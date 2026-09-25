@@ -1,10 +1,7 @@
 ---
-document: "LandingPage-screen-chklist"
-doc-id: LandingPage-screen-chklist
-state: Live
-date-created: 2026-09-10
+title: "LandingPage-screen-chklist"
+doc-id: "LandingPage-screen-chklist"
 ---
-
 # Checklist — LandingPage
 
 **Wireframe:** `LandingPage-wireframe.html`

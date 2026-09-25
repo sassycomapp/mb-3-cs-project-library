@@ -1,10 +1,7 @@
 ---
-document: Internal Standards & Specifications — Anvil Wireframe Conversion
-doc-id: internal-standards-anvil-wireframe-conversion
-state: Live
-date-created: 2026-07-25T152345+0200
+title: "internal-standards-anvil-wireframe-conversion"
+doc-id: "internal-standards-anvil-wireframe-conversion"
 ---
-
 # Internal Standards & Specifications — Anvil Wireframe Conversion
 
 **Audit date:** 2026-06-27

@@ -1,7 +1,4 @@
 ---
-document: PrivacyPolicyPage — Screen Checklist
-doc-id: PrivacyPolicyPage-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "PrivacyPolicyPage-screen-chklist"
+doc-id: "PrivacyPolicyPage-screen-chklist"
 ---
-

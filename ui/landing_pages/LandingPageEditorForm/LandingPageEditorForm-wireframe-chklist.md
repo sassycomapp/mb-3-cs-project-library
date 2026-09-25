@@ -1,7 +1,4 @@
 ---
-document: LandingPageEditorForm — Wireframe Checklist
-doc-id: LandingPageEditorForm-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "LandingPageEditorForm-wireframe-chklist"
+doc-id: "LandingPageEditorForm-wireframe-chklist"
 ---
-

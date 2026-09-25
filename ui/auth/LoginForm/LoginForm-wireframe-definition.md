@@ -1,7 +1,4 @@
 ---
-document: LoginForm — Wireframe Definition
-doc-id: LoginForm-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "LoginForm-wireframe-definition"
+doc-id: "LoginForm-wireframe-definition"
 ---
-

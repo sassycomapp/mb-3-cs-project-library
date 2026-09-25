@@ -1,7 +1,4 @@
 ---
-document: ServiceCategoriesForm — Wireframe Checklist
-doc-id: ServiceCategoriesForm-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "ServiceCategoriesForm-wireframe-chklist"
+doc-id: "ServiceCategoriesForm-wireframe-chklist"
 ---
-

@@ -1,7 +1,4 @@
 ---
-document: ServiceViewerForm — Screen Checklist
-doc-id: ServiceViewerForm-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "ServiceViewerForm-screen-chklist"
+doc-id: "ServiceViewerForm-screen-chklist"
 ---
-

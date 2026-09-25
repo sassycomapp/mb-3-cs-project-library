@@ -1,7 +1,4 @@
 ---
-document: BookingViewerForm — Wireframe Definition
-doc-id: BookingViewerForm-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "BookingViewerForm-wireframe-definition"
+doc-id: "BookingViewerForm-wireframe-definition"
 ---
-

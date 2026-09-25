@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — User Flows
-doc-id: user-flows
-state: Live
-date-created: 2026-07-09T144411+0200
+title: "user-flows"
+doc-id: "user-flows"
 ---
-
 # Mybizz CS — User Flows
 
 **Authority:** Reference — defines intended behaviour for all user flows  

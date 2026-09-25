@@ -1,7 +1,4 @@
 ---
-document: PasswordResetForm — Screen Checklist
-doc-id: PasswordResetForm-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "PasswordResetForm-screen-chklist"
+doc-id: "PasswordResetForm-screen-chklist"
 ---
-

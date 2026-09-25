@@ -1,10 +1,7 @@
 ---
-document: "Wireframe Alignment Checklist"
-doc-id: wireframe-alignment-checklist
-state: Live
-date-created: 2026-09-10
+title: "wireframe-alignment-checklist"
+doc-id: "wireframe-alignment-checklist"
 ---
-
 # Wireframe Alignment Checklist
 
 **Purpose:** Audit every wireframe against all changes made during the UI build preparation session (2026-06-28).

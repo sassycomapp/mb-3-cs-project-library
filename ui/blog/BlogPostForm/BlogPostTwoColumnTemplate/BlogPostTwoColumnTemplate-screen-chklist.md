@@ -1,10 +1,7 @@
 ---
-document: "BlogPostTwoColumnTemplate-screen-chklist"
-doc-id: BlogPostTwoColumnTemplate-screen-chklist
-state: Live
-date-created: 2026-09-10
+title: "BlogPostTwoColumnTemplate-screen-chklist"
+doc-id: "BlogPostTwoColumnTemplate-screen-chklist"
 ---
-
 # Checklist — BlogPostTwoColumnTemplate
 
 **Wireframe:** `BlogPostTwoColumnTemplate-wireframe.html`

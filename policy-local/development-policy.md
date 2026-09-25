@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Development Policy
-doc-id: development-policy
-state: Live
-date-created: 2026-07-05T141307+0200
+title: "development-policy"
+doc-id: "development-policy"
 ---
-
 # Mybizz CS — Development Policy
 
 **Category:** Policy (not Specification — see note below)

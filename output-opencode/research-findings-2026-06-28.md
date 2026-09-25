@@ -1,10 +1,7 @@
 ---
-document: "Research Findings Report"
-doc-id: research-findings-2026-06-28
-state: Live
-date-created: 2026-09-10
+title: "research-findings-2026-06-28"
+doc-id: "research-findings-2026-06-28"
 ---
-
 # Research Findings Report
 
 **Date:** 2026-06-28

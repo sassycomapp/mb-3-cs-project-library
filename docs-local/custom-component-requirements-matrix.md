@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Custom Component Requirements Matrix
-doc-id: custom-component-requirements-matrix
-state: Live
-date-created: 2026-06-01
+title: "custom-component-requirements-matrix"
+doc-id: "custom-component-requirements-matrix"
 ---
-
 # Mybizz CS — Custom Component Requirements Matrix
 
 **Date:** 2026-06-01

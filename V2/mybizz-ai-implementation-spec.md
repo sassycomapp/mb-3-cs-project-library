@@ -1,10 +1,7 @@
 ---
-document: "Mybizz AI Implementation Specification"
-doc-id: mybizz-ai-implementation-spec
-state: Live
-date-created: 2026-06-15
+title: "mybizz-ai-implementation-spec"
+doc-id: "mybizz-ai-implementation-spec"
 ---
-
 # Mybizz AI Implementation Specification
 
 ## Purpose

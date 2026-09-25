@@ -1,10 +1,7 @@
 ---
-document: "AvailabilitySettingsForm-screen-chklist"
-doc-id: AvailabilitySettingsForm-screen-chklist
-state: Live
-date-created: 2026-09-10
+title: "AvailabilitySettingsForm-screen-chklist"
+doc-id: "AvailabilitySettingsForm-screen-chklist"
 ---
-
 # Checklist — AvailabilitySettingsForm
 
 **Wireframe:** `AvailabilitySettingsForm-wireframe.html`

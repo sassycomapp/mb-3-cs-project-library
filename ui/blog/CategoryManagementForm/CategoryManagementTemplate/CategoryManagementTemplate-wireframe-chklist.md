@@ -1,7 +1,4 @@
 ---
-document: CategoryManagementTemplate — Wireframe Checklist
-doc-id: CategoryManagementTemplate-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "CategoryManagementTemplate-wireframe-chklist"
+doc-id: "CategoryManagementTemplate-wireframe-chklist"
 ---
-

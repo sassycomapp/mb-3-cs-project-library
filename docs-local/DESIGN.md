@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — DESIGN
-doc-id: DESIGN
-state: Live
-date-created: 2026-06-02
+title: "DESIGN"
+doc-id: "DESIGN"
 ---
-
 # Mybizz CS — DESIGN
 
 **Status:** Reconciled canonical design system  

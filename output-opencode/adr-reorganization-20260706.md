@@ -1,10 +1,7 @@
 ---
-document: "ADR Reorganization — 2026-07-06"
-doc-id: adr-reorganization-20260706
-state: Live
-date-created: 2026-09-10
+title: "adr-reorganization-20260706"
+doc-id: "adr-reorganization-20260706"
 ---
-
 # ADR Reorganization — 2026-07-06
 
 ## Task

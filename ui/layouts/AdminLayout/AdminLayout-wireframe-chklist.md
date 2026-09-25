@@ -1,7 +1,4 @@
 ---
-document: AdminLayout — Wireframe Checklist
-doc-id: AdminLayout-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "AdminLayout-wireframe-chklist"
+doc-id: "AdminLayout-wireframe-chklist"
 ---
-

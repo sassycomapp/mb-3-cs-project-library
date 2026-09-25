@@ -1,7 +1,4 @@
 ---
-document: AvailabilitySettingsFormRowTemplate — Screen Checklist
-doc-id: AvailabilitySettingsFormRowTemplate-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "AvailabilitySettingsFormRowTemplate-screen-chklist"
+doc-id: "AvailabilitySettingsFormRowTemplate-screen-chklist"
 ---
-

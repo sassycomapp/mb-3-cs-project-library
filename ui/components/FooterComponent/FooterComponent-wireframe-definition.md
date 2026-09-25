@@ -1,7 +1,4 @@
 ---
-document: FooterComponent — Wireframe Definition
-doc-id: FooterComponent-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "FooterComponent-wireframe-definition"
+doc-id: "FooterComponent-wireframe-definition"
 ---
-

@@ -1,10 +1,7 @@
 ---
-document: "HomePage-screen-chklist"
-doc-id: HomePage-screen-chklist
-state: Live
-date-created: 2026-09-10
+title: "HomePage-screen-chklist"
+doc-id: "HomePage-screen-chklist"
 ---
-
 # Checklist — HomePage
 
 **Wireframe:** `HomePage-wireframe.html`

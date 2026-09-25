@@ -1,810 +1,814 @@
+---
+title: "register-local"
+doc-id: "register-local"
+---
 # Register — mb-3-cs-project-library
 
 Append-only. Rows are never deleted. Only `state`, `date-state-changed`,
 `superseded-by`, and `notes` may be updated in place after a row is created.
 All other fields are permanent from first registration.
 
-| doc-id | filename | folder | type | state | date-registered | date-state-changed | superseded-by | notes |
-|---|---|---|---|---|---|---|---|---|
-| AGENTS | AGENTS.md | . | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| CLAUDE | CLAUDE.md | . | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| CONTEXT | docs-local/CONTEXT.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| README | README.md | . | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| blank-client-template | adr-local/blank-client-template.md | adr-local | adr | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| crm-package-replaces-marketing | adr-local/crm-package-replaces-marketing.md | adr-local | adr | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| schema-scope-reduction | adr-local/schema-scope-reduction.md | adr-local | adr | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| domain | docs/agents/domain.md | docs/agents | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| issue-tracker | docs/agents/issue-tracker.md | docs/agents | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| triage-labels | docs/agents/triage-labels.md | docs/agents | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| CHANGELOG | docs-local/CHANGELOG.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| DESIGN | docs-local/DESIGN.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| DESIGN_palette_section | docs-local/DESIGN_palette_section.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| INDEX | docs-local/INDEX.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| architecture | docs-local/architecture.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| authoritative-schema | docs-local/authoritative-schema.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| build-plan | docs-local/build-plan.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| calendar-feature-spec | docs-local/calendar-feature-spec.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| custom-component-requirements-matrix | docs-local/custom-component-requirements-matrix.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| design-direction | docs-local/design-direction.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| founder-strategic-review | docs-local/founder-strategic-review.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| palette_selector_tokens | docs-local/palette_selector_tokens.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| platform-architecture-narrative | docs-local/platform-architecture-narrative.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| platform-architecture | docs-local/platform-architecture.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| positioning-strategy | docs-local/positioning-strategy.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| pricing-strategy-consultation | docs-local/pricing-strategy-consultation.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| user-flows | docs-local/user-flows.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| business-requirements-document | docs-standard-local/business-requirements-document.md | docs-standard-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| deployment-procedures | docs-standard-local/deployment-procedures.md | docs-standard-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| globals-contract | docs-standard-local/globals-contract.md | docs-standard-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| integration-architecture | docs-standard-local/integration-architecture.md | docs-standard-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| observability-requirements | docs-standard-local/observability-requirements.md | docs-standard-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| product-requirements-document | docs-standard-local/product-requirements-document.md | docs-standard-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| scaffold-spec | docs-standard-local/scaffold-spec.md | docs-standard-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| software-requirements-specification | docs-standard-local/software-requirements-specification.md | docs-standard-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| domain | docs/agents/domain.md | docs/agents | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| issue-tracker | docs/agents/issue-tracker.md | docs/agents | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| triage-labels | docs/agents/triage-labels.md | docs/agents | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| gstack-artifact-governance | docs-local/gstack-artifact-governance.md | docs-local | guide | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| development-policy | policy-local/development-policy.md | policy-local | policy | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| screen-production-prompt | prompts-local/screen-production-prompt.md | prompts-local | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| DashboardAnalyticsForm-screen-chklist | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-screen-chklist.md | ui/analytics/DashboardAnalyticsForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| RevenueReportForm-RowTemplate-screen-chklist | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-screen-chklist.md | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| LoginForm-screen-chklist | ui/auth/LoginForm/LoginForm-screen-chklist.md | ui/auth/LoginForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| PasswordResetCompleteForm-screen-chklist | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-screen-chklist.md | ui/auth/PasswordResetCompleteForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| PasswordResetForm-screen-chklist | ui/auth/PasswordResetForm/PasswordResetForm-screen-chklist.md | ui/auth/PasswordResetForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| SignupForm-screen-chklist | ui/auth/SignupForm/SignupForm-screen-chklist.md | ui/auth/SignupForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogEditorForm-screen-chklist | ui/blog/BlogEditorForm/BlogEditorForm-screen-chklist.md | ui/blog/BlogEditorForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogListListTemplate-screen-chklist | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-screen-chklist.md | ui/blog/BlogListForm/BlogListListTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogListTiledTemplate-screen-chklist | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-screen-chklist.md | ui/blog/BlogListForm/BlogListTiledTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogListForm-screen-chklist | ui/blog/BlogListForm/BlogListForm-screen-chklist.md | ui/blog/BlogListForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogPostClassicTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostClassicTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogPostFullWidthTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogPostCategoriesTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogPostRelatedPostsTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogPostTwoColumnTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostTwoColumnTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| BlogPostForm-screen-chklist | ui/blog/BlogPostForm/BlogPostForm-screen-chklist.md | ui/blog/BlogPostForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| CategoryManagementTemplate-screen-chklist | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-screen-chklist.md | ui/blog/CategoryManagementForm/CategoryManagementTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| CategoryManagementForm-screen-chklist | ui/blog/CategoryManagementForm/CategoryManagementForm-screen-chklist.md | ui/blog/CategoryManagementForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| CommentModerationForm-RowTemplate-screen-chklist | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-screen-chklist.md | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| CommentModerationForm-screen-chklist | ui/blog/CommentModerationForm/CommentModerationForm-screen-chklist.md | ui/blog/CommentModerationForm | other | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| internal-standards-anvil-wireframe-conversion | standard-operating-procedures-local/internal-standards-anvil-wireframe-conversion.md | standard-operating-procedures-local | sop | Live | 2026-07-27T124852+0200 | 2026-07-27T124852+0200 |  |  |
-| DashboardAnalyticsForm-wireframe-definition | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-wireframe-definition.md | ui/analytics/DashboardAnalyticsForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| DashboardAnalyticsForm-wireframe-chklist | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-wireframe-chklist.md | ui/analytics/DashboardAnalyticsForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| DashboardAnalyticsForm-screen-chklist | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-screen-chklist.md | ui/analytics/DashboardAnalyticsForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| RevenueReportForm-RowTemplate-wireframe-definition | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-wireframe-definition.md | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| RevenueReportForm-RowTemplate-wireframe-chklist | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-wireframe-chklist.md | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| RevenueReportForm-RowTemplate-screen-chklist | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-screen-chklist.md | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LoginForm-wireframe-definition | ui/auth/LoginForm/LoginForm-wireframe-definition.md | ui/auth/LoginForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LoginForm-wireframe-chklist | ui/auth/LoginForm/LoginForm-wireframe-chklist.md | ui/auth/LoginForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LoginForm-screen-chklist | ui/auth/LoginForm/LoginForm-screen-chklist.md | ui/auth/LoginForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PasswordResetCompleteForm-wireframe-definition | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-wireframe-definition.md | ui/auth/PasswordResetCompleteForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PasswordResetCompleteForm-wireframe-chklist | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-wireframe-chklist.md | ui/auth/PasswordResetCompleteForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PasswordResetCompleteForm-screen-chklist | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-screen-chklist.md | ui/auth/PasswordResetCompleteForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PasswordResetForm-wireframe-definition | ui/auth/PasswordResetForm/PasswordResetForm-wireframe-definition.md | ui/auth/PasswordResetForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PasswordResetForm-wireframe-chklist | ui/auth/PasswordResetForm/PasswordResetForm-wireframe-chklist.md | ui/auth/PasswordResetForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PasswordResetForm-screen-chklist | ui/auth/PasswordResetForm/PasswordResetForm-screen-chklist.md | ui/auth/PasswordResetForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SignupForm-wireframe-definition | ui/auth/SignupForm/SignupForm-wireframe-definition.md | ui/auth/SignupForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SignupForm-wireframe-chklist | ui/auth/SignupForm/SignupForm-wireframe-chklist.md | ui/auth/SignupForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SignupForm-screen-chklist | ui/auth/SignupForm/SignupForm-screen-chklist.md | ui/auth/SignupForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogEditorForm-wireframe-definition | ui/blog/BlogEditorForm/BlogEditorForm-wireframe-definition.md | ui/blog/BlogEditorForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogEditorForm-wireframe-chklist | ui/blog/BlogEditorForm/BlogEditorForm-wireframe-chklist.md | ui/blog/BlogEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogEditorForm-screen-chklist | ui/blog/BlogEditorForm/BlogEditorForm-screen-chklist.md | ui/blog/BlogEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogListListTemplate-wireframe-definition | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-wireframe-definition.md | ui/blog/BlogListForm/BlogListListTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogListListTemplate-wireframe-chklist | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-wireframe-chklist.md | ui/blog/BlogListForm/BlogListListTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogListListTemplate-screen-chklist | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-screen-chklist.md | ui/blog/BlogListForm/BlogListListTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogListTiledTemplate-wireframe-definition | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-wireframe-definition.md | ui/blog/BlogListForm/BlogListTiledTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogListTiledTemplate-wireframe-chklist | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-wireframe-chklist.md | ui/blog/BlogListForm/BlogListTiledTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogListTiledTemplate-screen-chklist | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-screen-chklist.md | ui/blog/BlogListForm/BlogListTiledTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostClassicTemplate-wireframe-definition | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-wireframe-definition.md | ui/blog/BlogPostForm/BlogPostClassicTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostClassicTemplate-wireframe-chklist | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-wireframe-chklist.md | ui/blog/BlogPostForm/BlogPostClassicTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostClassicTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostClassicTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostFullWidthTemplate-wireframe-definition | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-wireframe-definition.md | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostFullWidthTemplate-wireframe-chklist | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-wireframe-chklist.md | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostFullWidthTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostCategoriesTemplate-wireframe-definition | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-wireframe-definition.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostCategoriesTemplate-wireframe-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-wireframe-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostCategoriesTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostRelatedPostsTemplate-wireframe-definition | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-wireframe-definition.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostRelatedPostsTemplate-wireframe-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-wireframe-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlogPostRelatedPostsTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CategoryManagementTemplate-wireframe-definition | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-wireframe-definition.md | ui/blog/CategoryManagementForm/CategoryManagementTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CategoryManagementTemplate-wireframe-chklist | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-wireframe-chklist.md | ui/blog/CategoryManagementForm/CategoryManagementTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CategoryManagementTemplate-screen-chklist | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-screen-chklist.md | ui/blog/CategoryManagementForm/CategoryManagementTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CommentModerationForm-RowTemplate-wireframe-definition | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-wireframe-definition.md | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CommentModerationForm-RowTemplate-wireframe-chklist | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-wireframe-chklist.md | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CommentModerationForm-RowTemplate-screen-chklist | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-screen-chklist.md | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AvailabilitySettingsFormRowTemplate-wireframe-definition | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-wireframe-definition.md | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AvailabilitySettingsFormRowTemplate-wireframe-chklist | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-wireframe-chklist.md | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AvailabilitySettingsFormRowTemplate-screen-chklist | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-screen-chklist.md | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_day_event-wireframe-definition | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-wireframe-definition.md | ui/bookings/BookingCalendarForm/tmpl_day_event | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_day_event-wireframe-chklist | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-wireframe-chklist.md | ui/bookings/BookingCalendarForm/tmpl_day_event | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_day_event-screen-chklist | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-screen-chklist.md | ui/bookings/BookingCalendarForm/tmpl_day_event | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_month_day_cell-wireframe-definition | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-wireframe-definition.md | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_month_day_cell-wireframe-chklist | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-wireframe-chklist.md | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_month_day_cell-screen-chklist | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-screen-chklist.md | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_week_event-wireframe-definition | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-wireframe-definition.md | ui/bookings/BookingCalendarForm/tmpl_week_event | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_week_event-wireframe-chklist | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-wireframe-chklist.md | ui/bookings/BookingCalendarForm/tmpl_week_event | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_week_event-screen-chklist | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-screen-chklist.md | ui/bookings/BookingCalendarForm/tmpl_week_event | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_week_timeslot-wireframe-definition | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-wireframe-definition.md | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_week_timeslot-wireframe-chklist | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-wireframe-chklist.md | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| tmpl_week_timeslot-screen-chklist | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-screen-chklist.md | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingEditorForm-wireframe-definition | ui/bookings/BookingEditorForm/BookingEditorForm-wireframe-definition.md | ui/bookings/BookingEditorForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingEditorForm-wireframe-chklist | ui/bookings/BookingEditorForm/BookingEditorForm-wireframe-chklist.md | ui/bookings/BookingEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingEditorForm-screen-chklist | ui/bookings/BookingEditorForm/BookingEditorForm-screen-chklist.md | ui/bookings/BookingEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingListForm-RowTemplate-wireframe-definition | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-wireframe-definition.md | ui/bookings/BookingListForm/BookingListForm-RowTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingListForm-RowTemplate-wireframe-chklist | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-wireframe-chklist.md | ui/bookings/BookingListForm/BookingListForm-RowTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingListForm-RowTemplate-screen-chklist | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-screen-chklist.md | ui/bookings/BookingListForm/BookingListForm-RowTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingViewerForm-wireframe-definition | ui/bookings/BookingViewerForm/BookingViewerForm-wireframe-definition.md | ui/bookings/BookingViewerForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingViewerForm-wireframe-chklist | ui/bookings/BookingViewerForm/BookingViewerForm-wireframe-chklist.md | ui/bookings/BookingViewerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BookingViewerForm-screen-chklist | ui/bookings/BookingViewerForm/BookingViewerForm-screen-chklist.md | ui/bookings/BookingViewerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ClauseBuilder-wireframe-definition | ui/components/ClauseBuilder/ClauseBuilder-wireframe-definition.md | ui/components/ClauseBuilder | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ClauseBuilder-wireframe-chklist | ui/components/ClauseBuilder/ClauseBuilder-wireframe-chklist.md | ui/components/ClauseBuilder | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ClauseBuilder-screen-chklist | ui/components/ClauseBuilder/ClauseBuilder-screen-chklist.md | ui/components/ClauseBuilder | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| FooterComponent-wireframe-definition | ui/components/FooterComponent/FooterComponent-wireframe-definition.md | ui/components/FooterComponent | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| FooterComponent-wireframe-chklist | ui/components/FooterComponent/FooterComponent-wireframe-chklist.md | ui/components/FooterComponent | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| FooterComponent-screen-chklist | ui/components/FooterComponent/FooterComponent-screen-chklist.md | ui/components/FooterComponent | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ParallaxComponent-wireframe-definition | ui/components/ParallaxComponent/ParallaxComponent-wireframe-definition.md | ui/components/ParallaxComponent | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ParallaxComponent-wireframe-chklist | ui/components/ParallaxComponent/ParallaxComponent-wireframe-chklist.md | ui/components/ParallaxComponent | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ParallaxComponent-screen-chklist | ui/components/ParallaxComponent/ParallaxComponent-screen-chklist.md | ui/components/ParallaxComponent | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TimeLapseCarouselComponent-wireframe-definition | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-wireframe-definition.md | ui/components/TimeLapseCarouselComponent | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TimeLapseCarouselComponent-wireframe-chklist | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-wireframe-chklist.md | ui/components/TimeLapseCarouselComponent | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TimeLapseCarouselComponent-screen-chklist | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-screen-chklist.md | ui/components/TimeLapseCarouselComponent | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VideoDisplayComponent-wireframe-definition | ui/components/VideoDisplayComponent/VideoDisplayComponent-wireframe-definition.md | ui/components/VideoDisplayComponent | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VideoDisplayComponent-wireframe-chklist | ui/components/VideoDisplayComponent/VideoDisplayComponent-wireframe-chklist.md | ui/components/VideoDisplayComponent | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VideoDisplayComponent-screen-chklist | ui/components/VideoDisplayComponent/VideoDisplayComponent-screen-chklist.md | ui/components/VideoDisplayComponent | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactEditorForm-wireframe-definition | ui/crm/ContactEditorForm/ContactEditorForm-wireframe-definition.md | ui/crm/ContactEditorForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactEditorForm-wireframe-chklist | ui/crm/ContactEditorForm/ContactEditorForm-wireframe-chklist.md | ui/crm/ContactEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactEditorForm-screen-chklist | ui/crm/ContactEditorForm/ContactEditorForm-screen-chklist.md | ui/crm/ContactEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactListForm-wireframe-definition | ui/crm/ContactListForm/ContactListForm-wireframe-definition.md | ui/crm/ContactListForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactListForm-wireframe-chklist | ui/crm/ContactListForm/ContactListForm-wireframe-chklist.md | ui/crm/ContactListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactListForm-screen-chklist | ui/crm/ContactListForm/ContactListForm-screen-chklist.md | ui/crm/ContactListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactViewerForm-wireframe-definition | ui/crm/ContactViewerForm/ContactViewerForm-wireframe-definition.md | ui/crm/ContactViewerForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactViewerForm-wireframe-chklist | ui/crm/ContactViewerForm/ContactViewerForm-wireframe-chklist.md | ui/crm/ContactViewerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactViewerForm-screen-chklist | ui/crm/ContactViewerForm/ContactViewerForm-screen-chklist.md | ui/crm/ContactViewerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailBroadcastForm-wireframe-definition | ui/crm/EmailBroadcastForm/EmailBroadcastForm-wireframe-definition.md | ui/crm/EmailBroadcastForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailBroadcastForm-wireframe-chklist | ui/crm/EmailBroadcastForm/EmailBroadcastForm-wireframe-chklist.md | ui/crm/EmailBroadcastForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailBroadcastForm-screen-chklist | ui/crm/EmailBroadcastForm/EmailBroadcastForm-screen-chklist.md | ui/crm/EmailBroadcastForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailCampaignEditorForm-wireframe-definition | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-wireframe-definition.md | ui/crm/EmailCampaignEditorForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailCampaignEditorForm-wireframe-chklist | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-wireframe-chklist.md | ui/crm/EmailCampaignEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailCampaignEditorForm-screen-chklist | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-screen-chklist.md | ui/crm/EmailCampaignEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailCampaignListForm-wireframe-definition | ui/crm/EmailCampaignListForm/EmailCampaignListForm-wireframe-definition.md | ui/crm/EmailCampaignListForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailCampaignListForm-wireframe-chklist | ui/crm/EmailCampaignListForm/EmailCampaignListForm-wireframe-chklist.md | ui/crm/EmailCampaignListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailCampaignListForm-screen-chklist | ui/crm/EmailCampaignListForm/EmailCampaignListForm-screen-chklist.md | ui/crm/EmailCampaignListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LeadCaptureForm-wireframe-definition | ui/crm/LeadCaptureForm/LeadCaptureForm-wireframe-definition.md | ui/crm/LeadCaptureForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LeadCaptureForm-wireframe-chklist | ui/crm/LeadCaptureForm/LeadCaptureForm-wireframe-chklist.md | ui/crm/LeadCaptureForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LeadCaptureForm-screen-chklist | ui/crm/LeadCaptureForm/LeadCaptureForm-screen-chklist.md | ui/crm/LeadCaptureForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SegmentManagerForm-wireframe-definition | ui/crm/SegmentManagerForm/SegmentManagerForm-wireframe-definition.md | ui/crm/SegmentManagerForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SegmentManagerForm-wireframe-chklist | ui/crm/SegmentManagerForm/SegmentManagerForm-wireframe-chklist.md | ui/crm/SegmentManagerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SegmentManagerForm-screen-chklist | ui/crm/SegmentManagerForm/SegmentManagerForm-screen-chklist.md | ui/crm/SegmentManagerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TaskListForm-wireframe-definition | ui/crm/TaskListForm/TaskListForm-wireframe-definition.md | ui/crm/TaskListForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TaskListForm-wireframe-chklist | ui/crm/TaskListForm/TaskListForm-wireframe-chklist.md | ui/crm/TaskListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TaskListForm-screen-chklist | ui/crm/TaskListForm/TaskListForm-screen-chklist.md | ui/crm/TaskListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ActivityFeed-wireframe-definition | ui/dashboard/ActivityFeed/ActivityFeed-wireframe-definition.md | ui/dashboard/ActivityFeed | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ActivityFeed-wireframe-chklist | ui/dashboard/ActivityFeed/ActivityFeed-wireframe-chklist.md | ui/dashboard/ActivityFeed | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ActivityFeed-screen-chklist | ui/dashboard/ActivityFeed/ActivityFeed-screen-chklist.md | ui/dashboard/ActivityFeed | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| MetricCard-wireframe-definition | ui/dashboard/MetricCard/MetricCard-wireframe-definition.md | ui/dashboard/MetricCard | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| MetricCard-wireframe-chklist | ui/dashboard/MetricCard/MetricCard-wireframe-chklist.md | ui/dashboard/MetricCard | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| MetricCard-screen-chklist | ui/dashboard/MetricCard/MetricCard-screen-chklist.md | ui/dashboard/MetricCard | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceEditorForm-wireframe-definition | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-wireframe-definition.md | ui/invoices/InvoiceEditorForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceEditorForm-wireframe-chklist | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-wireframe-chklist.md | ui/invoices/InvoiceEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceEditorForm-screen-chklist | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-screen-chklist.md | ui/invoices/InvoiceEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceListForm-wireframe-definition | ui/invoices/InvoiceListForm/InvoiceListForm-wireframe-definition.md | ui/invoices/InvoiceListForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceListForm-wireframe-chklist | ui/invoices/InvoiceListForm/InvoiceListForm-wireframe-chklist.md | ui/invoices/InvoiceListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceListForm-screen-chklist | ui/invoices/InvoiceListForm/InvoiceListForm-screen-chklist.md | ui/invoices/InvoiceListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceViewerForm-wireframe-definition | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-wireframe-definition.md | ui/invoices/InvoiceViewerForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceViewerForm-wireframe-chklist | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-wireframe-chklist.md | ui/invoices/InvoiceViewerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| InvoiceViewerForm-screen-chklist | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-screen-chklist.md | ui/invoices/InvoiceViewerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EventRegistrationTemplate-wireframe-definition | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-wireframe-definition.md | ui/landing_pages/LandingPage/EventRegistrationTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EventRegistrationTemplate-wireframe-chklist | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-wireframe-chklist.md | ui/landing_pages/LandingPage/EventRegistrationTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EventRegistrationTemplate-screen-chklist | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-screen-chklist.md | ui/landing_pages/LandingPage/EventRegistrationTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LeadCaptureTemplate-wireframe-definition | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-wireframe-definition.md | ui/landing_pages/LandingPage/LeadCaptureTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LeadCaptureTemplate-wireframe-chklist | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-wireframe-chklist.md | ui/landing_pages/LandingPage/LeadCaptureTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LeadCaptureTemplate-screen-chklist | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-screen-chklist.md | ui/landing_pages/LandingPage/LeadCaptureTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VslTemplate-wireframe-definition | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-wireframe-definition.md | ui/landing_pages/LandingPage/VslTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VslTemplate-wireframe-chklist | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-wireframe-chklist.md | ui/landing_pages/LandingPage/VslTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VslTemplate-screen-chklist | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-screen-chklist.md | ui/landing_pages/LandingPage/VslTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LandingPageEditorForm-wireframe-definition | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-wireframe-definition.md | ui/landing_pages/LandingPageEditorForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LandingPageEditorForm-wireframe-chklist | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-wireframe-chklist.md | ui/landing_pages/LandingPageEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LandingPageEditorForm-screen-chklist | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-screen-chklist.md | ui/landing_pages/LandingPageEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LandingPageListForm-wireframe-definition | ui/landing_pages/LandingPageListForm/LandingPageListForm-wireframe-definition.md | ui/landing_pages/LandingPageListForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LandingPageListForm-wireframe-chklist | ui/landing_pages/LandingPageListForm/LandingPageListForm-wireframe-chklist.md | ui/landing_pages/LandingPageListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| LandingPageListForm-screen-chklist | ui/landing_pages/LandingPageListForm/LandingPageListForm-screen-chklist.md | ui/landing_pages/LandingPageListForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AdminLayout-wireframe-definition | ui/layouts/AdminLayout/AdminLayout-wireframe-definition.md | ui/layouts/AdminLayout | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AdminLayout-wireframe-chklist | ui/layouts/AdminLayout/AdminLayout-wireframe-chklist.md | ui/layouts/AdminLayout | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AdminLayout-screen-chklist | ui/layouts/AdminLayout/AdminLayout-screen-chklist.md | ui/layouts/AdminLayout | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlankLayout-wireframe-definition | ui/layouts/BlankLayout/BlankLayout-wireframe-definition.md | ui/layouts/BlankLayout | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlankLayout-wireframe-chklist | ui/layouts/BlankLayout/BlankLayout-wireframe-chklist.md | ui/layouts/BlankLayout | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| BlankLayout-screen-chklist | ui/layouts/BlankLayout/BlankLayout-screen-chklist.md | ui/layouts/BlankLayout | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CustomerLayout-wireframe-definition | ui/layouts/CustomerLayout/CustomerLayout-wireframe-definition.md | ui/layouts/CustomerLayout | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CustomerLayout-wireframe-chklist | ui/layouts/CustomerLayout/CustomerLayout-wireframe-chklist.md | ui/layouts/CustomerLayout | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| CustomerLayout-screen-chklist | ui/layouts/CustomerLayout/CustomerLayout-screen-chklist.md | ui/layouts/CustomerLayout | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ErrorLayout-wireframe-definition | ui/layouts/ErrorLayout/ErrorLayout-wireframe-definition.md | ui/layouts/ErrorLayout | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ErrorLayout-wireframe-chklist | ui/layouts/ErrorLayout/ErrorLayout-wireframe-chklist.md | ui/layouts/ErrorLayout | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ErrorLayout-screen-chklist | ui/layouts/ErrorLayout/ErrorLayout-screen-chklist.md | ui/layouts/ErrorLayout | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| OnboardingForm-wireframe-definition | ui/onboarding/OnboardingForm/OnboardingForm-wireframe-definition.md | ui/onboarding/OnboardingForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| OnboardingForm-wireframe-chklist | ui/onboarding/OnboardingForm/OnboardingForm-wireframe-chklist.md | ui/onboarding/OnboardingForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| OnboardingForm-screen-chklist | ui/onboarding/OnboardingForm/OnboardingForm-screen-chklist.md | ui/onboarding/OnboardingForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AboutPage-wireframe-definition | ui/public_pages/AboutPage/AboutPage-wireframe-definition.md | ui/public_pages/AboutPage | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AboutPage-wireframe-chklist | ui/public_pages/AboutPage/AboutPage-wireframe-chklist.md | ui/public_pages/AboutPage | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| AboutPage-screen-chklist | ui/public_pages/AboutPage/AboutPage-screen-chklist.md | ui/public_pages/AboutPage | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactPage-wireframe-definition | ui/public_pages/ContactPage/ContactPage-wireframe-definition.md | ui/public_pages/ContactPage | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactPage-wireframe-chklist | ui/public_pages/ContactPage/ContactPage-wireframe-chklist.md | ui/public_pages/ContactPage | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ContactPage-screen-chklist | ui/public_pages/ContactPage/ContactPage-screen-chklist.md | ui/public_pages/ContactPage | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageBookingTemplate-wireframe-definition | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-wireframe-definition.md | ui/public_pages/HomePage/HomePageBookingTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageBookingTemplate-wireframe-chklist | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-wireframe-chklist.md | ui/public_pages/HomePage/HomePageBookingTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageBookingTemplate-screen-chklist | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-screen-chklist.md | ui/public_pages/HomePage/HomePageBookingTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageClassicTemplate-wireframe-definition | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-wireframe-definition.md | ui/public_pages/HomePage/HomePageClassicTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageClassicTemplate-wireframe-chklist | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-wireframe-chklist.md | ui/public_pages/HomePage/HomePageClassicTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageClassicTemplate-screen-chklist | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-screen-chklist.md | ui/public_pages/HomePage/HomePageClassicTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageMinimalistTemplate-wireframe-definition | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-wireframe-definition.md | ui/public_pages/HomePage/HomePageMinimalistTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageMinimalistTemplate-wireframe-chklist | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-wireframe-chklist.md | ui/public_pages/HomePage/HomePageMinimalistTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageMinimalistTemplate-screen-chklist | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-screen-chklist.md | ui/public_pages/HomePage/HomePageMinimalistTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageServicesTemplate-wireframe-definition | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-wireframe-definition.md | ui/public_pages/HomePage/HomePageServicesTemplate | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageServicesTemplate-wireframe-chklist | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-wireframe-chklist.md | ui/public_pages/HomePage/HomePageServicesTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| HomePageServicesTemplate-screen-chklist | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-screen-chklist.md | ui/public_pages/HomePage/HomePageServicesTemplate | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PrivacyPolicyPage-wireframe-definition | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-wireframe-definition.md | ui/public_pages/PrivacyPolicyPage | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PrivacyPolicyPage-wireframe-chklist | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-wireframe-chklist.md | ui/public_pages/PrivacyPolicyPage | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PrivacyPolicyPage-screen-chklist | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-screen-chklist.md | ui/public_pages/PrivacyPolicyPage | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TermsConditionsPage-wireframe-definition | ui/public_pages/TermsConditionsPage/TermsConditionsPage-wireframe-definition.md | ui/public_pages/TermsConditionsPage | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TermsConditionsPage-wireframe-chklist | ui/public_pages/TermsConditionsPage/TermsConditionsPage-wireframe-chklist.md | ui/public_pages/TermsConditionsPage | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| TermsConditionsPage-screen-chklist | ui/public_pages/TermsConditionsPage/TermsConditionsPage-screen-chklist.md | ui/public_pages/TermsConditionsPage | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceCategoriesForm-wireframe-definition | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-wireframe-definition.md | ui/services/ServiceCategoriesForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceCategoriesForm-wireframe-chklist | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-wireframe-chklist.md | ui/services/ServiceCategoriesForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceCategoriesForm-screen-chklist | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-screen-chklist.md | ui/services/ServiceCategoriesForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceEditorForm-wireframe-definition | ui/services/ServiceEditorForm/ServiceEditorForm-wireframe-definition.md | ui/services/ServiceEditorForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceEditorForm-wireframe-chklist | ui/services/ServiceEditorForm/ServiceEditorForm-wireframe-chklist.md | ui/services/ServiceEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceEditorForm-screen-chklist | ui/services/ServiceEditorForm/ServiceEditorForm-screen-chklist.md | ui/services/ServiceEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceViewerForm-wireframe-definition | ui/services/ServiceViewerForm/ServiceViewerForm-wireframe-definition.md | ui/services/ServiceViewerForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceViewerForm-wireframe-chklist | ui/services/ServiceViewerForm/ServiceViewerForm-wireframe-chklist.md | ui/services/ServiceViewerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServiceViewerForm-screen-chklist | ui/services/ServiceViewerForm/ServiceViewerForm-screen-chklist.md | ui/services/ServiceViewerForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServicesForm-wireframe-definition | ui/services/ServicesForm/ServicesForm-wireframe-definition.md | ui/services/ServicesForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServicesForm-wireframe-chklist | ui/services/ServicesForm/ServicesForm-wireframe-chklist.md | ui/services/ServicesForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ServicesForm-screen-chklist | ui/services/ServicesForm/ServicesForm-screen-chklist.md | ui/services/ServicesForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailSetupForm-wireframe-definition | ui/settings/EmailSetupForm/EmailSetupForm-wireframe-definition.md | ui/settings/EmailSetupForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailSetupForm-wireframe-chklist | ui/settings/EmailSetupForm/EmailSetupForm-wireframe-chklist.md | ui/settings/EmailSetupForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| EmailSetupForm-screen-chklist | ui/settings/EmailSetupForm/EmailSetupForm-screen-chklist.md | ui/settings/EmailSetupForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PaymentGatewayForm-wireframe-definition | ui/settings/PaymentGatewayForm/PaymentGatewayForm-wireframe-definition.md | ui/settings/PaymentGatewayForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PaymentGatewayForm-wireframe-chklist | ui/settings/PaymentGatewayForm/PaymentGatewayForm-wireframe-chklist.md | ui/settings/PaymentGatewayForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PaymentGatewayForm-screen-chklist | ui/settings/PaymentGatewayForm/PaymentGatewayForm-screen-chklist.md | ui/settings/PaymentGatewayForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PolicyEditorForm-wireframe-definition | ui/settings/PolicyEditorForm/PolicyEditorForm-wireframe-definition.md | ui/settings/PolicyEditorForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PolicyEditorForm-wireframe-chklist | ui/settings/PolicyEditorForm/PolicyEditorForm-wireframe-chklist.md | ui/settings/PolicyEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| PolicyEditorForm-screen-chklist | ui/settings/PolicyEditorForm/PolicyEditorForm-screen-chklist.md | ui/settings/PolicyEditorForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SettingsForm-wireframe-definition | ui/settings/SettingsForm/SettingsForm-wireframe-definition.md | ui/settings/SettingsForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SettingsForm-wireframe-chklist | ui/settings/SettingsForm/SettingsForm-wireframe-chklist.md | ui/settings/SettingsForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| SettingsForm-screen-chklist | ui/settings/SettingsForm/SettingsForm-screen-chklist.md | ui/settings/SettingsForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ThemeConfigForm-wireframe-definition | ui/settings/ThemeConfigForm/ThemeConfigForm-wireframe-definition.md | ui/settings/ThemeConfigForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ThemeConfigForm-wireframe-chklist | ui/settings/ThemeConfigForm/ThemeConfigForm-wireframe-chklist.md | ui/settings/ThemeConfigForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| ThemeConfigForm-screen-chklist | ui/settings/ThemeConfigForm/ThemeConfigForm-screen-chklist.md | ui/settings/ThemeConfigForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| UserManagementForm-wireframe-definition | ui/settings/UserManagementForm/UserManagementForm-wireframe-definition.md | ui/settings/UserManagementForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| UserManagementForm-wireframe-chklist | ui/settings/UserManagementForm/UserManagementForm-wireframe-chklist.md | ui/settings/UserManagementForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| UserManagementForm-screen-chklist | ui/settings/UserManagementForm/UserManagementForm-screen-chklist.md | ui/settings/UserManagementForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VaultForm-wireframe-definition | ui/settings/VaultForm/VaultForm-wireframe-definition.md | ui/settings/VaultForm | other | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VaultForm-wireframe-chklist | ui/settings/VaultForm/VaultForm-wireframe-chklist.md | ui/settings/VaultForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
-| VaultForm-screen-chklist | ui/settings/VaultForm/VaultForm-screen-chklist.md | ui/settings/VaultForm | checklist | Live | 2026-07-27T171825+0200 | 2026-07-27T171825+0200 |  |  |
+| doc-id | title | state | superseded-by | notes |
+| --- | --- | --- | --- | --- |
+| AGENTS | AGENTS.md | Live |  |  |
+| CLAUDE | CLAUDE.md | Live |  |  |
+| CONTEXT | CONTEXT.md | Live |  |  |
+| README | README.md | Live |  |  |
+| blank-client-template | blank-client-template.md | Live |  |  |
+| crm-package-replaces-marketing | crm-package-replaces-marketing.md | Live |  |  |
+| schema-scope-reduction | schema-scope-reduction.md | Live |  |  |
+| domain | domain.md | Live |  |  |
+| issue-tracker | issue-tracker.md | Live |  |  |
+| triage-labels | triage-labels.md | Live |  |  |
+| CHANGELOG | CHANGELOG.md | Live |  |  |
+| DESIGN | DESIGN.md | Live |  |  |
+| DESIGN_palette_section | DESIGN_palette_section.md | Live |  |  |
+| INDEX | INDEX.md | Live |  |  |
+| architecture | architecture.md | Live |  |  |
+| authoritative-schema | authoritative-schema.md | Live |  |  |
+| build-plan | build-plan.md | Live |  |  |
+| calendar-feature-spec | calendar-feature-spec.md | Live |  |  |
+| custom-component-requirements-matrix | custom-component-requirements-matrix.md | Live |  |  |
+| design-direction | design-direction.md | Live |  |  |
+| founder-strategic-review | founder-strategic-review.md | Live |  |  |
+| palette_selector_tokens | palette_selector_tokens.md | Live |  |  |
+| platform-architecture-narrative | platform-architecture-narrative.md | Live |  |  |
+| platform-architecture | platform-architecture.md | Live |  |  |
+| positioning-strategy | positioning-strategy.md | Live |  |  |
+| pricing-strategy-consultation | pricing-strategy-consultation.md | Live |  |  |
+| user-flows | user-flows.md | Live |  |  |
+| business-requirements-document | business-requirements-document.md | Live |  |  |
+| deployment-procedures | deployment-procedures.md | Live |  |  |
+| globals-contract | globals-contract.md | Live |  |  |
+| integration-architecture | integration-architecture.md | Live |  |  |
+| observability-requirements | observability-requirements.md | Live |  |  |
+| product-requirements-document | product-requirements-document.md | Live |  |  |
+| scaffold-spec | scaffold-spec.md | Live |  |  |
+| software-requirements-specification | software-requirements-specification.md | Live |  |  |
+| domain | domain.md | Live |  |  |
+| issue-tracker | issue-tracker.md | Live |  |  |
+| triage-labels | triage-labels.md | Live |  |  |
+| gstack-artifact-governance | gstack-artifact-governance.md | Live |  |  |
+| development-policy | development-policy.md | Live |  |  |
+| screen-production-prompt | screen-production-prompt.md | Live |  |  |
+| DashboardAnalyticsForm-screen-chklist | DashboardAnalyticsForm-screen-chklist.md | Live |  |  |
+| RevenueReportForm-RowTemplate-screen-chklist | RevenueReportForm-RowTemplate-screen-chklist.md | Live |  |  |
+| LoginForm-screen-chklist | LoginForm-screen-chklist.md | Live |  |  |
+| PasswordResetCompleteForm-screen-chklist | PasswordResetCompleteForm-screen-chklist.md | Live |  |  |
+| PasswordResetForm-screen-chklist | PasswordResetForm-screen-chklist.md | Live |  |  |
+| SignupForm-screen-chklist | SignupForm-screen-chklist.md | Live |  |  |
+| BlogEditorForm-screen-chklist | BlogEditorForm-screen-chklist.md | Live |  |  |
+| BlogListListTemplate-screen-chklist | BlogListListTemplate-screen-chklist.md | Live |  |  |
+| BlogListTiledTemplate-screen-chklist | BlogListTiledTemplate-screen-chklist.md | Live |  |  |
+| BlogListForm-screen-chklist | BlogListForm-screen-chklist.md | Live |  |  |
+| BlogPostClassicTemplate-screen-chklist | BlogPostClassicTemplate-screen-chklist.md | Live |  |  |
+| BlogPostFullWidthTemplate-screen-chklist | BlogPostFullWidthTemplate-screen-chklist.md | Live |  |  |
+| BlogPostCategoriesTemplate-screen-chklist | BlogPostCategoriesTemplate-screen-chklist.md | Live |  |  |
+| BlogPostRelatedPostsTemplate-screen-chklist | BlogPostRelatedPostsTemplate-screen-chklist.md | Live |  |  |
+| BlogPostTwoColumnTemplate-screen-chklist | BlogPostTwoColumnTemplate-screen-chklist.md | Live |  |  |
+| BlogPostForm-screen-chklist | BlogPostForm-screen-chklist.md | Live |  |  |
+| CategoryManagementTemplate-screen-chklist | CategoryManagementTemplate-screen-chklist.md | Live |  |  |
+| CategoryManagementForm-screen-chklist | CategoryManagementForm-screen-chklist.md | Live |  |  |
+| CommentModerationForm-RowTemplate-screen-chklist | CommentModerationForm-RowTemplate-screen-chklist.md | Live |  |  |
+| CommentModerationForm-screen-chklist | CommentModerationForm-screen-chklist.md | Live |  |  |
+| internal-standards-anvil-wireframe-conversion | internal-standards-anvil-wireframe-conversion.md | Live |  |  |
+| DashboardAnalyticsForm-wireframe-definition | DashboardAnalyticsForm-wireframe-definition.md | Live |  |  |
+| DashboardAnalyticsForm-wireframe-chklist | DashboardAnalyticsForm-wireframe-chklist.md | Live |  |  |
+| DashboardAnalyticsForm-screen-chklist | DashboardAnalyticsForm-screen-chklist.md | Live |  |  |
+| RevenueReportForm-RowTemplate-wireframe-definition | RevenueReportForm-RowTemplate-wireframe-definition.md | Live |  |  |
+| RevenueReportForm-RowTemplate-wireframe-chklist | RevenueReportForm-RowTemplate-wireframe-chklist.md | Live |  |  |
+| RevenueReportForm-RowTemplate-screen-chklist | RevenueReportForm-RowTemplate-screen-chklist.md | Live |  |  |
+| LoginForm-wireframe-definition | LoginForm-wireframe-definition.md | Live |  |  |
+| LoginForm-wireframe-chklist | LoginForm-wireframe-chklist.md | Live |  |  |
+| LoginForm-screen-chklist | LoginForm-screen-chklist.md | Live |  |  |
+| PasswordResetCompleteForm-wireframe-definition | PasswordResetCompleteForm-wireframe-definition.md | Live |  |  |
+| PasswordResetCompleteForm-wireframe-chklist | PasswordResetCompleteForm-wireframe-chklist.md | Live |  |  |
+| PasswordResetCompleteForm-screen-chklist | PasswordResetCompleteForm-screen-chklist.md | Live |  |  |
+| PasswordResetForm-wireframe-definition | PasswordResetForm-wireframe-definition.md | Live |  |  |
+| PasswordResetForm-wireframe-chklist | PasswordResetForm-wireframe-chklist.md | Live |  |  |
+| PasswordResetForm-screen-chklist | PasswordResetForm-screen-chklist.md | Live |  |  |
+| SignupForm-wireframe-definition | SignupForm-wireframe-definition.md | Live |  |  |
+| SignupForm-wireframe-chklist | SignupForm-wireframe-chklist.md | Live |  |  |
+| SignupForm-screen-chklist | SignupForm-screen-chklist.md | Live |  |  |
+| BlogEditorForm-wireframe-definition | BlogEditorForm-wireframe-definition.md | Live |  |  |
+| BlogEditorForm-wireframe-chklist | BlogEditorForm-wireframe-chklist.md | Live |  |  |
+| BlogEditorForm-screen-chklist | BlogEditorForm-screen-chklist.md | Live |  |  |
+| BlogListListTemplate-wireframe-definition | BlogListListTemplate-wireframe-definition.md | Live |  |  |
+| BlogListListTemplate-wireframe-chklist | BlogListListTemplate-wireframe-chklist.md | Live |  |  |
+| BlogListListTemplate-screen-chklist | BlogListListTemplate-screen-chklist.md | Live |  |  |
+| BlogListTiledTemplate-wireframe-definition | BlogListTiledTemplate-wireframe-definition.md | Live |  |  |
+| BlogListTiledTemplate-wireframe-chklist | BlogListTiledTemplate-wireframe-chklist.md | Live |  |  |
+| BlogListTiledTemplate-screen-chklist | BlogListTiledTemplate-screen-chklist.md | Live |  |  |
+| BlogPostClassicTemplate-wireframe-definition | BlogPostClassicTemplate-wireframe-definition.md | Live |  |  |
+| BlogPostClassicTemplate-wireframe-chklist | BlogPostClassicTemplate-wireframe-chklist.md | Live |  |  |
+| BlogPostClassicTemplate-screen-chklist | BlogPostClassicTemplate-screen-chklist.md | Live |  |  |
+| BlogPostFullWidthTemplate-wireframe-definition | BlogPostFullWidthTemplate-wireframe-definition.md | Live |  |  |
+| BlogPostFullWidthTemplate-wireframe-chklist | BlogPostFullWidthTemplate-wireframe-chklist.md | Live |  |  |
+| BlogPostFullWidthTemplate-screen-chklist | BlogPostFullWidthTemplate-screen-chklist.md | Live |  |  |
+| BlogPostCategoriesTemplate-wireframe-definition | BlogPostCategoriesTemplate-wireframe-definition.md | Live |  |  |
+| BlogPostCategoriesTemplate-wireframe-chklist | BlogPostCategoriesTemplate-wireframe-chklist.md | Live |  |  |
+| BlogPostCategoriesTemplate-screen-chklist | BlogPostCategoriesTemplate-screen-chklist.md | Live |  |  |
+| BlogPostRelatedPostsTemplate-wireframe-definition | BlogPostRelatedPostsTemplate-wireframe-definition.md | Live |  |  |
+| BlogPostRelatedPostsTemplate-wireframe-chklist | BlogPostRelatedPostsTemplate-wireframe-chklist.md | Live |  |  |
+| BlogPostRelatedPostsTemplate-screen-chklist | BlogPostRelatedPostsTemplate-screen-chklist.md | Live |  |  |
+| CategoryManagementTemplate-wireframe-definition | CategoryManagementTemplate-wireframe-definition.md | Live |  |  |
+| CategoryManagementTemplate-wireframe-chklist | CategoryManagementTemplate-wireframe-chklist.md | Live |  |  |
+| CategoryManagementTemplate-screen-chklist | CategoryManagementTemplate-screen-chklist.md | Live |  |  |
+| CommentModerationForm-RowTemplate-wireframe-definition | CommentModerationForm-RowTemplate-wireframe-definition.md | Live |  |  |
+| CommentModerationForm-RowTemplate-wireframe-chklist | CommentModerationForm-RowTemplate-wireframe-chklist.md | Live |  |  |
+| CommentModerationForm-RowTemplate-screen-chklist | CommentModerationForm-RowTemplate-screen-chklist.md | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-wireframe-definition | AvailabilitySettingsFormRowTemplate-wireframe-definition.md | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-wireframe-chklist | AvailabilitySettingsFormRowTemplate-wireframe-chklist.md | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-screen-chklist | AvailabilitySettingsFormRowTemplate-screen-chklist.md | Live |  |  |
+| tmpl_day_event-wireframe-definition | tmpl_day_event-wireframe-definition.md | Live |  |  |
+| tmpl_day_event-wireframe-chklist | tmpl_day_event-wireframe-chklist.md | Live |  |  |
+| tmpl_day_event-screen-chklist | tmpl_day_event-screen-chklist.md | Live |  |  |
+| tmpl_month_day_cell-wireframe-definition | tmpl_month_day_cell-wireframe-definition.md | Live |  |  |
+| tmpl_month_day_cell-wireframe-chklist | tmpl_month_day_cell-wireframe-chklist.md | Live |  |  |
+| tmpl_month_day_cell-screen-chklist | tmpl_month_day_cell-screen-chklist.md | Live |  |  |
+| tmpl_week_event-wireframe-definition | tmpl_week_event-wireframe-definition.md | Live |  |  |
+| tmpl_week_event-wireframe-chklist | tmpl_week_event-wireframe-chklist.md | Live |  |  |
+| tmpl_week_event-screen-chklist | tmpl_week_event-screen-chklist.md | Live |  |  |
+| tmpl_week_timeslot-wireframe-definition | tmpl_week_timeslot-wireframe-definition.md | Live |  |  |
+| tmpl_week_timeslot-wireframe-chklist | tmpl_week_timeslot-wireframe-chklist.md | Live |  |  |
+| tmpl_week_timeslot-screen-chklist | tmpl_week_timeslot-screen-chklist.md | Live |  |  |
+| BookingEditorForm-wireframe-definition | BookingEditorForm-wireframe-definition.md | Live |  |  |
+| BookingEditorForm-wireframe-chklist | BookingEditorForm-wireframe-chklist.md | Live |  |  |
+| BookingEditorForm-screen-chklist | BookingEditorForm-screen-chklist.md | Live |  |  |
+| BookingListForm-RowTemplate-wireframe-definition | BookingListForm-RowTemplate-wireframe-definition.md | Live |  |  |
+| BookingListForm-RowTemplate-wireframe-chklist | BookingListForm-RowTemplate-wireframe-chklist.md | Live |  |  |
+| BookingListForm-RowTemplate-screen-chklist | BookingListForm-RowTemplate-screen-chklist.md | Live |  |  |
+| BookingViewerForm-wireframe-definition | BookingViewerForm-wireframe-definition.md | Live |  |  |
+| BookingViewerForm-wireframe-chklist | BookingViewerForm-wireframe-chklist.md | Live |  |  |
+| BookingViewerForm-screen-chklist | BookingViewerForm-screen-chklist.md | Live |  |  |
+| ClauseBuilder-wireframe-definition | ClauseBuilder-wireframe-definition.md | Live |  |  |
+| ClauseBuilder-wireframe-chklist | ClauseBuilder-wireframe-chklist.md | Live |  |  |
+| ClauseBuilder-screen-chklist | ClauseBuilder-screen-chklist.md | Live |  |  |
+| FooterComponent-wireframe-definition | FooterComponent-wireframe-definition.md | Live |  |  |
+| FooterComponent-wireframe-chklist | FooterComponent-wireframe-chklist.md | Live |  |  |
+| FooterComponent-screen-chklist | FooterComponent-screen-chklist.md | Live |  |  |
+| ParallaxComponent-wireframe-definition | ParallaxComponent-wireframe-definition.md | Live |  |  |
+| ParallaxComponent-wireframe-chklist | ParallaxComponent-wireframe-chklist.md | Live |  |  |
+| ParallaxComponent-screen-chklist | ParallaxComponent-screen-chklist.md | Live |  |  |
+| TimeLapseCarouselComponent-wireframe-definition | TimeLapseCarouselComponent-wireframe-definition.md | Live |  |  |
+| TimeLapseCarouselComponent-wireframe-chklist | TimeLapseCarouselComponent-wireframe-chklist.md | Live |  |  |
+| TimeLapseCarouselComponent-screen-chklist | TimeLapseCarouselComponent-screen-chklist.md | Live |  |  |
+| VideoDisplayComponent-wireframe-definition | VideoDisplayComponent-wireframe-definition.md | Live |  |  |
+| VideoDisplayComponent-wireframe-chklist | VideoDisplayComponent-wireframe-chklist.md | Live |  |  |
+| VideoDisplayComponent-screen-chklist | VideoDisplayComponent-screen-chklist.md | Live |  |  |
+| ContactEditorForm-wireframe-definition | ContactEditorForm-wireframe-definition.md | Live |  |  |
+| ContactEditorForm-wireframe-chklist | ContactEditorForm-wireframe-chklist.md | Live |  |  |
+| ContactEditorForm-screen-chklist | ContactEditorForm-screen-chklist.md | Live |  |  |
+| ContactListForm-wireframe-definition | ContactListForm-wireframe-definition.md | Live |  |  |
+| ContactListForm-wireframe-chklist | ContactListForm-wireframe-chklist.md | Live |  |  |
+| ContactListForm-screen-chklist | ContactListForm-screen-chklist.md | Live |  |  |
+| ContactViewerForm-wireframe-definition | ContactViewerForm-wireframe-definition.md | Live |  |  |
+| ContactViewerForm-wireframe-chklist | ContactViewerForm-wireframe-chklist.md | Live |  |  |
+| ContactViewerForm-screen-chklist | ContactViewerForm-screen-chklist.md | Live |  |  |
+| EmailBroadcastForm-wireframe-definition | EmailBroadcastForm-wireframe-definition.md | Live |  |  |
+| EmailBroadcastForm-wireframe-chklist | EmailBroadcastForm-wireframe-chklist.md | Live |  |  |
+| EmailBroadcastForm-screen-chklist | EmailBroadcastForm-screen-chklist.md | Live |  |  |
+| EmailCampaignEditorForm-wireframe-definition | EmailCampaignEditorForm-wireframe-definition.md | Live |  |  |
+| EmailCampaignEditorForm-wireframe-chklist | EmailCampaignEditorForm-wireframe-chklist.md | Live |  |  |
+| EmailCampaignEditorForm-screen-chklist | EmailCampaignEditorForm-screen-chklist.md | Live |  |  |
+| EmailCampaignListForm-wireframe-definition | EmailCampaignListForm-wireframe-definition.md | Live |  |  |
+| EmailCampaignListForm-wireframe-chklist | EmailCampaignListForm-wireframe-chklist.md | Live |  |  |
+| EmailCampaignListForm-screen-chklist | EmailCampaignListForm-screen-chklist.md | Live |  |  |
+| LeadCaptureForm-wireframe-definition | LeadCaptureForm-wireframe-definition.md | Live |  |  |
+| LeadCaptureForm-wireframe-chklist | LeadCaptureForm-wireframe-chklist.md | Live |  |  |
+| LeadCaptureForm-screen-chklist | LeadCaptureForm-screen-chklist.md | Live |  |  |
+| SegmentManagerForm-wireframe-definition | SegmentManagerForm-wireframe-definition.md | Live |  |  |
+| SegmentManagerForm-wireframe-chklist | SegmentManagerForm-wireframe-chklist.md | Live |  |  |
+| SegmentManagerForm-screen-chklist | SegmentManagerForm-screen-chklist.md | Live |  |  |
+| TaskListForm-wireframe-definition | TaskListForm-wireframe-definition.md | Live |  |  |
+| TaskListForm-wireframe-chklist | TaskListForm-wireframe-chklist.md | Live |  |  |
+| TaskListForm-screen-chklist | TaskListForm-screen-chklist.md | Live |  |  |
+| ActivityFeed-wireframe-definition | ActivityFeed-wireframe-definition.md | Live |  |  |
+| ActivityFeed-wireframe-chklist | ActivityFeed-wireframe-chklist.md | Live |  |  |
+| ActivityFeed-screen-chklist | ActivityFeed-screen-chklist.md | Live |  |  |
+| MetricCard-wireframe-definition | MetricCard-wireframe-definition.md | Live |  |  |
+| MetricCard-wireframe-chklist | MetricCard-wireframe-chklist.md | Live |  |  |
+| MetricCard-screen-chklist | MetricCard-screen-chklist.md | Live |  |  |
+| InvoiceEditorForm-wireframe-definition | InvoiceEditorForm-wireframe-definition.md | Live |  |  |
+| InvoiceEditorForm-wireframe-chklist | InvoiceEditorForm-wireframe-chklist.md | Live |  |  |
+| InvoiceEditorForm-screen-chklist | InvoiceEditorForm-screen-chklist.md | Live |  |  |
+| InvoiceListForm-wireframe-definition | InvoiceListForm-wireframe-definition.md | Live |  |  |
+| InvoiceListForm-wireframe-chklist | InvoiceListForm-wireframe-chklist.md | Live |  |  |
+| InvoiceListForm-screen-chklist | InvoiceListForm-screen-chklist.md | Live |  |  |
+| InvoiceViewerForm-wireframe-definition | InvoiceViewerForm-wireframe-definition.md | Live |  |  |
+| InvoiceViewerForm-wireframe-chklist | InvoiceViewerForm-wireframe-chklist.md | Live |  |  |
+| InvoiceViewerForm-screen-chklist | InvoiceViewerForm-screen-chklist.md | Live |  |  |
+| EventRegistrationTemplate-wireframe-definition | EventRegistrationTemplate-wireframe-definition.md | Live |  |  |
+| EventRegistrationTemplate-wireframe-chklist | EventRegistrationTemplate-wireframe-chklist.md | Live |  |  |
+| EventRegistrationTemplate-screen-chklist | EventRegistrationTemplate-screen-chklist.md | Live |  |  |
+| LeadCaptureTemplate-wireframe-definition | LeadCaptureTemplate-wireframe-definition.md | Live |  |  |
+| LeadCaptureTemplate-wireframe-chklist | LeadCaptureTemplate-wireframe-chklist.md | Live |  |  |
+| LeadCaptureTemplate-screen-chklist | LeadCaptureTemplate-screen-chklist.md | Live |  |  |
+| VslTemplate-wireframe-definition | VslTemplate-wireframe-definition.md | Live |  |  |
+| VslTemplate-wireframe-chklist | VslTemplate-wireframe-chklist.md | Live |  |  |
+| VslTemplate-screen-chklist | VslTemplate-screen-chklist.md | Live |  |  |
+| LandingPageEditorForm-wireframe-definition | LandingPageEditorForm-wireframe-definition.md | Live |  |  |
+| LandingPageEditorForm-wireframe-chklist | LandingPageEditorForm-wireframe-chklist.md | Live |  |  |
+| LandingPageEditorForm-screen-chklist | LandingPageEditorForm-screen-chklist.md | Live |  |  |
+| LandingPageListForm-wireframe-definition | LandingPageListForm-wireframe-definition.md | Live |  |  |
+| LandingPageListForm-wireframe-chklist | LandingPageListForm-wireframe-chklist.md | Live |  |  |
+| LandingPageListForm-screen-chklist | LandingPageListForm-screen-chklist.md | Live |  |  |
+| AdminLayout-wireframe-definition | AdminLayout-wireframe-definition.md | Live |  |  |
+| AdminLayout-wireframe-chklist | AdminLayout-wireframe-chklist.md | Live |  |  |
+| AdminLayout-screen-chklist | AdminLayout-screen-chklist.md | Live |  |  |
+| BlankLayout-wireframe-definition | BlankLayout-wireframe-definition.md | Live |  |  |
+| BlankLayout-wireframe-chklist | BlankLayout-wireframe-chklist.md | Live |  |  |
+| BlankLayout-screen-chklist | BlankLayout-screen-chklist.md | Live |  |  |
+| CustomerLayout-wireframe-definition | CustomerLayout-wireframe-definition.md | Live |  |  |
+| CustomerLayout-wireframe-chklist | CustomerLayout-wireframe-chklist.md | Live |  |  |
+| CustomerLayout-screen-chklist | CustomerLayout-screen-chklist.md | Live |  |  |
+| ErrorLayout-wireframe-definition | ErrorLayout-wireframe-definition.md | Live |  |  |
+| ErrorLayout-wireframe-chklist | ErrorLayout-wireframe-chklist.md | Live |  |  |
+| ErrorLayout-screen-chklist | ErrorLayout-screen-chklist.md | Live |  |  |
+| OnboardingForm-wireframe-definition | OnboardingForm-wireframe-definition.md | Live |  |  |
+| OnboardingForm-wireframe-chklist | OnboardingForm-wireframe-chklist.md | Live |  |  |
+| OnboardingForm-screen-chklist | OnboardingForm-screen-chklist.md | Live |  |  |
+| AboutPage-wireframe-definition | AboutPage-wireframe-definition.md | Live |  |  |
+| AboutPage-wireframe-chklist | AboutPage-wireframe-chklist.md | Live |  |  |
+| AboutPage-screen-chklist | AboutPage-screen-chklist.md | Live |  |  |
+| ContactPage-wireframe-definition | ContactPage-wireframe-definition.md | Live |  |  |
+| ContactPage-wireframe-chklist | ContactPage-wireframe-chklist.md | Live |  |  |
+| ContactPage-screen-chklist | ContactPage-screen-chklist.md | Live |  |  |
+| HomePageBookingTemplate-wireframe-definition | HomePageBookingTemplate-wireframe-definition.md | Live |  |  |
+| HomePageBookingTemplate-wireframe-chklist | HomePageBookingTemplate-wireframe-chklist.md | Live |  |  |
+| HomePageBookingTemplate-screen-chklist | HomePageBookingTemplate-screen-chklist.md | Live |  |  |
+| HomePageClassicTemplate-wireframe-definition | HomePageClassicTemplate-wireframe-definition.md | Live |  |  |
+| HomePageClassicTemplate-wireframe-chklist | HomePageClassicTemplate-wireframe-chklist.md | Live |  |  |
+| HomePageClassicTemplate-screen-chklist | HomePageClassicTemplate-screen-chklist.md | Live |  |  |
+| HomePageMinimalistTemplate-wireframe-definition | HomePageMinimalistTemplate-wireframe-definition.md | Live |  |  |
+| HomePageMinimalistTemplate-wireframe-chklist | HomePageMinimalistTemplate-wireframe-chklist.md | Live |  |  |
+| HomePageMinimalistTemplate-screen-chklist | HomePageMinimalistTemplate-screen-chklist.md | Live |  |  |
+| HomePageServicesTemplate-wireframe-definition | HomePageServicesTemplate-wireframe-definition.md | Live |  |  |
+| HomePageServicesTemplate-wireframe-chklist | HomePageServicesTemplate-wireframe-chklist.md | Live |  |  |
+| HomePageServicesTemplate-screen-chklist | HomePageServicesTemplate-screen-chklist.md | Live |  |  |
+| PrivacyPolicyPage-wireframe-definition | PrivacyPolicyPage-wireframe-definition.md | Live |  |  |
+| PrivacyPolicyPage-wireframe-chklist | PrivacyPolicyPage-wireframe-chklist.md | Live |  |  |
+| PrivacyPolicyPage-screen-chklist | PrivacyPolicyPage-screen-chklist.md | Live |  |  |
+| TermsConditionsPage-wireframe-definition | TermsConditionsPage-wireframe-definition.md | Live |  |  |
+| TermsConditionsPage-wireframe-chklist | TermsConditionsPage-wireframe-chklist.md | Live |  |  |
+| TermsConditionsPage-screen-chklist | TermsConditionsPage-screen-chklist.md | Live |  |  |
+| ServiceCategoriesForm-wireframe-definition | ServiceCategoriesForm-wireframe-definition.md | Live |  |  |
+| ServiceCategoriesForm-wireframe-chklist | ServiceCategoriesForm-wireframe-chklist.md | Live |  |  |
+| ServiceCategoriesForm-screen-chklist | ServiceCategoriesForm-screen-chklist.md | Live |  |  |
+| ServiceEditorForm-wireframe-definition | ServiceEditorForm-wireframe-definition.md | Live |  |  |
+| ServiceEditorForm-wireframe-chklist | ServiceEditorForm-wireframe-chklist.md | Live |  |  |
+| ServiceEditorForm-screen-chklist | ServiceEditorForm-screen-chklist.md | Live |  |  |
+| ServiceViewerForm-wireframe-definition | ServiceViewerForm-wireframe-definition.md | Live |  |  |
+| ServiceViewerForm-wireframe-chklist | ServiceViewerForm-wireframe-chklist.md | Live |  |  |
+| ServiceViewerForm-screen-chklist | ServiceViewerForm-screen-chklist.md | Live |  |  |
+| ServicesForm-wireframe-definition | ServicesForm-wireframe-definition.md | Live |  |  |
+| ServicesForm-wireframe-chklist | ServicesForm-wireframe-chklist.md | Live |  |  |
+| ServicesForm-screen-chklist | ServicesForm-screen-chklist.md | Live |  |  |
+| EmailSetupForm-wireframe-definition | EmailSetupForm-wireframe-definition.md | Live |  |  |
+| EmailSetupForm-wireframe-chklist | EmailSetupForm-wireframe-chklist.md | Live |  |  |
+| EmailSetupForm-screen-chklist | EmailSetupForm-screen-chklist.md | Live |  |  |
+| PaymentGatewayForm-wireframe-definition | PaymentGatewayForm-wireframe-definition.md | Live |  |  |
+| PaymentGatewayForm-wireframe-chklist | PaymentGatewayForm-wireframe-chklist.md | Live |  |  |
+| PaymentGatewayForm-screen-chklist | PaymentGatewayForm-screen-chklist.md | Live |  |  |
+| PolicyEditorForm-wireframe-definition | PolicyEditorForm-wireframe-definition.md | Live |  |  |
+| PolicyEditorForm-wireframe-chklist | PolicyEditorForm-wireframe-chklist.md | Live |  |  |
+| PolicyEditorForm-screen-chklist | PolicyEditorForm-screen-chklist.md | Live |  |  |
+| SettingsForm-wireframe-definition | SettingsForm-wireframe-definition.md | Live |  |  |
+| SettingsForm-wireframe-chklist | SettingsForm-wireframe-chklist.md | Live |  |  |
+| SettingsForm-screen-chklist | SettingsForm-screen-chklist.md | Live |  |  |
+| ThemeConfigForm-wireframe-definition | ThemeConfigForm-wireframe-definition.md | Live |  |  |
+| ThemeConfigForm-wireframe-chklist | ThemeConfigForm-wireframe-chklist.md | Live |  |  |
+| ThemeConfigForm-screen-chklist | ThemeConfigForm-screen-chklist.md | Live |  |  |
+| UserManagementForm-wireframe-definition | UserManagementForm-wireframe-definition.md | Live |  |  |
+| UserManagementForm-wireframe-chklist | UserManagementForm-wireframe-chklist.md | Live |  |  |
+| UserManagementForm-screen-chklist | UserManagementForm-screen-chklist.md | Live |  |  |
+| VaultForm-wireframe-definition | VaultForm-wireframe-definition.md | Live |  |  |
+| VaultForm-wireframe-chklist | VaultForm-wireframe-chklist.md | Live |  |  |
+| VaultForm-screen-chklist | VaultForm-screen-chklist.md | Live |  |  |
+| AGENTS | AGENTS.md |  |  |  |
+| CLAUDE | CLAUDE.md |  |  |  |
+| README | README.md |  |  |  |
+| blank-client-template | blank-client-template.md |  |  |  |
+| crm-package-replaces-marketing | crm-package-replaces-marketing.md |  |  |  |
+| schema-scope-reduction | schema-scope-reduction.md |  |  |  |
+| domain | domain.md |  |  |  |
+| issue-tracker | issue-tracker.md |  |  |  |
+| triage-labels | triage-labels.md |  |  |  |
+| architecture | architecture.md |  |  |  |
+| authoritative-schema | authoritative-schema.md |  |  |  |
+| build-plan | build-plan.md |  |  |  |
+| calendar-feature-spec | calendar-feature-spec.md |  |  |  |
+| CHANGELOG | CHANGELOG.md |  |  |  |
+| CONTEXT | CONTEXT.md |  |  |  |
+| custom-component-requirements-matrix | custom-component-requirements-matrix.md |  |  |  |
+| design-direction | design-direction.md |  |  |  |
+| DESIGN | DESIGN.md |  |  |  |
+| DESIGN_palette_section | DESIGN_palette_section.md |  |  |  |
+| founder-strategic-review | founder-strategic-review.md |  |  |  |
+| gstack-artifact-governance | gstack-artifact-governance.md |  |  |  |
+| INDEX | INDEX.md |  |  |  |
+| palette_selector_tokens | palette_selector_tokens.md |  |  |  |
+| platform-architecture-narrative | platform-architecture-narrative.md |  |  |  |
+| platform-architecture | platform-architecture.md |  |  |  |
+| positioning-strategy | positioning-strategy.md |  |  |  |
+| pricing-strategy-consultation | pricing-strategy-consultation.md |  |  |  |
+| user-flows | user-flows.md |  |  |  |
+| business-requirements-document | business-requirements-document.md |  |  |  |
+| deployment-procedures | deployment-procedures.md |  |  |  |
+| globals-contract | globals-contract.md |  |  |  |
+| integration-architecture | integration-architecture.md |  |  |  |
+| observability-requirements | observability-requirements.md |  |  |  |
+| product-requirements-document | product-requirements-document.md |  |  |  |
+| scaffold-spec | scaffold-spec.md |  |  |  |
+| software-requirements-specification | software-requirements-specification.md |  |  |  |
+| development-policy | development-policy.md |  |  |  |
+| register-local | register-local.md |  |  |  |
+| internal-standards-anvil-wireframe-conversion | internal-standards-anvil-wireframe-conversion.md |  |  |  |
+| mybizz-ai-implementation-spec (1.0) | mybizz-ai-implementation-spec (1.0).md | Live |  | future development planning — developer ruling: intact, valid, do not retire |
+| mybizz-ai-implementation-spec-v2 | mybizz-ai-implementation-spec-v2.md | Live |  | future development planning — developer ruling: intact, valid, do not retire |
+| mybizz-ai-implementation-spec | mybizz-ai-implementation-spec.md | Live |  | future development planning — developer ruling: intact, valid, do not retire |
+| mybizz-ai-implementation-spec-v3 (1) | mybizz-ai-implementation-spec-v3 (1).md | Live |  | future development planning — developer ruling: intact, valid, do not retire |
+| mybizz-ai-implementation-spec-v3 | mybizz-ai-implementation-spec-v3.md | Live |  | future development planning — developer ruling: intact, valid, do not retire |
+| DashboardAnalyticsForm-screen-chklist | DashboardAnalyticsForm-screen-chklist.md | Live |  |  |
+| DashboardAnalyticsForm-screen | DashboardAnalyticsForm-screen.html | Live |  |  |
+| DashboardAnalyticsForm-screen | DashboardAnalyticsForm-screen.png | Live |  |  |
+| DashboardAnalyticsForm-wireframe-chklist | DashboardAnalyticsForm-wireframe-chklist.md | Live |  |  |
+| DashboardAnalyticsForm-wireframe-definition | DashboardAnalyticsForm-wireframe-definition.md | Live |  |  |
+| DashboardAnalyticsForm-wireframe | DashboardAnalyticsForm-wireframe.html | Live |  |  |
+| RevenueReport-screen-chklist | RevenueReport-screen-chklist.md | Live |  |  |
+| RevenueReport-screen | RevenueReport-screen.html | Live |  |  |
+| RevenueReport-screen | RevenueReport-screen.png | Live |  |  |
+| RevenueReport-wireframe-chklist | RevenueReport-wireframe-chklist.md | Live |  |  |
+| RevenueReport-wireframe-definition | RevenueReport-wireframe-definition.md | Live |  |  |
+| RevenueReport-wireframe | RevenueReport-wireframe.html | Live |  |  |
+| RevenueReportForm-RowTemplate-screen-chklist | RevenueReportForm-RowTemplate-screen-chklist.md | Live |  |  |
+| RevenueReportForm-RowTemplate-screen | RevenueReportForm-RowTemplate-screen.html | Live |  |  |
+| RevenueReportForm-RowTemplate-screen | RevenueReportForm-RowTemplate-screen.png | Live |  |  |
+| RevenueReportForm-RowTemplate-wireframe-chklist | RevenueReportForm-RowTemplate-wireframe-chklist.md | Live |  |  |
+| RevenueReportForm-RowTemplate-wireframe-definition | RevenueReportForm-RowTemplate-wireframe-definition.md | Live |  |  |
+| RevenueReportForm-RowTemplate-wireframe | RevenueReportForm-RowTemplate-wireframe.html | Live |  |  |
+| LoginForm-screen-chklist | LoginForm-screen-chklist.md | Live |  |  |
+| LoginForm-screen | LoginForm-screen.html | Live |  |  |
+| LoginForm-screen | LoginForm-screen.png | Live |  |  |
+| LoginForm-wireframe-chklist | LoginForm-wireframe-chklist.md | Live |  |  |
+| LoginForm-wireframe-definition | LoginForm-wireframe-definition.md | Live |  |  |
+| LoginForm-wireframe | LoginForm-wireframe.html | Live |  |  |
+| PasswordResetCompleteForm-screen-chklist | PasswordResetCompleteForm-screen-chklist.md | Live |  |  |
+| PasswordResetCompleteForm-screen | PasswordResetCompleteForm-screen.html | Live |  |  |
+| PasswordResetCompleteForm-screen | PasswordResetCompleteForm-screen.png | Live |  |  |
+| PasswordResetCompleteForm-wireframe-chklist | PasswordResetCompleteForm-wireframe-chklist.md | Live |  |  |
+| PasswordResetCompleteForm-wireframe-definition | PasswordResetCompleteForm-wireframe-definition.md | Live |  |  |
+| PasswordResetCompleteForm-wireframe | PasswordResetCompleteForm-wireframe.html | Live |  |  |
+| PasswordResetForm-screen-chklist | PasswordResetForm-screen-chklist.md | Live |  |  |
+| PasswordResetForm-screen | PasswordResetForm-screen.html | Live |  |  |
+| PasswordResetForm-screen | PasswordResetForm-screen.png | Live |  |  |
+| PasswordResetForm-wireframe-chklist | PasswordResetForm-wireframe-chklist.md | Live |  |  |
+| PasswordResetForm-wireframe-definition | PasswordResetForm-wireframe-definition.md | Live |  |  |
+| PasswordResetForm-wireframe | PasswordResetForm-wireframe.html | Live |  |  |
+| SignupForm-screen-chklist | SignupForm-screen-chklist.md | Live |  |  |
+| SignupForm-screen | SignupForm-screen.html | Live |  |  |
+| SignupForm-screen | SignupForm-screen.png | Live |  |  |
+| SignupForm-wireframe-chklist | SignupForm-wireframe-chklist.md | Live |  |  |
+| SignupForm-wireframe-definition | SignupForm-wireframe-definition.md | Live |  |  |
+| SignupForm-wireframe | SignupForm-wireframe.html | Live |  |  |
+| BlogEditorForm-screen-chklist | BlogEditorForm-screen-chklist.md | Live |  |  |
+| BlogEditorForm-screen | BlogEditorForm-screen.html | Live |  |  |
+| BlogEditorForm-screen | BlogEditorForm-screen.png | Live |  |  |
+| BlogEditorForm-wireframe-chklist | BlogEditorForm-wireframe-chklist.md | Live |  |  |
+| BlogEditorForm-wireframe-definition | BlogEditorForm-wireframe-definition.md | Live |  |  |
+| BlogEditorForm-wireframe | BlogEditorForm-wireframe.html | Live |  |  |
+| BlogListForm-screen-chklist | BlogListForm-screen-chklist.md | Retired |  |  |
+| BlogListForm-wireframe | BlogListForm-wireframe.html | Live |  |  |
+| BlogListListTemplate-screen-chklist | BlogListListTemplate-screen-chklist.md | Live |  |  |
+| BlogListListTemplate-screen | BlogListListTemplate-screen.html | Live |  |  |
+| BlogListListTemplate-screen | BlogListListTemplate-screen.png | Live |  |  |
+| BlogListListTemplate-wireframe-chklist | BlogListListTemplate-wireframe-chklist.md | Live |  |  |
+| BlogListListTemplate-wireframe-definition | BlogListListTemplate-wireframe-definition.md | Live |  |  |
+| BlogListListTemplate-wireframe | BlogListListTemplate-wireframe.html | Live |  |  |
+| BlogListTiledTemplate-screen-chklist | BlogListTiledTemplate-screen-chklist.md | Live |  |  |
+| BlogListTiledTemplate-screen | BlogListTiledTemplate-screen.html | Live |  |  |
+| BlogListTiledTemplate-screen | BlogListTiledTemplate-screen.png | Live |  |  |
+| BlogListTiledTemplate-wireframe-chklist | BlogListTiledTemplate-wireframe-chklist.md | Live |  |  |
+| BlogListTiledTemplate-wireframe-definition | BlogListTiledTemplate-wireframe-definition.md | Live |  |  |
+| BlogListTiledTemplate-wireframe | BlogListTiledTemplate-wireframe.html | Live |  |  |
+| BlogPostForm-screen-chklist | BlogPostForm-screen-chklist.md | Retired |  |  |
+| BlogPostForm-wireframe | BlogPostForm-wireframe.html | Live |  |  |
+| BlogPostClassicTemplate-screen-chklist | BlogPostClassicTemplate-screen-chklist.md | Live |  |  |
+| BlogPostClassicTemplate-screen | BlogPostClassicTemplate-screen.html | Live |  |  |
+| BlogPostClassicTemplate-screen | BlogPostClassicTemplate-screen.png | Live |  |  |
+| BlogPostClassicTemplate-wireframe-chklist | BlogPostClassicTemplate-wireframe-chklist.md | Live |  |  |
+| BlogPostClassicTemplate-wireframe-definition | BlogPostClassicTemplate-wireframe-definition.md | Live |  |  |
+| BlogPostClassicTemplate-wireframe | BlogPostClassicTemplate-wireframe.html | Live |  |  |
+| BlogPostFullWidthTemplate-screen-chklist | BlogPostFullWidthTemplate-screen-chklist.md | Live |  |  |
+| BlogPostFullWidthTemplate-screen | BlogPostFullWidthTemplate-screen.html | Live |  |  |
+| BlogPostFullWidthTemplate-screen | BlogPostFullWidthTemplate-screen.png | Live |  |  |
+| BlogPostFullWidthTemplate-wireframe-chklist | BlogPostFullWidthTemplate-wireframe-chklist.md | Live |  |  |
+| BlogPostFullWidthTemplate-wireframe-definition | BlogPostFullWidthTemplate-wireframe-definition.md | Live |  |  |
+| BlogPostFullWidthTemplate-wireframe | BlogPostFullWidthTemplate-wireframe.html | Live |  |  |
+| BlogPostTwoColumnTemplate-screen-chklist | BlogPostTwoColumnTemplate-screen-chklist.md | Retired |  |  |
+| BlogPostTwoColumnTemplate-wireframe | BlogPostTwoColumnTemplate-wireframe.html | Live |  |  |
+| BlogPostCategoriesTemplate-screen-chklist | BlogPostCategoriesTemplate-screen-chklist.md | Live |  |  |
+| BlogPostCategoriesTemplate-screen | BlogPostCategoriesTemplate-screen.html | Live |  |  |
+| BlogPostCategoriesTemplate-screen | BlogPostCategoriesTemplate-screen.png | Live |  |  |
+| BlogPostCategoriesTemplate-wireframe-chklist | BlogPostCategoriesTemplate-wireframe-chklist.md | Live |  |  |
+| BlogPostCategoriesTemplate-wireframe-definition | BlogPostCategoriesTemplate-wireframe-definition.md | Live |  |  |
+| BlogPostCategoriesTemplate-wireframe | BlogPostCategoriesTemplate-wireframe.html | Live |  |  |
+| BlogPostRelatedPostsTemplate-screen-chklist | BlogPostRelatedPostsTemplate-screen-chklist.md | Live |  |  |
+| BlogPostRelatedPostsTemplate-screen | BlogPostRelatedPostsTemplate-screen.html | Live |  |  |
+| BlogPostRelatedPostsTemplate-screen | BlogPostRelatedPostsTemplate-screen.png | Live |  |  |
+| BlogPostRelatedPostsTemplate-wireframe-chklist | BlogPostRelatedPostsTemplate-wireframe-chklist.md | Live |  |  |
+| BlogPostRelatedPostsTemplate-wireframe-definition | BlogPostRelatedPostsTemplate-wireframe-definition.md | Live |  |  |
+| BlogPostRelatedPostsTemplate-wireframe | BlogPostRelatedPostsTemplate-wireframe.html | Live |  |  |
+| CategoryManagementForm-screen-chklist | CategoryManagementForm-screen-chklist.md | Retired |  |  |
+| CategoryManagementForm-wireframe | CategoryManagementForm-wireframe.html | Live |  |  |
+| CategoryManagementTemplate-screen-chklist | CategoryManagementTemplate-screen-chklist.md | Live |  |  |
+| CategoryManagementTemplate-screen | CategoryManagementTemplate-screen.html | Live |  |  |
+| CategoryManagementTemplate-screen | CategoryManagementTemplate-screen.png | Live |  |  |
+| CategoryManagementTemplate-wireframe-chklist | CategoryManagementTemplate-wireframe-chklist.md | Live |  |  |
+| CategoryManagementTemplate-wireframe-definition | CategoryManagementTemplate-wireframe-definition.md | Live |  |  |
+| CategoryManagementTemplate-wireframe | CategoryManagementTemplate-wireframe.html | Live |  |  |
+| CommentModerationForm-screen-chklist | CommentModerationForm-screen-chklist.md | Retired |  |  |
+| CommentModerationForm-wireframe | CommentModerationForm-wireframe.html | Live |  |  |
+| CommentModerationForm-RowTemplate-screen-chklist | CommentModerationForm-RowTemplate-screen-chklist.md | Live |  |  |
+| CommentModerationForm-RowTemplate-screen | CommentModerationForm-RowTemplate-screen.html | Live |  |  |
+| CommentModerationForm-RowTemplate-screen | CommentModerationForm-RowTemplate-screen.png | Live |  |  |
+| CommentModerationForm-RowTemplate-wireframe-chklist | CommentModerationForm-RowTemplate-wireframe-chklist.md | Live |  |  |
+| CommentModerationForm-RowTemplate-wireframe-definition | CommentModerationForm-RowTemplate-wireframe-definition.md | Live |  |  |
+| CommentModerationForm-RowTemplate-wireframe | CommentModerationForm-RowTemplate-wireframe.html | Live |  |  |
+| AvailabilitySettingsForm-screen-chklist | AvailabilitySettingsForm-screen-chklist.md | Live |  |  |
+| AvailabilitySettingsForm-wireframe | AvailabilitySettingsForm-wireframe.html | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-screen-chklist | AvailabilitySettingsFormRowTemplate-screen-chklist.md | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-screen | AvailabilitySettingsFormRowTemplate-screen.html | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-screen | AvailabilitySettingsFormRowTemplate-screen.png | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-wireframe-chklist | AvailabilitySettingsFormRowTemplate-wireframe-chklist.md | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-wireframe-definition | AvailabilitySettingsFormRowTemplate-wireframe-definition.md | Live |  |  |
+| AvailabilitySettingsFormRowTemplate-wireframe | AvailabilitySettingsFormRowTemplate-wireframe.html | Live |  |  |
+| BookingCalendarForm-screen-chklist | BookingCalendarForm-screen-chklist.md | Live |  |  |
+| BookingCalendarForm-wireframe | BookingCalendarForm-wireframe.html | Live |  |  |
+| tmpl_day_event-screen-chklist | tmpl_day_event-screen-chklist.md | Live |  |  |
+| tmpl_day_event-screen | tmpl_day_event-screen.html | Live |  |  |
+| tmpl_day_event-screen | tmpl_day_event-screen.png | Live |  |  |
+| tmpl_day_event-wireframe-chklist | tmpl_day_event-wireframe-chklist.md | Live |  |  |
+| tmpl_day_event-wireframe-definition | tmpl_day_event-wireframe-definition.md | Live |  |  |
+| tmpl_day_event-wireframe | tmpl_day_event-wireframe.html | Live |  |  |
+| tmpl_month_day_cell-screen-chklist | tmpl_month_day_cell-screen-chklist.md | Live |  |  |
+| tmpl_month_day_cell-screen | tmpl_month_day_cell-screen.html | Live |  |  |
+| tmpl_month_day_cell-screen | tmpl_month_day_cell-screen.png | Live |  |  |
+| tmpl_month_day_cell-wireframe-chklist | tmpl_month_day_cell-wireframe-chklist.md | Live |  |  |
+| tmpl_month_day_cell-wireframe-definition | tmpl_month_day_cell-wireframe-definition.md | Live |  |  |
+| tmpl_month_day_cell-wireframe | tmpl_month_day_cell-wireframe.html | Live |  |  |
+| tmpl_week_event-screen-chklist | tmpl_week_event-screen-chklist.md | Live |  |  |
+| tmpl_week_event-screen | tmpl_week_event-screen.html | Live |  |  |
+| tmpl_week_event-screen | tmpl_week_event-screen.png | Live |  |  |
+| tmpl_week_event-wireframe-chklist | tmpl_week_event-wireframe-chklist.md | Live |  |  |
+| tmpl_week_event-wireframe-definition | tmpl_week_event-wireframe-definition.md | Live |  |  |
+| tmpl_week_event-wireframe | tmpl_week_event-wireframe.html | Live |  |  |
+| tmpl_week_timeslot-screen-chklist | tmpl_week_timeslot-screen-chklist.md | Live |  |  |
+| tmpl_week_timeslot-screen | tmpl_week_timeslot-screen.html | Live |  |  |
+| tmpl_week_timeslot-screen | tmpl_week_timeslot-screen.png | Live |  |  |
+| tmpl_week_timeslot-wireframe-chklist | tmpl_week_timeslot-wireframe-chklist.md | Live |  |  |
+| tmpl_week_timeslot-wireframe-definition | tmpl_week_timeslot-wireframe-definition.md | Live |  |  |
+| tmpl_week_timeslot-wireframe | tmpl_week_timeslot-wireframe.html | Live |  |  |
+| BookingEditorForm-screen-chklist | BookingEditorForm-screen-chklist.md | Live |  |  |
+| BookingEditorForm-screen | BookingEditorForm-screen.html | Live |  |  |
+| BookingEditorForm-screen | BookingEditorForm-screen.png | Live |  |  |
+| BookingEditorForm-wireframe-chklist | BookingEditorForm-wireframe-chklist.md | Live |  |  |
+| BookingEditorForm-wireframe-definition | BookingEditorForm-wireframe-definition.md | Live |  |  |
+| BookingEditorForm-wireframe | BookingEditorForm-wireframe.html | Live |  |  |
+| BookingListForm-screen-chklist | BookingListForm-screen-chklist.md | Live |  |  |
+| BookingListForm-wireframe | BookingListForm-wireframe.html | Live |  |  |
+| BookingListForm-RowTemplate-screen-chklist | BookingListForm-RowTemplate-screen-chklist.md | Live |  |  |
+| BookingListForm-RowTemplate-screen | BookingListForm-RowTemplate-screen.html | Live |  |  |
+| BookingListForm-RowTemplate-screen | BookingListForm-RowTemplate-screen.png | Live |  |  |
+| BookingListForm-RowTemplate-wireframe-chklist | BookingListForm-RowTemplate-wireframe-chklist.md | Live |  |  |
+| BookingListForm-RowTemplate-wireframe-definition | BookingListForm-RowTemplate-wireframe-definition.md | Live |  |  |
+| BookingListForm-RowTemplate-wireframe | BookingListForm-RowTemplate-wireframe.html | Live |  |  |
+| BookingViewerForm-screen-chklist | BookingViewerForm-screen-chklist.md | Live |  |  |
+| BookingViewerForm-screen | BookingViewerForm-screen.html | Live |  |  |
+| BookingViewerForm-screen | BookingViewerForm-screen.png | Live |  |  |
+| BookingViewerForm-wireframe-chklist | BookingViewerForm-wireframe-chklist.md | Live |  |  |
+| BookingViewerForm-wireframe-definition | BookingViewerForm-wireframe-definition.md | Live |  |  |
+| BookingViewerForm-wireframe | BookingViewerForm-wireframe.html | Live |  |  |
+| ClauseBuilder-screen-chklist | ClauseBuilder-screen-chklist.md | Live |  |  |
+| ClauseBuilder-screen | ClauseBuilder-screen.html | Live |  |  |
+| ClauseBuilder-screen | ClauseBuilder-screen.png | Live |  |  |
+| ClauseBuilder-wireframe-chklist | ClauseBuilder-wireframe-chklist.md | Live |  |  |
+| ClauseBuilder-wireframe-definition | ClauseBuilder-wireframe-definition.md | Live |  |  |
+| ClauseBuilder-wireframe | ClauseBuilder-wireframe.html | Live |  |  |
+| FooterComponent-screen-chklist | FooterComponent-screen-chklist.md | Live |  |  |
+| FooterComponent-screen | FooterComponent-screen.html | Live |  |  |
+| FooterComponent-screen | FooterComponent-screen.png | Live |  |  |
+| FooterComponent-wireframe-chklist | FooterComponent-wireframe-chklist.md | Live |  |  |
+| FooterComponent-wireframe-definition | FooterComponent-wireframe-definition.md | Live |  |  |
+| FooterComponent-wireframe | FooterComponent-wireframe.html | Live |  |  |
+| ParallaxComponent-screen-chklist | ParallaxComponent-screen-chklist.md | Live |  |  |
+| ParallaxComponent-screen | ParallaxComponent-screen.html | Live |  |  |
+| ParallaxComponent-screen | ParallaxComponent-screen.png | Live |  |  |
+| ParallaxComponent-wireframe-chklist | ParallaxComponent-wireframe-chklist.md | Live |  |  |
+| ParallaxComponent-wireframe-definition | ParallaxComponent-wireframe-definition.md | Live |  |  |
+| ParallaxComponent-wireframe | ParallaxComponent-wireframe.html | Live |  |  |
+| TimeLapseCarouselComponent-screen-chklist | TimeLapseCarouselComponent-screen-chklist.md | Live |  |  |
+| TimeLapseCarouselComponent-screen | TimeLapseCarouselComponent-screen.html | Live |  |  |
+| TimeLapseCarouselComponent-screen | TimeLapseCarouselComponent-screen.png | Live |  |  |
+| TimeLapseCarouselComponent-wireframe-chklist | TimeLapseCarouselComponent-wireframe-chklist.md | Live |  |  |
+| TimeLapseCarouselComponent-wireframe-definition | TimeLapseCarouselComponent-wireframe-definition.md | Live |  |  |
+| TimeLapseCarouselComponent-wireframe | TimeLapseCarouselComponent-wireframe.html | Live |  |  |
+| VideoDisplayComponent-screen-chklist | VideoDisplayComponent-screen-chklist.md | Live |  |  |
+| VideoDisplayComponent-screen | VideoDisplayComponent-screen.html | Live |  |  |
+| VideoDisplayComponent-screen | VideoDisplayComponent-screen.png | Live |  |  |
+| VideoDisplayComponent-wireframe-chklist | VideoDisplayComponent-wireframe-chklist.md | Live |  |  |
+| VideoDisplayComponent-wireframe-definition | VideoDisplayComponent-wireframe-definition.md | Live |  |  |
+| VideoDisplayComponent-wireframe | VideoDisplayComponent-wireframe.html | Live |  |  |
+| ContactEditorForm-screen-chklist | ContactEditorForm-screen-chklist.md | Live |  |  |
+| ContactEditorForm-screen | ContactEditorForm-screen.html | Live |  |  |
+| ContactEditorForm-screen | ContactEditorForm-screen.png | Live |  |  |
+| ContactEditorForm-wireframe-chklist | ContactEditorForm-wireframe-chklist.md | Live |  |  |
+| ContactEditorForm-wireframe-definition | ContactEditorForm-wireframe-definition.md | Live |  |  |
+| ContactEditorForm-wireframe | ContactEditorForm-wireframe.html | Live |  |  |
+| ContactListForm-screen-chklist | ContactListForm-screen-chklist.md | Live |  |  |
+| ContactListForm-screen | ContactListForm-screen.html | Live |  |  |
+| ContactListForm-screen | ContactListForm-screen.png | Live |  |  |
+| ContactListForm-wireframe-chklist | ContactListForm-wireframe-chklist.md | Live |  |  |
+| ContactListForm-wireframe-definition | ContactListForm-wireframe-definition.md | Live |  |  |
+| ContactListForm-wireframe | ContactListForm-wireframe.html | Live |  |  |
+| ContactViewerForm-screen-chklist | ContactViewerForm-screen-chklist.md | Live |  |  |
+| ContactViewerForm-screen | ContactViewerForm-screen.html | Live |  |  |
+| ContactViewerForm-screen | ContactViewerForm-screen.png | Live |  |  |
+| ContactViewerForm-wireframe-chklist | ContactViewerForm-wireframe-chklist.md | Live |  |  |
+| ContactViewerForm-wireframe-definition | ContactViewerForm-wireframe-definition.md | Live |  |  |
+| ContactViewerForm-wireframe | ContactViewerForm-wireframe.html | Live |  |  |
+| EmailBroadcastForm-screen-chklist | EmailBroadcastForm-screen-chklist.md | Live |  |  |
+| EmailBroadcastForm-screen | EmailBroadcastForm-screen.html | Live |  |  |
+| EmailBroadcastForm-screen | EmailBroadcastForm-screen.png | Live |  |  |
+| EmailBroadcastForm-wireframe-chklist | EmailBroadcastForm-wireframe-chklist.md | Live |  |  |
+| EmailBroadcastForm-wireframe-definition | EmailBroadcastForm-wireframe-definition.md | Live |  |  |
+| EmailBroadcastForm-wireframe | EmailBroadcastForm-wireframe.html | Live |  |  |
+| EmailCampaignEditorForm-screen-chklist | EmailCampaignEditorForm-screen-chklist.md | Live |  |  |
+| EmailCampaignEditorForm-screen | EmailCampaignEditorForm-screen.html | Live |  |  |
+| EmailCampaignEditorForm-screen | EmailCampaignEditorForm-screen.png | Live |  |  |
+| EmailCampaignEditorForm-wireframe-chklist | EmailCampaignEditorForm-wireframe-chklist.md | Live |  |  |
+| EmailCampaignEditorForm-wireframe-definition | EmailCampaignEditorForm-wireframe-definition.md | Live |  |  |
+| EmailCampaignEditorForm-wireframe | EmailCampaignEditorForm-wireframe.html | Live |  |  |
+| EmailCampaignListForm-screen-chklist | EmailCampaignListForm-screen-chklist.md | Live |  |  |
+| EmailCampaignListForm-screen | EmailCampaignListForm-screen.html | Live |  |  |
+| EmailCampaignListForm-screen | EmailCampaignListForm-screen.png | Live |  |  |
+| EmailCampaignListForm-wireframe-chklist | EmailCampaignListForm-wireframe-chklist.md | Live |  |  |
+| EmailCampaignListForm-wireframe-definition | EmailCampaignListForm-wireframe-definition.md | Live |  |  |
+| EmailCampaignListForm-wireframe | EmailCampaignListForm-wireframe.html | Live |  |  |
+| LeadCaptureForm-screen-chklist | LeadCaptureForm-screen-chklist.md | Live |  |  |
+| LeadCaptureForm-screen | LeadCaptureForm-screen.html | Live |  |  |
+| LeadCaptureForm-screen | LeadCaptureForm-screen.png | Live |  |  |
+| LeadCaptureForm-wireframe-chklist | LeadCaptureForm-wireframe-chklist.md | Live |  |  |
+| LeadCaptureForm-wireframe-definition | LeadCaptureForm-wireframe-definition.md | Live |  |  |
+| LeadCaptureForm-wireframe | LeadCaptureForm-wireframe.html | Live |  |  |
+| SegmentManagerForm-screen-chklist | SegmentManagerForm-screen-chklist.md | Live |  |  |
+| SegmentManagerForm-screen | SegmentManagerForm-screen.html | Live |  |  |
+| SegmentManagerForm-screen | SegmentManagerForm-screen.png | Live |  |  |
+| SegmentManagerForm-wireframe-chklist | SegmentManagerForm-wireframe-chklist.md | Live |  |  |
+| SegmentManagerForm-wireframe-definition | SegmentManagerForm-wireframe-definition.md | Live |  |  |
+| SegmentManagerForm-wireframe | SegmentManagerForm-wireframe.html | Live |  |  |
+| TaskListForm-screen-chklist | TaskListForm-screen-chklist.md | Live |  |  |
+| TaskListForm-screen | TaskListForm-screen.html | Live |  |  |
+| TaskListForm-screen | TaskListForm-screen.png | Live |  |  |
+| TaskListForm-wireframe-chklist | TaskListForm-wireframe-chklist.md | Live |  |  |
+| TaskListForm-wireframe-definition | TaskListForm-wireframe-definition.md | Live |  |  |
+| TaskListForm-wireframe | TaskListForm-wireframe.html | Live |  |  |
+| ActivityFeed-screen-chklist | ActivityFeed-screen-chklist.md | Live |  |  |
+| ActivityFeed-screen | ActivityFeed-screen.html | Live |  |  |
+| ActivityFeed-screen | ActivityFeed-screen.png | Live |  |  |
+| ActivityFeed-wireframe-chklist | ActivityFeed-wireframe-chklist.md | Live |  |  |
+| ActivityFeed-wireframe-definition | ActivityFeed-wireframe-definition.md | Live |  |  |
+| ActivityFeed-wireframe | ActivityFeed-wireframe.html | Live |  |  |
+| MetricCard-screen-chklist | MetricCard-screen-chklist.md | Live |  |  |
+| MetricCard-screen | MetricCard-screen.html | Live |  |  |
+| MetricCard-screen | MetricCard-screen.png | Live |  |  |
+| MetricCard-wireframe-chklist | MetricCard-wireframe-chklist.md | Live |  |  |
+| MetricCard-wireframe-definition | MetricCard-wireframe-definition.md | Live |  |  |
+| MetricCard-wireframe | MetricCard-wireframe.html | Live |  |  |
+| InvoiceEditorForm-screen-chklist | InvoiceEditorForm-screen-chklist.md | Live |  |  |
+| InvoiceEditorForm-screen | InvoiceEditorForm-screen.html | Live |  |  |
+| InvoiceEditorForm-screen | InvoiceEditorForm-screen.png | Live |  |  |
+| InvoiceEditorForm-wireframe-chklist | InvoiceEditorForm-wireframe-chklist.md | Live |  |  |
+| InvoiceEditorForm-wireframe-definition | InvoiceEditorForm-wireframe-definition.md | Live |  |  |
+| InvoiceEditorForm-wireframe | InvoiceEditorForm-wireframe.html | Live |  |  |
+| InvoiceListForm-screen-chklist | InvoiceListForm-screen-chklist.md | Live |  |  |
+| InvoiceListForm-screen | InvoiceListForm-screen.html | Live |  |  |
+| InvoiceListForm-screen | InvoiceListForm-screen.png | Live |  |  |
+| InvoiceListForm-wireframe-chklist | InvoiceListForm-wireframe-chklist.md | Live |  |  |
+| InvoiceListForm-wireframe-definition | InvoiceListForm-wireframe-definition.md | Live |  |  |
+| InvoiceListForm-wireframe | InvoiceListForm-wireframe.html | Live |  |  |
+| InvoiceViewerForm-screen-chklist | InvoiceViewerForm-screen-chklist.md | Live |  |  |
+| InvoiceViewerForm-screen | InvoiceViewerForm-screen.html | Live |  |  |
+| InvoiceViewerForm-screen | InvoiceViewerForm-screen.png | Live |  |  |
+| InvoiceViewerForm-wireframe-chklist | InvoiceViewerForm-wireframe-chklist.md | Live |  |  |
+| InvoiceViewerForm-wireframe-definition | InvoiceViewerForm-wireframe-definition.md | Live |  |  |
+| InvoiceViewerForm-wireframe | InvoiceViewerForm-wireframe.html | Live |  |  |
+| LandingPage-screen-chklist | LandingPage-screen-chklist.md | Live |  |  |
+| LandingPage-wireframe | LandingPage-wireframe.html | Live |  |  |
+| EventRegistrationTemplate-screen-chklist | EventRegistrationTemplate-screen-chklist.md | Live |  |  |
+| EventRegistrationTemplate-screen | EventRegistrationTemplate-screen.html | Live |  |  |
+| EventRegistrationTemplate-screen | EventRegistrationTemplate-screen.png | Live |  |  |
+| EventRegistrationTemplate-wireframe-chklist | EventRegistrationTemplate-wireframe-chklist.md | Live |  |  |
+| EventRegistrationTemplate-wireframe-definition | EventRegistrationTemplate-wireframe-definition.md | Live |  |  |
+| EventRegistrationTemplate-wireframe | EventRegistrationTemplate-wireframe.html | Live |  |  |
+| LeadCaptureTemplate-screen-chklist | LeadCaptureTemplate-screen-chklist.md | Live |  |  |
+| LeadCaptureTemplate-screen | LeadCaptureTemplate-screen.html | Live |  |  |
+| LeadCaptureTemplate-screen | LeadCaptureTemplate-screen.png | Live |  |  |
+| LeadCaptureTemplate-wireframe-chklist | LeadCaptureTemplate-wireframe-chklist.md | Live |  |  |
+| LeadCaptureTemplate-wireframe-definition | LeadCaptureTemplate-wireframe-definition.md | Live |  |  |
+| LeadCaptureTemplate-wireframe | LeadCaptureTemplate-wireframe.html | Live |  |  |
+| VslTemplate-screen-chklist | VslTemplate-screen-chklist.md | Live |  |  |
+| VslTemplate-screen | VslTemplate-screen.html | Live |  |  |
+| VslTemplate-screen | VslTemplate-screen.png | Live |  |  |
+| VslTemplate-wireframe-chklist | VslTemplate-wireframe-chklist.md | Live |  |  |
+| VslTemplate-wireframe-definition | VslTemplate-wireframe-definition.md | Live |  |  |
+| VslTemplate-wireframe | VslTemplate-wireframe.html | Live |  |  |
+| LandingPageEditorForm-screen-chklist | LandingPageEditorForm-screen-chklist.md | Live |  |  |
+| LandingPageEditorForm-screen | LandingPageEditorForm-screen.html | Live |  |  |
+| LandingPageEditorForm-screen | LandingPageEditorForm-screen.png | Live |  |  |
+| LandingPageEditorForm-wireframe-chklist | LandingPageEditorForm-wireframe-chklist.md | Live |  |  |
+| LandingPageEditorForm-wireframe-definition | LandingPageEditorForm-wireframe-definition.md | Live |  |  |
+| LandingPageEditorForm-wireframe | LandingPageEditorForm-wireframe.html | Live |  |  |
+| LandingPageListForm-screen-chklist | LandingPageListForm-screen-chklist.md | Live |  |  |
+| LandingPageListForm-screen | LandingPageListForm-screen.html | Live |  |  |
+| LandingPageListForm-screen | LandingPageListForm-screen.png | Live |  |  |
+| LandingPageListForm-wireframe-chklist | LandingPageListForm-wireframe-chklist.md | Live |  |  |
+| LandingPageListForm-wireframe-definition | LandingPageListForm-wireframe-definition.md | Live |  |  |
+| LandingPageListForm-wireframe | LandingPageListForm-wireframe.html | Live |  |  |
+| AdminLayout-screen-chklist | AdminLayout-screen-chklist.md | Live |  |  |
+| AdminLayout-screen | AdminLayout-screen.html | Live |  |  |
+| AdminLayout-screen | AdminLayout-screen.png | Live |  |  |
+| AdminLayout-wireframe-chklist | AdminLayout-wireframe-chklist.md | Live |  |  |
+| AdminLayout-wireframe-definition | AdminLayout-wireframe-definition.md | Live |  |  |
+| AdminLayout-wireframe | AdminLayout-wireframe.html | Live |  |  |
+| BlankLayout-screen-chklist | BlankLayout-screen-chklist.md | Live |  |  |
+| BlankLayout-screen | BlankLayout-screen.html | Live |  |  |
+| BlankLayout-screen | BlankLayout-screen.png | Live |  |  |
+| BlankLayout-wireframe-chklist | BlankLayout-wireframe-chklist.md | Live |  |  |
+| BlankLayout-wireframe-definition | BlankLayout-wireframe-definition.md | Live |  |  |
+| BlankLayout-wireframe | BlankLayout-wireframe.html | Live |  |  |
+| CustomerLayout-screen-chklist | CustomerLayout-screen-chklist.md | Live |  |  |
+| CustomerLayout-screen | CustomerLayout-screen.html | Live |  |  |
+| CustomerLayout-screen | CustomerLayout-screen.png | Live |  |  |
+| CustomerLayout-wireframe-chklist | CustomerLayout-wireframe-chklist.md | Live |  |  |
+| CustomerLayout-wireframe-definition | CustomerLayout-wireframe-definition.md | Live |  |  |
+| CustomerLayout-wireframe | CustomerLayout-wireframe.html | Live |  |  |
+| ErrorLayout-screen-chklist | ErrorLayout-screen-chklist.md | Live |  |  |
+| ErrorLayout-screen | ErrorLayout-screen.html | Live |  |  |
+| ErrorLayout-screen | ErrorLayout-screen.png | Live |  |  |
+| ErrorLayout-wireframe-chklist | ErrorLayout-wireframe-chklist.md | Live |  |  |
+| ErrorLayout-wireframe-definition | ErrorLayout-wireframe-definition.md | Live |  |  |
+| ErrorLayout-wireframe | ErrorLayout-wireframe.html | Live |  |  |
+| OnboardingForm-screen-chklist | OnboardingForm-screen-chklist.md | Live |  |  |
+| OnboardingForm-screen | OnboardingForm-screen.html | Live |  |  |
+| OnboardingForm-screen | OnboardingForm-screen.png | Live |  |  |
+| OnboardingForm-wireframe-chklist | OnboardingForm-wireframe-chklist.md | Live |  |  |
+| OnboardingForm-wireframe-definition | OnboardingForm-wireframe-definition.md | Live |  |  |
+| OnboardingForm-wireframe | OnboardingForm-wireframe.html | Live |  |  |
+| AboutPage-screen-chklist | AboutPage-screen-chklist.md | Live |  |  |
+| AboutPage-screen | AboutPage-screen.html | Live |  |  |
+| AboutPage-screen | AboutPage-screen.png | Live |  |  |
+| AboutPage-wireframe-chklist | AboutPage-wireframe-chklist.md | Live |  |  |
+| AboutPage-wireframe-definition | AboutPage-wireframe-definition.md | Live |  |  |
+| AboutPage-wireframe | AboutPage-wireframe.html | Live |  |  |
+| ContactPage-screen-chklist | ContactPage-screen-chklist.md | Live |  |  |
+| ContactPage-screen | ContactPage-screen.html | Live |  |  |
+| ContactPage-screen | ContactPage-screen.png | Live |  |  |
+| ContactPage-wireframe-chklist | ContactPage-wireframe-chklist.md | Live |  |  |
+| ContactPage-wireframe-definition | ContactPage-wireframe-definition.md | Live |  |  |
+| ContactPage-wireframe | ContactPage-wireframe.html | Live |  |  |
+| HomePage-screen-chklist | HomePage-screen-chklist.md | Live |  |  |
+| HomePage-wireframe | HomePage-wireframe.html | Live |  |  |
+| HomePageBookingTemplate-screen-chklist | HomePageBookingTemplate-screen-chklist.md | Live |  |  |
+| HomePageBookingTemplate-screen | HomePageBookingTemplate-screen.html | Live |  |  |
+| HomePageBookingTemplate-screen | HomePageBookingTemplate-screen.png | Live |  |  |
+| HomePageBookingTemplate-wireframe-chklist | HomePageBookingTemplate-wireframe-chklist.md | Live |  |  |
+| HomePageBookingTemplate-wireframe-definition | HomePageBookingTemplate-wireframe-definition.md | Live |  |  |
+| HomePageBookingTemplate-wireframe | HomePageBookingTemplate-wireframe.html | Live |  |  |
+| HomePageClassicTemplate-screen-chklist | HomePageClassicTemplate-screen-chklist.md | Live |  |  |
+| HomePageClassicTemplate-screen | HomePageClassicTemplate-screen.html | Live |  |  |
+| HomePageClassicTemplate-screen | HomePageClassicTemplate-screen.png | Live |  |  |
+| HomePageClassicTemplate-wireframe-chklist | HomePageClassicTemplate-wireframe-chklist.md | Live |  |  |
+| HomePageClassicTemplate-wireframe-definition | HomePageClassicTemplate-wireframe-definition.md | Live |  |  |
+| HomePageClassicTemplate-wireframe | HomePageClassicTemplate-wireframe.html | Live |  |  |
+| HomePageMinimalistTemplate-screen-chklist | HomePageMinimalistTemplate-screen-chklist.md | Live |  |  |
+| HomePageMinimalistTemplate-screen | HomePageMinimalistTemplate-screen.html | Live |  |  |
+| HomePageMinimalistTemplate-screen | HomePageMinimalistTemplate-screen.png | Live |  |  |
+| HomePageMinimalistTemplate-wireframe-chklist | HomePageMinimalistTemplate-wireframe-chklist.md | Live |  |  |
+| HomePageMinimalistTemplate-wireframe-definition | HomePageMinimalistTemplate-wireframe-definition.md | Live |  |  |
+| HomePageMinimalistTemplate-wireframe | HomePageMinimalistTemplate-wireframe.html | Live |  |  |
+| HomePageServicesTemplate-screen-chklist | HomePageServicesTemplate-screen-chklist.md | Live |  |  |
+| HomePageServicesTemplate-screen | HomePageServicesTemplate-screen.html | Live |  |  |
+| HomePageServicesTemplate-screen | HomePageServicesTemplate-screen.png | Live |  |  |
+| HomePageServicesTemplate-wireframe-chklist | HomePageServicesTemplate-wireframe-chklist.md | Live |  |  |
+| HomePageServicesTemplate-wireframe-definition | HomePageServicesTemplate-wireframe-definition.md | Live |  |  |
+| HomePageServicesTemplate-wireframe | HomePageServicesTemplate-wireframe.html | Live |  |  |
+| PrivacyPolicyPage-screen-chklist | PrivacyPolicyPage-screen-chklist.md | Live |  |  |
+| PrivacyPolicyPage-screen | PrivacyPolicyPage-screen.html | Live |  |  |
+| PrivacyPolicyPage-screen | PrivacyPolicyPage-screen.png | Live |  |  |
+| PrivacyPolicyPage-wireframe-chklist | PrivacyPolicyPage-wireframe-chklist.md | Live |  |  |
+| PrivacyPolicyPage-wireframe-definition | PrivacyPolicyPage-wireframe-definition.md | Live |  |  |
+| PrivacyPolicyPage-wireframe | PrivacyPolicyPage-wireframe.html | Live |  |  |
+| TermsConditionsPage-screen-chklist | TermsConditionsPage-screen-chklist.md | Live |  |  |
+| TermsConditionsPage-screen | TermsConditionsPage-screen.html | Live |  |  |
+| TermsConditionsPage-screen | TermsConditionsPage-screen.png | Live |  |  |
+| TermsConditionsPage-wireframe-chklist | TermsConditionsPage-wireframe-chklist.md | Live |  |  |
+| TermsConditionsPage-wireframe-definition | TermsConditionsPage-wireframe-definition.md | Live |  |  |
+| TermsConditionsPage-wireframe | TermsConditionsPage-wireframe.html | Live |  |  |
+| ServiceCategoriesForm-screen-chklist | ServiceCategoriesForm-screen-chklist.md | Live |  |  |
+| ServiceCategoriesForm-screen | ServiceCategoriesForm-screen.html | Live |  |  |
+| ServiceCategoriesForm-screen | ServiceCategoriesForm-screen.png | Live |  |  |
+| ServiceCategoriesForm-wireframe-chklist | ServiceCategoriesForm-wireframe-chklist.md | Live |  |  |
+| ServiceCategoriesForm-wireframe-definition | ServiceCategoriesForm-wireframe-definition.md | Live |  |  |
+| ServiceCategoriesForm-wireframe | ServiceCategoriesForm-wireframe.html | Live |  |  |
+| ServiceEditorForm-screen-chklist | ServiceEditorForm-screen-chklist.md | Live |  |  |
+| ServiceEditorForm-screen | ServiceEditorForm-screen.html | Live |  |  |
+| ServiceEditorForm-screen | ServiceEditorForm-screen.png | Live |  |  |
+| ServiceEditorForm-wireframe-chklist | ServiceEditorForm-wireframe-chklist.md | Live |  |  |
+| ServiceEditorForm-wireframe-definition | ServiceEditorForm-wireframe-definition.md | Live |  |  |
+| ServiceEditorForm-wireframe | ServiceEditorForm-wireframe.html | Live |  |  |
+| ServicesForm-screen-chklist | ServicesForm-screen-chklist.md | Live |  |  |
+| ServicesForm-screen | ServicesForm-screen.html | Live |  |  |
+| ServicesForm-screen | ServicesForm-screen.png | Live |  |  |
+| ServicesForm-wireframe-chklist | ServicesForm-wireframe-chklist.md | Live |  |  |
+| ServicesForm-wireframe-definition | ServicesForm-wireframe-definition.md | Live |  |  |
+| ServicesForm-wireframe | ServicesForm-wireframe.html | Live |  |  |
+| ServiceViewerForm-screen-chklist | ServiceViewerForm-screen-chklist.md | Live |  |  |
+| ServiceViewerForm-screen | ServiceViewerForm-screen.html | Live |  |  |
+| ServiceViewerForm-screen | ServiceViewerForm-screen.png | Live |  |  |
+| ServiceViewerForm-wireframe-chklist | ServiceViewerForm-wireframe-chklist.md | Live |  |  |
+| ServiceViewerForm-wireframe-definition | ServiceViewerForm-wireframe-definition.md | Live |  |  |
+| ServiceViewerForm-wireframe | ServiceViewerForm-wireframe.html | Live |  |  |
+| EmailSetupForm-screen-chklist | EmailSetupForm-screen-chklist.md | Live |  |  |
+| EmailSetupForm-screen | EmailSetupForm-screen.html | Live |  |  |
+| EmailSetupForm-screen | EmailSetupForm-screen.png | Live |  |  |
+| EmailSetupForm-wireframe-chklist | EmailSetupForm-wireframe-chklist.md | Live |  |  |
+| EmailSetupForm-wireframe-definition | EmailSetupForm-wireframe-definition.md | Live |  |  |
+| EmailSetupForm-wireframe | EmailSetupForm-wireframe.html | Live |  |  |
+| PaymentGatewayForm-screen-chklist | PaymentGatewayForm-screen-chklist.md | Live |  |  |
+| PaymentGatewayForm-screen | PaymentGatewayForm-screen.html | Live |  |  |
+| PaymentGatewayForm-screen | PaymentGatewayForm-screen.png | Live |  |  |
+| PaymentGatewayForm-wireframe-chklist | PaymentGatewayForm-wireframe-chklist.md | Live |  |  |
+| PaymentGatewayForm-wireframe-definition | PaymentGatewayForm-wireframe-definition.md | Live |  |  |
+| PaymentGatewayForm-wireframe | PaymentGatewayForm-wireframe.html | Live |  |  |
+| PolicyEditorForm-screen-chklist | PolicyEditorForm-screen-chklist.md | Live |  |  |
+| PolicyEditorForm-screen | PolicyEditorForm-screen.html | Live |  |  |
+| PolicyEditorForm-screen | PolicyEditorForm-screen.png | Live |  |  |
+| PolicyEditorForm-wireframe-chklist | PolicyEditorForm-wireframe-chklist.md | Live |  |  |
+| PolicyEditorForm-wireframe-definition | PolicyEditorForm-wireframe-definition.md | Live |  |  |
+| PolicyEditorForm-wireframe | PolicyEditorForm-wireframe.html | Live |  |  |
+| SettingsForm-screen-chklist | SettingsForm-screen-chklist.md | Live |  |  |
+| SettingsForm-screen | SettingsForm-screen.html | Live |  |  |
+| SettingsForm-screen | SettingsForm-screen.png | Live |  |  |
+| SettingsForm-wireframe-chklist | SettingsForm-wireframe-chklist.md | Live |  |  |
+| SettingsForm-wireframe-definition | SettingsForm-wireframe-definition.md | Live |  |  |
+| SettingsForm-wireframe | SettingsForm-wireframe.html | Live |  |  |
+| ThemeConfigForm-screen-chklist | ThemeConfigForm-screen-chklist.md | Live |  |  |
+| ThemeConfigForm-screen | ThemeConfigForm-screen.html | Live |  |  |
+| ThemeConfigForm-screen | ThemeConfigForm-screen.png | Live |  |  |
+| ThemeConfigForm-wireframe-chklist | ThemeConfigForm-wireframe-chklist.md | Live |  |  |
+| ThemeConfigForm-wireframe-definition | ThemeConfigForm-wireframe-definition.md | Live |  |  |
+| ThemeConfigForm-wireframe | ThemeConfigForm-wireframe.html | Live |  |  |
+| UserManagementForm-screen-chklist | UserManagementForm-screen-chklist.md | Live |  |  |
+| UserManagementForm-screen | UserManagementForm-screen.html | Live |  |  |
+| UserManagementForm-screen | UserManagementForm-screen.png | Live |  |  |
+| UserManagementForm-wireframe-chklist | UserManagementForm-wireframe-chklist.md | Live |  |  |
+| UserManagementForm-wireframe-definition | UserManagementForm-wireframe-definition.md | Live |  |  |
+| UserManagementForm-wireframe | UserManagementForm-wireframe.html | Live |  |  |
+| VaultForm-screen-chklist | VaultForm-screen-chklist.md | Live |  |  |
+| VaultForm-screen | VaultForm-screen.html | Live |  |  |
+| VaultForm-screen | VaultForm-screen.png | Live |  |  |
+| VaultForm-wireframe-chklist | VaultForm-wireframe-chklist.md | Live |  |  |
+| VaultForm-wireframe-definition | VaultForm-wireframe-definition.md | Live |  |  |
+| VaultForm-wireframe | VaultForm-wireframe.html | Live |  |  |
+| adr-reorganization-20260706 | adr-reorganization-20260706.md | Live |  |  |
+| checklist-screen-analytics-DashboardAnalyticsForm-2026-06-29 | checklist-screen-analytics-DashboardAnalyticsForm-2026-06-29.md | Live |  |  |
+| dev-pdlf-registration-20260707 | dev-pdlf-registration-20260707.md | Live |  |  |
+| docs-reorg-consolidated-20260706 | docs-reorg-consolidated-20260706.md | Live |  |  |
+| gstack-gbrain-optimization-20260706 | gstack-gbrain-optimization-20260706.md | Live |  |  |
+| opencode-config-optimization-20260706 | opencode-config-optimization-20260706.md | Live |  |  |
+| phase3-finalization-report-2026-06-28 | phase3-finalization-report-2026-06-28.md | Live |  |  |
+| project-registration-20260704 | project-registration-20260704.md | Live |  |  |
+| rename-report-project-library-to-mb-3-cs-2026-07-25 | rename-report-project-library-to-mb-3-cs-2026-07-25.md | Live |  |  |
+| repo-migration-20260705 | repo-migration-20260705.md | Live |  |  |
+| research-findings-2026-06-28 | research-findings-2026-06-28.md | Live |  |  |
+| setup-matt-skills-config-2026-08-12 | setup-matt-skills-config-2026-08-12.md | Live |  |  |
+| theme-css-updated-report-2026-06-28 | theme-css-updated-report-2026-06-28.md | Live |  |  |
+| ui-build-audit-report-2026-06-28 | ui-build-audit-report-2026-06-28.md | Live |  |  |
+| vscode-remnants-cleanup-20260706 | vscode-remnants-cleanup-20260706.md | Live |  |  |
+| wireframe-alignment-audit-final-report-2026-06-28 | wireframe-alignment-audit-final-report-2026-06-28.md | Live |  |  |
+| wireframe-alignment-checklist | wireframe-alignment-checklist.md | Live |  |  |
+| wireframe-refresh-completion-report-2026-06-28 | wireframe-refresh-completion-report-2026-06-28.md | Live |  |  |
+| wp10-verify-graphify-gbrain-mcp-2026-08-14 | wp10-verify-graphify-gbrain-mcp-2026-08-14.md | Live |  |  |
+| ceo-review-2026-06-15 | ceo-review-2026-06-15.md | Live |  |  |
+| ceo-review-v2-roadmap-2026-06-26 | ceo-review-v2-roadmap-2026-06-26.md | Live |  |  |
+| eng-review-2026-06-16 | eng-review-2026-06-16.md | Live |  |  |
+| devlog-index | devlog-index.md | Live |  |  |
+| judgement-trail | judgement-trail.md | Live |  |  |
+| anvil-ui-build-standard-v1-2026-07-05 | anvil-ui-build-standard-v1-2026-07-05.md | Live |  | relocated from wip\\ by align-docs run 2026-09-18T132533+0200 (developer-approved; newest of three wip variants — referenced by the screen-production prompt); FM added at registration |
+| anvil-ui-exception-review-procedure | anvil-ui-exception-review-procedure.md | Live |  | relocated from wip\\ by align-docs run 2026-09-18T132533+0200 (developer-approved; referenced by the screen-production prompt); FM added at registration |
+| design-reference-screens-old | design-reference-screens-old.html | Live |  | registered by align-docs run 2026-09-18T132533+0200 (developer-approved): only surviving visual style reference (no non-old version exists — es.exe verified 2026-09-18); row-only identity (HTML carries no front matter) |
 
-| AGENTS | AGENTS.md | . |
-| CLAUDE | CLAUDE.md | . |
-| README | README.md | . |
-| blank-client-template | adr-local/blank-client-template.md | adr-local |
-| crm-package-replaces-marketing | adr-local/crm-package-replaces-marketing.md | adr-local |
-| schema-scope-reduction | adr-local/schema-scope-reduction.md | adr-local |
-| domain | docs/agents/domain.md | docs/agents |
-| issue-tracker | docs/agents/issue-tracker.md | docs/agents |
-| triage-labels | docs/agents/triage-labels.md | docs/agents |
-| architecture | docs-local/architecture.md | docs-local |
-| authoritative-schema | docs-local/authoritative-schema.md | docs-local |
-| build-plan | docs-local/build-plan.md | docs-local |
-| calendar-feature-spec | docs-local/calendar-feature-spec.md | docs-local |
-| CHANGELOG | docs-local/CHANGELOG.md | docs-local |
-| CONTEXT | docs-local/CONTEXT.md | docs-local |
-| custom-component-requirements-matrix | docs-local/custom-component-requirements-matrix.md | docs-local |
-| design-direction | docs-local/design-direction.md | docs-local |
-| DESIGN | docs-local/DESIGN.md | docs-local |
-| DESIGN_palette_section | docs-local/DESIGN_palette_section.md | docs-local |
-| founder-strategic-review | docs-local/founder-strategic-review.md | docs-local |
-| gstack-artifact-governance | docs-local/gstack-artifact-governance.md | docs-local |
-| INDEX | docs-local/INDEX.md | docs-local |
-| palette_selector_tokens | docs-local/palette_selector_tokens.md | docs-local |
-| platform-architecture-narrative | docs-local/platform-architecture-narrative.md | docs-local |
-| platform-architecture | docs-local/platform-architecture.md | docs-local |
-| positioning-strategy | docs-local/positioning-strategy.md | docs-local |
-| pricing-strategy-consultation | docs-local/pricing-strategy-consultation.md | docs-local |
-| user-flows | docs-local/user-flows.md | docs-local |
-| business-requirements-document | docs-standard-local/business-requirements-document.md | docs-standard-local |
-| deployment-procedures | docs-standard-local/deployment-procedures.md | docs-standard-local |
-| globals-contract | docs-standard-local/globals-contract.md | docs-standard-local |
-| integration-architecture | docs-standard-local/integration-architecture.md | docs-standard-local |
-| observability-requirements | docs-standard-local/observability-requirements.md | docs-standard-local |
-| product-requirements-document | docs-standard-local/product-requirements-document.md | docs-standard-local |
-| scaffold-spec | docs-standard-local/scaffold-spec.md | docs-standard-local |
-| software-requirements-specification | docs-standard-local/software-requirements-specification.md | docs-standard-local |
-| development-policy | policy-local/development-policy.md | policy-local |
-| register-local | register-local/register-local.md | register-local |
-| internal-standards-anvil-wireframe-conversion | standard-operating-procedures-local/internal-standards-anvil-wireframe-conversion.md | standard-operating-procedures-local |
-| mybizz-ai-implementation-spec (1.0) | V2/mybizz-ai-implementation-spec (1.0).md | V2 | spec | Live | 2026-09-10 | 2026-09-10 | | future development planning — developer ruling: intact, valid, do not retire |
-| mybizz-ai-implementation-spec-v2 | V2/mybizz-ai-implementation-spec-v2.md | V2 | spec | Live | 2026-09-10 | 2026-09-10 | | future development planning — developer ruling: intact, valid, do not retire |
-| mybizz-ai-implementation-spec | V2/mybizz-ai-implementation-spec.md | V2 | spec | Live | 2026-09-10 | 2026-09-10 | | future development planning — developer ruling: intact, valid, do not retire |
-| mybizz-ai-implementation-spec-v3 (1) | V3/mybizz-ai-implementation-spec-v3 (1).md | V3 | spec | Live | 2026-09-10 | 2026-09-10 | | future development planning — developer ruling: intact, valid, do not retire |
-| mybizz-ai-implementation-spec-v3 | V3/mybizz-ai-implementation-spec-v3.md | V3 | spec | Live | 2026-09-10 | 2026-09-10 | | future development planning — developer ruling: intact, valid, do not retire |
-| DashboardAnalyticsForm-screen-chklist | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-screen-chklist.md | ui/analytics/DashboardAnalyticsForm | ui-document | Live |  |
-| DashboardAnalyticsForm-screen | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-screen.html | ui/analytics/DashboardAnalyticsForm | derived-rendering | Live |  |
-| DashboardAnalyticsForm-screen | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-screen.png | ui/analytics/DashboardAnalyticsForm | derived-rendering | Live |  |
-| DashboardAnalyticsForm-wireframe-chklist | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-wireframe-chklist.md | ui/analytics/DashboardAnalyticsForm | ui-document | Live |  |
-| DashboardAnalyticsForm-wireframe-definition | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-wireframe-definition.md | ui/analytics/DashboardAnalyticsForm | ui-document | Live |  |
-| DashboardAnalyticsForm-wireframe | ui/analytics/DashboardAnalyticsForm/DashboardAnalyticsForm-wireframe.html | ui/analytics/DashboardAnalyticsForm | derived-rendering | Live |  |
-| RevenueReport-screen-chklist | ui/analytics/RevenueReportForm/RevenueReport-screen-chklist.md | ui/analytics/RevenueReportForm | ui-document | Live |  |
-| RevenueReport-screen | ui/analytics/RevenueReportForm/RevenueReport-screen.html | ui/analytics/RevenueReportForm | derived-rendering | Live |  |
-| RevenueReport-screen | ui/analytics/RevenueReportForm/RevenueReport-screen.png | ui/analytics/RevenueReportForm | derived-rendering | Live |  |
-| RevenueReport-wireframe-chklist | ui/analytics/RevenueReportForm/RevenueReport-wireframe-chklist.md | ui/analytics/RevenueReportForm | ui-document | Live |  |
-| RevenueReport-wireframe-definition | ui/analytics/RevenueReportForm/RevenueReport-wireframe-definition.md | ui/analytics/RevenueReportForm | ui-document | Live |  |
-| RevenueReport-wireframe | ui/analytics/RevenueReportForm/RevenueReport-wireframe.html | ui/analytics/RevenueReportForm | derived-rendering | Live |  |
-| RevenueReportForm-RowTemplate-screen-chklist | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-screen-chklist.md | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | ui-document | Live |  |
-| RevenueReportForm-RowTemplate-screen | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-screen.html | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | derived-rendering | Live |  |
-| RevenueReportForm-RowTemplate-screen | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-screen.png | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | derived-rendering | Live |  |
-| RevenueReportForm-RowTemplate-wireframe-chklist | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-wireframe-chklist.md | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | ui-document | Live |  |
-| RevenueReportForm-RowTemplate-wireframe-definition | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-wireframe-definition.md | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | ui-document | Live |  |
-| RevenueReportForm-RowTemplate-wireframe | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate/RevenueReportForm-RowTemplate-wireframe.html | ui/analytics/RevenueReportForm/RevenueReportForm-RowTemplate | derived-rendering | Live |  |
-| LoginForm-screen-chklist | ui/auth/LoginForm/LoginForm-screen-chklist.md | ui/auth/LoginForm | ui-document | Live |  |
-| LoginForm-screen | ui/auth/LoginForm/LoginForm-screen.html | ui/auth/LoginForm | derived-rendering | Live |  |
-| LoginForm-screen | ui/auth/LoginForm/LoginForm-screen.png | ui/auth/LoginForm | derived-rendering | Live |  |
-| LoginForm-wireframe-chklist | ui/auth/LoginForm/LoginForm-wireframe-chklist.md | ui/auth/LoginForm | ui-document | Live |  |
-| LoginForm-wireframe-definition | ui/auth/LoginForm/LoginForm-wireframe-definition.md | ui/auth/LoginForm | ui-document | Live |  |
-| LoginForm-wireframe | ui/auth/LoginForm/LoginForm-wireframe.html | ui/auth/LoginForm | derived-rendering | Live |  |
-| PasswordResetCompleteForm-screen-chklist | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-screen-chklist.md | ui/auth/PasswordResetCompleteForm | ui-document | Live |  |
-| PasswordResetCompleteForm-screen | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-screen.html | ui/auth/PasswordResetCompleteForm | derived-rendering | Live |  |
-| PasswordResetCompleteForm-screen | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-screen.png | ui/auth/PasswordResetCompleteForm | derived-rendering | Live |  |
-| PasswordResetCompleteForm-wireframe-chklist | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-wireframe-chklist.md | ui/auth/PasswordResetCompleteForm | ui-document | Live |  |
-| PasswordResetCompleteForm-wireframe-definition | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-wireframe-definition.md | ui/auth/PasswordResetCompleteForm | ui-document | Live |  |
-| PasswordResetCompleteForm-wireframe | ui/auth/PasswordResetCompleteForm/PasswordResetCompleteForm-wireframe.html | ui/auth/PasswordResetCompleteForm | derived-rendering | Live |  |
-| PasswordResetForm-screen-chklist | ui/auth/PasswordResetForm/PasswordResetForm-screen-chklist.md | ui/auth/PasswordResetForm | ui-document | Live |  |
-| PasswordResetForm-screen | ui/auth/PasswordResetForm/PasswordResetForm-screen.html | ui/auth/PasswordResetForm | derived-rendering | Live |  |
-| PasswordResetForm-screen | ui/auth/PasswordResetForm/PasswordResetForm-screen.png | ui/auth/PasswordResetForm | derived-rendering | Live |  |
-| PasswordResetForm-wireframe-chklist | ui/auth/PasswordResetForm/PasswordResetForm-wireframe-chklist.md | ui/auth/PasswordResetForm | ui-document | Live |  |
-| PasswordResetForm-wireframe-definition | ui/auth/PasswordResetForm/PasswordResetForm-wireframe-definition.md | ui/auth/PasswordResetForm | ui-document | Live |  |
-| PasswordResetForm-wireframe | ui/auth/PasswordResetForm/PasswordResetForm-wireframe.html | ui/auth/PasswordResetForm | derived-rendering | Live |  |
-| SignupForm-screen-chklist | ui/auth/SignupForm/SignupForm-screen-chklist.md | ui/auth/SignupForm | ui-document | Live |  |
-| SignupForm-screen | ui/auth/SignupForm/SignupForm-screen.html | ui/auth/SignupForm | derived-rendering | Live |  |
-| SignupForm-screen | ui/auth/SignupForm/SignupForm-screen.png | ui/auth/SignupForm | derived-rendering | Live |  |
-| SignupForm-wireframe-chklist | ui/auth/SignupForm/SignupForm-wireframe-chklist.md | ui/auth/SignupForm | ui-document | Live |  |
-| SignupForm-wireframe-definition | ui/auth/SignupForm/SignupForm-wireframe-definition.md | ui/auth/SignupForm | ui-document | Live |  |
-| SignupForm-wireframe | ui/auth/SignupForm/SignupForm-wireframe.html | ui/auth/SignupForm | derived-rendering | Live |  |
-| BlogEditorForm-screen-chklist | ui/blog/BlogEditorForm/BlogEditorForm-screen-chklist.md | ui/blog/BlogEditorForm | ui-document | Live |  |
-| BlogEditorForm-screen | ui/blog/BlogEditorForm/BlogEditorForm-screen.html | ui/blog/BlogEditorForm | derived-rendering | Live |  |
-| BlogEditorForm-screen | ui/blog/BlogEditorForm/BlogEditorForm-screen.png | ui/blog/BlogEditorForm | derived-rendering | Live |  |
-| BlogEditorForm-wireframe-chklist | ui/blog/BlogEditorForm/BlogEditorForm-wireframe-chklist.md | ui/blog/BlogEditorForm | ui-document | Live |  |
-| BlogEditorForm-wireframe-definition | ui/blog/BlogEditorForm/BlogEditorForm-wireframe-definition.md | ui/blog/BlogEditorForm | ui-document | Live |  |
-| BlogEditorForm-wireframe | ui/blog/BlogEditorForm/BlogEditorForm-wireframe.html | ui/blog/BlogEditorForm | derived-rendering | Live |  |
-| BlogListForm-screen-chklist | ui/blog/BlogListForm/BlogListForm-screen-chklist.md | ui/blog/BlogListForm | ui-document | Retired | retired 2026-09-10: duplicate registration of the same document; original row (numeric-era doc-id) remains Live |
-| BlogListForm-wireframe | ui/blog/BlogListForm/BlogListForm-wireframe.html | ui/blog/BlogListForm | derived-rendering | Live |  |
-| BlogListListTemplate-screen-chklist | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-screen-chklist.md | ui/blog/BlogListForm/BlogListListTemplate | ui-document | Live |  |
-| BlogListListTemplate-screen | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-screen.html | ui/blog/BlogListForm/BlogListListTemplate | derived-rendering | Live |  |
-| BlogListListTemplate-screen | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-screen.png | ui/blog/BlogListForm/BlogListListTemplate | derived-rendering | Live |  |
-| BlogListListTemplate-wireframe-chklist | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-wireframe-chklist.md | ui/blog/BlogListForm/BlogListListTemplate | ui-document | Live |  |
-| BlogListListTemplate-wireframe-definition | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-wireframe-definition.md | ui/blog/BlogListForm/BlogListListTemplate | ui-document | Live |  |
-| BlogListListTemplate-wireframe | ui/blog/BlogListForm/BlogListListTemplate/BlogListListTemplate-wireframe.html | ui/blog/BlogListForm/BlogListListTemplate | derived-rendering | Live |  |
-| BlogListTiledTemplate-screen-chklist | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-screen-chklist.md | ui/blog/BlogListForm/BlogListTiledTemplate | ui-document | Live |  |
-| BlogListTiledTemplate-screen | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-screen.html | ui/blog/BlogListForm/BlogListTiledTemplate | derived-rendering | Live |  |
-| BlogListTiledTemplate-screen | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-screen.png | ui/blog/BlogListForm/BlogListTiledTemplate | derived-rendering | Live |  |
-| BlogListTiledTemplate-wireframe-chklist | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-wireframe-chklist.md | ui/blog/BlogListForm/BlogListTiledTemplate | ui-document | Live |  |
-| BlogListTiledTemplate-wireframe-definition | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-wireframe-definition.md | ui/blog/BlogListForm/BlogListTiledTemplate | ui-document | Live |  |
-| BlogListTiledTemplate-wireframe | ui/blog/BlogListForm/BlogListTiledTemplate/BlogListTiledTemplate-wireframe.html | ui/blog/BlogListForm/BlogListTiledTemplate | derived-rendering | Live |  |
-| BlogPostForm-screen-chklist | ui/blog/BlogPostForm/BlogPostForm-screen-chklist.md | ui/blog/BlogPostForm | ui-document | Retired | retired 2026-09-10: duplicate registration of the same document; original row (numeric-era doc-id) remains Live |
-| BlogPostForm-wireframe | ui/blog/BlogPostForm/BlogPostForm-wireframe.html | ui/blog/BlogPostForm | derived-rendering | Live |  |
-| BlogPostClassicTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostClassicTemplate | ui-document | Live |  |
-| BlogPostClassicTemplate-screen | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-screen.html | ui/blog/BlogPostForm/BlogPostClassicTemplate | derived-rendering | Live |  |
-| BlogPostClassicTemplate-screen | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-screen.png | ui/blog/BlogPostForm/BlogPostClassicTemplate | derived-rendering | Live |  |
-| BlogPostClassicTemplate-wireframe-chklist | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-wireframe-chklist.md | ui/blog/BlogPostForm/BlogPostClassicTemplate | ui-document | Live |  |
-| BlogPostClassicTemplate-wireframe-definition | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-wireframe-definition.md | ui/blog/BlogPostForm/BlogPostClassicTemplate | ui-document | Live |  |
-| BlogPostClassicTemplate-wireframe | ui/blog/BlogPostForm/BlogPostClassicTemplate/BlogPostClassicTemplate-wireframe.html | ui/blog/BlogPostForm/BlogPostClassicTemplate | derived-rendering | Live |  |
-| BlogPostFullWidthTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | ui-document | Live |  |
-| BlogPostFullWidthTemplate-screen | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-screen.html | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | derived-rendering | Live |  |
-| BlogPostFullWidthTemplate-screen | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-screen.png | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | derived-rendering | Live |  |
-| BlogPostFullWidthTemplate-wireframe-chklist | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-wireframe-chklist.md | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | ui-document | Live |  |
-| BlogPostFullWidthTemplate-wireframe-definition | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-wireframe-definition.md | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | ui-document | Live |  |
-| BlogPostFullWidthTemplate-wireframe | ui/blog/BlogPostForm/BlogPostFullWidthTemplate/BlogPostFullWidthTemplate-wireframe.html | ui/blog/BlogPostForm/BlogPostFullWidthTemplate | derived-rendering | Live |  |
-| BlogPostTwoColumnTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostTwoColumnTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate | ui-document | Retired | retired 2026-09-10: duplicate registration of the same document; original row (numeric-era doc-id) remains Live |
-| BlogPostTwoColumnTemplate-wireframe | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostTwoColumnTemplate-wireframe.html | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate | derived-rendering | Live |  |
-| BlogPostCategoriesTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | ui-document | Live |  |
-| BlogPostCategoriesTemplate-screen | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-screen.html | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | derived-rendering | Live |  |
-| BlogPostCategoriesTemplate-screen | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-screen.png | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | derived-rendering | Live |  |
-| BlogPostCategoriesTemplate-wireframe-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-wireframe-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | ui-document | Live |  |
-| BlogPostCategoriesTemplate-wireframe-definition | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-wireframe-definition.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | ui-document | Live |  |
-| BlogPostCategoriesTemplate-wireframe | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/BlogPostCategoriesTemplate-wireframe.html | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate | derived-rendering | Live |  |
-| BlogPostRelatedPostsTemplate-screen-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-screen-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | ui-document | Live |  |
-| BlogPostRelatedPostsTemplate-screen | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-screen.html | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | derived-rendering | Live |  |
-| BlogPostRelatedPostsTemplate-screen | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-screen.png | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | derived-rendering | Live |  |
-| BlogPostRelatedPostsTemplate-wireframe-chklist | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-wireframe-chklist.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | ui-document | Live |  |
-| BlogPostRelatedPostsTemplate-wireframe-definition | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-wireframe-definition.md | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | ui-document | Live |  |
-| BlogPostRelatedPostsTemplate-wireframe | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/BlogPostRelatedPostsTemplate-wireframe.html | ui/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate | derived-rendering | Live |  |
-| CategoryManagementForm-screen-chklist | ui/blog/CategoryManagementForm/CategoryManagementForm-screen-chklist.md | ui/blog/CategoryManagementForm | ui-document | Retired | retired 2026-09-10: duplicate registration of the same document; original row (numeric-era doc-id) remains Live |
-| CategoryManagementForm-wireframe | ui/blog/CategoryManagementForm/CategoryManagementForm-wireframe.html | ui/blog/CategoryManagementForm | derived-rendering | Live |  |
-| CategoryManagementTemplate-screen-chklist | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-screen-chklist.md | ui/blog/CategoryManagementForm/CategoryManagementTemplate | ui-document | Live |  |
-| CategoryManagementTemplate-screen | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-screen.html | ui/blog/CategoryManagementForm/CategoryManagementTemplate | derived-rendering | Live |  |
-| CategoryManagementTemplate-screen | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-screen.png | ui/blog/CategoryManagementForm/CategoryManagementTemplate | derived-rendering | Live |  |
-| CategoryManagementTemplate-wireframe-chklist | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-wireframe-chklist.md | ui/blog/CategoryManagementForm/CategoryManagementTemplate | ui-document | Live |  |
-| CategoryManagementTemplate-wireframe-definition | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-wireframe-definition.md | ui/blog/CategoryManagementForm/CategoryManagementTemplate | ui-document | Live |  |
-| CategoryManagementTemplate-wireframe | ui/blog/CategoryManagementForm/CategoryManagementTemplate/CategoryManagementTemplate-wireframe.html | ui/blog/CategoryManagementForm/CategoryManagementTemplate | derived-rendering | Live |  |
-| CommentModerationForm-screen-chklist | ui/blog/CommentModerationForm/CommentModerationForm-screen-chklist.md | ui/blog/CommentModerationForm | ui-document | Retired | retired 2026-09-10: duplicate registration of the same document; original row (numeric-era doc-id) remains Live |
-| CommentModerationForm-wireframe | ui/blog/CommentModerationForm/CommentModerationForm-wireframe.html | ui/blog/CommentModerationForm | derived-rendering | Live |  |
-| CommentModerationForm-RowTemplate-screen-chklist | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-screen-chklist.md | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | ui-document | Live |  |
-| CommentModerationForm-RowTemplate-screen | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-screen.html | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | derived-rendering | Live |  |
-| CommentModerationForm-RowTemplate-screen | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-screen.png | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | derived-rendering | Live |  |
-| CommentModerationForm-RowTemplate-wireframe-chklist | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-wireframe-chklist.md | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | ui-document | Live |  |
-| CommentModerationForm-RowTemplate-wireframe-definition | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-wireframe-definition.md | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | ui-document | Live |  |
-| CommentModerationForm-RowTemplate-wireframe | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate/CommentModerationForm-RowTemplate-wireframe.html | ui/blog/CommentModerationForm/CommentModerationForm-RowTemplate | derived-rendering | Live |  |
-| AvailabilitySettingsForm-screen-chklist | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsForm-screen-chklist.md | ui/bookings/AvailabilitySettingsForm | ui-document | Live |  |
-| AvailabilitySettingsForm-wireframe | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsForm-wireframe.html | ui/bookings/AvailabilitySettingsForm | derived-rendering | Live |  |
-| AvailabilitySettingsFormRowTemplate-screen-chklist | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-screen-chklist.md | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | ui-document | Live |  |
-| AvailabilitySettingsFormRowTemplate-screen | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-screen.html | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | derived-rendering | Live |  |
-| AvailabilitySettingsFormRowTemplate-screen | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-screen.png | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | derived-rendering | Live |  |
-| AvailabilitySettingsFormRowTemplate-wireframe-chklist | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-wireframe-chklist.md | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | ui-document | Live |  |
-| AvailabilitySettingsFormRowTemplate-wireframe-definition | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-wireframe-definition.md | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | ui-document | Live |  |
-| AvailabilitySettingsFormRowTemplate-wireframe | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate/AvailabilitySettingsFormRowTemplate-wireframe.html | ui/bookings/AvailabilitySettingsForm/AvailabilitySettingsFormRowTemplate | derived-rendering | Live |  |
-| BookingCalendarForm-screen-chklist | ui/bookings/BookingCalendarForm/BookingCalendarForm-screen-chklist.md | ui/bookings/BookingCalendarForm | ui-document | Live |  |
-| BookingCalendarForm-wireframe | ui/bookings/BookingCalendarForm/BookingCalendarForm-wireframe.html | ui/bookings/BookingCalendarForm | derived-rendering | Live |  |
-| tmpl_day_event-screen-chklist | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-screen-chklist.md | ui/bookings/BookingCalendarForm/tmpl_day_event | ui-document | Live |  |
-| tmpl_day_event-screen | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-screen.html | ui/bookings/BookingCalendarForm/tmpl_day_event | derived-rendering | Live |  |
-| tmpl_day_event-screen | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-screen.png | ui/bookings/BookingCalendarForm/tmpl_day_event | derived-rendering | Live |  |
-| tmpl_day_event-wireframe-chklist | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-wireframe-chklist.md | ui/bookings/BookingCalendarForm/tmpl_day_event | ui-document | Live |  |
-| tmpl_day_event-wireframe-definition | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-wireframe-definition.md | ui/bookings/BookingCalendarForm/tmpl_day_event | ui-document | Live |  |
-| tmpl_day_event-wireframe | ui/bookings/BookingCalendarForm/tmpl_day_event/tmpl_day_event-wireframe.html | ui/bookings/BookingCalendarForm/tmpl_day_event | derived-rendering | Live |  |
-| tmpl_month_day_cell-screen-chklist | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-screen-chklist.md | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | ui-document | Live |  |
-| tmpl_month_day_cell-screen | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-screen.html | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | derived-rendering | Live |  |
-| tmpl_month_day_cell-screen | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-screen.png | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | derived-rendering | Live |  |
-| tmpl_month_day_cell-wireframe-chklist | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-wireframe-chklist.md | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | ui-document | Live |  |
-| tmpl_month_day_cell-wireframe-definition | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-wireframe-definition.md | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | ui-document | Live |  |
-| tmpl_month_day_cell-wireframe | ui/bookings/BookingCalendarForm/tmpl_month_day_cell/tmpl_month_day_cell-wireframe.html | ui/bookings/BookingCalendarForm/tmpl_month_day_cell | derived-rendering | Live |  |
-| tmpl_week_event-screen-chklist | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-screen-chklist.md | ui/bookings/BookingCalendarForm/tmpl_week_event | ui-document | Live |  |
-| tmpl_week_event-screen | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-screen.html | ui/bookings/BookingCalendarForm/tmpl_week_event | derived-rendering | Live |  |
-| tmpl_week_event-screen | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-screen.png | ui/bookings/BookingCalendarForm/tmpl_week_event | derived-rendering | Live |  |
-| tmpl_week_event-wireframe-chklist | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-wireframe-chklist.md | ui/bookings/BookingCalendarForm/tmpl_week_event | ui-document | Live |  |
-| tmpl_week_event-wireframe-definition | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-wireframe-definition.md | ui/bookings/BookingCalendarForm/tmpl_week_event | ui-document | Live |  |
-| tmpl_week_event-wireframe | ui/bookings/BookingCalendarForm/tmpl_week_event/tmpl_week_event-wireframe.html | ui/bookings/BookingCalendarForm/tmpl_week_event | derived-rendering | Live |  |
-| tmpl_week_timeslot-screen-chklist | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-screen-chklist.md | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | ui-document | Live |  |
-| tmpl_week_timeslot-screen | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-screen.html | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | derived-rendering | Live |  |
-| tmpl_week_timeslot-screen | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-screen.png | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | derived-rendering | Live |  |
-| tmpl_week_timeslot-wireframe-chklist | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-wireframe-chklist.md | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | ui-document | Live |  |
-| tmpl_week_timeslot-wireframe-definition | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-wireframe-definition.md | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | ui-document | Live |  |
-| tmpl_week_timeslot-wireframe | ui/bookings/BookingCalendarForm/tmpl_week_timeslot/tmpl_week_timeslot-wireframe.html | ui/bookings/BookingCalendarForm/tmpl_week_timeslot | derived-rendering | Live |  |
-| BookingEditorForm-screen-chklist | ui/bookings/BookingEditorForm/BookingEditorForm-screen-chklist.md | ui/bookings/BookingEditorForm | ui-document | Live |  |
-| BookingEditorForm-screen | ui/bookings/BookingEditorForm/BookingEditorForm-screen.html | ui/bookings/BookingEditorForm | derived-rendering | Live |  |
-| BookingEditorForm-screen | ui/bookings/BookingEditorForm/BookingEditorForm-screen.png | ui/bookings/BookingEditorForm | derived-rendering | Live |  |
-| BookingEditorForm-wireframe-chklist | ui/bookings/BookingEditorForm/BookingEditorForm-wireframe-chklist.md | ui/bookings/BookingEditorForm | ui-document | Live |  |
-| BookingEditorForm-wireframe-definition | ui/bookings/BookingEditorForm/BookingEditorForm-wireframe-definition.md | ui/bookings/BookingEditorForm | ui-document | Live |  |
-| BookingEditorForm-wireframe | ui/bookings/BookingEditorForm/BookingEditorForm-wireframe.html | ui/bookings/BookingEditorForm | derived-rendering | Live |  |
-| BookingListForm-screen-chklist | ui/bookings/BookingListForm/BookingListForm-screen-chklist.md | ui/bookings/BookingListForm | ui-document | Live |  |
-| BookingListForm-wireframe | ui/bookings/BookingListForm/BookingListForm-wireframe.html | ui/bookings/BookingListForm | derived-rendering | Live |  |
-| BookingListForm-RowTemplate-screen-chklist | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-screen-chklist.md | ui/bookings/BookingListForm/BookingListForm-RowTemplate | ui-document | Live |  |
-| BookingListForm-RowTemplate-screen | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-screen.html | ui/bookings/BookingListForm/BookingListForm-RowTemplate | derived-rendering | Live |  |
-| BookingListForm-RowTemplate-screen | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-screen.png | ui/bookings/BookingListForm/BookingListForm-RowTemplate | derived-rendering | Live |  |
-| BookingListForm-RowTemplate-wireframe-chklist | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-wireframe-chklist.md | ui/bookings/BookingListForm/BookingListForm-RowTemplate | ui-document | Live |  |
-| BookingListForm-RowTemplate-wireframe-definition | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-wireframe-definition.md | ui/bookings/BookingListForm/BookingListForm-RowTemplate | ui-document | Live |  |
-| BookingListForm-RowTemplate-wireframe | ui/bookings/BookingListForm/BookingListForm-RowTemplate/BookingListForm-RowTemplate-wireframe.html | ui/bookings/BookingListForm/BookingListForm-RowTemplate | derived-rendering | Live |  |
-| BookingViewerForm-screen-chklist | ui/bookings/BookingViewerForm/BookingViewerForm-screen-chklist.md | ui/bookings/BookingViewerForm | ui-document | Live |  |
-| BookingViewerForm-screen | ui/bookings/BookingViewerForm/BookingViewerForm-screen.html | ui/bookings/BookingViewerForm | derived-rendering | Live |  |
-| BookingViewerForm-screen | ui/bookings/BookingViewerForm/BookingViewerForm-screen.png | ui/bookings/BookingViewerForm | derived-rendering | Live |  |
-| BookingViewerForm-wireframe-chklist | ui/bookings/BookingViewerForm/BookingViewerForm-wireframe-chklist.md | ui/bookings/BookingViewerForm | ui-document | Live |  |
-| BookingViewerForm-wireframe-definition | ui/bookings/BookingViewerForm/BookingViewerForm-wireframe-definition.md | ui/bookings/BookingViewerForm | ui-document | Live |  |
-| BookingViewerForm-wireframe | ui/bookings/BookingViewerForm/BookingViewerForm-wireframe.html | ui/bookings/BookingViewerForm | derived-rendering | Live |  |
-| ClauseBuilder-screen-chklist | ui/components/ClauseBuilder/ClauseBuilder-screen-chklist.md | ui/components/ClauseBuilder | ui-document | Live |  |
-| ClauseBuilder-screen | ui/components/ClauseBuilder/ClauseBuilder-screen.html | ui/components/ClauseBuilder | derived-rendering | Live |  |
-| ClauseBuilder-screen | ui/components/ClauseBuilder/ClauseBuilder-screen.png | ui/components/ClauseBuilder | derived-rendering | Live |  |
-| ClauseBuilder-wireframe-chklist | ui/components/ClauseBuilder/ClauseBuilder-wireframe-chklist.md | ui/components/ClauseBuilder | ui-document | Live |  |
-| ClauseBuilder-wireframe-definition | ui/components/ClauseBuilder/ClauseBuilder-wireframe-definition.md | ui/components/ClauseBuilder | ui-document | Live |  |
-| ClauseBuilder-wireframe | ui/components/ClauseBuilder/ClauseBuilder-wireframe.html | ui/components/ClauseBuilder | derived-rendering | Live |  |
-| FooterComponent-screen-chklist | ui/components/FooterComponent/FooterComponent-screen-chklist.md | ui/components/FooterComponent | ui-document | Live |  |
-| FooterComponent-screen | ui/components/FooterComponent/FooterComponent-screen.html | ui/components/FooterComponent | derived-rendering | Live |  |
-| FooterComponent-screen | ui/components/FooterComponent/FooterComponent-screen.png | ui/components/FooterComponent | derived-rendering | Live |  |
-| FooterComponent-wireframe-chklist | ui/components/FooterComponent/FooterComponent-wireframe-chklist.md | ui/components/FooterComponent | ui-document | Live |  |
-| FooterComponent-wireframe-definition | ui/components/FooterComponent/FooterComponent-wireframe-definition.md | ui/components/FooterComponent | ui-document | Live |  |
-| FooterComponent-wireframe | ui/components/FooterComponent/FooterComponent-wireframe.html | ui/components/FooterComponent | derived-rendering | Live |  |
-| ParallaxComponent-screen-chklist | ui/components/ParallaxComponent/ParallaxComponent-screen-chklist.md | ui/components/ParallaxComponent | ui-document | Live |  |
-| ParallaxComponent-screen | ui/components/ParallaxComponent/ParallaxComponent-screen.html | ui/components/ParallaxComponent | derived-rendering | Live |  |
-| ParallaxComponent-screen | ui/components/ParallaxComponent/ParallaxComponent-screen.png | ui/components/ParallaxComponent | derived-rendering | Live |  |
-| ParallaxComponent-wireframe-chklist | ui/components/ParallaxComponent/ParallaxComponent-wireframe-chklist.md | ui/components/ParallaxComponent | ui-document | Live |  |
-| ParallaxComponent-wireframe-definition | ui/components/ParallaxComponent/ParallaxComponent-wireframe-definition.md | ui/components/ParallaxComponent | ui-document | Live |  |
-| ParallaxComponent-wireframe | ui/components/ParallaxComponent/ParallaxComponent-wireframe.html | ui/components/ParallaxComponent | derived-rendering | Live |  |
-| TimeLapseCarouselComponent-screen-chklist | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-screen-chklist.md | ui/components/TimeLapseCarouselComponent | ui-document | Live |  |
-| TimeLapseCarouselComponent-screen | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-screen.html | ui/components/TimeLapseCarouselComponent | derived-rendering | Live |  |
-| TimeLapseCarouselComponent-screen | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-screen.png | ui/components/TimeLapseCarouselComponent | derived-rendering | Live |  |
-| TimeLapseCarouselComponent-wireframe-chklist | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-wireframe-chklist.md | ui/components/TimeLapseCarouselComponent | ui-document | Live |  |
-| TimeLapseCarouselComponent-wireframe-definition | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-wireframe-definition.md | ui/components/TimeLapseCarouselComponent | ui-document | Live |  |
-| TimeLapseCarouselComponent-wireframe | ui/components/TimeLapseCarouselComponent/TimeLapseCarouselComponent-wireframe.html | ui/components/TimeLapseCarouselComponent | derived-rendering | Live |  |
-| VideoDisplayComponent-screen-chklist | ui/components/VideoDisplayComponent/VideoDisplayComponent-screen-chklist.md | ui/components/VideoDisplayComponent | ui-document | Live |  |
-| VideoDisplayComponent-screen | ui/components/VideoDisplayComponent/VideoDisplayComponent-screen.html | ui/components/VideoDisplayComponent | derived-rendering | Live |  |
-| VideoDisplayComponent-screen | ui/components/VideoDisplayComponent/VideoDisplayComponent-screen.png | ui/components/VideoDisplayComponent | derived-rendering | Live |  |
-| VideoDisplayComponent-wireframe-chklist | ui/components/VideoDisplayComponent/VideoDisplayComponent-wireframe-chklist.md | ui/components/VideoDisplayComponent | ui-document | Live |  |
-| VideoDisplayComponent-wireframe-definition | ui/components/VideoDisplayComponent/VideoDisplayComponent-wireframe-definition.md | ui/components/VideoDisplayComponent | ui-document | Live |  |
-| VideoDisplayComponent-wireframe | ui/components/VideoDisplayComponent/VideoDisplayComponent-wireframe.html | ui/components/VideoDisplayComponent | derived-rendering | Live |  |
-| ContactEditorForm-screen-chklist | ui/crm/ContactEditorForm/ContactEditorForm-screen-chklist.md | ui/crm/ContactEditorForm | ui-document | Live |  |
-| ContactEditorForm-screen | ui/crm/ContactEditorForm/ContactEditorForm-screen.html | ui/crm/ContactEditorForm | derived-rendering | Live |  |
-| ContactEditorForm-screen | ui/crm/ContactEditorForm/ContactEditorForm-screen.png | ui/crm/ContactEditorForm | derived-rendering | Live |  |
-| ContactEditorForm-wireframe-chklist | ui/crm/ContactEditorForm/ContactEditorForm-wireframe-chklist.md | ui/crm/ContactEditorForm | ui-document | Live |  |
-| ContactEditorForm-wireframe-definition | ui/crm/ContactEditorForm/ContactEditorForm-wireframe-definition.md | ui/crm/ContactEditorForm | ui-document | Live |  |
-| ContactEditorForm-wireframe | ui/crm/ContactEditorForm/ContactEditorForm-wireframe.html | ui/crm/ContactEditorForm | derived-rendering | Live |  |
-| ContactListForm-screen-chklist | ui/crm/ContactListForm/ContactListForm-screen-chklist.md | ui/crm/ContactListForm | ui-document | Live |  |
-| ContactListForm-screen | ui/crm/ContactListForm/ContactListForm-screen.html | ui/crm/ContactListForm | derived-rendering | Live |  |
-| ContactListForm-screen | ui/crm/ContactListForm/ContactListForm-screen.png | ui/crm/ContactListForm | derived-rendering | Live |  |
-| ContactListForm-wireframe-chklist | ui/crm/ContactListForm/ContactListForm-wireframe-chklist.md | ui/crm/ContactListForm | ui-document | Live |  |
-| ContactListForm-wireframe-definition | ui/crm/ContactListForm/ContactListForm-wireframe-definition.md | ui/crm/ContactListForm | ui-document | Live |  |
-| ContactListForm-wireframe | ui/crm/ContactListForm/ContactListForm-wireframe.html | ui/crm/ContactListForm | derived-rendering | Live |  |
-| ContactViewerForm-screen-chklist | ui/crm/ContactViewerForm/ContactViewerForm-screen-chklist.md | ui/crm/ContactViewerForm | ui-document | Live |  |
-| ContactViewerForm-screen | ui/crm/ContactViewerForm/ContactViewerForm-screen.html | ui/crm/ContactViewerForm | derived-rendering | Live |  |
-| ContactViewerForm-screen | ui/crm/ContactViewerForm/ContactViewerForm-screen.png | ui/crm/ContactViewerForm | derived-rendering | Live |  |
-| ContactViewerForm-wireframe-chklist | ui/crm/ContactViewerForm/ContactViewerForm-wireframe-chklist.md | ui/crm/ContactViewerForm | ui-document | Live |  |
-| ContactViewerForm-wireframe-definition | ui/crm/ContactViewerForm/ContactViewerForm-wireframe-definition.md | ui/crm/ContactViewerForm | ui-document | Live |  |
-| ContactViewerForm-wireframe | ui/crm/ContactViewerForm/ContactViewerForm-wireframe.html | ui/crm/ContactViewerForm | derived-rendering | Live |  |
-| EmailBroadcastForm-screen-chklist | ui/crm/EmailBroadcastForm/EmailBroadcastForm-screen-chklist.md | ui/crm/EmailBroadcastForm | ui-document | Live |  |
-| EmailBroadcastForm-screen | ui/crm/EmailBroadcastForm/EmailBroadcastForm-screen.html | ui/crm/EmailBroadcastForm | derived-rendering | Live |  |
-| EmailBroadcastForm-screen | ui/crm/EmailBroadcastForm/EmailBroadcastForm-screen.png | ui/crm/EmailBroadcastForm | derived-rendering | Live |  |
-| EmailBroadcastForm-wireframe-chklist | ui/crm/EmailBroadcastForm/EmailBroadcastForm-wireframe-chklist.md | ui/crm/EmailBroadcastForm | ui-document | Live |  |
-| EmailBroadcastForm-wireframe-definition | ui/crm/EmailBroadcastForm/EmailBroadcastForm-wireframe-definition.md | ui/crm/EmailBroadcastForm | ui-document | Live |  |
-| EmailBroadcastForm-wireframe | ui/crm/EmailBroadcastForm/EmailBroadcastForm-wireframe.html | ui/crm/EmailBroadcastForm | derived-rendering | Live |  |
-| EmailCampaignEditorForm-screen-chklist | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-screen-chklist.md | ui/crm/EmailCampaignEditorForm | ui-document | Live |  |
-| EmailCampaignEditorForm-screen | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-screen.html | ui/crm/EmailCampaignEditorForm | derived-rendering | Live |  |
-| EmailCampaignEditorForm-screen | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-screen.png | ui/crm/EmailCampaignEditorForm | derived-rendering | Live |  |
-| EmailCampaignEditorForm-wireframe-chklist | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-wireframe-chklist.md | ui/crm/EmailCampaignEditorForm | ui-document | Live |  |
-| EmailCampaignEditorForm-wireframe-definition | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-wireframe-definition.md | ui/crm/EmailCampaignEditorForm | ui-document | Live |  |
-| EmailCampaignEditorForm-wireframe | ui/crm/EmailCampaignEditorForm/EmailCampaignEditorForm-wireframe.html | ui/crm/EmailCampaignEditorForm | derived-rendering | Live |  |
-| EmailCampaignListForm-screen-chklist | ui/crm/EmailCampaignListForm/EmailCampaignListForm-screen-chklist.md | ui/crm/EmailCampaignListForm | ui-document | Live |  |
-| EmailCampaignListForm-screen | ui/crm/EmailCampaignListForm/EmailCampaignListForm-screen.html | ui/crm/EmailCampaignListForm | derived-rendering | Live |  |
-| EmailCampaignListForm-screen | ui/crm/EmailCampaignListForm/EmailCampaignListForm-screen.png | ui/crm/EmailCampaignListForm | derived-rendering | Live |  |
-| EmailCampaignListForm-wireframe-chklist | ui/crm/EmailCampaignListForm/EmailCampaignListForm-wireframe-chklist.md | ui/crm/EmailCampaignListForm | ui-document | Live |  |
-| EmailCampaignListForm-wireframe-definition | ui/crm/EmailCampaignListForm/EmailCampaignListForm-wireframe-definition.md | ui/crm/EmailCampaignListForm | ui-document | Live |  |
-| EmailCampaignListForm-wireframe | ui/crm/EmailCampaignListForm/EmailCampaignListForm-wireframe.html | ui/crm/EmailCampaignListForm | derived-rendering | Live |  |
-| LeadCaptureForm-screen-chklist | ui/crm/LeadCaptureForm/LeadCaptureForm-screen-chklist.md | ui/crm/LeadCaptureForm | ui-document | Live |  |
-| LeadCaptureForm-screen | ui/crm/LeadCaptureForm/LeadCaptureForm-screen.html | ui/crm/LeadCaptureForm | derived-rendering | Live |  |
-| LeadCaptureForm-screen | ui/crm/LeadCaptureForm/LeadCaptureForm-screen.png | ui/crm/LeadCaptureForm | derived-rendering | Live |  |
-| LeadCaptureForm-wireframe-chklist | ui/crm/LeadCaptureForm/LeadCaptureForm-wireframe-chklist.md | ui/crm/LeadCaptureForm | ui-document | Live |  |
-| LeadCaptureForm-wireframe-definition | ui/crm/LeadCaptureForm/LeadCaptureForm-wireframe-definition.md | ui/crm/LeadCaptureForm | ui-document | Live |  |
-| LeadCaptureForm-wireframe | ui/crm/LeadCaptureForm/LeadCaptureForm-wireframe.html | ui/crm/LeadCaptureForm | derived-rendering | Live |  |
-| SegmentManagerForm-screen-chklist | ui/crm/SegmentManagerForm/SegmentManagerForm-screen-chklist.md | ui/crm/SegmentManagerForm | ui-document | Live |  |
-| SegmentManagerForm-screen | ui/crm/SegmentManagerForm/SegmentManagerForm-screen.html | ui/crm/SegmentManagerForm | derived-rendering | Live |  |
-| SegmentManagerForm-screen | ui/crm/SegmentManagerForm/SegmentManagerForm-screen.png | ui/crm/SegmentManagerForm | derived-rendering | Live |  |
-| SegmentManagerForm-wireframe-chklist | ui/crm/SegmentManagerForm/SegmentManagerForm-wireframe-chklist.md | ui/crm/SegmentManagerForm | ui-document | Live |  |
-| SegmentManagerForm-wireframe-definition | ui/crm/SegmentManagerForm/SegmentManagerForm-wireframe-definition.md | ui/crm/SegmentManagerForm | ui-document | Live |  |
-| SegmentManagerForm-wireframe | ui/crm/SegmentManagerForm/SegmentManagerForm-wireframe.html | ui/crm/SegmentManagerForm | derived-rendering | Live |  |
-| TaskListForm-screen-chklist | ui/crm/TaskListForm/TaskListForm-screen-chklist.md | ui/crm/TaskListForm | ui-document | Live |  |
-| TaskListForm-screen | ui/crm/TaskListForm/TaskListForm-screen.html | ui/crm/TaskListForm | derived-rendering | Live |  |
-| TaskListForm-screen | ui/crm/TaskListForm/TaskListForm-screen.png | ui/crm/TaskListForm | derived-rendering | Live |  |
-| TaskListForm-wireframe-chklist | ui/crm/TaskListForm/TaskListForm-wireframe-chklist.md | ui/crm/TaskListForm | ui-document | Live |  |
-| TaskListForm-wireframe-definition | ui/crm/TaskListForm/TaskListForm-wireframe-definition.md | ui/crm/TaskListForm | ui-document | Live |  |
-| TaskListForm-wireframe | ui/crm/TaskListForm/TaskListForm-wireframe.html | ui/crm/TaskListForm | derived-rendering | Live |  |
-| ActivityFeed-screen-chklist | ui/dashboard/ActivityFeed/ActivityFeed-screen-chklist.md | ui/dashboard/ActivityFeed | ui-document | Live |  |
-| ActivityFeed-screen | ui/dashboard/ActivityFeed/ActivityFeed-screen.html | ui/dashboard/ActivityFeed | derived-rendering | Live |  |
-| ActivityFeed-screen | ui/dashboard/ActivityFeed/ActivityFeed-screen.png | ui/dashboard/ActivityFeed | derived-rendering | Live |  |
-| ActivityFeed-wireframe-chklist | ui/dashboard/ActivityFeed/ActivityFeed-wireframe-chklist.md | ui/dashboard/ActivityFeed | ui-document | Live |  |
-| ActivityFeed-wireframe-definition | ui/dashboard/ActivityFeed/ActivityFeed-wireframe-definition.md | ui/dashboard/ActivityFeed | ui-document | Live |  |
-| ActivityFeed-wireframe | ui/dashboard/ActivityFeed/ActivityFeed-wireframe.html | ui/dashboard/ActivityFeed | derived-rendering | Live |  |
-| MetricCard-screen-chklist | ui/dashboard/MetricCard/MetricCard-screen-chklist.md | ui/dashboard/MetricCard | ui-document | Live |  |
-| MetricCard-screen | ui/dashboard/MetricCard/MetricCard-screen.html | ui/dashboard/MetricCard | derived-rendering | Live |  |
-| MetricCard-screen | ui/dashboard/MetricCard/MetricCard-screen.png | ui/dashboard/MetricCard | derived-rendering | Live |  |
-| MetricCard-wireframe-chklist | ui/dashboard/MetricCard/MetricCard-wireframe-chklist.md | ui/dashboard/MetricCard | ui-document | Live |  |
-| MetricCard-wireframe-definition | ui/dashboard/MetricCard/MetricCard-wireframe-definition.md | ui/dashboard/MetricCard | ui-document | Live |  |
-| MetricCard-wireframe | ui/dashboard/MetricCard/MetricCard-wireframe.html | ui/dashboard/MetricCard | derived-rendering | Live |  |
-| InvoiceEditorForm-screen-chklist | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-screen-chklist.md | ui/invoices/InvoiceEditorForm | ui-document | Live |  |
-| InvoiceEditorForm-screen | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-screen.html | ui/invoices/InvoiceEditorForm | derived-rendering | Live |  |
-| InvoiceEditorForm-screen | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-screen.png | ui/invoices/InvoiceEditorForm | derived-rendering | Live |  |
-| InvoiceEditorForm-wireframe-chklist | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-wireframe-chklist.md | ui/invoices/InvoiceEditorForm | ui-document | Live |  |
-| InvoiceEditorForm-wireframe-definition | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-wireframe-definition.md | ui/invoices/InvoiceEditorForm | ui-document | Live |  |
-| InvoiceEditorForm-wireframe | ui/invoices/InvoiceEditorForm/InvoiceEditorForm-wireframe.html | ui/invoices/InvoiceEditorForm | derived-rendering | Live |  |
-| InvoiceListForm-screen-chklist | ui/invoices/InvoiceListForm/InvoiceListForm-screen-chklist.md | ui/invoices/InvoiceListForm | ui-document | Live |  |
-| InvoiceListForm-screen | ui/invoices/InvoiceListForm/InvoiceListForm-screen.html | ui/invoices/InvoiceListForm | derived-rendering | Live |  |
-| InvoiceListForm-screen | ui/invoices/InvoiceListForm/InvoiceListForm-screen.png | ui/invoices/InvoiceListForm | derived-rendering | Live |  |
-| InvoiceListForm-wireframe-chklist | ui/invoices/InvoiceListForm/InvoiceListForm-wireframe-chklist.md | ui/invoices/InvoiceListForm | ui-document | Live |  |
-| InvoiceListForm-wireframe-definition | ui/invoices/InvoiceListForm/InvoiceListForm-wireframe-definition.md | ui/invoices/InvoiceListForm | ui-document | Live |  |
-| InvoiceListForm-wireframe | ui/invoices/InvoiceListForm/InvoiceListForm-wireframe.html | ui/invoices/InvoiceListForm | derived-rendering | Live |  |
-| InvoiceViewerForm-screen-chklist | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-screen-chklist.md | ui/invoices/InvoiceViewerForm | ui-document | Live |  |
-| InvoiceViewerForm-screen | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-screen.html | ui/invoices/InvoiceViewerForm | derived-rendering | Live |  |
-| InvoiceViewerForm-screen | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-screen.png | ui/invoices/InvoiceViewerForm | derived-rendering | Live |  |
-| InvoiceViewerForm-wireframe-chklist | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-wireframe-chklist.md | ui/invoices/InvoiceViewerForm | ui-document | Live |  |
-| InvoiceViewerForm-wireframe-definition | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-wireframe-definition.md | ui/invoices/InvoiceViewerForm | ui-document | Live |  |
-| InvoiceViewerForm-wireframe | ui/invoices/InvoiceViewerForm/InvoiceViewerForm-wireframe.html | ui/invoices/InvoiceViewerForm | derived-rendering | Live |  |
-| LandingPage-screen-chklist | ui/landing_pages/LandingPage/LandingPage-screen-chklist.md | ui/landing_pages/LandingPage | ui-document | Live |  |
-| LandingPage-wireframe | ui/landing_pages/LandingPage/LandingPage-wireframe.html | ui/landing_pages/LandingPage | derived-rendering | Live |  |
-| EventRegistrationTemplate-screen-chklist | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-screen-chklist.md | ui/landing_pages/LandingPage/EventRegistrationTemplate | ui-document | Live |  |
-| EventRegistrationTemplate-screen | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-screen.html | ui/landing_pages/LandingPage/EventRegistrationTemplate | derived-rendering | Live |  |
-| EventRegistrationTemplate-screen | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-screen.png | ui/landing_pages/LandingPage/EventRegistrationTemplate | derived-rendering | Live |  |
-| EventRegistrationTemplate-wireframe-chklist | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-wireframe-chklist.md | ui/landing_pages/LandingPage/EventRegistrationTemplate | ui-document | Live |  |
-| EventRegistrationTemplate-wireframe-definition | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-wireframe-definition.md | ui/landing_pages/LandingPage/EventRegistrationTemplate | ui-document | Live |  |
-| EventRegistrationTemplate-wireframe | ui/landing_pages/LandingPage/EventRegistrationTemplate/EventRegistrationTemplate-wireframe.html | ui/landing_pages/LandingPage/EventRegistrationTemplate | derived-rendering | Live |  |
-| LeadCaptureTemplate-screen-chklist | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-screen-chklist.md | ui/landing_pages/LandingPage/LeadCaptureTemplate | ui-document | Live |  |
-| LeadCaptureTemplate-screen | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-screen.html | ui/landing_pages/LandingPage/LeadCaptureTemplate | derived-rendering | Live |  |
-| LeadCaptureTemplate-screen | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-screen.png | ui/landing_pages/LandingPage/LeadCaptureTemplate | derived-rendering | Live |  |
-| LeadCaptureTemplate-wireframe-chklist | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-wireframe-chklist.md | ui/landing_pages/LandingPage/LeadCaptureTemplate | ui-document | Live |  |
-| LeadCaptureTemplate-wireframe-definition | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-wireframe-definition.md | ui/landing_pages/LandingPage/LeadCaptureTemplate | ui-document | Live |  |
-| LeadCaptureTemplate-wireframe | ui/landing_pages/LandingPage/LeadCaptureTemplate/LeadCaptureTemplate-wireframe.html | ui/landing_pages/LandingPage/LeadCaptureTemplate | derived-rendering | Live |  |
-| VslTemplate-screen-chklist | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-screen-chklist.md | ui/landing_pages/LandingPage/VslTemplate | ui-document | Live |  |
-| VslTemplate-screen | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-screen.html | ui/landing_pages/LandingPage/VslTemplate | derived-rendering | Live |  |
-| VslTemplate-screen | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-screen.png | ui/landing_pages/LandingPage/VslTemplate | derived-rendering | Live |  |
-| VslTemplate-wireframe-chklist | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-wireframe-chklist.md | ui/landing_pages/LandingPage/VslTemplate | ui-document | Live |  |
-| VslTemplate-wireframe-definition | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-wireframe-definition.md | ui/landing_pages/LandingPage/VslTemplate | ui-document | Live |  |
-| VslTemplate-wireframe | ui/landing_pages/LandingPage/VslTemplate/VslTemplate-wireframe.html | ui/landing_pages/LandingPage/VslTemplate | derived-rendering | Live |  |
-| LandingPageEditorForm-screen-chklist | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-screen-chklist.md | ui/landing_pages/LandingPageEditorForm | ui-document | Live |  |
-| LandingPageEditorForm-screen | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-screen.html | ui/landing_pages/LandingPageEditorForm | derived-rendering | Live |  |
-| LandingPageEditorForm-screen | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-screen.png | ui/landing_pages/LandingPageEditorForm | derived-rendering | Live |  |
-| LandingPageEditorForm-wireframe-chklist | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-wireframe-chklist.md | ui/landing_pages/LandingPageEditorForm | ui-document | Live |  |
-| LandingPageEditorForm-wireframe-definition | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-wireframe-definition.md | ui/landing_pages/LandingPageEditorForm | ui-document | Live |  |
-| LandingPageEditorForm-wireframe | ui/landing_pages/LandingPageEditorForm/LandingPageEditorForm-wireframe.html | ui/landing_pages/LandingPageEditorForm | derived-rendering | Live |  |
-| LandingPageListForm-screen-chklist | ui/landing_pages/LandingPageListForm/LandingPageListForm-screen-chklist.md | ui/landing_pages/LandingPageListForm | ui-document | Live |  |
-| LandingPageListForm-screen | ui/landing_pages/LandingPageListForm/LandingPageListForm-screen.html | ui/landing_pages/LandingPageListForm | derived-rendering | Live |  |
-| LandingPageListForm-screen | ui/landing_pages/LandingPageListForm/LandingPageListForm-screen.png | ui/landing_pages/LandingPageListForm | derived-rendering | Live |  |
-| LandingPageListForm-wireframe-chklist | ui/landing_pages/LandingPageListForm/LandingPageListForm-wireframe-chklist.md | ui/landing_pages/LandingPageListForm | ui-document | Live |  |
-| LandingPageListForm-wireframe-definition | ui/landing_pages/LandingPageListForm/LandingPageListForm-wireframe-definition.md | ui/landing_pages/LandingPageListForm | ui-document | Live |  |
-| LandingPageListForm-wireframe | ui/landing_pages/LandingPageListForm/LandingPageListForm-wireframe.html | ui/landing_pages/LandingPageListForm | derived-rendering | Live |  |
-| AdminLayout-screen-chklist | ui/layouts/AdminLayout/AdminLayout-screen-chklist.md | ui/layouts/AdminLayout | ui-document | Live |  |
-| AdminLayout-screen | ui/layouts/AdminLayout/AdminLayout-screen.html | ui/layouts/AdminLayout | derived-rendering | Live |  |
-| AdminLayout-screen | ui/layouts/AdminLayout/AdminLayout-screen.png | ui/layouts/AdminLayout | derived-rendering | Live |  |
-| AdminLayout-wireframe-chklist | ui/layouts/AdminLayout/AdminLayout-wireframe-chklist.md | ui/layouts/AdminLayout | ui-document | Live |  |
-| AdminLayout-wireframe-definition | ui/layouts/AdminLayout/AdminLayout-wireframe-definition.md | ui/layouts/AdminLayout | ui-document | Live |  |
-| AdminLayout-wireframe | ui/layouts/AdminLayout/AdminLayout-wireframe.html | ui/layouts/AdminLayout | derived-rendering | Live |  |
-| BlankLayout-screen-chklist | ui/layouts/BlankLayout/BlankLayout-screen-chklist.md | ui/layouts/BlankLayout | ui-document | Live |  |
-| BlankLayout-screen | ui/layouts/BlankLayout/BlankLayout-screen.html | ui/layouts/BlankLayout | derived-rendering | Live |  |
-| BlankLayout-screen | ui/layouts/BlankLayout/BlankLayout-screen.png | ui/layouts/BlankLayout | derived-rendering | Live |  |
-| BlankLayout-wireframe-chklist | ui/layouts/BlankLayout/BlankLayout-wireframe-chklist.md | ui/layouts/BlankLayout | ui-document | Live |  |
-| BlankLayout-wireframe-definition | ui/layouts/BlankLayout/BlankLayout-wireframe-definition.md | ui/layouts/BlankLayout | ui-document | Live |  |
-| BlankLayout-wireframe | ui/layouts/BlankLayout/BlankLayout-wireframe.html | ui/layouts/BlankLayout | derived-rendering | Live |  |
-| CustomerLayout-screen-chklist | ui/layouts/CustomerLayout/CustomerLayout-screen-chklist.md | ui/layouts/CustomerLayout | ui-document | Live |  |
-| CustomerLayout-screen | ui/layouts/CustomerLayout/CustomerLayout-screen.html | ui/layouts/CustomerLayout | derived-rendering | Live |  |
-| CustomerLayout-screen | ui/layouts/CustomerLayout/CustomerLayout-screen.png | ui/layouts/CustomerLayout | derived-rendering | Live |  |
-| CustomerLayout-wireframe-chklist | ui/layouts/CustomerLayout/CustomerLayout-wireframe-chklist.md | ui/layouts/CustomerLayout | ui-document | Live |  |
-| CustomerLayout-wireframe-definition | ui/layouts/CustomerLayout/CustomerLayout-wireframe-definition.md | ui/layouts/CustomerLayout | ui-document | Live |  |
-| CustomerLayout-wireframe | ui/layouts/CustomerLayout/CustomerLayout-wireframe.html | ui/layouts/CustomerLayout | derived-rendering | Live |  |
-| ErrorLayout-screen-chklist | ui/layouts/ErrorLayout/ErrorLayout-screen-chklist.md | ui/layouts/ErrorLayout | ui-document | Live |  |
-| ErrorLayout-screen | ui/layouts/ErrorLayout/ErrorLayout-screen.html | ui/layouts/ErrorLayout | derived-rendering | Live |  |
-| ErrorLayout-screen | ui/layouts/ErrorLayout/ErrorLayout-screen.png | ui/layouts/ErrorLayout | derived-rendering | Live |  |
-| ErrorLayout-wireframe-chklist | ui/layouts/ErrorLayout/ErrorLayout-wireframe-chklist.md | ui/layouts/ErrorLayout | ui-document | Live |  |
-| ErrorLayout-wireframe-definition | ui/layouts/ErrorLayout/ErrorLayout-wireframe-definition.md | ui/layouts/ErrorLayout | ui-document | Live |  |
-| ErrorLayout-wireframe | ui/layouts/ErrorLayout/ErrorLayout-wireframe.html | ui/layouts/ErrorLayout | derived-rendering | Live |  |
-| OnboardingForm-screen-chklist | ui/onboarding/OnboardingForm/OnboardingForm-screen-chklist.md | ui/onboarding/OnboardingForm | ui-document | Live |  |
-| OnboardingForm-screen | ui/onboarding/OnboardingForm/OnboardingForm-screen.html | ui/onboarding/OnboardingForm | derived-rendering | Live |  |
-| OnboardingForm-screen | ui/onboarding/OnboardingForm/OnboardingForm-screen.png | ui/onboarding/OnboardingForm | derived-rendering | Live |  |
-| OnboardingForm-wireframe-chklist | ui/onboarding/OnboardingForm/OnboardingForm-wireframe-chklist.md | ui/onboarding/OnboardingForm | ui-document | Live |  |
-| OnboardingForm-wireframe-definition | ui/onboarding/OnboardingForm/OnboardingForm-wireframe-definition.md | ui/onboarding/OnboardingForm | ui-document | Live |  |
-| OnboardingForm-wireframe | ui/onboarding/OnboardingForm/OnboardingForm-wireframe.html | ui/onboarding/OnboardingForm | derived-rendering | Live |  |
-| AboutPage-screen-chklist | ui/public_pages/AboutPage/AboutPage-screen-chklist.md | ui/public_pages/AboutPage | ui-document | Live |  |
-| AboutPage-screen | ui/public_pages/AboutPage/AboutPage-screen.html | ui/public_pages/AboutPage | derived-rendering | Live |  |
-| AboutPage-screen | ui/public_pages/AboutPage/AboutPage-screen.png | ui/public_pages/AboutPage | derived-rendering | Live |  |
-| AboutPage-wireframe-chklist | ui/public_pages/AboutPage/AboutPage-wireframe-chklist.md | ui/public_pages/AboutPage | ui-document | Live |  |
-| AboutPage-wireframe-definition | ui/public_pages/AboutPage/AboutPage-wireframe-definition.md | ui/public_pages/AboutPage | ui-document | Live |  |
-| AboutPage-wireframe | ui/public_pages/AboutPage/AboutPage-wireframe.html | ui/public_pages/AboutPage | derived-rendering | Live |  |
-| ContactPage-screen-chklist | ui/public_pages/ContactPage/ContactPage-screen-chklist.md | ui/public_pages/ContactPage | ui-document | Live |  |
-| ContactPage-screen | ui/public_pages/ContactPage/ContactPage-screen.html | ui/public_pages/ContactPage | derived-rendering | Live |  |
-| ContactPage-screen | ui/public_pages/ContactPage/ContactPage-screen.png | ui/public_pages/ContactPage | derived-rendering | Live |  |
-| ContactPage-wireframe-chklist | ui/public_pages/ContactPage/ContactPage-wireframe-chklist.md | ui/public_pages/ContactPage | ui-document | Live |  |
-| ContactPage-wireframe-definition | ui/public_pages/ContactPage/ContactPage-wireframe-definition.md | ui/public_pages/ContactPage | ui-document | Live |  |
-| ContactPage-wireframe | ui/public_pages/ContactPage/ContactPage-wireframe.html | ui/public_pages/ContactPage | derived-rendering | Live |  |
-| HomePage-screen-chklist | ui/public_pages/HomePage/HomePage-screen-chklist.md | ui/public_pages/HomePage | ui-document | Live |  |
-| HomePage-wireframe | ui/public_pages/HomePage/HomePage-wireframe.html | ui/public_pages/HomePage | derived-rendering | Live |  |
-| HomePageBookingTemplate-screen-chklist | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-screen-chklist.md | ui/public_pages/HomePage/HomePageBookingTemplate | ui-document | Live |  |
-| HomePageBookingTemplate-screen | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-screen.html | ui/public_pages/HomePage/HomePageBookingTemplate | derived-rendering | Live |  |
-| HomePageBookingTemplate-screen | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-screen.png | ui/public_pages/HomePage/HomePageBookingTemplate | derived-rendering | Live |  |
-| HomePageBookingTemplate-wireframe-chklist | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-wireframe-chklist.md | ui/public_pages/HomePage/HomePageBookingTemplate | ui-document | Live |  |
-| HomePageBookingTemplate-wireframe-definition | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-wireframe-definition.md | ui/public_pages/HomePage/HomePageBookingTemplate | ui-document | Live |  |
-| HomePageBookingTemplate-wireframe | ui/public_pages/HomePage/HomePageBookingTemplate/HomePageBookingTemplate-wireframe.html | ui/public_pages/HomePage/HomePageBookingTemplate | derived-rendering | Live |  |
-| HomePageClassicTemplate-screen-chklist | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-screen-chklist.md | ui/public_pages/HomePage/HomePageClassicTemplate | ui-document | Live |  |
-| HomePageClassicTemplate-screen | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-screen.html | ui/public_pages/HomePage/HomePageClassicTemplate | derived-rendering | Live |  |
-| HomePageClassicTemplate-screen | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-screen.png | ui/public_pages/HomePage/HomePageClassicTemplate | derived-rendering | Live |  |
-| HomePageClassicTemplate-wireframe-chklist | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-wireframe-chklist.md | ui/public_pages/HomePage/HomePageClassicTemplate | ui-document | Live |  |
-| HomePageClassicTemplate-wireframe-definition | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-wireframe-definition.md | ui/public_pages/HomePage/HomePageClassicTemplate | ui-document | Live |  |
-| HomePageClassicTemplate-wireframe | ui/public_pages/HomePage/HomePageClassicTemplate/HomePageClassicTemplate-wireframe.html | ui/public_pages/HomePage/HomePageClassicTemplate | derived-rendering | Live |  |
-| HomePageMinimalistTemplate-screen-chklist | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-screen-chklist.md | ui/public_pages/HomePage/HomePageMinimalistTemplate | ui-document | Live |  |
-| HomePageMinimalistTemplate-screen | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-screen.html | ui/public_pages/HomePage/HomePageMinimalistTemplate | derived-rendering | Live |  |
-| HomePageMinimalistTemplate-screen | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-screen.png | ui/public_pages/HomePage/HomePageMinimalistTemplate | derived-rendering | Live |  |
-| HomePageMinimalistTemplate-wireframe-chklist | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-wireframe-chklist.md | ui/public_pages/HomePage/HomePageMinimalistTemplate | ui-document | Live |  |
-| HomePageMinimalistTemplate-wireframe-definition | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-wireframe-definition.md | ui/public_pages/HomePage/HomePageMinimalistTemplate | ui-document | Live |  |
-| HomePageMinimalistTemplate-wireframe | ui/public_pages/HomePage/HomePageMinimalistTemplate/HomePageMinimalistTemplate-wireframe.html | ui/public_pages/HomePage/HomePageMinimalistTemplate | derived-rendering | Live |  |
-| HomePageServicesTemplate-screen-chklist | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-screen-chklist.md | ui/public_pages/HomePage/HomePageServicesTemplate | ui-document | Live |  |
-| HomePageServicesTemplate-screen | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-screen.html | ui/public_pages/HomePage/HomePageServicesTemplate | derived-rendering | Live |  |
-| HomePageServicesTemplate-screen | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-screen.png | ui/public_pages/HomePage/HomePageServicesTemplate | derived-rendering | Live |  |
-| HomePageServicesTemplate-wireframe-chklist | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-wireframe-chklist.md | ui/public_pages/HomePage/HomePageServicesTemplate | ui-document | Live |  |
-| HomePageServicesTemplate-wireframe-definition | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-wireframe-definition.md | ui/public_pages/HomePage/HomePageServicesTemplate | ui-document | Live |  |
-| HomePageServicesTemplate-wireframe | ui/public_pages/HomePage/HomePageServicesTemplate/HomePageServicesTemplate-wireframe.html | ui/public_pages/HomePage/HomePageServicesTemplate | derived-rendering | Live |  |
-| PrivacyPolicyPage-screen-chklist | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-screen-chklist.md | ui/public_pages/PrivacyPolicyPage | ui-document | Live |  |
-| PrivacyPolicyPage-screen | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-screen.html | ui/public_pages/PrivacyPolicyPage | derived-rendering | Live |  |
-| PrivacyPolicyPage-screen | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-screen.png | ui/public_pages/PrivacyPolicyPage | derived-rendering | Live |  |
-| PrivacyPolicyPage-wireframe-chklist | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-wireframe-chklist.md | ui/public_pages/PrivacyPolicyPage | ui-document | Live |  |
-| PrivacyPolicyPage-wireframe-definition | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-wireframe-definition.md | ui/public_pages/PrivacyPolicyPage | ui-document | Live |  |
-| PrivacyPolicyPage-wireframe | ui/public_pages/PrivacyPolicyPage/PrivacyPolicyPage-wireframe.html | ui/public_pages/PrivacyPolicyPage | derived-rendering | Live |  |
-| TermsConditionsPage-screen-chklist | ui/public_pages/TermsConditionsPage/TermsConditionsPage-screen-chklist.md | ui/public_pages/TermsConditionsPage | ui-document | Live |  |
-| TermsConditionsPage-screen | ui/public_pages/TermsConditionsPage/TermsConditionsPage-screen.html | ui/public_pages/TermsConditionsPage | derived-rendering | Live |  |
-| TermsConditionsPage-screen | ui/public_pages/TermsConditionsPage/TermsConditionsPage-screen.png | ui/public_pages/TermsConditionsPage | derived-rendering | Live |  |
-| TermsConditionsPage-wireframe-chklist | ui/public_pages/TermsConditionsPage/TermsConditionsPage-wireframe-chklist.md | ui/public_pages/TermsConditionsPage | ui-document | Live |  |
-| TermsConditionsPage-wireframe-definition | ui/public_pages/TermsConditionsPage/TermsConditionsPage-wireframe-definition.md | ui/public_pages/TermsConditionsPage | ui-document | Live |  |
-| TermsConditionsPage-wireframe | ui/public_pages/TermsConditionsPage/TermsConditionsPage-wireframe.html | ui/public_pages/TermsConditionsPage | derived-rendering | Live |  |
-| ServiceCategoriesForm-screen-chklist | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-screen-chklist.md | ui/services/ServiceCategoriesForm | ui-document | Live |  |
-| ServiceCategoriesForm-screen | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-screen.html | ui/services/ServiceCategoriesForm | derived-rendering | Live |  |
-| ServiceCategoriesForm-screen | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-screen.png | ui/services/ServiceCategoriesForm | derived-rendering | Live |  |
-| ServiceCategoriesForm-wireframe-chklist | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-wireframe-chklist.md | ui/services/ServiceCategoriesForm | ui-document | Live |  |
-| ServiceCategoriesForm-wireframe-definition | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-wireframe-definition.md | ui/services/ServiceCategoriesForm | ui-document | Live |  |
-| ServiceCategoriesForm-wireframe | ui/services/ServiceCategoriesForm/ServiceCategoriesForm-wireframe.html | ui/services/ServiceCategoriesForm | derived-rendering | Live |  |
-| ServiceEditorForm-screen-chklist | ui/services/ServiceEditorForm/ServiceEditorForm-screen-chklist.md | ui/services/ServiceEditorForm | ui-document | Live |  |
-| ServiceEditorForm-screen | ui/services/ServiceEditorForm/ServiceEditorForm-screen.html | ui/services/ServiceEditorForm | derived-rendering | Live |  |
-| ServiceEditorForm-screen | ui/services/ServiceEditorForm/ServiceEditorForm-screen.png | ui/services/ServiceEditorForm | derived-rendering | Live |  |
-| ServiceEditorForm-wireframe-chklist | ui/services/ServiceEditorForm/ServiceEditorForm-wireframe-chklist.md | ui/services/ServiceEditorForm | ui-document | Live |  |
-| ServiceEditorForm-wireframe-definition | ui/services/ServiceEditorForm/ServiceEditorForm-wireframe-definition.md | ui/services/ServiceEditorForm | ui-document | Live |  |
-| ServiceEditorForm-wireframe | ui/services/ServiceEditorForm/ServiceEditorForm-wireframe.html | ui/services/ServiceEditorForm | derived-rendering | Live |  |
-| ServicesForm-screen-chklist | ui/services/ServicesForm/ServicesForm-screen-chklist.md | ui/services/ServicesForm | ui-document | Live |  |
-| ServicesForm-screen | ui/services/ServicesForm/ServicesForm-screen.html | ui/services/ServicesForm | derived-rendering | Live |  |
-| ServicesForm-screen | ui/services/ServicesForm/ServicesForm-screen.png | ui/services/ServicesForm | derived-rendering | Live |  |
-| ServicesForm-wireframe-chklist | ui/services/ServicesForm/ServicesForm-wireframe-chklist.md | ui/services/ServicesForm | ui-document | Live |  |
-| ServicesForm-wireframe-definition | ui/services/ServicesForm/ServicesForm-wireframe-definition.md | ui/services/ServicesForm | ui-document | Live |  |
-| ServicesForm-wireframe | ui/services/ServicesForm/ServicesForm-wireframe.html | ui/services/ServicesForm | derived-rendering | Live |  |
-| ServiceViewerForm-screen-chklist | ui/services/ServiceViewerForm/ServiceViewerForm-screen-chklist.md | ui/services/ServiceViewerForm | ui-document | Live |  |
-| ServiceViewerForm-screen | ui/services/ServiceViewerForm/ServiceViewerForm-screen.html | ui/services/ServiceViewerForm | derived-rendering | Live |  |
-| ServiceViewerForm-screen | ui/services/ServiceViewerForm/ServiceViewerForm-screen.png | ui/services/ServiceViewerForm | derived-rendering | Live |  |
-| ServiceViewerForm-wireframe-chklist | ui/services/ServiceViewerForm/ServiceViewerForm-wireframe-chklist.md | ui/services/ServiceViewerForm | ui-document | Live |  |
-| ServiceViewerForm-wireframe-definition | ui/services/ServiceViewerForm/ServiceViewerForm-wireframe-definition.md | ui/services/ServiceViewerForm | ui-document | Live |  |
-| ServiceViewerForm-wireframe | ui/services/ServiceViewerForm/ServiceViewerForm-wireframe.html | ui/services/ServiceViewerForm | derived-rendering | Live |  |
-| EmailSetupForm-screen-chklist | ui/settings/EmailSetupForm/EmailSetupForm-screen-chklist.md | ui/settings/EmailSetupForm | ui-document | Live |  |
-| EmailSetupForm-screen | ui/settings/EmailSetupForm/EmailSetupForm-screen.html | ui/settings/EmailSetupForm | derived-rendering | Live |  |
-| EmailSetupForm-screen | ui/settings/EmailSetupForm/EmailSetupForm-screen.png | ui/settings/EmailSetupForm | derived-rendering | Live |  |
-| EmailSetupForm-wireframe-chklist | ui/settings/EmailSetupForm/EmailSetupForm-wireframe-chklist.md | ui/settings/EmailSetupForm | ui-document | Live |  |
-| EmailSetupForm-wireframe-definition | ui/settings/EmailSetupForm/EmailSetupForm-wireframe-definition.md | ui/settings/EmailSetupForm | ui-document | Live |  |
-| EmailSetupForm-wireframe | ui/settings/EmailSetupForm/EmailSetupForm-wireframe.html | ui/settings/EmailSetupForm | derived-rendering | Live |  |
-| PaymentGatewayForm-screen-chklist | ui/settings/PaymentGatewayForm/PaymentGatewayForm-screen-chklist.md | ui/settings/PaymentGatewayForm | ui-document | Live |  |
-| PaymentGatewayForm-screen | ui/settings/PaymentGatewayForm/PaymentGatewayForm-screen.html | ui/settings/PaymentGatewayForm | derived-rendering | Live |  |
-| PaymentGatewayForm-screen | ui/settings/PaymentGatewayForm/PaymentGatewayForm-screen.png | ui/settings/PaymentGatewayForm | derived-rendering | Live |  |
-| PaymentGatewayForm-wireframe-chklist | ui/settings/PaymentGatewayForm/PaymentGatewayForm-wireframe-chklist.md | ui/settings/PaymentGatewayForm | ui-document | Live |  |
-| PaymentGatewayForm-wireframe-definition | ui/settings/PaymentGatewayForm/PaymentGatewayForm-wireframe-definition.md | ui/settings/PaymentGatewayForm | ui-document | Live |  |
-| PaymentGatewayForm-wireframe | ui/settings/PaymentGatewayForm/PaymentGatewayForm-wireframe.html | ui/settings/PaymentGatewayForm | derived-rendering | Live |  |
-| PolicyEditorForm-screen-chklist | ui/settings/PolicyEditorForm/PolicyEditorForm-screen-chklist.md | ui/settings/PolicyEditorForm | ui-document | Live |  |
-| PolicyEditorForm-screen | ui/settings/PolicyEditorForm/PolicyEditorForm-screen.html | ui/settings/PolicyEditorForm | derived-rendering | Live |  |
-| PolicyEditorForm-screen | ui/settings/PolicyEditorForm/PolicyEditorForm-screen.png | ui/settings/PolicyEditorForm | derived-rendering | Live |  |
-| PolicyEditorForm-wireframe-chklist | ui/settings/PolicyEditorForm/PolicyEditorForm-wireframe-chklist.md | ui/settings/PolicyEditorForm | ui-document | Live |  |
-| PolicyEditorForm-wireframe-definition | ui/settings/PolicyEditorForm/PolicyEditorForm-wireframe-definition.md | ui/settings/PolicyEditorForm | ui-document | Live |  |
-| PolicyEditorForm-wireframe | ui/settings/PolicyEditorForm/PolicyEditorForm-wireframe.html | ui/settings/PolicyEditorForm | derived-rendering | Live |  |
-| SettingsForm-screen-chklist | ui/settings/SettingsForm/SettingsForm-screen-chklist.md | ui/settings/SettingsForm | ui-document | Live |  |
-| SettingsForm-screen | ui/settings/SettingsForm/SettingsForm-screen.html | ui/settings/SettingsForm | derived-rendering | Live |  |
-| SettingsForm-screen | ui/settings/SettingsForm/SettingsForm-screen.png | ui/settings/SettingsForm | derived-rendering | Live |  |
-| SettingsForm-wireframe-chklist | ui/settings/SettingsForm/SettingsForm-wireframe-chklist.md | ui/settings/SettingsForm | ui-document | Live |  |
-| SettingsForm-wireframe-definition | ui/settings/SettingsForm/SettingsForm-wireframe-definition.md | ui/settings/SettingsForm | ui-document | Live |  |
-| SettingsForm-wireframe | ui/settings/SettingsForm/SettingsForm-wireframe.html | ui/settings/SettingsForm | derived-rendering | Live |  |
-| ThemeConfigForm-screen-chklist | ui/settings/ThemeConfigForm/ThemeConfigForm-screen-chklist.md | ui/settings/ThemeConfigForm | ui-document | Live |  |
-| ThemeConfigForm-screen | ui/settings/ThemeConfigForm/ThemeConfigForm-screen.html | ui/settings/ThemeConfigForm | derived-rendering | Live |  |
-| ThemeConfigForm-screen | ui/settings/ThemeConfigForm/ThemeConfigForm-screen.png | ui/settings/ThemeConfigForm | derived-rendering | Live |  |
-| ThemeConfigForm-wireframe-chklist | ui/settings/ThemeConfigForm/ThemeConfigForm-wireframe-chklist.md | ui/settings/ThemeConfigForm | ui-document | Live |  |
-| ThemeConfigForm-wireframe-definition | ui/settings/ThemeConfigForm/ThemeConfigForm-wireframe-definition.md | ui/settings/ThemeConfigForm | ui-document | Live |  |
-| ThemeConfigForm-wireframe | ui/settings/ThemeConfigForm/ThemeConfigForm-wireframe.html | ui/settings/ThemeConfigForm | derived-rendering | Live |  |
-| UserManagementForm-screen-chklist | ui/settings/UserManagementForm/UserManagementForm-screen-chklist.md | ui/settings/UserManagementForm | ui-document | Live |  |
-| UserManagementForm-screen | ui/settings/UserManagementForm/UserManagementForm-screen.html | ui/settings/UserManagementForm | derived-rendering | Live |  |
-| UserManagementForm-screen | ui/settings/UserManagementForm/UserManagementForm-screen.png | ui/settings/UserManagementForm | derived-rendering | Live |  |
-| UserManagementForm-wireframe-chklist | ui/settings/UserManagementForm/UserManagementForm-wireframe-chklist.md | ui/settings/UserManagementForm | ui-document | Live |  |
-| UserManagementForm-wireframe-definition | ui/settings/UserManagementForm/UserManagementForm-wireframe-definition.md | ui/settings/UserManagementForm | ui-document | Live |  |
-| UserManagementForm-wireframe | ui/settings/UserManagementForm/UserManagementForm-wireframe.html | ui/settings/UserManagementForm | derived-rendering | Live |  |
-| VaultForm-screen-chklist | ui/settings/VaultForm/VaultForm-screen-chklist.md | ui/settings/VaultForm | ui-document | Live |  |
-| VaultForm-screen | ui/settings/VaultForm/VaultForm-screen.html | ui/settings/VaultForm | derived-rendering | Live |  |
-| VaultForm-screen | ui/settings/VaultForm/VaultForm-screen.png | ui/settings/VaultForm | derived-rendering | Live |  |
-| VaultForm-wireframe-chklist | ui/settings/VaultForm/VaultForm-wireframe-chklist.md | ui/settings/VaultForm | ui-document | Live |  |
-| VaultForm-wireframe-definition | ui/settings/VaultForm/VaultForm-wireframe-definition.md | ui/settings/VaultForm | ui-document | Live |  |
-| VaultForm-wireframe | ui/settings/VaultForm/VaultForm-wireframe.html | ui/settings/VaultForm | derived-rendering | Live |  |
-| adr-reorganization-20260706 | output-opencode/adr-reorganization-20260706.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| checklist-screen-analytics-DashboardAnalyticsForm-2026-06-29 | output-opencode/checklist-screen-analytics-DashboardAnalyticsForm-2026-06-29.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| dev-pdlf-registration-20260707 | output-opencode/dev-pdlf-registration-20260707.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| docs-reorg-consolidated-20260706 | output-opencode/docs-reorg-consolidated-20260706.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| gstack-gbrain-optimization-20260706 | output-opencode/gstack-gbrain-optimization-20260706.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| opencode-config-optimization-20260706 | output-opencode/opencode-config-optimization-20260706.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| phase3-finalization-report-2026-06-28 | output-opencode/phase3-finalization-report-2026-06-28.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| project-registration-20260704 | output-opencode/project-registration-20260704.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| rename-report-project-library-to-mb-3-cs-2026-07-25 | output-opencode/rename-report-project-library-to-mb-3-cs-2026-07-25.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| repo-migration-20260705 | output-opencode/repo-migration-20260705.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| research-findings-2026-06-28 | output-opencode/research-findings-2026-06-28.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| setup-matt-skills-config-2026-08-12 | output-opencode/setup-matt-skills-config-2026-08-12.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| theme-css-updated-report-2026-06-28 | output-opencode/theme-css-updated-report-2026-06-28.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| ui-build-audit-report-2026-06-28 | output-opencode/ui-build-audit-report-2026-06-28.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| vscode-remnants-cleanup-20260706 | output-opencode/vscode-remnants-cleanup-20260706.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| wireframe-alignment-audit-final-report-2026-06-28 | output-opencode/wireframe-alignment-audit-final-report-2026-06-28.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| wireframe-alignment-checklist | output-opencode/wireframe-alignment-checklist.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| wireframe-refresh-completion-report-2026-06-28 | output-opencode/wireframe-refresh-completion-report-2026-06-28.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| wp10-verify-graphify-gbrain-mcp-2026-08-14 | output-opencode/wp10-verify-graphify-gbrain-mcp-2026-08-14.md | output-opencode | report | Live | 2026-09-10 | 2026-09-10 | | |
-| ceo-review-2026-06-15 | output-gstack/ceo-review-2026-06-15.md | output-gstack | report | Live | 2026-09-10 | 2026-09-10 | | |
-| ceo-review-v2-roadmap-2026-06-26 | output-gstack/ceo-review-v2-roadmap-2026-06-26.md | output-gstack | report | Live | 2026-09-10 | 2026-09-10 | | |
-| eng-review-2026-06-16 | output-gstack/eng-review-2026-06-16.md | output-gstack | report | Live | 2026-09-10 | 2026-09-10 | | |
-| devlog-index | pdlf/devlog-index.md | pdlf | document | Live | 2026-09-10 | 2026-09-10 | | |
-| judgement-trail | pdlf/judgement-trail.md | pdlf | document | Live | 2026-09-10 | 2026-09-10 | | |
-| anvil-ui-build-standard-v1-2026-07-05 | docs-standard-local/anvil-ui-build-standard-v1-2026-07-05.md | docs-standard-local | standard | Live | 2026-09-18T132533+0200 | 2026-09-18T132533+0200 |  | relocated from wip\ by align-docs run 2026-09-18T132533+0200 (developer-approved; newest of three wip variants — referenced by the screen-production prompt); FM added at registration |
-| anvil-ui-exception-review-procedure | docs-standard-local/anvil-ui-exception-review-procedure.md | docs-standard-local | sop | Live | 2026-09-18T132533+0200 | 2026-09-18T132533+0200 |  | relocated from wip\ by align-docs run 2026-09-18T132533+0200 (developer-approved; referenced by the screen-production prompt); FM added at registration |
-| design-reference-screens-old | output-gstack/design-reference-screens-old.html | output-gstack | rendering | Live | 2026-09-18T132533+0200 | 2026-09-18T132533+0200 |  | registered by align-docs run 2026-09-18T132533+0200 (developer-approved): only surviving visual style reference (no non-old version exists — es.exe verified 2026-09-18); row-only identity (HTML carries no front matter) |
 
 ## Field definitions
 

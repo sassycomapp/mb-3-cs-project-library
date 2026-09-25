@@ -1,10 +1,7 @@
 ---
-document: Domain Docs
-doc-id: domain
-state: Live
-date-created: 2026-08-12T212422+0200
+title: "domain"
+doc-id: "domain"
 ---
-
 # Domain Docs
 
 How the engineering skills should consume this repo's domain documentation when exploring the codebase.

@@ -1,10 +1,7 @@
 ---
-document: "Mybizz AI and Voice — V3 Specification"
-doc-id: mybizz-ai-implementation-spec-v3 (1)
-state: Live
-date-created: 2026-07-22
+title: "mybizz-ai-implementation-spec-v3 (1)"
+doc-id: "mybizz-ai-implementation-spec-v3 (1)"
 ---
-
 # Mybizz AI and Voice — V3 Specification
 
 **Version:** 1.1 (Wave Accounting added)

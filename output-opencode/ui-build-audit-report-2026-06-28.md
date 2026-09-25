@@ -1,10 +1,7 @@
 ---
-document: "UI Build Audit Report"
-doc-id: ui-build-audit-report-2026-06-28
-state: Live
-date-created: 2026-09-10
+title: "ui-build-audit-report-2026-06-28"
+doc-id: "ui-build-audit-report-2026-06-28"
 ---
-
 # UI Build Audit Report
 
 **Date:** 2026-06-28

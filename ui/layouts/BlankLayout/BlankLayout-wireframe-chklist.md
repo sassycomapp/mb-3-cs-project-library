@@ -1,7 +1,4 @@
 ---
-document: BlankLayout — Wireframe Checklist
-doc-id: BlankLayout-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "BlankLayout-wireframe-chklist"
+doc-id: "BlankLayout-wireframe-chklist"
 ---
-

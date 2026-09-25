@@ -1,7 +1,4 @@
 ---
-document: CommentModerationForm-RowTemplate — Wireframe Definition
-doc-id: CommentModerationForm-RowTemplate-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "CommentModerationForm-RowTemplate-wireframe-definition"
+doc-id: "CommentModerationForm-RowTemplate-wireframe-definition"
 ---
-

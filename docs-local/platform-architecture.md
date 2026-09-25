@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Platform Architecture
-doc-id: platform-architecture
-state: Live
-date-created: 2026-07-09T144255+0200
+title: "platform-architecture"
+doc-id: "platform-architecture"
 ---
-
 # Mybizz CS — Platform Architecture
 
 **Vertical:** Consulting & Services

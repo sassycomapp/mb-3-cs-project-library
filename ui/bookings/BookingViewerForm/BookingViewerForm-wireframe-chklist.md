@@ -1,7 +1,4 @@
 ---
-document: BookingViewerForm — Wireframe Checklist
-doc-id: BookingViewerForm-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "BookingViewerForm-wireframe-chklist"
+doc-id: "BookingViewerForm-wireframe-chklist"
 ---
-

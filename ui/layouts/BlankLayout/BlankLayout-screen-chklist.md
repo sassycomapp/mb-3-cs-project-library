@@ -1,7 +1,4 @@
 ---
-document: BlankLayout — Screen Checklist
-doc-id: BlankLayout-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "BlankLayout-screen-chklist"
+doc-id: "BlankLayout-screen-chklist"
 ---
-

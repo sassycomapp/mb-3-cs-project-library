@@ -1,7 +1,4 @@
 ---
-document: HomePageServicesTemplate — Wireframe Definition
-doc-id: HomePageServicesTemplate-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "HomePageServicesTemplate-wireframe-definition"
+doc-id: "HomePageServicesTemplate-wireframe-definition"
 ---
-

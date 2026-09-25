@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Observability Requirements
-doc-id: observability-requirements
-state: Live
-date-created: 2026-07-06T171413+0200
+title: "observability-requirements"
+doc-id: "observability-requirements"
 ---
-
 # Mybizz CS — Observability Requirements
 
 **Authority:** [[adr-observability-architecture|Observability Architecture]] ADR (Observability Architecture), [[adr-mybizz-management-visibility|Mybizz_management Visibility and Control]] ADR (Mybizz_management Visibility and Control)

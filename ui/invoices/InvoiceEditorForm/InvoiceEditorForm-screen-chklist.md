@@ -1,7 +1,4 @@
 ---
-document: InvoiceEditorForm — Screen Checklist
-doc-id: InvoiceEditorForm-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "InvoiceEditorForm-screen-chklist"
+doc-id: "InvoiceEditorForm-screen-chklist"
 ---
-

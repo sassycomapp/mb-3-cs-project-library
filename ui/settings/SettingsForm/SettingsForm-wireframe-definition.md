@@ -1,7 +1,4 @@
 ---
-document: SettingsForm — Wireframe Definition
-doc-id: SettingsForm-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "SettingsForm-wireframe-definition"
+doc-id: "SettingsForm-wireframe-definition"
 ---
-

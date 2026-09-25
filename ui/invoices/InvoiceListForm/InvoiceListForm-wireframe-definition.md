@@ -1,7 +1,4 @@
 ---
-document: InvoiceListForm — Wireframe Definition
-doc-id: InvoiceListForm-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "InvoiceListForm-wireframe-definition"
+doc-id: "InvoiceListForm-wireframe-definition"
 ---
-

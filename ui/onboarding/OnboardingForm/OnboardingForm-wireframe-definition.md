@@ -1,7 +1,4 @@
 ---
-document: OnboardingForm — Wireframe Definition
-doc-id: OnboardingForm-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "OnboardingForm-wireframe-definition"
+doc-id: "OnboardingForm-wireframe-definition"
 ---
-

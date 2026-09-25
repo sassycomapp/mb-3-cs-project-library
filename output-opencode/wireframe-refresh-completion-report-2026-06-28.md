@@ -1,10 +1,7 @@
 ---
-document: "Wireframe Refresh — Completion Report"
-doc-id: wireframe-refresh-completion-report-2026-06-28
-state: Live
-date-created: 2026-09-10
+title: "wireframe-refresh-completion-report-2026-06-28"
+doc-id: "wireframe-refresh-completion-report-2026-06-28"
 ---
-
 # Wireframe Refresh — Completion Report
 
 **Date:** 2026-06-28

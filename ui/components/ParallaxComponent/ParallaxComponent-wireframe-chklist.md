@@ -1,7 +1,4 @@
 ---
-document: ParallaxComponent — Wireframe Checklist
-doc-id: ParallaxComponent-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "ParallaxComponent-wireframe-chklist"
+doc-id: "ParallaxComponent-wireframe-chklist"
 ---
-

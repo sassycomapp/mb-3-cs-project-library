@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Authoritative Database Schema
-doc-id: authoritative-schema
-state: Live
-date-created: 2026-06-01
+title: "authoritative-schema"
+doc-id: "authoritative-schema"
 ---
-
 # Mybizz CS — Authoritative Database Schema
 
 **Date:** 2026-06-01

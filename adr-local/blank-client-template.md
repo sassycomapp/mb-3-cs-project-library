@@ -1,10 +1,7 @@
 ---
-document: "`blank-client-template` ADR — blank_client_template as Provisioning Clone Source"
-doc-id: blank-client-template
-state: Live
-date-created: 2026-06-13
+title: "blank-client-template"
+doc-id: "blank-client-template"
 ---
-
 # `blank-client-template` ADR — blank_client_template as Provisioning Clone Source
 
 **Status:** Confirmed — revised following Test B (2026-06-13)  

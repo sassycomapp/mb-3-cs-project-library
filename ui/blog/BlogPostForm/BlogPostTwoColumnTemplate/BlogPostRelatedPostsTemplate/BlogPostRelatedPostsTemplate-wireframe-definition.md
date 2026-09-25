@@ -1,7 +1,4 @@
 ---
-document: BlogPostRelatedPostsTemplate — Wireframe Definition
-doc-id: BlogPostRelatedPostsTemplate-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "BlogPostRelatedPostsTemplate-wireframe-definition"
+doc-id: "BlogPostRelatedPostsTemplate-wireframe-definition"
 ---
-

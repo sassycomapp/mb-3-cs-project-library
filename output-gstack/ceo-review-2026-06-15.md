@@ -1,10 +1,7 @@
 ---
-document: "CEO Review — Mybizz CS V1"
-doc-id: ceo-review-2026-06-15
-state: Live
-date-created: 2026-09-10
+title: "ceo-review-2026-06-15"
+doc-id: "ceo-review-2026-06-15"
 ---
-
 # CEO Review — Mybizz CS V1
 
 **Date:** 2026-06-15

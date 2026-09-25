@@ -1,7 +1,4 @@
 ---
-document: AboutPage — Wireframe Definition
-doc-id: AboutPage-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "AboutPage-wireframe-definition"
+doc-id: "AboutPage-wireframe-definition"
 ---
-

@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Local Documentation Index
-doc-id: INDEX
-state: Live
-date-created: 2026-07-23T094939+0200
+title: "INDEX"
+doc-id: "INDEX"
 ---
-
 # Mybizz CS — Local Documentation Index
 
 **Project:** mb-3-cs (Consulting & Services)

@@ -1,10 +1,7 @@
 ---
-document: "Engineering Review — Mybizz CS V1"
-doc-id: eng-review-2026-06-16
-state: Live
-date-created: 2026-09-10
+title: "eng-review-2026-06-16"
+doc-id: "eng-review-2026-06-16"
 ---
-
 # Engineering Review — Mybizz CS V1
 
 **Date:** 2026-06-16

@@ -1,7 +1,4 @@
 ---
-document: EmailCampaignEditorForm — Wireframe Checklist
-doc-id: EmailCampaignEditorForm-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "EmailCampaignEditorForm-wireframe-chklist"
+doc-id: "EmailCampaignEditorForm-wireframe-chklist"
 ---
-

@@ -1,10 +1,7 @@
 ---
-document: "BlogPostForm-screen-chklist"
-doc-id: BlogPostForm-screen-chklist
-state: Live
-date-created: 2026-09-10
+title: "BlogPostForm-screen-chklist"
+doc-id: "BlogPostForm-screen-chklist"
 ---
-
 # Checklist — BlogPostForm
 
 **Wireframe:** `BlogPostForm-wireframe.html`

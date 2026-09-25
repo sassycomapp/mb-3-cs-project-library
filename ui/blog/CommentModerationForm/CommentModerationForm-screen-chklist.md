@@ -1,10 +1,7 @@
 ---
-document: "CommentModerationForm-screen-chklist"
-doc-id: CommentModerationForm-screen-chklist
-state: Live
-date-created: 2026-09-10
+title: "CommentModerationForm-screen-chklist"
+doc-id: "CommentModerationForm-screen-chklist"
 ---
-
 # Checklist — CommentModerationForm
 
 **Wireframe:** `CommentModerationForm-wireframe.html`

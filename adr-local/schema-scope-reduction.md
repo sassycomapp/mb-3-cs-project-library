@@ -1,10 +1,7 @@
 ---
-document: 11 — Schema Scope Reduction
-doc-id: schema-scope-reduction
-state: Live
-date-created: 2026-05-03
+title: "schema-scope-reduction"
+doc-id: "schema-scope-reduction"
 ---
-
 # 11 — Schema Scope Reduction
 **Removal of Out-of-Scope Tables from anvil.yaml**
 

@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Deployment Procedures
-doc-id: deployment-procedures
-state: Live
-date-created: 2026-07-06T171413+0200
+title: "deployment-procedures"
+doc-id: "deployment-procedures"
 ---
-
 # Mybizz CS — Deployment Procedures
 
 **Authority:** [[adr-dependency-update-model|Dependency Update Model]] ADR (Dependency Update Model), `blank-client-template` ADR (blank_client_template), [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints)

@@ -1,7 +1,4 @@
 ---
-document: HomePageMinimalistTemplate — Wireframe Checklist
-doc-id: HomePageMinimalistTemplate-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "HomePageMinimalistTemplate-wireframe-chklist"
+doc-id: "HomePageMinimalistTemplate-wireframe-chklist"
 ---
-

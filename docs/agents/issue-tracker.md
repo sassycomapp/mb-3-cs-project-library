@@ -1,10 +1,7 @@
 ---
-document: "Issue tracker: GitHub"
-doc-id: issue-tracker
-state: Live
-date-created: 2026-08-12T212422+0200
+title: "issue-tracker"
+doc-id: "issue-tracker"
 ---
-
 # Issue tracker: GitHub
 
 Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all operations.

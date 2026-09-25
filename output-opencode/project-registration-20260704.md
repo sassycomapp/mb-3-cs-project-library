@@ -1,10 +1,7 @@
 ---
-document: "Project Registration — Completion Report"
-doc-id: project-registration-20260704
-state: Live
-date-created: 2026-09-10
+title: "project-registration-20260704"
+doc-id: "project-registration-20260704"
 ---
-
 # Project Registration — Completion Report
 
 **Date:** 2026-07-04

@@ -1,10 +1,7 @@
 ---
-document: "VS Code Remnants Cleanup — 2026-07-06"
-doc-id: vscode-remnants-cleanup-20260706
-state: Live
-date-created: 2026-09-10
+title: "vscode-remnants-cleanup-20260706"
+doc-id: "vscode-remnants-cleanup-20260706"
 ---
-
 # VS Code Remnants Cleanup — 2026-07-06
 
 ## Task

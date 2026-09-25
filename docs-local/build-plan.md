@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Build Plan (Definitive)
-doc-id: build-plan
-state: Live
-date-created: 2026-07-09T144317+0200
+title: "build-plan"
+doc-id: "build-plan"
 ---
-
 ---
 type: concept
 title: Build Plan

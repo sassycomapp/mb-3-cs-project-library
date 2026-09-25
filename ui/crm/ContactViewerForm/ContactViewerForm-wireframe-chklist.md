@@ -1,7 +1,4 @@
 ---
-document: ContactViewerForm — Wireframe Checklist
-doc-id: ContactViewerForm-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "ContactViewerForm-wireframe-chklist"
+doc-id: "ContactViewerForm-wireframe-chklist"
 ---
-

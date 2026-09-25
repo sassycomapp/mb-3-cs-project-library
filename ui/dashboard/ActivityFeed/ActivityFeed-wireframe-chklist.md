@@ -1,7 +1,4 @@
 ---
-document: ActivityFeed — Wireframe Checklist
-doc-id: ActivityFeed-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "ActivityFeed-wireframe-chklist"
+doc-id: "ActivityFeed-wireframe-chklist"
 ---
-

@@ -1,7 +1,4 @@
 ---
-document: BlogListListTemplate — Wireframe Definition
-doc-id: BlogListListTemplate-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "BlogListListTemplate-wireframe-definition"
+doc-id: "BlogListListTemplate-wireframe-definition"
 ---
-

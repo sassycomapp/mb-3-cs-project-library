@@ -1,7 +1,4 @@
 ---
-document: DashboardAnalyticsForm — Wireframe Checklist
-doc-id: DashboardAnalyticsForm-wireframe-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "DashboardAnalyticsForm-wireframe-chklist"
+doc-id: "DashboardAnalyticsForm-wireframe-chklist"
 ---
-

@@ -1,10 +1,7 @@
 ---
-document: GStack Artifact Governance
-doc-id: gstack-artifact-governance
-state: Live
-date-created: 2026-05-23T110132+0200
+title: "gstack-artifact-governance"
+doc-id: "gstack-artifact-governance"
 ---
-
 # GStack Artifact Governance
 
 ## Purpose

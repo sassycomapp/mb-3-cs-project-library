@@ -1,10 +1,7 @@
 ---
-document: DESIGN Palette Section
-doc-id: DESIGN_palette_section
-state: Live
-date-created: 2026-07-06T171413+0200
+title: "DESIGN_palette_section"
+doc-id: "DESIGN_palette_section"
 ---
-
 ## Palette System
 
 ### Palette Strategy

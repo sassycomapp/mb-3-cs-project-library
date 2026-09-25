@@ -1,10 +1,7 @@
 ---
-document: "Docs Reorganization — Consolidated Completion Report"
-doc-id: docs-reorg-consolidated-20260706
-state: Live
-date-created: 2026-09-10
+title: "docs-reorg-consolidated-20260706"
+doc-id: "docs-reorg-consolidated-20260706"
 ---
-
 # Docs Reorganization — Consolidated Completion Report
 
 **Date:** 2026-07-06

@@ -1,10 +1,7 @@
 ---
-document: "Issue tracker: Local markdown"
-doc-id: issue-tracker
-state: Live
-date-created: 2026-06-25T073251+0200
+title: "issue-tracker"
+doc-id: "issue-tracker"
 ---
-
 # Issue tracker: Local markdown
 
 Issues and PRDs for this repo live as markdown files under `.scratch/`. This is a planning/documentation repo without a GitHub Issues workflow — issue tracking happens locally.

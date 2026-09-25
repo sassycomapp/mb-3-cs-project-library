@@ -1,7 +1,4 @@
 ---
-document: BookingViewerForm — Screen Checklist
-doc-id: BookingViewerForm-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "BookingViewerForm-screen-chklist"
+doc-id: "BookingViewerForm-screen-chklist"
 ---
-

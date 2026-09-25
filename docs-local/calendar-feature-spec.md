@@ -1,10 +1,7 @@
 ---
-document: Calendar Feature Spec
-doc-id: calendar-feature-spec
-state: Live
-date-created: 2026-06-01T103431+0200
+title: "calendar-feature-spec"
+doc-id: "calendar-feature-spec"
 ---
-
 Calendar Feature Plan — Anvil + Material 3
 Core Decision
 

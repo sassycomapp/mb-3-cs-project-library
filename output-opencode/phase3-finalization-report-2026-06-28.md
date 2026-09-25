@@ -1,10 +1,7 @@
 ---
-document: "Phase 3 Finalization Report"
-doc-id: phase3-finalization-report-2026-06-28
-state: Live
-date-created: 2026-09-10
+title: "phase3-finalization-report-2026-06-28"
+doc-id: "phase3-finalization-report-2026-06-28"
 ---
-
 # Phase 3 Finalization Report
 
 **Date:** 2026-06-28

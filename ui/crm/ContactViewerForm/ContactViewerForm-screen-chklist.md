@@ -1,7 +1,4 @@
 ---
-document: ContactViewerForm — Screen Checklist
-doc-id: ContactViewerForm-screen-chklist
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "ContactViewerForm-screen-chklist"
+doc-id: "ContactViewerForm-screen-chklist"
 ---
-

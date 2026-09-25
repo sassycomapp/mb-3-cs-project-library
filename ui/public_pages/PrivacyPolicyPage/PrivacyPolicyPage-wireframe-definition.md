@@ -1,7 +1,4 @@
 ---
-document: PrivacyPolicyPage — Wireframe Definition
-doc-id: PrivacyPolicyPage-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "PrivacyPolicyPage-wireframe-definition"
+doc-id: "PrivacyPolicyPage-wireframe-definition"
 ---
-

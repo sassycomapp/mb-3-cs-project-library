@@ -1,7 +1,4 @@
 ---
-document: VaultForm — Wireframe Definition
-doc-id: VaultForm-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "VaultForm-wireframe-definition"
+doc-id: "VaultForm-wireframe-definition"
 ---
-

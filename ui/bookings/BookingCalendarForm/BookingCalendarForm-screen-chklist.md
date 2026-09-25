@@ -1,10 +1,7 @@
 ---
-document: "BookingCalendarForm-screen-chklist"
-doc-id: BookingCalendarForm-screen-chklist
-state: Live
-date-created: 2026-09-10
+title: "BookingCalendarForm-screen-chklist"
+doc-id: "BookingCalendarForm-screen-chklist"
 ---
-
 # Checklist — BookingCalendarForm
 
 **Wireframe:** `BookingCalendarForm-wireframe.html`

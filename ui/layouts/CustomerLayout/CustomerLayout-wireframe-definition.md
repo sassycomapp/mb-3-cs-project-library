@@ -1,7 +1,4 @@
 ---
-document: CustomerLayout — Wireframe Definition
-doc-id: CustomerLayout-wireframe-definition
-state: Live
-date-created: 2026-07-27T171825+0200
+title: "CustomerLayout-wireframe-definition"
+doc-id: "CustomerLayout-wireframe-definition"
 ---
-

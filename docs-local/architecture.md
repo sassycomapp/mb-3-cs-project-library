@@ -1,10 +1,7 @@
 ---
-document: Mybizz CS — Architecture
-doc-id: architecture
-state: Live
-date-created: 2026-07-09T144429+0200
+title: "architecture"
+doc-id: "architecture"
 ---
-
 # Mybizz CS — Architecture
 
 **Vertical:** Consulting & Services only
