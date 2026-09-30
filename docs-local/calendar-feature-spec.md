@@ -1,6 +1,6 @@
 ---
 title: "calendar-feature-spec"
-doc-id: "calendar-feature-spec"
+doc-id: "mb-2e6a1c57"
 ---
 Calendar Feature Plan — Anvil + Material 3
 Core Decision

@@ -1,3 +1,7 @@
+---
+title: "anvil-ui-build-standard-2026-07-03"
+doc-id: "mb-6c071b5e"
+---
 # Anvil UI Build Standard
 
 **Version:** 2.3

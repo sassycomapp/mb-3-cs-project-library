@@ -1,4 +1,4 @@
 ---
 title: "BlogPostClassicTemplate-screen-chklist"
-doc-id: "BlogPostClassicTemplate-screen-chklist"
+doc-id: "mb-bb1b467a"
 ---

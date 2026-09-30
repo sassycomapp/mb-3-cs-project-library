@@ -1,6 +1,6 @@
 ---
 title: "custom-component-requirements-matrix"
-doc-id: "custom-component-requirements-matrix"
+doc-id: "mb-680c4ac6"
 ---
 # Mybizz CS — Custom Component Requirements Matrix
 

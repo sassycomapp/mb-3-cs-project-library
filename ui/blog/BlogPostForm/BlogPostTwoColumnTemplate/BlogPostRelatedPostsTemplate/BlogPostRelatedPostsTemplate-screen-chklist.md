@@ -1,4 +1,4 @@
 ---
 title: "BlogPostRelatedPostsTemplate-screen-chklist"
-doc-id: "BlogPostRelatedPostsTemplate-screen-chklist"
+doc-id: "mb-eb18b987"
 ---

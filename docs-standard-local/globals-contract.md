@@ -1,6 +1,6 @@
 ---
 title: "globals-contract"
-doc-id: "globals-contract"
+doc-id: "mb-0542088e"
 ---
 # Mybizz CS — globals.py Contract
 

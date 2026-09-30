@@ -1,6 +1,6 @@
 ---
 title: "ui-build-audit-report-2026-06-28"
-doc-id: "ui-build-audit-report-2026-06-28"
+doc-id: "mb-3af4f4ec"
 ---
 # UI Build Audit Report
 

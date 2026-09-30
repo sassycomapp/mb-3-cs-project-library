@@ -1,4 +1,4 @@
 ---
 title: "EventRegistrationTemplate-wireframe-definition"
-doc-id: "EventRegistrationTemplate-wireframe-definition"
+doc-id: "mb-c32dc417"
 ---

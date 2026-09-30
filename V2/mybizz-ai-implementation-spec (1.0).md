@@ -1,6 +1,6 @@
 ---
 title: "mybizz-ai-implementation-spec (1.0)"
-doc-id: "mybizz-ai-implementation-spec (1.0)"
+doc-id: "mb-64455860"
 ---
 # Mybizz AI Implementation Specification
 

@@ -1,6 +1,6 @@
 ---
 title: "mybizz-ai-implementation-spec-v3 (1)"
-doc-id: "mybizz-ai-implementation-spec-v3 (1)"
+doc-id: "mb-181ea09c"
 ---
 # Mybizz AI and Voice — V3 Specification
 

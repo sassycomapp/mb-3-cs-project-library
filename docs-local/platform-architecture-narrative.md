@@ -1,6 +1,6 @@
 ---
 title: "platform-architecture-narrative"
-doc-id: "platform-architecture-narrative"
+doc-id: "mb-daf7b766"
 ---
 # Mybizz — Comprehensive Application Treatise
 

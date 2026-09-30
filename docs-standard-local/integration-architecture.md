@@ -1,6 +1,6 @@
 ---
 title: "integration-architecture"
-doc-id: "integration-architecture"
+doc-id: "mb-af335781"
 ---
 # Mybizz CS — Integration Architecture
 

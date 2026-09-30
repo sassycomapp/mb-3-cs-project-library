@@ -1,6 +1,6 @@
 ---
 title: "gstack-artifact-governance"
-doc-id: "gstack-artifact-governance"
+doc-id: "mb-2b5d047d"
 ---
 # GStack Artifact Governance
 

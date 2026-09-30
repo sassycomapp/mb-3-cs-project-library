@@ -1,4 +1,4 @@
 ---
 title: "EmailBroadcastForm-wireframe-definition"
-doc-id: "EmailBroadcastForm-wireframe-definition"
+doc-id: "mb-72cd7908"
 ---

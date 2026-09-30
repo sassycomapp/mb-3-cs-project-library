@@ -1,6 +1,6 @@
 ---
 title: "DESIGN_palette_section"
-doc-id: "DESIGN_palette_section"
+doc-id: "mb-1fe7e195"
 ---
 ## Palette System
 

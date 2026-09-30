@@ -1,6 +1,6 @@
 ---
 title: "palette_selector_tokens"
-doc-id: "palette_selector_tokens"
+doc-id: "mb-8f719d7c"
 ---
 # Palette Selector — Token Swap Blocks
 

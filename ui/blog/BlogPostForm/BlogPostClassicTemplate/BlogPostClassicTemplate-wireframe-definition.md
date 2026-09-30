@@ -1,4 +1,4 @@
 ---
 title: "BlogPostClassicTemplate-wireframe-definition"
-doc-id: "BlogPostClassicTemplate-wireframe-definition"
+doc-id: "mb-0a82d551"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "development-policy"
-doc-id: "development-policy"
+doc-id: "mb-509458a0"
 ---
 # Mybizz CS — Development Policy
 

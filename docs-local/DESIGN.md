@@ -1,6 +1,6 @@
 ---
 title: "DESIGN"
-doc-id: "DESIGN"
+doc-id: "mb-190df6bf"
 ---
 # Mybizz CS — DESIGN
 

@@ -1,4 +1,4 @@
 ---
 title: "HomePageBookingTemplate-wireframe-definition"
-doc-id: "HomePageBookingTemplate-wireframe-definition"
+doc-id: "mb-35b9bd34"
 ---

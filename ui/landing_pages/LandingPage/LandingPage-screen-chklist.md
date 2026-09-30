@@ -1,6 +1,6 @@
 ---
 title: "LandingPage-screen-chklist"
-doc-id: "LandingPage-screen-chklist"
+doc-id: "mb-e748dfd2"
 ---
 # Checklist — LandingPage
 

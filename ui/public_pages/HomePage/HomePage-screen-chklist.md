@@ -1,6 +1,6 @@
 ---
 title: "HomePage-screen-chklist"
-doc-id: "HomePage-screen-chklist"
+doc-id: "mb-e7dec478"
 ---
 # Checklist — HomePage
 

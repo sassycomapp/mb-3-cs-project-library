@@ -1,6 +1,6 @@
 ---
 title: "ceo-review-2026-06-15"
-doc-id: "ceo-review-2026-06-15"
+doc-id: "mb-586b5956"
 ---
 # CEO Review — Mybizz CS V1
 

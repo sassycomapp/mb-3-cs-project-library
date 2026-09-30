@@ -1,6 +1,6 @@
 ---
 title: "mybizz-ai-implementation-spec-v2"
-doc-id: "mybizz-ai-implementation-spec-v2"
+doc-id: "mb-7fc7c0e2"
 ---
 # Mybizz AI Implementation Specification
 

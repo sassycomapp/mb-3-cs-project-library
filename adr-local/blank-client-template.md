@@ -1,6 +1,6 @@
 ---
 title: "blank-client-template"
-doc-id: "blank-client-template"
+doc-id: "mb-8829bc8a"
 ---
 # `blank-client-template` ADR — blank_client_template as Provisioning Clone Source
 

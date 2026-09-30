@@ -1,6 +1,6 @@
 ---
 title: "authoritative-schema"
-doc-id: "authoritative-schema"
+doc-id: "mb-8b83e940"
 ---
 # Mybizz CS — Authoritative Database Schema
 

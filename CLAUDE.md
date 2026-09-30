@@ -1,6 +1,6 @@
 ---
 title: "CLAUDE"
-doc-id: "CLAUDE"
+doc-id: "mb-f965d14c"
 ---
 # CLAUDE.md
 

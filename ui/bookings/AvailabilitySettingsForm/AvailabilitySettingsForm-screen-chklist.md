@@ -1,6 +1,6 @@
 ---
 title: "AvailabilitySettingsForm-screen-chklist"
-doc-id: "AvailabilitySettingsForm-screen-chklist"
+doc-id: "mb-76f19f81"
 ---
 # Checklist — AvailabilitySettingsForm
 

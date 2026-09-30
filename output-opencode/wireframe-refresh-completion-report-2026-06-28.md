@@ -1,6 +1,6 @@
 ---
 title: "wireframe-refresh-completion-report-2026-06-28"
-doc-id: "wireframe-refresh-completion-report-2026-06-28"
+doc-id: "mb-e3b59440"
 ---
 # Wireframe Refresh — Completion Report
 

@@ -1,6 +1,6 @@
 ---
 title: "adr-reorganization-20260706"
-doc-id: "adr-reorganization-20260706"
+doc-id: "mb-3d2fd248"
 ---
 # ADR Reorganization — 2026-07-06
 

@@ -1,6 +1,6 @@
 ---
 title: "gstack-gbrain-optimization-20260706"
-doc-id: "gstack-gbrain-optimization-20260706"
+doc-id: "mb-d4e7c22e"
 ---
 # GStack + GBrain Config Optimization — Completion Report
 

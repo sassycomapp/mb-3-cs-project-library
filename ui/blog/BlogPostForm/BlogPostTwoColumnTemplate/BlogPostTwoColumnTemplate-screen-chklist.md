@@ -1,6 +1,6 @@
 ---
 title: "BlogPostTwoColumnTemplate-screen-chklist"
-doc-id: "BlogPostTwoColumnTemplate-screen-chklist"
+doc-id: "mb-e3ba8e2c"
 ---
 # Checklist — BlogPostTwoColumnTemplate
 

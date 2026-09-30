@@ -1,3 +1,7 @@
+---
+title: "ui-build-preparation-plan"
+doc-id: "mb-deb563c7"
+---
 # UI Build Preparation Plan
 
 **Purpose:** Final preparation steps before constructing UIs in Anvil.works using Anvil AI.

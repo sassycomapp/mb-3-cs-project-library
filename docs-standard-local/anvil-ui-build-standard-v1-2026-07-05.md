@@ -1,6 +1,6 @@
 ---
 title: "anvil-ui-build-standard-v1-2026-07-05"
-doc-id: "anvil-ui-build-standard-v1-2026-07-05"
+doc-id: "mb-6e69563b"
 ---
 # Anvil UI Build Standard (Consolidated) — v1
 

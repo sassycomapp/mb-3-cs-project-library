@@ -1,6 +1,6 @@
 ---
 title: "INDEX"
-doc-id: "INDEX"
+doc-id: "mb-33cd8aba"
 ---
 # Mybizz CS — Local Documentation Index
 

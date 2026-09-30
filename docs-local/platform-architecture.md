@@ -1,6 +1,6 @@
 ---
 title: "platform-architecture"
-doc-id: "platform-architecture"
+doc-id: "mb-dc62ff9a"
 ---
 # Mybizz CS — Platform Architecture
 

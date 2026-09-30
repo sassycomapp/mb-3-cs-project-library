@@ -1,6 +1,6 @@
 ---
 title: "wireframe-alignment-audit-final-report-2026-06-28"
-doc-id: "wireframe-alignment-audit-final-report-2026-06-28"
+doc-id: "mb-c319ca87"
 ---
 # Wireframe Alignment Audit — Final Report
 

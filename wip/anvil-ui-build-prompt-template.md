@@ -1,3 +1,7 @@
+---
+title: "anvil-ui-build-prompt-template"
+doc-id: "mb-f6ba2b48"
+---
 # Anvil Build Prompt — Template
 
 This is the reusable wrapper only. It contains no information about any specific UI —

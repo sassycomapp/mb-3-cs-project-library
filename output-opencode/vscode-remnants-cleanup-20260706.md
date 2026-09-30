@@ -1,6 +1,6 @@
 ---
 title: "vscode-remnants-cleanup-20260706"
-doc-id: "vscode-remnants-cleanup-20260706"
+doc-id: "mb-6e4b1532"
 ---
 # VS Code Remnants Cleanup — 2026-07-06
 

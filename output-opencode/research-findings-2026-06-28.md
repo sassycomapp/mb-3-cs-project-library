@@ -1,6 +1,6 @@
 ---
 title: "research-findings-2026-06-28"
-doc-id: "research-findings-2026-06-28"
+doc-id: "mb-ba46d43b"
 ---
 # Research Findings Report
 

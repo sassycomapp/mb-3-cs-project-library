@@ -1,6 +1,6 @@
 ---
 title: "issue-tracker"
-doc-id: "issue-tracker"
+doc-id: "mb-d732ba21"
 ---
 # Issue tracker: GitHub
 

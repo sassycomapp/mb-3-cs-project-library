@@ -1,6 +1,6 @@
 ---
 title: "user-flows"
-doc-id: "user-flows"
+doc-id: "mb-b1292280"
 ---
 # Mybizz CS — User Flows
 

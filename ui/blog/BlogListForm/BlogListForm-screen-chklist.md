@@ -1,6 +1,6 @@
 ---
 title: "BlogListForm-screen-chklist"
-doc-id: "BlogListForm-screen-chklist"
+doc-id: "mb-bf91b615"
 ---
 # Checklist — BlogListForm
 

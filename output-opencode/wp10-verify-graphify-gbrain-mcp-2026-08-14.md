@@ -1,6 +1,6 @@
 ---
 title: "wp10-verify-graphify-gbrain-mcp-2026-08-14"
-doc-id: "wp10-verify-graphify-gbrain-mcp-2026-08-14"
+doc-id: "mb-997177c7"
 ---
 # Work Package 10 — Verify Graphify and GBrain MCP Tools
 

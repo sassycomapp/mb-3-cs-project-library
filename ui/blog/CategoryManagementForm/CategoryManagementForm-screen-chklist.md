@@ -1,6 +1,6 @@
 ---
 title: "CategoryManagementForm-screen-chklist"
-doc-id: "CategoryManagementForm-screen-chklist"
+doc-id: "mb-86c24f96"
 ---
 # Checklist — CategoryManagementForm
 

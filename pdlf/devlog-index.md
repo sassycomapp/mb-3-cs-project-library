@@ -1,6 +1,6 @@
 ---
 title: "devlog-index"
-doc-id: "devlog-index"
+doc-id: "mb-1c80659f"
 ---
 # Devlog Index
 Reverse-chronological list of task completion reports.

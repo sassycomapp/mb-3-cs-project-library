@@ -1,6 +1,6 @@
 ---
 title: "scaffold-spec"
-doc-id: "scaffold-spec"
+doc-id: "mb-be462593"
 ---
 # Mybizz CS — Scaffold Specification
 

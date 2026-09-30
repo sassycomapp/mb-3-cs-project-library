@@ -1,6 +1,6 @@
 ---
 title: "deployment-procedures"
-doc-id: "deployment-procedures"
+doc-id: "mb-f46b55a9"
 ---
 # Mybizz CS — Deployment Procedures
 

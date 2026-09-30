@@ -1,6 +1,6 @@
 ---
 title: "architecture"
-doc-id: "architecture"
+doc-id: "mb-7d6be180"
 ---
 # Mybizz CS — Architecture
 

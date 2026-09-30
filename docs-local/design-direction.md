@@ -1,6 +1,6 @@
 ---
 title: "design-direction"
-doc-id: "design-direction"
+doc-id: "mb-ccd67c98"
 ---
 # Mybizz CS — Design Direction (Canonical)
 

@@ -1,6 +1,6 @@
 ---
 title: "observability-requirements"
-doc-id: "observability-requirements"
+doc-id: "mb-4a65dade"
 ---
 # Mybizz CS — Observability Requirements
 
