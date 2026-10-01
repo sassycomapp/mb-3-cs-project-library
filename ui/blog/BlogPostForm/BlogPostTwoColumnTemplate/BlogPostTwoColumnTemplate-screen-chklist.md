@@ -1,6 +1,7 @@
 ---
 title: "BlogPostTwoColumnTemplate-screen-chklist"
 doc-id: "mb-e3ba8e2c"
+updated: "2026-10-01"
 ---
 # Checklist — BlogPostTwoColumnTemplate
 

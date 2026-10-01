@@ -1,6 +1,7 @@
 ---
 title: "CategoryManagementForm-screen-chklist"
 doc-id: "mb-86c24f96"
+updated: "2026-10-01"
 ---
 # Checklist — CategoryManagementForm
 

@@ -1,6 +1,7 @@
 ---
 title: "rename-report-project-library-to-mb-3-cs-2026-07-25"
 doc-id: "mb-08dedf3b"
+updated: "2026-10-01"
 ---
 # Rename Report: project-library → mb-3-cs-project-library
 

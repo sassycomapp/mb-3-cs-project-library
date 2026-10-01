@@ -1,6 +1,7 @@
 ---
 title: "docs-reorg-consolidated-20260706"
 doc-id: "mb-286fb93e"
+updated: "2026-10-01"
 ---
 # Docs Reorganization — Consolidated Completion Report
 

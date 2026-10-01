@@ -1,6 +1,7 @@
 ---
 title: "screen-production-prompt"
 doc-id: "mb-e8e60c3e"
+updated: "2026-10-01"
 ---
 # Screen Production Prompt — /design-html
 

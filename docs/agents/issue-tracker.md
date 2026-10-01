@@ -1,6 +1,7 @@
 ---
 title: "issue-tracker"
 doc-id: "mb-d732ba21"
+updated: "2026-10-01"
 ---
 # Issue tracker: GitHub
 

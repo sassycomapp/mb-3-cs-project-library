@@ -1,6 +1,7 @@
 ---
 title: "repo-migration-20260705"
 doc-id: "mb-886dcfbe"
+updated: "2026-10-01"
 ---
 # Repo Migration — Completion Report
 

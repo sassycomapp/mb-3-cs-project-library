@@ -1,6 +1,7 @@
 ---
 title: "pricing-strategy-consultation"
 doc-id: "mb-82157203"
+updated: "2026-10-01"
 ---
 ## 1. Market Position — Do their clients own their data?
 

@@ -1,6 +1,7 @@
 ---
 title: "calendar-feature-spec"
 doc-id: "mb-2e6a1c57"
+updated: "2026-10-01"
 ---
 Calendar Feature Plan — Anvil + Material 3
 Core Decision

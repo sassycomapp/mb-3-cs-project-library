@@ -1,6 +1,7 @@
 ---
 title: "checklist-screen-analytics-DashboardAnalyticsForm-2026-06-29"
 doc-id: "mb-088d22f5"
+updated: "2026-10-01"
 ---
 # Compliance Checklist — DashboardAnalyticsForm Screen
 

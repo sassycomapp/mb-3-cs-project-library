@@ -1,6 +1,7 @@
 ---
 title: "AGENTS"
 doc-id: "mb-7532e863"
+updated: "2026-10-01"
 ---
 # AGENTS.md — mb-3-cs-project-library
 

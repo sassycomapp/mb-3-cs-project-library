@@ -1,6 +1,7 @@
 ---
 title: "research-findings-2026-06-28"
 doc-id: "mb-ba46d43b"
+updated: "2026-10-01"
 ---
 # Research Findings Report
 

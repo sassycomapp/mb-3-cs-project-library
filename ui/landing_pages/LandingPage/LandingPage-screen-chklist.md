@@ -1,6 +1,7 @@
 ---
 title: "LandingPage-screen-chklist"
 doc-id: "mb-e748dfd2"
+updated: "2026-10-01"
 ---
 # Checklist — LandingPage
 

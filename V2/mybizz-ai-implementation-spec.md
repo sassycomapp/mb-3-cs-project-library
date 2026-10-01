@@ -1,6 +1,7 @@
 ---
 title: "mybizz-ai-implementation-spec"
 doc-id: "mb-c145dbbc"
+updated: "2026-10-01"
 ---
 # Mybizz AI Implementation Specification
 

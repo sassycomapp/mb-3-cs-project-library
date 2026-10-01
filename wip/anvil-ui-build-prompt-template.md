@@ -1,6 +1,7 @@
 ---
 title: "anvil-ui-build-prompt-template"
 doc-id: "mb-f6ba2b48"
+updated: "2026-10-01"
 ---
 # Anvil Build Prompt — Template
 

@@ -1,6 +1,7 @@
 ---
 title: "wireframe-alignment-checklist"
 doc-id: "mb-64454deb"
+updated: "2026-10-01"
 ---
 # Wireframe Alignment Checklist
 

@@ -1,6 +1,7 @@
 ---
 title: "setup-matt-skills-config-2026-08-12"
 doc-id: "mb-3dd5843b"
+updated: "2026-10-01"
 ---
 # Setup Report: Matt Pocock Engineering Skills Configuration
 

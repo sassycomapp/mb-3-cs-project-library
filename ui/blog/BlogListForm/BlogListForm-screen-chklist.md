@@ -1,6 +1,7 @@
 ---
 title: "BlogListForm-screen-chklist"
 doc-id: "mb-bf91b615"
+updated: "2026-10-01"
 ---
 # Checklist — BlogListForm
 

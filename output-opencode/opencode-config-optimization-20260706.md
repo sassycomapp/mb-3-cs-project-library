@@ -1,6 +1,7 @@
 ---
 title: "opencode-config-optimization-20260706"
 doc-id: "mb-3f9780e8"
+updated: "2026-10-01"
 ---
 # OpenCode Config Optimization — Completion Report
 

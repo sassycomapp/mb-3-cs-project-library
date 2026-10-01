@@ -1,6 +1,7 @@
 ---
 title: "HomePage-screen-chklist"
 doc-id: "mb-e7dec478"
+updated: "2026-10-01"
 ---
 # Checklist — HomePage
 

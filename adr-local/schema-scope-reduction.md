@@ -1,6 +1,7 @@
 ---
 title: "schema-scope-reduction"
 doc-id: "mb-d146fc2b"
+updated: "2026-10-01"
 ---
 # 11 — Schema Scope Reduction
 **Removal of Out-of-Scope Tables from anvil.yaml**

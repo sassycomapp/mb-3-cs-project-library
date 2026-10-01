@@ -1,6 +1,7 @@
 ---
 title: "BookingCalendarForm-screen-chklist"
 doc-id: "mb-9eb9ddcb"
+updated: "2026-10-01"
 ---
 # Checklist — BookingCalendarForm
 

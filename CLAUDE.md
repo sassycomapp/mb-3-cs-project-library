@@ -1,6 +1,7 @@
 ---
 title: "CLAUDE"
 doc-id: "mb-f965d14c"
+updated: "2026-10-01"
 ---
 # CLAUDE.md
 
