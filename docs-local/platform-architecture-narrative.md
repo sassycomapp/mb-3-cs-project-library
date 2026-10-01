@@ -369,7 +369,7 @@ Landing pages are standalone pages designed for specific marketing campaigns —
 
 - **Lead Capture** — designed to collect contact information from visitors. Includes a headline, description, an offer (e.g., "Download our free guide"), and a form capturing name, email, and phone. Best for building the contact list through content marketing or advertising.
 
-- **Event Registration** — designed to promote and register attendees for events, workshops, or webinars. Includes event details, date, time, location or link, and a registration form. Best for businesses that run group events or workshops.
+- **Event Registration** — designed to promote and register The use of registers has been discontinued. Please review attendees for events, workshops, or webinars. Includes event details, date, time, location or link, and a registration form. Best for businesses that run group events or workshops.
 
 - **Video Sales Letter (VSL)** — designed for video-driven conversion. Features a prominent video embed (from the business's YouTube channel) followed by a call-to-action button. Best for businesses that use video to explain their service and want the viewer to take action immediately after watching.
 

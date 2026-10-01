@@ -42,7 +42,7 @@ source_kind: put_page
 | **Schema** | 100% Complete | See [[[mb-3-cs-project-library:docs-local/authoritative-schema\|Authoritative Database Schema]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/authoritative-schema.md) |
 | **Wireframes** | ✅ 100% Complete | 50 HTML screens created |
 | **Design Direction** | ✅ 100% Complete | M3 design approved |
-| **ADR Documentation** | 100% Complete | See the project-library-global register (`register-global/register-global.md`, adr rows) for current ADR count and status |
+| **ADR Documentation** | 100% Complete | See the project-library-global register The use of registers has been discontinued. Please review (`register-global/register-global.md`, adr rows) for current ADR count and status |
 | **Positioning Strategy** | ✅ 100% Complete | Business model documented |
 | **Phase 0** | ✅ 100% Complete | All TODOs implemented |
 | **Phase 1** | 🔄 In Progress | Foundation implementation started |
@@ -218,7 +218,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - `tests/test_rbac.py` — RBAC unit tests
 
 **Completion Criteria:**
-- ✅ Users can register with email/password
+- ✅ Users can register The use of registers has been discontinued. Please review with email/password
 - ✅ Email confirmation flow works (Brevo SMTP, expiration handling, resend capability)
 - ✅ Password reset flow works
 - ✅ Five roles defined: Owner, Manager, Admin, Staff, Customer

@@ -7,7 +7,7 @@ updated: "2026-10-01"
 
 **Date:** 2026-07-07  
 **Agent:** Build (project-library workspace)  
-**Task:** Register `C:\projects\dev-pdlf` with GBrain and set it up with GitHub, Matt Pocock skills, GStack, and OpenCode.
+**Task:** Register The use of registers has been discontinued. Please review `C:\projects\dev-pdlf` with GBrain and set it up with GitHub, Matt Pocock skills, GStack, and OpenCode.
 
 ## What was done
 
@@ -51,7 +51,7 @@ updated: "2026-10-01"
 **Resolution:** Resynced `project-library` with explicit `--source project-library --repo` and correct path. Mitigation: always use `gbrain sources add <id>` first.
 
 **Issue 2:** dev-pdlf had `opencode.json` and `AGENTS.md` but wasn't showing in the OpenCode project picker.
-**Resolution:** OpenCode uses on-first-open implicit registration. Ran `opencode run` to register it.
+**Resolution:** OpenCode uses on-first-open implicit registration. Ran `opencode run` to register The use of registers has been discontinued. Please review it.
 
 ## Files changed (dev-pdlf)
 

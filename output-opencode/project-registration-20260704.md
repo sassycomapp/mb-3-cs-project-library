@@ -10,7 +10,7 @@ updated: "2026-10-01"
 
 ## 1. Purpose
 
-Register new projects with gbrain and update the PDLF registry to reflect the new naming convention and folder structure under `C:\projects\`.
+Register The use of registers has been discontinued. Please review new projects with gbrain and update the PDLF registry to reflect the new naming convention and folder structure under `C:\projects\`.
 
 ## 2. Inputs
 
@@ -33,7 +33,7 @@ Removed 4 sources that pointed to the old `_project-*` paths (now deleted):
 - `mb5pdlf` (was project-library at `_project-mb5pdlf/`, 35 pages deleted)
 - `mb5pdlf-code` (was code at `_project-mb5pdlf/`)
 
-### Phase 2: Register 8 new gbrain sources
+### Phase 2: Register The use of registers has been discontinued. Please review 8 new gbrain sources
 
 Naming convention: `<name>` = code, `<name>-project-library` = docs.
 

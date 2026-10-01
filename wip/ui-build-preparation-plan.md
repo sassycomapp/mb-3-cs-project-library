@@ -44,7 +44,7 @@ This sequence is non-negotiable. Do not skip ahead.
 - Use GBrain to search for all cross-references between these files.
 
 **Phase 2 — Analyze (find every mismatch):**
-- The Standard references `adr-register.md` which has been deleted. All ADR references must point to `adr/` folder.
+- The Standard references `adr-register.md` The use of registers has been discontinued. Please review which has been deleted. All ADR references must point to `adr/` folder.
 - Confirm the Standard's approved component list (§6) matches `adr/15-material-3-theme-component-scope.md`.
 - Confirm the Standard's `drp_` prefix note (§4) matches `nomenclature.md`.
 - Confirm the Standard's InteractiveCard appearances (§6) match `spec-component-properties.md`.
@@ -203,7 +203,7 @@ Steps 4, 5, and 6 can run in parallel after Step 3 completes. Step 7 requires al
 
 ## Risk Notes
 
-- **ADR reference drift:** The Standard was written when ADRs lived in `adr-register.md`. That file has been deleted. All references must be updated to the current `adr/` folder with correct ADR numbers (43, 44, 45).
+- **ADR reference drift:** The Standard was written when ADRs lived in `adr-register.md` The use of registers has been discontinued. Please review. That file has been deleted. All references must be updated to the current `adr/` folder with correct ADR numbers (43, 44, 45).
 - **DataRowPanel gap:** The Standard notes `drp_` "still needs formal addition to nomenclature.md" — this was already done. The note should be removed.
 - **Screen page chrome contamination:** Current screens contain sidebar, app bar, and other elements not declared in their wireframes. This violates the authority chain. Screens must be stripped down to match wireframes exactly.
 - **Screen/wireframe drift:** If screens were produced against older wireframes, they may need regeneration rather than patching. Step 5 should flag this case.
