@@ -1,6 +1,7 @@
 ---
 title: "platform-architecture"
 doc-id: "mb-dc62ff9a"
+updated: "2026-10-01"
 ---
 # Mybizz CS — Platform Architecture
 
@@ -8,11 +9,11 @@ doc-id: "mb-dc62ff9a"
 **Architecture:** Single vertical, dependency-based (master_template → client instances)
 **UI Theme:** Material Design 3 (M3)
 **Platform Capacity:** 100 clients (V1.x)
-**Schema:** 44 tables (see [[authoritative-schema|Authoritative Database Schema]])
+**Schema:** 44 tables (see [[[mb-3-cs-project-library:docs-local/authoritative-schema|Authoritative Database Schema]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/authoritative-schema.md))
 
 **Note:** The five-app dependency model (development workspace / master_template /
 blank_client_template / client instances / platform-operator tooling) is Mybizz-wide — see
-[[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]. This document contains only this app's specific
+[[[default:specifications-global/spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md). This document contains only this app's specific
 instantiation of that model and its own feature set.
 
 ---
@@ -45,7 +46,7 @@ this app.
 
 ## 3. This App's Five-App Instances
 
-Per the Mybizz-wide model ([[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]), this app's actual
+Per the Mybizz-wide model ([[[default:specifications-global/spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md)), this app's actual
 instance names:
 
 | App | Instance Name |
@@ -102,7 +103,7 @@ Two pricing models — both fully supported:
 
 ### 4.7 Email & Campaigns
 Three distinct email systems — Anvil built-in (system emails), Brevo SMTP (transactional),
-Brevo Campaigns (marketing). **See:** [[spec-integration|Integration Specification]] (Integration — Brevo patterns).
+Brevo Campaigns (marketing). **See:** [[[default:specifications-global/spec-integration|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) (Integration — Brevo patterns).
 
 ### 4.8 Blog & Content, Tasks & Segmentation
 Full blog with rich text editor; manual and basic auto-generated tasks; pre-built segments.
@@ -135,16 +136,16 @@ Full blog with rich text editor; manual and basic auto-generated tasks; pre-buil
 The platform is designed to work within Anvil's specific parameters. Key constraints:
 
 - **Skulpt client-side runtime:** Not all Python 3 stdlib works. Money and date logic lives in
-  server modules only. See [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR.
+  server modules only. See [[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR.
 - **No native URL routing:** Public pages use the community routing library. Admin portal uses
-  lambda/Link/`open_form`. See [[adr-navigation-lambda-link-open-form|Navigation Standard: Lambda/Link/open_form]] ADR, [[adr-ui-customization-approach|UI Customization Approach]] ADR.
+  lambda/Link/`open_form`. See [[[default:adr-global/adr-navigation-lambda-link-open-form|Navigation Standard: Lambda/Link/open_form]]](C:/dev/project-library-global/adr-global/adr-navigation-lambda-link-open-form.md) ADR, [[[default:adr-global/adr-ui-customization-approach|UI Customization Approach]]](C:/dev/project-library-global/adr-global/adr-ui-customization-approach.md) ADR.
 - **Lazy-loaded Data Table rows:** Never iterate without `.search()` or `.limit_to()`. See
-  [[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR.
+  [[[default:adr-global/adr-data-access-patterns|Data Access Patterns and Query Limitations]]](C:/dev/project-library-global/adr-global/adr-data-access-patterns.md) ADR.
 - **Server call latency:** Every `anvil.server.call()` is an HTTP round-trip. Minimize in
-  user-facing flows. See [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR.
-- **No WebSocket push:** Real-time updates use client-side timer polling. See [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR.
+  user-facing flows. See [[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR.
+- **No WebSocket push:** Real-time updates use client-side timer polling. See [[[default:adr-global/adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]]](C:/dev/project-library-global/adr-global/adr-real-time-and-background-tasks.md) ADR.
 
-**See:** [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints and Design Boundaries)
+**See:** [[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR (Anvil Platform Constraints and Design Boundaries)
 
 ---
 
@@ -152,15 +153,15 @@ The platform is designed to work within Anvil's specific parameters. Key constra
 
 | Specification | Relevance |
 |---|---|
-| [[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]] | Five-app architecture model (Mybizz-wide) |
-| [[spec-client-activation-runbook|Client Instance Activation Runbook]] | Client provisioning and activation procedures |
+| [[[default:specifications-global/spec-five-app-architecture-model\|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md) | Five-app architecture model (Mybizz-wide) |
+| [[[default:specifications-global/spec-client-activation-runbook\|Client Instance Activation Runbook]]](C:/dev/project-library-global/specifications-global/spec-client-activation-runbook.md) | Client provisioning and activation procedures |
 | `spec-nomenclature.md` | Naming conventions for files, forms, components, tables |
-| [[spec-integration|Integration Specification]] | Brevo, Stripe, Paystack integration patterns |
-| [[spec-regulatory-compliance-baseline|Regulatory Compliance Baseline (Specification)]] | POPIA, GDPR, PCI DSS compliance |
-| [[spec-security-architecture|Security & Secrets Architecture]] | RBAC role limits, token security |
+| [[[default:specifications-global/spec-integration\|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) | Brevo, Stripe, Paystack integration patterns |
+| [[[default:specifications-global/spec-regulatory-compliance-baseline\|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md) | POPIA, GDPR, PCI DSS compliance |
+| [[[default:specifications-global/spec-security-architecture\|Security & Secrets Architecture]]](C:/dev/project-library-global/specifications-global/spec-security-architecture.md) | RBAC role limits, token security |
 
 ---
 
 *Platform Architecture v3.0 — Five-app model extracted to
-[[spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]. This document contains only this app's specific
+[[[default:specifications-global/spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md). This document contains only this app's specific
 instances, feature scope, and business model.*

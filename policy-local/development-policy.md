@@ -1,6 +1,7 @@
 ---
 title: "development-policy"
 doc-id: "mb-509458a0"
+updated: "2026-10-01"
 ---
 # Mybizz CS — Development Policy
 
@@ -10,8 +11,8 @@ doc-id: "mb-509458a0"
 **Note on this revision:** This document previously mixed Policy content with Specification
 content. The Specification content (M3 usage rules, navigation, code quality, error handling,
 naming conventions, package structure, performance standards, security, and regulatory
-compliance) was already fully covered by [[spec-anvil-platform-standards|Anvil Platform Mechanics]],
-[[spec-m3-design-standards|M3 Design & Component Standards]], and `security-architecture-canonical.md` — nothing was lost, it
+compliance) was already fully covered by [[[default:specifications-global/spec-anvil-platform-standards|Anvil Platform Mechanics]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md),
+[[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md), and `security-architecture-canonical.md` — nothing was lost, it
 was simply removed from here as duplicate. What remains below is genuine Policy: rules about how
 decisions get made and how the team operates, not technical specifications.
 
@@ -33,7 +34,7 @@ inadequate.
 
 The approved exception is The Vault. Client API keys cannot go in Anvil Secrets because doing so
 would require giving clients IDE access. The Vault is an application-level encrypted secrets
-store (see [[spec-anvil-platform-standards|Anvil Platform Mechanics]] Section 10 for the technical pattern).
+store (see [[[default:specifications-global/spec-anvil-platform-standards|Anvil Platform Mechanics]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md) Section 10 for the technical pattern).
 
 ---
 
@@ -44,7 +45,7 @@ Commit format: `[TYPE] Brief description` where TYPE is one of FEATURE, FIX, REF
 Branching strategy: `master` (production), `dev` (development integration),
 `feature/feature-name`, `fix/bug-description`.
 
-Backup protocol: see [[spec-testing-methodology-standards|Testing Methodology]] Section 4 for the two-backup-point
+Backup protocol: see [[[default:specifications-global/spec-testing-methodology-standards|Testing Methodology]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) Section 4 for the two-backup-point
 discipline (before integration tests, after tests pass). Never back up a red or failing state.
 
 ---

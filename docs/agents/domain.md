@@ -1,6 +1,7 @@
 ---
 title: "domain"
 doc-id: "mb-18292576"
+updated: "2026-10-01"
 ---
 # Domain Docs
 
@@ -17,7 +18,7 @@ Both repos apply to the same application. When a skill needs implementation cont
 
 ## Before exploring, read these
 
-- **[[CONTEXT|mb-3-cs (Mybizz Consulting Services)]]** — domain glossary and key concepts (create lazily via `/domain-modeling` when needed).
+- **[[[mb-3-cs-project-library:docs-local/context|mb-3-cs (Mybizz Consulting Services)]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/CONTEXT.md)** — domain glossary and key concepts (create lazily via `/domain-modeling` when needed).
 - **`adr-local/`** — Architecture Decision Records for this project.
 
 If any of these files don't exist, **proceed silently**. The `/domain-modeling` skill creates them lazily when terms or decisions actually get resolved.
@@ -48,7 +49,7 @@ If any of these files don't exist, **proceed silently**. The `/domain-modeling` 
 
 ## Use the glossary's vocabulary
 
-When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in [[CONTEXT|mb-3-cs (Mybizz Consulting Services)]]. Don't drift to synonyms the glossary explicitly avoids.
+When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in [[[mb-3-cs-project-library:docs-local/context|mb-3-cs (Mybizz Consulting Services)]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/CONTEXT.md). Don't drift to synonyms the glossary explicitly avoids.
 
 If the concept you need isn't in the glossary yet, that's a signal — either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
 
@@ -56,4 +57,4 @@ If the concept you need isn't in the glossary yet, that's a signal — either yo
 
 If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
 
-> _Contradicts the [[adr-client-instance-architecture|Client Instance Architecture]] ADR (client instance architecture) — but worth reopening because…_
+> _Contradicts the [[[default:adr-global/adr-client-instance-architecture|Client Instance Architecture]]](C:/dev/project-library-global/adr-global/adr-client-instance-architecture.md) ADR (client instance architecture) — but worth reopening because…_

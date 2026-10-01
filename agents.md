@@ -40,7 +40,7 @@ User instruction → global `AGENTS.md` → this file's hard rules → ADRs
 
 | Folder | Contents |
 |---|---|
-| `docs-local/` | Project documentation, including [[DESIGN|DESIGN]] |
+| `docs-local/` | Project documentation, including [[[mb-3-cs-project-library:docs-local/design\|DESIGN]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/DESIGN.md) |
 | `adr-local/` | Architecture decision records specific to this project |
 | `wireframes/` | Wireframe and visual references |
 | `output-gstack/` | GStack pipeline outputs (CEO/ENG/design review reports) |
@@ -73,7 +73,7 @@ task completion.
 
 Every date or timestamp generated for a build artefact must follow the
 format and conversion method defined in the
-[[adr-timezone-utc-storage-display-conversion|Client Timezone: IANA String, UTC Storage, Display-Time Conversion]] ADR. Read that document
+[[[default:adr-global/adr-timezone-utc-storage-display-conversion|Client Timezone: IANA String, UTC Storage, Display-Time Conversion]]](C:/dev/project-library-global/adr-global/adr-timezone-utc-storage-display-conversion.md) ADR. Read that document
 before generating any such timestamp. If anything about the required
 method is unclear, stop and ask the developer.
 
@@ -96,7 +96,7 @@ Five canonical labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-f
 
 ### Domain docs
 
-Single-context — [[CONTEXT|mb-3-cs (Mybizz Consulting Services)]] + `adr-local/` for architectural decisions. Two-repo architecture: this repo holds planning/docs, `mb-3-cs` holds app code. See `docs/agents/domain.md`.
+Single-context — [[[mb-3-cs-project-library:docs-local/context|mb-3-cs (Mybizz Consulting Services)]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/CONTEXT.md) + `adr-local/` for architectural decisions. Two-repo architecture: this repo holds planning/docs, `mb-3-cs` holds app code. See `docs/agents/domain.md`.
 
 ---
 

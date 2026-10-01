@@ -1,6 +1,7 @@
 ---
 title: "platform-architecture-narrative"
 doc-id: "mb-daf7b766"
+updated: "2026-10-01"
 ---
 # Mybizz — Comprehensive Application Treatise
 
@@ -696,7 +697,7 @@ A reusable AI helper component that provides intelligent assistance across the p
 
 The AI assistant is designed as a contextual floating helper — it opens on the current page without navigating away, and it preselects the most relevant assist based on where the user is working.
 
-*Source: V2/mybizz-ai-implementation-spec.md*
+*Source: [[[mb-3-cs-project-library:v2/mybizz-ai-implementation-spec]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/V2/mybizz-ai-implementation-spec.md)*
 
 ### 10.3 Client Portal
 
@@ -823,5 +824,5 @@ Mybizz is live at **mybizz.live**. The platform is built. The market is waiting.
 
 *Document owner: Mybizz founder*
 *Status: Comprehensive developer reference treatise — covers all V1 features, user flows, and V2 roadmap*
-*Based on: positioning-strategy.md, platform-architecture.md, scaffold-spec.md, DESIGN.md, V2/mybizz-ai-implementation-spec.md, and other authoritative project documents*
+*Based on: positioning-strategy.md, platform-architecture.md, scaffold-spec.md, DESIGN.md, [[[mb-3-cs-project-library:v2/mybizz-ai-implementation-spec]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/V2/mybizz-ai-implementation-spec.md), and other authoritative project documents*
 *To be updated as features are added or product positioning evolves*

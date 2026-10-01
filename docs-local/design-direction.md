@@ -1,16 +1,17 @@
 ---
 title: "design-direction"
 doc-id: "mb-ccd67c98"
+updated: "2026-10-01"
 ---
 # Mybizz CS — Design Direction (Canonical)
 
 **Status:** Final
-**Re-issued:** 2026-06-28 — Aligned with [[adr-role-property-assignment-mechanism|Role Property Assignment Mechanism (Designer vs. Code)]] ADR, [[adr-responsive-behaviour-mechanism|Responsive Behaviour Mechanism]] ADR, [[adr-htmltemplate-use|HTMLTemplate Use]] ADR
+**Re-issued:** 2026-06-28 — Aligned with [[[default:adr-global/adr-role-property-assignment-mechanism|Role Property Assignment Mechanism (Designer vs. Code)]]](C:/dev/project-library-global/adr-global/adr-role-property-assignment-mechanism.md) ADR, [[[default:adr-global/adr-responsive-behaviour-mechanism|Responsive Behaviour Mechanism]]](C:/dev/project-library-global/adr-global/adr-responsive-behaviour-mechanism.md) ADR, [[[default:adr-global/adr-htmltemplate-use|HTMLTemplate Use]]](C:/dev/project-library-global/adr-global/adr-htmltemplate-use.md) ADR
 **Vertical:** Consulting & Services
 
 **Note:** Generic M3 rules (typography scale, spacing scale, elevation, accessibility
 requirements, the `wrap_on` responsive mechanism, state-specification patterns) live in
-[[spec-m3-design-standards|M3 Design & Component Standards]] and are not repeated here. This document contains only what is
+[[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) and are not repeated here. This document contains only what is
 specific to this project's actual choices.
 
 ---
@@ -37,13 +38,13 @@ neumorphism.
 anywhere, without exception.**
 
 Semantic status roles (`status-success`, `status-pending`, `status-error`) are a fixed platform
-standard — see [[spec-m3-design-standards|M3 Design & Component Standards]] Section 10. This project uses those roles as defined
+standard — see [[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) Section 10. This project uses those roles as defined
 there; nothing project-specific to state here.
 
 ## Anvil Role Map (this project's actual role names)
 
-Reference: [[adr-ui-customization-approach|UI Customization Approach]] ADR (UI Customization Approach). The *pattern* of defining named roles per component
-category is a general standard (see [[spec-m3-design-standards|M3 Design & Component Standards]]); the specific names below are this
+Reference: [[[default:adr-global/adr-ui-customization-approach|UI Customization Approach]]](C:/dev/project-library-global/adr-global/adr-ui-customization-approach.md) ADR (UI Customization Approach). The *pattern* of defining named roles per component
+category is a general standard (see [[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md)); the specific names below are this
 project's chosen implementation of that pattern.
 
 ### Buttons
@@ -81,4 +82,4 @@ deviation is visible, not silently inherited):
 ---
 
 *Design Direction (Canonical) v2.0 — split from the original design-direction.md. Generic content
-moved to [[spec-m3-design-standards|M3 Design & Component Standards]].*
+moved to [[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md).*

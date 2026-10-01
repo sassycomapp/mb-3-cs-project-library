@@ -1,10 +1,11 @@
 ---
 title: "globals-contract"
 doc-id: "mb-0542088e"
+updated: "2026-10-01"
 ---
 # Mybizz CS — globals.py Contract
 
-**Authority:** [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture and State Management)
+**Authority:** [[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR (Form Architecture and State Management)
 **Status:** Living document — update as new shared state is added during implementation
 
 ---

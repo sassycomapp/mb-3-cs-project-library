@@ -1,11 +1,12 @@
 ---
 title: "user-flows"
 doc-id: "mb-b1292280"
+updated: "2026-10-01"
 ---
 # Mybizz CS — User Flows
 
 **Authority:** Reference — defines intended behaviour for all user flows  
-**Related ADRs:** [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture and State Management), [[adr-webhook-architecture|Webhook Architecture]] ADR (Webhook Architecture)
+**Related ADRs:** [[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR (Form Architecture and State Management), [[[default:adr-global/adr-webhook-architecture|Webhook Architecture]]](C:/dev/project-library-global/adr-global/adr-webhook-architecture.md) ADR (Webhook Architecture)
 
 ---
 
@@ -56,7 +57,7 @@ doc-id: "mb-b1292280"
 
 ### Owner Onboarding (Onboarding Form — guided first-run)
 
-> **Note:** Onboarding is a separate form from Settings. It links to Settings for specific configuration tasks. See [[spec-onboarding-implementation-plan|Mybizz CS Onboarding System - Engineering Plan]] for full details.
+> **Note:** Onboarding is a separate form from Settings. It links to Settings for specific configuration tasks. See [[[default:specifications-global/spec-onboarding-implementation-plan|Mybizz CS Onboarding System - Engineering Plan]]](C:/dev/project-library-global/specifications-global/spec-onboarding-implementation-plan.md) for full details.
 
 1. **Owner logs in** → Onboarding form opens with welcome and progress indicator
 2. **Business Profile** — Link to Settings → Business Profile tab
@@ -85,9 +86,9 @@ doc-id: "mb-b1292280"
 
 **Post-confirmation:** Offer recurring appointment option (weekly / bi-weekly / monthly).
 
-**Performance note:** The booking flow has multiple steps, each potentially requiring a server call. To avoid sluggish UX, data is pre-loaded where possible and related operations are batched. See [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture — booking flow latency management).
+**Performance note:** The booking flow has multiple steps, each potentially requiring a server call. To avoid sluggish UX, data is pre-loaded where possible and related operations are batched. See [[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR (Form Architecture — booking flow latency management).
 
-**See:** [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints — Skulpt limits on date/money logic)
+**See:** [[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR (Anvil Platform Constraints — Skulpt limits on date/money logic)
 
 ---
 
@@ -108,10 +109,10 @@ Vault (Owner only)
 
 **Processing a booking:** Open detail → verify details and payment status → Confirm (PENDING → CONFIRMED) → system sends confirmation email and creates calendar event.
 
-**Payment webhooks:** Stripe and Paystack POST webhooks to the client instance. Handlers return HTTP 200 immediately and defer processing to background tasks. See [[adr-webhook-architecture|Webhook Architecture]] ADR (Webhook Architecture).
+**Payment webhooks:** Stripe and Paystack POST webhooks to the client instance. Handlers return HTTP 200 immediately and defer processing to background tasks. See [[[default:adr-global/adr-webhook-architecture|Webhook Architecture]]](C:/dev/project-library-global/adr-global/adr-webhook-architecture.md) ADR (Webhook Architecture).
 
-**See:** [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR (Real-Time and Background Tasks — polling intervals)
-**See:** [[adr-pdf-invoice-generation|PDF Invoice Generation]] ADR (PDF Invoice Generation) for invoice creation on booking completion.
+**See:** [[[default:adr-global/adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]]](C:/dev/project-library-global/adr-global/adr-real-time-and-background-tasks.md) ADR (Real-Time and Background Tasks — polling intervals)
+**See:** [[[default:adr-global/adr-pdf-invoice-generation|PDF Invoice Generation]]](C:/dev/project-library-global/adr-global/adr-pdf-invoice-generation.md) ADR (PDF Invoice Generation) for invoice creation on booking completion.
 
 ---
 
@@ -187,7 +188,7 @@ Vault (Owner only)
 6. Configure final CTA — headline, subheadline, button text + link.
 7. Preview → Save → live immediately.
 
-Auto-saves every 30 seconds. Configuration stored in [[config|Config]] table with `key = 'home_config'`.
+Auto-saves every 30 seconds. Configuration stored in [[[makepdlf-project-library:docs-local/config|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) table with `key = 'home_config'`.
 
 ---
 

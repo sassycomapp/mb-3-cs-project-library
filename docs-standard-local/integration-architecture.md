@@ -1,6 +1,7 @@
 ---
 title: "integration-architecture"
 doc-id: "mb-af335781"
+updated: "2026-10-01"
 ---
 # Mybizz CS — Integration Architecture
 
@@ -27,7 +28,7 @@ Payment is integrated into the booking flow. No separate checkout. Central-accou
 
 System currency is set at onboarding and immutable after the first transaction.
 
-**See:** [[adr-webhook-architecture|Webhook Architecture]] ADR (Webhook Architecture), [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints)
+**See:** [[[default:adr-global/adr-webhook-architecture|Webhook Architecture]]](C:/dev/project-library-global/adr-global/adr-webhook-architecture.md) ADR (Webhook Architecture), [[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR (Anvil Platform Constraints)
 
 ---
 
@@ -90,7 +91,7 @@ Each client creates their own Brevo account and stores SMTP and API keys in the 
 
 ## 4. Background Tasks
 
-Seven scheduled and event-driven background tasks (see [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR):
+Seven scheduled and event-driven background tasks (see [[[default:adr-global/adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]]](C:/dev/project-library-global/adr-global/adr-real-time-and-background-tasks.md) ADR):
 
 | Task | Schedule | Purpose |
 |------|----------|---------|
@@ -104,11 +105,11 @@ Seven scheduled and event-driven background tasks (see [[adr-real-time-and-backg
 
 Any operation expected to exceed 22 seconds must use `@anvil.server.background_task`. Background tasks have no timeout limit.
 
-**See:** [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR (Real-Time and Background Task Architecture)
+**See:** [[[default:adr-global/adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]]](C:/dev/project-library-global/adr-global/adr-real-time-and-background-tasks.md) ADR (Real-Time and Background Task Architecture)
 
-**See:** [[adr-pdf-invoice-generation|PDF Invoice Generation]] ADR (PDF Invoice Generation) for invoice PDF approach.
+**See:** [[[default:adr-global/adr-pdf-invoice-generation|PDF Invoice Generation]]](C:/dev/project-library-global/adr-global/adr-pdf-invoice-generation.md) ADR (PDF Invoice Generation) for invoice PDF approach.
 
-**See:** [[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR (Data Access Patterns) for denormalization and pre-computed aggregation patterns.
+**See:** [[[default:adr-global/adr-data-access-patterns|Data Access Patterns and Query Limitations]]](C:/dev/project-library-global/adr-global/adr-data-access-patterns.md) ADR (Data Access Patterns) for denormalization and pre-computed aggregation patterns.
 
 ---
 

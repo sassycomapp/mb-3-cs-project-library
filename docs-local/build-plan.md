@@ -1,6 +1,7 @@
 ---
 title: "build-plan"
 doc-id: "mb-e9bc1d1c"
+updated: "2026-10-01"
 ---
 ---
 type: concept
@@ -15,7 +16,7 @@ source_kind: put_page
 **Vertical:** Consulting & Services
 **V1 Scope:** Blog, Landing Pages, Campaigns, Pre-built Segments, Tasks, Homepage Templates, Basic Analytics, Stripe + Paystack
 **V2 Deferred:** Client Portal, Advanced Analytics, Complex Task Automation, PayPal, Time Tracking, Custom Segment Builder
-**Schema:** See [[authoritative-schema|Authoritative Database Schema]] for current table count
+**Schema:** See [[[mb-3-cs-project-library:docs-local/authoritative-schema|Authoritative Database Schema]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/authoritative-schema.md) for current table count
 **Architecture:** Dependency-based (master_template → client instances)
 **Review Status:** CEO + Eng Review Complete (All 5 phases engineering reviews complete)
 
@@ -23,14 +24,14 @@ source_kind: put_page
 
 | Specification | Relevance |
 |---|---|
-| [[spec-client-activation-runbook|Client Instance Activation Runbook]] | Client provisioning procedures |
-| [[spec-onboarding-implementation-plan|Mybizz CS Onboarding System - Engineering Plan]] | Onboarding form, Settings form, legal acknowledgement |
-| [[spec-deployment|Deployment Specification]] | Anvil environments, release workflow, rollback, schema migration |
-| [[spec-integration|Integration Specification]] | Brevo, Stripe, Paystack integration patterns |
-| [[spec-api-specification|API Specification (HTTP Endpoints)]] | HTTP endpoints (webhooks, management) |
-| [[spec-testing-methodology-standards|Testing Methodology]] | Testing levels, pure logic, Uplink safety protocol |
-| [[spec-testing|Test Specification (Canonical)]] | Test specifications, E2E flows, RBAC matrix |
-| [[spec-regulatory-compliance-baseline|Regulatory Compliance Baseline (Specification)]] | POPIA, GDPR, PCI DSS compliance |
+| [[[default:specifications-global/spec-client-activation-runbook\|Client Instance Activation Runbook]]](C:/dev/project-library-global/specifications-global/spec-client-activation-runbook.md) | Client provisioning procedures |
+| [[[default:specifications-global/spec-onboarding-implementation-plan\|Mybizz CS Onboarding System - Engineering Plan]]](C:/dev/project-library-global/specifications-global/spec-onboarding-implementation-plan.md) | Onboarding form, Settings form, legal acknowledgement |
+| [[[default:specifications-global/spec-deployment\|Deployment Specification]]](C:/dev/project-library-global/specifications-global/spec-deployment.md) | Anvil environments, release workflow, rollback, schema migration |
+| [[[default:specifications-global/spec-integration\|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) | Brevo, Stripe, Paystack integration patterns |
+| [[[default:specifications-global/spec-api-specification\|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md) | HTTP endpoints (webhooks, management) |
+| [[[default:specifications-global/spec-testing-methodology-standards\|Testing Methodology]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) | Testing levels, pure logic, Uplink safety protocol |
+| [[[default:specifications-global/spec-testing\|Test Specification (Canonical)]]](C:/dev/project-library-global/specifications-global/spec-testing.md) | Test specifications, E2E flows, RBAC matrix |
+| [[[default:specifications-global/spec-regulatory-compliance-baseline\|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md) | POPIA, GDPR, PCI DSS compliance |
 
 ---
 
@@ -38,7 +39,7 @@ source_kind: put_page
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| **Schema** | 100% Complete | See [[authoritative-schema|Authoritative Database Schema]] |
+| **Schema** | 100% Complete | See [[[mb-3-cs-project-library:docs-local/authoritative-schema\|Authoritative Database Schema]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/authoritative-schema.md) |
 | **Wireframes** | ✅ 100% Complete | 50 HTML screens created |
 | **Design Direction** | ✅ 100% Complete | M3 design approved |
 | **ADR Documentation** | 100% Complete | See the project-library-global register (`register-global/register-global.md`, adr rows) for current ADR count and status |
@@ -57,8 +58,8 @@ source_kind: put_page
 **Next Review:** After Phase 1 implementation completion
 **CEO Review:** 2026-06-15 — 11 sections reviewed, 14 TODO items captured (see todo.md section 8), plan changes applied
 **Eng Review:** 2026-06-16 — 5 dilemmas reviewed, 4 completable items executed (see todo.md section 9)
-**Test Specs:** Testing specifications consolidated into this build plan (see Phase 5.4 Testing & QA, build-plan.md Stage 5.4 completion criteria, and self-review checklists). Separate testing specifications are in [[spec-testing-methodology-standards|Testing Methodology]] and [[spec-testing|Test Specification (Canonical)]].
-**State Contract:** [[docstd-globals-contract|globals.py Contract]] — shared state variables and defensive loading pattern
+**Test Specs:** Testing specifications consolidated into this build plan (see Phase 5.4 Testing & QA, build-plan.md Stage 5.4 completion criteria, and self-review checklists). Separate testing specifications are in [[[default:specifications-global/spec-testing-methodology-standards|Testing Methodology]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) and [[[default:specifications-global/spec-testing|Test Specification (Canonical)]]](C:/dev/project-library-global/specifications-global/spec-testing.md).
+**State Contract:** [[[default:docs-standard-global/docstd-globals-contract|globals.py Contract]]](C:/dev/project-library-global/docs-standard-global/docstd-globals-contract.md) — shared state variables and defensive loading pattern
 
 ---
 
@@ -179,7 +180,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Feature flag strategy defined
 - ✅ Rollback procedure tested and verified
 
-**See:** [[spec-deployment|Deployment Specification]] (Deployment — Anvil environments, release workflow, rollback, schema migration)
+**See:** [[[default:specifications-global/spec-deployment|Deployment Specification]]](C:/dev/project-library-global/specifications-global/spec-deployment.md) (Deployment — Anvil environments, release workflow, rollback, schema migration)
 
 ---
 
@@ -207,7 +208,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 ### Stage 1.2: Authentication System
 
 **Deliverables:**
-- `users` table extended with `role`, [[permissions|User Permissions]], `account_status`, `signed_up`, `email_confirmation_key`, `mfa` fields
+- `users` table extended with `role`, [[[default:anvil-docs/users/permissions|User Permissions]]](C:/dev/project-library-global/anvil-docs/users/permissions.md), `account_status`, `signed_up`, `email_confirmation_key`, `mfa` fields
 - `LoginForm` — email/password login with validation
 - `SignupForm` — new user registration with business name capture
 - `PasswordResetForm` — password reset flow
@@ -259,13 +260,13 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - Navigation helpers prevent lambda capture bugs and ensure consistent patterns
 - AdminLayout uses NavigationRailLayout with plain Link components (not NavigationLink)
 - Navigation structure follows the spec in architecture.md
-- **See:** [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture and State Management)
+- **See:** [[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR (Form Architecture and State Management)
 
 ### Stage 1.4: Settings & Configuration
 
 **Deliverables:**
 - `business_profile` table populated with business information
-- [[config|Config]] table for key-value configuration
+- [[[makepdlf-project-library:docs-local/config|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) table for key-value configuration
 - `email_config` table for email settings
 - `payment_config` table for payment gateway settings
 - `theme_config` table for M3 theme customization
@@ -286,14 +287,14 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Settings form uses 11-tab layout with M3 button navigation
 - ✅ RBAC governance enforced per tab
 - ✅ "Return to Onboarding" button visible only when onboarding in progress
-- ✅ Edge case: user closes browser mid-onboarding — onboarding resumable from last completed step ([[adr-onboarding-resumability|Onboarding Resumability]] ADR); no session expiry for incomplete onboarding
+- ✅ Edge case: user closes browser mid-onboarding — onboarding resumable from last completed step ([[[default:adr-global/adr-onboarding-resumability|Onboarding Resumability]]](C:/dev/project-library-global/adr-global/adr-onboarding-resumability.md) ADR); no session expiry for incomplete onboarding
 - ✅ All unit tests passing
 
 **Implementation Notes:**
 - SettingsForm uses sub-sections for better maintainability
 - Currency becomes immutable after first transaction
 - Feature flags control navigation item visibility
-- **See:** [[adr-ui-customization-approach|UI Customization Approach]] ADR (UI Customization Approach)
+- **See:** [[[default:adr-global/adr-ui-customization-approach|UI Customization Approach]]](C:/dev/project-library-global/adr-global/adr-ui-customization-approach.md) ADR (UI Customization Approach)
 
 ### Stage 1.5: The Vault
 
@@ -336,7 +337,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - Bearer token authentication for all management endpoints
 - Per-client management token stored in client instance config
 
-**Endpoints (per [[adr-mybizz-management-visibility|Mybizz_management Visibility and Control]] ADR):**
+**Endpoints (per [[[default:adr-global/adr-mybizz-management-visibility|Mybizz_management Visibility and Control]]](C:/dev/project-library-global/adr-global/adr-mybizz-management-visibility.md) ADR):**
 
 | Endpoint | Method | Purpose |
 |---|---|---|
@@ -434,9 +435,9 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
   - Call 3: `confirm_booking(booking_data)` → booking confirmation, payment result
   - Meeting type and intake form are client-side selections from pre-loaded data — no server call
   - Confirmation display is client-side — no server call
-  - Cache `get_booking_context()` response in `globals.py` for flow duration (see [[docstd-globals-contract|globals.py Contract]])
-- **See:** [[adr-form-architecture-and-state|Form Architecture and State Management]] ADR (Form Architecture — booking flow latency management)
-- **See:** [[spec-testing-methodology-standards|Testing Methodology]] (E2E booking test spec, error path tests, RBAC matrix)
+  - Cache `get_booking_context()` response in `globals.py` for flow duration (see [[[default:docs-standard-global/docstd-globals-contract|globals.py Contract]]](C:/dev/project-library-global/docs-standard-global/docstd-globals-contract.md))
+- **See:** [[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR (Form Architecture — booking flow latency management)
+- **See:** [[[default:specifications-global/spec-testing-methodology-standards|Testing Methodology]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) (E2E booking test spec, error path tests, RBAC matrix)
 
 ### Stage 2.4: Payment Integration
 
@@ -457,8 +458,8 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Payment ID stored in booking
 - ✅ Test/Live mode switching working
 - ✅ External service failure handling implemented (TODO 12: Retry logic with backoff)
-- **See:** [[adr-webhook-architecture|Webhook Architecture]] ADR (Webhook Architecture), [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR (Real-Time and Background Tasks)
-- **See:** [[spec-integration|Integration Specification]] (Integration — Stripe, Paystack, Brevo patterns), [[spec-api-specification|API Specification (HTTP Endpoints)]] (API Specification — webhook endpoints)
+- **See:** [[[default:adr-global/adr-webhook-architecture|Webhook Architecture]]](C:/dev/project-library-global/adr-global/adr-webhook-architecture.md) ADR (Webhook Architecture), [[[default:adr-global/adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]]](C:/dev/project-library-global/adr-global/adr-real-time-and-background-tasks.md) ADR (Real-Time and Background Tasks)
+- **See:** [[[default:specifications-global/spec-integration|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) (Integration — Stripe, Paystack, Brevo patterns), [[[default:specifications-global/spec-api-specification|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md) (API Specification — webhook endpoints)
 
 ### Stage 2.5: Invoicing System
 
@@ -478,7 +479,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Invoice statuses working (Draft, Sent, Paid, Overdue, Cancelled)
 - ✅ Payment recording updates invoice status
 - ✅ Multi-currency display working
-- **See:** [[adr-pdf-invoice-generation|PDF Invoice Generation]] ADR (PDF Invoice Generation)
+- **See:** [[[default:adr-global/adr-pdf-invoice-generation|PDF Invoice Generation]]](C:/dev/project-library-global/adr-global/adr-pdf-invoice-generation.md) ADR (PDF Invoice Generation)
 
 ---
 
@@ -516,7 +517,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Edge case: landing page lead submitted with duplicate email — updates existing contact, does not reject
 - ✅ Database indexes added (TODO 8: contacts.email, bookings.contact_id, bookings.service_id indexed)
 - ✅ Pagination added to large lists (TODO 9: 50 items per page)
-- **See:** [[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR (Data Access Patterns — pagination, denormalization)
+- **See:** [[[default:adr-global/adr-data-access-patterns|Data Access Patterns and Query Limitations]]](C:/dev/project-library-global/adr-global/adr-data-access-patterns.md) ADR (Data Access Patterns — pagination, denormalization)
 
 ### Stage 3.2: Email Marketing (Brevo Campaigns)
 
@@ -538,8 +539,8 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Open/click tracking via webhooks working
 - ✅ Broadcast emails functional
 - ✅ Unsubscribe handling working
-- **See:** [[adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]] ADR (Real-Time and Background Tasks — campaign enrollment task)
-- **See:** [[spec-integration|Integration Specification]] (Integration — Brevo Campaigns API, SMTP patterns)
+- **See:** [[[default:adr-global/adr-real-time-and-background-tasks|Real-Time Updates and Background Task Architecture]]](C:/dev/project-library-global/adr-global/adr-real-time-and-background-tasks.md) ADR (Real-Time and Background Tasks — campaign enrollment task)
+- **See:** [[[default:specifications-global/spec-integration|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) (Integration — Brevo Campaigns API, SMTP patterns)
 
 ### Stage 3.3: Segmentation
 
@@ -652,7 +653,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 ### Stage 4.3: Homepage Templates
 
 **Deliverables:**
-- [[config|Config]] table `home_config` key for template configuration
+- [[[makepdlf-project-library:docs-local/config|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) table `home_config` key for template configuration
 - `public_pages/HomePage` with four template options:
   - Classic
   - Services
@@ -690,7 +691,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 - ✅ Period selector working (week, month, quarter, custom)
 - ✅ Real-time data refresh working
 - ✅ Charts rendering correctly
-- **See:** [[adr-data-access-patterns|Data Access Patterns and Query Limitations]] ADR (Data Access Patterns — pre-computed aggregations)
+- **See:** [[[default:adr-global/adr-data-access-patterns|Data Access Patterns and Query Limitations]]](C:/dev/project-library-global/adr-global/adr-data-access-patterns.md) ADR (Data Access Patterns — pre-computed aggregations)
 
 ### Stage 5.2: Security Hardening
 
@@ -792,7 +793,7 @@ Phase 0 (Pre-Implementation) → Phase 1 (Foundation) → Phase 2 (Transactional
 - `email_campaigns` table (Phase 3) → contact_campaigns
 - `landing_pages` table (Phase 3) → leads → contacts
 
-**See:** [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints) for platform-specific implementation guidance.
+**See:** [[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR (Anvil Platform Constraints) for platform-specific implementation guidance.
 
 ---
 
@@ -818,7 +819,7 @@ Phase 0 (Pre-Implementation) → Phase 1 (Foundation) → Phase 2 (Transactional
 - **Contact deduplication:** Addressed in Phase 3 — mitigated
 - **RBAC coverage:** Addressed in Phase 1 (TODO 11) — mitigated
 - **External service failures:** Addressed in Phase 2 (TODO 12) — mitigated
-- **Anvil platform constraints:** All phases — [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR documents Skulpt limits, lazy rows, server latency, background tasks
+- **Anvil platform constraints:** All phases — [[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR documents Skulpt limits, lazy rows, server latency, background tasks
 
 ### Operational Risks (All Addressed)
 - **Onboarding friction:** Keep Phase 1 simple and intuitive

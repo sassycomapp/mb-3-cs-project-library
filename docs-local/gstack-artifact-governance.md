@@ -1,6 +1,7 @@
 ---
 title: "gstack-artifact-governance"
 doc-id: "mb-2b5d047d"
+updated: "2026-10-01"
 ---
 # GStack Artifact Governance
 
@@ -71,7 +72,7 @@ These files are design references, not policy documents and not session outputs.
 
 ## Special Notes
 
-- [[DESIGN|DESIGN]] belongs in `docs/` because it is an application UI design document, not a general repository artifact.
+- [[[mb-3-cs-project-library:docs-local/design|DESIGN]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/DESIGN.md) belongs in `docs/` because it is an application UI design document, not a general repository artifact.
 - Do not place long-lived app specifications in `gstack-outputs/`.
 - Do not place transient planning reports in `docs/` unless they have been promoted into durable documentation.
 - Do not place ADRs inside `docs/` or `gstack-outputs/`.

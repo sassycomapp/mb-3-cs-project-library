@@ -1,10 +1,11 @@
 ---
 title: "CONTEXT"
 doc-id: "mb-fcd66dfb"
+updated: "2026-10-01"
 ---
 # CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
 
-Domain glossary and key concepts for agent skills that need project context ([[step-16-domain-modeling|Step 16 Domain Modeling]], `grill-with-docs`, `tdd`, `diagnosing-bugs`, [[step-40-improve-codebase-architecture|Step 40 Improve Codebase Architecture]], `codebase-design`).
+Domain glossary and key concepts for agent skills that need project context ([[[makepdlf-project-library:stepwise/step-16-domain-modeling|Step 16 Domain Modeling]]](C:/dev/dev-makepdlf/makepdlf-project-library/stepwise/step-16-domain-modeling.md), `grill-with-docs`, `tdd`, `diagnosing-bugs`, [[[makepdlf-project-library:stepwise/step-40-improve-codebase-architecture|Step 40 Improve Codebase Architecture]]](C:/dev/dev-makepdlf/makepdlf-project-library/stepwise/step-40-improve-codebase-architecture.md), `codebase-design`).
 
 ## Repository architecture
 
@@ -56,7 +57,7 @@ Architecture Decision Records live in `adr-local/` (currently 3). Major architec
 
 - **Devlog index**: `devlog-index.md` — reverse-chronological task completion log
 - **Judgement trail**: `judgement-trail.md` — flagged issues, decisions, approved deviations
-- **Active todo**: [[dev-makepdlf-todo|Active PDLF To-Do List]]
+- **Active todo**: [[[data-mybizz-mgt:desktop/dev-makepdlf-todo|Active PDLF To-Do List]]](C:/data-mybizz-mgt/desktop/dev-makepdlf-todo.md)
 
 ## Multi-project context
 

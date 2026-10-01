@@ -1,10 +1,11 @@
 ---
 title: "deployment-procedures"
 doc-id: "mb-f46b55a9"
+updated: "2026-10-01"
 ---
 # Mybizz CS — Deployment Procedures
 
-**Authority:** [[adr-dependency-update-model|Dependency Update Model]] ADR (Dependency Update Model), `blank-client-template` ADR (blank_client_template), [[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR (Anvil Platform Constraints)
+**Authority:** [[[default:adr-global/adr-dependency-update-model|Dependency Update Model]]](C:/dev/project-library-global/adr-global/adr-dependency-update-model.md) ADR (Dependency Update Model), `blank-client-template` ADR (blank_client_template), [[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR (Anvil Platform Constraints)
 
 ---
 
@@ -12,7 +13,7 @@ doc-id: "mb-f46b55a9"
 
 This document defines the deployment procedures for the Mybizz CS platform. It covers the update deployment model, schema migration strategy, staged rollout, rollback procedures, and post-deploy verification.
 
-**Key architectural decision:** The platform uses a branch-based update model. Merging `develop` → `stable` in GitHub releases an update to all client instances automatically. See [[adr-dependency-update-model|Dependency Update Model]] ADR.
+**Key architectural decision:** The platform uses a branch-based update model. Merging `develop` → `stable` in GitHub releases an update to all client instances automatically. See [[[default:adr-global/adr-dependency-update-model|Dependency Update Model]]](C:/dev/project-library-global/adr-global/adr-dependency-update-model.md) ADR.
 
 ---
 
@@ -269,7 +270,7 @@ All 100 client instances are hosted on a single Anvil Business account. This cre
 3. Once restored: verify all instances are healthy
 4. Review `health_log` for any data gaps during outage
 
-**Note:** This is an accepted risk of the platform decision ([[adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]] ADR). No self-hosted fallback is planned.
+**Note:** This is an accepted risk of the platform decision ([[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR). No self-hosted fallback is planned.
 
 ---
 
