@@ -1,7 +1,7 @@
 ---
 title: "scaffold-spec"
 doc-id: "mb-be462593"
-updated: "2026-10-01"
+updated: "2026-10-04"
 ---
 # Mybizz CS — Scaffold Specification
 
@@ -601,7 +601,7 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | `role` | string | "owner", "manager", "admin", "staff", "customer" |
 | `account_status` | string | "active", "suspended", "deleted" |
 | `phone` | string | |
-| [[[default:anvil-docs/users/permissions\|User Permissions]]](C:/dev/project-library-global/anvil-docs/users/permissions.md) | simpleObject | JSON permission flags |
+| `permissions` | simpleObject | JSON permission flags |
 | `created_at` | datetime | UTC |
 | `signed_up` | datetime | UTC |
 | `email_confirmation_key` | string | |
@@ -926,7 +926,7 @@ Tables marked ★ are new additions in this reconciliation. Tables marked with p
 | `title` | string | |
 | `slug` | string | |
 | `template_type` | string | "lead_capture", "event_registration", "vsl" |
-| [[[makepdlf-project-library:docs-local/config\|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) | simpleObject | |
+| `config` | simpleObject | |
 | `status` | string | "draft", "published" |
 | `created_at` | datetime | UTC |
 | `published_at` | datetime | UTC |

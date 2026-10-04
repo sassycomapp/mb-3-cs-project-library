@@ -1,7 +1,7 @@
 ---
 title: "DESIGN"
 doc-id: "mb-190df6bf"
-updated: "2026-10-01"
+updated: "2026-10-04"
 ---
 # Mybizz CS — DESIGN
 
@@ -1101,7 +1101,7 @@ The `invoice` and `invoice_items` schema tables do not contain dedicated tax fie
 - Tax = subtotal × tax rate (display calculation)
 - `invoice.total_amount` = subtotal + tax (the final stored amount)
 
-For V1, the tax rate is fixed at **15%** (South African VAT). This rate is used for display calculation only and is not stored per invoice. If a configurable tax rate is needed in future, it should be added to the `business_profile` or [[[makepdlf-project-library:docs-local/config|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) table.
+For V1, the tax rate is fixed at **15%** (South African VAT). This rate is used for display calculation only and is not stored per invoice. If a configurable tax rate is needed in future, it should be added to the `business_profile` or `config` table.
 
 ### Invoice Status Lifecycle
 

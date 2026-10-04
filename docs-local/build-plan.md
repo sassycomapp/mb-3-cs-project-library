@@ -1,7 +1,7 @@
 ---
 title: "build-plan"
 doc-id: "mb-e9bc1d1c"
-updated: "2026-10-01"
+updated: "2026-10-04"
 ---
 ---
 type: concept
@@ -208,7 +208,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 ### Stage 1.2: Authentication System
 
 **Deliverables:**
-- `users` table extended with `role`, [[[default:anvil-docs/users/permissions|User Permissions]]](C:/dev/project-library-global/anvil-docs/users/permissions.md), `account_status`, `signed_up`, `email_confirmation_key`, `mfa` fields
+- `users` table extended with `role`, `permissions`, `account_status`, `signed_up`, `email_confirmation_key`, `mfa` fields
 - `LoginForm` — email/password login with validation
 - `SignupForm` — new user registration with business name capture
 - `PasswordResetForm` — password reset flow
@@ -266,7 +266,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 
 **Deliverables:**
 - `business_profile` table populated with business information
-- [[[makepdlf-project-library:docs-local/config|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) table for key-value configuration
+- `config` table for key-value configuration
 - `email_config` table for email settings
 - `payment_config` table for payment gateway settings
 - `theme_config` table for M3 theme customization
@@ -653,7 +653,7 @@ This build plan defines the phased implementation sequence for the Mybizz CS V1 
 ### Stage 4.3: Homepage Templates
 
 **Deliverables:**
-- [[[makepdlf-project-library:docs-local/config|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) table `home_config` key for template configuration
+- `config` table `home_config` key for template configuration
 - `public_pages/HomePage` with four template options:
   - Classic
   - Services

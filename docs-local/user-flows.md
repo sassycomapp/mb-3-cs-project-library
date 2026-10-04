@@ -1,7 +1,7 @@
 ---
 title: "user-flows"
 doc-id: "mb-b1292280"
-updated: "2026-10-01"
+updated: "2026-10-04"
 ---
 # Mybizz CS — User Flows
 
@@ -188,7 +188,7 @@ Vault (Owner only)
 6. Configure final CTA — headline, subheadline, button text + link.
 7. Preview → Save → live immediately.
 
-Auto-saves every 30 seconds. Configuration stored in [[[makepdlf-project-library:docs-local/config|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) table with `key = 'home_config'`.
+Auto-saves every 30 seconds. Configuration stored in `config` table with `key = 'home_config'`.
 
 ---
 

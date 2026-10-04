@@ -1,7 +1,7 @@
 ---
 title: "authoritative-schema"
 doc-id: "mb-8b83e940"
-updated: "2026-10-01"
+updated: "2026-10-04"
 ---
 # Mybizz CS — Authoritative Database Schema
 
@@ -101,7 +101,7 @@ Client business information.
 | `accreditations` | string | Business accreditations text |
 | `google_maps_embed_url` | string | Google Maps embed URL for contact page |
 
-###[DONE] 1.3 [[[makepdlf-project-library:docs-local/config|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md)
+###[DONE] 1.3 `config`
 Key-value configuration storage.
 
 | Field | Type | Notes |
@@ -186,7 +186,7 @@ System users and staff (extends Anvil Users service).
 | `role` | string | "owner", "manager", "admin", "staff", "customer" |
 | `account_status` | string | "active", "suspended", "deleted" |
 | `phone` | string | |
-| [[[default:anvil-docs/users/permissions\|User Permissions]]](C:/dev/project-library-global/anvil-docs/users/permissions.md) | simpleObject | JSON permission flags |
+| `permissions` | simpleObject | JSON permission flags |
 | `created_at` | datetime | UTC |
 | `signed_up` | datetime | UTC |
 | `email_confirmation_key` | string | |
@@ -553,7 +553,7 @@ Marketing landing pages.
 | `title` | string | |
 | `slug` | string | URL-friendly, unique |
 | `template_type` | string | "lead_capture", "event_registration", "vsl" |
-| [[[makepdlf-project-library:docs-local/config\|Config]]](C:/dev/dev-makepdlf/makepdlf-project-library/docs-local/config.md) | simpleObject | Template configuration |
+| `config` | simpleObject | Template configuration |
 | `status` | string | "draft", "published" |
 | `created_at` | datetime | UTC |
 | `published_at` | datetime | UTC |
