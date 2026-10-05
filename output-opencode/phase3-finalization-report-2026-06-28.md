@@ -1,7 +1,7 @@
 ---
 title: "phase3-finalization-report-2026-06-28"
 doc-id: "mb-3fdcc20c"
-updated: "2026-10-01"
+updated: "2026-10-05"
 ---
 # Phase 3 Finalization Report
 
@@ -14,8 +14,8 @@ updated: "2026-10-01"
 
 | # | File | Changes Made |
 |---|---|---|
-| 1 | `ui-build-prep/anvil-ui-build-standard.md` | ADR references updated (ADR-43/44/45, no more adr-register.md The use of registers has been discontinued. Please review). §6.0 reversed to code-based role assignment. CSS gap section updated. Dark mode deferred to V2. `drp_` note removed. Icon clarified as IconButton shorthand. Remaining Open Items updated. |
-| 2 | `ui-build-prep/anvil-ui-build-prompt-template.md` | ADR-1/adr-register.md The use of registers has been discontinued. Please review reference updated to ADR-43. |
+| 1 | `ui-build-prep/anvil-ui-build-standard.md` | ADR references updated (ADR-43/44/45, no more adr-register.md). §6.0 reversed to code-based role assignment. CSS gap section updated. Dark mode deferred to V2. `drp_` note removed. Icon clarified as IconButton shorthand. Remaining Open Items updated. |
+| 2 | `ui-build-prep/anvil-ui-build-prompt-template.md` | ADR-1/adr-register.md reference updated to ADR-43. |
 | 3 | `adr/37-ui-customization-approach.md` | Marked **Superseded by ADR-45**. NavigationRailLayout/NavigationDrawerLayout now used per ADR-45. |
 | 4 | `adr/43-role-property-assignment-mechanism.md` | **Reversed.** Original decision (Designer) superseded by project rule: if property can be set programmatically, it must be. Role now set in code. |
 | 5 | `docs/spec-material-3-theme.md` | ADR-43 reference updated to show code-based role assignment. Code examples now correct per reversal. |

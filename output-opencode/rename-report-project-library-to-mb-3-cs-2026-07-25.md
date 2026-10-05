@@ -1,7 +1,7 @@
 ---
 title: "rename-report-project-library-to-mb-3-cs-2026-07-25"
 doc-id: "mb-08dedf3b"
-updated: "2026-10-01"
+updated: "2026-10-05"
 ---
 # Rename Report: project-library → mb-3-cs-project-library
 
@@ -22,7 +22,7 @@ updated: "2026-10-01"
 | `project-inventory.md` | 17 | Documentation repo (GitHub): `sassycomapp/mb-3-cs-project-library` |
 | `project-inventory.md` | 18 | Documentation repo (GBrain): `mb-3-cs-project-library` |
 | `project-inventory.md` | 88 | Active Repo table entry |
-| `mb-align-docs-README.md` | 127 | Register The use of registers has been discontinued. Please review + Quarantine paths (2 occurrences on one line) |
+| `mb-align-docs-README.md` | 127 | Register + Quarantine paths (2 occurrences on one line) |
 
 ### 2. projects-reference (`C:\projects-reference\`) — 11 references in 6 files
 

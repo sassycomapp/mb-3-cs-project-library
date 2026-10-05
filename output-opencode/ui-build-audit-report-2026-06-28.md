@@ -1,7 +1,7 @@
 ---
 title: "ui-build-audit-report-2026-06-28"
 doc-id: "mb-3af4f4ec"
-updated: "2026-10-01"
+updated: "2026-10-05"
 ---
 # UI Build Audit Report
 
@@ -32,18 +32,18 @@ updated: "2026-10-01"
 
 ## Section 2: Detailed Findings
 
-### DISCREPANCY #1 — ADR register The use of registers has been discontinued. Please review reference (deleted file)
+### DISCREPANCY #1 — ADR register reference (deleted file)
 
-**Document A:** `anvil-ui-build-standard.md` §Changelog line 18 says: "All three ADRs referenced in this document now live in `adr-register.md` The use of registers has been discontinued. Please review, not separate files."
-**Document B:** `adr-register.md` The use of registers has been discontinued. Please review has been deleted. The ADRs now live in `adr/43-role-property-assignment-mechanism.md`, `adr/44-responsive-behaviour-mechanism.md`, `adr/45-htmltemplate-use.md`.
-**Document A also references `adr-register.md` The use of registers has been discontinued. Please review on:** lines 22, 79, 190, 241, 309.
+**Document A:** `anvil-ui-build-standard.md` §Changelog line 18 says: "All three ADRs referenced in this document now live in `adr-register.md`, not separate files."
+**Document B:** `adr-register.md` has been deleted. The ADRs now live in `adr/43-role-property-assignment-mechanism.md`, `adr/44-responsive-behaviour-mechanism.md`, `adr/45-htmltemplate-use.md`.
+**Document A also references `adr-register.md` on:** lines 22, 79, 190, 241, 309.
 
-**Document C:** `anvil-ui-build-prompt-template.md` line 25 says: "per ADR-1 in `adr-register.md` The use of registers has been discontinued. Please review"
+**Document C:** `anvil-ui-build-prompt-template.md` line 25 says: "per ADR-1 in `adr-register.md`"
 
-**Question for user:** Should all references to `adr-register.md` The use of registers has been discontinued. Please review in the Standard and Template be replaced with references to the individual ADR files in `adr/`? If so, should the ADR numbers change from ADR-1/ADR-2/ADR-3 to ADR-43/ADR-44/ADR-45?
+**Question for user:** Should all references to `adr-register.md` in the Standard and Template be replaced with references to the individual ADR files in `adr/`? If so, should the ADR numbers change from ADR-1/ADR-2/ADR-3 to ADR-43/ADR-44/ADR-45?
 
 #### Developer's Resonse
-1. Yes - all references to `adr-register.md` The use of registers has been discontinued. Please review in the Standard and Template must be replaced with references to the individual ADR files in `adr/`
+1. Yes - all references to `adr-register.md` in the Standard and Template must be replaced with references to the individual ADR files in `adr/`
 2. Yes - the ADR numbers change from ADR-1/ADR-2/ADR-3 to ADR-43/ADR-44/ADR-45
 ---
 
@@ -55,7 +55,7 @@ updated: "2026-10-01"
 
 **Document B:** The current ADR files are numbered ADR-43 (role assignment), ADR-44 (responsive behaviour), ADR-45 (HTMLTemplate banned).
 
-**Question for user:** Should the Standard's ADR references be updated from ADR-1/2/3 to ADR-43/44/45? Or were ADR-1/2/3 internal references within `adr-register.md` The use of registers has been discontinued. Please review that should be removed entirely?
+**Question for user:** Should the Standard's ADR references be updated from ADR-1/2/3 to ADR-43/44/45? Or were ADR-1/2/3 internal references within `adr-register.md` that should be removed entirely?
 
 #### Developer's Resonse
 1. the Standard's ADR references must be updated from ADR-1/2/3 to ADR-43/44/45
@@ -220,16 +220,16 @@ updated: "2026-10-01"
 1. This discrepancy involves researching Anvil material three theme , M3 dependency components docs To establish The authoritative list of components which have write-back capability. Our documentation should be updated throughout to reflect that list.  The reason for this measure is that if we miss the write back property on a component then that breaks the application . all the lists in our documents are a result of our research the only authoritative source is the source of truth which is the proprietary anvil documentation  
 ---
 
-### DISCREPANCY #14 — Template references `adr-register.md` The use of registers has been discontinued. Please review
+### DISCREPANCY #14 — Template references `adr-register.md`
 
-**Document A:** `anvil-ui-build-prompt-template.md` line 25 says: "per ADR-1 in `adr-register.md` The use of registers has been discontinued. Please review"
+**Document A:** `anvil-ui-build-prompt-template.md` line 25 says: "per ADR-1 in `adr-register.md`"
 
-**Document B:** `adr-register.md` The use of registers has been discontinued. Please review has been deleted.
+**Document B:** `adr-register.md` has been deleted.
 
 **Question for user:** Should this reference be updated to point to `adr/43-role-property-assignment-mechanism.md` (ADR-43)?
 
 #### Developer's Resonse
-1. The ADR-register.MD The use of registers has been discontinued. Please review was a precursor to creating ADR'S 43,44  and 45 . Now that these Adr's have been created, that file became obsolete and was deleted therefore all references should point to the relevant ADR 
+1. The ADR-register.MD was a precursor to creating ADR'S 43,44  and 45 . Now that these Adr's have been created, that file became obsolete and was deleted therefore all references should point to the relevant ADR 
 ---
 
 ## Section 3: Anvil Compliance Check

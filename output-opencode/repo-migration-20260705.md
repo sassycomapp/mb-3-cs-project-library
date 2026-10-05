@@ -1,7 +1,7 @@
 ---
 title: "repo-migration-20260705"
 doc-id: "mb-886dcfbe"
-updated: "2026-10-01"
+updated: "2026-10-05"
 ---
 # Repo Migration — Completion Report
 
@@ -46,7 +46,7 @@ Updated in 3 files + 5 operational documents:
 - `workspace/system-operation-reference/workflow reference/Daily operations.md`: 4 refs updated
 - `workspace/gstack/gstack-install-plan.md`: 1 ref updated
 
-### Phase 6: Re-register The use of registers has been discontinued. Please review GBrain sources
+### Phase 6: Re-register GBrain sources
 - Killed stale gbrain daemon (PID 837, pts/6)
 - Removed old `mb-3-cs` source (240 pages) and `project-library` source (212 pages)
 - Created new `mb-3-cs` source → `/mnt/c/projects/mb-3-cs/mb-3-cs` (2 pages markdown-only)

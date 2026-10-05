@@ -1,7 +1,7 @@
 ---
 title: "opencode-config-optimization-20260706"
 doc-id: "mb-3f9780e8"
-updated: "2026-10-01"
+updated: "2026-10-05"
 ---
 # OpenCode Config Optimization — Completion Report
 
@@ -51,7 +51,7 @@ Added to each `plan.md` and `build.md` (both project-library and mb-3-cs):
 - `project-inventory.txt` — fixed mb-3-cs paths, removed non-existent `pdlf-project-library` entry
 
 ### Workspace docs (3 files rewritten)
-- `workspace-docmap.md` — multi-project path register The use of registers has been discontinued. Please review, all paths current, GBrain section deduplicated
+- `workspace-docmap.md` — multi-project path register, all paths current, GBrain section deduplicated
 - `workspace-description.md` — Web UI only usage guide, Desktop bridge removed, multi-project layout
 - `opencode-10-config-files.md` — all 10 config file contents updated to current state, API key redacted, new project configs documented
 
