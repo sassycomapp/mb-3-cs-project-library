@@ -1,9 +1,11 @@
 ---
 title: "platform-architecture-narrative"
 doc-id: "mb-daf7b766"
-updated: "2026-10-05"
+updated: "2026-10-07"
 ---
 # Mybizz — Comprehensive Application Treatise
+
+> **Status:** Written before PDLF. The product intent is current; figures and the build approach will be set by the PDLF build.
 
 **mybizz.live**
 Version 1.0 | 2026

@@ -1,9 +1,11 @@
 ---
 title: "positioning-strategy"
 doc-id: "mb-f23e1822"
-updated: "2026-10-01"
+updated: "2026-10-07"
 ---
 # Mybizz — Business Strategy & Positioning Document
+
+> **Status:** Written before PDLF. The product intent is current; figures and the build approach will be set by the PDLF build.
 **mybizz.live**
 Version 1.0 | Pre-Launch | 2026
 

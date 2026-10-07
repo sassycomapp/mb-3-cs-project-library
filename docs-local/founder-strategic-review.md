@@ -1,9 +1,11 @@
 ---
 title: "founder-strategic-review"
 doc-id: "mb-8aebac00"
-updated: "2026-10-01"
+updated: "2026-10-07"
 ---
 # Mybizz CS — Founder Strategic Review
+
+> **Status:** Written before PDLF. The product intent is current; figures and the build approach will be set by the PDLF build.
 
 **Document type:** Personal strategic reference — founder only
 **Version:** 1.0
