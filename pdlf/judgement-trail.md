@@ -1,7 +1,7 @@
 ---
 title: "judgement-trail"
 doc-id: "mb-117d5961"
-updated: "2026-10-01"
+updated: "2026-10-09"
 ---
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
@@ -30,7 +30,7 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 ## 2026-07-06 — Docs reorganization consolidated
 
 **Issue flagged:** Devlog/todo system status unresolved — handover questioned whether `C:\mybizz\devlog\` and `C:\mybizz\todo\` were still live.
-**Developer decision:** Old system at `C:\mybizz\` does not exist on disk — superseded. Replacement established in AGENTS.md: `devlog-index.md` + `judgement-trail.md` + [[[data-mybizz-mgt:desktop/dev-makepdlf-todo|Active PDLF To-Do List]]](C:/data-mybizz-mgt/desktop/dev-makepdlf-todo.md) at project root. These files are actively maintained.
+**Developer decision:** Old system at `C:\mybizz\` does not exist on disk — superseded. Replacement established in AGENTS.md: `devlog-index.md` + `judgement-trail.md` + [[[pdlf:makepdlf-project-library/docs-local/dev-makepdlf-todo|Active PDLF To-Do List]]](C:/pdlf/makepdlf-project-library/docs-local/dev-makepdlf-todo.md) at project root. These files are actively maintained.
 
 **Issue flagged:** [[[default:specifications-global/spec-security-architecture|Security & Secrets Architecture]]](C:/dev/project-library-global/specifications-global/spec-security-architecture.md) contained app-specific framing ("Mybizz CS," "this app's") but the content (RBAC role limits, token security, regulatory posture) applies Mybizz-wide.
 **Developer decision:** Elevated to global. Moved to [[[default:specifications-global/spec-security-architecture|Security & Secrets Architecture]]](C:/dev/project-library-global/specifications-global/spec-security-architecture.md). Multi-tenant language corrected per [[[default:adr-global/adr-dependency-based-not-multi-tenant|Mybizz CS is a Dependency-Based Architecture, Not a Multi-Tenant Architecture]]](C:/dev/project-library-global/adr-global/adr-dependency-based-not-multi-tenant.md) ADR.
@@ -98,7 +98,7 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 **Developer decision:** Added `## Task completion` and `## Environment` sections to all 4 agent files.
 
 **Issue flagged:** 52 command files in `.opencode/commands/` — 3 duplicates, 2 broken headers, 5 formatting outliers.
-**Developer decision:** Removed duplicates (`gstack-context-save.md`, `gstack-learn.md`, `gstack-upgrade.md`). Fixed headers ([[[makepdlf-project-library:stepwise/step-32-physical-scaffold-build|Step 32 Physical Scaffold Build]]](C:/dev/dev-makepdlf/makepdlf-project-library/stepwise/step-32-physical-scaffold-build.md), `review.md`). Standardized 5 outliers.
+**Developer decision:** Removed duplicates (`gstack-context-save.md`, `gstack-learn.md`, `gstack-upgrade.md`). Fixed headers ([[[pdlf:makepdlf-project-library/stepwise/step-32-physical-scaffold-build|Step 32 Physical Scaffold Build]]](C:/pdlf/makepdlf-project-library/stepwise/step-32-physical-scaffold-build.md), `review.md`). Standardized 5 outliers.
 
 **Issue flagged:** mb-3-cs project library agent files (plan/build) now part of PDLF transition. All projects are PDLF projects.
 **Developer decision:** Project configs (`opencode.json`) created for mb4ecom and mb5pdlf for proper OpenCode operation. PDLF-specific config handled in later pass.
