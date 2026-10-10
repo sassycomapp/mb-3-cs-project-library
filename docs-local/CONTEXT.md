@@ -57,7 +57,7 @@ Architecture Decision Records live in `adr-local/` (currently 3). Major architec
 
 - **Devlog index**: `devlog-index.md` — reverse-chronological task completion log
 - **Judgement trail**: `judgement-trail.md` — flagged issues, decisions, approved deviations
-- **Active todo**: [[[pdlf:pdlf-library/docs-local/dev-makepdlf-todo|Active PDLF To-Do List]]](C:/pdlf/pdlf-library/docs-local/dev-makepdlf-todo.md)
+- **Active todo**: [[[pdlf:pdlf-library/docs-local/pdlf-todo|Active PDLF To-Do List]]](C:/pdlf/pdlf-library/docs-local/pdlf-todo.md)
 
 ## Multi-project context
 
