@@ -1,11 +1,11 @@
 ---
 title: "CONTEXT"
 doc-id: "mb-fcd66dfb"
-updated: "2026-10-09"
+updated: "2026-10-10"
 ---
 # CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
 
-Domain glossary and key concepts for agent skills that need project context ([[[pdlf:makepdlf-project-library/stepwise/step-16-domain-modeling|Step 16 Domain Modeling]]](C:/pdlf/makepdlf-project-library/stepwise/step-16-domain-modeling.md), `grill-with-docs`, `tdd`, `diagnosing-bugs`, [[[pdlf:makepdlf-project-library/stepwise/step-40-improve-codebase-architecture|Step 40 Improve Codebase Architecture]]](C:/pdlf/makepdlf-project-library/stepwise/step-40-improve-codebase-architecture.md), `codebase-design`).
+Domain glossary and key concepts for agent skills that need project context ([[[pdlf:stepwise/step-16-domain-modeling|Step 16 Domain Modeling]]](C:/pdlf/stepwise/step-16-domain-modeling.md), `grill-with-docs`, `tdd`, `diagnosing-bugs`, [[[pdlf:stepwise/step-40-improve-codebase-architecture|Step 40 Improve Codebase Architecture]]](C:/pdlf/stepwise/step-40-improve-codebase-architecture.md), `codebase-design`).
 
 ## Repository architecture
 
@@ -57,7 +57,7 @@ Architecture Decision Records live in `adr-local/` (currently 3). Major architec
 
 - **Devlog index**: `devlog-index.md` — reverse-chronological task completion log
 - **Judgement trail**: `judgement-trail.md` — flagged issues, decisions, approved deviations
-- **Active todo**: [[[pdlf:makepdlf-project-library/docs-local/dev-makepdlf-todo|Active PDLF To-Do List]]](C:/pdlf/makepdlf-project-library/docs-local/dev-makepdlf-todo.md)
+- **Active todo**: [[[pdlf:pdlf-library/docs-local/dev-makepdlf-todo|Active PDLF To-Do List]]](C:/pdlf/pdlf-library/docs-local/dev-makepdlf-todo.md)
 
 ## Multi-project context
 
