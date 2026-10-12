@@ -1,11 +1,11 @@
 ---
 title: "CONTEXT"
 doc-id: "mb-fcd66dfb"
-updated: "2026-10-11"
+updated: "2026-10-12"
 ---
 # CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
 
-Domain glossary and key concepts for agent skills that need project context ([[[pdlf:app-factory/phase-b-discover-and-define/16-domain-modeling|Step 16 Domain Modeling]]](C:/pdlf/app-factory/phase-b-discover-and-define/16-domain-modeling.md), `grill-with-docs`, `tdd`, `diagnosing-bugs`, [[[pdlf:app-factory/phase-e-build-and-verify/40-improve-codebase-architecture|Step 40 Improve Codebase Architecture]]](C:/pdlf/app-factory/phase-e-build-and-verify/40-improve-codebase-architecture.md), `codebase-design`).
+Domain glossary and key concepts for agent skills that need project context (Step 16 Domain Modeling, `grill-with-docs`, `tdd`, `diagnosing-bugs`, Step 40 Improve Codebase Architecture, `codebase-design`).
 
 ## Repository architecture
 

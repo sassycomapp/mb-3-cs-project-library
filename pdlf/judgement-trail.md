@@ -1,7 +1,7 @@
 ---
 title: "judgement-trail"
 doc-id: "mb-117d5961"
-updated: "2026-10-11"
+updated: "2026-10-12"
 ---
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
@@ -98,7 +98,7 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 **Developer decision:** Added `## Task completion` and `## Environment` sections to all 4 agent files.
 
 **Issue flagged:** 52 command files in `.opencode/commands/` — 3 duplicates, 2 broken headers, 5 formatting outliers.
-**Developer decision:** Removed duplicates (`gstack-context-save.md`, `gstack-learn.md`, `gstack-upgrade.md`). Fixed headers ([[[pdlf:app-factory/phase-d-scaffold-and-assemble/32-physical-scaffold-build|Step 32 Physical Scaffold Build]]](C:/pdlf/app-factory/phase-d-scaffold-and-assemble/32-physical-scaffold-build.md), `review.md`). Standardized 5 outliers.
+**Developer decision:** Removed duplicates (`gstack-context-save.md`, `gstack-learn.md`, `gstack-upgrade.md`). Fixed headers (Step 32 Physical Scaffold Build, `review.md`). Standardized 5 outliers.
 
 **Issue flagged:** mb-3-cs project library agent files (plan/build) now part of PDLF transition. All projects are PDLF projects.
 **Developer decision:** Project configs (`opencode.json`) created for mb4ecom and mb5pdlf for proper OpenCode operation. PDLF-specific config handled in later pass.
