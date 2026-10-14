@@ -1,7 +1,7 @@
 ---
 title: "judgement-trail"
 doc-id: "mb-117d5961"
-updated: "2026-10-12"
+updated: "2026-10-14"
 ---
 # Judgement Trail
 Flagged issues, developer decisions, and approved deviations, extracted per task.
@@ -69,7 +69,7 @@ Flagged issues, developer decisions, and approved deviations, extracted per task
 **Developer decision:** Established the PGLite operational pattern: stop serve → run CLI commands → restart serve. Documented in gbrain-config-reference.md §7.
 
 **Issue flagged:** GBrain at v0.42.44.0, PGLite engine. All workspace docs said v0.18.2, Supabase engine, OpenRouter proxy, local `embedding.ts` patch.
-**Developer decision:** Updated 6 files to reflect current reality: `gbrain-install-plan.md`, `gbrain-repo-strategy.md`, [[[mybizz-config-docs:gbrain/gbrain-log|Log]]](C:/mybizz/mybizz-config-docs/gbrain/gbrain-log.md), [[[mybizz-config-docs:gbrain/gbrain-reference|Reference: Commands, Mechanics, Incidents, Troubleshooting]]](C:/mybizz/mybizz-config-docs/gbrain/gbrain-reference.md), `gbrain-operating-guide.md`, `opencode-setup.md`. Removed stale references to OpenRouter patch and Supabase project ID.
+**Developer decision:** Updated 6 files to reflect current reality: `gbrain-install-plan.md`, `gbrain-repo-strategy.md`, Log, [[[mybizz-config-docs:gbrain/gbrain-reference|Reference: Commands, Mechanics, Incidents, Troubleshooting]]](C:/mybizz/mybizz-config-docs/gbrain/gbrain-reference.md), `gbrain-operating-guide.md`, `opencode-setup.md`. Removed stale references to OpenRouter patch and Supabase project ID.
 
 **Issue flagged:** ZeroEntropy reranker failing (230 audit log entries over 3 weeks) — `ZEROENTROPY_API_KEY` not set.
 **Developer decision:** API key provided by developer. Configured in `~/.bashrc` (persistent) and OpenCode MCP environment (for serve process). Reranker enabled via `gbrain config set search.reranker.enabled true`.
