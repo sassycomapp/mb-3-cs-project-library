@@ -23,7 +23,7 @@
       "wget*|*bash": "deny"
     },
     "external_directory": {
-      "C:\\dev\\dev-mb-3-cs\\mb-3-cs\\**": "allow"
+      "/mnt/c/dev/dev-mb-3-cs/mb-3-cs-app1/**": "allow"
     }
   },
   "agent": {
