@@ -3,7 +3,7 @@
   "default_agent": "plan",
   "permission": {
     "edit": {
-      "*": "ask"
+      "*": "allow"
     },
     "webfetch": "ask",
     "bash": {
@@ -22,9 +22,7 @@
       "wget*|*sh": "deny",
       "wget*|*bash": "deny"
     },
-    "external_directory": {
-      "/mnt/c/dev/dev-mb-3-cs/mb-3-cs-app1/**": "allow"
-    }
+    "external_directory": { "*": "allow" }
   },
   "agent": {
     "plan": {
