@@ -1,7 +1,7 @@
 ---
 title: "mybizz-ai-implementation-spec-v3 (1)"
 doc-id: "mb-181ea09c"
-updated: "2026-10-01"
+updated: "2026-10-20"
 ---
 # Mybizz AI and Voice — V3 Specification
 
@@ -32,6 +32,7 @@ V2 delivered Tiers 1, 2, and 3. V3 adds Tiers 4 and 5.
 The user speaks a complete record. Mybizz parses the spoken input into structured data and pre-fills the relevant form for the user to review and confirm. The user does not type anything — they speak, review, and confirm.
 
 **Examples:**
+
 - "New booking — Sarah Johnson, Swedish massage, Friday 2pm" → booking form pre-filled, user confirms
 - "New contact — Thabo Nkosi, thabo at gmail dot com, referred by Naledi" → contact form pre-filled
 - "Create invoice for 3 hours consulting at R800 per hour for Makena Ltd" → invoice pre-filled
@@ -40,6 +41,7 @@ The user speaks a complete record. Mybizz parses the spoken input into structure
 Tier 2 (task creation) is simple — one field, one action. Tier 4 requires entity extraction from natural speech and mapping extracted values to specific form fields. Each form type (booking, contact, invoice) needs its own entity extraction prompt design.
 
 **Build requirements:**
+
 - Per-form entity extraction prompt for each supported form type
 - Pre-fill logic mapping extracted entities to Anvil form fields
 - Confirmation step before saving — the user always reviews before committing
@@ -47,26 +49,31 @@ Tier 2 (task creation) is simple — one field, one action. Tier 4 requires enti
 
 ### Tier 5 — Aggregated data queries and intelligence
 
-Complex queries requiring cross-referencing, trend analysis, or multi-step reasoning across the user's data. Deferred from V2 because they require meaningful data volume to produce credible answers, and because the AI query layer needs to be mature before adding this complexity.
+Complex queries requiring cross-referencing, trend analysis, or multi-step reasoning across the user's data. Deferred from V2 because they require meaningful data volume to produce credible answers, and because the AI query layer needs to be mature before adding this complexity. 
+**Create and test with dummy data**
 
 **Revenue intelligence:**
+
 - "What is my best performing service by revenue this month?"
 - "How does this month's revenue compare to last month?"
 - "Which service has the most cancellations?"
 - "What is my average booking value?"
 
 **Client intelligence:**
+
 - "Who are my top 5 clients by spend?"
 - "Which clients haven't booked in more than 60 days?"
 - "What is my client retention rate?"
 - "Which clients came from my landing page?"
 
 **Marketing intelligence:**
+
 - "How many leads came in this week?"
 - "Which campaign had the best open rate?"
 - "How many blog posts have I published this month?"
 
 **Predictive and advisory:**
+
 - "Am I on track to hit last month's revenue?"
 - "Which days of the week are my busiest?"
 - "What time slots are most popular?"
@@ -83,6 +90,7 @@ Three features that go beyond query-and-response and represent a meaningfully de
 Mybizz speaks to the user without being asked. On opening the app — or via the WhatsUp mobile shortcut — Mybizz delivers a short spoken morning brief covering what matters right now. No query needed. The system decides what is worth saying based on the user's data.
 
 **Suggested brief content:**
+
 - Today's booking schedule
 - Outstanding invoices
 - Overdue tasks
@@ -92,6 +100,7 @@ Mybizz speaks to the user without being asked. On opening the app — or via the
 **Design principle:** The brief should be concise — 20 to 30 seconds spoken. Not a data dump. Curated, prioritised, actionable.
 
 **Build requirements:**
+
 - A "brief generation" server function that queries across bookings, invoices, tasks, and leads
 - A morning brief prompt that converts the data into a natural-sounding spoken summary
 - TTS delivery via browser SpeechSynthesis (same as V2) or upgraded to Groq TTS if quality warrants
@@ -102,11 +111,13 @@ Mybizz speaks to the user without being asked. On opening the app — or via the
 V2 is single-shot — one question, one answer, session ends. V3 adds multi-turn conversation within a voice session. The user can ask a follow-up question in the context of the previous answer.
 
 **Example:**
+
 - "What payments came in today?" → *[Mybizz answers: R2,400 from three clients]*
 - "And what's still outstanding from last week?" → *[Mybizz answers in context]*
 - "Send Naledi a reminder" → *[Mybizz creates the task]*
 
 **Build requirements:**
+
 - Session memory within the voice interaction — a short context window held in the component state
 - The AI layer receives the prior exchange as context when composing each new response
 - Session terminates on explicit close, timeout, or navigation away from the current form
@@ -205,13 +216,13 @@ Before any V3 development begins, confirm all of the following:
 
 ## Cost Model for V3
 
-| Feature | Provider | Paid by | Notes |
-|---|---|---|---|
-| Tier 4 entity extraction | LLM (same as V2) | Mybizz | Slightly higher token usage per interaction than V2 queries |
-| Tier 5 aggregated queries | LLM (same as V2) | Mybizz | Higher token usage — data context is larger |
-| Proactive briefings | LLM + Groq Whisper/TTS | Mybizz | One brief generation per user per day — manageable |
-| Conversational follow-up | LLM (same as V2) | Mybizz | Minimal additional cost — context window is short |
-| TTS upgrade (if triggered) | Groq TTS | Mybizz | Same negligible cost range as Groq Whisper |
+| Feature                    | Provider               | Paid by | Notes                                                       |
+| -------------------------- | ---------------------- | ------- | ----------------------------------------------------------- |
+| Tier 4 entity extraction   | LLM (same as V2)       | Mybizz  | Slightly higher token usage per interaction than V2 queries |
+| Tier 5 aggregated queries  | LLM (same as V2)       | Mybizz  | Higher token usage — data context is larger                 |
+| Proactive briefings        | LLM + Groq Whisper/TTS | Mybizz  | One brief generation per user per day — manageable          |
+| Conversational follow-up   | LLM (same as V2)       | Mybizz  | Minimal additional cost — context window is short           |
+| TTS upgrade (if triggered) | Groq TTS               | Mybizz  | Same negligible cost range as Groq Whisper                  |
 
 No additional cost passes to the client for any V3 voice or AI feature.
 
