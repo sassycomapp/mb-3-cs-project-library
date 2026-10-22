@@ -1,7 +1,7 @@
 ---
 title: "architecture"
 doc-id: "mb-7d6be180"
-updated: "2026-10-01"
+updated: "2026-10-22"
 ---
 # Mybizz CS — Architecture
 
@@ -13,21 +13,21 @@ updated: "2026-10-01"
 
 ## 1. The Five-App System
 
-Mybizz runs on five applications within a single Anvil account (see [[[default:adr-global/adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]]](C:/dev/project-library-global/adr-global/adr-client-instance-readme-five-app-system.md) ADR):
+Mybizz runs on five applications; Apps 1, 2, 3 and 5 are on Mybizz's Anvil account and each client instance is on its client's own account (see [[[default:adr-global/adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]]](C:/dev/project-library-global/adr-global/adr-client-instance-readme-five-app-system.md) ADR):
 
 ### mb-3-cs
-The development workspace. All feature work happens here. Connected to GitHub as the shared
-source of truth between Anvil.works and VS Code. Never a dependency for any client instance.
+The development workspace (App 1, `mb-3-cs-app1`). All feature work happens here. Connected to GitHub as the shared
+source of truth between Anvil.works and the local copy agents work in. Never a dependency for any client instance.
 
 ### master_template
-The sole source of all server-side logic and UI forms for every client instance. Tracks the
-`stable` GitHub branch. A frozen, versioned snapshot of mb-3-cs's proven work — never given to
+The sole source of all server-side logic and UI forms for every client instance. Receives
+App 1's tagged releases, pushed into its repository by the developer (Step 42). A frozen, versioned snapshot of mb-3-cs's proven work — never given to
 clients directly. Client instances depend on it entirely; there is no copy to fall out of date
 and no separate "deploy" step for a client instance — it simply reflects whatever
 `master_template` currently contains.
 
 ### blank_client_template
-The provisioning clone source. Contains the 43-table schema, one startup module, and
+The provisioning clone source. Contains the 44-table schema ([[[mb-3-cs-project-library:docs-local/authoritative-schema]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/authoritative-schema.md)), one startup module, and
 `master_template` as a dependency. **Zero server modules, zero forms.** Every new client instance
 is cloned from this app, not built from scratch.
 
@@ -45,9 +45,6 @@ Client instances expose management HTTP endpoints from day one so that Mybizz_ma
 communicate with them when built. **See:** [[[default:specifications-global/spec-api-specification|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md) (API Specification — management endpoints),
 [[[default:adr-global/adr-mybizz-management-visibility|Mybizz_management Visibility and Control]]](C:/dev/project-library-global/adr-global/adr-mybizz-management-visibility.md) ADR.
 
-**Note:** mb-2-cs was the original development application and has been deprecated. All
-development has migrated to mb-3-cs.
-
 **See:** [[[default:adr-global/adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]]](C:/dev/project-library-global/adr-global/adr-client-instance-readme-five-app-system.md) ADR (Mandatory README in Every Client Instance)
 
 ---
@@ -58,8 +55,8 @@ Because a client instance (App 4) inherits all logic and UI live from `master_te
 form or server module directly to a client instance does not extend that instance — it silently
 and permanently overrides the dependency for that instance only, with no error or warning. That
 instance stops receiving any future update to `master_template`. If a change is needed for a
-specific client, it belongs in `mb-3-cs`, tested against a private client instance, then merged
-`develop` → `stable` into `master_template` — after which every client instance, including the
+specific client, it belongs in `mb-3-cs`, tested against a private client instance, then released
+into `master_template` (Step 42) — after which every client instance, including the
 one that prompted the change, receives it automatically. Per [[[default:adr-global/adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]]](C:/dev/project-library-global/adr-global/adr-client-instance-readme-five-app-system.md) ADR, every client instance
 carries a README stating this explicitly from the moment of provisioning; if you are working
 directly in a client instance app and don't see that README, stop and locate it before proceeding.
@@ -83,8 +80,8 @@ by building a fresh app. The clone brings the schema, the startup module, and th
 
 ## 3. Development Workflow
 
-Changes made in VS Code are pushed to GitHub. Anvil syncs from GitHub. Changes made in the Anvil
-Designer are pulled into VS Code before any code draft prompt is run. Designer work must always
+Agents work in the local copy of App 1 and the developer pushes to GitHub; Anvil syncs from GitHub. Changes made in the Anvil
+Designer are pulled into the local copy with Step 18's pull procedure before any agent edits code. Designer work must always
 precede code work for any given form. This workflow applies to `mb-3-cs` only — see the warning
 above regarding client instances.
 

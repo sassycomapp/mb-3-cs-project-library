@@ -1,7 +1,7 @@
 ---
 title: "calendar-feature-spec"
 doc-id: "mb-2e6a1c57"
-updated: "2026-10-01"
+updated: "2026-10-22"
 ---
 Calendar Feature Plan — Anvil + Material 3
 Core Decision
@@ -44,7 +44,7 @@ REQUIRED APPROACH
 Use:
 
 3 separate forms dynamically loaded into content_panel
-frm_calendar_month — HTMLTemplate with CSS Grid
+frm_calendar_month — DataGrid with seven day columns
 frm_calendar_week — RepeatingPanel with tmpl_week_timeslot
 frm_calendar_day — RepeatingPanel with tmpl_day_event
 
@@ -71,7 +71,7 @@ BookingCalendarForm
 │   │   └── btn_view_day (Button)
 │   └── content_panel (ColumnPanel)
 │
-├── frm_calendar_month (HTMLTemplate-based)
+├── frm_calendar_month (DataGrid-based)
 │   └── tmpl_month_day_cell (template subform)
 │
 ├── frm_calendar_week (RepeatingPanel-based)
@@ -93,9 +93,8 @@ Render month grid view.
 
 Layout:
 
-HTMLTemplate with CSS Grid (7 columns)
-tmpl_month_day_cell repeated for each day cell
-No DataGrid — pure HTML/CSS grid
+DataGrid (grid_month) with seven columns, Mon to Sun, whose titles are the weekday names
+One DataRowPanel per week (up to six), each holding seven tmpl_month_day_cell components, one per column
 Dynamic day rendering based on month
 
 frm_calendar_week
@@ -130,7 +129,7 @@ Event containers	InteractiveCard
 Clickable events	InteractiveCard
 Dynamic rows	RepeatingPanel
 Main content injection	add_component()
-HTML rendering	HTMLTemplate
+Month grid	DataGrid with DataRowPanel
 5. TEMPLATE SUBFORMS
 tmpl_month_day_cell
 Purpose: Single day cell in month grid
@@ -198,7 +197,7 @@ InteractiveCard — For all clickable events
 ColumnPanel — For vertical layouts
 FlowPanel — For horizontal layouts
 RepeatingPanel — For dynamic lists
-HTMLTemplate — For month grid
+DataGrid — For the month grid (seven day columns)
 standard Buttons — For navigation
 standard DropDown — For staff selection
 
@@ -292,61 +291,43 @@ def dd_staff_change(self, **event_args):
     self.load_view(self.current_view)  # Reloads with filter
 10. MONTH VIEW IMPLEMENTATION
 frm_calendar_month
-Purpose: HTMLTemplate-based month grid
+Purpose: DataGrid-based month grid, built only from Material 3 and Anvil's own containers
 
-HTMLTemplate Structure:
-<div class="calendar-month-container">
-  <div class="calendar-toolbar">
-    <button class="nav-btn">&lt;</button>
-    <div class="calendar-title">{{ current_month }}</div>
-    <button class="nav-btn">&gt;</button>
-  </div>
-  <div class="calendar-weekdays">
-    <div>Mon</div><div>Tue</div><div>Wed</div>
-    <div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
-  </div>
-  <div class="calendar-grid" anvil-slot-repeat="day_cells">
-  </div>
-</div>
-
-CSS Grid (applied programmatically):
-.calendar-month-container { width: 100%; }
-.calendar-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-.calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-}
-@media (max-width: 768px) {
-  .calendar-grid { gap: 4px; }
-}
+Structure:
+col_month (ColumnPanel)
+  ├── flow_month_toolbar (FlowPanel)
+  │   ├── btn_prev_month (IconButton, mi:chevron_left)
+  │   ├── hdg_month_title (Heading)
+  │   └── btn_next_month (IconButton, mi:chevron_right)
+  └── grid_month (DataGrid)
+      columns: mon, tue, wed, thu, fri, sat, sun (titles Mon to Sun, equal widths)
+      rows_per_page: 6; show_page_controls: False
+      └── one DataRowPanel per week, holding seven tmpl_month_day_cell components
 
 frm_calendar_month Implementation:
 class frm_calendar_month(frm_calendar_monthTemplate):
+    COLUMNS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+
     def form_show(self, **event_args):
-        # Generate day cells for current month
-        day_cells = self.generate_month_grid()
-        self.day_cells = day_cells  # Populates anvil-slot-repeat
+        self.render_month()
+
+    def render_month(self):
+        self.grid_month.clear()
+        for week in self.generate_month_grid():  # list of weeks, each a list of 7 day dicts
+            row = DataRowPanel()
+            for column, day in zip(self.COLUMNS, week):
+                row.add_component(tmpl_month_day_cell(item=day), column=column)
+            self.grid_month.add_component(row)
 
     def generate_month_grid(self):
-        # Returns list of day cell data
-        # Each cell: {'day': 15, 'is_today': False, 'events': [...]}
+        # Returns a list of weeks; each day: {'day': 15, 'in_month': True, 'is_today': False, 'events': [...]}
         pass
+
+Responsive behaviour: the DataGrid keeps seven equal columns at every width; below 600 px each tmpl_month_day_cell shows its day number and an event count instead of event cards.
 
 Designer-Only Properties:
 Component	Type	Property
-HTMLTemplate	HTMLTemplate	anvil-slot-repeat="day_cells"
+grid_month	DataGrid	columns mon to sun, rows_per_page 6, show_page_controls False
 11. WEEK VIEW IMPLEMENTATION
 frm_calendar_week
 Purpose: RepeatingPanel-based week view
@@ -421,7 +402,7 @@ BookingCalendarForm
 │   │   └── btn_view_day (Button)
 │   └── content_panel (ColumnPanel)
 │
-├── frm_calendar_month (HTMLTemplate)
+├── frm_calendar_month (DataGrid)
 │   └── tmpl_month_day_cell (template subform)
 │
 ├── frm_calendar_week (RepeatingPanel)

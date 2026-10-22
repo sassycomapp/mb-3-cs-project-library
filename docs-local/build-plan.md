@@ -1,7 +1,7 @@
 ---
 title: "build-plan"
 doc-id: "mb-e9bc1d1c"
-updated: "2026-10-05"
+updated: "2026-10-22"
 ---
 ---
 type: concept
@@ -30,7 +30,7 @@ source_kind: put_page
 | [[[default:specifications-global/spec-integration\|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) | Brevo, Stripe, Paystack integration patterns |
 | [[[default:specifications-global/spec-api-specification\|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md) | HTTP endpoints (webhooks, management) |
 | [[[default:specifications-global/spec-testing-methodology-standards\|Testing Methodology]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) | Testing levels, pure logic, Uplink safety protocol |
-| [[[default:specifications-global/spec-testing\|Test Specification (Canonical)]]](C:/dev/project-library-global/specifications-global/spec-testing.md) | Test specifications, E2E flows, RBAC matrix |
+| [[[mb-3-cs-project-library:docs-local/mb-3-cs-test-specification]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/mb-3-cs-test-specification.md) | Test specifications, E2E flows, RBAC matrix |
 | [[[default:specifications-global/spec-regulatory-compliance-baseline\|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md) | POPIA, GDPR, PCI DSS compliance |
 
 ---
@@ -58,7 +58,7 @@ source_kind: put_page
 **Next Review:** After Phase 1 implementation completion
 **CEO Review:** 2026-06-15 — 11 sections reviewed, 14 TODO items captured (see todo.md section 8), plan changes applied
 **Eng Review:** 2026-06-16 — 5 dilemmas reviewed, 4 completable items executed (see todo.md section 9)
-**Test Specs:** Testing specifications consolidated into this build plan (see Phase 5.4 Testing & QA, build-plan.md Stage 5.4 completion criteria, and self-review checklists). Separate testing specifications are in [[[default:specifications-global/spec-testing-methodology-standards|Testing Methodology]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) and [[[default:specifications-global/spec-testing|Test Specification (Canonical)]]](C:/dev/project-library-global/specifications-global/spec-testing.md).
+**Test Specs:** Testing specifications consolidated into this build plan (see Phase 5.4 Testing & QA, build-plan.md Stage 5.4 completion criteria, and self-review checklists). Separate testing specifications are in [[[default:specifications-global/spec-testing-methodology-standards|Testing Methodology]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) and [[[mb-3-cs-project-library:docs-local/mb-3-cs-test-specification|Test Specification (Canonical)]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/mb-3-cs-test-specification.md).
 **State Contract:** [[[default:docs-standard-global/docstd-globals-contract|globals.py Contract]]](C:/dev/project-library-global/docs-standard-global/docstd-globals-contract.md) — shared state variables and defensive loading pattern
 
 ---

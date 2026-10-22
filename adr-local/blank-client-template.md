@@ -1,7 +1,7 @@
 ---
 title: "blank-client-template"
 doc-id: "mb-8829bc8a"
-updated: "2026-10-01"
+updated: "2026-10-22"
 ---
 # `blank-client-template` ADR — blank_client_template as Provisioning Clone Source
 
@@ -14,13 +14,13 @@ updated: "2026-10-01"
 
 ## Context
 
-Every new client instance requires 36 pre-defined Data Tables with the correct schema before master_template's server modules can function. Anvil provides no programmatic API for creating Data Tables — they must be defined in the IDE. A fresh blank Anvil app has zero tables.
+Every new client instance requires 44 pre-defined Data Tables with the correct schema before master_template's server modules can function. Anvil provides no programmatic API for creating Data Tables — they must be defined in the IDE. A fresh blank Anvil app has zero tables.
 
-Three options were evaluated for how a new client instance acquires its 36 tables:
+Three options were evaluated for how a new client instance acquires its 44 tables:
 
 1. **Clone master_template** — produces a full code copy; client instance then has its own server modules which take precedence over the dependency, permanently breaking update propagation (see [[[default:adr-global/adr-client-instance-architecture|Client Instance Architecture]]](C:/dev/project-library-global/adr-global/adr-client-instance-architecture.md) ADR)
-2. **Manual table creation per client** — 36 manual steps per new client; not workable at scale
-3. **A dedicated blank provisioning app** — pre-configured with 36 tables, master_template as dependency, and no server modules of its own
+2. **Manual table creation per client** — 44 manual steps per new client; not workable at scale
+3. **A dedicated blank provisioning app** — pre-configured with 44 tables, master_template as dependency, and no server modules of its own
 
 Option 3 is the correct solution.
 
@@ -34,7 +34,7 @@ A fifth app, `blank_client_template`, is maintained on the mybizz Anvil account.
 
 | Component | Present | Notes |
 |---|---|---|
-| All 36 Data Tables | ✅ | Correct schema; no data |
+| All 44 Data Tables | ✅ | Correct schema; no data |
 | Startup module | ✅ | One minimal module; imports and opens first form from master_template |
 | master_template as dependency | ✅ | Set to stable branch; present so it is inherited by every clone |
 | Server modules | ❌ | Must never be added |
@@ -57,7 +57,7 @@ When a new client is onboarded:
 
 1. Clone `blank_client_template` in the Anvil IDE
 2. Rename the clone to the client identifier
-3. The clone immediately has all 36 tables, the startup module, and master_template wired as dependency
+3. The clone immediately has all 44 tables, the startup module, and master_template wired as dependency
 4. Proceed with remaining activation steps (see [[[default:specifications-global/spec-client-activation-runbook|Client Instance Activation Runbook]]](C:/dev/project-library-global/specifications-global/spec-client-activation-runbook.md))
 
 ---
@@ -82,7 +82,7 @@ A schema change must never be merged to `stable` (master_template) without a doc
 | Alternative | Reason rejected |
 |---|---|
 | Clone master_template | Copies server module code; breaks dependency update model ([[[default:adr-global/adr-client-instance-architecture\|Client Instance Architecture]]](C:/dev/project-library-global/adr-global/adr-client-instance-architecture.md) ADR) |
-| Manual table creation | 36 steps per client; error-prone; not scalable |
+| Manual table creation | 44 steps per client; error-prone; not scalable |
 | Programmatic table creation | Not supported in Anvil — tables cannot be created via code |
 | Clone an existing client instance | Risks copying live client data; requires data wipe; error-prone |
 
@@ -104,10 +104,10 @@ A schema change must never be merged to `stable` (master_template) without a doc
 
 | App | Role |
 |---|---|
-| `mb-3-cs` | Development workspace — all code, all forms, all server modules, 36 tables |
+| `mb-3-cs` | Development workspace — all code, all forms, all server modules, 44 tables |
 | `master_template` | Published dependency — all server modules + all forms + all UI |
-| `blank_client_template` | Provisioning clone source — 36 tables + startup module only |
-| `[client instances]` | One per client — 36 tables + startup module + master_template dependency (active) |
+| `blank_client_template` | Provisioning clone source — 44 tables + startup module only |
+| `[client instances]` | One per client — 44 tables + startup module + master_template dependency (active) |
 | `Mybizz_management` | Platform operator tooling (deferred) |
 
 ---

@@ -1,20 +1,14 @@
 ---
 title: "development-policy"
 doc-id: "mb-509458a0"
-updated: "2026-10-01"
+updated: "2026-10-22"
 ---
 # Mybizz CS — Development Policy
 
 **Category:** Policy (not Specification — see note below)
 **Authority:** Mandatory — all development work must conform to this policy
 
-**Note on this revision:** This document previously mixed Policy content with Specification
-content. The Specification content (M3 usage rules, navigation, code quality, error handling,
-naming conventions, package structure, performance standards, security, and regulatory
-compliance) was already fully covered by [[[default:specifications-global/spec-anvil-platform-standards|Anvil Platform Mechanics]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md),
-[[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md), and `security-architecture-canonical.md` — nothing was lost, it
-was simply removed from here as duplicate. What remains below is genuine Policy: rules about how
-decisions get made and how the team operates, not technical specifications.
+**Scope:** How `mb-3-cs` development is run. Technical standards are in [[[default:specifications-global/spec-anvil-platform-standards]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md), [[[default:specifications-global/spec-m3-design-standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) and [[[default:specifications-global/spec-security-architecture]]](C:/dev/project-library-global/specifications-global/spec-security-architecture.md).
 
 ---
 
@@ -34,28 +28,21 @@ inadequate.
 
 The approved exception is The Vault. Client API keys cannot go in Anvil Secrets because doing so
 would require giving clients IDE access. The Vault is an application-level encrypted secrets
-store (see [[[default:specifications-global/spec-anvil-platform-standards|Anvil Platform Mechanics]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md) Section 10 for the technical pattern).
+store (see [[[default:specifications-global/spec-vault-system]]](C:/dev/project-library-global/specifications-global/spec-vault-system.md) for the technical pattern).
 
 ---
 
 ## 2. Version Control and Backup
 
-Commit format: `[TYPE] Brief description` where TYPE is one of FEATURE, FIX, REFACTOR, SECURITY.
+All development happens in App 1 (`mb-3-cs-app1`). Agents never commit or push; the developer commits every repository with `commit-all`. A release is App 1's code tagged `vMAJOR.MINOR.PATCH` and pushed by the developer into App 2 (Step 42), as [[[default:specifications-global/spec-deployment]]](C:/dev/project-library-global/specifications-global/spec-deployment.md) sets out.
 
-Branching strategy: `master` (production), `dev` (development integration),
-`feature/feature-name`, `fix/bug-description`.
-
-Backup protocol: see [[[default:specifications-global/spec-testing-methodology-standards|Testing Methodology]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) Section 4 for the two-backup-point
-discipline (before integration tests, after tests pass). Never back up a red or failing state.
+Backup protocol: see [[[default:specifications-global/spec-testing-methodology-standards]]](C:/dev/project-library-global/specifications-global/spec-testing-methodology-standards.md) section 4 — App 1 is backed up before and after every test run on hosted App 1; every client instance is backed up to its own R2 bucket before a release. Never back up a red or failing state.
 
 ---
 
 ## 3. Development Tooling
 
-Development environment: VS Code with Continue.dev as the agent. The Anvil app is connected to
-GitHub as the shared source of truth. Changes made in VS Code are pushed to GitHub; Anvil syncs
-from GitHub. Changes made in the Anvil Designer are pulled into VS Code before any code draft
-prompt is run.
+Development environment: OpenCode, used through its web UI, with the PDLF step skills, working in WSL. Each Anvil app is connected to GitHub as the shared source of truth. Changes made in the Anvil Designer are pulled into the local copy with Step 18's pull procedure before any agent edits code.
 
 ---
 
@@ -70,10 +57,3 @@ prompt is run.
 
 Security issues are always Critical. RBAC violations, secret handling errors, and any code that
 returns sensitive data to the client are treated as Critical.
-
----
-
-*Development Policy v3.0 — Specification content fully removed (was duplicate of
-spec-anvil-platform-standards.md, spec-m3-design-standards.md, and
-security-architecture-canonical.md). Only genuine Policy content remains: the Anvil-First
-mandate, version control/backup rules, tooling, and enforcement severity levels.*

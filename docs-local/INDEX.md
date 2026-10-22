@@ -1,7 +1,7 @@
 ---
 title: "INDEX"
 doc-id: "mb-33cd8aba"
-updated: "2026-10-01"
+updated: "2026-10-22"
 ---
 # Mybizz CS — Local Documentation Index
 
@@ -65,14 +65,13 @@ Global resources referenced from these documents live in:
 
 | File | Title | Description |
 |---|---|---|
-| [[[mb-3-cs-project-library:docs-local/changelog\|CHANGELOG]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/CHANGELOG.md) | Changelog | **EMPTY** — to be populated with versioned change history |
-| [[[mb-3-cs-project-library:docs-local/context\|mb-3-cs (Mybizz Consulting Services)]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/CONTEXT.md) | Project Context | **EMPTY** — to be populated with session context, current state, and active decisions |
+| [[[mb-3-cs-project-library:docs-local/changelog\|CHANGELOG]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/CHANGELOG.md) | Changelog | Versioned change history |
+| [[[mb-3-cs-project-library:docs-local/context\|mb-3-cs (Mybizz Consulting Services)]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/CONTEXT.md) | Project Context | Domain glossary, repositories and key concepts |
 
 ---
 
 ## Notes
 
-- **CONTEXT.md** and **CHANGELOG.md** are currently empty. These gaps are flagged in the documentation integration report.
 - **README.md** does not exist in this directory. The project README lives at the repository root.
 - All cross-references to global documents (ADRs, specifications) use descriptive slugs (e.g., [[[default:adr-global/adr-anvil-platform-constraints|Anvil Platform Constraints and Design Boundaries]]](C:/dev/project-library-global/adr-global/adr-anvil-platform-constraints.md) ADR, [[[default:specifications-global/spec-deployment|Deployment Specification]]](C:/dev/project-library-global/specifications-global/spec-deployment.md)). Legacy numeric-prefix references (e.g., `4-lead-capture-simultaneous-creation.md`) are stale — see the integration report for full findings.
 - The `docs-standard-global/` directory contains placeholder documents not yet verified for integration — their correction is a separate workstream.

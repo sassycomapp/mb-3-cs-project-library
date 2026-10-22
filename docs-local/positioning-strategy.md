@@ -1,7 +1,7 @@
 ---
 title: "positioning-strategy"
 doc-id: "mb-f23e1822"
-updated: "2026-10-07"
+updated: "2026-10-22"
 ---
 # Mybizz — Business Strategy & Positioning Document
 
@@ -31,7 +31,7 @@ Every subscriber receives their own fully operational, isolated application inst
 **Domain:** mybizz.live
 **Platform:** Anvil.works (full-stack Python, hosted)
 **UI theme:** Material Design 3
-**Schema:** 36 data tables
+**Schema:** 44 data tables
 **Capacity:** 100 clients (V1.x)
 
 ---

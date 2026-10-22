@@ -1,7 +1,7 @@
 ---
 title: "schema-scope-reduction"
 doc-id: "mb-d146fc2b"
-updated: "2026-10-01"
+updated: "2026-10-22"
 ---
 # 11 — Schema Scope Reduction
 **Removal of Out-of-Scope Tables from anvil.yaml**
@@ -28,7 +28,7 @@ Additionally, `bookable_resources` was removed as an unnecessary abstraction —
 
 ## Decision
 
-**All out-of-scope tables are removed from the live schema.** The production table count is reduced from 49 to 36.
+**All out-of-scope tables are removed from the live schema.** The schema holds only in-scope tables; [[[mb-3-cs-project-library:docs-local/authoritative-schema]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/authoritative-schema.md) is the source of truth for the current list, which is 44 tables.
 
 ### Tables removed:
 | Table | Reason |
@@ -45,13 +45,9 @@ Additionally, `bookable_resources` was removed as an unnecessary abstraction —
 | `bookable_resources` | Unnecessary abstraction; providers are Staff users |
 | `customers` | Merged into `contacts` (`10-single-contacts-table.md`) |
 
-### Tables retained (36 total):
-- **Core (10):** activity_log, business_profile, config, email_config, files, payment_config, rate_limits, theme_config, users, vault
-- **Bookings (6):** availability_exceptions, availability_rules, booking_metadata_schemas, bookings, services, contact_submissions
-- **CRM (9):** contacts, contact_events, contact_counter, contact_campaigns, email_campaigns, segments, tasks, leads, lead_captures
-- **Email (3):** email_templates, email_log, webhook_log
-- **Content (4):** blog_posts, blog_categories, pages, landing_pages
-- **Finance (3):** invoice, invoice_items, time_entries
+### Tables retained
+
+Every table listed in [[[mb-3-cs-project-library:docs-local/authoritative-schema]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/authoritative-schema.md): Core and Configuration (10), Bookings (6), CRM (9), Email (3), Content (5), Policy (2), Finance (3) and Summary (6), 44 in all.
 
 ---
 

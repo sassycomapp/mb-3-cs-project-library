@@ -778,25 +778,25 @@ All five apps live on a single mybizz Anvil account on the Business plan (~$89/m
 
 App 1: mb-3-cs — Development Workspace
 Role: All feature development happens here.
-Contains: All 36 Data Tables (for dev/testing), all UI forms, all server modules, all application code.
-Updated via: Daily development on GitHub develop branch.
+Contains: All 44 Data Tables (for dev/testing), all UI forms, all server modules, all application code.
+Updated via: Daily development; each release is tagged here.
 Key rule: This is the authoring environment, not the publishing environment. It is never a dependency for any client instance.
 
 App 2: master_template — The Published Dependency
 Role: Sole source of all server-side logic AND all UI forms for every client instance.
 Contains: All server modules + all forms + all UI.
-Updated via: Merge develop → stable in GitHub. It tracks the stable branch automatically.
+Updated via: the developer pushes App 1's tagged release into its repository (Step 42).
 Key rule: When a client instance calls anvil.server.call('function_name'), the function executes from master_template's server modules. When a client instance displays a form, that form is served from master_template via the dependency. master_template is never given to clients directly — they depend on it.
 
 App 3: blank_client_template — Provisioning Clone Source
 Role: The sole clone source for creating new client instances.
-Contains: All 36 Data Tables (correct schema, no data) + one startup module + master_template as dependency. Zero server modules. Zero forms.
+Contains: All 44 Data Tables (correct schema, no data) + one startup module + master_template as dependency. Zero server modules. Zero forms.
 Updated via: Only when schema changes occur.
-Key rule: Anvil cannot create tables programmatically, so cloning this app gives each new client the required 36-table schema without copying any server code or forms (which would break the update model). Anvil Secrets are left empty — set per instance at provisioning.
+Key rule: Anvil cannot create tables programmatically, so cloning this app gives each new client the required 44-table schema without copying any server code or forms (which would break the update model). Anvil Secrets are left empty — set per instance at provisioning.
 
 App 4: [client-name]-cs — Client Instances (one per client)
 Role: Each paying client gets a dedicated, isolated app instance.
-Contains: 36 Data Tables + one startup module + master_template dependency (active). That's it — nothing else.
+Contains: 44 Data Tables + one startup module + master_template dependency (active). That's it — nothing else.
 Updated via: Automatic — server logic, UI, and forms all propagate via the dependency. Schema changes are manual only.
 Critical rules:
 Must never contain server modules — Anvil runs the instance's own code instead of the dependency, permanently breaking update propagation.

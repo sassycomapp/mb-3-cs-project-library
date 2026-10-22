@@ -1,7 +1,7 @@
 ---
 title: "CONTEXT"
 doc-id: "mb-fcd66dfb"
-updated: "2026-10-12"
+updated: "2026-10-22"
 ---
 # CONTEXT.md — mb-3-cs (Mybizz Consulting Services)
 
@@ -9,10 +9,15 @@ Domain glossary and key concepts for agent skills that need project context ([[[
 
 ## Repository architecture
 
-Two repos, one application:
+One project folder, `C:\dev\dev-mb-3-cs\`, holds five repositories:
 
 - **`mb-3-cs-project-library`** — documentation, ADRs, wireframes, design artefacts. The planning authority. Does not go to Anvil.
-- **`mb-3-cs`** — live application code (Python/Anvil). Build agent writes here under explicit approval. Pushed to Anvil via GitHub VC.
+- **`mb-3-cs-app1`** — App 1, the development workspace: live application code (Python/Anvil). The build agent writes here under explicit approval.
+- **`mb-3-cs-app2`** — App 2, `master_template`: receives App 1's tagged releases (Step 42). Every client instance depends on it.
+- **`mb-3-cs-app3`** — App 3, `blank_client_template`: the released schema, cloned for each new client.
+- **`mb-3-cs-app5`** — App 5, Mybizz management.
+
+Client instances (App 4) live on each client's own Anvil account.
 
 ## Anvil.works context
 
@@ -44,7 +49,7 @@ The mb-3-cs application serves Mybizz Consulting Services, a consulting practice
 
 ### Key ADR topics
 
-Architecture Decision Records live in `adr-local/` (currently 3). Major architectural decisions include:
+Architecture Decision Records live in `adr-local/` and, for every Mybizz application, in `project-library-global\adr-global\`. Major architectural decisions include:
 - Material 3 theme component scope
 - Single contacts table design
 - Consolidated build sequence
@@ -55,16 +60,14 @@ Architecture Decision Records live in `adr-local/` (currently 3). Major architec
 
 ## Tracking
 
-- **Devlog index**: `devlog-index.md` — reverse-chronological task completion log
-- **Judgement trail**: `judgement-trail.md` — flagged issues, decisions, approved deviations
+- **Step outputs**: `pdlf-outputs\{step}\` — every PDLF step's receipt and artefacts for this project
 - **Active todo**: [[[pdlf:pdlf-library/docs-local/pdlf-todo|Active PDLF To-Do List]]](C:/pdlf/pdlf-library/docs-local/pdlf-todo.md)
 
 ## Multi-project context
 
-This project is part of a multi-project workspace under `C:\projects\`:
-- **mb-3-cs** — this project (GStack-managed, transitioning to PDLF)
-- **mb4ecom** — E-Commerce (PDLF-managed)
-- **mb5pdlf** — PDLF test project (Daily Intentions Tracker)
-- **scratch** — test/experiment workspace
+This project is one of the Mybizz businesses PDLF builds, each in its own project folder under `C:\dev\`:
+- **`mb-3-cs`** — this project (`C:\dev\dev-mb-3-cs\`)
+- **`mb-4-ecom`** — e-commerce (`C:\dev\dev-mb-4-ecom\`)
+- **`mb-5-pdlf`** — PDLF's test project, the Daily Intentions Tracker (`C:\dev\dev-mb-5-pdlf\`)
 
-Shared infrastructure at `C:\mybizz\`: GStack tools, GBrain database, skills directory, Matt Pocock skills teaching workspace.
+Shared rules for every Mybizz application are in `C:\dev\project-library-global\`; PDLF itself is in `C:\pdlf\`.
