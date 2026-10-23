@@ -1,7 +1,7 @@
 ---
 title: "DESIGN"
 doc-id: "mb-190df6bf"
-updated: "2026-10-04"
+updated: "2026-10-23"
 ---
 # Mybizz CS — DESIGN
 
@@ -89,7 +89,7 @@ The intended character is:
 
 - Bright gradients, flashy hero treatments, or decorative visual noise.
 - Childish or overly playful interface language.
-- Dark mode as the primary design target. (Dark mode is included in V1 per [[[default:adr-global/adr-dark-mode-v1|Dark Mode — V1 Inclusion]]](C:/dev/project-library-global/adr-global/adr-dark-mode-v1.md) ADR.)
+- Dark mode as the primary design target. (Dark mode is included in V1 per [[default:adr-global/adr-dark-mode-v1|Dark Mode — V1 Inclusion]] ADR.)
 - Heavy animation, glassmorphism, or neumorphism.
 - Complex charts or visual systems in V1 beyond what is operationally useful.
 - Template-specific CSS divergence that breaks the shared design system.
@@ -558,7 +558,7 @@ This section defines the primary implementation-facing forms and pages in the My
 
 **Key design rules:**
 - From Email and From Name are the only per-client editable fields.
-- SMTP host, port, and encryption are platform constants (smtp-relay.brevo.com:587, TLS) — not user-configurable. See [[[default:adr-global/adr-brevo-replaces-zoho-email|Brevo Replaces All Zoho Products]]](C:/dev/project-library-global/adr-global/adr-brevo-replaces-zoho-email.md) ADR.
+- SMTP host, port, and encryption are platform constants (smtp-relay.brevo.com:587, TLS) — not user-configurable. See [[default:adr-global/adr-brevo-replaces-zoho-email|Brevo Replaces All Zoho Products]] ADR.
 - SMTP credentials (API key) stored in Vault, not in the form or database.
 - Test Connection button verifies SMTP configuration.
 - Success/error result displayed inline after test.

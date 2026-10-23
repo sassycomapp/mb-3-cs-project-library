@@ -1,7 +1,7 @@
 ---
 title: "internal-standards-anvil-wireframe-conversion"
 doc-id: "mb-aa66a967"
-updated: "2026-10-01"
+updated: "2026-10-23"
 ---
 # Internal Standards & Specifications — Anvil Wireframe Conversion
 
@@ -157,7 +157,7 @@ No dedicated accessibility specification (WCAG level targets, ARIA requirements,
 | Source | Rule |
 |--------|------|
 | Production reports (2026-06-24) | Screens include `@media (prefers-color-scheme: dark)` dark mode support. |
-| [[[default:adr-global/adr-dark-mode-v1\|Dark Mode — V1 Inclusion]]](C:/dev/project-library-global/adr-global/adr-dark-mode-v1.md) (global) | Dark mode included in V1 per ADR-46. |
+| [[default:adr-global/adr-dark-mode-v1\|Dark Mode — V1 Inclusion]] (global) | Dark mode included in V1 per ADR-46. |
 
 **Note:** Dark mode is included in V1 per ADR-46. All screens must include dark mode token overrides. Authoritative dark-mode tokens defined in [[[mb-3-cs-project-library:docs-local/design_palette_section|DESIGN Palette Section]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/DESIGN_palette_section.md).
 

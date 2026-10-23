@@ -1,7 +1,7 @@
 ---
 title: "DESIGN_palette_section"
 doc-id: "mb-1fe7e195"
-updated: "2026-10-01"
+updated: "2026-10-23"
 ---
 ## Palette System
 
@@ -374,5 +374,5 @@ Surface and neutral tokens are palette-specific and must be included in every pa
 
 ### Dark Mode
 
-Per [[[default:adr-global/adr-dark-mode-v1|Dark Mode — V1 Inclusion]]](C:/dev/project-library-global/adr-global/adr-dark-mode-v1.md) ADR, dark mode is incorporated into V1. Each palette includes dark mode token overrides.
+Per [[default:adr-global/adr-dark-mode-v1|Dark Mode — V1 Inclusion]] ADR, dark mode is incorporated into V1. Each palette includes dark mode token overrides.
 Screens must include `@media (prefers-color-scheme: dark)` blocks with the dark mode token values above.
