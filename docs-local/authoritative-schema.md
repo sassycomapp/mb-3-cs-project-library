@@ -760,7 +760,7 @@ Payment gateway secret keys stored in `vault` table only (encrypted at rest). Cr
 ### Lead Capture ([[[default:adr-global/adr-lead-capture-simultaneous-creation|Lead Capture: Simultaneous leads + contacts Creation]]](C:/dev/project-library-global/adr-global/adr-lead-capture-simultaneous-creation.md) ADR)
 When lead submitted from landing page: both `leads` and `contacts` rows created simultaneously. `leads.converted_to_contact_id` set immediately. Contact auto-enrolled in welcome campaign.
 
-### Email Architecture ([[default:adr-global/adr-brevo-replaces-zoho-email|Brevo Replaces All Zoho Products]] ADR)
+### Email Architecture ([[[default:adr-global/adr-brevo-email-and-crm|Brevo Replaces All Zoho Products]]](C:/dev/project-library-global/adr-global/adr-brevo-email-and-crm.md) ADR)
 - Brevo SMTP — Transactional email
 - Brevo Campaigns API — Marketing email
 - All clients use identical SMTP host (smtp-relay.brevo.com:587)
