@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="mb-3-cs-b11-app1 checks" time="0">
+  <testsuite name="process and static tests" errors="0" failures="0" tests="7" time="0">
+    <testcase name="PR-01">
+      <output>evidence: ledger projects row mb-3-cs (library_path, gbrain_source_docs, app paths and Anvil addresses recorded) and entry record of steps row id 4; project context mb-3-cs-project-context linked to github.com/sassycomapp/mb-3-cs-project-context, registered as the federated GBrain source, on the commit-all list and in mb-doc-check.sources, with the project-library folder empty before Step 11 made the library from the template (route B, item 12 verified in session)</output>
+    </testcase>
+    <testcase name="ST-01">
+      <output>evidence: pdlf-outputs/b11/mb-3-cs-b11-app1-validate.json — anvil --json validate .: valid true, 251 of 251 files valid, 0 invalid</output>
+    </testcase>
+    <testcase name="ST-12">
+      <output>evidence: anvil.yaml users service client_config read in session — allow_signup: false, confirm_email: true, use_email: true, require_mfa: true, require_secure_passwords: true, remember_me_days: 0.02083 (30 minutes, within the at-most-7-days standard), allow_embedding: false, users table holds the role text column — matches spec-security section 3 and the b11 Users service settings</output>
+    </testcase>
+    <testcase name="ST-10">
+      <output>evidence: each app .gitignore holds the baseline (env lines and cache lines verified in the health check, check 5); App 1 tests/ holds conftest.py, pytest.ini, ts-config.yaml (role: app1) and integration/test_pr09_environment.py; App 5 tests/ holds the same suite files; App 3 holds no code and no test setup</output>
+    </testcase>
+    <testcase name="PR-06">
+      <output>evidence: gitleaks 8.16.0 over all five repositories the step touched — mb-3-cs-b11-app1-gitleaks.json, -app2-, -app3-, -app5-: 0 findings each; mb-3-cs-b11-project-context-gitleaks.json: 8 candidates, engineer verdicts recorded in triage_findings row 8 (OpenRouter key rotated months ago by David, dead; AWS tokens benign expired Perplexity links; stripe pk_test_ placeholders benign). .env not tracked: zero commits touch it in every app, git status shows it ignored. No commit was made by the agent at any point.</output>
+    </testcase>
+    <testcase name="PR-04">
+      <output>evidence: triage_findings row id 9 (finding_id sentinel-11-app1, source_step 11, triage_label clear, resolved_at set) — mb-sentinel-review run for Step 11 at High scrutiny, all three matched security documents read in full</output>
+    </testcase>
+    <testcase name="PR-02">
+      <output>evidence: pdlf-outputs/b11/mb-3-cs-b11-app1-health-check.md — all nine SOP checks PASS, ends ALL PASS</output>
+    </testcase>
+  </testsuite>
+</testsuites>

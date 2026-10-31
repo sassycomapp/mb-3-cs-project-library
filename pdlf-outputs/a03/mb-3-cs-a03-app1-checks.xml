@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="mb-3-cs-a03-app1 checks" time="0">
+  <testsuite name="process tests" errors="0" failures="0" tests="1" time="0">
+    <testcase name="PR-01">
+      <output>evidence: ledger steps row id 4 (entry record: entry_point 03, route application, app_number 1, run app1, start_step 11, fault false, existing_apps [1, 2, 3, 5], project_context mb-3-cs-project-context, reference_platform null, statement null) and the projects row mb-3-cs / Mybizz Consulting Services / mode full. Every value confirmed by David at the entry; the app folders hold anvil.yaml; the context sits at its final path; the GBrain source mb-3-cs-project-context is registered with 303 pages.</output>
+    </testcase>
+  </testsuite>
+</testsuites>
