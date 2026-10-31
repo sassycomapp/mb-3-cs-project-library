@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-b11-project-context-cso-report"
 doc-id: "mb-f3912f6e"
-updated: "2026-10-30"
+updated: "2026-11-01"
 ---
 partial — default
 Status: partial. Some required coverage is missing; findings below cover only the assessed part.
@@ -28,9 +28,9 @@ Snapshot transformations:
 - agents.md: excluded: credential or execution configuration
 - [[[mb-3-cs-project-context:docs-local/mb-3-cs-test-specification]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-context/docs-local/mb-3-cs-test-specification.md): secret spans redacted
 - memory/retro-2026-06-26.json: secret spans redacted
-- [[[mb-3-cs-project-context:output-opencode/wireframe-refresh-completion-report-2026-06-28]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-context/output-opencode/wireframe-refresh-completion-report-2026-06-28.md): secret spans redacted
-- [[[mb-3-cs-project-context:pdlf/judgement-trail]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-context/pdlf/judgement-trail.md): secret spans redacted
-- [[[mb-3-cs-project-context:wip/questions-to-raise-with-anvil]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-context/wip/questions-to-raise-with-anvil.md): secret spans redacted
+- wireframe-refresh-completion-report-2026-06-28: secret spans redacted
+- judgement-trail: secret spans redacted
+- questions-to-raise-with-anvil: secret spans redacted
 
 Coverage:
 - snapshot-inputs: assessed; fail-closed captured source inventory.
