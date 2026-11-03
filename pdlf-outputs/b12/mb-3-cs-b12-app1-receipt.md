@@ -16,7 +16,7 @@ updated: "2026-11-03"
 | Status | `complete` — started 2026-10-31 12:23 UTC (an earlier attempt of this run wrote nothing; restarted from its beginning with David's confirmation), completed 2026-11-03 12:49 UTC |
 | Synthesized | `false` — `/office-hours` ran |
 | Artifact | `docs-local\design\app1\design-doc.md` — the approved working design doc |
-| BFT | Full — all six questions recorded (`bft_records`, step_id 6, row id 3) |
+| BFT | Full — all six answers in the section BFT (Full) below (`bft_records`, step_id 6, row id 3) |
 | Gate | None at Step 12; the concept is locked at `concept-locked` (Step 21) |
 | Inputs used | Step 11 (steps row id 5); b12-config/reference/test-spec; spec-execution-discipline; spec-bft; spec-skill-context-pack; the canonical corpus read in full (mb-3-cs-project-context 31 files + project-library-global 71 files, every file listed in design-doc §15); the app inventory from `anvil.yaml` and the form files |
 
@@ -58,6 +58,22 @@ Test evidence in `pdlf-outputs/b12` (ts_report.py output, unchanged):
 |---|---|---|---|---|---|
 | mb-3-cs-b12-app1-checks.xml | 5 | 0 | 0 | 0 | 0 |
 | **Total** | **5** | **0** | **0** | **0** | **0** |
+
+## BFT (Full)
+
+The six answers of `bft_records` row id 3, recorded 2026-11-03 12:50 UTC, as [[[pdlf:pdlf-library/specifications-local/spec-bft]]](C:/pdlf/pdlf-library/specifications-local/spec-bft.md) sets them out.
+
+**BONES — Structure.** Hinge elements: the approved design doc (every later step builds from it) and the confirmed Specification naming every feature, rule and decision with its document and section. Big bones: the /office-hours run completed and approved (PDLF and GStack proven to work together); the eleven Step 12 decisions D1-D7 and C1-C4; the common/trade marking (14.9) derived from the schema links; the checks file with all five tests passing. Small bones: the four output copies in pdlf-outputs/b12, the sentinel CLEAR row 10, the empty gitleaks report, the corrected checks file after David's four corrections. Intangible bone: the step inherited a settled premise and never reopened it - David separated proof-of-process from the product question at the start, and the record stays honest about evidence gaps ("not in the record" is written where a lesser record would have invented a persona).
+
+**MUSCLE — Force.** Channel muscle dominant: GStack /office-hours run through its full protocol from the project library; the ledger bridge; gitleaks; the Sentinel skill; ts_report; the Anvil-side file reads for the inventory. project-library-global files read and applied by name: the full global corpus (41 ADRs, 5 policies, 25 specifications, all listed with what the design doc takes from each in design-doc section 15), ts-method section 5 (evidence rules), spec-bft (this record), spec-execution-discipline (the step sequence), spec-skill-context-pack (the pack pasted to /office-hours), the four security-global documents Sentinel matched. Information muscle second: 136 canonical files read in full plus the app inventory taken directly from anvil.yaml and the form tree. Logic muscle: the common/trade marking was derived mechanically from adr-common-and-trade-modules no-cross-link rule against the schema typed links, and David corrected its presentation. Value muscle: David ruled money in cents from the platform constraint over the documents' convenience wording (D1), and kept the canonical documents out of the agent's hands.
+
+**NERVES — Connections.** Achieving: the route B chain held in order - canonical read, app inventory, conflicts decided (D1-D7, C1-C4), Specification confirmed twice, draft written, /office-hours run and approved, PDLF merge, checks run twice, sentinel, gitleaks, ledger. Sequencing mattered: David's corrections landed before the checks re-ran, and the checks re-ran before the sentinel and gitleaks. Exploring was bounded by David's rules: the premises were fixed, so /office-hours alternatives were recorded under Approaches Considered with the document reason each is not taken, never acted on. Organizing: the /office-hours merge carried only what the skill contributed (the not-in-the-record demand statement, the notification-surface constraint, Approaches D and E); the first concept was never touched.
+
+**FAT — Waste.** Cut: the Graphify code graph (developer rule 6 - modules read directly from the files; the stale 2026-10-18 graph was flagged, not used, not rebuilt). Cut: reference-platform-research.md (no reference platform; entry record null). Cut: The Assignment from the design doc (founder business action, outside the build, per David). Cut: the notification-surface open question (settled by spec-mastertemplate-notification-system section 8 at David's direction; now a Constraints line). Cut: the D4-D7 defect wording (the global documents were corrected; the decisions state the rule only). Kept: the full unabridged Specification - David asked for it twice and confirmed it; it is the step's hinge.
+
+**SKIN — Presentation.** Presentation: the receipt is the ledger row formatted, never composed separately; the design doc names documents instead of restating them; the checks file names its evidence per ts-method section 5; the /office-hours fit notes are recorded verbatim on the receipt per David's rule 5 so they reach PDLF as fixes.
+
+**HEALTH — Is it healthy?** Good in itself: the design doc is approved, all five tests pass with saved evidence, the sentinel returned CLEAR with a real row, and the first concept is preserved untouched. Good for the project: Step 14 reviews an approved, decision-complete document whose every statement cites its source. The downstream consequence watched most closely: the run pauses after Step 16 gate domain-locked until Phase C is built - by design, reported as such, never worked around. Second: the schema migration (P1-P13) is recorded but not yet applied - App 1 still holds 44 of the 68 tables, and Step 17 and every build step depend on David applying it through Resolve; the migration prompt order (P13 removals last) must not be shuffled.
 
 ## Findings recorded for this step (triage_findings, step_id 6)
 
