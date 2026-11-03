@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="mb-3-cs-b12-app1 checks" time="0">
+  <testsuite name="process, document and static tests" errors="0" failures="0" tests="5" time="0">
+    <testcase name="PR-01">
+      <output>evidence: ledger — entry row step 03 complete for run app1 (inputs_used entry record: entry_point 03, route application, app_number 1, run app1, start_step 11, reference_platform null) and Step 11 complete with synthesized=false, no INPUT NOTICE due; checked at the step's start before any Step 12 work</output>
+    </testcase>
+    <testcase name="DC-01">
+      <output>evidence: docs-local/design/app1/design-doc.md section 13 (re-run on the corrected file after David's four corrections; section 13 unchanged by them) — ten success criteria (SC-1 to SC-10), each row carrying a metric, a threshold and a method (e.g. SC-7 onboarding-to-live: metric average onboarding-to-live time, threshold under 7 days, method registration date to business_profile.onboarding_completed_at read in App 5); no criterion uses a vague term and none bundles two needs; the /office-hours doc's success criteria match this table</output>
+    </testcase>
+    <testcase name="DC-02">
+      <output>evidence: docs-local/design/app1/design-doc.md (re-run on the corrected file) — sections 1 to 15 present in order (header scan: lines 13, 17, 27, 31, 37, 53, 78, 99, 103, 117, 126, 143, 150, 165, 343); Approaches D and E now sit inside section 9 after Approach C and section 10 holds only the recommendation of Approach A and its reasons; section 6 states one app and one database per client, server authority, public client code and theme/assets, one Mybizz-owned Anvil Business account per client instance, POPIA, and GDPR/PCI DSS when applicable; section 14 (Specification, 14.1 to 14.8 plus the 14.9 common/trade marking, its Tables paragraph now in the two-sentence form David directed) names every feature F-01 to F-36, every rule and every decision of the project's documents with document and section; section 15 lists every canonical file read, with the spec-anvil-spec-table and spec-mastertemplate-notification-system lines in the wording David directed; section 7 lists all 14 common aspects as shared, none deviating; no reference platform is used (entry record reference_platform: null), so the reference-analysis clause does not arise</output>
+    </testcase>
+    <testcase name="PR-04">
+      <output>evidence: triage_findings row id 10 (finding_id sentinel-12-app1, source_step 12, triage_label clear, resolved_at set) — mb-sentinel-review run for Step 12 at Medium scrutiny on design-doc.md; four security-global documents read in full (sec-multi-tenant-assumption-leakage, sec-server-side-authority, sec-payment-manipulation, sec-authentication-session); CLEAR with one document-drift note (sec-authentication-session cites the superseded password-composition rule; spec-security 2026-11-02 and decision D4 govern)</output>
+    </testcase>
+    <testcase name="PR-06">
+      <output>evidence: pdlf-outputs/b12/mb-3-cs-b12-app1-gitleaks.json — gitleaks over the project library working tree: 3 commits scanned, no leaks found, exit 0, empty report; the design docs, checks file and receipts hold no secret</output>
+    </testcase>
+  </testsuite>
+</testsuites>
