@@ -1,11 +1,11 @@
 ---
 title: "pricing-strategy"
 doc-id: "mb-793505b3"
-updated: "2026-10-30"
+updated: "2026-11-04"
 ---
 # Mybizz Consulting Services — Pricing Strategy
 
-What the client pays, for what, and why, within the Anvil Hobby plan every client starts on.
+What the client pays, for what, and why, on the Mybizz-owned Anvil Business account every client runs on.
 
 ## Pricing Model
 
