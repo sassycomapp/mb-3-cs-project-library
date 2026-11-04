@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="mb-3-cs-b14-app1" tests="5" failures="0" errors="0">
+  <testsuite name="PDLF process and document tests" tests="5" failures="0" errors="0">
+    <testcase name="PR-01">
+      <system-out>Entry record complete (steps row id 4, route application, run app1, start_step 11); Step 12 complete with synthesized=false and its design doc approved (steps row id 6, notes and receipt). Evidence: ledger steps rows 4 and 6; b12 receipt pdlf-outputs/b12/mb-3-cs-b12-app1-receipt.md.</system-out>
+    </testcase>
+    <testcase name="DC-03">
+      <system-out>design-doc.md section 21 Scope states goals and non-goals and references the review's NOT in scope section, which gives every exclusion its reason; section 16 Data Inventory names owner, readers, writers, protection level and retention for all 13 kinds of data incl. the consent records (D8/D4); section 17 Regulatory Position decides POPIA (applies; registration after launch; rights implemented), GDPR (conditional, per-client actual base, rechecked yearly, same rights machinery) and PCI DSS SAQ A (applies; card data never touches the instance; annual SAQ A; script-list check at every release); section 19 Client Exit names what the exit export writes to the client's bucket; section 20 Plan Fit shows a typical client at roughly 350,000-450,000 rows after three years, under half the 1,000,000-row and 100 GB limits, with the 80 percent warnings named.</system-out>
+    </testcase>
+    <testcase name="DC-01">
+      <system-out>Every requirement and acceptance criterion the review added is testable with no vague term and no bundled needs: the 16 security acceptance criteria AC-S1 to AC-S16 in section 18 are each a single testable statement with its named catalogue test; the D8/D4/D5/D6 decisions are single requirements with defined behaviour (consent record shape and retention; reconciliation cadence; reinstatement-or-refund rule; media.mybizz.live hosting); section 22 names a test for every critical flow, role and edge case.</system-out>
+    </testcase>
+    <testcase name="PR-04">
+      <system-out>Sentinel ran at Medium on the reviewed plan. Matched documents read in full: sec-business-logic-race-conditions.md, sec-payment-manipulation.md, sec-injection-unsafe-input.md, sec-requirements-third-party-integration.md. Outcome FLAG: the D5 reinstatement path was not bound to a transactional re-check (triage_findings row 11, sentinel-14-app1, needs-triage, High/High). Developer decision recorded 2026-11-04: amendment approved and applied to design-doc.md; row resolved to ready-for-agent with resolved_at set. PR-04 holds: the row exists and the Flag has the developer decision.</system-out>
+    </testcase>
+    <testcase name="PR-06">
+      <system-out>gitleaks on the project library: history scan of 6 commits and working-tree scan both found no leaks; merged report saved as pdlf-outputs/b14/mb-3-cs-b14-gitleaks.json (0 findings). No agent committed: the working tree carries this step's uncommitted edits for the developer.</system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

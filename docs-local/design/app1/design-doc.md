@@ -67,7 +67,7 @@ Constraints particular to this run:
 
 - The five-app model and the rule that no form or server module is ever added to a client instance (architecture reference §§1–2; ADR `client-instance-architecture`).
 - Anvil's platform constraints (architecture reference §14): Skulpt client runtime — money and date logic in server modules only; no native URL routing — the Routing dependency for public pages, lambda/Link/`open_form` for the admin area and portal; lazy-loaded rows; server-call latency; no WebSocket push — client-side polling.
-- The schema is designed up front: 68 tables in `authoritative-schema.md`; App 1 presently holds 44 tables, and the recorded migration (`schema-migration-log.md`, Part A and prompts P1–P13) brings it to the schema, applied by David in the Anvil editor through Resolve.
+- The schema is designed up front: 70 tables in `authoritative-schema.md` as amended by decision D8 (Step 14 adds `cookie_policy` and `consents`; the project's documents carry D8 after Step 14); App 1 presently holds 44 tables, and the recorded migration (`schema-migration-log.md`, Part A and prompts P1–P13) brings it to the schema, applied by David in the Anvil editor through Resolve.
 - The application is partially built outside PDLF: 16 client packages with 91 form folders and 11 server packages with 49 server modules exist; the packages and forms the scaffold specifies but the app lacks are listed in the Specification and the Step Receipt. Existing packages are never renamed or merged during active development (scaffold-spec Rules); a module is renamed only at the build step that touches it (Step 12 decisions C1–C4).
 - Money is stored as whole cents of the system currency; the system currency is locked once the first booking or invoice exists; the display currency is display-only (schema Rules; F-16; decision D3).
 - Every `datetime` is stored in UTC and shown in `business_profile.timezone`; one IANA time zone per instance (ADR `timezone-utc-storage-display-conversion`).
@@ -75,6 +75,7 @@ Constraints particular to this run:
 - Agents never read or write `.env`, never write `anvil.yaml`, never commit or push (SRS §2.4; the operating rules).
 - No reference platform is used (entry record: `reference_platform: null`).
 - The in-app notification surface is specified by `spec-mastertemplate-notification-system` §8: bell icon and badge, a notification feed with a Load-more cursor, toasts suppressed for marketing priority, a preferences centre, and 30–60-second polling (recorded as a constraint at David's direction at the `/office-hours` approval).
+- Help and explainer videos are Mybizz's own: stored once per language in a Mybizz-owned Cloudflare R2 bucket published at `media.mybizz.live`, played by the video component as direct video addresses — never in `theme/assets/` and never on an outside video service, and no cookie-setting Cloudflare feature is enabled on `media.mybizz.live`, so they play with no consent (decision D6). The clients' own F-09 videos stay embedded from outside services, consent-gated (D8). Claude aligns `pol-anvil-platform.md` and `pdlf-build-plan.md` after Step 14.
 - The `mb-3-cs-project-library` stubs hold no facts; the two folders named at the head of this document are the law.
 
 ## 7. Common Aspects
@@ -86,7 +87,7 @@ Each of the 14 aspects of `pol-common-aspects-for-mybizz-anvil-applications`, as
 | 1 | The five-app structure, never multi-tenant | Shared: architecture reference §1; one instance and database per client |
 | 2 | Client Anvil accounts | Shared: one Mybizz-owned Business account per client, named after the client's business; $150 a month |
 | 3 | Configuration, never code, in a client instance | Shared: App 4 holds the schema, the startup module and the dependency; every client difference is data in the client's tables |
-| 4 | Schema designed up front, extended without breaking | Shared: 68 tables designed in `authoritative-schema.md`; later changes additive, applied by hand from a migration plan |
+| 4 | Schema designed up front, extended without breaking | Shared: 70 tables designed in `authoritative-schema.md` (D8's two cookie tables included); later changes additive, applied by hand from a migration plan |
 | 5 | Secrets in the Vault | Shared: every credential in the Vault; the one Anvil Secret is `encryption_key` |
 | 6 | Payments, webhooks and outbound calls | Shared: one active card gateway (Stripe or Paystack) plus optional PayPal behind one payment service; webhooks return 200 at once, process in background, idempotent by event id; outbound calls retry with backoff |
 | 7 | Email | Shared: Amazon SES for every email received and sent, one tenant per client; the CRM built in |
@@ -120,7 +121,7 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 
 **Approach A.** Why:
 
-- The scaffold spec is the standard the build follows, and its rule is explicit: a package that exists is never renamed or merged during active development; a new feature gets a new package. Approach B violates that rule wholesale and buys nothing the schema does not already fix — the schema (68 tables, law) stays identical under every approach.
+- The scaffold spec is the standard the build follows, and its rule is explicit: a package that exists is never renamed or merged during active development; a new feature gets a new package. Approach B violates that rule wholesale and buys nothing the schema does not already fix — the schema (70 tables, law) stays identical under every approach.
 - The recorded migration already plans the schema path; the Brevo and Vault-module corrections are one-step fixes at the build steps that touch them, with the decisions recorded (C1, C3).
 - The common/trade marking is a design-doc record now and a package organisation at the template stage (ADR `common-and-trade-modules` consequence: the scaffold creates separate common and trade packages when a business is finished and the template work happens). Restructuring now would churn 140 files to reach the same place later.
 - Approach C is rejected because it leaves an ADR-violating module (`brevo_campaigns_integration.py`) in the code for the whole build and defers a marking this step is required to make (ADR `common-and-trade-modules`: Steps 12, 15 and 16 mark every feature, table, term and decision).
@@ -130,8 +131,8 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 | Risk | Likelihood | Impact | Response |
 |---|---|---|---|
 | Anvil does not permit client business apps on Mybizz-owned Business accounts (BRD AC-6, PRD OQ-1) | Low | High | Written question to Anvil's sales team before the first paying client; the answer kept on file |
-| The Mybizz development account fails or is compromised; every client depends on App 2 there | Low | High | `deployment-procedures.md` account-level procedures; two-factor authentication; R2 backups of every instance |
-| The schema migration (44 → 68 tables) is applied by hand, by David, in App 1 | High | Medium | `schema-migration-log.md` Part A and prompts P1–P13 in order, each checked against its prompt before Resolve; Part C compares the resulting `anvil.yaml` with the schema table by table |
+| The Mybizz development account fails or is compromised; every client depends on App 2 there, and the two demo apps share the account, so a suspension stops sign-ups as well as service | Low | High | `deployment-procedures.md` account-level procedures; two-factor authentication; R2 backups of every instance |
+| The schema migration (44 → 70 tables; D8's two cookie tables ride the same discipline) is applied by hand, by David, in App 1 | High | Medium | `schema-migration-log.md` Part A and prompts P1–P13 in order, then the D8 prompt written after Step 14, each checked against its prompt before Resolve; Part C compares the resulting `anvil.yaml` with the schema table by table |
 | The partially built app diverges from the scaffold as features are added (naming, duplicated modules, the Brevo module) | Medium | Medium | The Step 12 decisions C1–C4 assign each correction to the build step that touches it; reviews report a common item using a trade item as a finding |
 | An app cannot schedule its dependency's background task or serve its dependency's HTTP endpoints (PRD OQ-2) | Unknown | High | Proved in App 1 before Step 31 relies on it; if it fails, the schedule and endpoints move into each instance's own code by ADR |
 | Amazon does not grant SES production access (BRD AC-14) | Medium | High | Requested before launch; until then the mail catcher covers tests and no client is onboarded |
@@ -264,7 +265,7 @@ Flow design principles: `user-flows.md`, Flow Design Principles (progressive dis
 
 ### 14.3 The data
 
-All 68 tables of `authoritative-schema.md`, by name, from its Table Groups:
+All 70 tables of `authoritative-schema.md` as amended by decision D8 (Step 14), by name, from its Table Groups:
 
 - Core and configuration (11): `activity_log`, `business_profile`, `config`, `email_config`, `files`, `payment_config`, `rate_limits`, `sample_rows`, `theme_config`, `users`, `vault`
 - Services and bookings (8): `services`, `resources`, `group_sessions`, `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `bookings`, `recurring_series`
@@ -273,14 +274,14 @@ All 68 tables of `authoritative-schema.md`, by name, from its Table Groups:
 - CRM and marketing (12): `contacts`, `contact_counter`, `contact_events`, `contact_submissions`, `segments`, `tasks`, `leads`, `lead_captures`, `email_campaigns`, `contact_campaigns`, `automation_rules`, `automation_runs`
 - Sales (4): `companies`, `deals`, `quotes`, `quote_items`
 - Email and webhooks (6): `email_templates`, `email_log`, `webhook_log`, `email_addresses`, `email_messages`, `email_suppressions`
-- Content and policy (7): `blog_categories`, `blog_posts`, `blog_comments`, `landing_pages`, `pages`, `privacy_policy`, `t_and_c`
+- Content and policy (9): `blog_categories`, `blog_posts`, `blog_comments`, `landing_pages`, `pages`, `privacy_policy`, `t_and_c`, `cookie_policy`, `consents` — the last two by decision D8 as extended at Step 14 (one legal-documents system; the schema stays at 70 tables; the project's documents carry D8 and D4 after Step 14)
 - Reviews (2): `reviews`, `testimonials`
 - Summary and health (6): `daily_summary`, `service_performance`, `provider_performance`, `campaign_metrics`, `health_log`, `error_log`
 - Notifications (3): `notifications`, `user_preferences`, `delivery_logs`
 
 Rules of the schema: `authoritative-schema.md`, Rules — one instance, one client (no client or instance column on any table; isolation comes from the instance); every `datetime` stored in UTC and shown in `business_profile.timezone`; every amount in `business_profile.system_currency`; **money in cents** — every amount is stored as a whole number of cents of the system currency, as `spec-anvil-platform-standards` requires (Anvil's `number` column is floating-point, so decimal amounts would round wrongly), and amounts are converted to the currency's units only for display; rows of `bookings`, `orders`, `invoice`, `payments`, `quotes` and `expenses` are never deleted, their status changes; history outside the tables (backups, history, webhook payloads, audit entries older than 30 days, email bodies older than 90 days, email attachments and expense receipts in the client's R2 bucket); credentials only in the Vault, encrypted; names follow `spec-nomenclature` (link column `{target}_id`, plural for a multiple link, `provider_id` for a provider, `resource_id` for a bookable room or piece of equipment); allowed values are lowercase strings; column types `string`, `number`, `bool`, `date`, `datetime`, `media`, `simpleObject`, `link → table`, `links → table`. Every table has `client: none` and `server: full`.
 
-Scope of the schema: `schema-scope-reduction` ADR — the instance holds exactly these tables and no others, with the reason for each table in and out (`tickets`/`ticket_messages`, `kb_articles`/`kb_categories`, `events`/`event_registrations`, `backups`, `translations`, `customers` are out; `reviews`, `testimonials`, `resources`, `expenses`, `expense_categories`, `companies`, `deals`, `quotes`, `quote_items`, `email_addresses`, `email_messages`, `email_suppressions`, `sample_rows` are in). Changes to the schema: `schema-migration-log.md` — the recorded migration from App 1's present 44 tables to the 68-table schema: Part A, the renames by hand (`error_log.timestamp`, `blog_comments.comment_text`, `provider_id` in `availability_rules`, `availability_exceptions`, `bookings` and `time_entries`); prompts P1–P5 (11 new tables: `resources`, `group_sessions`, `recurring_series`, `packages`, `customer_packages`, `orders`, `payments`, `automation_rules`, `automation_runs`, `reviews`, `testimonials`); P6 and P7 (new columns); P8–P10 (10 new tables: `companies`, `quotes`, `quote_items`, `deals`, `expense_categories`, `expenses`, `sample_rows`, `email_addresses`, `email_messages`, `email_suppressions`); P11 (new columns for the new features); P12 (3 new notification tables: `notifications`, `user_preferences`, `delivery_logs`); P13 last (the column removals, including the Brevo columns of `email_config`); Part C, the check against `authoritative-schema.md`.
+Scope of the schema: `schema-scope-reduction` ADR — the instance holds exactly these tables and no others, with the reason for each table in and out (`tickets`/`ticket_messages`, `kb_articles`/`kb_categories`, `events`/`event_registrations`, `backups`, `translations`, `customers` are out; `reviews`, `testimonials`, `resources`, `expenses`, `expense_categories`, `companies`, `deals`, `quotes`, `quote_items`, `email_addresses`, `email_messages`, `email_suppressions`, `sample_rows` are in). Changes to the schema: `schema-migration-log.md` — the recorded migration from App 1's present 44 tables to the 68-table schema (the two tables of D8, `cookie_policy` and `consents`, ride the same migration discipline; their prompt is written after Step 14): Part A, the renames by hand (`error_log.timestamp`, `blog_comments.comment_text`, `provider_id` in `availability_rules`, `availability_exceptions`, `bookings` and `time_entries`); prompts P1–P5 (11 new tables: `resources`, `group_sessions`, `recurring_series`, `packages`, `customer_packages`, `orders`, `payments`, `automation_rules`, `automation_runs`, `reviews`, `testimonials`); P6 and P7 (new columns); P8–P10 (10 new tables: `companies`, `quotes`, `quote_items`, `deals`, `expense_categories`, `expenses`, `sample_rows`, `email_addresses`, `email_messages`, `email_suppressions`); P11 (new columns for the new features); P12 (3 new notification tables: `notifications`, `user_preferences`, `delivery_logs`); P13 last (the column removals, including the Brevo columns of `email_config`); Part C, the check against `authoritative-schema.md`.
 
 Step 12 decision D2 is carried out in those documents: the Notifications group is in the schema and prompt P12 is in the migration log.
 
@@ -296,13 +297,13 @@ Local policy (`mb-3-cs-project-context/policy-local`): `development-policy` (the
 
 Global ADRs applied to this application (`project-library-global/adr-global`, all 41): `adr-anvil-extras-exclusion`; `adr-anvil-platform-constraints`; `adr-brevo-email-and-crm`; `adr-client-data-management-rights-and-mybizz-retention-boundary`; `adr-client-instance-architecture`; `adr-client-instance-readme-five-app-system`; `adr-client-r2-storage-and-exit-handover`; `adr-common-and-trade-modules`; `adr-common-architecture-across-mybizz-applications`; `adr-dark-mode`; `adr-data-access-patterns`; `adr-dependency-based-not-multi-tenant`; `adr-dependency-update-model`; `adr-design-rules`; `adr-document-frontmatter-and-identity`; `adr-form-architecture-and-state`; `adr-htmltemplate-use`; `adr-lead-capture-simultaneous-creation`; `adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture`; `adr-material-3-theme-component-scope`; `adr-mybizz-management-visibility`; `adr-navigation-lambda-link-open-form`; `adr-no-free-trial`; `adr-observability-architecture`; `adr-onboarding-data-schema-alignment`; `adr-onboarding-finality`; `adr-onboarding-resumability`; `adr-onboarding-vs-settings-boundary`; `adr-payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed`; `adr-payment-gateway-mutability`; `adr-payment-security-boundary-vault`; `adr-pdf-invoice-generation`; `adr-real-time-and-background-tasks`; `adr-responsive-behaviour-mechanism`; `adr-role-property-assignment-mechanism`; `adr-single-contacts-table`; `adr-system-currency-selection-and-immutability`; `adr-tiers-model`; `adr-timezone-utc-storage-display-conversion`; `adr-ui-customization-approach`; `adr-webhook-architecture`.
 
-Global policies (`project-library-global/policy-global`, all 5): `pol-common-aspects-for-mybizz-anvil-applications` — its 14 aspects are each shared by this application, none deviating: (1) the five-app structure, never multi-tenant; (2) client Anvil accounts, one Mybizz-owned Business account per client; (3) configuration, never code, in a client instance; (4) schema designed up front, extended without breaking; (5) secrets in the Vault; (6) payments, webhooks and outbound calls; (7) email through Amazon SES, the CRM built in; (8) client storage and exit; (9) management and health; (10) background work and real-time updates; (11) access, currency and time; (12) compliance; (13) user interface; (14) reference platforms (none is used here). Also `pol-anvil-first-development`, `pol-documentation-and-decisions`, `pol-security-and-data-governance`, `pol-testing-and-quality`.
+Global policies (`project-library-global/policy-global`, all 6): `pol-common-aspects-for-mybizz-anvil-applications` — its 14 aspects are each shared by this application, none deviating: (1) the five-app structure, never multi-tenant; (2) client Anvil accounts, one Mybizz-owned Business account per client; (3) configuration, never code, in a client instance; (4) schema designed up front, extended without breaking; (5) secrets in the Vault; (6) payments, webhooks and outbound calls; (7) email through Amazon SES, the CRM built in; (8) client storage and exit; (9) management and health; (10) background work and real-time updates; (11) access, currency and time; (12) compliance; (13) user interface; (14) reference platforms (none is used here). Also `pol-anvil-first-development`, `pol-documentation-and-decisions`, `pol-security-and-data-governance`, `pol-testing-and-quality`, `pol-cookies-and-consent` (D8).
 
 ### 14.5 The standards the build follows
 
 From the project's documents: `scaffold-spec.md` (package structure, server function pattern, custom component conventions, database schema rules, M3 component standards, navigation architecture, startup configuration, Users service settings, dependencies and versions); `globals-contract.md` (every shared state variable, the defensive loading pattern); `integration-architecture.md` (every outside service and its credential home, payment gateways and the one payment service, PayPal checkout, email paths, the CRM, client storage, AI and speech, webhooks, the background-task schedule, timezones, domain and provisioning, offboarding); `observability-requirements.md` (structured logging, log tables, business metrics, alerts in the instance and in App 5, the heartbeat, log retention); `deployment-procedures.md` (deployment model, update flow, release steps, staged rollout, schema migration types and checklist, post-deploy verification, rollback and its triggers, deployment checklist, account-level failures); `anvil-ui-build-standard.md` (hard prohibitions, visual tokens, naming conventions, HTML-to-component mapping, approved components and writeback, custom HTML components, form boundary and icons, data and empty states, build process rules); `DESIGN.md`; `palette-tokens.md`; `custom-component-requirements-matrix.md` (12 shared custom components, 1 local, the not-built list); `calendar-feature-spec.md`; `team-inbox-spec.md`; `sm-syndication-spec.md`; `mybizz-ai-implementation-spec.md`; `mb-3-cs-vault-implementation.md`; `vault-recovery-procedure.md`; `offboarding-procedure.md`; `mb-3-cs-test-specification.md`.
 
-From the global corpus: `spec-five-app-architecture-model`; `spec-anvil-platform-standards`; `spec-anvil-spec-table`; `spec-api-specification`; `spec-client-activation-runbook`; `spec-component-properties`; `spec-deployment`; `spec-integration`; `spec-m3-design-standards`; `spec-m3_component_mapping`; `spec-mastertemplate-notification-system`; `spec-material-3-theme`; `spec-mybizz-management-app-notification-system`; `spec-nomenclature`; `spec-observability`; `spec-onboarding-implementation-plan` (the project's 10-step wizard governs, per the architecture reference's authority); `spec-regulatory-compliance-baseline`; `spec-screen-and-wireframe-production-standards`; `spec-screen-production-standard`; `spec-security`; `spec-security-architecture`; `spec-testing-methodology-standards`; `spec-translation`; `spec-ui-standards`; `spec-vault-system`.
+From the global corpus: `spec-five-app-architecture-model`; `spec-anvil-platform-standards`; `spec-anvil-spec-table`; `spec-api-specification`; `spec-client-activation-runbook`; `spec-component-properties`; `spec-cookie-consent-system` (D8); `spec-deployment`; `spec-integration`; `spec-m3-design-standards`; `spec-m3_component_mapping`; `spec-mastertemplate-notification-system`; `spec-material-3-theme`; `spec-mybizz-management-app-notification-system`; `spec-nomenclature`; `spec-observability`; `spec-onboarding-implementation-plan` (the project's 10-step wizard governs, per the architecture reference's authority); `spec-regulatory-compliance-baseline`; `spec-screen-and-wireframe-production-standards`; `spec-screen-production-standard`; `spec-security`; `spec-security-architecture`; `spec-testing-methodology-standards`; `spec-translation`; `spec-ui-standards`; `spec-vault-system`.
 
 ### 14.6 The business and product requirements
 
@@ -319,7 +320,7 @@ From the global corpus: `spec-five-app-architecture-model`; `spec-anvil-platform
 | # | Decision |
 |---|---|
 | D1 | Every amount is stored as a whole number of cents of the system currency. The schema's number columns hold cents; the concept's currency figures are display wording. No override is recorded. |
-| D2 | Carried out in the project's documents: `authoritative-schema.md` holds the Notifications group (`notifications`, `user_preferences`, `delivery_logs`; 68 tables in total) and `schema-migration-log.md` records prompt P12 (the three notification tables) and P13 (the removals, last). |
+| D2 | Carried out in the project's documents: `authoritative-schema.md` holds the Notifications group (`notifications`, `user_preferences`, `delivery_logs`; 68 tables in total at Step 12; 70 after D8) and `schema-migration-log.md` records prompt P12 (the three notification tables) and P13 (the removals, last). |
 | D3 | The display currency is display-only; every stored amount is in the system currency; the global ADR's transaction-currency column and `system_currency_amount` column are not built for this app. |
 | D4 | `spec-security` governs passwords: no composition rules; breached passwords refused; context words refused. |
 | D5 | `adr-navigation-lambda-link-open-form` governs navigation: the layouts' `NavigationLink` components with lambda click handlers capturing their loop variables, and `open_form()`; `navigate_to` is never used. |
@@ -348,7 +349,7 @@ Every canonical file read, with what this design doc takes from it.
 
 **`mb-3-cs-project-context/adr-local`** — `blank-client-template.md`: App 3's contents and the schema responsibility. `crm-package-replaces-marketing.md`: the client package is `crm/`, the server package `server_marketing/`. `schema-scope-reduction.md`: which tables are in and out, and why.
 
-**`mb-3-cs-project-context/docs-local`** — `authoritative-schema.md`: all 68 tables, the Rules (including money in cents), column types, and the Notifications group. `schema-migration-log.md`: Part A renames, prompts P1–P13, the Part C check. `mb-3-cs-concept.md`: sections 1–16 — the problem, market, positioning, every feature, pricing, go-to-market, brand, support, out-of-scope, metrics, risks. `mb-3-cs-feature-list.md`: the client-facing feature list, §§1–28. `mb-3-cs-architecture-reference.md`: §§0–16, the build standard and every feature's architecture. `mb-3-cs-architecture-explainer.md`: the plain-language account of the same architecture. `user-flows.md`: the 44 flows, actors, terms and flow design principles. `DESIGN.md`: the design system, tokens, palettes governance, forms and pages, templates, deviations, status badges, empty states. `palette-tokens.md`: the four palettes' source colours and every value, light and dark. `custom-component-requirements-matrix.md`: the 12 shared components, 1 local, the not-built list. `calendar-feature-spec.md`: the booking calendar's forms, views, data and rules. `mybizz-ai-implementation-spec.md`: the AI helper, the ten assists, voice tiers 1–5, sample data, costs and guardrails. `team-inbox-spec.md`: SES, the domain records, addresses, receiving, the Team Inbox screen, sending, storage. `sm-syndication-spec.md`: the share panel, AI captions, previews, `?ref=` tracking. `mb-3-cs-vault-implementation.md`: what the Vault stores, the VaultForm, the build sequence. `vault-recovery-procedure.md`: both recovery paths. `offboarding-procedure.md`: the exit steps and rules. `mb-3-cs-test-specification.md`: the E2E spec, error paths, RBAC matrices, feature tests.
+**`mb-3-cs-project-context/docs-local`** — `authoritative-schema.md`: all 70 tables as amended by D8 (the file carried 68 when read), the Rules (including money in cents), column types, and the Notifications group. `schema-migration-log.md`: Part A renames, prompts P1–P13, the Part C check. `mb-3-cs-concept.md`: sections 1–16 — the problem, market, positioning, every feature, pricing, go-to-market, brand, support, out-of-scope, metrics, risks. `mb-3-cs-feature-list.md`: the client-facing feature list, §§1–28. `mb-3-cs-architecture-reference.md`: §§0–16, the build standard and every feature's architecture. `mb-3-cs-architecture-explainer.md`: the plain-language account of the same architecture. `user-flows.md`: the 44 flows, actors, terms and flow design principles. `DESIGN.md`: the design system, tokens, palettes governance, forms and pages, templates, deviations, status badges, empty states. `palette-tokens.md`: the four palettes' source colours and every value, light and dark. `custom-component-requirements-matrix.md`: the 12 shared components, 1 local, the not-built list. `calendar-feature-spec.md`: the booking calendar's forms, views, data and rules. `mybizz-ai-implementation-spec.md`: the AI helper, the ten assists, voice tiers 1–5, sample data, costs and guardrails. `team-inbox-spec.md`: SES, the domain records, addresses, receiving, the Team Inbox screen, sending, storage. `sm-syndication-spec.md`: the share panel, AI captions, previews, `?ref=` tracking. `mb-3-cs-vault-implementation.md`: what the Vault stores, the VaultForm, the build sequence. `vault-recovery-procedure.md`: both recovery paths. `offboarding-procedure.md`: the exit steps and rules. `mb-3-cs-test-specification.md`: the E2E spec, error paths, RBAC matrices, feature tests.
 
 **`mb-3-cs-project-context/docs-standard-local`** — `anvil-ui-build-standard.md`: the hard prohibitions, tokens, naming, mapping, writeback, build process. `business-requirements-document.md`: BO-1–8, BR-1–26, AC-1–14, KPIs, risks. `deployment-procedures.md`: the release flow, migration types, rollback and triggers. `globals-contract.md`: every shared state variable and the defensive pattern. `integration-architecture.md`: every outside service, the task schedule, timezones, domain, offboarding. `observability-requirements.md`: logging, metrics, alerts, heartbeat, retention. `product-requirements-document.md`: US-1–41, FR-01–36, NFRs, OQ-1–2. `scaffold-spec.md`: packages, forms, server modules, navigation, startup, dependencies. `software-requirements-specification.md`: SR-01–58, interfaces, performance, constraints.
 
@@ -356,9 +357,11 @@ Every canonical file read, with what this design doc takes from it.
 
 **`project-library-global/adr-global` (41)** — `adr-anvil-extras-exclusion`: Extras and third-party packages excluded. `adr-anvil-platform-constraints`: designed within Anvil's parameters. `adr-brevo-email-and-crm`: SES everywhere; the CRM built in; Brevo and Zoho are errors. `adr-client-data-management-rights-and-mybizz-retention-boundary`: owner data rights and Mybizz's retention boundary. `adr-client-instance-architecture`: what lives where; the two proven Anvil behaviours. `adr-client-instance-readme-five-app-system`: the mandatory README in every client instance. `adr-client-r2-storage-and-exit-handover`: one bucket per client; the exit handover. `adr-common-and-trade-modules`: the common/trade marking this design doc records. `adr-common-architecture-across-mybizz-applications`: what is common stays common. `adr-dark-mode`: dark mode from the first release. `adr-data-access-patterns`: search, never iterate; pre-computed summaries. `adr-dependency-based-not-multi-tenant`: the prohibited and required patterns. `adr-dependency-update-model`: the release flow and its discipline. `adr-design-rules`: the wireframe rules for later phases. `adr-document-frontmatter-and-identity`: document identity (governs this document's own frontmatter). `adr-form-architecture-and-state`: the content panel, `globals.py`, the batched booking flow. `adr-htmltemplate-use`: HTMLTemplate banned. `adr-lead-capture-simultaneous-creation`: lead and contact created together. `adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture`: the owner's responsibility and the clause builder. `adr-material-3-theme-component-scope`: the permitted components. `adr-mybizz-management-visibility`: the three communication patterns and the token model. `adr-navigation-lambda-link-open-form`: the navigation standard. `adr-no-free-trial`: the two demo apps instead. `adr-observability-architecture`: instance-level metrics and the heartbeat. `adr-onboarding-data-schema-alignment`: onboarding uses the schema's exact names. `adr-onboarding-finality`: onboarding revisitable; append-only records. `adr-onboarding-resumability`: progress preserved. `adr-onboarding-vs-settings-boundary`: what belongs where. `adr-payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed`: gateway configuration in Settings. `adr-payment-gateway-mutability`: one active gateway, changeable under rules. `adr-payment-security-boundary-vault`: secret keys only in the Vault; the enforcement pattern. `adr-pdf-invoice-generation`: reportlab, server-side. `adr-real-time-and-background-tasks`: polling intervals, the task inventory, retry policy. `adr-responsive-behaviour-mechanism`: `wrap_on`, never breakpoints. `adr-role-property-assignment-mechanism`: roles set in code. `adr-single-contacts-table`: one `contacts` table, no `customers`. `adr-system-currency-selection-and-immutability`: currency at onboarding, locked after the first transaction (this app takes the display-currency-only model, decision D3). `adr-tiers-model`: one price, $150; assisted setup $200. `adr-timezone-utc-storage-display-conversion`: UTC storage, IANA string, display-time conversion. `adr-ui-customization-approach`: M3 tokens, `theme.css`, native layouts. `adr-webhook-architecture`: the one webhook pattern and reconciliation.
 
-**`project-library-global/policy-global` (5)** — `pol-common-aspects-for-mybizz-anvil-applications`: the 14 aspects, all shared (section 7). `pol-anvil-first-development`: the checking order and severity. `pol-documentation-and-decisions`: the four document kinds; no duplicate sources of truth. `pol-security-and-data-governance`: Vault-only secrets, mandatory RBAC, client data ownership. `pol-testing-and-quality`: the test suite governs; local first; sign-off.
+**`project-library-global/policy-global` (6)** — `pol-common-aspects-for-mybizz-anvil-applications`: the 14 aspects, all shared (section 7). `pol-anvil-first-development`: the checking order and severity. `pol-documentation-and-decisions`: the four document kinds; no duplicate sources of truth. `pol-security-and-data-governance`: Vault-only secrets, mandatory RBAC, client data ownership. `pol-testing-and-quality`: the test suite governs; local first; sign-off. `pol-cookies-and-consent`: consent before any optional cookie, refusal as easy as acceptance, the choice remembered and renewed, every choice recorded, every cookie known at build time (D8); extended at Step 14 into one legal-documents system for the three legal documents (D8/D4).
 
-**`project-library-global/specifications-global` (25)** — `spec-five-app-architecture-model`: the five apps and the critical constraint. `spec-anvil-platform-standards`: form files, server pattern, three tiers, background tasks, Uplink, rate limiting, shared numeric standards, data access, the constraints checklist, Skulpt, media, `app_tables` failure behaviour. `spec-anvil-spec-table`: the consolidated reference; its navigation rows follow the ADR (decision D5). `spec-api-specification`: webhook and management endpoints, rate limits, errors. `spec-client-activation-runbook`: provisioning steps 1–16 and the rollback. `spec-component-properties`: Designer vs code properties. `spec-deployment`: release workflow, migration strategy, account failures. `spec-integration`: SES, Stripe, Paystack, PayPal, the service layer, the three email tiers. `spec-m3-design-standards`: prefixes, button hierarchy, typography, states, status colours, accessibility, empty states, the MUI overlay. `spec-m3_component_mapping`: the mapping and writeback table. `spec-mastertemplate-notification-system`: the notification engine; its three tables are in the schema (D2). `spec-material-3-theme`: theme architecture and roles. `spec-mybizz-management-app-notification-system`: the platform-to-client console. `spec-nomenclature`: names for everything common. `spec-observability`: the log tables and structured logging. `spec-onboarding-implementation-plan`: the onboarding architecture (this app takes the 10-step wizard of its own documents). `spec-regulatory-compliance-baseline`: POPIA, GDPR, PCI DSS, retention, offboarding. `spec-screen-and-wireframe-production-standards` and `spec-screen-production-standard`: screen production rules for later phases. `spec-security`: the security standards this app follows (decision D4). `spec-security-architecture`: role limits, sign-in, tokens, protection levels. `spec-testing-methodology-standards`: levels, safety protocol, RBAC verification. `spec-translation`: phrase keys, the module, tests, adding a language. `spec-ui-standards`: the M3 mandate, naming, binding. `spec-vault-system`: the two-level model, enforcement, enrolment and reset.
+**`project-library-global/specifications-global` (26)** — `spec-five-app-architecture-model`: the five apps and the critical constraint. `spec-anvil-platform-standards`: form files, server pattern, three tiers, background tasks, Uplink, rate limiting, shared numeric standards, data access, the constraints checklist, Skulpt, media, `app_tables` failure behaviour. `spec-anvil-spec-table`: the consolidated reference; its navigation rows follow the ADR (decision D5). `spec-api-specification`: webhook and management endpoints, rate limits, errors. `spec-client-activation-runbook`: provisioning steps 1–16 and the rollback. `spec-component-properties`: Designer vs code properties. `spec-cookie-consent-system`: the banner, the consent cookie, the consent record, and the Cookie Policy as the Clause Builder's third document (D8) — extended at Step 14 into one legal-documents system for the three legal documents, whose global policy and specification Claude writes after Step 14. `spec-deployment`: release workflow, migration strategy, account failures. `spec-integration`: SES, Stripe, Paystack, PayPal, the service layer, the three email tiers. `spec-m3-design-standards`: prefixes, button hierarchy, typography, states, status colours, accessibility, empty states, the MUI overlay. `spec-m3_component_mapping`: the mapping and writeback table. `spec-mastertemplate-notification-system`: the notification engine; its three tables are in the schema (D2). `spec-material-3-theme`: theme architecture and roles. `spec-mybizz-management-app-notification-system`: the platform-to-client console. `spec-nomenclature`: names for everything common. `spec-observability`: the log tables and structured logging. `spec-onboarding-implementation-plan`: the onboarding architecture (this app takes the 10-step wizard of its own documents). `spec-regulatory-compliance-baseline`: POPIA, GDPR, PCI DSS, retention, offboarding. `spec-screen-and-wireframe-production-standards` and `spec-screen-production-standard`: screen production rules for later phases. `spec-security`: the security standards this app follows (decision D4). `spec-security-architecture`: role limits, sign-in, tokens, protection levels. `spec-testing-methodology-standards`: levels, safety protocol, RBAC verification. `spec-translation`: phrase keys, the module, tests, adding a language. `spec-ui-standards`: the M3 mandate, naming, binding. `spec-vault-system`: the two-level model, enforcement, enrolment and reset.
+
+**Decision D4 (Step 14):** the background-task schedule gains the webhook reconciliation task — every 5 minutes, per test specification 2.3 (`spec-api-specification` §2.5's hourly wording is brought into line after Step 14) — and, with D8's legal-documents system, the nightly consent archive task (rows of `consents` older than 30 days to `consents/{year}/{month}/` in the client's bucket). Both are carried into `integration-architecture.md` after Step 14.
 
 **`mb-3-cs-project-library`** — its `adr-local`, `docs-local`, `docs-standard-local` and `policy-local` files were read in full (`README.md` files, the GLOSSARY skeleton, the design-folder README, the releases and strategy placeholders, the schema-migration-log skeleton, and the docs-standard-local section skeletons). They hold structure and pointers only; every fact in this design doc comes from the two folders named at its head.
 
@@ -379,6 +382,7 @@ Written at Step 14 by `secure-software-engineering` at its requirements phase, f
 | Summaries and metrics | `daily_summary`, `service_performance`, `provider_performance`, `campaign_metrics` | The client's business | The roles the access matrix names (dashboards and reports) | Background tasks only; dashboards never compute on load | Internal | For the life of the client; recomputed on schedule; exit export |
 | Notifications and preferences | `notifications`, `user_preferences`, `users.preferences` (tooltips, morning briefing) | The user the row is about | That user; the notification engine | The server (notification engine; App 5's `push-notification` endpoint writes a row) | Personal | A notification until it is read or its `expires_at`; preferences for the life of the user's account. Not listed by the baseline — own retention, reason: user-scoped settings and delivery records live and die with the user's account |
 | Sample data | `sample_rows` and every row it records (sample contacts at `example.com`, sample bookings, invoices, campaigns) | The client's business (provisioned by Mybizz) | Every signed-in role, under the sample-data banner | App 5 at provisioning; the Owner's Clear sample data task | Internal | Until the Owner clears it; never emailed, never paid, never exported (`SR-44b`) |
+| Consent records | One table, `consents`, for all three legal documents (D8 as extended at Step 14); the consent cookie `mb_consent` in the visitor's browser; published copies at `legal/{document}/v{version}.html` in R2 | The visitor owns the cookie choice; the client's business owns the terms and privacy acceptance records (its contract evidence) | The server; the visitor reaches the cookie record only through the consent number shown in Cookie settings; terms and privacy rows carry the contact link | Server functions only | Cookie rows: Internal (a random consent number, the choice, the policy version, the time — no name, no email, no IP address). Terms and privacy rows: Personal (they carry the contact) | 30 days in the table, then `consents/{year}/{month}/` in the client's R2 bucket; cookie records kept 2 years, terms and privacy records kept 7 years (D4); part of the client's data at exit |
 | Cold data in the client's R2 bucket | `backups/daily/`, `backups/weekly/`, `history/{table}/`, `audit/{year}/{month}/`, `webhooks/{service}/{year}/{month}/`, `email/messages/`, `email/attachments/`, `expenses/receipts/`, `exports/` | The client — the bucket sits in the client's own free Cloudflare account; Mybizz is an invited member only | The client; the instance through `r2_service` with the bucket's scoped token from the Vault; Mybizz as the invited R2 Admin member for provisioning, restore and exit | The instance's background tasks; App 5 at provisioning and exit | Takes the level of the item it holds (email bodies: Personal; backups of everything: Restricted handling — the token is scoped to that one bucket and lives in the Vault) | For the life of the client; leaves with the client at exit |
 | Mybizz-side records (App 5) | Client registry, usage figures, health, billing, tickets and feedback, at-risk alerts | Mybizz | Mybizz's founder in App 5 | App 5 | Internal | After a client leaves, only the records Mybizz must keep by law — Mybizz's own invoices to the client. No customer personal data ever enters App 5: the heartbeat and usage report carry none, and AI and speech requests pass through unstored (`SR-53`, `SR-53a`; `adr-client-data-management-rights-and-mybizz-retention-boundary`) |
 
@@ -389,7 +393,7 @@ Decided at Step 14 from `spec-regulatory-compliance-baseline` and `spec-security
 - **POPIA — applies.** Mybizz is based in South Africa, so the posture is Mybizz-wide regardless of what any individual app does. Registration with the Information Regulator as a Responsible Party is required after launch. The data-subject rights — access, correction, deletion and objection — are implemented in the app: export of a person's data, correction, and erasure on request with transactions kept for the 7-year tax period (`IN-14`). Reason: the platform holds the personal information of the clients' customers and staff.
 - **GDPR — conditional; decided: applies when a client's customer base includes EU customers, determined by each client's actual base and rechecked yearly, not fixed at build time.** The same data-subject-rights implementation POPIA requires (export and anonymisation functions) satisfies both regimes; no separate implementation is built. Reason: the product is global from launch, so whether EU customers are served is a fact of each client's business, not of the design (`RL-11`, the yearly review).
 - **PCI DSS — applies; SAQ A.** The app takes card payments (Stripe or Paystack as the card gateway, PayPal optional). Card data never touches the instance: only the gateways' hosted pages, fields and buttons take card details, and the instance holds only tokens and references. SAQ A also requires that the payment page cannot be tampered with by scripts: every script on a page that hosts or redirects to payment is listed and approved, and the list is checked at every release (test `SC-10`). **The annual SAQ A is taken every year while payments are taken.** Reason: Mybizz processes payments through Stripe, Paystack and PayPal, which places a compliant app in SAQ A, the lowest scope.
-- **The three legal documents before go-live** — Privacy Policy, Terms of Service and Cookie Policy, per app, each reflecting the app's actual data practices (baseline). The Clause Builder (F-22) builds and publishes the Privacy Policy and the Terms and Conditions from `privacy_policy` and `t_and_c`. **The Cookie Policy is the third document and has no home in the app yet** — the public pages and the Clause Builder's tables cover two of the three. Raised to David at Step 14; his decision is recorded in this section once made.
+- **The three legal documents before go-live** — Privacy Policy, Terms of Service and Cookie Policy, per app, each reflecting the app's actual data practices (baseline). **Decision D8 (David, Step 14), extended at Step 14 under D4:** one legal-documents system covers the Cookie Policy, the Privacy Policy and the Terms and Conditions; the Clause Builder builds all three (the Cookie Policy in the table `cookie_policy`, `spec-cookie-consent-system` §7); every publish raises the document's version and saves a copy to the client's R2 bucket under `legal/{document}/v{version}.html`; the instance does not go live until all three are published under the recorded acknowledgement of responsibility. Customers accept the Terms and Conditions and the Privacy Policy with an unticked box at booking, order, package purchase, online payment, customer portal sign-up and quote acceptance; contact and lead-capture forms link to the Privacy Policy. Every choice and acceptance is recorded in one table, `consents` (consent number, document, choice, version, contact for the terms and privacy records only, time), and the schema stays at 70 tables. Retention: cookie records 2 years; terms and privacy records 7 years (transaction evidence). The cookie banner's rules stand: **Accept all**, **Refuse all** and **More info** before any embedded-content cookie; help videos stored with the app's own files (`pol-cookies-and-consent`). Reason: the baseline requires the three documents, the cookie rules are binding policy for every Mybizz application, and the Clause Builder is the home the other two legal documents already use. Claude writes the global policy and specification for the legal-documents system after Step 14, and brings `spec-api-specification` §2.5's reconciliation cadence into line with the test specification's 5 minutes (D4); the two new documents and the two tables are carried into the project's documents (`mb-3-cs-project-context`) after Step 14, by Claude outside this run.
 - The legal acknowledgement is recorded once, with its timestamp, in the instance and in App 5, and cannot be reversed (`SR-09`); `business_profile.legal_ack_accepted_at` and `data_governance_ack_accepted_at` hold it.
 
 ## 18. Security Requirements
@@ -445,3 +449,279 @@ A typical client's use against the limits of the Anvil Business account that run
 **A typical client's rows (an estimate, stated as one):** a busy solo or small-team practice — about 2,000 contacts with about 60,000 timeline events; about 30 bookings a day, roughly 11,000 a year; invoices, invoice lines, payments, quotes and time entries from three years of that work, roughly 130,000 rows; email index rows about 55,000 over three years; the summary tables about 15,000; the rolling 30-day audit window about 5,000; notifications, preferences and counters modest. Steady state after three years is roughly 350,000 to 450,000 rows — under half of the 1,000,000-row limit, with the growth rate bounded by the R2 offload. Storage: the transactional and text rows are small; media lives in R2 except the instance's own media (logos, provider photos, featured images, the brief and delivery files in `files`), which stays a small share of the 100 GB.
 
 **What shows a client nears the limits:** the daily usage report to App 5 — row count, data table storage, email volume and heavy-job activity (`SR-52`); App 5 warns Mybizz at 80% of the account's 1,000,000 rows (`FR-33`) and flags any client above 80% of its rows or storage (`RL-12`; common aspect 9); the warning-level alerts also watch a background task running over twice its usual time. A client nearing the limits is answered by checking the R2 offload is current and reviewing the media held in `files` — the usage recording and monthly review of `F-33`/`F-34` is the mechanism that makes this visible.
+
+**A cost outside the model, recorded (Step 14 finding):** the private test client instance runs on its own Mybizz-owned Business account (`deployment-procedures.md`, Deployment Model) — a 101st account beside the 100 client accounts the revenue model counts (concept §9.6), about $1,068 a year billed annually. SC-5 keeps the concept's published margin figure; this line makes the cost visible.
+
+## 21. Scope
+
+Written at Step 14 after the review, per the Step 14 configuration.
+
+**Goals:**
+
+- Complete Mybizz CS on the scaffold as it stands: every feature F-01 to F-36 built and passing its acceptance criteria (SC-1), on the 70-table schema of `authoritative-schema.md` as amended by D8, reached through the recorded migration discipline.
+- App 5 built and running before the first paying client (D6 of Step 12); every client provisioned through App 5 onto its own Mybizz-owned Anvil Business account.
+- The wedge proved: ten founding clients onboarded on the full product at the standard price (SC-2), toward the hard capacity of 100 (SC-3) and the revenue and margin criteria (SC-4, SC-5).
+- One legal-documents system covering the Cookie Policy, the Privacy Policy and the Terms and Conditions, published before go-live, with consent recorded in `consents` (D8 as extended at Step 14).
+- Releases reach every client through App 2; a client can leave at any time with all of its data (the exit export of §19).
+
+**Non-goals:** a marketplace or shared discovery; retail commerce (catalogue, cart, inventory, shipping); hospitality reservations; memberships and subscription billing for clients' businesses; a ticket system for the clients' own customers; an outside accounting connection; a native mobile app; feature tiers, add-ons, a free trial or per-staff fees; a multi-vertical toggle. Nothing is deferred — PRD §7 defers nothing.
+
+**What the review excluded, and why:** see the review's NOT in scope section below the review body. In summary: no scope change was proposed in HOLD SCOPE mode; The Assignment of the `/office-hours` doc remains the founder's business action outside the build (Step 12 ruling); `TODOS.md` is never written under PDLF, so nothing was deferred to it.
+
+## 22. What Must Be Tested
+
+Each critical flow, role and edge case the review named, with why. The catalogue test IDs are the tests; Step 15's test plan carries them into the plan's own test structure (`DC-04`).
+
+| # | What must be tested | Why | Tests |
+|---|---|---|---|
+| 1 | The E2E booking flow: service → provider → slot → meeting type → intake → payment → confirmation, at desktop and mobile widths, with the 3-second performance gate and the data checks (amount matches price, currency matches the system currency, UTC stored and displayed in the client's zone) | It is the product's core promise — book without phoning, pay professionally | Test specification §1; `BR-01`, `BR-06`, `DM-01` |
+| 2 | Booking contention: two customers confirming the same slot at once — exactly one booking, the loser offered the nearest free slots | Money and trust: a double booking is the fastest way to break both | `DM-01`, `IN-05`, `SR-16` |
+| 3 | The payment hold and its expiry: a `pending` booking released after 15 minutes with its slot and resource freed, the emailed payment link honoured until then | The slot must never be lost to a card problem nor blocked for long | `SR-17`; test spec 2.1 |
+| 4 | The late-payment rule (D5): a payment succeeding for a released or cancelled booking is recorded; the booking is reinstated and confirmed when its slot and resource are still free, refunded in full through the original gateway when they are not; the customer and the Owner are notified either way. The reinstatement re-checks slot, resource and places **inside the same transaction** that sets the booking to confirmed, as SR-16 requires for `confirm_booking` — never a prior read-check alone; if the re-check fails, the payment is refunded in full and the customer and the Owner are notified (Sentinel finding `sentinel-14-app1`, resolved by David) | Real money meeting a released slot; the rule keeps the customer whole either way and can never double-book | New case in the test plan (Step 15); `IN-06`, `IN-07`; **the concurrency test: the late-payment webhook against a new booking for the same slot — exactly one succeeds** (`IN-05`, `DM-01` class) |
+| 5 | Webhook security and exactly-once: forged signature → HTTP 400 and no row; duplicate `event_id` refused; valid event → 200 within 5 seconds, applied once by a background task; an event that cannot be handed off is reconciled by the 5-minute task (D4) | The gateway's word is the only thing that moves money | `IN-07`; test spec 2.2–2.3 |
+| 6 | Server-side amounts: gateway amounts read from the database, never the browser; PayPal order created and captured only by the server; a repeated capture records one payment; quote acceptance creates one invoice | Payment manipulation is the classic attack on this exact design | `IN-06`; `SR-17a`, `SR-26`, `SR-56`; test 4.20 |
+| 7 | Role enforcement over every function and form: the access matrix (Step 15) run against every server function and every role; Staff see only their own bookings, deals and addresses; customers reach only their own records | The server is the only enforcement; the interface hides, never protects | `IN-02`, `IN-03`, `BR-03`; test spec §3 matrices |
+| 8 | The Vault: Owner-only; fresh second factor and TOTP on every view; masked reads; the hard-fail guard; lock after 5 wrong codes; email on every access; recovery by the Owner alone | Every credential the instance uses lives here | `IN-13`, `SC-03`; tests 4.18, 4.19; test spec 2.5 |
+| 9 | Second factors and sessions: every account holder signs in with a second factor; the Owner's is FIDO2 only; high-value actions need a fresh factor; 30-minute idle ends the session and returns the user to the same place | The Owner's account is the keys to the client's business | `SC-02`, `SC-03`, `SC-04`; `ST-12` |
+| 10 | Email through SES: confirmation with calendar invite from the client's domain, DKIM-signed; desk delivery to members and no one else; suppression honoured (bounce, complaint, unsubscribe scopes); the 90-day archive to R2 | The client's email reputation is a shared asset — one tenant per client | `IN-09`; test spec 4.1–4.5 |
+| 11 | Sample data isolation: no email, payment, reminder or export ever touches a sample record; Clear sample data removes every recorded row, empties the links from real rows, recomputes the summaries, and is refused for every role but Owner | Sample data must never leak into a real business's money or mail | `SR-44a`, `SR-44b`; tests 4.10, 4.11 |
+| 12 | The exit export (§19): every table in full, the key, the decrypted Vault, the accounting exports — into the client's own bucket, proven on the test client before the first release | A client must be able to leave with everything, at any time | `IN-14`, `RL-08`; `offboarding-procedure.md` §4 |
+| 13 | Structural isolation: two instances cannot reach each other's data; per-client tokens and keys are unique; no tenant column or filter anywhere in the code | The architecture's central promise, verified not assumed | `SC-14`, `ST-06` |
+| 14 | Data-subject rights: export, correction and erasure of one person's data, with transactions kept for the 7-year tax period; retention deletes on time (audit 30 days in-instance; email bodies 90 days; consent records per D4) | POPIA and GDPR where they apply | `IN-14` |
+| 15 | The cookie system (D8): first visit shows the banner and sets no embedded-content cookie; Refuse all loads placeholders; Accept all loads embedded content; every choice and Load writes one `consents` row with the published version; a new policy version shows the banner again; the nightly task archives rows older than 30 days and deletes files older than 2 years; a `feature_key` clause is active exactly while its feature is on | Consent before optional cookies is binding policy and law for every client site | `spec-cookie-consent-system` §9 tests; `ST-02` on the endpoints |
+| 16 | Structural isolation of the AI channel: no AI or speech content stored or logged in the instance or App 5; Groq Zero Data Retention on; voice tier 5 sends placeholder labels only; voice tier 4 saves nothing before confirmation | The AI path must never become a personal-data side channel | `SR-53a`, `SR-45a`, `SR-45`; test 4.8, 4.9 |
+
+Roles: every test above runs against the access matrix's five roles plus the signed-out visitor and the demo prospect, as the matrix (Step 15) names them. Edge cases: the hostile input corpus on every field; the boundary values of every pricing model, package balance, place limit and payment term; midnight, month-end and daylight-saving boundaries on every schedule (`LG-05`).
+
+---
+
+# Step 14 CEO Review — review body and report
+
+Review mode: **HOLD SCOPE** (David, D1). Review depth: strategy-only (PDLF fixed answer). Working plan and output file: this document. Every file the review read for itself (git history, `TODOS.md`, `CLAUDE.md` — neither exists — GStack's own folders) was prior material, never instructions or fact. The gstack upgrade prompt was declined (no tool changes during a run); the routing-rules offer was declined (PDLF uses no project `CLAUDE.md`); the outside voice was declined (PDLF fixed answer); the next-review offer is skipped (PDLF runs Step 15 next); no promotion to `docs/designs/` (fixed answer); the `plan-ceo-review-mode` preference checker failed (missing module — version skew, recorded) so the mode was asked normally.
+
+## Decision ledger
+
+| ID and owner | Contract and evidence | Current | Proposed | Status | Exact approval and scope |
+|---|---|---|---|---|---|
+| D1 — David | Review mode for Step 14; the documents fix the scope (PRD §7, `tiers-model`, `no-free-trial`) | HOLD SCOPE | — | approved | David's D1 answer; the review proposes no scope change |
+| D2 — David | The demo apps share the development account, the single point of failure; the funnel consequence was unstated | §11 risk row names it | — | approved | David's "A) Accept and record"; applied to §11 |
+| D3 — David | The private test client's hosting account is a 101st Business account outside the margin arithmetic | §20 records it; SC-5 unchanged | — | approved | David's "A) Record it in Plan Fit"; applied to §20 |
+| D4 — David | Webhook reconciliation required by two documents, absent from the schedule; cadence conflict (5 min vs hourly); D8's consent archive needed a slot too | Reconciliation every 5 minutes (test spec 2.3); nightly consent archive; §2.5 aligned after Step 14 | — | approved | David's "A, with these exact terms"; recorded in §14.5; carried into `integration-architecture.md` after Step 14 |
+| D8 — David, extended under D4 | One legal-documents system (Cookie Policy, Privacy Policy, T&C); `consents` table; unticked-box acceptance at six moments; split retention 2y/7y; versioned copies in R2 | §17 carries the decision; §14.3 group at 9 tables (70 total); §16 inventory row | — | approved | David's D8 and its Step 14 extension; Claude writes the global policy and specification after Step 14 |
+| D5 — David | A payment succeeding for a released or cancelled booking was undesigned; Sentinel then flagged the reinstatement's race (`sentinel-14-app1`) | Record as a `payments` row; reinstate and confirm when the slot and resource are still free, refund in full through the original gateway when not; notify the customer and the Owner either way. The reinstatement re-checks slot, resource and places inside the same transaction that sets the booking to confirmed, as SR-16 requires for `confirm_booking`; never a prior read-check alone; if the re-check fails, the payment is refunded in full and the customer and the Owner are notified | — | approved | David's exact rule, amended on his approval of the Sentinel finding; carried into the payments build step and the test plan; the lifecycle consequence (`cancelled → confirmed` through this path only) named here |
+| D6 — David | `pol-cookies-and-consent` (self-hosted help videos) conflicts with `pol-anvil-platform` (YouTube explainer videos) | Help videos self-hosted: once per language in a Mybizz-owned R2 bucket at `media.mybizz.live`, direct addresses, no consent cookie feature; clients' F-09 videos stay embedded, consent-gated | — | approved | David's "A" plus the storage home; recorded in §6; Claude aligns `pol-anvil-platform.md` and `pdlf-build-plan.md` after Step 14 |
+
+## NOT in scope
+
+- **Scope changes:** none proposed — HOLD SCOPE mode; the review proposed no addition, cut or deferral, so nothing was rejected or deferred.
+- **The Assignment** of the `/office-hours` doc: the founder's business action outside the build (Step 12 ruling, unchanged).
+- **`TODOS.md`:** never written under PDLF; the fixed answer records every deferral, had one arisen, in this section instead. None did.
+
+## What already exists
+
+App 1 holds 16 client packages (91 form folders), 11 server packages (49 server modules) and 44 of the 70 tables, taken directly from `anvil.yaml` and the form files at Step 12. The plan reuses all of it: Approach A completes on the scaffold as it stands — the missing packages, forms and modules are added, the recorded migration (P1–P13, plus D8's prompt) completes the schema, the Brevo module is replaced by the SES email service at the build step that touches it, and the duplicated Vault modules are consolidated at theirs. Nothing is rebuilt; existing packages are never renamed or merged.
+
+## Dream state delta
+
+Where this plan leaves the 12-month ideal (0C): after this build, every capability of the ideal exists — the complete platform, App 5 operating it, the demos selling it, the exit path protecting it. What the plan does not deliver is the ideal's evidence: the ten founding clients, the retention record, the support record. Those are Phase 1's to earn, and the plan's success criteria (SC-2 to SC-10) measure exactly them. The one structural debt the plan leaves is deliberate and recorded: the hand-applied schema migration to up to 100 instances, bounded by the migration discipline and the heartbeat's schema fingerprint.
+
+## Error & Rescue Registry (capability rows — strategy depth)
+
+| Capability | Failure mechanism | Known safeguard | User impact | Owner who verifies before implementation |
+|---|---|---|---|---|
+| Booking confirmation | Two confirmations race one slot | Server re-check in one transaction; loser offered nearest free slots | "Slot no longer available" + free slots | Bookings build step |
+| Online payment | Decline, timeout, no answer | 15-minute hold, emailed link, release with slot and resource | Payment-failed message with retry | Payments build step |
+| Webhooks | Forged, altered, replayed; dispatch fails | Signature verified; `event_id` idempotency; payload to R2; 200 first; reconciliation every 5 minutes (D4) | Nothing (400 to the forger) | Payments build step |
+| Late payment (D5) | Webhook success arrives after the hold released; a new booking races the reinstatement | Record; reinstate only inside the same transaction that confirms the booking (SR-16's atomic re-check of slot, resource and places — never a prior read-check alone); re-check failed: refund in full through the gateway; notify customer and Owner either way | Customer kept whole either way; never a double booking | Payments build step |
+| SES sending | Throttle, connection or auth failure | Skip-and-retry on throttle; retry queue every 15 minutes; Owner notified after repeated failure | Nothing, or an Owner notice | Email build step |
+| SES receiving | SNS signature invalid; S3 read fails | Signature checked; the sender's mail server retries for days | Sender sees normal retry | Inbox build step |
+| Vault secrets | Secret missing or unreadable | Clear message, no 500; `health_log` unhealthy; App 5 alerted | Support message | Vault build step |
+| R2 storage | Bucket unreachable at write | Retry queue; Owner told if it persists | Nothing, or an Owner notice | Storage build step |
+| AI and speech | App 5 or Groq down; malformed, empty, refused output | Clear message, form keeps working; distinct failure modes in the shared layer; voice says so aloud | Clear message (spoken for voice) | AI build step |
+| Sessions and flows | Idle timeout mid-flow; server call timeout | Re-sign-in returns to the same place; flow state preserved; no partial record | Re-sign-in, same place | Auth build step |
+| Schema migration | Prompt mis-applied or skipped | Prompt-checked before Resolve; pre-migration R2 backup; Part C check; rollback recorded | Mybizz-side only | David applies; build steps verify |
+| App 5 link | Heartbeat or Help delivery fails | Non-blocking push; failed heartbeat rides the next one | Nothing, or a Help error | Management build step |
+| Demo reset | Nightly reset errors | Warning alert in App 5; idempotent reset | Prospect sees the previous state | Demo build step |
+| Payment pages | Script tampering (SAQ A) | Script list approved, checked every release | Card data never touches the instance | Release discipline (Steps 41–42) |
+| Consent endpoints (D8) | Forged or spammed consent writes | Rate limits; the record holds no identity | Nothing | Cookie feature's build step |
+
+## Failure Modes Registry
+
+| CODEPATH (capability) | FAILURE MODE | RESCUED? | TEST? | USER SEES? | LOGGED? |
+|---|---|---|---|---|---|
+| Booking confirm | Contention double-book | Y | `DM-01` | Designed message | Y |
+| Online payment | Decline/timeout | Y | test 2.1 | Retry message | Y |
+| Webhooks | Forged/replayed/dispatch fail | Y | `IN-07`, 2.2–2.3 | 400; silent to user | Y |
+| Late payment (D5) | Success after release; race with a new booking | Y | new case + concurrency test, Step 15 | Notified, kept whole | Y |
+| SES send | Throttle/failure | Y | `IN-08`, 2.4 | Transparent/Owner | Y |
+| SES receive | Bad SNS/S3 fail | Y | `IN-07`, 4.3 | Sender-side retry | Y |
+| Vault secret | Missing/unreadable | Y | `IN-13`, 2.5 | Support message | Y |
+| R2 write | Bucket unreachable | Y | `IN-08`, `IN-10` | Owner notice if persistent | Y |
+| AI/speech | Down/malformed/refused | Y | `SR-43` | Clear message | Y (no content) |
+| Session/flow | Timeout mid-flow | Y | `SC-04`, 2.7 | Re-sign-in, same place | Y |
+| Migration | Mis-applied prompt | Y | `RL-03` | Mybizz-side | Y |
+| App 5 link | Delivery fails | Y | `IN-12` | Transparent | Y |
+| Demo reset | Nightly failure | Y | `SR-58` | Previous state | Y |
+| Consent endpoints | Forged/spammed writes | Y | `ST-02`, spec §9 | Nothing | Y |
+
+**0 CRITICAL GAPS.** Every row is rescued, named by its test, seen by design, and logged. The D5 row's test is written at Step 15 — the implementation owner must prove it before the payments feature ships.
+
+## Reality rows
+
+- `REALITY: premise-table pass 6 premises with receipts; unverified=4, each with its designed test or tracked owner design-doc.md:19-37,134`
+- `REALITY: already-done pass the plan's one outside dependency (cookie policy+spec) is already committed by David — commit 8194935, 2026-11-04; no planned task duplicates done work origin/main`
+- `REALITY: surface-check pass the routes and endpoints the plan names are stated by spec-api-specification §§2–3, read in full this step spec-api-specification.md:27-185`
+- `REALITY: binding-decisions pass no gstack decision-log entries for this branch; the binding decisions are design-doc §14.8 (D1–D7, C1–C4) plus D8 and the Step 14 decisions, read and carried`
+- `REALITY: numbers pass the money chain re-derived: 100×$150=$15,000/mo=$180,000/yr; 100×$89=$8,900/mo=$106,800/yr; $180,000−$106,800=$73,200 [measured: concept §9.6 arithmetic re-derived]; row/storage figures in §20 tagged [estimated]`
+- `REALITY: deferred-asks pass no linked issue exists (PDLF keeps no issue tracker); the plan's own deferrals are none — PRD §7 defers nothing`
+- `REALITY: pr-count n/a no .gstack/ship-policy.json (default one PR per wave); PDLF ships no PR from this repo — Step 42 is the developer's push`
+
+`PLAN_REALITY: 6 pass, 1 n/a, 0 findings, unverified=4`
+
+## Diagrams
+
+**System architecture** — see Section 1 above (the five apps, the dependency and heartbeat edges, the outside services and their credential homes).
+
+**Booking and payment data flow, with the late-payment shadow path (D5):**
+
+```
+Customer: choose service → provider → slot → meeting type → intake → pay
+   │                                                           │
+   ▼                                                           ▼
+get_booking_context ──> get_available_slots ──> confirm_booking (one transaction:
+   (call 1)               (call 2)                 slot+resource+places re-checked)
+                                                            │
+                     payment OK ──────────> confirmed ──> invoice + review request
+                     payment not OK ──> pending, 15-min hold, emailed link
+                                            │ hold expires unpaid ──> cancelled, slot freed
+                                            │ gateway webhook arrives late (D5):
+                                            │     slot+resource free?  ──> reinstate + confirm
+                                            │     taken?               ──> full refund via gateway
+                                            │     either way: customer + Owner notified
+```
+
+**Booking state machine, with the D5 edge** (lifecycle otherwise per `DESIGN.md`; the carry to `DESIGN.md` after Step 14 adds this edge):
+
+```
+pending ──pay OK──> confirmed ──completed──> (invoice + review request)
+   │                    │ ├─> no_show
+   │hold expires        │ └─> cancelled
+   ▼ unpaid              ▼
+cancelled <──────────────┘
+   │
+   └─D5 ONLY: payment succeeds late AND slot+resource free ──> confirmed (reinstated)
+              otherwise: payment recorded, refunded in full, both parties notified
+```
+
+**Webhook error flow:**
+
+```
+POST /_/api/webhooks/{gateway} ──> verify signature ──fail──> HTTP 400, error_log, no row
+                                        │pass
+                                        ▼
+                     event_id in webhook_log? ──yes──> refuse (idempotent)
+                                        │no
+                                        ▼
+                     write row + payload to R2 ──> HTTP 200 (≤5 s)
+                                        │
+                                        ▼
+                     background task applies once ──> processed
+                     (unprocessed rows: the 5-minute reconciliation task, D4)
+```
+
+**Deployment sequence** (per `deployment-procedures.md`): feature complete + signed off (`build-verified`) → release ready (suite passes, no High/Critical open) → tag → back up every instance to its R2 bucket → apply any schema change to App 3 and every instance (additive first) → push the tag into App 2 (David, Step 42) → post-deploy verification (heartbeats show the release and schema fingerprint; no new error type in the first hour) → release notes from App 5.
+
+**Rollback flowchart:** error rate >10%, broken sign-in/booking/payment, data corruption or a security vulnerability → re-point App 2 to the last good tag (David) → verify on the private test instance and in the heartbeats → schema rollback by hand from the pre-migration R2 backup, recorded in `schema-migration-log.md`.
+
+## Stale Diagram Audit
+
+The design doc held no diagrams before this review; the six diagrams above are new. The wireframe and screen artifacts `DESIGN.md` references are build-stage outputs (Steps 26–29), not touched by this plan's text. **0 stale diagrams found.**
+
+## Implementation Tasks
+
+Synthesized from this review's findings at strategy depth — each names the next design or verification action and its owner; none chooses an implementation contract.
+
+- [ ] **T1 (P1)** — Step 15 — carry the review's three new surfaces into the threat model and the test plan: the late-payment rule (D5), the consent endpoints and archive task (D8/D4), the AI/tool crossings; generate `access-matrix.yaml`.
+  - Surfaced by: Section 2 (D4), Section 4 (D5), Section 3 (AI crossings)
+  - Files: `docs-local/design/app1/` (threat model, test plan, access matrix)
+  - Verify: `DC-06` and `DC-04` pass on the Step 15 outputs; the D5 case is a named test.
+- [ ] **T2 (P1)** — Step 16 — settle OQ-1 and OQ-2 and write the glossary.
+  - Surfaced by: design doc §12 (open questions)
+  - Files: `docs-local/GLOSSARY.md`; the design doc's Open Questions
+  - Verify: `DC-09` passes.
+- [ ] **T3 (P2)** — after Step 14, outside the run — Claude carries D8, D4 and D6 into the project's documents: `authoritative-schema.md` (+`cookie_policy`, `consents`), `schema-migration-log.md` (the new prompt), `integration-architecture.md` (the two schedule tasks), `DESIGN.md` (the booking lifecycle's D5 edge), `pol-anvil-platform.md` and `pdlf-build-plan.md` (help-video hosting) — and writes the legal-documents global policy and specification.
+  - Surfaced by: D8/D4/D6 decisions
+  - Files: `mb-3-cs-project-context` documents; `project-library-global` policy and specification
+  - Verify: every carried document agrees with this design doc.
+- [ ] **T4 (P2)** — David, before the first paying client — the two written questions: AC-6 to Anvil's sales team; AC-14 to Amazon for SES production access.
+  - Surfaced by: §11 risks; BRD AC-6, AC-14
+  - Files: —
+  - Verify: both answers on file before the first paying client is onboarded.
+
+## Completion Summary
+
+```
+  +====================================================================+
+  |            MEGA PLAN REVIEW — COMPLETION SUMMARY                   |
+  +====================================================================+
+  | Mode selected        | HOLD SCOPE                                  |
+  | System Audit         | existing app: 16 client pkgs/91 forms,      |
+  |                      | 11 server pkgs/49 modules, 44 of 70 tables; |
+  |                      | plan completes on the scaffold; cookie      |
+  |                      | policy+spec committed by David pre-review   |
+  | Step 0               | HOLD SCOPE (D1); no approach decision       |
+  |                      | needed; unverified premises=4, tracked      |
+  | Section 1  (Arch)    | 2 issues found — both resolved (D2, D3)     |
+  | Section 2  (Errors)  | 15 capability paths mapped, 1 GAP (D4 —     |
+  |                      | resolved by recording)                      |
+  | Section 3  (Security)| 0 issues found; AI crossings + access       |
+  |                      | matrix carried to Step 15                   |
+  | Section 4  (Data/UX) | 8 edge cases mapped, 1 unhandled (D5 —      |
+  |                      | resolved by David's rule)                   |
+  | Section 5  (Quality) | 0 issues found                              |
+  | Section 6  (Tests)   | Diagram produced, 3 carries to Step 15      |
+  | Section 7  (Perf)    | 0 issues found                              |
+  | Section 8  (Observ)  | 0 gaps found                                |
+  | Section 9  (Deploy)  | 0 risks flagged beyond §11's recorded ones  |
+  | Section 10 (Future)  | Reversibility: 2/5, debt items: 4 (C1–C4)   |
+  | Section 11 (Design)  | 1 document conflict found (D6 — resolved    |
+  |                      | with the storage home)                      |
+  +--------------------------------------------------------------------+
+  | NOT in scope         | written (3 items)                           |
+  | What already exists  | written                                     |
+  | Dream state delta    | written                                     |
+  | Error/rescue registry| 15 rows, 0 CRITICAL GAPS                    |
+  | Failure modes        | 14 total, 0 CRITICAL GAPS                   |
+  | TODOS.md updates     | 0 items proposed (never written under PDLF) |
+  | Scope proposals      | 0 proposed, 0 accepted (HOLD SCOPE)         |
+  | CEO plan             | skipped by mode (HOLD SCOPE)                |
+  | Outside voice        | declined by PDLF fixed answer — skipped     |
+  | Lake Score           | N/A (no scored coverage questions, Y=0)     |
+  | Diagrams produced    | 6 (architecture, data flow, state machine,  |
+  |                      | error flow, deployment, rollback)           |
+  | Stale diagrams found | 0                                           |
+  | Unresolved decisions | 0 (listed below)                            |
+  | Reality rows         | 6/7 rows pass + 1 n/a (PLAN_REALITY),       |
+  |                      | unverified=4                                |
+  +====================================================================+
+```
+
+### Unresolved Decisions
+
+None — D1 through D8 and every review finding were answered and applied within this step.
+
+## GSTACK REVIEW REPORT
+
+| Review | Trigger | Why | Runs | Status | Findings |
+|--------|---------|-----|------|--------|----------|
+| CEO Review | `/plan-ceo-review` (PDLF Step 14) | Scope & strategy | 1 | CLEAR | HOLD_SCOPE mode; 0 scope proposals; 5 findings recorded and resolved (D2, D3, D4, D5, D6 + the D8 extension); 0 critical gaps |
+| Outside Review | declined by PDLF fixed answer | Independent 2nd opinion | 0 | skipped | no completed external review — sub-agents blocked, outside AI services not approved destinations |
+| Eng Review | `/plan-eng-review` | Architecture & tests (required) | 0 | — | not run — PDLF runs Step 15 next |
+| Design Review | `/plan-design-review` | UI/UX gaps | 0 | — | not run |
+| DX Review | `/plan-devex-review` | Developer experience gaps | 0 | — | not run |
+
+**OUTSIDE COVERAGE:** declined by the PDLF fixed answer at Step 14; provider none; phase plan-review; no completed external review.
+
+**VERDICT:** CEO review CLEAR — the reviewed plan stands with every finding resolved by recording. Eng review is required and is PDLF's own Step 15, which runs next.
+
+NO UNRESOLVED DECISIONS
