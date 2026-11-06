@@ -1,22 +1,15 @@
 ---
 title: "README"
 doc-id: "mb-7d2ea785"
-updated: "2026-10-30"
+updated: "2026-11-06"
 ---
 # ui
 
-The wireframes and screens of App 1. Every intended user interface has a wireframe, created from the application's defined architecture. A folder per Anvil client package, named exactly as the package is named, holds a folder per form, named exactly as the form is named in Anvil: `ui\{package}\{FormName}\`.
+The screen requirements of App 1. A screen requirement is the approved design of one form, written to section 14.1 of `spec-ui-standards` in `project-library-global`; `mb-form-builder` builds the form from it.
 
-Every form folder holds the same six files, modelled on `(PACKAGE-NAME)\(FORM-NAME)\`:
+A folder per Anvil client package, named exactly as the package is named, holds a folder per form, named exactly as the form is named in Anvil. The path mirrors the form's module path in `client_code`: `ui\<package path>\<FormName>\`. A form held inside another form's folder in `client_code` sits one folder deeper here in the same way.
 
-| File | What it is |
-|---|---|
-| `{FormName}-wireframe-definition.md` | What the screen must show and do |
-| `{FormName}-wireframe.html` | The approved wireframe, chosen from the options in `wireframe\` |
-| `{FormName}-wireframe-chklist.md` | The wireframe checklist, from `templates-global\tmp-chklist-wireframe.md` |
-| `{FormName}-screen.html` | The screen, Step 27 |
-| `{FormName}-screen.png` | The screen image, Step 28 |
-| `{FormName}-screen-chklist.md` | The screen checklist, from `templates-global\tmp-chklist-screen.md` |
+Every form folder holds one file, `<FormName>-requirement.md`, modelled on `(PACKAGE-NAME)\(FORM-NAME)\(FORM-NAME)-requirement.md`. Its front matter says `status: draft` until David approves it, then `status: approved`. The form's spec sheet, which the Anvil agent reads, lives in the app at `theme\assets\docs\app1\<package path>\<FormName>.md`.
 
 Every package folder is kept. An empty package folder is a package the application does not use. The model folder `(PACKAGE-NAME)\` stays as the pattern for every form folder.
 
