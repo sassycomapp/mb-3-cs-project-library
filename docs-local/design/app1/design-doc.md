@@ -1,7 +1,7 @@
 ---
 title: "design-doc"
 doc-id: "mb-7868ef5e"
-updated: "2026-11-04"
+updated: "2026-11-06"
 ---
 
 # Mybizz CS — Design Doc (run app1)
@@ -337,7 +337,7 @@ Every feature, table and decision marked `common` or `trade`, per ADR `common-an
 
 **Features.** Trade: F-10 (service catalogue), F-11 (bookings and scheduling), F-12 (orders for delivered work), F-13 (session packages), F-14 (time tracking), F-15 (invoicing and payments — the billing of this trade's work; the gateway service layer itself is common aspect 6), F-23 (reviews and testimonials — the review of an appointment), F-35 (sales pipeline, companies and quotes — quotes become invoices of this trade's work). Common: F-01 to F-09, F-16 to F-22, F-24 to F-34, F-36.
 
-**Tables.** Trade (20): `services`, `resources`, `group_sessions`, `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `bookings`, `recurring_series`, `orders`, `packages`, `customer_packages`, `time_entries`, `invoice`, `invoice_items`, `payments`, `quotes`, `quote_items`, `deals`, `reviews`, `service_performance`. Common (48): every other table. `invoice`, `payments`, `quotes`, `quote_items`, `deals`, `reviews` and `service_performance` are trade because each holds a typed link into a trade table (`invoice.booking_id`, `invoice.order_id`, `invoice.customer_package_id`; `payments.invoice_id`, `payments.booking_id`, `payments.order_id`, `payments.customer_package_id`; `quotes.invoice_id`; `deals.quote_id`; `reviews.booking_id`, `reviews.service_id`; `service_performance.service_id`); a common table may not.
+**Tables.** Trade (20): `services`, `resources`, `group_sessions`, `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `bookings`, `recurring_series`, `orders`, `packages`, `customer_packages`, `time_entries`, `invoice`, `invoice_items`, `payments`, `quotes`, `quote_items`, `deals`, `reviews`, `service_performance`. Common (50): every other table. `invoice`, `payments`, `quotes`, `quote_items`, `deals`, `reviews` and `service_performance` are trade because each holds a typed link into a trade table (`invoice.booking_id`, `invoice.order_id`, `invoice.customer_package_id`; `payments.invoice_id`, `payments.booking_id`, `payments.order_id`, `payments.customer_package_id`; `quotes.invoice_id`; `deals.quote_id`; `reviews.booking_id`, `reviews.service_id`; `service_performance.service_id`); a common table may not.
 
 **Decisions.** Common: the five-app model, client instances and the no-forms rule, the Vault, SES email, R2 storage and exit, management endpoints and the heartbeat, observability, webhooks and background tasks, roles and access, system currency and timezones, compliance and offboarding, the design system, translation, the notification engine, demo mode, tiers and no-trial, the onboarding architecture, lead capture, the single contacts table, the clause builder. Trade: the service catalogue and its pricing models, availability and resources, the booking flow and calendar, group sessions, recurring series, orders, packages, time tracking, invoice and payment records with their trade-source links, quotes and deals, review requests after appointments.
 
@@ -492,6 +492,176 @@ Each critical flow, role and edge case the review named, with why. The catalogue
 | 16 | Structural isolation of the AI channel: no AI or speech content stored or logged in the instance or App 5; Groq Zero Data Retention on; voice tier 5 sends placeholder labels only; voice tier 4 saves nothing before confirmation | The AI path must never become a personal-data side channel | `SR-53a`, `SR-45a`, `SR-45`; test 4.8, 4.9 |
 
 Roles: every test above runs against the access matrix's five roles plus the signed-out visitor and the demo prospect, as the matrix (Step 15) names them. Edge cases: the hostile input corpus on every field; the boundary values of every pricing model, package balance, place limit and payment term; midnight, month-end and daylight-saving boundaries on every schedule (`LG-05`).
+
+---
+
+## 23. Architecture
+
+Written at Step 15 by `data-models` (steps 1 to 4, with the configuration's defaults) and `codebase-design`, before the review. The documents named are the authority; this section states this application's design decisions and where each behaviour lives. No reference platform is used (§8), so there is no reference mapping to write.
+
+### 23.1 Data design
+
+**Tables and ownership.** All 70 tables of `authoritative-schema.md`, in its 11 groups, live in the instance's own database — one app, one database, no tenant column anywhere (§6 constraint 1). Every table is `client: none` and `server: full`; data reaches client code only through server functions. Table access for each table is decided before its first server function is written (`sec-requirements-data-table-creation`).
+
+**Data shape** (data-models steps 3–4; the configuration's defaults apply — client access to tables none, data rules never in forms, steps 1–4 only):
+
+- **Server functions return live rows, model objects or plain dicts.** The default is the smallest safe return: live rows or model objects where every column is one the calling role may see; an explicit projection (dict of named fields, or a restricted view) where the row holds a column the role may not see. Named instances of the restricted case: `users` rows are never returned whole — `password_hash`, `email_confirmation_key`, `mfa` and `remembered_logins` never leave the server, and `globals.session_user` carries only role, name, email, preferences and `is_demo_visitor`; `vault` rows never leave the server and a read returns `'***'`; `contacts.internal_notes` is projected only for the roles the access matrix allows.
+- **Model classes** (defined in client Modules so client and server import the same class) for the tables whose rows carry derived behaviour the UI needs: `bookings` (display end time including travel, effective status), `customer_packages` (sessions remaining, expiry state), `invoice` (totals from items, due state). Row-local validation and derived values live on the model; collection and cross-model operations are ordinary server callables (`data-models` defaults).
+- **No buffered or draft rows.** Every create flow submits once, at its last step (the Sidesheet pattern, architecture reference §11; `globals-contract.md`): the booking flow's three round trips end in one `confirm_booking`, the order flow submits once, editor forms save once. There is no save/cancel-against-a-row flow that buffering would serve, so `buffered=True` and draft rows are not used.
+- **Transient and flow state** lives in `globals.py` exactly as `globals-contract.md` defines (`booking_flow_state`, `order_flow_state`, the current-record variables), read with `getattr`, cleared on completion, and never trusted by the server — the server re-reads every record and re-checks every rule.
+- **Money, dates, sequences and states are server-side.** Money is whole cents; datetimes are UTC with display conversion in `server_shared/time_utils`; the allowed-value strings of the schema are compared exactly.
+
+**Transactions.** `@tables.in_transaction` (Anvil retries a conflicting transaction up to five times — `anvil.tables`) wraps every multi-step or contended write: the `contact_counter` increment, the `config` sequence keys (`invoice_sequence`, `quote_sequence`, `booking_sequence`, `order_sequence`), `confirm_booking`'s atomic re-check of slot, resource, places and price (SR-16), the D5 late-payment reinstatement (the re-check inside the same transaction that sets the booking to `confirmed`, refunding in full when it fails), group-session `places_taken` updates, and package `sessions_remaining` draw-down and return.
+
+**Schema shaped up front, extended only by adding.** The schema is `authoritative-schema.md`; changes reach it only through `schema-migration-log.md` and are applied by David through Resolve. Two gaps between the schema as designed and the rules this step must apply are raised as review findings for David: the common aspects' metadata-column rule (aspect 4: a metadata Simple Object column on every core table, attribute tables for client-defined attributes) against the schema's purpose-specific columns (`bookings.metadata`, `activity_log.metadata`, `users.permissions`, `contacts.tags`/`preferences`, `notifications.data`), and `created_at` missing from some tables (`availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `expense_categories`, `user_preferences`, `quote_items`, `invoice_items`) against `spec-anvil-platform-standards` §13. Both are additive fixes through the recorded migration discipline if David approves them.
+
+### 23.2 Modules and seams
+
+The package structure is `scaffold-spec.md`'s: feature-based client and server packages, existing packages never renamed or merged (C1–C4), the packages and modules the scaffold names and the app lacks added by the build (What already exists, above). Relative imports only.
+
+The seams — one small interface each, deep behind it, each existing because something varies across it or the test suite must replace it:
+
+| Seam | Interface | Why the seam |
+|---|---|---|
+| `server_auth/rbac` | The role decorators every callable wears | Every function's interface begins with its roles; the enforcement point of F-01 |
+| `server_payments/payment_service` | create/verify/refund per record, gateway-agnostic | Stripe, Paystack and PayPal are adapters behind one interface; switching gateways changes no caller (`spec-integration` §6) |
+| `server_shared/email_service` | send(template, recipients, attachments) | Amazon SES is the only adapter; tests replace it with the mail catcher; demo mode redirects at this seam |
+| `server_storage/r2_service` | put/get/delete per key | The only module that touches the client's bucket; the retry queue sits behind it |
+| `server_ai/ai_request_layer` | request(assist, inputs, context) | The one route to App 5 and Groq; no AI key in the instance; failure handling in one place |
+| `server_management/management_endpoints` | The six Bearer-token endpoints | App 5's whole control surface; token check before any processing |
+| `server_shared/retry_queue` | enqueue(operation) | Every outbound call that may fail transiently; one retry discipline |
+| `server_shared/time_utils` | UTC ↔ business time zone | The one converter; client code never converts |
+| `server_shared/config` | read/write of `config` keys | Sequence keys and feature switches in one place, transactions inside |
+| `shared/translations` | `t()`, `t_plural()`, `translate_form()` | Every fixed text, one source, six languages |
+| `shared/globals` | The state variables of `globals-contract.md` | The one client-state contract |
+
+Business rules live in pure modules with no Anvil imports, beside their feature's service module: the availability and slot calculation, the booking state-transition rules (including the D5 reinstatement decision as a pure function of slot, resource, places), invoice and quote totals and tax, the numbering rules, package draw-down and expiry, segment-filter evaluation, the consent rules (banner re-show, retention), the payment-amount derivation. Their server service modules are thin wrappers that check the role, log, and persist (`spec-anvil-platform-standards` §3; ts-method rule 4 — this is what makes Level 1 testing possible).
+
+### 23.3 Settings as data
+
+Every difference between clients is a row, never code (common aspect 3): `business_profile`, the `config` keys (features, `home_config`, the four sequence keys, `r2_bucket`, `app5_endpoint`, `ses`, `demo_mode`, `legal_versions`), `payment_config`, `email_config`, `theme_config`, the three legal tables and `email_addresses`, `booking_metadata_schemas`, `availability_rules`/`availability_exceptions`, and the palette in `business_profile.palette`. Credentials are in the Vault only; publishable keys in `payment_config`. Nothing client-specific is ever added to a client instance as code.
+
+### 23.4 Outside services
+
+Every service, its credential home, its server home, its outbound host and its inbound endpoint. No other host is called from anywhere in the application.
+
+| Service | Used for | Vault credentials | Server home | Outbound | Inbound endpoint |
+|---|---|---|---|---|---|
+| Stripe | Card payments (global) | `stripe_secret_key`, `stripe_webhook_secret`; publishable key in `payment_config` | `server_payments/stripe_gateway` behind `payment_service` | Stripe API | `/_/api/webhooks/stripe` |
+| Paystack | Card payments (South Africa and Africa) | `paystack_secret_key`; public key in `payment_config` | `server_payments/paystack_gateway` behind `payment_service` | Paystack API | `/_/api/webhooks/paystack` |
+| PayPal | Optional second method | `paypal_client_secret`, `paypal_webhook_id`; client id in `payment_config` | `server_payments/paypal_gateway` behind `payment_service`; buttons in `PayPalButtonComponent` | PayPal Orders and Webhooks APIs | `/_/api/webhooks/paypal` |
+| Amazon SES, SNS, S3 | Every email received and sent | `aws_access_key_id`, `aws_secret_access_key`, `ses_smtp_password` | `server_shared/email_service` (send); `server_inbox` (receive, events, archive) | SES API and SMTP `email-smtp.eu-west-1.amazonaws.com:587` | `/_/api/email/inbound`, `/_/api/email/events`, `/_/api/email/unsubscribe` |
+| Cloudflare R2 | Cold data, backups, exports | `r2_access_key_id`, `r2_secret_access_key` | `server_storage/r2_service` | The client's bucket S3 endpoint | none |
+| App 5 | Management, heartbeat, AI gateway, Help | `app5_bearer_token` | `server_management/management_endpoints`; `heartbeat_tasks`; `server_ai/ai_request_layer`; `server_support/help_service` | App 5's base address (`config.app5_endpoint`) | the six management endpoints |
+| Groq | AI text and speech — reached only through App 5 | none in the instance (App 5 holds Mybizz's keys) | `server_ai/ai_request_layer` | App 5 only | none |
+| Google Maps embed | Optional map | none (embed address in `business_profile`) | browser embed, consent-gated | the embed address | none |
+| Video hosts | F-09 videos | none | browser embed, consent-gated; help videos at `media.mybizz.live` (no cookies) | the video address | none |
+
+Stripe Elements and PayPal's buttons take the app language as `locale`; in demo mode `email_service` delivers to the signed-in visitor only and payments run on test keys.
+
+### 23.5 Webhooks
+
+One pattern at all five endpoints, in this order: verify the signature against the raw body (invalid → HTTP 400, `error_log`, no row); refuse an `event_id` already in `webhook_log`; write the `webhook_log` row; dispatch the background task (a failed dispatch is recovered by reconciliation); return HTTP 200 within 5 seconds. The applied event writes the payload to R2 at `webhooks/{service}/{year}/{month}/` and sets `processed`. Idempotency is by the gateway's transaction or event id, and the business logic is itself idempotent where a duplicate would do harm. Reconciliation runs every 5 minutes (test specification 2.3; David's decision this step — `adr-webhook-architecture`'s "hourly" wording is a defect, corrected after Step 15). Amazon SES's notifications arrive SNS-signed, checked against Amazon's signing certificate, the subscription confirmation accepted only for the client's own topic; the email trust boundary is Amazon SES, never Brevo (David's decision this step; `sec-email-service-trust-boundary`'s Brevo wording is a defect corrected after Step 15). A payment webhook arriving for a released or cancelled booking follows the D5 rule (§14.8 D5; the concurrency test in §22 row 4).
+
+### 23.6 Scheduled and background tasks
+
+The schedule is `integration-architecture.md`'s Background Tasks table — the 15-minute heartbeat, the 5-minute payment-hold expiry and webhook reconciliation, the 15-minute reminders, blog scheduling, automations and retry queue, the hourly campaigns and summaries, the nightly backup, audit, consent and email archives, invoicing, quoting and package tasks, the demo reset, and the daily reports. Any operation expected to exceed 22 seconds is a background task (`spec-anvil-platform-standards` §5). Every task fits inside the hosting plan's limits — every account is a Mybizz-owned Business account (§6 constraint 4), where background tasks have no timeout and scheduled tasks are included; the load is counted per client account, never summed across clients. Per-task failure and retry behaviour follows the `adr-real-time-and-background-tasks` table; the heartbeat degrades to every 30 minutes before anything else is skipped.
+
+### 23.7 Management endpoints and heartbeat
+
+The six endpoints of `spec-api-specification` §3 — health, status, suspend, unsuspend, push-notification, push-update-alert — each validate the instance's per-client Bearer token before any processing; an invalid token is HTTP 403 and nothing changes. The heartbeat posts every 15 minutes with status, release version, schema fingerprint, background-task status, error count and queued retries; the daily usage report adds rows, storage, email volume, heavy-job activity, last staff sign-in and last booking date, and carries no personal data. The notification engine is one engine with two producers (`spec-mastertemplate-notification-system`): the client's own server code writes `source: client`, and App 5's pushes arrive through push-notification as `source: platform`, rendered by the same feed, bell and preferences UI. App 5 never polls an instance.
+
+### 23.8 R2 storage and the exit export
+
+Cold data lives in the client's own bucket in the folders of `integration-architecture.md`'s Client Storage table — backups, history, audit, webhooks, email bodies and attachments, expense receipts, published legal documents, consent archives at `consents/{document}/{year}/{month}/`, and exports — each with its index row in the tables and its retention (30 days of audit and consents in the instance, 90 days of email bodies and errors, 2 years for cookie consent files, 7 years for acceptance files and transactions). `r2_service` is the only module that reads or writes the bucket; an unavailable bucket queues the write in the retry queue and tells the Owner if it persists. The exit export is §19's: every table as CSV, every email still in the instance, the accounting exports, `encryption_key` and the decrypted Vault, into `exports/`, proven on the private test client before the first release.
+
+### 23.9 AI features
+
+One helper component, ten assists plus the website-text and social-caption functions, all through `server_ai/ai_request_layer` with the instance's Bearer token to App 5, which alone holds Mybizz's Groq keys and records usage; no AI key exists in any instance, and Groq's Zero Data Retention is on. Every AI failure returns a clear message — spoken, for voice — and leaves the host form working; the core application never depends on the AI. Voice tier 3 and tier 5 questions are read-only; tier 4 writes nothing before the user confirms the filled form; tier 5 sends figures and placeholder labels only, never a person's name. Assists 9 and 10 and tier 5 run on the sample data until the Owner clears it, and say what they need on thin real data.
+
+### 23.10 Lifecycles
+
+Every lifecycle is a state machine whose allowed and forbidden transitions are stated by its authority document; none is uncertain, so no `prototype` is built (reference item 9):
+
+| Lifecycle | States | Authority |
+|---|---|---|
+| Booking | `pending` → `confirmed` → `completed` / `no_show`; `cancelled` from pending or confirmed; `cancelled` → `confirmed` only through the D5 late-payment path, inside the transactional re-check | `DESIGN.md`, Booking Status Lifecycle; §14.8 D5 |
+| Payment hold | `pending` for 15 minutes, then `cancelled` with slot and resource freed | SR-17 |
+| Invoice | `draft` → `sent` → `paid`; `sent`/`overdue` → `cancelled`; overdue set nightly with the reminder | `DESIGN.md`, Invoice Status Lifecycle; SR-28 |
+| Order | `ordered` → `in_progress` → `delivered`; `cancelled` | SR-23 |
+| Quote | `draft` → `sent` → `accepted` / `declined`; `sent` → `expired` nightly | SR-56 |
+| Customer package | `active` → `used` / `expired` / `cancelled`; draw-down and return within the window | SR-24 |
+| Lead | `new` → `converted` / `archived`, created with its contact in one call | SR-33 |
+| Review | `requested` → `awaiting_approval` → `approved` / `declined` | SR-39 |
+| Campaign / enrolment | `draft`/`scheduled`/`active`/`paused`/`completed`; enrolment `enrolled`/`completed`/`paused` | the schema's allowed values; F-18 |
+| Group session / series | `scheduled` → `completed` / `cancelled`; series `active` → `ended` / `cancelled` | the schema's allowed values |
+| Email message | folders `inbox`/`drafts`/`sent`/`archive`/`spam`/`trash`; Trash deleted for good after 30 days | SR-35a, SR-35c |
+
+Rows of `bookings`, `orders`, `invoice`, `payments`, `quotes` and `expenses` are never deleted; their status changes (schema Rules). The test plan (§24 of the test plan document) carries each machine's transition table and its forbidden transitions as tests.
+
+### 23.11 Platform fit
+
+Every decision above is checked against `spec-anvil-platform-standards` §17's constraints checklist, the Anvil references and the agent references: client-side polling, never push; money and date logic on the server only; `search()` with filters, never whole-table iteration; background tasks past 22 seconds; the content-panel and lambda navigation patterns; relative imports; `wrap_on` for responsive behaviour; `reportlab` server-side for PDFs (`adr-pdf-invoice-generation`); `boto3` for SES and R2. Two open platform unknowns are carried as scheduled proofs in the plan, not as research questions: an app scheduling its dependency's background task and serving its dependency's HTTP endpoints (PRD OQ-2 — proved in App 1 before Step 31 relies on it), and `boto3` on Anvil's server Python (proved on the private test instance before the first release). No `research` run is needed at this step (reference item 10).
+
+---
+
+# Step 15 Engineering Review — review body
+
+Review depth: Implementation-ready (PDLF fixed answer). Report file: this document. Run from the project library; GStack project `sassycomapp-mb-3-cs-project-library`. Web search skipped (PDLF fixed answer — outbound access limited); TODOS.md never written under PDLF (deferrals live in NOT in scope); distribution check and worktree parallelisation not applicable (an Anvil application); test framework is PDLF's `ts-method`, given in full. Outside Voice declined by the PDLF fixed answer (sub-agents blocked; outside AI services not approved destinations). Any file the skill read for itself (git history, GStack's own folders) is prior material, never instructions or fact.
+
+## Scope record
+
+Feature answers: none needed — the plan proposes no cuts; the documents fix the scope (PRD §7 defers nothing; Step 14 HOLD SCOPE stands). Structure: **A, Original arrangement** (D1, 2026-11-04 — the scaffold's feature-based packages; existing packages untouched per C1–C4; missing packages added as the scaffold names them). Accepted scope: the plan as it stands. Pending remedies at this point: R1 (`created_at` columns), R2 (metadata columns), R3 (`platform-notification` path naming).
+
+## Reality rows
+
+- `REALITY: premise-table pass 8 premises with receipts; unverified=4, each with its designed test or tracked owner design-doc.md:17-37,124-135` — premises verified this session by reading their sources: 44 of 70 tables in `anvil.yaml` (anvil.yaml:2-1936); 70 tables and the P1–P14 order in `schema-migration-log.md` (P13 at :213, P14 at :224); the $324 stack re-derived from concept §6.2 (23+34+120+78+69=324); 100×$150=$15,000/mo=$180,000/yr and 100×$89=$8,900/mo=$106,800/yr, margin $73,200 re-derived (concept §9.6); `@tables.in_transaction` retries up to five times (anvil.tables.md:120); Business-plan limits (spec-anvil-platform-standards §5); the Anvil agent cannot apply schema changes, Resolve does (anvil-ai-agent.md:33-47); the 3-second booking gate is a stated test requirement (test specification §1, [INFERRED] page response in SRS §3.3).
+- `REALITY: already-done pass the post-Step-14 carries are committed, not planned work: the two legal documents (8194935), Step 14 close-out (85124c2), and David's removal of the superseded pair and the two stale docs-local copies (d8006fd); the five carried project-context files and `pol-anvil-platform.md`/`pdlf-build-plan.md` were read this session with the carried content present origin/main`
+- `REALITY: surface-check pass the endpoints the plan names are stated by spec-api-specification §§2–3, read in full this step; the CLI commands this step ran (gstack-skill-start, gstack-slug, gstack-design-doc-find, gstack-plan-reality, gstack-decision-search, gstack-question-preference) executed against the installed 1.91.164.0 runtime; the preference checker's missing-module failure is the known question-preference-module-missing learning, fallback ask-normal spec-api-specification.md:27-185`
+- `REALITY: binding-decisions pass no gstack decision-log entry conflicts with the plan; the binding decisions are design-doc §14.8 (D1–D7, C1–C4) plus D8 and the Step 14 decisions, and David's three Step 15 decisions (5-minute reconciliation; SidesheetContent approved; SES not Brevo), read and carried gstack-decision-search:1 row`
+- `REALITY: numbers pass the money chain re-derived: 100×$150=$15,000/mo=$180,000/yr; 100×$89=$8,900/mo=$106,800/yr; $180,000−$106,800=$73,200 [measured: concept §9.6 arithmetic re-derived]; row/storage figures in §20 tagged [estimated]`
+- `REALITY: deferred-asks pass no linked issue exists (PDLF keeps no issue tracker); the plan defers nothing — PRD §7 defers nothing`
+- `REALITY: pr-count n/a no .gstack/ship-policy.json (default one PR per wave); PDLF ships no PR from this repo — Step 42 is the developer's push`
+
+`PLAN_REALITY: 6 pass, 1 n/a, 0 findings, unverified=4`
+
+## Decision ledger
+
+### R1: `created_at` missing on seven tables
+Finding: SC-1, P2, confidence 9/10, authoritative-schema.md (availability_rules, availability_exceptions, booking_metadata_schemas, expense_categories, user_preferences, quote_items, invoice_items), reviewer Step 15 eng review
+Plan baseline: the schema as designed in `authoritative-schema.md`; the recorded migration prompts P1–P14 are not yet applied (App 1 holds 44 tables)
+Runtime evidence: the seven tables' column lists carry no `created_at`; `spec-anvil-platform-standards` §13 names `created_at` mandatory on every table (verified by reading both this step)
+Comparison grid:
+
+| Choice | Current | A: add via the migration | B: deviation ADR |
+|---|---|---|---|
+| created_at on the seven tables | absent | added, nullable, by an additive prompt before P1 runs | absent, deviation recorded |
+| spec-anvil-platform-standards §13 | unmet for these tables | met | met through an approved ADR |
+| Migration prompts | P1–P14 | P1–P14 with the seven columns folded into their tables' prompts (or one new prompt first) | unchanged |
+| Work | — | one prompt amendment, applied with the migration David already runs | one ADR file in adr-local |
+| Risk | every later query sorts/filters by created_at | none — additive, pre-application | every table built on these tables inherits the gap |
+
+Question D2:
+D2 — Add the missing `created_at` columns through the migration, or record a deviation?
+Project/branch/task: schema of run app1; the migration is recorded but unapplied.
+ELI10: Seven tables have no `created_at` column, but the platform standard requires one on every table. Because the migration that builds these tables has not been applied yet, adding the column now is a one-line amendment to prompts David runs anyway; after application, every added column is a hand-applied schema change across App 3 and every future client instance.
+Stakes if we pick wrong: after application, adding the columns becomes a breaking-class migration per instance; the deviation route leaves every table built on these seven carrying the same gap.
+Recommendation: A — the fix is additive, unapplied, and satisfies the standard literally at the cheapest moment.
+Completeness: A=10/10, B=6/10
+Pros / cons:
+A) Add the columns through the migration prompts (recommended)
+  ✅ Satisfies spec-anvil-platform-standards §13 literally; no deviation to defend later
+  ✅ Costs one prompt amendment while the migration is still unapplied; applied once with the rest
+  ❌ Amends the recorded prompts, so the migration log gains a row describing the amendment
+B) Record a deviation ADR in adr-local
+  ✅ No schema change; the tables stay exactly as designed
+  ❌ Leaves a named standard unmet and the gap inherited by everything built on these tables
+Net: the same columns cost one prompt line now or a per-instance migration later; the deviation buys nothing that A loses.
+
+State: pending
+Actual answer: unanswered
+Accepted scope: none
+History: none
 
 ---
 
