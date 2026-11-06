@@ -13,7 +13,7 @@ Every custom component Mybizz CS needs, where each one is used, and why no nativ
 
 A custom component is a reusable interactive UI element that:
 
-1. Is not provided, or not adequately provided, by the Anvil Material 3 theme ([[[default:specifications-global/spec-m3_component_mapping|M3 Component Mapping]]](C:/dev/project-library-global/specifications-global/spec-m3_component_mapping.md)); and
+1. Is not provided, or not adequately provided, by `m3-custom-theme` ([[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md)); and
 2. Is used in more than one place.
 
 An element that meets rule 1 but is used in only one place is a **local component**: it lives in the folder of the one form that uses it.

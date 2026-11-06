@@ -47,7 +47,7 @@ Domain terms are defined in `GLOSSARY.md` once Step 16 produces it; until then, 
 
 - `business-requirements-document.md`, `product-requirements-document.md`
 - `mb-3-cs-concept.md`, `mb-3-cs-architecture-reference.md`, `user-flows.md`
-- `scaffold-spec.md`, `globals-contract.md`, `integration-architecture.md`, `observability-requirements.md`, `deployment-procedures.md`, `anvil-ui-build-standard.md`
+- `scaffold-spec.md`, `globals-contract.md`, `integration-architecture.md`, `observability-requirements.md`, `deployment-procedures.md`
 - `authoritative-schema.md`, `DESIGN.md`, `palette-tokens.md`, `custom-component-requirements-matrix.md`, `spec-calendar-feature.md`, `spec-ai-implementation.md`, `spec-team-inbox.md`, `spec-sm-syndication.md`, `vault-implementation.md`, `spec-test-specification.md`, `mb-3-cs-feature-list.md`
 - [[[default:specifications-global/spec-regulatory-compliance-baseline|Regulatory Compliance Baseline]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md), [[[default:specifications-global/spec-security|Security Specification]]](C:/dev/project-library-global/specifications-global/spec-security.md), [[[default:specifications-global/spec-api-specification|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md)
 
@@ -169,7 +169,7 @@ Every functional requirement FR-01 to FR-36 of the PRD appears in this table at 
 
 ### 3.2 External Interface Requirements
 
-- **User interfaces:** the Anvil Material 3 theme with the project deviations (`DESIGN.md`); screens built to `anvil-ui-build-standard.md`; the admin area, customer portal and public website as in `scaffold-spec.md` (Navigation Architecture); WhatsUp on the phone's browser.
+- **User interfaces:** the Anvil Material 3 theme with the project deviations (`DESIGN.md`); screens built to `spec-ui-standards` (project-library-global); the admin area, customer portal and public website as in `scaffold-spec.md` (Navigation Architecture); WhatsUp on the phone's browser.
 - **Hardware interfaces:** the device microphone for WhatsUp, through `anvil.js`, and the device camera for expense receipts, through the file upload, each with the user's permission.
 - **Software interfaces:** Stripe, Paystack, PayPal, Amazon SES, SNS and S3, Cloudflare R2, and App 5 (for Groq, management, DNS and SES provisioning), as `integration-architecture.md` sets out.
 - **Communication interfaces:** HTTPS only. Inbound HTTP endpoints: one webhook endpoint per gateway; `/_/api/email/inbound`, `/_/api/email/events`, `/_/api/email/unsubscribe` for SES; `/_/api/blog-image/{slug}`; the management endpoints for App 5, with the instance's Bearer token. Outbound: HTTPS to SES and every other service; SMTP with STARTTLS to the SES SMTP endpoint for Anvil's Users service email.
@@ -208,7 +208,7 @@ Every functional requirement FR-01 to FR-36 of the PRD appears in this table at 
 - **Recoverability:** daily backups and pre-release and pre-migration backups to the client's R2 bucket; restore by Mybizz from R2 (UF-33). `[CLEAR]`
 - **Observability:** structured logging, `health_log`, `error_log` and `activity_log`, heartbeat to App 5, as `observability-requirements.md` sets out. `[CLEAR]`
 - **Maintainability:** feature-based packages, never renamed; one module per responsibility (`scaffold-spec.md`); every public function typed and documented; response envelope `{'success', 'data' | 'error'}`. `[CLEAR]`
-- **Accessibility:** WCAG 2.1 AA (`anvil-ui-build-standard.md`). `[CLEAR]`
+- **Accessibility:** WCAG 2.2 AA (`spec-ui-standards`, project-library-global). `[CLEAR]`
 
 ---
 

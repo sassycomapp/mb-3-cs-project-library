@@ -38,7 +38,7 @@ This document is the single home of the colour values of the four Mybizz CS pale
 
 **Dark mode.** Dark mode follows the device setting on every screen ([[[default:adr-global/adr-dark-mode|Dark Mode]]](C:/dev/project-library-global/adr-global/adr-dark-mode.md) ADR). The palette module applies the palette's dark block when the device prefers dark, and switches automatically when the device setting changes.
 
-**Status colours** (`status-success`, `status-pending`, `status-error`) are fixed platform colours, not palette colours ([[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) section 10). They are added once as custom colours in the Colour Scheme and are the same in every palette.
+**Status colours** (`status-success`, `status-pending`, `status-error`) are fixed platform colours, not palette colours ([[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) section 7). They are added once as custom colours in the Colour Scheme and are the same in every palette.
 
 ### Palette module (`client_code/shared/palette_utils.py`)
 

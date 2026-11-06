@@ -8,7 +8,7 @@ updated: "2026-11-06"
 This document is the design system of Mybizz CS. It is built on the **Anvil Material 3 theme** (dependency ID `4UK6WHQ6UX7AKELK`) and applies to every Mybizz CS screen: the public website, the admin area, the customer portal, and the Mybizz management app (App 5).
 
 - The colour values of the four palettes live in `palette-tokens.md`; this document defines how colour is used.
-- Generic Material 3 rules (accessibility, the `wrap_on` responsive mechanism, state-specification patterns) live in [[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) and are not repeated here. This document states this project's choices and its deviations from the M3 defaults.
+- Generic Material 3 rules (accessibility, the `wrap_on` responsive mechanism, state-specification patterns) live in [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) and are not repeated here. This document states this project's choices and its deviations from the M3 defaults.
 - Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
 - Feature numbers (F-01 to F-36) are those of `mb-3-cs-concept.md`.
 
@@ -127,7 +127,7 @@ The Colour Scheme holds the 46 colours of the Anvil M3 theme:
 
 #### Status Colors
 
-Material 3 provides no success or pending colour. The platform fixes three status colours once for every Mybizz app ([[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) section 10), added as custom colours in the Colour Scheme and identical in every palette:
+Material 3 provides no success or pending colour. The platform fixes three status colours once for every Mybizz app ([[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) section 7), added as custom colours in the Colour Scheme and identical in every palette:
 
 | Role | Meaning |
 |---|---|
@@ -192,7 +192,7 @@ Fallbacks: Noto Sans, Arial, sans-serif
 
 ### Type Scale
 
-The M3 type scale ([[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) section 11) with this project's heading weight:
+The type scale of `m3-custom-theme` with this project's heading weight:
 
 | Scale | Size | Line Height | Weight | Use Case |
 |---|---:|---:|---:|---|
@@ -1230,9 +1230,4 @@ Every data-driven screen must define an empty state. The empty state pattern has
 | Specification | Relevance |
 |---|---|
 | [[[default:specifications-global/spec-component-properties\|Component Properties Specification]]](C:/dev/project-library-global/specifications-global/spec-component-properties.md) | Component property standards, Designer vs Code classification |
-| [[[default:specifications-global/spec-m3-design-standards\|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) | M3 design standards, typography, spacing, accessibility |
-| [[[default:specifications-global/spec-m3_component_mapping\|m3_component_mapping.md]]](C:/dev/project-library-global/specifications-global/spec-m3_component_mapping.md) | M3 to Anvil component mapping, support levels |
-| [[[default:specifications-global/spec-material-3-theme\|Material 3 Theme Specification]]](C:/dev/project-library-global/specifications-global/spec-material-3-theme.md) | M3 theme implementation, token structure, CSS overrides |
-| [[[default:specifications-global/spec-screen-and-wireframe-production-standards\|Screen & Wireframe Production Standards]]](C:/dev/project-library-global/specifications-global/spec-screen-and-wireframe-production-standards.md) | Screen and wireframe production rules |
-| [[[default:specifications-global/spec-screen-production-standard\|Screen Production Standard]]](C:/dev/project-library-global/specifications-global/spec-screen-production-standard.md) | Screen production process, M3 token block |
 | [[[default:specifications-global/spec-ui-standards\|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) | UI standards, component naming, form types |

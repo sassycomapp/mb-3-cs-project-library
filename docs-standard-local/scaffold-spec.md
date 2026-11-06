@@ -21,7 +21,7 @@ The structure of App 1: its packages, forms, modules, navigation and startup.
 | Email and the Team Inbox | `specifications-local/spec-team-inbox.md` |
 | Social media sharing | `specifications-local/spec-sm-syndication.md` |
 | Shared client state | `docs-standard-local/globals-contract.md` |
-| Screen building rules | `docs-standard-local/anvil-ui-build-standard.md` |
+| Screen building rules | `spec-ui-standards` (project-library-global) and the screen requirements in `ui\` |
 
 ---
 
@@ -294,7 +294,7 @@ A custom component is a reusable element that the Anvil Material 3 theme does no
 
 - The twelve shared custom components, where each is used and its implementation notes: `custom-component-requirements-matrix.md`.
 - Every shared custom component lives in `client_code/components/`, takes its settings as properties set by the host form, and uses only the tokens, typography, spacing and roles in `DESIGN.md`.
-- Components inside a custom component are only those in [[[default:specifications-global/spec-m3_component_mapping|M3 Component Mapping]]](C:/dev/project-library-global/specifications-global/spec-m3_component_mapping.md); browser features are reached through `anvil.js`, never `eval`.
+- Components inside a custom component are only those [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) allows; browser features are reached through `anvil.js`, never `eval`.
 - Not built: animated button, card, link and image components; an onboarding palette form; chip components (matrix, Not built).
 
 ---
@@ -317,12 +317,10 @@ The tables, their columns, types and allowed values are in `authoritative-schema
 
 ## M3 Component Standards
 
-- Every screen is built to `anvil-ui-build-standard.md` and `DESIGN.md`.
-- Components are only those in [[[default:specifications-global/spec-m3_component_mapping|M3 Component Mapping]]](C:/dev/project-library-global/specifications-global/spec-m3_component_mapping.md). `HTMLTemplate` and the legacy `Label` are banned.
+- Every screen is built to [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md), by the method of [[[default:specifications-global/mo-ui-production|UI Production Method]]](C:/dev/project-library-global/specifications-global/mo-ui-production.md), and to `DESIGN.md`.
 - Component names follow [[[default:specifications-global/spec-nomenclature|Nomenclature]]](C:/dev/project-library-global/specifications-global/spec-nomenclature.md); `Text` components use the prefix `text_`.
-- Inputs use `appearance = "outlined"`, set in the Designer. A failed validation sets the input's `error` property and shows the message in its supporting text; both are cleared when the input is valid.
-- One filled button per screen for the primary action; outlined for secondary; text for tertiary.
-- Editor forms set `self.item` before `self.init_components()`, with Write Back switched on in the Designer's Data Bindings panel; settings forms that read and write through their own server calls use no data bindings.
+- A failed validation sets the input's `error` property and shows the message in its supporting text; both are cleared when the input is valid.
+- Settings forms that read and write through their own server calls use no data bindings.
 - Multi-step flows (onboarding, booking, order) keep the selections in `self.item` or in `globals.py` (`globals-contract.md`) and submit to the server once, at the last step.
 
 ---

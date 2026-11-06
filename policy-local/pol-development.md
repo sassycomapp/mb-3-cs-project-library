@@ -8,7 +8,7 @@ updated: "2026-11-06"
 **Category:** Policy
 **Authority:** Mandatory — all development work must conform to this policy
 
-**Scope:** How `mb-3-cs` development is run. Technical standards are in [[[default:specifications-global/spec-anvil-platform-standards]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md), [[[default:specifications-global/spec-m3-design-standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) and [[[default:specifications-global/spec-security-architecture]]](C:/dev/project-library-global/specifications-global/spec-security-architecture.md).
+**Scope:** How `mb-3-cs` development is run. Technical standards are in [[[default:specifications-global/spec-anvil-platform-standards]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md), [[[default:specifications-global/spec-ui-standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) and [[[default:specifications-global/spec-security-architecture]]](C:/dev/project-library-global/specifications-global/spec-security-architecture.md).
 
 ---
 

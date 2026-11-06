@@ -17,7 +17,7 @@ updated: "2026-11-06"
 - The calendar **displays** bookings and lets the user act on them. It does not decide availability or create bookings itself: availability is calculated by `server_bookings/`, and creating or changing a booking opens the booking forms (UF-05, UF-11).
 - Pure Anvil and Material 3 only: no Anvil Extras, no custom JavaScript, no external libraries, minimal custom CSS.
 - Every view is rendered dynamically from data; no hardcoded day or time components.
-- Only components listed in [[[default:specifications-global/spec-m3_component_mapping|M3 Component Mapping]]](C:/dev/project-library-global/specifications-global/spec-m3_component_mapping.md) are used; component names follow [[[default:specifications-global/spec-nomenclature|Nomenclature]]](C:/dev/project-library-global/specifications-global/spec-nomenclature.md).
+- Only components [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) allows are used; component names follow [[[default:specifications-global/spec-nomenclature|Nomenclature]]](C:/dev/project-library-global/specifications-global/spec-nomenclature.md).
 - No hardcoded colours: every colour comes from theme tokens (F-31).
 
 ---

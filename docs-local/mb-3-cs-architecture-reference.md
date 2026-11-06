@@ -164,7 +164,7 @@ The general three-tier module pattern (forms / client modules / server modules /
 
 ## 9. Navigation
 
-General navigation patterns: [[[default:specifications-global/spec-m3-design-standards|M3 Design & Component Standards]]](C:/dev/project-library-global/specifications-global/spec-m3-design-standards.md) section 7.
+General navigation patterns: [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) section 9.
 
 | Area | System |
 |---|---|
