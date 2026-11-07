@@ -1,7 +1,7 @@
 ---
 title: "authoritative-schema"
 doc-id: "mb-8b83e940"
-updated: "2026-11-06"
+updated: "2026-11-07"
 ---
 # Mybizz CS — Authoritative Database Schema
 
@@ -25,6 +25,7 @@ Every table and column of a Mybizz CS client instance: name, type and allowed va
 - **Credentials only in the Vault**, encrypted.
 - **Names** follow [[[default:specifications-global/spec-nomenclature|Nomenclature]]](C:/dev/project-library-global/specifications-global/spec-nomenclature.md). A link column is named `{target}_id`, or in the plural for a multiple link. A link to a provider (a staff user who delivers services) is always `provider_id`. A link to a bookable room or piece of equipment is always `resource_id`.
 - **Allowed values** are lowercase strings, written in this document as `value1` / `value2`. Code compares against these exact strings.
+- **Standard columns.** Every table has `created_at`. Every table whose rows are edited after creation has `updated_at`. Every core table (one holding a business record a client works with) has `metadata`, a simpleObject for client-level attributes; `bookings.metadata` holds the client-defined intake answers.
 
 ### Column types
 
@@ -129,6 +130,7 @@ One row: the client's business.
 | `data_governance_ack_accepted_at` | datetime | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 1.3 `config`
 Key–value settings.
@@ -157,6 +159,7 @@ Key–value settings.
 | `ses` | integration | SES region, tenant name, configuration set and the S3 prefix for received email; the keys are in the Vault |
 | `demo_mode` | features | bool; True only in the demo apps (F-36) |
 | `legal_versions` | content | The published version of each legal document: `{"privacy_policy": 3, "t_and_c": 2, "cookie_policy": 1}`; raised by one at each publish (F-22) |
+| `created_at` | datetime | When the row was created |
 
 Sequence keys are read and incremented inside a transaction, so that no number repeats or is skipped.
 
@@ -173,6 +176,8 @@ One row: the client's email domain (F-18, `spec-team-inbox.md`).
 | `mail_from_verified` | bool | |
 | `mx_verified` | bool | Receiving into the Team Inbox is on |
 | `verified_at` | datetime | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 1.5 `files`
 Files held by the instance: the media library, order briefs and deliveries.
@@ -183,6 +188,8 @@ Files held by the instance: the media library, order briefs and deliveries.
 | `file` | media | |
 | `file_version` | string | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 1.6 `payment_config`
 One row: payment gateways (F-15). Secret keys are in the Vault.
@@ -202,6 +209,8 @@ One row: payment gateways (F-15). Secret keys are in the Vault.
 | `paypal_connected` | bool | |
 | `paypal_connected_at` | datetime | |
 | `configured_at` | datetime | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 1.7 `rate_limits`
 Counters for rate limiting, sign-in lockout and the Vault lock.
@@ -212,6 +221,8 @@ Counters for rate limiting, sign-in lockout and the Vault lock.
 | `count` | number | Attempts in the current window |
 | `reset_time` | datetime | When the counter or lock ends; for `vault:` 15 minutes after the 5th wrong code |
 | `last_request` | datetime | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 1.8 `sample_rows`
 Every row of sample data (`spec-ai-implementation.md`, Sample Data). Empty once the Owner clears the sample data.
@@ -229,6 +240,7 @@ One row: the public website's header style (Settings → Theme). Colours come fr
 |---|---|---|
 | `header_style` | string | |
 | `updated_at` | datetime | |
+| `created_at` | datetime | When the row was created |
 
 ### 1.10 `users`
 Every person who signs in: Owner, staff and customers. Extends the Anvil Users service.
@@ -257,6 +269,8 @@ Every person who signs in: Owner, staff and customers. Extends the Anvil Users s
 | `preferences` | simpleObject | `{"tooltips": bool, "morning_briefing": bool}` |
 | `is_demo_visitor` | bool | A demo app sign-in, removed at the nightly reset (F-36) |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 1.11 `vault`
 Every credential, encrypted with `encryption_key` by `vault_service` (F-02).
@@ -304,6 +318,8 @@ The service catalogue (F-10).
 | `video_type` | string | `youtube` / `vimeo` / `dailymotion` / `direct` |
 | `is_active` | bool | Only active services are public |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 2.2 `resources`
 Rooms and equipment that can be booked (F-11).
@@ -315,6 +331,8 @@ Rooms and equipment that can be booked (F-11).
 | `description` | string | |
 | `is_active` | bool | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 2.3 `group_sessions`
 Sessions of a group service (F-11, UF-07).
@@ -332,6 +350,8 @@ Sessions of a group service (F-11, UF-07).
 | `call_link` | string | For an online session |
 | `status` | string | `scheduled` / `completed` / `cancelled` |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 2.4 `availability_rules`
 Weekly hours. A row with no provider is the business's opening hours.
@@ -343,6 +363,8 @@ Weekly hours. A row with no provider is the business's opening hours.
 | `start_time` | string | `HH:MM`, business time zone |
 | `end_time` | string | `HH:MM` |
 | `is_active` | bool | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 2.5 `availability_exceptions`
 Blocked dates and one-off changes. A row with no provider applies to the whole business.
@@ -355,6 +377,8 @@ Blocked dates and one-off changes. A row with no provider applies to the whole b
 | `end_time` | string | `HH:MM` |
 | `is_available` | bool | False = blocked |
 | `reason` | string | Shown on the calendar as the block's title |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 2.6 `booking_metadata_schemas`
 Intake forms.
@@ -365,6 +389,8 @@ Intake forms.
 | `booking_type` | string | `appointment` / `order` |
 | `field_definitions` | simpleObject | Fields, types, labels, required flags |
 | `is_active` | bool | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 2.7 `bookings`
 Appointments and group places (F-11).
@@ -419,6 +445,8 @@ A recurring booking's pattern (F-11).
 | `end_date` | date | Empty = until cancelled |
 | `status` | string | `active` / `ended` / `cancelled` |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ---
 
@@ -446,6 +474,7 @@ Orders for delivered work (F-12).
 | `delivered_at` | datetime | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 3.2 `packages`
 Package definitions (F-13).
@@ -460,6 +489,8 @@ Package definitions (F-13).
 | `expiry_days` | number | Days from purchase |
 | `is_active` | bool | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 3.3 `customer_packages`
 A customer's purchased package (F-13).
@@ -474,6 +505,9 @@ A customer's purchased package (F-13).
 | `expires_at` | datetime | |
 | `expiry_notice_sent_at` | datetime | |
 | `status` | string | `active` / `used` / `expired` / `cancelled` |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ---
 
@@ -507,6 +541,7 @@ Invoices (F-15).
 | `notes` | string | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 Status lifecycle: `DESIGN.md`, Invoice Status Lifecycle.
 
@@ -522,6 +557,9 @@ Invoice lines.
 | `amount` | number | `quantity` × `unit_price` |
 | `time_entry_id` | link → time_entries | When the line came from a time entry |
 | `sort_order` | number | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 4.3 `payments`
 Every payment and refund (F-15).
@@ -545,6 +583,8 @@ Every payment and refund (F-15).
 | `received_at` | datetime | |
 | `notes` | string | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 4.4 `time_entries`
 Time worked (F-14).
@@ -566,6 +606,8 @@ Time worked (F-14).
 | `is_invoiced` | bool | Set in the same call that creates the invoice line |
 | `invoice_id` | link → invoice | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 4.5 `expenses`
 Expenses of the business (F-28).
@@ -587,6 +629,7 @@ Expenses of the business (F-28).
 | `notes` | string | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 4.6 `expense_categories`
 Expense categories, seeded with common categories and editable.
@@ -596,6 +639,8 @@ Expense categories, seeded with common categories and editable.
 | `name` | string | |
 | `description` | string | |
 | `is_active` | bool | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ---
 
@@ -627,6 +672,7 @@ One record per person (F-17).
 | `date_added` | datetime | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 5.2 `contact_counter`
 One row: the next contact number.
@@ -634,6 +680,8 @@ One row: the next contact number.
 | Column | Type | Notes |
 |---|---|---|
 | `value` | number | Read and incremented inside a transaction |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 5.3 `contact_events`
 The contact timeline.
@@ -647,6 +695,7 @@ The contact timeline.
 | `event_data` | simpleObject | |
 | `related_id` | string | Id of the related row |
 | `user_visible` | bool | Shown on the timeline |
+| `created_at` | datetime | When the row was created |
 
 ### 5.4 `contact_submissions`
 Contact form messages (F-06, UF-19).
@@ -661,6 +710,9 @@ Contact form messages (F-06, UF-19).
 | `status` | string | `new` / `responded` / `archived` |
 | `auto_reply_sent` | bool | |
 | `submitted_date` | datetime | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 5.5 `segments`
 Contact segments (F-17).
@@ -673,7 +725,8 @@ Contact segments (F-17).
 | `filter_criteria` | simpleObject | Rules and `all` / `any` |
 | `contact_count` | number | Recalculated nightly |
 | `is_active` | bool | |
-| `created_date` | datetime | |
+| `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 5.6 `tasks`
 Tasks (F-20).
@@ -692,6 +745,8 @@ Tasks (F-20).
 | `notes` | string | |
 | `auto_generated` | bool | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 5.7 `leads`
 Captured leads (F-19).
@@ -708,6 +763,9 @@ Captured leads (F-19).
 | `converted_to_contact_id` | link → contacts | Set in the same call that creates the lead |
 | `status` | string | `new` / `converted` / `archived` |
 | `captured_at` | datetime | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 5.8 `lead_captures`
 Lead capture forms.
@@ -723,6 +781,8 @@ Lead capture forms.
 | `status` | string | `draft` / `active` / `inactive` |
 | `captures_count` | number | |
 | `conversions_count` | number | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 5.9 `email_campaigns`
 Sequences and broadcasts (F-18).
@@ -742,8 +802,10 @@ Sequences and broadcasts (F-18).
 | `conversions` | number | |
 | `unsubscribes` | number | |
 | `revenue_generated` | number | |
-| `created_date` | datetime | |
+| `created_at` | datetime | |
 | `last_run_date` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 5.10 `contact_campaigns`
 Enrolment of a contact in a sequence.
@@ -758,6 +820,8 @@ Enrolment of a contact in a sequence.
 | `enrolled_date` | datetime | |
 | `last_email_sent_date` | datetime | |
 | `completed_date` | datetime | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 5.11 `automation_rules`
 Automations (F-20).
@@ -784,6 +848,7 @@ Each run of an automation.
 | `result` | string | `success` / `skipped` / `failed` |
 | `detail` | simpleObject | |
 | `ran_at` | datetime | |
+| `created_at` | datetime | When the row was created |
 
 ---
 
@@ -805,6 +870,7 @@ Business customers (F-35).
 | `notes` | string | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 6.2 `deals`
 The sales pipeline (F-35).
@@ -825,6 +891,7 @@ The sales pipeline (F-35).
 | `lost_at` | datetime | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 6.3 `quotes`
 Quotes (F-35).
@@ -852,6 +919,7 @@ Quotes (F-35).
 | `notes` | string | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 6.4 `quote_items`
 Quote lines.
@@ -865,6 +933,9 @@ Quote lines.
 | `unit_price` | number | |
 | `amount` | number | `quantity` × `unit_price` |
 | `sort_order` | number | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ---
 
@@ -883,6 +954,8 @@ Transactional email templates.
 | `template_type` | string | `welcome` / `confirmation` / `reminder` / `invoice` / `receipt` / `order_update` / `review_request` / `auto_reply` / `quote` |
 | `language` | string | `en` / `fr` / `pt` / `es` / `de` / `it`; one template per type and language |
 | `is_active` | bool | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 7.2 `email_log`
 Emails sent.
@@ -896,6 +969,8 @@ Emails sent.
 | `sent_at` | datetime | |
 | `status` | string | `sent` / `failed` / `opened` / `clicked` |
 | `error_message` | string | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 7.3 `webhook_log`
 Index of webhook events received. The payloads are in R2.
@@ -911,6 +986,8 @@ Index of webhook events received. The payloads are in R2.
 | `error_message` | string | |
 | `received_at` | datetime | |
 | `processed_at` | datetime | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 7.4 `email_addresses`
 The client's email addresses (F-18, `spec-team-inbox.md`).
@@ -927,6 +1004,8 @@ The client's email addresses (F-18, `spec-team-inbox.md`).
 | `auto_reply_until` | datetime | |
 | `is_active` | bool | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 7.5 `email_messages`
 Every email received and sent through the Team Inbox. Bodies older than 90 days move to R2; the row stays as an index.
@@ -957,6 +1036,9 @@ Every email received and sent through the Team Inbox. Bodies older than 90 days 
 | `received_at` | datetime | |
 | `sent_at` | datetime | |
 | `deleted_at` | datetime | Moved to Trash; deleted for good 30 days later |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 7.6 `email_suppressions`
 Addresses no email is sent to.
@@ -980,6 +1062,8 @@ Addresses no email is sent to.
 | `name` | string | |
 | `slug` | string | |
 | `description` | string | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 8.2 `blog_posts`
 
@@ -1008,6 +1092,7 @@ Addresses no email is sent to.
 | `share_captions` | simpleObject | One caption per platform: `facebook`, `linkedin`, `whatsapp`, `instagram` (`spec-sm-syndication.md`) |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 8.3 `blog_comments`
 
@@ -1020,6 +1105,7 @@ Addresses no email is sent to.
 | `status` | string | `pending` / `approved` / `spam` / `deleted`; only `approved` is public |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 8.4 `landing_pages`
 
@@ -1036,6 +1122,7 @@ Addresses no email is sent to.
 | `published_at` | datetime | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 8.5 `pages`
 Website pages (About, Contact and the others managed under Content & Website → Pages).
@@ -1052,6 +1139,7 @@ Website pages (About, Contact and the others managed under Content & Website →
 | `view_count` | number | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 8.6 `privacy_policy`, 8.7 `t_and_c` and 8.8 `cookie_policy`
 Clauses of the Privacy Policy, the Terms and Conditions and the Cookie Policy (F-22), as [[[default:specifications-global/spec-legal-documents-and-consent|Legal Documents and Consent]]](C:/dev/project-library-global/specifications-global/spec-legal-documents-and-consent.md) sets out. The three tables have the same columns; `cookie_policy` has one more, `feature_key`.
@@ -1067,6 +1155,7 @@ Clauses of the Privacy Policy, the Terms and Conditions and the Cookie Policy (F
 | `feature_key` | string | `cookie_policy` only: `maps` / `video` / `payments`, the feature whose cookies the clause describes; empty for a general clause. The clause is active exactly while its feature is in use |
 | `created_at` | datetime | |
 | `updated_at` | datetime | |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 8.9 `consents`
 Every cookie choice, every acceptance of the Terms and Conditions or the Privacy Policy, and every Privacy Policy notice shown on a form (F-22, F-30). The last 30 days stay here; older rows are moved to R2 nightly.
@@ -1101,6 +1190,9 @@ Customer reviews (F-23).
 | `requested_at` | datetime | |
 | `submitted_at` | datetime | |
 | `approved_at` | datetime | |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 ### 9.2 `testimonials`
 Testimonials typed in by the business (F-23).
@@ -1114,6 +1206,8 @@ Testimonials typed in by the business (F-23).
 | `show_on_homepage` | bool | |
 | `sort_order` | number | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+| `metadata` | simpleObject | Client-level attributes (common aspect 4) |
 
 At most 10 reviews and testimonials together have `show_on_homepage` set.
 
@@ -1133,6 +1227,7 @@ Written by background tasks only (`integration-architecture.md`, Background Task
 | `booking_count` | number | |
 | `new_contacts` | number | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 10.2 `service_performance`
 
@@ -1144,6 +1239,7 @@ Written by background tasks only (`integration-architecture.md`, Background Task
 | `booking_count` | number | |
 | `completed_count` | number | For the completion rate |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 10.3 `provider_performance`
 
@@ -1154,6 +1250,7 @@ Written by background tasks only (`integration-architecture.md`, Background Task
 | `revenue` | number | |
 | `booking_count` | number | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 10.4 `campaign_metrics`
 
@@ -1167,6 +1264,7 @@ Written by background tasks only (`integration-architecture.md`, Background Task
 | `conversions` | number | |
 | `unsubscribes` | number | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 10.5 `health_log`
 Kept 30 days.
@@ -1192,6 +1290,7 @@ Kept 90 days.
 | `resolved` | bool | |
 | `resolved_at` | datetime | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
 
 ---
 
@@ -1214,6 +1313,7 @@ The notification engine (`spec-mastertemplate-notification-system`): in-app noti
 | `created_at` | datetime | |
 | `expires_at` | datetime | Empty when it never expires |
 | `idempotency_key` | string | Checked before every insert, so the same event is never notified twice |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 11.2 `user_preferences`
 
@@ -1228,6 +1328,8 @@ One row per user, channel and type; the server keeps the combination unique.
 | `quiet_from` | string | `HH:MM`; empty for no quiet hours |
 | `quiet_to` | string | `HH:MM`; empty for no quiet hours |
 | `freq_cap` | number | Most sends a day for this channel and type; empty for no limit |
+| `created_at` | datetime | When the row was created |
+| `updated_at` | datetime | When the row was last changed |
 
 ### 11.3 `delivery_logs`
 
@@ -1239,6 +1341,7 @@ One row per user, channel and type; the server keeps the combination unique.
 | `attempts` | number | Default 0 |
 | `error` | string | |
 | `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
 
 ---
 

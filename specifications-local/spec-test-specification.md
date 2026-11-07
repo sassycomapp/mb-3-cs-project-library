@@ -1,7 +1,7 @@
 ---
 title: "spec-test-specification"
 doc-id: "mb-d8dcf41a"
-updated: "2026-11-06"
+updated: "2026-11-07"
 ---
 # Mybizz CS — Test Specification (Canonical)
 
@@ -99,7 +99,7 @@ tests"
 **Expected:**
 - User sees "Payment failed" error with retry option
 - `bookings` row created with status `pending` (not `confirmed`)
-- `webhook_log` row has `processed=True`, `error_message` set
+- `webhook_log` row has `processed=True` and no `error_message`: the failure is the payment's outcome, not a processing error
 - No invoice generated
 - User can retry payment without re-entering booking details
 
@@ -108,7 +108,7 @@ tests"
 **Scenario:** Webhook arrives with invalid signature
 
 **Steps:**
-1. Send a POST request to `/api/webhooks/stripe` with a valid payload but incorrect signature
+1. Send a POST request to `[base_url]/_/api/webhooks/stripe` with a valid payload but incorrect signature
 
 **Expected:**
 - HTTP 400 returned
