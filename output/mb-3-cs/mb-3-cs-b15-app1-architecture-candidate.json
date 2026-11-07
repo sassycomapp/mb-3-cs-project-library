@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Mybizz CS — Five-App Architecture",
+    "quality_profile": "standard"
+  },
+  "components": [
+    {
+      "id": "client-browser",
+      "type": "frontend",
+      "label": "Client Browser",
+      "sublabel": "public client code",
+      "pos": [
+        40,
+        260
+      ],
+      "size": [
+        130,
+        60
+      ]
+    },
+    {
+      "id": "app3",
+      "type": "backend",
+      "label": "App 3 blank template",
+      "sublabel": "schema, startup, dependency",
+      "pos": [
+        230,
+        80
+      ],
+      "size": [
+        170,
+        60
+      ]
+    },
+    {
+      "id": "app4",
+      "type": "backend",
+      "label": "App 4 client instance",
+      "sublabel": "schema, startup, dependency",
+      "pos": [
+        230,
+        260
+      ],
+      "size": [
+        170,
+        60
+      ]
+    },
+    {
+      "id": "app1",
+      "type": "backend",
+      "label": "App 1 development",
+      "sublabel": "all feature work",
+      "pos": [
+        440,
+        80
+      ],
+      "size": [
+        150,
+        60
+      ]
+    },
+    {
+      "id": "app2",
+      "type": "backend",
+      "label": "App 2 master_template",
+      "sublabel": "all server logic and forms",
+      "pos": [
+        440,
+        260
+      ],
+      "size": [
+        160,
+        60
+      ]
+    },
+    {
+      "id": "app5",
+      "type": "backend",
+      "label": "App 5 management",
+      "sublabel": "registry, push, AI gateway",
+      "pos": [
+        440,
+        440
+      ],
+      "size": [
+        160,
+        60
+      ]
+    },
+    {
+      "id": "gateways",
+      "type": "external",
+      "label": "Payment Gateways",
+      "sublabel": "Stripe, Paystack, PayPal",
+      "pos": [
+        680,
+        120
+      ],
+      "size": [
+        150,
+        60
+      ]
+    },
+    {
+      "id": "ses",
+      "type": "external",
+      "label": "Amazon SES",
+      "sublabel": "SNS, S3 — eu-west-1",
+      "pos": [
+        680,
+        260
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "r2",
+      "type": "cloud",
+      "label": "Client R2 Bucket",
+      "sublabel": "the client's own account",
+      "pos": [
+        680,
+        400
+      ],
+      "size": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": "groq",
+      "type": "external",
+      "label": "Groq",
+      "sublabel": "AI and speech; ZDR on",
+      "pos": [
+        680,
+        540
+      ],
+      "size": [
+        120,
+        60
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Mybizz development account",
+      "wraps": [
+        "app1",
+        "app2",
+        "app3",
+        "app5"
+      ]
+    },
+    {
+      "kind": "security-group",
+      "label": "Client instance — schema, startup, dependency only",
+      "wraps": [
+        "app4"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "The client's own Cloudflare account",
+      "wraps": [
+        "r2"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "loads-app",
+      "from": "client-browser",
+      "to": "app4",
+      "label": "loads the app",
+      "variant": "emphasis",
+      "labelDy": 54
+    },
+    {
+      "id": "instance-depends",
+      "from": "app4",
+      "to": "app2",
+      "label": "dependency: all logic and forms",
+      "variant": "emphasis",
+      "labelDy": 68
+    },
+    {
+      "id": "app3-clones",
+      "from": "app3",
+      "to": "app4",
+      "label": "cloned at provisioning",
+      "variant": "dashed",
+      "labelDy": 24
+    },
+    {
+      "id": "app1-releases",
+      "from": "app1",
+      "to": "app2",
+      "label": "tagged release (Step 42)",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "app5-controls",
+      "from": "app5",
+      "to": "app4",
+      "label": "control + push (Bearer)",
+      "variant": "security"
+    },
+    {
+      "id": "instance-reports",
+      "from": "app4",
+      "to": "app5",
+      "label": "heartbeat, AI, Help (Bearer)"
+    },
+    {
+      "id": "pay",
+      "from": "app2",
+      "to": "gateways",
+      "label": "payment_service"
+    },
+    {
+      "id": "mail",
+      "from": "app2",
+      "to": "ses",
+      "label": "email_service"
+    },
+    {
+      "id": "cold-data",
+      "from": "app2",
+      "to": "r2",
+      "label": "r2_service"
+    },
+    {
+      "id": "ai",
+      "from": "app5",
+      "to": "groq",
+      "label": "ai_request_layer"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "violet",
+      "title": "The eleven seams",
+      "items": [
+        "payment_service",
+        "email_service",
+        "r2_service",
+        "ai_request_layer",
+        "management_endpoints",
+        "retry_queue",
+        "time_utils",
+        "config",
+        "rbac",
+        "translations",
+        "globals"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "The Vault's twelve secret names",
+      "items": [
+        "stripe_secret_key",
+        "stripe_webhook_secret",
+        "paystack_secret_key",
+        "paypal_client_secret",
+        "paypal_webhook_id",
+        "aws_access_key_id",
+        "aws_secret_access_key",
+        "ses_smtp_password",
+        "r2_access_key_id",
+        "r2_secret_access_key",
+        "app5_bearer_token",
+        "vault_totp_secret"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Inbound endpoints",
+      "items": [
+        "/_/api/webhooks/{stripe,paystack,paypal}",
+        "/_/api/email/{inbound,events,unsubscribe}",
+        "/_/api/blog-image/{slug}",
+        "/management/{health,status,suspend,unsuspend,push-notification,push-update-alert}"
+      ]
+    }
+  ]
+}

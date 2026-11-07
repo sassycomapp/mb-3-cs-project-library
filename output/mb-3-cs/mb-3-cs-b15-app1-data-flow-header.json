@@ -1,0 +1,30 @@
+{
+  "subject": "mb-3-cs-b15-app1-data-flow",
+  "intent": "Show the booking flow's three round trips and the payment paths including the D5 late-payment shadow, so the reader trusts that one transaction guards the slot and money never moves on the browser's word. The load-bearing claim: confirm_booking re-checks slot, resource and places inside the same transaction that confirms, and a late webhook either reinstates inside that discipline or refunds in full (design doc section 22 row 4; section 14.8 D5).",
+  "type": "sequence",
+  "type_reason": "The RT1-RT2-RT3 ordering and the webhook's later arrival are the meaning; vertical order carries the D5 shadow path.",
+  "quality_profile": "standard",
+  "nodes": ["customer-browser", "booking-flow-form", "get_booking_context", "get_available_slots", "confirm_booking-transaction", "gateway-payment-session", "webhook-endpoint", "webhook-log-row", "process-webhook-task", "payments-invoice-rows", "d5-refund-path", "booking-status"],
+  "node_roles": {
+    "customer-browser": "the customer choosing and paying; nothing trusted from it",
+    "booking-flow-form": "the client form; caches context between steps",
+    "get_booking_context": "round trip 1 - services, providers, intake schema",
+    "get_available_slots": "round trip 2 - only genuinely free slots",
+    "confirm_booking-transaction": "round trip 3 - slot, resource and places re-checked inside the same transaction",
+    "gateway-payment-session": "the hosted payment; card data never touches the instance",
+    "webhook-endpoint": "signature verified, idempotent, 200 within 5 seconds",
+    "webhook-log-row": "the event's index and processing state",
+    "process-webhook-task": "the background task that applies the event once",
+    "payments-invoice-rows": "the money and invoice records",
+    "d5-refund-path": "the late-payment shadow - reinstate inside the transaction, or refund in full",
+    "booking-status": "pending, confirmed, completed, no_show, cancelled"
+  },
+  "main_path": ["customer-browser", "booking-flow-form", "get_booking_context", "get_available_slots", "confirm_booking-transaction", "gateway-payment-session", "webhook-endpoint", "process-webhook-task", "payments-invoice-rows"],
+  "deferred_to_cards": ["intake forms", "booking_flow_state caching", "the confirmation email"],
+  "stages_or_lanes": ["browser", "form", "server", "gateway", "webhook", "task", "tables"],
+  "expected_corridors": [["d5-refund-path", "payments-invoice-rows", "band between task and tables"], ["webhook-endpoint", "process-webhook-task", "task band"]],
+  "layout_budget_read": "renderers/sequence/README.md",
+  "quality_gate": "showcase accepted only at 9 artifact checks, 0 composition errors, 0 warnings",
+  "abort_conditions": ["the D5 shadow colliding with the main path's lifelines", "an edge through a node after repair order", "a corridor crossing an occupied band"],
+  "status": "approved"
+}

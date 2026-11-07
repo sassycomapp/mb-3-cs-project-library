@@ -1,7 +1,7 @@
 ---
 title: "design-doc"
 doc-id: "mb-7868ef5e"
-updated: "2026-11-06"
+updated: "2026-11-07"
 ---
 
 # Mybizz CS — Design Doc (run app1)
@@ -82,22 +82,22 @@ Constraints particular to this run:
 
 Each of the 14 aspects of `pol-common-aspects-for-mybizz-anvil-applications`, as this application takes it. **All 14 are shared; none deviates**, so no business-domain deviation reason arises:
 
-| # | Aspect | Shared — how this application takes it |
+| # | Aspect | Shared — where the architecture meets it (§23 of this document) and its ADR |
 |---|---|---|
-| 1 | The five-app structure, never multi-tenant | Shared: architecture reference §1; one instance and database per client |
-| 2 | Client Anvil accounts | Shared: one Mybizz-owned Business account per client, named after the client's business; $150 a month |
-| 3 | Configuration, never code, in a client instance | Shared: App 4 holds the schema, the startup module and the dependency; every client difference is data in the client's tables |
-| 4 | Schema designed up front, extended without breaking | Shared: 70 tables designed in `authoritative-schema.md`, including `cookie_policy` and `consents`; later changes additive, applied by hand from a migration plan |
-| 5 | Secrets in the Vault | Shared: every credential in the Vault; the one Anvil Secret is `encryption_key` |
-| 6 | Payments, webhooks and outbound calls | Shared: one active card gateway (Stripe or Paystack) plus optional PayPal behind one payment service; webhooks return 200 at once, process in background, idempotent by event id; outbound calls retry with backoff |
-| 7 | Email | Shared: Amazon SES for every email received and sent, one tenant per client; the CRM built in |
-| 8 | Client storage and exit | Shared: one R2 bucket per client in the client's own Cloudflare account; cold data in the bucket; the exit handover of `client-exit-handover.md` |
-| 9 | Management and health | Shared: management endpoints from the first release, Bearer-token secured; the heartbeat to App 5 every 15 minutes; App 5 never polls |
-| 10 | Background work and real-time updates | Shared: background tasks within the Business plan; near-real-time by client-side polling |
-| 11 | Access, currency and time | Shared: the five roles; system currency set at onboarding and fixed after the first transaction; UTC storage, display-time conversion |
-| 12 | Compliance | Shared: POPIA everywhere; GDPR and PCI DSS where they apply; legal documents before go-live; the standard offboarding |
-| 13 | User interface | Shared: Anvil's Material 3 theme only; no Anvil Extras, no `HTMLTemplate`; dark mode from the first release |
-| 14 | Reference platforms | Shared in the negative: no reference platform is used, so nothing is taken from one |
+| 1 | The five-app structure, never multi-tenant | §23.1 (one instance, one database; no tenant column — ST-06 verifies); ADR `dependency-based-not-multi-tenant` |
+| 2 | Client Anvil accounts | §23.6 (the load counted per client account); architecture reference §4; ADR `tiers-model` |
+| 3 | Configuration, never code, in a client instance | §23.3 (settings as data); architecture reference §1–§2; ADR `client-instance-architecture` |
+| 4 | Schema designed up front, extended without breaking | §23.1 (the schema, the migration discipline, the metadata columns on the core tables); `authoritative-schema.md`; `schema-migration-log.md` |
+| 5 | Secrets in the Vault | §23.4's Vault column and §24's secrets rules (one `encryption_key` reader); `spec-vault-system`; ADR `payment-security-boundary-vault` |
+| 6 | Payments, webhooks and outbound calls | §23.2 (`payment_service` seam), §23.4 (the gateways), §23.5 (webhooks); ADR `webhook-architecture` |
+| 7 | Email | §23.4 (SES, one tenant per client), §23.5 (SNS-signed events); ADR `brevo-email-and-crm` |
+| 8 | Client storage and exit | §23.8 (R2 folders, index rows, retention, the exit export); ADR `client-r2-storage-and-exit-handover` |
+| 9 | Management and health | §23.7 (the six Bearer-token endpoints, the 15-minute heartbeat, App 5 never polls); ADR `mybizz-management-visibility`, ADR `observability-architecture` |
+| 10 | Background work and real-time updates | §23.6 (the schedule within the Business plan's limits; >22 s as background tasks); ADR `real-time-and-background-tasks` |
+| 11 | Access, currency and time | §23.1 (server-side money and dates, transactions), §24 (sign-in and second factors, the five roles); ADRs `system-currency-selection-and-immutability`, `timezone-utc-storage-display-conversion` |
+| 12 | Compliance | §23.9 (AI pass-through, ZDR), §24 (the cookie and consent surface), threat-model §B12; `spec-regulatory-compliance-baseline` |
+| 13 | User interface | §23.2's display rules by reference to `DESIGN.md`; ADR `material-3-theme-component-scope`, ADR `anvil-extras-exclusion`, ADR `htmltemplate-use` |
+| 14 | Reference platforms | none used — §8; nothing is taken from one |
 
 ## 8. Reference Platform
 
@@ -490,6 +490,8 @@ Each critical flow, role and edge case the review named, with why. The catalogue
 | 14 | Data-subject rights: export, correction and erasure of one person's data, with transactions kept for the 7-year tax period; retention deletes on time (audit 30 days in-instance; email bodies 90 days; consent records per D4) | POPIA and GDPR where they apply | `IN-14` |
 | 15 | The legal-documents and consent system (D8): first visit shows the banner and sets no embedded-content cookie; Refuse all loads placeholders; Accept all loads embedded content; every choice and Load writes one `consents` row with the published version; a new policy version shows the banner again; the nightly task moves rows older than 30 days to the client's bucket and deletes cookie files older than 2 years and acceptance files older than 7 years; a `feature_key` clause is active exactly while its feature is on | Consent before optional cookies is binding policy and law for every client site | `spec-legal-documents-and-consent` §12 tests; `ST-02` on the endpoints |
 | 16 | Structural isolation of the AI channel: no AI or speech content stored or logged in the instance or App 5; Groq Zero Data Retention on; voice tier 5 sends placeholder labels only; voice tier 4 saves nothing before confirmation | The AI path must never become a personal-data side channel | `SR-53a`, `SR-45a`, `SR-45`; test 4.8, 4.9 |
+| 17 | The notification engine: a send is idempotent — two identical sends at the same moment leave exactly one `notifications` row (the transactional check-and-insert); preferences and quiet hours are honoured per channel and type; each delivery attempt is logged in `delivery_logs`; App 5's push-notification lands once in the feed; the bell badge matches the unread count | The notification surface is user-facing and the platform pushes into it; its behaviour must be proven, not only its access | New cases in the test plan (Step 15); `IN-02` over the notification functions; `ST-02` |
+| 18 | The summary tasks: a summary task run twice for the same period leaves exactly one row per period, holding the recalculated figures, for `daily_summary`, `service_performance`, `provider_performance` and `campaign_metrics` (the period-keyed upsert) | Dashboards read the summary tables directly (SR-10); a duplicated period double-counts revenue | New case in the test plan (Step 15); `IN-11` |
 
 Roles: every test above runs against the access matrix's five roles plus the signed-out visitor and the demo prospect, as the matrix (Step 15) names them. Edge cases: the hostile input corpus on every field; the boundary values of every pricing model, package balance, place limit and payment term; midnight, month-end and daylight-saving boundaries on every schedule (`LG-05`).
 
@@ -511,7 +513,7 @@ Written at Step 15 by `data-models` (steps 1 to 4, with the configuration's defa
 - **Transient and flow state** lives in `globals.py` exactly as `globals-contract.md` defines (`booking_flow_state`, `order_flow_state`, the current-record variables), read with `getattr`, cleared on completion, and never trusted by the server — the server re-reads every record and re-checks every rule.
 - **Money, dates, sequences and states are server-side.** Money is whole cents; datetimes are UTC with display conversion in `server_shared/time_utils`; the allowed-value strings of the schema are compared exactly.
 
-**Transactions.** `@tables.in_transaction` (Anvil retries a conflicting transaction up to five times — `anvil.tables`) wraps every multi-step or contended write: the `contact_counter` increment, the `config` sequence keys (`invoice_sequence`, `quote_sequence`, `booking_sequence`, `order_sequence`), `confirm_booking`'s atomic re-check of slot, resource, places and price (SR-16), the D5 late-payment reinstatement (the re-check inside the same transaction that sets the booking to `confirmed`, refunding in full when it fails), group-session `places_taken` updates, and package `sessions_remaining` draw-down and return.
+**Transactions.** `@tables.in_transaction` (Anvil retries a conflicting transaction up to five times — `anvil.tables`) wraps every multi-step or contended write: the `contact_counter` increment, the `config` sequence keys (`invoice_sequence`, `quote_sequence`, `booking_sequence`, `order_sequence`), `confirm_booking`'s atomic re-check of slot, resource, places and price (SR-16), the D5 late-payment reinstatement (the re-check inside the same transaction that sets the booking to `confirmed`, refunding in full when it fails), group-session `places_taken` updates, and package `sessions_remaining` draw-down and return, the notification engine's idempotency check-and-insert — one send per event under concurrency (review finding R4) — and the summary tables' period-keyed upsert (review finding R5).
 
 **Schema shaped up front, extended only by adding.** The schema is `authoritative-schema.md`; changes reach it only through `schema-migration-log.md` and are applied by David through Resolve. Two gaps between the schema as designed and the rules this step must apply are raised as review findings for David: the common aspects' metadata-column rule (aspect 4: a metadata Simple Object column on every core table, attribute tables for client-defined attributes) against the schema's purpose-specific columns (`bookings.metadata`, `activity_log.metadata`, `users.permissions`, `contacts.tags`/`preferences`, `notifications.data`), and `created_at` missing from some tables (`availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `expense_categories`, `user_preferences`, `quote_items`, `invoice_items`) against `spec-anvil-platform-standards` §13. Both are additive fixes through the recorded migration discipline if David approves them.
 
@@ -536,6 +538,31 @@ The seams — one small interface each, deep behind it, each existing because so
 | `shared/globals` | The state variables of `globals-contract.md` | The one client-state contract |
 
 Business rules live in pure modules with no Anvil imports, beside their feature's service module: the availability and slot calculation, the booking state-transition rules (including the D5 reinstatement decision as a pure function of slot, resource, places), invoice and quote totals and tax, the numbering rules, package draw-down and expiry, segment-filter evaluation, the consent rules (banner re-show, retention), the payment-amount derivation. Their server service modules are thin wrappers that check the role, log, and persist (`spec-anvil-platform-standards` §3; ts-method rule 4 — this is what makes Level 1 testing possible).
+
+**Divergence inventory (review finding R6).** The live app's module and form names diverge from the scaffold's beyond the four C4 recorded. The rule stands: nothing is renamed now; each rename happens at the build step that touches the module, and this inventory names the intended target so no step meets an unrecorded rename. Recorded here, superseding C4's list in scope (not in authority):
+
+| Live module or form | Scaffold's name or place | Intended target |
+|---|---|---|
+| `auth/SignupForm` | (no sign-up form; sign-up is off) | deleted at the next build step that touches auth (C2) |
+| `settings/EmailSetupForm` | `EmailSettingsForm` | renamed at the email build step |
+| `server_payments/stripe_service.py`, `paystack_service.py` | `stripe_gateway`, `paystack_gateway` | renamed at the payments build step, behind `payment_service` |
+| `server_marketing/task_service.py` | `task_service` in `server_automation/` | moved or renamed at the automation build step |
+| `server_marketing/brevo_campaigns_integration.py` | (no Brevo — ADR `brevo-email-and-crm`) | replaced by the SES email service at the marketing-email build step (C1) |
+| `server_settings/vault_service.py` + `encryption_service.py` duplicated in `server_shared/` | one `vault_service` (the only reader of `encryption_key`) | consolidated at the Vault build step (C3) |
+| `server_auth/service.py` | `auth_service` | renamed at the auth build step |
+| `server_blog/service.py` | `blog_service` | renamed at the blog build step |
+| `server_bookings/service.py` | `booking_service` | renamed at the bookings build step |
+| `server_dashboard/service.py` | `dashboard_service` | renamed at the dashboard build step |
+| `server_services/service.py` | `catalogue_service` | renamed at the services build step |
+| `server_settings/service.py` | `settings_service` | renamed at the settings build step |
+| `server_bookings/metadata_service.py` | `intake_service` | renamed at the intake build step |
+| `server_bookings/time_service.py` | (no time module in the scaffold's `server_bookings/` list) | assessed at the build step that touches it — fold into `server_time/time_entry_service` or keep, decided there |
+| `server_shared/policy_service.py` | `policy_service` in `server_settings/` | moved at the legal-pages (Clause Builder) build step |
+| `server_shared/utilities.py` | (not in the scaffold's `server_shared/` list) | assessed at the build step that touches it |
+| `server_shared/encryption.py` | (subsumed by the one `vault_service`) | folded into the C3 consolidation at the Vault build step |
+| `server_shared/metrics.py` | (not in the scaffold's `server_shared/` list) | assessed at the observability build step |
+
+Every review reports a common item using a trade item, and any module not in this table or the scaffold, as a finding.
 
 ### 23.3 Settings as data
 
@@ -565,7 +592,7 @@ One pattern at all five endpoints, in this order: verify the signature against t
 
 ### 23.6 Scheduled and background tasks
 
-The schedule is `integration-architecture.md`'s Background Tasks table — the 15-minute heartbeat, the 5-minute payment-hold expiry and webhook reconciliation, the 15-minute reminders, blog scheduling, automations and retry queue, the hourly campaigns and summaries, the nightly backup, audit, consent and email archives, invoicing, quoting and package tasks, the demo reset, and the daily reports. Any operation expected to exceed 22 seconds is a background task (`spec-anvil-platform-standards` §5). Every task fits inside the hosting plan's limits — every account is a Mybizz-owned Business account (§6 constraint 4), where background tasks have no timeout and scheduled tasks are included; the load is counted per client account, never summed across clients. Per-task failure and retry behaviour follows the `adr-real-time-and-background-tasks` table; the heartbeat degrades to every 30 minutes before anything else is skipped.
+The schedule is `integration-architecture.md`'s Background Tasks table — the 15-minute heartbeat, the 5-minute payment-hold expiry and webhook reconciliation, the 15-minute reminders, blog scheduling, automations and retry queue, the hourly campaigns and summaries, the nightly backup, audit, consent and email archives, invoicing, quoting and package tasks, the demo reset, and the daily reports. Any operation expected to exceed 22 seconds is a background task (`spec-anvil-platform-standards` §5). Every task fits inside the hosting plan's limits — every account is a Mybizz-owned Business account (§6 constraint 4), where background tasks have no timeout and scheduled tasks are included; the load is counted per client account, never summed across clients. Per-task failure and retry behaviour follows the `adr-real-time-and-background-tasks` table; the heartbeat degrades to every 30 minutes before anything else is skipped. **The summary tasks' writes are period-keyed upserts inside `@tables.in_transaction` (review finding R5): for each period, if the row exists it is updated with the recalculated figures, otherwise it is added — a retried or overlapping task run can never duplicate a period's row.**
 
 ### 23.7 Management endpoints and heartbeat
 
@@ -602,6 +629,26 @@ Rows of `bookings`, `orders`, `invoice`, `payments`, `quotes` and `expenses` are
 ### 23.11 Platform fit
 
 Every decision above is checked against `spec-anvil-platform-standards` §17's constraints checklist, the Anvil references and the agent references: client-side polling, never push; money and date logic on the server only; `search()` with filters, never whole-table iteration; background tasks past 22 seconds; the content-panel and lambda navigation patterns; relative imports; `wrap_on` for responsive behaviour; `reportlab` server-side for PDFs (`adr-pdf-invoice-generation`); `boto3` for SES and R2. Two open platform unknowns are carried as scheduled proofs in the plan, not as research questions: an app scheduling its dependency's background task and serving its dependency's HTTP endpoints (PRD OQ-2 — proved in App 1 before Step 31 relies on it), and `boto3` on Anvil's server Python (proved on the private test instance before the first release). No `research` run is needed at this step (reference item 10).
+
+---
+
+### 23.12 The approved pictures
+
+The architecture and data-flow diagrams are `pdlf-outputs/b15/mb-3-cs-b15-app1-architecture.html` and `pdlf-outputs/b15/mb-3-cs-b15-app1-data-flow.html` (with their Archify specifications beside them), drawn by `archify` from the Scope Cards David approved at Step 15 (Scope Cards and machine headers: `output/mb-3-cs/`). They are the approved picture of §§23.1–23.11: the five-app system with its credential homes, and the booking/payment flow with the D5 shadow. The architecture diagram's load-bearing claim: a client instance holds only the schema, one startup module and its dependency — all logic and every credential path is server-side. The data-flow diagram's: `confirm_booking` re-checks slot, resource and places inside the same transaction that confirms, and a late webhook either reinstates inside that discipline or refunds in full. Browser evidence (`visual-check`) is pending — Chrome is unavailable in this environment — so perceptual review is David's at the step's approval.
+
+## 24. Security Decisions
+
+Written at Step 15 after the review (`sec-requirements-architecture-review`). The threat model is `docs-local/design/app1/threat-model.md`; the access matrix is `docs-local/design/app1/access-matrix.yaml`. What the build must prove:
+
+- **Sign-in and second factors.** Every account holder signs in with password and second factor (Anvil's "Require 2-factor authentication"); the Owner's is FIDO2 only and the Owner's high-value functions are refused while any other factor is enrolled. Sign-in, sign-up, two-factor enrolment and login are the app's own screens (`auth/`), translated. Lost factors are reset by the user through Anvil's reset-by-email (10-minute link, password re-entry); the Owner resets the Vault's authenticator alone through the emailed link (`vault-recovery-procedure.md`). High-value actions — Vault access, refunds above the set limit, role changes, exports, gateway changes, price changes — require a factor given in the last five minutes.
+- **Sessions.** 30-minute inactivity enforced by Anvil's session mechanism, never overridden in code (SR-04); the user returns to the same form. The Owner can end any user's sessions: remembered logins and factors cleared, every server function refuses a session that began before that time.
+- **The Vault's own code.** `vault_service` is the only module that reads the `encryption_key` Anvil Secret (`spec-vault-system` §1); TOTP (`vault_totp_secret`) required on every open with no remembered session; enrolment on first open; 5 wrong codes lock the Vault for 15 minutes and email the Owner; every access emails the Owner and writes `activity_log`; masking `'***'` on every read; the hard-fail guard before any broader handler on payment-config saves.
+- **Secrets — home and maximum age.** Every credential lives in the Vault (12 names, `mb-3-cs-vault-implementation.md`); publishable keys in `payment_config`; `encryption_key` alone in Anvil Secrets, **never rotated** (its protection is the one-module rule — `sec-master-encryption-key-protection`); gateway keys are Owner-set and rotated on exposure; the SES, R2 and Bearer tokens are written by App 5 at provisioning and rotated manually by re-provisioning — the age is tracked explicitly (`sec-secret-rotation-policy`); Vault access notifications are reviewed as an aggregate pattern (`sec-secret-access-audit`). No secret is logged, printed or round-tripped; an exposed secret is rotated immediately (the exposure itself is the trigger).
+- **Security events logged.** `activity_log` carries every significant action — sign-in and sign-out, role changes, Vault access, payments and refunds, booking and invoice status changes, settings changes, every export — with who, what, when, before and after; `health_log` and the heartbeat carry task status and error counts; `error_log` carries uncaught and re-raised exceptions. No log carries credentials, card data, secrets or personal data beyond row ids (`spec-observability`; `sec-audit-log-integrity`: logs are evidence for review, never self-proving authority).
+- **Limits.** Rate limits enforced in the `rate_limits` table: 10 requests/minute unauthenticated per IP, 100/minute authenticated per user, on every endpoint including background-triggering ones; the Vault locks 15 minutes after 5 wrong codes; contact-form messages ≤ 1,000 characters; every search bounded, every aggregate pre-computed.
+- **Outbound hosts.** Exactly the hosts of §23.4's table: the gateways' APIs, `email-smtp.eu-west-1.amazonaws.com:587` and the SES API, the client's own R2 bucket endpoint, App 5's base address — and nothing else. The email trust boundary is **Amazon SES with SNS-signed events, never Brevo** (Step 15 decision); no other host is called from anywhere in the application.
+- **Server packages with their review.** Every server package of the scaffold receives its Sentinel review at its build step's scrutiny; every callable function carries its role decorator (`ST-02`), every new table its access decision (`sec-requirements-data-table-creation`), every new function its four checks (`sec-requirements-server-function`); the consent, webhook and management endpoints are rate-limited and tested (`ST-02`, `IN-07`, `IN-12`); `triage_findings` is clean before `build-verified`.
+- **Cookie and consent surface.** `mb_consent` is a first-party necessary cookie (12 months, no personal data); every choice, acceptance and shown notice is one `consents` row written by `policy_service` server-side; the archive task deletes cookie records at 2 years and acceptance records at 7 years (`consents/{document}/{year}/{month}/`).
 
 ---
 
@@ -658,10 +705,340 @@ B) Record a deviation ADR in adr-local
   ❌ Leaves a named standard unmet and the gap inherited by everything built on these tables
 Net: the same columns cost one prompt line now or a per-instance migration later; the deviation buys nothing that A loses.
 
-State: pending
-Actual answer: unanswered
-Accepted scope: none
+State: approved
+Actual answer: A) Add via the migration (D2, 2026-11-04), widened by David's ruling of 2026-11-06
+Accepted scope: a nullable `created_at` added to every table that lacked it — 28 tables, core and non-core, in the live schema and the prompt-created tables — and `created_date` replaced by `created_at` on `email_campaigns` and `segments` (added and removed in prompt P7); all folded into prompts P1–P13 and the single 2026-11-06 migration-log row; `authoritative-schema.md` is mirrored in the post-Step-15 document corrections (Claude, outside the run), and David applies the amended prompts with the rest of the migration.
 History: none
+
+### R2: common aspect 4's metadata-column rule versus the schema
+Finding: SC-2, P2, confidence 8/10, authoritative-schema.md against pol-common-aspects aspect 4, reviewer Step 15 eng review
+Plan baseline: the schema as designed (purpose-specific Simple Object columns; `booking_metadata_schemas` as the attribute-definition table); aspect 4 binding with deviations only by ADR
+Runtime evidence: read both this step — no general `metadata` column exists on the core tables; the schema's Simple Object columns are purpose-specific
+Comparison grid:
+
+| Choice | Current | A: add `metadata` to core tables | B: deviation ADR |
+|---|---|---|---|
+| Aspect 4, plain reading | unmet (no general metadata column) | met — nullable `metadata` simpleObject on the core tables | met through an approved ADR |
+| Aspect 4, intent (most new needs met without a schema change) | partly met — specific columns cover known needs | met generically | met as far as the specific columns reach |
+| Schema surface | as designed | +1 nullable column per core table | unchanged |
+| Work | — | prompt amendment alongside R1's, pre-application | one ADR in adr-local |
+| Risk | a new client-level attribute needs a schema change | unused columns carried by every instance | future needs hit the hand-migration path |
+
+Question D3:
+D3 — Add a general `metadata` column to the core tables, or record the aspect-4 deviation?
+Project/branch/task: schema of run app1 against the binding common aspects.
+ELI10: The platform policy says every core table should carry a general metadata column so that most new client needs need no schema change. This schema instead gives each table exactly the Simple Object columns its features use. Adding a general column now is cheap (the migration is unapplied) but carries an unused column in every instance; recording a deviation keeps the schema tight and states the reason in an ADR.
+Stakes if we pick wrong: the wrong choice either carries dead columns in 100 instances or leaves future attribute needs on the hand-migration path the aspect exists to avoid.
+Recommendation: A — the aspect is binding and its intent is exactly the no-schema-change path; the column is nullable, cheap now, and the migration is unapplied.
+Completeness: A=9/10, B=7/10
+Pros / cons:
+A) Add a nullable `metadata` simpleObject to the core tables (recommended)
+  ✅ Meets the binding aspect literally and its intent generically, at the cheapest moment
+  ✅ Rides the same prompt amendment as R1; one application, no extra migration event
+  ❌ Carries an unused nullable column in every instance until a feature uses it
+B) Record a deviation ADR in adr-local
+  ✅ Keeps the schema exactly as designed; no speculative columns
+  ❌ A binding aspect goes unmet on its plain reading; future attribute needs take the hand-migration path
+Net: A spends one nullable column per table to satisfy a binding rule; B saves the column and takes on the deviation and the later migration path.
+
+State: approved
+Actual answer: A) Add metadata via migration (D3, 2026-11-06), with David's core-table enumeration and the widened `updated_at` ruling of 2026-11-06
+Accepted scope: a nullable `metadata` (simpleObject) added to the 35 core tables other than `bookings`, which already carries `metadata` as its client-defined intake answers (`activity_log` non-core, unchanged); a nullable `updated_at` added to every mutable table that lacked it — 39 tables, the four edited log tables (`webhook_log`, `error_log`, `email_log`, `delivery_logs`) included — while the 11 append-only tables carry none; all folded into the same prompts P1–P13 and the same migration-log row; `authoritative-schema.md` mirrored in the post-Step-15 document corrections.
+History: none
+
+### R3: one inbound path for App 5's notification push
+Finding: SC-3, P3, confidence 8/10, spec-mastertemplate-notification-system §6 against spec-api-specification §3, reviewer Step 15 eng review
+Plan baseline: the design doc §23.7 and the architecture reference F-34 name the API specification's six management endpoints, including `POST /management/push-notification`
+Runtime evidence: read both this step — the notification engine's server API names `@anvil.server.http_endpoint("/platform-notification")` for the same capability App 5's push-notification endpoint covers (one engine, two producers, source `platform`); the API specification's §3 is the single home of the management-endpoint surface and its Bearer-token authentication
+Comparison grid:
+
+| Choice | Current | A: API spec's path canonical | B: notification spec's path canonical |
+|---|---|---|---|
+| Named inbound path for App 5's push | two: `/management/push-notification` and `/platform-notification` | one: `/management/push-notification` | one: `/platform-notification` |
+| Fits the architecture reference F-34 | six API-spec endpoints named | yes, unchanged | the reference's list would need correcting too |
+| Fits the design doc §23.7 | names the API spec's six endpoints | yes, unchanged | §23.7 would need correcting |
+| Document corrections after Step 15 | — | one document (the notification spec's path wording) | two documents (API spec endpoint list; architecture reference; design doc) |
+| Risk | an agent could build both endpoints, or the wrong one | none — one surface, one home | same capability, more documents to move |
+
+Question D4:
+D4 — Which path is canonical for App 5's notification push?
+Project/branch/task: the instance's HTTP endpoint surface for run app1.
+ELI10: Two global documents name the endpoint App 5 calls to push a notification into a client instance, and they name different paths. The application should build exactly one. The API specification is the single home of every webhook and management endpoint and its authentication rules, and both the architecture reference and this design doc already name its six management endpoints; the notification-engine specification's `/platform-notification` is the stray wording.
+Stakes if we pick wrong: an agent building from the notification spec would create a second endpoint or the wrong path, splitting App 5's control surface and its authentication.
+Recommendation: A — the API specification is the endpoint surface's single home; the notification spec's path wording is aligned in the post-Step-15 corrections.
+Completeness: A=9/10, B=5/10
+Pros / cons:
+A) `/management/push-notification` is canonical (recommended)
+  ✅ Keeps the API specification as the one home of every endpoint and its authentication rules
+  ✅ The architecture reference and this design doc already name it; no further correction there
+  ❌ The notification-engine specification needs its path wording corrected after Step 15
+B) `/platform-notification` is canonical
+  ✅ Matches the notification-engine specification's own server-API listing
+  ❌ Contradicts the API specification, the architecture reference F-34 and design doc §23.7 — three documents to correct instead of one
+Net: both routes end with one endpoint; A corrects one document's wording, B corrects three.
+
+State: approved
+Actual answer: A) API spec path canonical (D4, 2026-11-06)
+Accepted scope: `POST /management/push-notification` (spec-api-specification §3) is the one inbound path for App 5's notification push, Bearer-token secured; the notification-engine specification's `/platform-notification` path wording is corrected in the post-Step-15 document corrections (Claude, outside the run). The design doc §23.7 already states this.
+History: none
+
+### R4: notification idempotency is a check-then-act race
+Finding: S1-1, P3, confidence 8/10, spec-mastertemplate-notification-system §5.5, reviewer Step 15 eng review
+Plan baseline: the notification engine checks `idempotency_key` before inserting; no transaction named in the spec or in design doc §23.1's transaction list
+Runtime evidence: the pattern as written is check-then-act — the exact prohibited pattern of `sec-business-logic-race-conditions`; two concurrent sends of the same event could both insert, producing a duplicate in-app notification (no money involved)
+Comparison grid:
+
+| Choice | Current | A: transaction around check+insert | B: leave as written |
+|---|---|---|---|
+| Race window on duplicate send | open | closed — Anvil retries the conflicting transaction | open; second-line defence is none (a duplicate notification has no business-layer idempotency) |
+| §23.1 transaction list | notifications absent | added to the contended-write list | unchanged |
+| sec-business-logic-race-conditions | prohibited pattern present | pattern closed | finding stays open for the build |
+| Cost | — | one sentence in the plan; one decorator at build | none |
+| Harm if raced | one duplicate in-app notification | none | one duplicate in-app notification |
+
+Question D5:
+D5 — Wrap the notification idempotency check and insert in a transaction, or leave the pattern as written?
+Project/branch/task: the notification engine of run app1.
+ELI10: When two copies of the same event arrive at once, the notification engine checks whether it has already sent the notification and then inserts it if not. Two simultaneous sends can both pass the check and both insert, so the user sees the same notification twice. The platform's own race-condition rule prohibits this pattern; closing it costs one line of design now and one decorator at build.
+Stakes if we pick wrong: a user occasionally sees a duplicate notification — cosmetic, but it leaves a named security pattern open in the plan.
+Recommendation: A — the fix is free at plan time and closes a prohibited pattern the security library names.
+Completeness: A=10/10, B=4/10
+Pros / cons:
+A) Wrap check and insert in `@tables.in_transaction` (recommended)
+  ✅ Closes the prohibited check-then-act pattern with Anvil's own retrying transaction
+  ✅ One sentence added to §23.1's transaction list; zero extra build cost beyond the decorator
+  ❌ Contended writes retry up to five times, so a genuinely hot notification stream retries more
+B) Leave the pattern as the notification specification wrote it
+  ✅ No change to the global specification's stated pattern
+  ❌ Leaves a named prohibited pattern open in the plan for the build to inherit
+Net: the same one-line fix now or an open finding later; B saves nothing.
+
+State: approved
+Actual answer: A) Wrap in transaction (D5, 2026-11-06)
+Accepted scope: the notification engine's idempotency check and insert are wrapped in `@tables.in_transaction` — one send per event under concurrency; design doc §23.1's transaction list gains the notification write (applied below); the build applies the decorator; no global-specification correction is needed since the spec's check-before-inserting still holds inside the transaction.
+History: none
+
+### R5: summary-table writes are not idempotent under task retry
+Finding: S1-2, P3, confidence 7/10, adr-data-access-patterns Pattern 4 with adr-real-time-and-background-tasks' retry policy, reviewer Step 15 eng review
+Plan baseline: the summary tasks compute and add_row the period's rows; the retry policy retries a failed daily task's full batch
+Runtime evidence: pattern as written plus the retry policy — a task that wrote rows before failing, or two overlapping runs, writes the same period's row twice; dashboards read the summary tables directly and never compute on load (SR-10), so a duplicated period double-counts revenue until corrected
+Comparison grid:
+
+| Choice | Current | A: idempotent per period key | B: leave as written |
+|---|---|---|---|
+| Duplicate rows for one period | possible on retry or overlap | impossible — the write is keyed by period and replaces or skips | possible |
+| Dashboard impact if it happens | revenue double-counted until corrected | none | revenue double-counted until corrected |
+| Cost | — | one sentence in §23.6; the task checks by period key in a transaction or deletes-then-inserts | none |
+| Trust | the client's dashboard is the product's window on the business | protected | exposed to a retry bug |
+
+Question D6:
+D6 — Make the summary tasks' writes idempotent per period key, or leave them as the data-access pattern wrote them?
+Project/branch/task: the dashboard summary tasks of run app1.
+ELI10: The dashboards show figures the background tasks pre-compute into summary tables, one row per day. If a summary task fails halfway and retries — which the platform's retry policy says it will — it can write the same day's row twice, and the dashboard then shows double revenue. Making each write keyed by its period, so a re-run replaces or skips instead of duplicating, costs one sentence of design now.
+Stakes if we pick wrong: the client's dashboard shows double revenue after a task retry until someone notices and cleans it.
+Recommendation: A — retries are expected behaviour, not exceptional, and the fix is free at plan time.
+Completeness: A=10/10, B=4/10
+Pros / cons:
+A) Key each summary write by its period inside a transaction (recommended)
+  ✅ A retried or overlapping task run can never duplicate a period's row
+  ✅ One sentence added to §23.6; the build writes the task once, correctly
+  ❌ The task gains a period-key check — a small, permanent part of every summary write
+B) Leave the tasks as the data-access pattern wrote them
+  ✅ No change to the global pattern's example code
+  ❌ A retry bug shows the client double revenue — the dashboard is the product's window on the business
+Net: one sentence now buys a dashboard that survives its own retry policy.
+
+State: approved
+Actual answer: A, with David's rule (D6, 2026-11-06): each summary write is keyed by its period inside `@tables.in_transaction`; if the period's row exists it is updated with the recalculated figures, otherwise it is added
+Accepted scope: the summary tasks' writes are period-keyed upserts inside a transaction (applied to §23.6 below); because the rows are now edited, `daily_summary`, `service_performance`, `provider_performance` and `campaign_metrics` move from the append-only list to the mutable list and gain a nullable `updated_at` in the same schema amendment and migration-log row (applied below); the mutable `updated_at` count rises 39 → 43 and the append-only list falls 11 → 7.
+History: none
+
+### R6: the C4 divergence inventory is incomplete
+Finding: S2-1, P3, confidence 9/10, the live server packages against scaffold-spec.md's module lists, reviewer Step 15 eng review
+Plan baseline: Step 12's decision C4 records four divergences (`SignupForm`; `EmailSetupForm` vs `EmailSettingsForm`; `stripe_service`/`paystack_service` vs `*_gateway`; `task_service` in `server_marketing`) and the rule that a module is renamed only at the build step that touches it
+Runtime evidence: the live app's server modules were listed this session against the scaffold's lists — additional divergences exist: a generic `service.py` in `server_auth/`, `server_blog/`, `server_bookings/`, `server_dashboard/`, `server_services/` and `server_settings/` where the scaffold names `auth_service`, `blog_service`, `booking_service`, `dashboard_service`, `catalogue_service`, `settings_service`; `metadata_service.py` and `time_service.py` in `server_bookings/` where the scaffold names `intake_service` (and lists no time module); `policy_service.py` in `server_shared/` where the scaffold places it in `server_settings/`; and `utilities.py`, `encryption.py`, `metrics.py` in `server_shared/`, which the scaffold's list does not name
+Comparison grid:
+
+| Choice | Current | A: extend the recorded inventory | B: leave C4 as written |
+|---|---|---|---|
+| Divergences with an assigned rename step | the four of C4 only | the four plus the ones found this session, each assigned at its touching build step | the others surface unassigned at their build steps |
+| Build-step surprise risk | a build step meets an unrecorded rename mid-feature | every known divergence is on the record before Phase E | each discovery interrupts its build step |
+| Cost | — | one paragraph in the design doc recording the fuller inventory | none |
+| Rule change | none — the no-rename rule stands | none | none |
+
+Question D7:
+D7 — Extend the recorded divergence inventory with the divergences found this session, or leave C4's list as written?
+Project/branch/task: the module inventory of run app1 against the scaffold.
+ELI10: The plan's rule is that an existing module is renamed only at the build step that touches it, and Step 12 recorded four naming divergences so each rename has an owner. Reading the live server packages against the scaffold's module lists this session found more divergences than the four recorded — mostly a generic service.py where the scaffold names a purpose-specific service, plus three modules living in a different package than the scaffold says. Recording the fuller list now means no build step is surprised by an unrecorded rename later.
+Stakes if we pick wrong: the unrecorded divergences surface mid-feature at their build steps, interrupting feature work to settle a rename that could have been assigned calmly now.
+Recommendation: A — the inventory is a record, not a change; the no-rename rule stands either way.
+Completeness: A=10/10, B=5/10
+Pros / cons:
+A) Extend the recorded inventory in the design doc (recommended)
+  ✅ Every known divergence carries its intended rename assignment before Phase E starts
+  ✅ Purely a record — no code is renamed and no rule changes
+  ❌ The inventory paragraph grows and must be kept current as build steps touch modules
+B) Leave C4's four-item list as written
+  ✅ The design doc stays as Step 12 wrote it
+  ❌ At least six further divergences stay off the record and interrupt their build steps unassigned
+Net: A costs a paragraph and buys a complete map; B defers the same discoveries into the middle of feature work.
+
+State: approved
+Actual answer: A) Extend the inventory (D7, 2026-11-06)
+Accepted scope: the fuller divergence inventory is recorded in §23.2 (applied below); the no-rename rule stands — no module is renamed now; each rename happens at the build step that touches the module, and the inventory names the intended target for each so no build step meets an unrecorded rename.
+History: none
+
+## Review sections
+
+**Section 1 — Architecture review.** Two findings, both resolved: R4 (notification idempotency race — transaction applied to §23.1) and R5 (summary-write idempotency — David's period-keyed upsert rule applied to §23.6 and §23.1, with the four summary tables moved to the mutable list and `updated_at` folded into the schema amendment). Dispositions: both accepted. Production-failure check per new path: every path of §23 is covered by the Error & Rescue registry and Failure Modes registry of the Step 14 review except the platform-push path, whose failure mode (forged or spammed push) is closed by the management endpoints' Bearer-token check — HTTP 403 and no state change (`sec-management-service-authentication`), already named in §23.7. Distribution architecture: not applicable — an Anvil application. System boundaries, coupling and data flow: §23.1–§23.11 as written; single points of failure (the development account, the migration discipline) are §11 risks already recorded.
+
+**Section 2 — Code quality review.** One finding, resolved: R6 (the C4 divergence inventory extended; the inventory applied to §23.2). Dispositions: accepted. Shared-code rubric: the eleven seams of §23.2 each name why the seam exists (something varies or the test suite replaces it); no extraction is proposed beyond them, so no caller proof is required. Error handling and edge cases: the registries and §22 name them per path; the empty-state pattern is DESIGN.md's. Technical debt: C1–C4 plus the R6 inventory, each with its assigned step.
+
+**Section 3 — Test review.** Test framework: PDLF's `ts-method`, given in full (fixed answer — no detection run). Coverage diagram over the plan's critical paths (§22), every row a planned Level-D test the suite executes from Step 35:
+
+```
+CRITICAL PATHS (per §22 What Must Be Tested)                PLANNED COVERAGE
+[+] 1  E2E booking flow (RT1–RT3, desktop + mobile)         test spec §1; BR-01/06; DM-01; 3-second gate
+[+] 2  Booking contention (one slot, two customers)         IN-05, DM-01
+[+] 3  Payment hold and expiry (15 minutes)                 SR-17; test spec 2.1
+[+] 4  D5 late payment + transactional reinstatement        new case + concurrency test (Step 15 test plan)
+[+] 5  Webhook security and exactly-once                    IN-07; test spec 2.2–2.3; 5-minute reconciliation (D4)
+[+] 6  Server-side amounts (gateways, PayPal, quote→inv.)   IN-06; SR-17a/26/56; test 4.20
+[+] 7  Role enforcement over every function and form        IN-02/03, BR-03; access matrix (this step)
+[+] 8  The Vault                                            IN-13, SC-03; tests 4.18–4.19
+[+] 9  Second factors and sessions                          SC-02/03/04; ST-12
+[+] 10 Email through SES                                    IN-09; test spec 4.1–4.5
+[+] 11 Sample-data isolation                                SR-44a/b; tests 4.10–4.11
+[+] 12 Exit export                                          IN-14, RL-08
+[+] 13 Structural isolation (no tenant column anywhere)     SC-14, ST-06
+[+] 14 Data-subject rights and retention                    IN-14
+[+] 15 Legal-documents and consent system                   spec §12 tests; ST-02
+[+] 16 AI/speech channel isolation                          SR-53a/45a; tests 4.8–4.9
+[+] 17 Notification engine (send idempotent incl. the       new cases (Step 15 test plan; §22 row 17, D8)
+      same-moment race, preferences, quiet hours,
+      delivery log, platform push, feed and bell)
+[+] 18 Summary tasks (a re-run leaves one row per           new case (Step 15 test plan; §22 row 18, D8)
+      period with the recalculated figures)
+
+USER FLOWS crossing the paths (planned): sign-in and 2FA (UF-03/UF-04), booking (UF-05–UF-08), order
+(UF-09), package (UF-10), portal (UF-29), quote acceptance (UF-41), Team Inbox (UF-35), demo (UF-44) —
+each carried by its §22 row's tests and by the access matrix's generated IN-02 runs.
+LLM/eval scope: the AI assists' prompt quality is guarded by the AI implementation spec's guardrails and
+tests 4.8–4.9; no eval suite is proposed beyond them (the assists are build-stage scope).
+
+COVERAGE: 18/18 critical paths planned | GAPS: 0 (the one gap found — the notification engine — was
+closed by D8's two-row ruling during this review)
+```
+
+**Section 4 — Performance review.** No issues found. The recorded performance requirements stand (booking flow ≤ 3 round trips; dashboards read pre-computed tables only, SR-10; operations over 22 seconds as background tasks; bounded searches per the data-access ADR; calendar one call per period). R5's period-keyed upsert removes the one unbounded-write path this review found. The notification bell's 30–60-second polling of `get_unread_count` is a bounded count query per open form, within the polling intervals of the real-time ADR.
+
+### R7: the notification engine has no row in What Must Be Tested
+Finding: S3-1, P3, confidence 8/10, design doc §22 rows 1–16, reviewer Step 15 eng review
+Plan baseline: §22 carries 16 rows of critical flows, roles and edge cases, each with its tests; the notification engine's three tables are in the schema (D2) and §23.7 names the engine and the platform push
+Runtime evidence: read this step — no §22 row covers the notification flow (send → dispatch → preferences and quiet hours → delivery log → feed and bell; the platform push's idempotent write), and the test specification has no notification tests; IN-02/ST-02 would cover the functions' access but not the flow's behaviour
+Comparison grid:
+
+| Choice | Current | A: add §22 row 17 | B: rely on the matrix alone |
+|---|---|---|---|
+| Notification flow's behaviour tests | none planned | send, preferences, quiet hours, delivery log, platform push each tested | access-only (IN-02) |
+| User-facing surface | bell, badge, feed, preferences centre (§8) | covered by the row's tests | untested behaviour |
+| Platform push idempotency | §5.5's key + R4's transaction | named in the row's tests | implicit |
+| Cost | — | one §22 row; carried into the test plan | none |
+
+Question D8:
+D8 — Add the notification engine to What Must Be Tested as row 17, or rely on the access matrix's mechanical coverage alone?
+Project/branch/task: the test structure of run app1.
+ELI10: The plan lists sixteen things that must be tested before the build ships, from the booking flow to the AI channel. The notification engine — the bell, the feed, the preferences, the delivery records and App 5's push into it — is built by this plan but absent from that list. The access matrix would still prove who may call each notification function, but nothing would test whether the engine actually works: that a send is idempotent, that quiet hours are honoured, that a push lands in the feed. Adding one row to the list fixes that and rides into the test plan this step writes.
+Stakes if we pick wrong: the notification surface ships with access tested but behaviour untested — a silent engine or a duplicated push reaches clients before anyone planned a test for it.
+Recommendation: A — one row, carried into the test plan this step already writes.
+Completeness: A=10/10, B=4/10
+Pros / cons:
+A) Add §22 row 17 (recommended)
+  ✅ The notification flow's behaviour — send, preferences, quiet hours, delivery, push — gets planned tests
+  ✅ Rides into the test plan and access matrix this step produces; no extra artefact
+  ❌ §22 grows by one row and the test plan by its cases
+B) Rely on IN-02/ST-02 mechanical coverage
+  ✅ No change to §22
+  ❌ Access proven, behaviour untested — the engine's working order is nobody's planned test
+Net: one row buys behaviour coverage for a user-facing surface the plan otherwise ships untested.
+
+State: approved
+Actual answer: A, with David's two-row ruling (D8, 2026-11-06)
+Accepted scope: §22 gains row 17 — the notification engine: a send is idempotent, including two identical sends at the same moment leaving exactly one notification row (D5, the transactional check-and-insert); preferences and quiet hours are honoured; each delivery is logged; App 5's push lands once in the feed; the bell badge matches the unread count — and row 18 — the summary tasks: a summary task run twice for the same period leaves exactly one row per period with the recalculated figures (D6), for `daily_summary`, `service_performance`, `provider_performance` and `campaign_metrics`. Both rows are carried into the test plan and the access matrix this step writes (applied to §22 below).
+History: none
+
+**Approval readiness: PASS** — R1 (D2, widened 2026-11-06), R2 (D3, with the core-table enumeration and the `updated_at` ruling), R3 (D4), R4 (D5), R5 (D6, with David's upsert rule and the schema consequence), R6 (D7), R7 (D8, two rows) — every remedy cites its actual answer; D1 (structure) confirms the arrangement. Scope Challenge result: **scope accepted as-is**.
+
+## NOT in scope
+
+- **Scope changes:** none — the complexity gate tripped and the structure question confirmed the original arrangement (D1); the documents fix the scope (PRD §7 defers nothing; Step 14 HOLD SCOPE stands), so the review proposed no addition, cut or deferral.
+- **`TODOS.md`:** never written under PDLF; every deferral, had one arisen, is recorded here instead. None arose — the schema amendment, the notification rows and the divergence inventory are all approved work of this step, not deferred work.
+- **`updated_at` on mutable tables being a global-specification change:** `spec-anvil-platform-standards` §13 already requires it; the schema amendment applies it. Nothing deferred.
+- **The post-Step-15 document corrections** (the superseded-document repairs you decided at the session start, the notification-spec path wording, and `authoritative-schema.md` mirroring the 43-table amendment): Claude's work outside the run, named in the ledger rows — carried, not deferred.
+
+## What already exists
+
+The reviewed plan reuses everything the app already holds — 16 client packages (91 form folders), 11 server packages (49 server modules), 44 of the 70 tables — and adds only what the scaffold names and the app lacks. The review's amendments extend that reuse rather than replacing it: the schema amendment rides the recorded migration prompts; the notification rows ride the existing test structure; the divergence inventory records what exists so it is never rebuilt. No shared-code extraction was proposed: the eleven seams of §23.2 already name every place behaviour varies or the test suite must replace a service, and each has exactly one home.
+
+## Implementation Tasks
+
+Synthesized from this review's findings; each derives from a specific finding above. Owners are the build steps of Phases C–E unless named otherwise.
+
+- [ ] **T1 (P1)** — Step 15 outputs — carry the review's new surfaces into the threat model, access matrix and test plan: the notification engine (§22 row 17) and the summary-task idempotency (§22 row 18) as test cases; the D5 late-payment concurrency test; the consent endpoints and archive task; the AI/tool crossings; `access-matrix.yaml` for IN-02; the `media.mybizz.live` cookie-freedom check at release; the SES trust boundary (not Brevo) in the threat model.
+  - Surfaced by: D8's two-row ruling; Step 14's carry-forward note; David's SES decision
+  - Files: `docs-local/design/app1/` (threat model, test plan, access matrix)
+  - Verify: the D5 concurrency case, row 17 and row 18 appear as named tests in `test-plan.md`
+- [ ] **T2 (P1)** — Step 17 (schema tables) — the amended prompts P1–P13 as recorded: 43 `updated_at` gains, 28 `created_at` gains, 35 `metadata` gains, the two `created_date` removals in P7.
+  - Surfaced by: R1/R2 accepted amendments; the 2026-11-06 migration-log row
+  - Files: `schema-migration-log.md` (recorded); Anvil Data Tables (David applies through Resolve)
+  - Verify: Part C — the resulting `anvil.yaml` matches `authoritative-schema.md` table by table and column by column, after the post-Step-15 mirroring
+- [ ] **T3 (P2)** — Build steps that touch the divergent modules — the R6 inventory's renames and moves at their touching steps (six `service.py` renames, `metadata_service`→`intake_service`, `policy_service` to `server_settings/`, the C1–C4 items).
+  - Surfaced by: R6; §23.2's divergence inventory
+  - Files: the named server packages
+  - Verify: each touched module matches its scaffold name after its build step; no rename outside its touching step
+- [ ] **T4 (P2)** — Payments build step — the D5 late-payment rule with its transactional reinstatement and the concurrency test (late-payment webhook vs a new booking for the same slot — exactly one succeeds), per §14.8 D5 and §22 row 4.
+  - Surfaced by: Step 14 D5; §22 row 4
+  - Files: `server_payments/`
+  - Verify: the concurrency test passes in the Step 35 test plan
+- [ ] **T5 (P3)** — Notifications build step — the transactional idempotency check-and-insert (R4) and the platform push through `push-notification` only (R3).
+  - Surfaced by: R4, R3
+  - Files: `server_shared/` notification engine (or its scaffold home), `server_management/`
+  - Verify: §22 row 17's cases pass; no second endpoint exists
+- [ ] **T6 (P2)** — Analytics build step — the summary tasks' period-keyed upsert (R5).
+  - Surfaced by: R5
+  - Files: `server_analytics/summary_tasks`
+  - Verify: §22 row 18's case passes
+
+## Unresolved decisions
+
+None — every finding of this review was answered and applied within the step (R1–R7, D1–D8).
+
+## Completion summary
+
+```
+  +====================================================================+
+  |            ENGINEERING REVIEW — COMPLETION SUMMARY                 |
+  +====================================================================+
+  | Step 0 Scope Challenge | structure confirmed (D1, Original     |
+  |                        | arrangement); scope accepted as-is    |
+  | Reality rows           | 6 pass + 1 n/a (PLAN_REALITY);        |
+  |                        | unverified=4, each with its owner     |
+  | Section 1 (Arch)       | 2 issues found — both resolved        |
+  |                        | (R4 transaction; R5 upsert + schema)  |
+  | Section 2 (Code)       | 1 issue found — resolved (R6          |
+  |                        | inventory extended, applied §23.2)    |
+  | Section 3 (Tests)      | diagram produced, 1 gap found and     |
+  |                        | closed (R7 → §22 rows 17–18)          |
+  | Section 4 (Perf)       | 0 issues found                        |
+  | Outside Voice          | declined by the PDLF fixed answer     |
+  | NOT in scope           | written (4 items)                     |
+  | What already exists    | written                               |
+  | TODOS.md updates       | 0 items proposed (never written       |
+  |                        | under PDLF)                           |
+  | Unresolved decisions   | 0                                     |
+  | Approval readiness     | PASS (R1–R7, D1–D8)                   |
+  +====================================================================+
+```
 
 ---
 
@@ -893,5 +1270,21 @@ None — D1 through D8 and every review finding were answered and applied within
 **OUTSIDE COVERAGE:** declined by the PDLF fixed answer at Step 14; provider none; phase plan-review; no completed external review.
 
 **VERDICT:** CEO review CLEAR — the reviewed plan stands with every finding resolved by recording. Eng review is required and is PDLF's own Step 15, which runs next.
+
+NO UNRESOLVED DECISIONS
+
+## GSTACK REVIEW REPORT
+
+| Review | Trigger | Why | Runs | Status | Findings |
+|--------|---------|-----|------|--------|----------|
+| CEO Review | `/plan-ceo-review` (PDLF Step 14) | Scope & strategy | 1 | CLEAR | HOLD_SCOPE mode; 0 scope proposals; 5 findings recorded and resolved (D2–D6 plus the D8 extension); 0 critical gaps |
+| Outside Review | declined by the PDLF fixed answer | Independent 2nd opinion | 0 | skipped | no completed external review — sub-agents blocked, outside AI services not approved destinations |
+| Eng Review | `/plan-eng-review` (PDLF Step 15) | Architecture & tests (required) | 1 | ISSUES OPEN | 4 issues, 0 critical gaps — all resolved in-step: the schema amendment (43 `updated_at`, 28 `created_at`, 35 `metadata`), the notification transaction, the summary upsert, the divergence inventory, and two new test rows |
+| Design Review | `/plan-design-review` | UI/UX gaps | 0 | — | not run |
+| DX Review | `/plan-devex-review` | Developer experience gaps | 0 | — | not run |
+
+**OUTSIDE COVERAGE:** declined by the PDLF fixed answer at Step 15; provider none; phase plan-review; no completed external review.
+
+**VERDICT:** Eng review complete — every finding resolved by a recorded decision (R1–R7, D1–D8); the schema amendment is complete in `schema-migration-log.md`; PDLF runs Step 16 (domain modelling) next.
 
 NO UNRESOLVED DECISIONS

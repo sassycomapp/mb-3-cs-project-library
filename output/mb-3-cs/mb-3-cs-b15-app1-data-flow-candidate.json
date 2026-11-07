@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Mybizz CS — Booking and Payment Flow with the D5 Shadow",
+    "quality_profile": "standard",
+    "viewBox": [
+      1240,
+      840
+    ],
+    "column_fit": "spread"
+  },
+  "participants": [
+    {
+      "id": "customer-browser",
+      "type": "external",
+      "label": "Customer",
+      "sublabel": "browser"
+    },
+    {
+      "id": "booking-flow-form",
+      "type": "frontend",
+      "label": "BookingFlowForm",
+      "sublabel": "3 round trips"
+    },
+    {
+      "id": "booking-server",
+      "type": "backend",
+      "label": "server_bookings",
+      "sublabel": "server-side authority"
+    },
+    {
+      "id": "gateway",
+      "type": "external",
+      "label": "Gateway",
+      "sublabel": "hosted payment"
+    },
+    {
+      "id": "webhook-endpoint",
+      "type": "backend",
+      "label": "Webhook endpoint",
+      "sublabel": "signature + idempotency"
+    },
+    {
+      "id": "process-webhook-task",
+      "type": "backend",
+      "label": "Background task",
+      "sublabel": "applies once"
+    },
+    {
+      "id": "data-tables",
+      "type": "database",
+      "label": "Data tables",
+      "sublabel": "bookings, payments, invoice"
+    }
+  ],
+  "segments": [
+    {
+      "from": 150,
+      "to": 348,
+      "label": "Three round trips"
+    },
+    {
+      "from": 370,
+      "to": 500,
+      "label": "Hold and pay"
+    },
+    {
+      "from": 518,
+      "to": 660,
+      "label": "Webhook applied once"
+    },
+    {
+      "from": 690,
+      "to": 790,
+      "label": "D5 late payment"
+    }
+  ],
+  "messages": [
+    {
+      "from": "customer-browser",
+      "to": "booking-flow-form",
+      "y": 180,
+      "label": "choose service, provider, slot, meeting type, intake",
+      "variant": "default"
+    },
+    {
+      "from": "booking-flow-form",
+      "to": "booking-server",
+      "y": 222,
+      "label": "RT1 get_booking_context",
+      "variant": "emphasis"
+    },
+    {
+      "from": "booking-server",
+      "to": "booking-flow-form",
+      "y": 258,
+      "label": "services, providers, intake schema",
+      "variant": "return"
+    },
+    {
+      "from": "booking-flow-form",
+      "to": "booking-server",
+      "y": 300,
+      "label": "RT2 get_available_slots",
+      "variant": "emphasis"
+    },
+    {
+      "from": "booking-server",
+      "to": "booking-flow-form",
+      "y": 336,
+      "label": "only genuinely free slots",
+      "variant": "return"
+    },
+    {
+      "from": "booking-flow-form",
+      "to": "booking-server",
+      "y": 384,
+      "label": "RT3 confirm_booking",
+      "variant": "emphasis",
+      "note": "one transaction: slot, resource, places, price re-checked"
+    },
+    {
+      "from": "booking-server",
+      "to": "booking-flow-form",
+      "y": 440,
+      "label": "pending - 15-minute hold, emailed payment link",
+      "variant": "return"
+    },
+    {
+      "from": "customer-browser",
+      "to": "gateway",
+      "y": 482,
+      "label": "pays on the hosted page",
+      "variant": "default"
+    },
+    {
+      "from": "gateway",
+      "to": "webhook-endpoint",
+      "y": 524,
+      "label": "payment succeeded",
+      "variant": "dashed"
+    },
+    {
+      "from": "webhook-endpoint",
+      "to": "data-tables",
+      "y": 560,
+      "label": "webhook_log row; payload to R2",
+      "variant": "default"
+    },
+    {
+      "from": "webhook-endpoint",
+      "to": "process-webhook-task",
+      "y": 596,
+      "label": "dispatch; 200 within 5 s",
+      "variant": "emphasis"
+    },
+    {
+      "from": "process-webhook-task",
+      "to": "data-tables",
+      "y": 638,
+      "label": "apply once: confirm, record payment, invoice",
+      "variant": "emphasis"
+    },
+    {
+      "from": "gateway",
+      "to": "webhook-endpoint",
+      "y": 700,
+      "label": "late webhook after the hold released (D5)",
+      "variant": "dashed"
+    },
+    {
+      "from": "process-webhook-task",
+      "to": "data-tables",
+      "y": 742,
+      "label": "slot free: reinstate + confirm in the transaction; taken: refund in full - both parties notified",
+      "variant": "dashed"
+    }
+  ],
+  "activations": [
+    {
+      "participant": "booking-flow-form",
+      "from": 174,
+      "to": 452,
+      "type": "frontend"
+    },
+    {
+      "participant": "booking-server",
+      "from": 216,
+      "to": 452,
+      "type": "backend"
+    },
+    {
+      "participant": "gateway",
+      "from": 476,
+      "to": 530,
+      "type": "external"
+    },
+    {
+      "participant": "webhook-endpoint",
+      "from": 518,
+      "to": 712,
+      "type": "backend"
+    },
+    {
+      "participant": "process-webhook-task",
+      "from": 590,
+      "to": 754,
+      "type": "backend"
+    },
+    {
+      "participant": "data-tables",
+      "from": 554,
+      "to": 754,
+      "type": "database"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One transaction guards the slot",
+      "items": [
+        "confirm_booking re-checks slot, resource, places, price inside the same transaction",
+        "A clash returns the nearest free slots and creates nothing",
+        "The browser never decides availability"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Money never on the browser's word",
+      "items": [
+        "Every amount is read from the database",
+        "Card data stays on the gateway's hosted page",
+        "The webhook is verified, idempotent, and applied once in the background"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "The D5 shadow",
+      "items": [
+        "A payment succeeding after the hold released is recorded, never lost",
+        "Reinstated only inside the same transactional re-check",
+        "Otherwise refunded in full; the customer and the Owner are notified either way"
+      ]
+    }
+  ]
+}

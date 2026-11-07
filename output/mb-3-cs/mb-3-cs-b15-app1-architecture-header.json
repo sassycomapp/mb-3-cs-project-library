@@ -1,0 +1,28 @@
+{
+  "subject": "mb-3-cs-b15-app1-architecture",
+  "intent": "Show the five-app system and every outside service with its credential home, so the reader trusts that client code never touches data or secrets and every cross-boundary call runs through one named seam. The load-bearing claim: a client instance holds only the schema, one startup module and its dependency - all logic and every credential path is server-side (design doc section 6 constraint 3; section 23.4).",
+  "type": "architecture",
+  "type_reason": "Components, boundaries and ownership; the default for everything that exists and connects; not a flow picture.",
+  "quality_profile": "standard",
+  "nodes": ["client-browser", "app1", "app2", "app3", "app4", "app5", "gateways", "ses", "r2", "groq"],
+  "node_roles": {
+    "client-browser": "public client code; never holds credentials or rules",
+    "app1": "development workspace; never a dependency for any client",
+    "app2": "master_template - the published dependency; all server logic and forms",
+    "app3": "blank_client_template - the provisioning clone source; schema, startup, dependency",
+    "app4": "client instance - schema, startup module, dependency; nothing else",
+    "app5": "Mybizz management - registry, push notifications, AI gateway",
+    "gateways": "Stripe, Paystack, PayPal; card data never touches the instance",
+    "ses": "Amazon SES/SNS/S3 - every email received and sent",
+    "r2": "the client's own R2 bucket - cold data and backups",
+    "groq": "AI and speech - reached only through App 5"
+  },
+  "main_path": ["client-browser", "app4", "app2", "gateways"],
+  "deferred_to_cards": ["the eleven seam names", "the Vault's twelve secret names", "the endpoint paths", "the R2 folder table", "the task schedule"],
+  "stages_or_lanes": ["browser", "the five apps", "outside services"],
+  "expected_corridors": [["app4", "app2", "dependency band"], ["app2", "gateways", "services band"], ["app2", "ses", "services band"], ["app2", "r2", "services band"], ["app2", "app5", "services band"]],
+  "layout_budget_read": "renderers/architecture/README.md",
+  "quality_gate": "showcase accepted only at 9 artifact checks, 0 composition errors, 0 warnings",
+  "abort_conditions": ["node overlap after repair order", "an edge through a node after repair order", "a corridor crossing an occupied band"],
+  "status": "approved"
+}

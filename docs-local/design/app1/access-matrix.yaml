@@ -1,0 +1,297 @@
+# Mybizz CS — access matrix of one application (DC-05).
+# Written at Step 15 from the template templates/access-matrix.yaml.
+# Every server function the architecture names, every form and settings tab the plan
+# names, against every role, with the fields each role may read and change.
+# Scopes: all (every row), own (only the caller's own rows), none (refused).
+# Roles: Owner, Manager, Admin, Staff, Customer, SignedOut.
+# IN-02 and ST-02 are generated from this file; BR-03 reads it.
+# Every callable not listed here is caught by the decorator rule (SR-01) and the
+# ST-02 scanner: a server function without an access rule is a finding, unless the
+# architecture lists it as intentionally public — the public content readers,
+# the quote/review token pages and the consent write are those.
+
+roles: [Owner, Manager, Admin, Staff, Customer, SignedOut]
+
+server_functions:
+  # — bookings and scheduling —
+  get_booking_context:
+    module: server_code/server_bookings/booking_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+    returns: [services, providers, meeting_types, intake_schema]   # IN-04 allowed fields
+    step_up: false
+  get_available_slots:
+    module: server_code/server_bookings/availability_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+    returns: [slots, provider_name, resource_name]
+    step_up: false
+  confirm_booking:
+    module: server_code/server_bookings/booking_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: all}
+    returns: [booking_id, status, payment]
+    step_up: false
+  get_calendar_items:
+    module: server_code/server_bookings/calendar_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+    returns: [item_id, kind, status, start, end, title, provider_name, meeting_type, address, resource_name, places_taken, payment_status, is_recurring]
+    step_up: false
+  get_my_bookings:
+    module: server_code/server_bookings/booking_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: own, SignedOut: none}
+    returns: [id, start, end, service_name, status]
+    step_up: false
+  # — payments and invoices —
+  approve_refund:
+    module: server_code/server_payments/refund_service.py
+    scope: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: [id, status]
+    step_up: true
+  create_invoice:
+    module: server_code/server_payments/invoice_service.py
+    scope: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: [invoice_id, invoice_number, total_amount]
+    step_up: false
+  get_my_invoices:
+    module: server_code/server_payments/invoice_service.py
+    scope: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: own, SignedOut: none}
+    returns: [invoice_id, invoice_number, due_date, total_amount, status]
+    step_up: false
+  # — sales —
+  list_deals:
+    module: server_code/server_sales/deal_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+    returns: [deal_id, title, stage, value, expected_close_date]
+    step_up: false
+  accept_quote:
+    module: server_code/server_sales/quote_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: all}
+    returns: [quote_id, status]
+    step_up: false
+  # — customers —
+  get_contact:
+    module: server_code/server_customers/contact_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+    returns: [contact_id, first_name, last_name, email, phone, status, tags]   # internal_notes restricted
+    step_up: false
+  import_contacts:
+    module: server_code/server_customers/contact_import_export.py
+    scope: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: [imported, updated]
+    step_up: false
+  # — email —
+  send_email:
+    module: server_code/server_shared/email_service.py
+    scope: {Owner: all, Manager: all, Admin: none, Staff: own, Customer: none, SignedOut: none}   # from own addresses only
+    returns: [message_id]
+    step_up: false
+  list_addresses:
+    module: server_code/server_inbox/address_service.py
+    scope: {Owner: all, Manager: own, Admin: own, Staff: own, Customer: none, SignedOut: none}   # Owner sees every address
+    returns: [address_id, address, kind, unread]
+    step_up: false
+  # — notifications —
+  send_notification:
+    module: server_code/server_shared/notification_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: none}   # server-internal; idempotent
+    returns: [notification_id]
+    step_up: false
+  get_notifications:
+    module: server_code/server_shared/notification_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: none}   # own rows only, derived from the signed-in user
+    returns: [notification_id, type, title, body, is_read, created_at]
+    step_up: false
+  get_unread_count:
+    module: server_code/server_shared/notification_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: none}
+    returns: [count]
+    step_up: false
+  mark_read:
+    module: server_code/server_shared/notification_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: none}   # own rows only
+    returns: []
+    step_up: false
+  update_preferences:
+    module: server_code/server_shared/notification_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: none}   # own rows only
+    returns: []
+    step_up: false
+  # — content and policy —
+  publish_policy:
+    module: server_code/server_settings/policy_service.py
+    scope: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: [document, version]
+    step_up: false
+  record_consent:
+    module: server_code/server_settings/policy_service.py
+    scope: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}   # public; server-derived fields only
+    returns: [consent_id]
+    step_up: false
+  # — accounts —
+  record_expense:
+    module: server_code/server_accounts/expense_service.py
+    scope: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: [expense_id]
+    step_up: false
+  # — vault —
+  get_vault_secret:
+    module: server_code/server_shared/vault_service.py
+    scope: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: [masked]   # '***' only — the value never leaves the server
+    step_up: true
+  save_vault_secret:
+    module: server_code/server_shared/vault_service.py
+    scope: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: []
+    step_up: true
+  # — data and sample —
+  export_all_data:
+    module: server_code/server_shared/export_service.py
+    scope: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: [export_id]
+    step_up: true
+  clear_sample_data:
+    module: server_code/server_settings/sample_data_service.py
+    scope: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: []
+    step_up: false
+  # — http endpoints (Bearer or signature; not role-decorated) —
+  # /management/{health,status,suspend,unsuspend,push-notification,push-update-alert}:
+  #     Bearer token, HTTP 403 without a valid token (sec-management-service-authentication)
+  # /_/api/webhooks/{stripe,paystack,paypal}: gateway signature, HTTP 400 on failure
+  # /_/api/email/{inbound,events}: SNS signature + own-topic confirmation; /unsubscribe: signed link
+  # /_/api/blog-image/{slug}: published-post featured image only, else 404
+
+forms:
+  # — admin area (module path keyed) —
+  dashboard.DashboardForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  inbox.TeamInboxForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # Staff/Admin see their own addresses and desks only
+  bookings.BookingListForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # Staff own only
+  bookings.BookingCalendarForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+  bookings.BookingEditorForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+  bookings.BookingViewerForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+  bookings.AvailabilitySettingsForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  services.ServicesForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  services.ServiceEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  services.ServiceViewerForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  services.ServiceCategoriesForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  services.ResourceListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  services.GroupSessionEditorForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  orders.OrderListForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # Staff own only
+  orders.OrderViewerForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+  packages.PackageListForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  packages.PackageEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  crm.ContactListForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  crm.ContactEditorForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  crm.ContactViewerForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  crm.CompanyListForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  crm.SegmentManagerForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  crm.TaskListForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+  crm.AutomationListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  crm.AutomationEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  crm.EmailCampaignListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  crm.EmailCampaignEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  crm.EmailBroadcastForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  crm.LeadCaptureForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  blog.BlogAdminListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  blog.BlogEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  blog.CategoryManagementForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  blog.CommentModerationForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  public_pages.PageListForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  public_pages.HomepageEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  public_pages.MediaLibraryForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  landing_pages.LandingPageListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  landing_pages.LandingPageEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  invoices.InvoiceListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  invoices.InvoiceEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  invoices.InvoiceViewerForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  invoices.PaymentListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  time_tracking.TimeEntryListForm: {Owner: all, Manager: all, Admin: none, Staff: own, Customer: none, SignedOut: none}
+  time_tracking.TimeEntryEditorForm: {Owner: all, Manager: all, Admin: none, Staff: own, Customer: none, SignedOut: none}
+  reviews.ReviewListForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  reviews.ReviewViewerForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  sales.DealBoardForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+  sales.DealEditorForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+  sales.QuoteListForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  sales.QuoteEditorForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  accounts.ExpenseListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  accounts.ExpenseEditorForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  accounts.AccountsForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  ai.WhatsUpForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  support.HelpForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  settings.VaultForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  settings.UserManagementForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  settings.EmailSettingsForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  settings.DomainSettingsForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  settings.PaymentGatewayForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  settings.ThemeConfigForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  onboarding.OnboardingForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  # — public (SignedOut reachable) —
+  public_pages.HomePage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.AboutPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.ContactPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.ServicesPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.ServiceDetailPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.PrivacyPolicyPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.TermsConditionsPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.CookiePolicyPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  blog.BlogListForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  blog.BlogPostForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  bookings.BookingFlowForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  orders.OrderFlowForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  landing_pages.LandingPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  reviews.ReviewSubmitForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  sales.QuoteAcceptPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  auth.LoginForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  auth.PasswordResetForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  auth.TwoFactorForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  auth.SetPasswordForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  # — customer portal (Customer role; every view own-records-only) —
+  portal.MyDashboardForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: none}
+  portal.MyBookingsForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: none}
+  portal.MyPackagesForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: none}
+  portal.MyQuotesForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: none}
+  portal.MyInvoicesForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: none}
+  portal.MyReviewsForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: none}
+  portal.AccountForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: none}
+
+settings_tabs:
+  BusinessProfile: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  BrandPalette: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  SystemCurrency: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  DisplayCurrency: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  LegalAcknowledgement: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  PaymentGateways: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  Invoicing: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  UsersAndPermissions: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  Email: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  Domain: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  Theme: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  FeatureSwitches: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  LegalPages: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  Data: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+
+# Fields each role may change, where it differs by role (IN-04, ASVS 8.2.3).
+writable_fields:
+  bookings:
+    Owner: [status, start_datetime, end_datetime, special_requests, meeting_type, provider_id, resource_id]
+    Staff: [special_requests]
+    Customer: [special_requests]
+  invoice:
+    Owner: [status, notes, payment_terms_days]
+    Manager: [status, notes, payment_terms_days]
+  contacts:
+    Owner: [first_name, last_name, email, phone, status, tags, internal_notes, preferences]
+    Admin: [first_name, last_name, email, phone, status, tags]
+  tasks:
+    Owner: [task_title, due_date, completed, notes]
+    Staff: [completed, notes]
+  users:
+    Owner: [role, account_status, full_name, phone, permissions, preferences]
+  email_messages:
+    Owner: [is_read, is_starred, folder]
+    Staff: [is_read, is_starred, folder]   # own addresses and desks only
+  notifications:
+    Owner: [is_read]
+    Staff: [is_read]
+    Customer: [is_read]
+  consents:
+    SignedOut: []   # choice written by the server from the request; no client-chosen fields

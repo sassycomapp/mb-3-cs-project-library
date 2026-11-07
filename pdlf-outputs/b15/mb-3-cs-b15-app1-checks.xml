@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mb-3-cs-b15-app1-checks" tests="9" failures="0" errors="0" skipped="0">
+  <testcase name="PR-01" classname="pdlf.process">
+    <output>Entry record complete (steps row id 4, entry 03, route application, run app1); Step 14 complete with synthesized=false and its reviewed plan approved (steps row id 7; the Step 14 receipt: CEO review CLEAR, NO UNRESOLVED DECISIONS, BFT Full recorded, 5/5 tests passed). Evidence: this step's section-1 verification; the ledger rows read via the PowerShell bridge.</output>
+  </testcase>
+  <testcase name="DC-01" classname="documents">
+    <output>Every requirement and acceptance criterion the step added is testable. Evidence: design-doc.md §22 rows 17 and 18 are single testable statements each naming its tests (D8); §24 states each rule with its named test or scanner; the Architecture section's decisions (§23.1 transactions, §23.5 webhook pattern, §23.6 upsert rule, §23.7 endpoints) each name the SR/test that proves them; threat-model.md names test IDs per boundary.</output>
+  </testcase>
+  <testcase name="DC-04" classname="documents">
+    <output>test-plan.md gives every critical flow its preconditions, numbered steps with expected results, performance budget (3-second booking gate) and data checks (amount, currency, UTC/timezone), its edge cases and error paths, and the catalogue test IDs it uses; every lifecycle is a state machine with allowed and forbidden transitions (test-plan.md §17). Evidence: docs-local/design/app1/test-plan.md §§1-17; §22 rows 1-18.</output>
+  </testcase>
+  <testcase name="DC-05" classname="documents">
+    <output>access-matrix.yaml lists every server function the architecture names (26, including the notification functions and the named booking/payment/sales/vault functions), every form and settings tab the plan names (88 forms incl. the admin menu, portal, public and auth forms; 14 settings tabs), against every role (Owner, Manager, Admin, Staff, Customer, SignedOut), with readable fields per function and writable fields per role-differing table (8 tables); forms keyed by module path. It parses as YAML (python3 yaml.safe_load). Evidence: docs-local/design/app1/access-matrix.yaml; the parse run recorded in this session.</output>
+  </testcase>
+  <testcase name="DC-06" classname="documents">
+    <output>threat-model.md lists every trust boundary (B1-B12: browser to server, role to role, server to each outside service - gateways, SES/SNS, App 5, R2 - plus sessions, resource exhaustion, business-logic races, secrets, supply chain, the build process), each with its threats, control, owner (Anvil or the application), governing security-global document and test IDs; the multi-tenant guidance is stated as not applying with ST-06 kept as the leakage guard; assumptions to test and the plan of security assessments included. Evidence: docs-local/design/app1/threat-model.md.</output>
+  </testcase>
+  <testcase name="DC-07" classname="documents">
+    <output>The Security Decisions section states the sign-in and second-factor rules (every account holder; Owner FIDO2 only; factor in the last 5 minutes for high-value actions), session periods (30-minute idle; the Owner ends sessions), every secret with its home and maximum age (12 Vault names; encryption_key never rotated; tokens rotated manually with tracked age), the security events logged (activity_log, health_log, error_log with the no-personal-data rule), the limits (rate limits in the table, Vault lockout, bounded searches), every outbound host (exactly section 23.4's hosts; SES never Brevo), and every server package with its review (Sentinel per build step; ST-02; sec-requirements checks). Evidence: design-doc.md §24.</output>
+  </testcase>
+  <testcase name="DC-08" classname="documents">
+    <output>Each of the 14 common aspects names where it is met or its ADR (design-doc.md §7, updated with the section 23 anchors). The conformance checks that apply are listed in test-plan.md §18. Every contradiction between rules was settled at its source by David this step: the webhook ADR's hourly wording (5 minutes decided), SidesheetContent approval, the SES-not-Brevo boundary, the push-notification path, the R5 upsert write-back - all recorded in the review body's ledger and assigned to the post-Step-15 document corrections.</output>
+  </testcase>
+  <testcase name="VISUAL-CHECK" classname="diagrams">
+    <output>David reviewed both delivered diagrams in the Windows browser on 2026-11-07: mb-3-cs-b15-app1-architecture.html and mb-3-cs-b15-app1-data-flow.html display correctly, with no overlapping or cut-off text. The automated visual-check was skipped (Chrome unavailable in WSL); this human review is the visual evidence for both artifacts (architecture: SHA-256 1d9447631ed15ff89e55a2718e139b97cdeec1784b2ba84246341a0afdf9e8cd, 718682 bytes; data-flow: SHA-256 ab16ee85ff560c387587f92dbd0fcb68..., 719405 bytes). Artifacts: pdlf-outputs/b15/mb-3-cs-b15-app1-architecture.html and mb-3-cs-b15-app1-data-flow.html.</output>
+  </testcase>
+</testsuite>
