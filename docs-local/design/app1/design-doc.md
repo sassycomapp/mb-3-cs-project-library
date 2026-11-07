@@ -1011,7 +1011,7 @@ Synthesized from this review's findings; each derives from a specific finding ab
 
 ## Unresolved decisions
 
-None — every finding of this review was answered and applied within the step (R1–R7, D1–D8).
+None — every finding of this review was answered and applied within the step (R1–R7, D1–D10).
 
 ## Completion summary
 
@@ -1036,7 +1036,7 @@ None — every finding of this review was answered and applied within the step (
   | TODOS.md updates       | 0 items proposed (never written       |
   |                        | under PDLF)                           |
   | Unresolved decisions   | 0                                     |
-  | Approval readiness     | PASS (R1–R7, D1–D8)                   |
+  | Approval readiness     | PASS (R1–R7, D1–D10)                   |
   +====================================================================+
 ```
 
@@ -1285,6 +1285,6 @@ NO UNRESOLVED DECISIONS
 
 **OUTSIDE COVERAGE:** declined by the PDLF fixed answer at Step 15; provider none; phase plan-review; no completed external review.
 
-**VERDICT:** Eng review complete — every finding resolved by a recorded decision (R1–R7, D1–D8); the schema amendment is complete in `schema-migration-log.md`; PDLF runs Step 16 (domain modelling) next.
+**VERDICT:** Eng review complete — every finding resolved by a recorded decision (R1–R7, D1–D10); the schema amendment is complete in `schema-migration-log.md`; PDLF runs Step 16 (domain modelling) next.
 
 NO UNRESOLVED DECISIONS
