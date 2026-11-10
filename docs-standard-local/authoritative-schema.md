@@ -1,7 +1,7 @@
 ---
 title: "authoritative-schema"
 doc-id: "mb-8b83e940"
-updated: "2026-11-07"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Authoritative Database Schema
 
@@ -94,7 +94,7 @@ One row: the client's business.
 | `city` | string | |
 | `country` | string | |
 | `postal_code` | string | |
-| `timezone` | string | IANA time zone, e.g. `Africa/Johannesburg` |
+| `timezone` | string | IANA time zone, e.g. `Europe/London` |
 | `system_currency` | string | ISO 4217; set at onboarding; locked once a booking or invoice exists |
 | `app_language` | string | `en` / `fr` / `pt` / `es` / `de` / `it`; default `en`; set in onboarding step 1 (F-25) |
 | `trade` | string | The client's trade, chosen at registration; selects the sample data set |
@@ -196,14 +196,10 @@ One row: payment gateways (F-15). Secret keys are in the Vault.
 
 | Column | Type | Notes |
 |---|---|---|
-| `active_gateway` | string | `stripe` / `paystack` — the card gateway |
 | `test_mode` | bool | Test or live, for the card gateway |
 | `stripe_publishable_key` | string | Public key |
 | `stripe_connected` | bool | |
 | `stripe_connected_at` | datetime | |
-| `paystack_public_key` | string | Public key |
-| `paystack_connected` | bool | |
-| `paystack_connected_at` | datetime | |
 | `paypal_client_id` | string | Public client id |
 | `paypal_test_mode` | bool | Test or live, for PayPal |
 | `paypal_connected` | bool | |
@@ -283,7 +279,7 @@ Every credential, encrypted with `encryption_key` by `vault_service` (F-02).
 | `updated_at` | datetime | |
 | `updated_by` | link → users | |
 
-**Names:** `stripe_secret_key`, `stripe_webhook_secret`, `paystack_secret_key`, `paypal_client_secret`, `paypal_webhook_id`, `aws_access_key_id`, `aws_secret_access_key`, `ses_smtp_password`, `r2_access_key_id`, `r2_secret_access_key`, `app5_bearer_token`, `vault_totp_secret`.
+**Names:** `stripe_secret_key`, `stripe_webhook_secret`, `paypal_client_secret`, `paypal_webhook_id`, `aws_access_key_id`, `aws_secret_access_key`, `ses_smtp_password`, `r2_access_key_id`, `r2_secret_access_key`, `app5_bearer_token`, `vault_totp_secret`.
 
 ---
 
@@ -572,7 +568,7 @@ Every payment and refund (F-15).
 | `order_id` | link → orders | |
 | `customer_package_id` | link → customer_packages | |
 | `contact_id` | link → contacts | |
-| `method` | string | `stripe` / `paystack` / `paypal` / `cash` / `bank_transfer` / `other` |
+| `method` | string | `stripe` / `paypal` / `cash` / `bank_transfer` / `other` |
 | `amount` | number | |
 | `currency` | string | The system currency |
 | `status` | string | `pending` / `succeeded` / `failed` |
@@ -977,7 +973,7 @@ Index of webhook events received. The payloads are in R2.
 
 | Column | Type | Notes |
 |---|---|---|
-| `gateway` | string | `stripe` / `paystack` / `paypal` / `ses` |
+| `gateway` | string | `stripe` / `paypal` / `ses` |
 | `event_id` | string | The sender's event id; an id already present is refused |
 | `event_type` | string | |
 | `r2_key` | string | Where the payload is stored |

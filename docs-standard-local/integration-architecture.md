@@ -16,7 +16,6 @@ Every outside service the application uses, and how it is connected.
 | Service | Used for | Account owner | Credentials kept in |
 |---|---|---|---|
 | Stripe | Card payments, global (F-15) | Client | Client's Vault |
-| Paystack | Card payments, South Africa and Africa (F-15) | Client | Client's Vault |
 | PayPal | Optional second payment method (F-15) | Client | Client's Vault |
 | Amazon SES, SNS and S3 | Every email received and sent: Team Inbox, transactional, marketing and system email (F-18) | Mybizz; one SES tenant per client | Client's Vault (scoped keys); App 5 (account access) |
 | Cloudflare R2 | Backups, history, webhook payloads, old emails, attachments, receipts, exports (F-29) | Client: a free Cloudflare account on the client's own email address; Mybizz is a member with R2 access | Client's Vault |
@@ -34,13 +33,13 @@ Every credential a client instance uses is encrypted in the client's Vault (F-02
 
 ### Gateways
 
-- One card gateway per instance: **Stripe** (global) or **Paystack** (South Africa and Africa; Stripe does not accept South African businesses directly).
-- **PayPal** is an optional second method beside the card gateway, offered only when the system currency is one of PayPal's supported currencies (not ZAR); Settings shows PayPal as unavailable otherwise.
+- The card gateway of every instance is **Stripe**.
+- **PayPal** is an optional second method beside the card gateway, offered only when the system currency is one of PayPal's supported currencies (not ISK); Settings shows PayPal as unavailable otherwise.
 - Configured in Settings → Payment Gateways (Owner only); secret keys are entered in the Vault; each gateway has test and live modes (`payment_config.test_mode`).
 
 ### One payment service
 
-- Client code and other server modules never call a gateway. Every payment operation goes through `server_payments/payment_service`, which selects the gateway module (`stripe_gateway`, `paystack_gateway`, `paypal_gateway`) from `payment_config`.
+- Client code and other server modules never call a gateway. Every payment operation goes through `server_payments/payment_service`, which routes each payment to the gateway module the customer chose (`stripe_gateway` for a card, `paypal_gateway` for PayPal).
 - Switching gateways does not change services, bookings or invoices.
 - Money logic runs in server modules only; card data never touches the instance (PCI DSS, F-30).
 - All payments go to the business's own gateway account. There are no per-provider payment accounts.
@@ -73,7 +72,7 @@ PayPal's standard checkout, as the [[[default:specifications-global/spec-integra
 ### Recording payments and refunds
 
 - Every payment and refund is a row in `payments`: by gateway, or recorded manually (cash, bank transfer).
-- The gateway's fee for each payment is recorded on its row (`gateway_fee`), from the gateway's own response: Stripe's balance transaction, Paystack's `fees`, PayPal's `paypal_fee`. The accounts show the gross payment as income and the fee as an expense, and the accounting export carries both (F-28).
+- The gateway's fee for each payment is recorded on its row (`gateway_fee`), from the gateway's own response: Stripe's balance transaction, PayPal's `paypal_fee`. The accounts show the gross payment as income and the fee as an expense, and the accounting export carries both (F-28).
 - Refunds are full or partial, through the original gateway or recorded manually; payments and refunds feed the accounts reports and export (F-28).
 
 ### Currency
@@ -129,7 +128,7 @@ Every email of a client instance, received and sent, goes through **Amazon SES**
 | Backup of every data table | `backups/daily/`, `backups/weekly/` | Daily, by `backup_tasks`; also before every release and every schema migration. The last 7 daily and the last 4 weekly backups are kept; the release and migration backups are kept for 30 days | nothing |
 | History records | `history/{table}/` | When the history is created | current state only |
 | Audit entries older than 30 days | `audit/{year}/{month}/` | Nightly, by `audit_archive_tasks` | the last 30 days of `activity_log` |
-| Webhook payloads (Stripe, Paystack, PayPal, SES) | `webhooks/{service}/{year}/{month}/` | On receipt | `webhook_log` row: gateway, event id, type, received time, processed flag, error, R2 key |
+| Webhook payloads (Stripe, PayPal, SES) | `webhooks/{service}/{year}/{month}/` | On receipt | `webhook_log` row: gateway, event id, type, received time, processed flag, error, R2 key |
 | Email bodies older than 90 days | `email/messages/{address}/{year}/{month}/` | Nightly, by `inbound_tasks` | the `email_messages` row as an index |
 | Email attachments | `email/attachments/` | On receipt or send | their R2 keys in `email_messages.attachments` |
 | Expense receipts | `expenses/receipts/` | On save | `expenses.receipt_r2_key` |

@@ -132,14 +132,13 @@ Work billed by the hour is recorded with time tracking (F-14) and invoiced from 
 
 ### 4.4 Geography
 
-Mybizz CS is global from launch:
-- Stripe for global payment processing, and PayPal for customers who prefer it
-- Paystack for South African and African clients (Stripe does not accept South African businesses directly)
+Mybizz CS serves businesses in the United States, Canada, the United Kingdom, the European Union, the European Economic Area and Switzerland:
+- Stripe for card payments, and PayPal for customers who prefer it
 - Two currencies: a system currency for all accounting, and an optional display currency per service
 - UTC storage with display in each user's time zone
-- Six app languages: English, French, Portuguese, Spanish, German and Italian, chosen by each client; English at launch, the other languages added one at a time
+- Five app languages: English, French, German, Spanish and Italian, chosen by each client; English at launch, the other languages added one at a time
 
-South Africa is the founder's home market and the primary focus for direct, personal client relationships. International clients are acquired through content and digital marketing.
+The United Kingdom is Mybizz's home market and the primary focus for direct, personal client relationships. Clients in the other markets are acquired through content and digital marketing.
 
 ### 4.5 The needs Mybizz CS meets
 
@@ -170,7 +169,6 @@ The first five are felt by every service business owner. The rest make Mybizz CS
 - **Digital service businesses are normal.** The share of service businesses operating online rose sharply after 2020 and has not fallen back.
 - **AI is expected.** Small business owners are looking for AI-powered tools, and Mybizz CS includes AI and voice in the price.
 - **Marketplace fatigue.** A growing group of service businesses want to own their customer relationships instead of paying commissions to a marketplace.
-- **Africa's digital service economy is growing.** Professional services and wellness businesses in South Africa, Nigeria, Kenya and Ghana are moving online, and many global tools do not serve them because of payment gaps.
 
 ---
 
@@ -217,10 +215,9 @@ That total does not include a team email inbox, voice access, backups, legal pag
 
 | | HoneyBook Premium | GoHighLevel Starter | **Mybizz CS** |
 |---|---|---|---|
-| Price per month | $129, plus a website at $23 | $97, plus $97 for unlimited AI | **$99** |
+| Price per month | $129, plus a website at $23 | $97, plus $97 for unlimited AI | **$99 (£79 in the UK)** |
 | Same price at any team size | no — 10 people maximum | yes | **yes** |
 | Payments through any gateway, no processor markup | no — 2.9% + $0.25 through HoneyBook | — | **yes** |
-| Paystack built in, for Africa | — | — | **yes** |
 | No usage billing (SMS, calls, AI) | — | no — billed per use | **yes** |
 | Voice assistant and spoken morning briefing | no | no | **yes** |
 | Backups in the client's own storage | no | no | **yes** |
@@ -232,7 +229,7 @@ That total does not include a team email inbox, voice access, backups, legal pag
 
 | | Booksy | Vagaro | Mindbody | **Mybizz CS** |
 |---|---|---|---|---|
-| Base price | $29.99/mo | about $30/mo | $99–$699/mo | **$99/mo** |
+| Base price | $29.99/mo | about $30/mo | $99–$699/mo | **$99/mo (£79 in the UK)** |
 | Per-staff fee | +$20/person | +$10/calendar | included | **included** |
 | Processing fee | 2.49–2.69% | 2.2–3.5% | 3.5% | **gateway rate only** |
 | Marketplace commission | up to $49.99/mo (Boost) | none | 20% new customer | **none** |
@@ -258,10 +255,6 @@ Every client's data is also backed up to the client's own Cloudflare R2 bucket, 
 
 Marketplace platforms do one thing: booking and discovery. Businesses using them still set up and pay for a website, a blog, landing pages, a CRM, email addresses and an inbox, email marketing, invoicing and accounts separately. Mybizz CS replaces all of those tools — all in one platform, all working together, all included in the price.
 
-### 6.5 The Africa advantage
-
-Stripe does not accept South African businesses directly, and Booksy and Vagaro were not built for the African market. Mybizz CS integrates Paystack natively — customers pay in Rands and the money lands in the business's bank account, with no workarounds.
-
 ---
 
 ## 7. The Platform — Feature Set
@@ -285,7 +278,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - The import brings in contacts from HubSpot, Mailchimp, Acuity or any CSV file, with ready-made column matching
 - AI writes the first website text from the business profile
 - Setup can be left and resumed without losing progress; onboarding and Settings link to each other
-- Assisted setup, where Mybizz configures the instance, costs $200 once-off
+- Assisted setup, where Mybizz configures the instance, costs one month's subscription, once
 
 **F-04 Dashboard and analytics**
 - Revenue, bookings and customer totals with period comparison, metric cards, trend charts and an activity feed
@@ -354,7 +347,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - Tax set by each client — rate, label (VAT, GST, Sales Tax) and registration number — with no tax by default
 - Invoice lifecycle: draft, sent, paid, overdue, cancelled; automatic sequential numbering
 - PDF invoices, email delivery, payment recording, refunds
-- Stripe (global) or Paystack (Africa) as the card gateway, plus PayPal as an option; test and live modes; one payment service behind all gateways
+- Stripe as the card gateway, plus PayPal as an option; test and live modes; one payment service behind all gateways
 
 **F-16 Dual currency**
 - A system currency set at onboarding, used for all accounting and fixed once the first transaction exists
@@ -434,7 +427,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 **F-25 Ease of use, in-app help and language**
 - Every workflow follows the natural order of the task
 - Every feature has a plain-language tooltip that opens a short help video in a pop-up; tooltips are switchable on or off
-- The client chooses the app's language: English, French, Portuguese, Spanish, German or Italian; screens, emails and help videos follow that choice; English at launch, the other languages added one at a time
+- The client chooses the app's language: English, French, German, Spanish or Italian; screens, emails and help videos follow that choice; English at launch, the other languages added one at a time
 
 **F-26 AI assistance**
 - One AI helper on every relevant page: a button opens a floating window, so the user never leaves the page; the helper preselects the assist that fits the page
@@ -461,7 +454,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 **F-29 Data, backups and history**
 - Every client's backups go to the client's own Cloudflare R2 bucket: 7 daily and 4 weekly backups kept
 - The bucket keeps each kind of record in its own folder: backups, history, the activity log, payment and email service messages, emails, attachments, receipts and exports
-- Webhook responses (the messages Stripe, Paystack, PayPal and Amazon SES send back) go to the R2 bucket
+- Webhook responses (the messages Stripe, PayPal and Amazon SES send back) go to the R2 bucket
 - History is not kept in the app's data tables; history goes to the R2 bucket
 - The last 30 days of the audit trail stay in the app; older entries go to the R2 bucket; emails older than 90 days and every attachment go to the R2 bucket
 - The client can view history from the R2 bucket in Settings, and Mybizz restores data from the bucket on request
@@ -469,14 +462,14 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - On leaving, the client receives a full export and the decrypted Vault in the client's own R2 bucket
 
 **F-30 Security and compliance**
-- POPIA, GDPR and PCI DSS alignment
+- UK GDPR, the client's own privacy law and PCI DSS alignment
 - Server-side role enforcement, rate limiting, encrypted credentials, full audit trail
 - Complete data isolation between clients, built into the structure of the platform
 
 **F-31 Design system**
 - Material Design 3 with refinements: softer shadows, tighter corners, stronger headings, subtle dividers, distinct surfaces, consistent hover and press states
 - Two contexts from one design system: the management interface (clear, compact, fast) and the public website (warm, generous, trustworthy)
-- Four brand palettes chosen at onboarding and changeable at any time: Professional Blue, Warm Coral, Calm Teal, Sophisticated Purple
+- Eight brand palettes chosen at onboarding and changeable at any time: Default, Professional Blue, Warm Coral, Calm Teal, Sophisticated Purple, Sky Blue, Forest Green, Desert Rose
 - Dark mode on every screen, following the device's light or dark setting
 - Typography: Roboto on the M3 type scale; fully responsive on every screen size
 
@@ -516,11 +509,11 @@ Every new client starts with three months of sample data for a business in the c
 
 ### 9.1 Price
 
-**$99 per client per month.** One price for every client. Unlimited staff are included. There is no commission on bookings or payments, and no add-on: AI, voice, email, accounts and hosting are all in the price.
+**£79 per client per month**, before tax, charged in the client's own currency at a fixed price: £79, $99, C$135, €89 or CHF 89 ([[[default:adr-global/adr-tiers-model|Tiers Model]]](C:/dev/project-library-global/adr-global/adr-tiers-model.md)). One price for every client. Unlimited staff are included. There is no commission on bookings or payments, and no add-on: AI, voice, email, accounts and hosting are all in the price.
 
 ### 9.2 Billing model
 
-Billing is monthly, in advance, month to month, with no contract. Mybizz invoices each client at the start of each month. A client can leave at any time, effective at the end of the paid month, taking the client's R2 bucket with every backup, email and export in it.
+Billing is monthly, in advance, month to month, with no contract. Paddle, Mybizz's Merchant of Record, bills each client at the start of each month and issues its tax invoice ([[[default:specifications-global/spec-client-billing|Client Billing]]](C:/dev/project-library-global/specifications-global/spec-client-billing.md)). A client can leave at any time, effective at the end of the paid month, taking the client's R2 bucket with every backup, email and export in it.
 
 There is no free trial and no money-back period. A prospective client sees the whole product before paying in the two demo apps (F-36): `demo.mybizz.live`, a working business with sample data, and `try.mybizz.live`, an empty Mybizz CS for trying setup.
 
@@ -531,14 +524,14 @@ There is no free trial and no money-back period. A prospective client sees the w
 
 ### 9.4 Assisted setup
 
-The onboarding wizard (F-03) takes a client from registration to a working business without help, with a help video on every step. A client who wants Mybizz to do the setup pays **$200 once-off** for assisted setup.
+The onboarding wizard (F-03) takes a client from registration to a working business without help, with a help video on every step. A client who wants Mybizz to do the setup pays **one month's subscription, once,** for assisted setup.
 
 ### 9.5 Costs outside the monthly price
 
 New costs are added to this list as they are identified.
 
 **Paid by the client:**
-- **Stripe, Paystack and PayPal:** the connection is free; the client pays the provider's own fees on each payment. Mybizz adds no markup.
+- **Stripe and PayPal:** the connection is free; the client pays the provider's own fees on each payment. Mybizz adds no markup.
 - **Domain name:** the client registers and owns the client's own domain name.
 - **Cloudflare R2:** the client's backups and history are kept in a free Cloudflare account in the client's own name, set up at registration. Cloudflare asks for a payment method; storage above the free 10 GB a month is billed by Cloudflare to the client, at $0.015 per GB a month.
 
@@ -552,11 +545,11 @@ New costs are added to this list as they are identified.
 
 | | Monthly | Yearly |
 |---|---|---|
-| Revenue at capacity (100 clients × $99) | $9,900 | $118,800 |
-| Hosting at 100 clients (Client Instance Hosting section 11) | $1,796 | $21,552 |
-| **Gross margin before other costs** | **$8,104** | **$97,248** |
+| Revenue at capacity (100 clients × £79) | £7,900 | £94,800 |
+| Hosting at 100 clients (Client Instance Hosting section 11) | £1,347 | £16,164 |
+| **Gross margin before other costs** | **£6,553** | **£78,636** |
 
-Email and AI cost a few dollars per client per month and are recorded per client in the Mybizz management app (F-34).
+Email and AI cost a few pounds per client per month and are recorded per client in the Mybizz management app (F-34).
 
 ### 9.7 Domain
 
@@ -571,7 +564,7 @@ Every client's application instance runs on the client's own domain, and every e
 Mybizz CS launches with no marketing budget. The strategy must therefore be:
 - Founder-led and personal
 - Built on authentic story rather than paid reach
-- South Africa-first, then international by content
+- United Kingdom first, then Mybizz's other markets by content
 
 This is not a weakness. A founder who lived the problem, built the solution, and can speak about both honestly is a more credible voice than any ad campaign.
 
@@ -583,7 +576,7 @@ The goal of Phase 1 is not revenue — it is proof. Ten real businesses using a 
 - Personal network first: identify 10 consulting or service business owners in the founder's direct network or warm referrals
 - WhatsApp and direct outreach: brief, honest, personal — "I built this, you are exactly who I built it for, I want you to be one of ten founding members"
 - LinkedIn: the founder's own profile, sharing the story of building Mybizz — not promotional content but honest building-in-public posts
-- Local South African business communities: Facebook groups, local networking events, BNI chapters, professional associations
+- Local United Kingdom business communities: Facebook groups, local networking events, BNI chapters, professional associations
 
 **What to offer:** Mybizz CS at the standard price, plus genuine involvement in shaping the product. The first clients' feedback comes in through the Help channel (F-32).
 
@@ -596,7 +589,7 @@ With 10 clients using the platform, the narrative shifts from "founding member" 
 **Tactics:**
 - Case studies from the first clients: one or two detailed write-ups of how a real business uses Mybizz CS (with client permission)
 - LinkedIn content: founder posts sharing lessons, client results and product updates — consistent, weekly
-- SEO content: blog posts targeting high-intent searches such as "how to set up online booking for a physiotherapy practice" or "best booking system for personal trainers South Africa"
+- SEO content: blog posts targeting high-intent searches such as "how to set up online booking for a physiotherapy practice" or "best booking system for personal trainers UK"
 - Referral programme: a client who refers a paying client receives one month free
 - Industry-specific outreach: identify professional associations and communities for target industries (consulting, beauty, wellness, trades) and engage authentically — not as a sponsor, but as a member
 
@@ -605,16 +598,14 @@ With 10 clients using the platform, the narrative shifts from "founding member" 
 By this stage, Mybizz CS has 50 real clients, documented case studies, visible reviews and an established content presence. Phase 3 introduces paid acquisition supported by organic proof.
 
 **Tactics:**
-- Targeted LinkedIn and Facebook advertising to consulting and service business owners in South Africa and internationally
+- Targeted LinkedIn and Facebook advertising to consulting and service business owners in the United Kingdom and Mybizz's other markets
 - Google Search advertising targeting booking software and business management keywords
 - Partnership outreach: complementary providers (accountants, business coaches, web designers) who serve the same businesses and can refer
 - Content marketing: continued SEO blog content now supported by a track record
 
-### 10.5 International strategy
+### 10.5 Markets beyond the United Kingdom
 
-International clients are acquired primarily through content and search. A consulting or service business owner in the UK, Australia or the US searching for "complete booking and website platform for consultants" should find Mybizz CS. SEO content targeting these search terms, combined with Stripe and PayPal for global payments, makes international acquisition possible without a local presence.
-
-The Paystack integration is a specific advantage in African markets where Stripe does not accept businesses directly. This positions Mybizz CS as the only complete platform built for African consulting and service businesses.
+Clients in the United States, Canada, the European Union, the European Economic Area and Switzerland are acquired primarily through content and search. A consulting or service business owner searching for "complete booking and website platform for consultants" should find Mybizz CS. SEO content targeting these search terms, in the five app languages, combined with Stripe and PayPal and a fixed price in each market's own currency, makes acquisition possible without a local presence.
 
 ---
 
@@ -648,7 +639,7 @@ That story — "I built what I needed" — is the brand's most durable asset. It
 
 ### 11.5 Visual identity
 
-The visual identity is the design system in F-31: the Anvil Material 3 theme with refinements, two contexts, four brand palettes, dark mode following the device, and Roboto typography.
+The visual identity is the design system in F-31: the Anvil Material 3 theme with refinements, two contexts, eight brand palettes, dark mode following the device, and Roboto typography. Mybizz's own brand colour is Professional Blue.
 
 ---
 
@@ -672,16 +663,13 @@ The visual identity is the design system in F-31: the Anvil Material 3 theme wit
 *What happens to your customers when you leave? On marketplace platforms, they stay behind. On Mybizz CS your customer list is yours on day one and yours on the last day. Take it anywhere. No one else has a copy.*
 
 **On pricing:**
-*A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over $300 a month — and every staff member adds more. Mybizz CS is $99 a month for all of it and more, for your whole team, with email, accounts, AI and voice included. No contract, no add-ons.*
+*A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month — and every staff member adds more. Mybizz CS is £79 a month for all of it and more, for your whole team, with email, accounts, AI and voice included. No contract, no add-ons.*
 
 **On simplicity:**
 *Set up your business once. Website, booking, payments, CRM, sales, email, invoicing, accounts — all connected, all working, all in one place. Then run your business.*
 
 **On voice:**
 *Ask your business a question and hear the answer. "What is my schedule for tomorrow?" "Which invoices are outstanding?" From your phone, wherever you are.*
-
-**On Africa:**
-*Stripe does not accept South African businesses directly. Mybizz CS integrates Paystack natively. Your customers pay in Rands. Your money arrives in your account. No workarounds.*
 
 **The founder message:**
 *I built this because I needed it. I could not find a single platform that did everything a business needs without costing a fortune and requiring a technical degree to set up. So I built one. That is Mybizz.*
@@ -703,7 +691,7 @@ Clients reach Mybizz through the Help button in their app (F-32). A client's mes
 | Option | Onboarding | Cost |
 |---|---|---|
 | Self-setup | The client registers and sets up their own instance through the onboarding wizard (F-03), with a help video on every step. Registration creates the client's reference number and records the client in the Mybizz management app. | Included |
-| Assisted setup | Mybizz configures the client's instance on their behalf | $200 (one-time) |
+| Assisted setup | Mybizz configures the client's instance on their behalf | One month's subscription (one-time) |
 
 Onboarding is streamlined and self-serving: the wizard takes a client from registration to a working business without help. There is no compulsory setup fee. Assisted setup is there for clients who want it.
 
@@ -729,7 +717,7 @@ The following are not part of Mybizz CS:
 |---|---|
 | First clients onboarded | 10 |
 | Total clients at capacity | 100 |
-| Annual recurring revenue at capacity | $118,800 |
+| Annual recurring revenue at capacity | £94,800 |
 | Client retention (year 1 to year 2) | >90% |
 | Average onboarding-to-live time | <7 days |
 | Support tickets per client per month | <2 |
@@ -742,7 +730,7 @@ The following are not part of Mybizz CS:
 
 **Early churn.** A client who does not see value in the first weeks leaves quietly. Mybizz CS answers with the at-risk alerts (F-34), a streamlined self-serving setup with a help video on every step (F-03), sample data that shows every report working from the first day (section 8), and the demo apps that show the product before the client pays (F-36).
 
-**Competitors copying.** Features can be copied. Mybizz CS's defence is what cannot be copied easily: the Africa and Paystack positioning, founder-direct support, and an ownership architecture that marketplace platforms cannot offer.
+**Competitors copying.** Features can be copied. Mybizz CS's defence is what cannot be copied easily: founder-direct support, one price for the whole team in each market's own currency, and an ownership architecture that marketplace platforms cannot offer.
 
 **Cost per client.** Hosting, AI and voice have a real cost per client. The Mybizz management app records each client's hosting, email and AI usage (F-33, F-34), each client has its own container and database, and the cost per client is reviewed every month.
 

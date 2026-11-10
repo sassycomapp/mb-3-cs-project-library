@@ -360,8 +360,8 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Lifecycle: draft → sent → paid; overdue set by a nightly task, with a reminder email to the customer; cancelled. Sequential numbering per instance (`INV-{year}-{sequence}`).
 - Payments received outside the gateways (cash, bank transfer) are recorded manually; refunds are full or partial, through the original gateway or recorded manually.
 - PDF generation, email delivery, payment recording, refunds.
-- Gateways: one card gateway per instance (Stripe or Paystack), plus PayPal as an option. One gateway-agnostic payment service (`server_payments/`) sits behind all three; switching gateways does not change services or bookings.
-- PayPal: offered only when the system currency is one PayPal supports (not ZAR). PayPal's buttons (`PayPalButtonComponent`) take the buyer's approval; the server creates and captures the order through PayPal's Orders API with amounts from the database. Detail: `integration-architecture.md` (PayPal).
+- Gateways: Stripe as the card gateway, plus PayPal as an option. One gateway-agnostic payment service (`server_payments/`) sits behind all three; switching gateways does not change services or bookings.
+- PayPal: offered only when the system currency is one PayPal supports (not ISK). PayPal's buttons (`PayPalButtonComponent`) take the buyer's approval; the server creates and captures the order through PayPal's Orders API with amounts from the database. Detail: `integration-architecture.md` (PayPal).
 - Every payment and refund, by any gateway or by hand, is a `payments` row; the gateway's fee is recorded on it (`gateway_fee`) and shown in the accounts as an expense (F-28).
 - Gateway webhooks are received by HTTP endpoints, verified, applied, and their payloads written to R2 (F-29).
 - Test and live modes per gateway. Money logic runs in server modules only.
@@ -439,7 +439,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - App language: `business_profile.app_language` (`en` / `fr` / `pt` / `es` / `de` / `it`). English is complete at launch; a language is offered once its translation is complete and checked.
 - Translation follows [[[default:specifications-global/spec-translation|Translation]]](C:/dev/project-library-global/specifications-global/spec-translation.md):
   - Every fixed text has a phrase key. The Designer holds the key; each form calls `translate_form(self)` after `init_components`, and code uses `t(key, **values)`. Server functions return phrase keys with values, never finished text.
-  - One phrase file per language (`en.py`, `fr.py`, `pt.py`, `es.py`, `de.py`, `it.py`); Portuguese is Portugal's, Spanish is Spain's. Plural forms by each language's rule; dates, numbers and money through `formats.py`, on browser and server alike.
+  - One phrase file per language (`en.py`, `fr.py`, `de.py`, `es.py`, `it.py`); Spanish is Spain's. Plural forms by each language's rule; dates, numbers and money through `formats.py`, on browser and server alike.
   - System emails, invoice, quote and statement PDFs, sample data and the public website's fixed text are in the app language. Client-edited email templates are stored per language (`email_templates.language`).
   - Anvil's Users emails (password reset, email confirmation, two-factor reset) carry all six languages, English first, set once in App 3.
   - Stripe Elements and PayPal's buttons are given the app language as `locale`.
@@ -479,7 +479,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Each client has one Cloudflare R2 bucket, in a free Cloudflare account in the client's own name; Mybizz reaches it as an invited member. The bucket's access keys are held in the client's Vault. Detail: `integration-architecture.md` (Client Storage).
 - Folders of the bucket: `backups/daily/`, `backups/weekly/`, `history/{table}/`, `audit/{year}/{month}/`, `webhooks/{service}/{year}/{month}/`, `email/messages/{address}/{year}/{month}/`, `email/attachments/`, `expenses/receipts/`, `exports/`.
 - Backups: scheduled background task exports every data table to the bucket daily; the last 7 daily and 4 weekly backups are kept.
-- Webhook payloads (Stripe, Paystack, PayPal, Amazon SES) are written to the bucket on receipt; the data tables keep only the current state they produce.
+- Webhook payloads (Stripe, PayPal, Amazon SES) are written to the bucket on receipt; the data tables keep only the current state they produce.
 - Emails: bodies older than 90 days move to the bucket nightly and the row stays as an index; attachments are always in the bucket.
 - Exit: Mybizz writes the full export, `encryption_key` and the decrypted Vault into the bucket, then leaves the client's Cloudflare account.
 - History is not kept in the data tables; history records go to the bucket.
@@ -489,7 +489,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 
 ### F-30 Security and compliance
 - Server-side enforcement of every role check; rate limiting; encrypted credentials (F-02); audit trail (F-01, F-29); data isolation (section 3).
-- POPIA, GDPR and PCI DSS: [[[default:specifications-global/spec-regulatory-compliance-baseline|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md). Card data never touches the instance; gateways handle it.
+- UK GDPR, the client's own privacy law and PCI DSS: [[[default:specifications-global/spec-regulatory-compliance-baseline|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md). Card data never touches the instance; gateways handle it.
 
 ### F-31 Design system
 - The Anvil Material 3 theme (dependency ID `4UK6WHQ6UX7AKELK`) with the project deviations in `DESIGN.md`.
@@ -541,7 +541,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 | Authentication | Anvil Users service | Role checks by custom decorators |
 | Anvil Secrets | `encryption_key` only | Used only by `vault_service.py` |
 | Storage, backups, history | Cloudflare R2 | One bucket per client |
-| Payments | Stripe, Paystack, PayPal | One gateway-agnostic service |
+| Payments | Stripe, PayPal | One gateway-agnostic service |
 | Email | Amazon SES (sending, receiving, tracking) | Mybizz's AWS account, one tenant per client; each container's SMTP settings hold the SES SMTP endpoint |
 | AI text | Groq (provider configurable in App 5) | Called through App 5 |
 | Speech | Groq Whisper (speech-to-text); browser SpeechSynthesis and Groq TTS (text-to-speech) | Groq called through App 5 |
@@ -571,11 +571,11 @@ Each feature below states its packages, data, rules and links. Tables and fields
 | [[[default:specifications-global/spec-five-app-architecture-model\|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md) | Five-app model (Mybizz-wide) |
 | [[[default:specifications-global/spec-client-activation-runbook\|Client Instance Activation Runbook]]](C:/dev/project-library-global/specifications-global/spec-client-activation-runbook.md) | Provisioning and activation |
 | [[[default:specifications-global/spec-api-specification\|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md) | Webhook and management endpoints |
-| [[[default:specifications-global/spec-integration\|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) | Stripe, Paystack, PayPal patterns |
+| [[[default:specifications-global/spec-integration\|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) | Stripe and PayPal patterns |
 | [[[default:specifications-global/spec-security-architecture\|Security & Secrets Architecture]]](C:/dev/project-library-global/specifications-global/spec-security-architecture.md) | Role limits, token security |
 | [[[default:specifications-global/spec-security\|Security Specification]]](C:/dev/project-library-global/specifications-global/spec-security.md) | Security patterns, rate limiting |
 | [[[default:specifications-global/spec-vault-system\|The Vault System]]](C:/dev/project-library-global/specifications-global/spec-vault-system.md) | Vault architecture |
-| [[[default:specifications-global/spec-regulatory-compliance-baseline\|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md) | POPIA, GDPR, PCI DSS |
+| [[[default:specifications-global/spec-regulatory-compliance-baseline\|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md) | UK GDPR, the client's own privacy law, PCI DSS |
 | `spec-nomenclature.md` | Naming conventions |
 
 ---

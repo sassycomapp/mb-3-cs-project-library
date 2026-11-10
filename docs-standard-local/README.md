@@ -26,7 +26,7 @@ The standard documents every Mybizz project keeps, canonical to this project. Ea
 | `capacity-and-plan-tiers.md` | A client's use against its container's and cluster's limits |
 | `data-retention-schedule.md` | How long each kind of data is kept |
 | `backup-and-recovery.md` | Backups to the client's buckets, and restoring them |
-| `incident-response-plan.md` | Handling a security incident, and the POPIA notices it requires |
+| `incident-response-plan.md` | Handling a security incident, and the breach notices it requires |
 | `onboarding-implementation-plan.md` | Setting up a new client |
 | `client-exit-handover.md` | What a leaving client receives |
 | `deployment-procedures.md` | Releasing from App 1 through App 2, and rolling back |

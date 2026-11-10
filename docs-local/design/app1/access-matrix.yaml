@@ -186,7 +186,7 @@ server_functions:
   # — http endpoints (Bearer or signature; not role-decorated) —
   # /management/{health,status,suspend,unsuspend,push-notification,push-update-alert}:
   #     Bearer token, HTTP 403 without a valid token (sec-management-service-authentication)
-  # /_/api/webhooks/{stripe,paystack,paypal}: gateway signature, HTTP 400 on failure
+  # /_/api/webhooks/{stripe,paypal}: gateway signature, HTTP 400 on failure
   # /_/api/email/{inbound,events}: SNS signature + own-topic confirmation; /unsubscribe: signed link
   # /_/api/blog-image/{slug}: published-post featured image only, else 404
 

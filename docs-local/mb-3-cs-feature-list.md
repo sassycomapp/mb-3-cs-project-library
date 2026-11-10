@@ -9,7 +9,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 
 ## 1. Price and terms
 
-- $99 a month, one flat price.
+- £79 a month, one flat price, charged in the client's own currency: £79, $99, C$135, €89 or CHF 89.
 - Unlimited staff at no extra cost.
 - Month-to-month, with no contract; cancel at any time, effective at the end of the paid month.
 - No add-ons: AI, voice, email, accounts and hosting are all included.
@@ -22,7 +22,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 - Try app (`try.mybizz.live`): an empty Mybizz for exploring setup.
 - Both apps reset every night, so visitors can change or break anything.
 - Demo emails are really sent, and every one goes to the visitor's own email address, so visitors see exactly what their customers would receive.
-- Payments run in the gateways' test mode (Stripe, Paystack and PayPal), so visitors pay with a test card and watch the whole flow without any real money moving.
+- Payments run in the gateways' test mode (Stripe and PayPal), so visitors pay with a test card and watch the whole flow without any real money moving.
 
 ## 3. Getting started
 
@@ -40,7 +40,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 - The client's Cloudflare R2 storage is connected automatically during registration.
 - AI writes the first website text from the business profile.
 - Every step of setup has a short help video, opened from its tooltip in a pop-up, so the client sets everything up without help.
-- Assisted setup, where Mybizz configures everything, costs $200 once-off.
+- Assisted setup, where Mybizz configures everything, costs one month's subscription, once.
 
 ## 4. Team, roles and access
 
@@ -116,7 +116,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 - Tax rate, label and registration number set by the client.
 - PDF invoices, sent by email.
 - Payment recording and refunds.
-- Gateways: Stripe, Paystack and PayPal, each with test and live modes.
+- Gateways: Stripe for cards and PayPal, each with test and live modes.
 - A system currency for accounting, plus an optional display currency per service.
 
 ## 13. CRM and contacts
@@ -237,7 +237,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 - The Vault: an encrypted store for every credential. Each view needs an authenticator-app code, and the owner is emailed on every access.
 - Full audit trail of every significant action.
 - Each client is in its own app with its own database, completely separate from every other client.
-- Aligned with POPIA, GDPR and PCI DSS.
+- Aligned with the UK GDPR, the client's own privacy law and PCI DSS.
 
 ## 26. Design and ease of use
 
@@ -246,7 +246,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 - Dark mode on every screen.
 - Works on every screen size.
 - Every feature has a short help video, opened from its tooltip in a pop-up, shown in the language the client chose for the app.
-- The client chooses the app's language: English, French, Portuguese, Spanish, German or Italian. Screens, emails and help videos all follow that choice. English is available at launch, and the other languages follow one at a time.
+- The client chooses the app's language: English, French, German, Spanish or Italian. Screens, emails and help videos all follow that choice. English is available at launch, and the other languages follow one at a time.
 
 ## 27. Hosting and updates
 

@@ -1,7 +1,7 @@
 ---
 title: "scaffold-spec"
 doc-id: "mb-be462593"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Scaffold Specification
 
@@ -250,7 +250,7 @@ server_code/
 ├── server_orders/        order_service
 ├── server_packages/      package_service, package_tasks
 ├── server_time/          time_entry_service
-├── server_payments/      payment_service, stripe_gateway, paystack_gateway, paypal_gateway,
+├── server_payments/      payment_service, stripe_gateway, paypal_gateway,
 │                         invoice_service, invoice_pdf, refund_service, webhook_handlers, webhook_tasks, invoice_tasks
 ├── server_customers/     contact_service, company_service, segment_service, contact_import_export
 ├── server_marketing/     campaign_service, broadcast_service, lead_capture_service, landing_page_service,

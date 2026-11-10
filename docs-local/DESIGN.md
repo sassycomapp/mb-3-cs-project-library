@@ -1,7 +1,7 @@
 ---
 title: "DESIGN"
 doc-id: "mb-190df6bf"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — DESIGN
 
@@ -457,7 +457,7 @@ This section defines the primary implementation-facing forms and pages in the My
 | System Currency | Currency display (read-only, locked after first transaction) | Owner |
 | Display Currency | Optional per-service display currency | Owner, Manager |
 | Legal Acknowledgement | Read-only acknowledgement history | Owner |
-| Payment Gateways | Card gateway (Stripe or Paystack), optional PayPal, test/live mode (secret keys in the Vault) | Owner |
+| Payment Gateways | Card gateway (Stripe), optional PayPal, test/live mode (secret keys in the Vault) | Owner |
 | Invoicing | Default payment terms, tax rate and tax label, tax registration number, invoice numbering, default quote validity | Owner |
 | Users and Permissions | Link to UserManagementForm | Owner |
 | Email | EmailSettingsForm: addresses, desks, members, signatures, auto-replies, default sender | Owner, Manager |
@@ -534,13 +534,13 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### PaymentGatewayForm
 
-**Purpose:** Configure the card gateway (Stripe or Paystack) and the optional PayPal gateway (F-15).
+**Purpose:** Configure the card gateway (Stripe) and the optional PayPal gateway (F-15).
 **Architecture:** Standalone form opened from Settings → Payment Gateways. One active card gateway per client instance ([[[default:adr-global/adr-payment-gateway-mutability|Payment Gateway Mutability]]](C:/dev/project-library-global/adr-global/adr-payment-gateway-mutability.md) ADR); PayPal can be enabled alongside it. Publishable keys are stored in `payment_config`; secret keys only in the Vault.
 
-**Schema fields (`payment_config`):** `active_gateway`, `stripe_publishable_key`, `stripe_connected`, `stripe_connected_at`, `paystack_connected`, `paystack_connected_at`, `paypal_enabled`, `paypal_connected_at`, `test_mode`, `configured_at`.
+**Schema fields (`payment_config`):** `stripe_publishable_key`, `stripe_connected`, `stripe_connected_at`, `paypal_enabled`, `paypal_connected_at`, `test_mode`, `configured_at`.
 
 **Key design rules:**
-- Card gateway selector with Stripe and Paystack options (radio buttons or cards).
+- Stripe connection card: publishable key, connection status and test/live mode.
 - PayPal switch with its own connection status.
 - Test Mode switch for sandbox and live keys.
 - Publishable key input — safe to expose in client-side code.
@@ -934,7 +934,7 @@ JavaScript stays minimal and is called through `anvil.js` (never `eval`). Approv
 
 ### Text and Language
 
-Every piece of screen text comes from a phrase key in `shared/translations/` (F-25, [[[default:specifications-global/spec-translation|Translation]]](C:/dev/project-library-global/specifications-global/spec-translation.md)); the Designer holds the key, never the words. Layouts allow for text up to 40% longer than the English, because French, Portuguese, Spanish, German and Italian run longer: buttons and labels wrap or grow, never cut text off.
+Every piece of screen text comes from a phrase key in `shared/translations/` (F-25, [[[default:specifications-global/spec-translation|Translation]]](C:/dev/project-library-global/specifications-global/spec-translation.md)); the Designer holds the key, never the words. Layouts allow for text up to 40% longer than the English, because French, German, Spanish and Italian run longer: buttons and labels wrap or grow, never cut text off.
 
 ### Storage Guidance
 
@@ -994,7 +994,7 @@ Calculation:
 - Tax = subtotal × the tax rate at the moment the invoice is issued, stored on the invoice as `tax_rate` and `tax_amount`
 - `invoice.total_amount` = subtotal + tax
 
-When the tax rate is 0, the invoice shows no tax line. A client registered for VAT in South Africa sets 15% and label VAT.
+When the tax rate is 0, the invoice shows no tax line. A client registered for VAT in the United Kingdom sets 20% and label VAT.
 
 ### Invoice Status Lifecycle
 

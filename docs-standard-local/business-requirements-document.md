@@ -20,7 +20,7 @@ Why the business needs the application and what it must achieve for the business
 
 ## 1. Executive Summary
 
-Mybizz CS gives a consulting or service business one complete, private online platform — website, booking, payments, CRM with a sales pipeline, a team email inbox, email marketing, invoicing, accounts, time tracking, blog, analytics, reviews, AI assistance and voice — in its own isolated application, on its own domain, for $99 a month with unlimited staff included, month to month, with no add-ons. It replaces the five to seven separate tools such a business otherwise pays for and connects by hand. The business outcome is 100 paying clients, $118,800 a year in revenue and $97,248 a year gross margin after hosting, run by the founder with Mybizz's own management app.
+Mybizz CS gives a consulting or service business one complete, private online platform — website, booking, payments, CRM with a sales pipeline, a team email inbox, email marketing, invoicing, accounts, time tracking, blog, analytics, reviews, AI assistance and voice — in its own isolated application, on its own domain, for £79 a month (or the fixed price in the client's currency) with unlimited staff included, month to month, with no add-ons. It replaces the five to seven separate tools such a business otherwise pays for and connects by hand. The business outcome is 100 paying clients, $118,800 a year in revenue and $97,248 a year gross margin after hosting, run by the founder with Mybizz's own management app.
 
 ---
 
@@ -28,7 +28,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 
 **Problem.** A consulting or service business that wants to operate professionally online needs a website and hosting, a booking system, a payment gateway, a CRM, email marketing and invoicing. Bought separately these cost a team of six $324 a month at list prices, before any setup cost (concept section 6.2). The tools do not talk to each other, so the owner re-types data between them, holds client records in three or four places, and still has no reliable view of the business. On marketplace platforms the business's customers are effectively the platform's customers, and commissions reach 20–23.5% on new customers. `[CLEAR]`
 
-**Opportunity.** Service businesses now operate online as a matter of course; owners expect AI; a growing group wants to own its customer relationships instead of paying a marketplace; and Africa's service businesses are poorly served by global tools because Stripe does not accept South African businesses directly. `[CLEAR]`
+**Opportunity.** Service businesses now operate online as a matter of course; owners expect AI; a growing group wants to own its customer relationships instead of paying a marketplace. `[CLEAR]`
 
 **Cost of doing nothing.** Without Mybizz CS, the founder's target clients continue to pay more for a fragmented, partial setup, and the founder has no product in the market. `[CLEAR]`
 
@@ -38,14 +38,14 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 
 | # | Objective | How success is measured | Certainty |
 |---|---|---|---|
-| BO-1 | Replace the separate-tool stack of a consulting or service business with one platform at one price | Every need in concept section 4.5 is met by a built feature; the price is $99 a month with no per-staff fee, no commission and no add-on | [CLEAR] |
+| BO-1 | Replace the separate-tool stack of a consulting or service business with one platform at one price | Every need in concept section 4.5 is met by a built feature; the price is £79 a month, or the fixed price in the client's currency, with no per-staff fee, no commission and no add-on | [CLEAR] |
 | BO-2 | Reach full capacity | 100 paying clients; $118,800 annual recurring revenue | [CLEAR] |
 | BO-3 | Hold the margin at capacity | Hosting at or below $21,552 a year at 100 clients; gross margin $97,248 a year; cost per client reviewed monthly in App 5 | [CLEAR] |
 | BO-4 | The client owns the client's data and customers | Each client in a separate app and database; data exportable as CSV at any time; backups in the client's own R2 bucket; no marketplace or shared directory | [CLEAR] |
 | BO-5 | A client goes live without help | Average onboarding-to-live time under 7 days through the onboarding wizard | [CLEAR] |
 | BO-6 | Keep clients | Client retention from year 1 to year 2 above 90% | [CLEAR] |
 | BO-7 | The founder can support 100 clients alone | Under 2 support tickets per client per month; at-risk alerts raised before a client leaves | [CLEAR] |
-| BO-8 | Serve African businesses as well as global ones | Paystack for South African and African clients, Stripe and PayPal globally, from launch | [CLEAR] |
+| BO-8 | Serve businesses across Mybizz's markets | The United States, Canada, the United Kingdom, the European Union, the European Economic Area and Switzerland, from launch: Stripe and PayPal, five app languages, and a fixed price in each market's own currency | [CLEAR] |
 
 ---
 
@@ -60,8 +60,8 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 | Visitors | Visitors to a client's public website and landing pages | Find the business, enquire, become leads |
 | Prospects | Businesses trying the demo apps | See the whole product before paying |
 | Platform suppliers | Anvil; DigitalOcean | Anvil's Business plan terms for Apps 1, 2, 3 and 5; DigitalOcean's terms for client instances |
-| Service providers | Stripe, Paystack, PayPal, Amazon Web Services (SES), Cloudflare, Groq | Each provider's own terms and fees |
-| Regulators | South Africa's Information Regulator (POPIA); data protection authorities under GDPR | Lawful processing of personal data |
+| Service providers | Stripe, PayPal, Paddle, Amazon Web Services (SES), Cloudflare, Groq | Each provider's own terms and fees |
+| Regulators | The Information Commissioner's Office (UK GDPR); each client's own data protection authority | Lawful processing of personal data |
 
 ---
 
@@ -73,10 +73,10 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 - Every way such a business delivers work: at its premises, at the customer's location, online live, as delivered work, and to groups (concept section 4.3).
 - All 36 features of concept section 7 (F-01 to F-36), including AI assistance with all ten assists, WhatsUp voice tiers 1 to 5, and the sample data of concept section 8.
 - One isolated application instance per client, on the client's own domain, in its own container with its own database.
-- Six app languages: English at launch; French, Portuguese, Spanish, German and Italian added one at a time.
+- Five app languages: English at launch; French, German, Spanish and Italian added one at a time.
 - Two demo apps for prospects (F-36).
 - The Mybizz management app (App 5), built and running before the first paying client.
-- Global availability from launch, with South Africa as the founder's home market.
+- Available from launch in the United States, Canada, the United Kingdom, the European Union, the European Economic Area and Switzerland, with the United Kingdom as Mybizz's home market.
 
 ### Out of Scope
 
@@ -98,7 +98,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 |---|---|---|---|---|
 | BR-1 | A client's customers can book every delivery mode online — at the business, at the customer's location, video or phone call, group session, with a room or equipment where needed — without phoning | BO-1 | Must | [CLEAR] |
 | BR-2 | A client can sell fixed-price delivered work and session packages online | BO-1 | Must | [CLEAR] |
-| BR-3 | A client gets paid by the payment option set per service — in full, deposit, on the day, or invoice with payment terms — through Stripe or Paystack, with PayPal as an option | BO-1, BO-8 | Must | [CLEAR] |
+| BR-3 | A client gets paid by the payment option set per service — in full, deposit, on the day, or invoice with payment terms — through Stripe, with PayPal as an option | BO-1, BO-8 | Must | [CLEAR] |
 | BR-4 | A client issues professional invoices with payment terms and its own tax setting, automatically on completion, from time worked, and manually | BO-1 | Must | [CLEAR] |
 | BR-5 | A client has a professional website on its own domain, with homepage templates, a blog, landing pages and legal pages, edited on the page itself without a web designer, and shares every blog post to social media in one tap | BO-1 | Must | [CLEAR] |
 | BR-6 | A client keeps one record per customer, created automatically from bookings, orders, enquiries, captures and emails, with companies, segments and CSV import and export | BO-1, BO-4 | Must | [CLEAR] |
@@ -108,18 +108,18 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 | BR-10 | Every staff member of a client is included in the one price, with no limit, each with an access level that the server enforces | BO-1, BO-2 | Must | [CLEAR] |
 | BR-11 | Each client runs in its own application and database; no client can reach another's data; Mybizz never takes a client's customer data for its own use | BO-4 | Must | [CLEAR] |
 | BR-12 | A client can export all of its data at any time and has its backups and history in its own R2 bucket | BO-4 | Must | [CLEAR] |
-| BR-13 | A client registers and sets up its instance itself through a resumable onboarding wizard with a help video on every step, including connecting its domain and importing its existing contacts; assisted setup is offered at $200 once | BO-5 | Must | [CLEAR] |
+| BR-13 | A client registers and sets up its instance itself through a resumable onboarding wizard with a help video on every step, including connecting its domain and importing its existing contacts; assisted setup is offered at one month's subscription, once | BO-5 | Must | [CLEAR] |
 | BR-14 | Mybizz provisions, monitors, bills and updates every client from one management app, and every release reaches every client through `master_template` | BO-2, BO-3, BO-7 | Must | [CLEAR] |
 | BR-15 | Mybizz is alerted when a client is at risk: no staff sign-in for 14 days, no bookings for 30 days, a ticket unanswered for 3 days | BO-6, BO-7 | Must | [CLEAR] |
 | BR-16 | A client reaches Mybizz through a Help button; a problem that stops the client's business is acknowledged within 4 business hours, every other ticket answered within 24 hours on business days | BO-6, BO-7 | Must | [CLEAR] |
 | BR-17 | Every feature explains itself through a tooltip that opens a short help video, in the client's app language, so a client rarely needs support | BO-5, BO-7 | Must | [CLEAR] |
 | BR-18 | Each client runs in its own container with its own database, with its own memory and its own database connections | BO-3 | Must | [CLEAR] |
 | BR-19 | Mybizz records each client's hosting, email and AI usage so that the cost per client is known every month | BO-3 | Must | [CLEAR] |
-| BR-20 | The platform meets POPIA, GDPR and PCI DSS: card data never touches the platform, credentials are encrypted, every significant action is audited | BO-4 | Must | [CLEAR] |
+| BR-20 | The platform meets the UK GDPR, the client's own privacy law and PCI DSS: card data never touches the platform, credentials are encrypted, every significant action is audited | BO-4 | Must | [CLEAR] |
 | BR-21 | A client keeps its accounts in Mybizz CS — invoices, payments, refunds and expenses with receipts — with profit and loss, tax and statement reports, and exports them to Wave, Xero or QuickBooks in one click | BO-1 | Must | [CLEAR] |
 | BR-22 | Each client's website and app carry the client's own brand: one of four palettes, light and dark following the device | BO-1 | Must | [CLEAR] |
 | BR-23 | A client's salespeople follow every sale in a deals pipeline and send quotes that customers accept online and that become invoices | BO-1 | Must | [CLEAR] |
-| BR-24 | A client uses the app in its chosen language: English, French, Portuguese, Spanish, German or Italian | BO-1, BO-8 | Must | [CLEAR] |
+| BR-24 | A client uses the app in its chosen language: English, French, German, Spanish or Italian | BO-1, BO-8 | Must | [CLEAR] |
 | BR-25 | A new client sees every report, assist and voice question working from the first day, on sample data the Owner clears with one button | BO-5, BO-6 | Must | [CLEAR] |
 | BR-26 | A prospect tries the whole product before paying, in two demo apps that reset every night | BO-2 | Must | [CLEAR] |
 
@@ -144,7 +144,7 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 | AC-11 | The client pays its payment providers' fees, its domain, and Cloudflare R2 storage above the free allowance in its own Cloudflare account; Mybizz absorbs Anvil, DigitalOcean, Amazon SES and Groq costs | [CLEAR] |
 | AC-14 | Amazon grants Mybizz's AWS account SES production access before the first paying client | [PARTIAL] |
 | AC-12 | Capacity is a hard limit of 100 clients for Mybizz CS | [CLEAR] |
-| AC-13 | Launch with no marketing budget: founder-led, South Africa first, international through content | [CLEAR] |
+| AC-13 | Launch with no marketing budget: founder-led, the United Kingdom first, the other markets through content | [CLEAR] |
 
 ---
 
@@ -173,7 +173,7 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 | Mybizz's Anvil account fails or is compromised; releases and provisioning stop | Low | Medium | Client instances keep running; account-level procedures in `deployment-procedures.md`; two-factor authentication | [CLEAR] |
 | Founder capacity: every ticket lands with the founder | Medium | High | Self-service help on every screen (F-25), a target under 2 tickets per client per month, at-risk alerts (F-34) | [CLEAR] |
 | Early churn: a client who sees no value in the first weeks leaves quietly | Medium | Medium | At-risk alerts, the onboarding wizard with help videos, sample data showing every report from the first day, the demo apps before purchase | [CLEAR] |
-| Competitors copy features | Medium | Medium | The Africa and Paystack position, founder-direct support, an ownership architecture marketplaces cannot offer | [CLEAR] |
+| Competitors copy features | Medium | Medium | One price for the whole team in each market's own currency, founder-direct support, an ownership architecture marketplaces cannot offer | [CLEAR] |
 | Cost per client rises (hosting, email, AI, voice) | Medium | Medium | Usage recorded in App 5, monthly review | [CLEAR] |
 | A client's sending harms the email reputation of others | Low | Medium | One SES tenant per client, automatic suppression of bounces and complaints, marketing only to opted-in contacts | [CLEAR] |
 | The market does not name the problem | Medium | Medium | Marketing names the five-tool problem before the features | [CLEAR] |

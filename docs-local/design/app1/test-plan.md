@@ -88,7 +88,7 @@ Written at Step 15 in the shape of `spec-testing-methodology-standards` §6, fro
 
 ## 6. Server-side amounts (§22 row 6)
 
-Every gateway and PayPal amount is read from the database, never the browser; a repeated PayPal capture records one payment (`PayPal-Request-Id`); a second quote acceptance changes nothing (`/quote/{token}`); PayPal is unavailable for ZAR. **Tests:** `IN-06`; SR-17a, SR-26, SR-56; test 4.20–4.21.
+Every gateway and PayPal amount is read from the database, never the browser; a repeated PayPal capture records one payment (`PayPal-Request-Id`); a second quote acceptance changes nothing (`/quote/{token}`); PayPal is unavailable for ISK. **Tests:** `IN-06`; SR-17a, SR-26, SR-56; test 4.20–4.21.
 
 ## 7. Role enforcement (§22 row 7)
 

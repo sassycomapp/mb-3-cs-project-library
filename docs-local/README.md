@@ -1,7 +1,7 @@
 ---
 title: "README"
 doc-id: "mb-5315abc6"
-updated: "2026-10-30"
+updated: "2026-11-10"
 ---
 # docs-local
 
@@ -9,6 +9,7 @@ The business's own working documents.
 
 | Document or folder | What it is | Written by |
 |---|---|---|
+| `brand-profile.md` | The business and the product in one place: identity, market, voice, look, price and promises, each section drawn from a named canonical document. | David, with the agent; updated when a canonical document it names changes |
 | `GLOSSARY.md` | The domain glossary, shared by all the business's apps. | Step 16 |
 | `design\{run}\` | The design folder of one run: App 1, App 5 or a feature. | Steps 12 to 16 |
 | `reference-platform-research.md` | The reference platform's analysis, checked against its primary sources. Present only when a reference platform is used. | Step 12 |

@@ -1,7 +1,7 @@
 ---
 title: "vault-implementation"
 doc-id: "mb-fc24acf4"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Vault Implementation
 
@@ -12,7 +12,6 @@ updated: "2026-11-06"
 | Secret | Used by |
 |---|---|
 | `stripe_secret_key`, `stripe_webhook_secret` | Payment Gateway (Stripe) |
-| `paystack_secret_key` | Payment Gateway (Paystack) |
 | `paypal_client_secret`, `paypal_webhook_id` | Payment Gateway (PayPal) |
 | `aws_access_key_id`, `aws_secret_access_key` | Amazon SES sending and the client's received-email folder in S3 (`spec-team-inbox.md`); written by App 5 |
 | `ses_smtp_password` | Anvil's Email service, Custom Mail Server on the SES SMTP endpoint; written by App 5 |

@@ -13,7 +13,7 @@ The agreement between Mybizz and the client: the service, the fee, the client's 
 
 ## Fees
 
-- The subscription is $99 a month, before tax, for each client instance. The client pays monthly, in advance.
+- The subscription is £79 a month, before tax, for each client instance, charged at the fixed price for the client's currency: £79, $99, C$135, €89 or CHF 89. The client pays monthly, in advance.
 - Mybizz's order process is conducted by its online reseller, Paddle.com Market Ltd ("Paddle"), which is the Merchant of Record for every order. The client buys the subscription from Paddle. Paddle handles billing and payment, collects any VAT or sales tax due in the client's country, and issues the tax invoice for every payment.
 - By completing a purchase, the client agrees to Paddle's Terms of Use (https://paddle.com/legal/terms) and acknowledges Paddle's Privacy Policy (https://paddle.com/legal/privacy).
 

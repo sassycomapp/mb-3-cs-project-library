@@ -51,7 +51,7 @@ The client's domain is also the client's own, registered by the client.
 
 - The export (step 2) is never skipped and is confirmed (step 3) before anything is deleted.
 - Mybizz keeps none of the client's data after step 8.
-- The decrypted Vault holds live credentials. The Owner is told in the step 9 email to change the gateway keys (Stripe, Paystack, PayPal) once the instance is closed.
+- The decrypted Vault holds live credentials. The Owner is told in the step 9 email to change the gateway keys (Stripe, PayPal) once the instance is closed.
 - The exit export is proven on the test client instance before the first release.
 
 ---

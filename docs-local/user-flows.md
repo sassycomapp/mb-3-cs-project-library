@@ -113,12 +113,12 @@ updated: "2026-11-10"
 Onboarding is a resumable wizard, separate from Settings, with a progress indicator and a short help video on every step. Each step saves when completed. See [[[default:specifications-global/spec-onboarding-implementation-plan|Mybizz CS Onboarding System - Engineering Plan]]](C:/dev/project-library-global/specifications-global/spec-onboarding-implementation-plan.md).
 
 1. **Owner sets a password** from the welcome link, enrols a FIDO2 second factor (a security key or the device's passkey) and signs in → the onboarding wizard opens with a welcome and the progress indicator.
-2. **App language** — choose English, French, Portuguese, Spanish, German or Italian (the languages whose translation is complete); every later step and video follows the choice.
+2. **App language** — choose English, French, German, Spanish or Italian (the languages whose translation is complete); every later step and video follows the choice.
 3. **Business profile** — link to Settings → Business Profile tab; the AI helper offers the first website text from the profile.
 4. **Brand palette** — link to Settings → Brand Palette tab, with live preview.
 5. **System currency** — select from the list and confirm; locked once the first booking or invoice exists.
 6. **Legal acknowledgement** — read the critical excerpts, tick, confirm; recorded with a timestamp in the instance and in App 5.
-7. **Payment gateway** — link to Settings → Payment Gateways: choose Stripe or Paystack, optionally PayPal; secret keys go into the Vault; test mode on.
+7. **Payment gateway** — link to Settings → Payment Gateways: connect Stripe, optionally PayPal; secret keys go into the Vault; test mode on.
 8. **Connect the domain** — the wizard shows the website and email records; App 5 writes them in the client's Cloudflare DNS (or the Owner copies them into another domain provider) and the wizard checks them until every one is live. Where the domain already receives email elsewhere, the wizard says that switching moves all the domain's email into the Team Inbox and asks the Owner to confirm. The Owner's personal address and the default sender address are created.
 9. **Import contacts** — upload a CSV file exported from HubSpot, Mailchimp, Acuity or any other tool; the matching columns are filled in for the known tools; the Owner checks the mapping and imports; existing contacts with the same email are updated, not duplicated. The step can be skipped.
 10. **Onboarding complete** → the Owner is taken to the Dashboard, where the sample data banner shows.
@@ -297,7 +297,7 @@ The client then manages the order (UF-12).
 
 ## UF-15 Payment webhooks (F-15, F-29)
 
-1. Stripe, Paystack or PayPal sends a webhook to the client instance.
+1. Stripe or PayPal sends a webhook to the client instance.
 2. The handler verifies the webhook, returns HTTP 200 immediately, and defers the work to a background task ([[[default:adr-global/adr-webhook-architecture|Webhook Architecture]]](C:/dev/project-library-global/adr-global/adr-webhook-architecture.md) ADR).
 3. The background task applies the result (booking confirmed, invoice paid, refund recorded) and writes the webhook payload to the client's R2 bucket. The data tables keep only the resulting state.
 

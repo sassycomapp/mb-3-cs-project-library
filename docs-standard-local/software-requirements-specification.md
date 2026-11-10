@@ -110,7 +110,7 @@ Anvil's platform constraints apply by default: the App Server builds and extends
 | SR-15 | `get_available_slots` returns only slots where the provider is available, any required resource is free, travel buffers for customer-location bookings are respected, and a group session has places left | FR-11 | Unit tests over availability rules, exceptions, resources, buffers and places | [CLEAR] |
 | SR-16 | `confirm_booking` re-checks the slot, resource, places and price inside one transaction; a clash returns the nearest free slots and creates nothing | FR-11 | Concurrent-confirmation test | [CLEAR] |
 | SR-17 | A booking with an online payment option is `pending` until the payment succeeds; a `pending` booking older than 15 minutes is set to `cancelled` and its slot and resource freed | FR-11, FR-15 | Test with the hold task | [CLEAR] |
-| SR-17a | A PayPal order is created and captured only by the server, with the amount read from the database; a repeated capture call or webhook records the payment once; PayPal is unavailable when the system currency is not one PayPal supports | FR-15 | Test with PayPal's sandbox: tampered amount, double capture, closed browser after approval, ZAR instance | [CLEAR] |
+| SR-17a | A PayPal order is created and captured only by the server, with the amount read from the database; a repeated capture call or webhook records the payment once; PayPal is unavailable when the system currency is not one PayPal supports | FR-15 | Test with PayPal's sandbox: tampered amount, double capture, closed browser after approval, ISK instance | [CLEAR] |
 | SR-17b | Every gateway payment row carries the gateway's fee from the gateway's response; the accounts show it as an expense | FR-15, FR-28 | Test with each gateway in test mode | [CLEAR] |
 | SR-18 | Bookings on pay on the day, invoice terms or a package session are `confirmed` at once | FR-11 | Test each option | [CLEAR] |
 | SR-19 | Booking status changes follow `DESIGN.md` (Booking Status Lifecycle); no booking row is ever deleted | FR-11 | State-transition test; no delete call on `bookings` in code | [CLEAR] |
@@ -171,7 +171,7 @@ Every functional requirement FR-01 to FR-36 of the PRD appears in this table at 
 
 - **User interfaces:** the Anvil Material 3 theme with the project deviations (`DESIGN.md`); screens built to `spec-ui-standards` (project-library-global); the admin area, customer portal and public website as in `scaffold-spec.md` (Navigation Architecture); WhatsUp on the phone's browser.
 - **Hardware interfaces:** the device microphone for WhatsUp, through `anvil.js`, and the device camera for expense receipts, through the file upload, each with the user's permission.
-- **Software interfaces:** Stripe, Paystack, PayPal, Amazon SES, SNS and S3, Cloudflare R2, and App 5 (for Groq, management, DNS and SES provisioning), as `integration-architecture.md` sets out.
+- **Software interfaces:** Stripe, PayPal, Amazon SES, SNS and S3, Cloudflare R2, and App 5 (for Groq, management, DNS and SES provisioning), as `integration-architecture.md` sets out.
 - **Communication interfaces:** HTTPS only. Inbound HTTP endpoints: one webhook endpoint per gateway; `/_/api/email/inbound`, `/_/api/email/events`, `/_/api/email/unsubscribe` for SES; `/_/api/blog-image/{slug}`; the management endpoints for App 5, with the instance's Bearer token. Outbound: HTTPS to SES and every other service; SMTP with STARTTLS to the SES SMTP endpoint for Anvil's Users service email.
 
 ### 3.3 Performance Requirements

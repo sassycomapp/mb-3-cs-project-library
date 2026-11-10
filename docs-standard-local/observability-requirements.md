@@ -41,7 +41,7 @@ logger.info("payment_recorded", extra={"function": "record_payment", "invoice_id
 - Function entry and exit at DEBUG, with argument names and row ids only, never values.
 - Every call to an outside service (gateway, Amazon SES, R2, App 5) at INFO, with its duration.
 - Every caught and re-raised exception at ERROR, and written to `error_log`.
-- Never logged: credentials, keys, tokens, card data, passwords, TOTP codes, the content of Vault entries, the content of emails, or customer personal data beyond row ids (POPIA, GDPR, F-30).
+- Never logged: credentials, keys, tokens, card data, passwords, TOTP codes, the content of Vault entries, the content of emails, or customer personal data beyond row ids (UK GDPR, the client's own privacy law, F-30).
 
 ### Log levels
 

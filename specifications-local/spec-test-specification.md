@@ -1,7 +1,7 @@
 ---
 title: "spec-test-specification"
 doc-id: "mb-d8dcf41a"
-updated: "2026-11-07"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Test Specification (Canonical)
 
@@ -28,7 +28,7 @@ service selection to payment confirmation"
 - At least one service configured in `services` table
 - At least one provider (Staff user) assigned to the service
 - Availability rules configured for the provider
-- Payment gateway configured (Stripe or Paystack in test mode)
+- Payment gateway configured (Stripe in test mode)
 - Vault contains payment gateway secret keys
 
 **Steps:**
@@ -89,7 +89,7 @@ tests"
 
 ### 2.1 Payment Failure
 
-**Scenario:** Stripe/Paystack returns `payment_intent.payment_failed`
+**Scenario:** Stripe returns `payment_intent.payment_failed`
 
 **Steps:**
 1. Start booking flow through to payment step
@@ -304,7 +304,7 @@ Each test runs against App 1 with the test suite's mail catcher in place of Amaz
 | 4.18 | F-01 two-factor | Sign in as each role without a second factor | Sign-in is refused; with the second factor it succeeds; the Owner with only an authenticator app enrolled is refused the Vault and refunds |
 | 4.19 | F-02 Vault reset | As Owner, Reset Vault code and follow the emailed link | The next Vault open asks for enrolment; no stored secret changed; the reset is in `activity_log` |
 | 4.20 | F-15 PayPal | In PayPal's sandbox: pay a booking; alter the amount in the browser; capture twice; close the browser after approval | The server's amount is charged; one payment row with `gateway_fee`; the closed-browser order is captured by the webhook |
-| 4.21 | F-15 PayPal | Set the system currency to ZAR | PayPal shows as unavailable in Settings and at checkout |
+| 4.21 | F-15 PayPal | Set the system currency to ISK | PayPal shows as unavailable in Settings and at checkout |
 
 ---
 
