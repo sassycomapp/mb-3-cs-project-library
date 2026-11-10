@@ -109,7 +109,7 @@ One row: the client's business.
 | `home_video_type` | string | `youtube` / `vimeo` / `dailymotion` / `direct`, detected on save |
 | `services_video_url` | string | Services page video; empty hides the section |
 | `services_video_type` | string | As `home_video_type` |
-| `palette` | string | `professional_blue` / `warm_coral` / `calm_teal` / `sophisticated_purple`; default `professional_blue` |
+| `palette` | string | `default` / `professional_blue` / `warm_coral` / `calm_teal` / `sophisticated_purple` / `sky_blue` / `forest_green` / `desert_rose`; default `professional_blue` |
 | `palette_updated_at` | datetime | |
 | `homepage_template` | string | `classic` / `services` / `booking` / `minimalist` |
 | `blog_list_view` | string | `tiled` / `list` |
@@ -653,7 +653,7 @@ One record per person (F-17).
 | `email` | string | Matching key for automatic creation; may be empty for walk-ins |
 | `phone` | string | |
 | `company_id` | link → companies | Optional (F-35) |
-| `address` | simpleObject | Shown on invoices |
+| `address` | simpleObject | Shown on invoices; keys `address_line_1`, `address_line_2`, `city`, `region`, `postal_code`, `country` |
 | `status` | string | `lead` / `customer` / `inactive` |
 | `lifecycle_stage` | string | `new` / `active` / `at_risk` / `lost`; recalculated nightly |
 | `source` | string | `booking` / `order` / `enquiry` / `landing_page` / `social` / `email` / `import` / `manual` |

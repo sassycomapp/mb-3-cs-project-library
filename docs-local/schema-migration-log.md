@@ -1,7 +1,7 @@
 ---
 title: "schema-migration-log"
 doc-id: "mb-dde289cd"
-updated: "2026-11-07"
+updated: "2026-11-10"
 ---
 # Schema Migration Log
 
@@ -24,6 +24,7 @@ Every schema change, recorded at Step 17 and read at Steps 41 and 42. The schema
 | pre-release | 2026-10-31 | 19 tables with `instance_id` or `client_id`; `theme_config`; `webhook_log`; `bookings`; `invoice`; `services` | Breaking: columns removed (listed in P14) | App 1 only, prompt P14, last. App 1 holds development data only; the data in the removed columns is not needed |
 | pre-release | 2026-11-01 | `email_config` | Breaking: the Brevo columns `from_email`, `from_name`, `configured`, `configured_at`, `sender_domain_verified` removed | App 1 only, prompt P14, last |
 | pre-release | 2026-11-06 | 35 core tables (through the P1–P3, P5–P13 amendments below); and every table that lacked `created_at`: `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `invoice_items`, `quote_items`, `expense_categories`, `user_preferences`, `customer_packages`, `automation_runs`, `reviews`, `email_messages`, `blog_categories`, `config`, `contact_campaigns`, `contact_counter`, `contact_events`, `contact_submissions`, `email_config`, `email_log`, `email_templates`, `lead_captures`, `leads`, `payment_config`, `rate_limits`, `theme_config`, `webhook_log` | Additive: a nullable `metadata` (simpleObject) column added to the 35 core tables other than `bookings`, which already carries `metadata` as its client-defined intake answers (common aspect 4; Step 15 decision D3); a nullable `created_at` added to every table that lacked it, core and non-core (spec-anvil-platform-standards §13; Step 15 decisions D2 and D3 follow-up); on `email_campaigns` and `segments` `created_date` is replaced by `created_at`: `created_at` added and `created_date` removed in the same prompt (P7); nothing reads `created_date`; a nullable `updated_at` added to every mutable table that lacked it — 43 tables (28 in the live schema, 15 created by the prompts), each named in its prompt below; the summary tables `daily_summary`, `service_performance`, `provider_performance` and `campaign_metrics` are mutable because the summary tasks' period-keyed upserts update their rows (Step 15 decision D3 follow-up, review finding R5); the append-only tables carry none: `activity_log`, `contact_events`, `health_log`, `automation_runs`, `consents`, `email_suppressions`, `sample_rows` (§13's mutable-row rule; Step 15 decision D3 follow-up) | App 1 only, folded into prompts P1–P13 below (P14 unchanged) |
+| pre-release | 2026-11-10 | `payment_config` | Breaking: `active_gateway`, `paystack_connected` and `paystack_connected_at` deleted | App 1 only, by hand (Part A) |
 
 ---
 
@@ -41,6 +42,8 @@ Renaming a column in the Data Tables view keeps its data. Rename:
 4. `availability_exceptions`: `resource_id` → `provider_id`
 5. `bookings`: `resource_id` → `provider_id`
 6. `time_entries`: `staff_id` → `provider_id`
+
+Delete, from `payment_config`: `active_gateway`, `paystack_connected` and `paystack_connected_at`. Stripe is the card gateway and PayPal is optional; a customer chooses between them at checkout.
 
 ### Part B — one prompt per conversation (Anvil editor → Agent chat)
 
@@ -128,7 +131,7 @@ Change only the Data Tables schema. Do not change any form, module, server modul
 Add these columns to these existing Data Tables, with exactly these names and types:
 
 - Table `business_profile`: add `home_video_url` (string), `home_video_type` (string), `services_video_url` (string), `services_video_type` (string), `tax_rate` (number), `tax_label` (string), `tax_registration_number` (string), `default_payment_terms_days` (number), `cancellation_window_hours` (number), `metadata` (simpleObject)
-- Table `payment_config`: add `paystack_public_key` (string), `paypal_client_id` (string), `paypal_test_mode` (bool), `paypal_connected` (bool), `paypal_connected_at` (datetime), `created_at` (datetime), `updated_at` (datetime)
+- Table `payment_config`: add `paypal_client_id` (string), `paypal_test_mode` (bool), `paypal_connected` (bool), `paypal_connected_at` (datetime), `created_at` (datetime), `updated_at` (datetime)
 - Table `users`: add `full_name` (string), `is_provider` (bool), `photo` (media), `specialisations` (string), `contact_id` (link to one row of `contacts`), `preferences` (simpleObject), `metadata` (simpleObject), `updated_at` (datetime)
 - Table `files`: add `created_at` (datetime), `metadata` (simpleObject), `updated_at` (datetime)
 - Table `contacts`: add `address` (simpleObject), `email_opt_out` (bool), `metadata` (simpleObject)

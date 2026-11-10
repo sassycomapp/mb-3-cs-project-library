@@ -232,6 +232,75 @@ Scheduled tasks belong to the app that runs them. They are set up in App 3 (`bla
 
 ---
 
+## Accounting Export (F-28)
+
+Finance & Reports → Accounts → Export has one period (From and To dates, the last calendar month by default) and three buttons: **Download for Wave**, **Download for Xero** and **Download for QuickBooks**. Each button runs a background task in `server_accounts/` that writes one ZIP file into the client's bucket (`exports/accounting-{package}-{from}-{to}.zip`) and downloads it. The ZIP holds the period's full books, laid out in that package's own import format, and a `README.txt` that names, in order, the screen of the package on which each file is imported.
+
+**What the period holds.**
+
+| Records | Rows exported |
+|---|---|
+| Customers | Every contact with an exported invoice or payment in the period |
+| Invoices | Invoices dated in the period with status `sent`, `paid` or `overdue`, one row per invoice line |
+| Payments and refunds | `payments` rows with status `succeeded`, received in the period |
+| Gateway fees | The `gateway_fee` of each exported payment |
+| Expenses | `expenses` with status `recorded`, dated in the period |
+
+Sample data, draft and cancelled invoices, and void expenses are never exported.
+
+**Rules for every file.**
+
+- UTF-8 CSV, comma-separated, with a header row.
+- The header row and column order are copied exactly from the package's current import template (Step 15 reads each template). Mybizz fills the columns named in the tables below and leaves every other column of the template empty.
+- Amounts are plain decimals with two places and a dot: no currency symbol and no thousands separator. Invoice lines are written exclusive of tax.
+- Dates are written in the order the packages read for the client's country: `MM/DD/YYYY` when `business_profile.country` is the United States, `DD/MM/YYYY` for every other client.
+- An invoice's own fields repeat on each of its lines; the package joins the lines by invoice number.
+- None of the three packages imports payments against invoices from a file. Money that moved is therefore written as a bank statement file: payments in, refunds out, gateway fees out and expenses out. The accountant imports it into the account that received the money (for example a Stripe clearing account) and matches each line to its invoice in the package's reconciliation screen.
+- A file larger than a package's row limit is split into numbered files (`invoices-1.csv`, `invoices-2.csv`).
+
+**Bank statement lines (all three packages).**
+
+| Money | Amount | Payee | Description | Reference |
+|---|---|---|---|---|
+| Payment | `amount`, positive | Contact's full name | `Payment {invoice_number} ({method})` | `gateway_reference`, or the payment's id when empty |
+| Refund | `amount`, negative | Contact's full name | `Refund {invoice_number} ({method})` | `gateway_reference`, or the refund's id |
+| Gateway fee | `gateway_fee`, negative | `Stripe` or `PayPal` | `{Stripe or PayPal} fee {invoice_number}` | The payment's `gateway_reference` |
+| Expense | `amount`, negative | `supplier` | `{category name}: {description}` | `expense_id` |
+
+The date of each line is `received_at` for a payment, a refund and its fee, and `expense_date` for an expense.
+
+### Xero
+
+| File | Imported in Xero at | Columns Mybizz fills |
+|---|---|---|
+| `contacts.csv` | Contacts → Import | `ContactName` (full name), `EmailAddress`, `FirstName`, `LastName`, `PhoneNumber`, `POAddressLine1`, `POAddressLine2`, `POCity`, `PORegion`, `POPostalCode`, `POCountry` |
+| `sales-invoices.csv` | Sales → Invoices → Import, with "Tax exclusive" chosen | `ContactName`, `EmailAddress`, `InvoiceNumber`, `InvoiceDate`, `DueDate`, `Description`, `Quantity`, `UnitAmount`, `AccountCode` (`200`, Xero's standard Sales account), `Currency` |
+| `bank-statement.csv` | Bank accounts → the account → Import a statement | `Date`, `Amount`, `Payee`, `Description`, `Reference` |
+
+`TaxType` is left empty, so Xero applies the tax rate of the Sales account. Xero imports the invoices as drafts for the accountant to approve.
+
+### QuickBooks Online
+
+| File | Imported in QuickBooks at | Columns Mybizz fills |
+|---|---|---|
+| `customers.csv` | Customers → Import customers | `Name` (full name), `Email`, `Phone`, `Street`, `City`, `State`, `ZIP`, `Country` |
+| `invoices.csv` | Settings → Import data → Invoices | `InvoiceNo`, `Customer`, `InvoiceDate`, `DueDate`, `Memo` (the invoice notes), `Item(Product/Service)` (`Services`, QuickBooks' standard service item), `ItemDescription`, `ItemQuantity`, `ItemRate`, `ItemAmount` |
+| `bank-statement.csv` | Transactions → Bank transactions → Upload from file | `Date`, `Description` (Payee and Description joined with " — "), `Amount` |
+
+QuickBooks takes at most 100 invoices and 1,000 rows per invoice file, so `invoices.csv` is split at whichever limit comes first. A QuickBooks company in the United States with automated sales tax switched on cannot import invoices from a file; the `README.txt` tells that client to skip `invoices.csv`, and the bank statement still carries every payment.
+
+### Wave
+
+| File | Imported in Wave at | Columns Mybizz fills |
+|---|---|---|
+| `customers.csv` | Sales & Payments → Customers → Import from CSV | Company name (when the contact has a company), first name, last name, email, phone, address line 1, address line 2, city, province or state, postal or zip code, country |
+| `invoices.csv` | Wave Connect (Wave's Google Sheets add-on), Upload → Invoices | Customer, invoice number, invoice date, due date, item description, quantity, price |
+| `transactions.csv` | Accounting → Transactions → Upload a bank statement | `Date`, `Description` (Payee and Description joined with " — "), `Amount` |
+
+Wave imports invoices only through Wave Connect. `invoices.csv` already has a blank row between invoices, because Wave Connect treats consecutive rows as one invoice; the `README.txt` tells the client to paste the file into the Wave Connect invoice sheet.
+
+---
+
 ## Offboarding
 
 When a client leaves (step by step: `docs-standard-local/client-exit-handover.md`):

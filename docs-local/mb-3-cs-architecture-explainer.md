@@ -187,7 +187,7 @@ Step-by-step processes, such as onboarding and booking, show their steps in a si
 
 **F-30 Security and compliance.** Section 7.
 
-**F-31 Design system.** Every screen is built on the Anvil Material 3 theme with a small set of refinements, using named colour tokens instead of fixed colours. Because colours are tokens, a client can switch between four palettes and the whole app changes at once; and when a user's device is in dark mode, the app switches to the palette's dark colours by itself, on every screen. The admin area is compact and quick; the public website is warmer and more spacious — the same design system, tuned for two jobs.
+**F-31 Design system.** Every screen is built on the Anvil Material 3 theme with a small set of refinements, using named colour tokens instead of fixed colours. Because colours are tokens, a client can switch between eight palettes and the whole app changes at once; and when a user's device is in dark mode, the app switches to the palette's dark colours by itself, on every screen. The admin area is compact and quick; the public website is warmer and more spacious — the same design system, tuned for two jobs.
 
 ### Mybizz running the business
 

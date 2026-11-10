@@ -1,7 +1,7 @@
 ---
 title: "spec-calendar-feature"
 doc-id: "mb-2e6a1c57"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Calendar Feature Specification
 
@@ -298,7 +298,7 @@ Use only:
 Do not use:
 - `Label` (banned)
 - `LinearPanel`
-- Chips (no native chip; the legend uses small outlined cards)
+- Chips for the legend: chips are interactive, so the legend uses small outlined cards
 - Anvil Extras, custom JavaScript or external widgets
 - Hardcoded colours
 

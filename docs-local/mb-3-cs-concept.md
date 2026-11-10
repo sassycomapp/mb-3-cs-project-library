@@ -356,7 +356,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 **F-28 Accounts**
 - Built-in accounts: invoices, payments, refunds and expenses in one place, with a photo of every receipt
 - Reports: profit and loss by month, outstanding invoices, tax collected and tax paid, and customer statements
-- One-click export of customers, invoices, invoice lines, payments, refunds and expenses, in the import formats of Wave, Xero and QuickBooks, or for the client's accountant
+- One-click export of the period's full books — customers, invoices, payments, refunds and expenses — with one button each for Wave, Xero and QuickBooks, in that package's own import format
 - No accounting subscription needed
 
 ### Customers and marketing

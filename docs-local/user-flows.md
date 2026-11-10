@@ -553,8 +553,8 @@ Assists 9 (client sentiment summary) and 10 (booking and availability insights) 
 - Profit and loss by month, outstanding invoices, tax collected and tax paid, customer statements (PDF).
 
 **Export — Entry:** Finance & Reports → Accounts → Export
-1. Choose the period and the format: Wave, Xero, QuickBooks, or plain CSV for the accountant.
-2. Export → one file per record type (customers, invoices, invoice lines, payments, refunds, expenses) is downloaded and kept in the bucket's `exports/` folder.
+1. Choose the period (From and To; last month by default).
+2. Download for Wave, Download for Xero or Download for QuickBooks → one ZIP of the period's full books, in that package's import format, is downloaded and kept in the bucket's `exports/` folder.
 
 ---
 

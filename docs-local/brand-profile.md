@@ -404,7 +404,10 @@ Each client chooses its own brand palette at onboarding and can change it at any
 | Sophisticated Purple | Executive coaches, premium consultants, high-end services | Premium, refined, exclusive |
 | Warm Coral | Salons, spas, beauty and lifestyle businesses | Warmth, creativity, approachability |
 | Calm Teal | Fitness, wellness, physiotherapy, health services | Health, balance, growth |
-| Default, Sky Blue, Forest Green, Desert Rose | Clients whose own brand is closer to one of these | The client's own identity |
+| Sky Blue | IT support, online tutors, digital and remote services | Fresh, open, modern |
+| Forest Green | Gardeners, trades, outdoor and sustainability services, financial advisers | Growth, nature, dependability |
+| Desert Rose | Aestheticians, make-up artists, photographers, event planners | Elegant, warm, personal |
+| Default | Businesses that want the plain Material 3 look | Neutral, standard |
 
 Sophisticated Purple is the strongest alternative for premium positioning: executive coaching, premium consulting, high-end professional services and luxury wellness or lifestyle brands that want a more exclusive, refined identity.
 

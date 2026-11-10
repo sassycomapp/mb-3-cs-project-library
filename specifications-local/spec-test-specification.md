@@ -297,7 +297,7 @@ Each test runs against App 1 with the test suite's mail catcher in place of Amaz
 | 4.11 | Sample data | Run the reminder, campaign and accounts export tasks with sample data present | No email is sent to an `example.com` address and the export contains no sample record |
 | 4.12 | F-06 edit mode | As Manager, edit a page's heading and save; as Admin, open the same page | The heading is published; the Admin sees no Edit button and the save function refuses an Admin |
 | 4.13 | F-21 preview tags | Fetch a published post's address without running scripts | The first response carries the post's `og:title`, `og:description`, `og:image` and `og:url` |
-| 4.14 | F-28 export | Export one month for Xero | One UTF-8 CSV per record type, dates `YYYY-MM-DD`, plain decimal amounts, no void expense |
+| 4.14 | F-28 export | Download for Xero for one month, for a UK client | One ZIP holding `contacts.csv`, `sales-invoices.csv`, `bank-statement.csv` and `README.txt`; headers as Xero's templates; dates `DD/MM/YYYY`; plain decimal amounts; no void expense, draft invoice or sample record |
 | 4.15 | F-36 demo mode | With `demo_mode` on, send a booking confirmation to a customer address | The email reaches the signed-in visitor's own address only |
 | 4.16 | F-25 language | Switch `app_language` to `fr` | Every screen of the admin menu shows no English phrase key or English text; emails use the French templates |
 | 4.17 | F-25 language | Run `ts_scan` (ST-14) | Every Designer text is a phrase key; every key exists in every offered language with the same placeholders |

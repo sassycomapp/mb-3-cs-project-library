@@ -1,7 +1,7 @@
 ---
 title: "custom-component-requirements-matrix"
 doc-id: "mb-680c4ac6"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Custom Component Requirements Matrix
 
@@ -30,18 +30,17 @@ All custom components:
 
 ## Custom Component Matrix
 
-### Shared custom components (12)
+### Shared custom components (11)
 
 | Component | Feature | Used in | Uses | Why no native component serves |
 |---|---|---|---|---|
 | VideoDisplayComponent | F-09, F-25 | HomePage, services page, ServiceViewerForm, blog posts, HelpTooltipComponent | 5 | The M3 theme has no video embed; the native YouTube component handles one source only |
 | FooterComponent | F-06 | Every public page (HomePage, About, Contact, Services, Blog listing, Blog post, Privacy Policy, Terms and Conditions, Cookie Policy) | 9 | No footer component; the footer combines logo, credentials, social links, policy links, map and contact |
-| TimeLapseCarouselComponent | F-09 | HomePage, services page | 2 | No carousel component |
 | ParallaxComponent | F-09 | HomePage hero, About, Services, landing pages | 4 | No parallax effect |
 | ClauseBuilder | F-22 | PolicyEditorForm for the Privacy Policy, the Terms and Conditions and the Cookie Policy | 3 | No clause-level document editor |
 | AIHelperComponent | F-26, F-27 | Business Profile, ServiceEditorForm, FAQ editor, proposal editor, QuoteEditorForm, BlogEditorForm, Team Inbox compose, InvoiceEditorForm, Clause Builder explainer, ContactViewerForm, BookingCalendar insights, EditModeComponent, SharePanelComponent | 13 | No floating AI assistant with assist selection, voice input and spoken output |
 | StarRatingComponent | F-23 | Customer review form, ReviewViewerForm, homepage testimonials, customer portal My Reviews | 4 | No star rating input or display |
-| HelpTooltipComponent | F-25 | Every feature on every admin screen, every onboarding step | many | The native `tooltip` property shows text only; no tooltip opens a video pop-up |
+| HelpTooltipComponent | F-25 | Every feature on every admin screen, every onboarding step | many | `m3.RichTooltip` shows the text and one action, but not the lookup of each feature's help entry in the app language or the user's tooltips switch |
 | EditModeComponent | F-06, F-08, F-21 | Every public page, every landing page template, every blog post template | 15 | No in-place editing of a published page |
 | SharePanelComponent | F-21 | BlogEditorForm, BlogListForm | 2 | No share panel with captions and platform share links |
 | ReaderShareComponent | F-21 | BlogPostClassicTemplate, BlogPostTwoColumnTemplate, BlogPostFullWidthTemplate | 3 | No social share buttons |
@@ -59,7 +58,8 @@ All custom components:
 |---|---|
 | AnimatedButtonComponent, AnimatedCardComponent, AnimatedLinkComponent, AnimatedImageComponent | Native M3 components provide the required hover and focus feedback through roles |
 | OnboardingPaletteForm | Onboarding links to Settings → Brand Palette |
-| Chip components | The M3 theme has no native chip; status and filter needs are met with outlined status badges and buttons (`DESIGN.md`, Status Badges) |
+| Chip components | `m3.Chip` serves every filter, choice, input and suggestion chip; status is shown with outlined status badges (`DESIGN.md`, Status Badges) |
+| TimeLapseCarouselComponent | `m3.Carousel` serves, in the hero layout; the host form advances it with a Timer and a pause/play `m3.IconButton` (`DESIGN.md`, Homepage Template Variants) |
 
 ---
 
@@ -89,13 +89,6 @@ All custom components:
 - Reads its content from `business_profile`; the map shows only when `google_maps_embed_url` is set.
 - Identical on every public page.
 
-### TimeLapseCarouselComponent
-
-- Auto-rotating carousel with previous and next controls and dot indicators.
-- Pauses on hover and on keyboard focus; rotation stops when the user navigates manually.
-- Items are supplied by the host form (active services, featured content or testimonials).
-- Hidden when it has no items.
-
 ### ParallaxComponent
 
 - Background image moving at a different speed from the foreground on scroll.
@@ -122,8 +115,8 @@ All custom components:
 
 ### HelpTooltipComponent
 
-- A small help icon button placed beside a feature's heading or field; its accessible label is the feature's plain-language tooltip text.
-- Pressing it opens a pop-up with the tooltip text and the feature's help video (VideoDisplayComponent) in the app language; Close returns focus to the icon.
+- A small help `m3.IconButton` placed beside a feature's heading or field; its accessible label is the feature's plain-language tooltip text.
+- Pressing it opens a persistent `m3.RichTooltip` holding the tooltip text and the action "Watch the video"; the action opens an `m3` Dialog with the feature's help video (VideoDisplayComponent) in the app language; closing returns focus to the icon.
 - Properties: `help_key` (the feature's help entry), set in code. Hidden when the user has switched tooltips off (`users.preferences.tooltips`).
 - Help entries (text and video address per language) are held in `master_template`, so every client receives new and corrected videos.
 
@@ -150,6 +143,6 @@ All custom components:
 
 ### PaletteSettingsForm (local)
 
-- Shows each of the four palettes with a primary swatch, a sample filled and outlined button, a sample card, a sample heading and link, and the target business fit.
-- Choosing a palette previews it live across the screen through the palette module (`palette-tokens.md`); Save stores it in `business_profile.palette`.
+- Shows each of the eight palettes with a primary swatch, a sample filled and outlined button, a sample card, a sample heading and link, and the target business fit.
+- Choosing a palette previews it live across the screen through `m3x_theming.set_palette` (`m3-custom-theme`); Save stores it in `business_profile.palette`.
 - Lives in the folder of SettingsForm.

@@ -117,7 +117,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 | BR-19 | Mybizz records each client's hosting, email and AI usage so that the cost per client is known every month | BO-3 | Must | [CLEAR] |
 | BR-20 | The platform meets the UK GDPR, the client's own privacy law and PCI DSS: card data never touches the platform, credentials are encrypted, every significant action is audited | BO-4 | Must | [CLEAR] |
 | BR-21 | A client keeps its accounts in Mybizz CS — invoices, payments, refunds and expenses with receipts — with profit and loss, tax and statement reports, and exports them to Wave, Xero or QuickBooks in one click | BO-1 | Must | [CLEAR] |
-| BR-22 | Each client's website and app carry the client's own brand: one of four palettes, light and dark following the device | BO-1 | Must | [CLEAR] |
+| BR-22 | Each client's website and app carry the client's own brand: one of eight palettes, light and dark following the device | BO-1 | Must | [CLEAR] |
 | BR-23 | A client's salespeople follow every sale in a deals pipeline and send quotes that customers accept online and that become invoices | BO-1 | Must | [CLEAR] |
 | BR-24 | A client uses the app in its chosen language: English, French, German, Spanish or Italian | BO-1, BO-8 | Must | [CLEAR] |
 | BR-25 | A new client sees every report, assist and voice question working from the first day, on sample data the Owner clears with one button | BO-5, BO-6 | Must | [CLEAR] |

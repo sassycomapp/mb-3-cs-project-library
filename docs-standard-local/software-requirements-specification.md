@@ -48,7 +48,7 @@ Domain terms are defined in `GLOSSARY.md` once Step 16 produces it; until then, 
 - `business-requirements-document.md`, `product-requirements-document.md`
 - `mb-3-cs-concept.md`, `mb-3-cs-architecture-reference.md`, `user-flows.md`
 - `scaffold-spec.md`, `globals-contract.md`, `integration-architecture.md`, `observability-requirements.md`, `deployment-procedures.md`
-- `authoritative-schema.md`, `DESIGN.md`, `palette-tokens.md`, `custom-component-requirements-matrix.md`, `spec-calendar-feature.md`, `spec-ai-implementation.md`, `spec-team-inbox.md`, `spec-sm-syndication.md`, `vault-implementation.md`, `spec-test-specification.md`, `mb-3-cs-feature-list.md`
+- `authoritative-schema.md`, `DESIGN.md`, `custom-component-requirements-matrix.md`, `spec-calendar-feature.md`, `spec-ai-implementation.md`, `spec-team-inbox.md`, `spec-sm-syndication.md`, `vault-implementation.md`, `spec-test-specification.md`, `mb-3-cs-feature-list.md`
 - [[[default:specifications-global/spec-regulatory-compliance-baseline|Regulatory Compliance Baseline]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md), [[[default:specifications-global/spec-security|Security Specification]]](C:/dev/project-library-global/specifications-global/spec-security.md), [[[default:specifications-global/spec-api-specification|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md)
 
 ---
@@ -150,11 +150,11 @@ Anvil's platform constraints apply by default: the App Server builds and extends
 | SR-44b | No email, reminder, campaign or payment is sent for a sample record, and no sample record is exported | FR-26, FR-28 | Test (test specification 4.11) | [CLEAR] |
 | SR-45 | Voice tier 3 and tier 5 questions are read-only; no voice question changes data; voice tier 4 writes nothing until the user confirms the filled-in form | FR-27 | Test: every voice query function performs no write; tier 4 test | [CLEAR] |
 | SR-45a | A voice tier 5 request to App 5 carries figures and placeholder labels only, never a person's name | FR-27 | Payload inspection | [CLEAR] |
-| SR-46 | Profit and loss, outstanding invoices, tax and statements are computed in server code from `invoice`, `payments` and recorded `expenses`; the export writes one UTF-8 CSV per record type in the chosen format, leaving out void expenses and sample records | FR-28 | Calculation tests; export test per format | [CLEAR] |
+| SR-46 | Profit and loss, outstanding invoices, tax and statements are computed in server code from `invoice`, `payments` and recorded `expenses`; each export button writes one ZIP in that package's import format, as `integration-architecture.md` (Accounting Export) sets out, leaving out void expenses, draft and cancelled invoices and sample records | FR-28 | Calculation tests; an import test of each ZIP into the package's free trial | [CLEAR] |
 | SR-47 | The daily backup writes every table to the client's R2 bucket; `activity_log` holds no row older than 30 days after the nightly archive | FR-29 | Test | [CLEAR] |
 | SR-48 | Export all data produces a CSV of every table as a background task | FR-29 | Test | [CLEAR] |
 | SR-49 | No card number, CVV or full card data is stored in any table or log | FR-30 | Table and log scans | [CLEAR] |
-| SR-50 | Every colour on every screen comes from the Colour Scheme; the palette module sets the `--anvil-m3-*` properties from `palette-tokens.md` and follows the device's light or dark setting | FR-31 | UI conformance scans (Step 29); visual check in light and dark | [CLEAR] |
+| SR-50 | Every colour on every screen comes from the Colour Scheme; `m3x_theming` (`m3-custom-theme`) sets the palette from `business_profile.palette` and follows the device's light or dark setting | FR-31 | UI conformance scans (Step 29); visual check in light and dark | [CLEAR] |
 | SR-51 | A Help message is sent to App 5 with the Bearer token and returns a reference number; App 5's replies appear in the Help view | FR-32 | Test against App 5 | [CLEAR] |
 | SR-52 | Usage (memory, storage, email volume) is reported to App 5 daily; App 5 warns Mybizz at 80% of a container's memory and at 80% of the cluster's client limit | FR-33 | Test against App 5 | [CLEAR] |
 | SR-53 | The heartbeat reaches App 5 every 15 minutes with release version and schema fingerprint and no customer personal data | FR-34 | Test against App 5; payload inspection | [CLEAR] |

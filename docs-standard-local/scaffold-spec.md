@@ -15,7 +15,7 @@ The structure of App 1: its packages, forms, modules, navigation and startup.
 |---|---|
 | Tables and fields | `docs-standard-local/authoritative-schema.md` |
 | Custom components | `docs-standard-local/custom-component-requirements-matrix.md` |
-| Design system | `docs-local/DESIGN.md`, `docs-local/palette-tokens.md` |
+| Design system | `docs-local/DESIGN.md`; palette colours in `m3-custom-theme` |
 | Calendar forms | `specifications-local/spec-calendar-feature.md` |
 | AI, voice and sample data | `specifications-local/spec-ai-implementation.md` |
 | Email and the Team Inbox | `specifications-local/spec-team-inbox.md` |
@@ -214,7 +214,6 @@ client_code/
 ├── components/                    shared custom components: custom-component-requirements-matrix.md
 │   ├── VideoDisplayComponent/
 │   ├── FooterComponent/
-│   ├── TimeLapseCarouselComponent/
 │   ├── ParallaxComponent/
 │   ├── ClauseBuilder/
 │   ├── AIHelperComponent/
@@ -230,8 +229,7 @@ client_code/
     ├── navigation_helpers.py
     ├── validation_utils.py
     ├── formatting_utils.py
-    ├── palette_utils.py           palette and dark mode: palette-tokens.md
-    └── translations/              t(), t_plural(), translate_form(); en, fr, pt, es, de, it phrase files; formats.py; glossary.py (spec-translation)
+    └── translations/              t(), t_plural(), translate_form(); en, fr, es, de, it phrase files; formats.py; glossary.py (spec-translation)
 ```
 
 The four homepage templates, two blog list templates, three blog post templates and three landing page templates are the 12 page templates of `DESIGN.md` (Template and Layout Architecture). Each is a form in its parent's folder, loaded into the parent's content panel by the parent's template field (`business_profile.homepage_template`, `business_profile.blog_list_view`, `blog_posts.template`, `landing_pages.template_type`).
@@ -292,7 +290,7 @@ server_code/
 
 A custom component is a reusable element that the Anvil Material 3 theme does not provide and that is used in more than one place. An element used in one place only is a local form in its parent's folder.
 
-- The twelve shared custom components, where each is used and its implementation notes: `custom-component-requirements-matrix.md`.
+- The eleven shared custom components, where each is used and its implementation notes: `custom-component-requirements-matrix.md`.
 - Every shared custom component lives in `client_code/components/`, takes its settings as properties set by the host form, and uses only the tokens, typography, spacing and roles in `DESIGN.md`.
 - Components inside a custom component are only those [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) allows; browser features are reached through `anvil.js`, never `eval`.
 - Not built: animated button, card, link and image components; an onboarding palette form; chip components (matrix, Not built).
@@ -423,7 +421,7 @@ The startup form is `auth.LoginForm` (`anvil.yaml`: `startup: {module: auth.Logi
 3. A public address → the routing dependency opens the route's form.
 4. Not signed in → the sign-in form is shown.
 
-At startup the palette module applies `business_profile.palette` and starts the device light/dark watch (`palette-tokens.md`).
+At startup App 1 calls `m3x_theming.apply_saved()`, then `m3x_theming.set_palette(business_profile.palette)` and `m3x_theming.set_mode("system")`, which applies the palette and follows the device's light or dark setting (`m3-custom-theme`).
 
 ### Users service (set in the Anvil editor; agents never write `anvil.yaml`)
 
@@ -448,7 +446,7 @@ At startup the palette module applies `business_profile.palette` and starts the 
 
 | Dependency | Dependency ID | Version | Package name |
 |---|---|---|---|
-| Material 3 Theme | `4UK6WHQ6UX7AKELK` | `v1.2.6` | `m3` |
+| m3-custom-theme | `7USO6DVZSIIWA5QX` | `v2.0.0` | `m3` |
 | Routing | `3PIDO5P3H4VPEMPL` | `v0.6.1` | `routing` |
 
 - Versions are pinned. A version change is a release with its own tests.

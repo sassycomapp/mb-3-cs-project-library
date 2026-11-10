@@ -1,7 +1,7 @@
 ---
 title: "adr-schema-scope-reduction"
 doc-id: "mb-d146fc2b"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Schema Scope — Tables In and Out of a Mybizz CS Client Instance
 
@@ -28,7 +28,7 @@ A Mybizz CS client instance holds only the tables its features need (F-01 to F-3
 | `kb_articles`, `kb_categories` | A knowledge base is out of scope (concept section 14); in-app help is tooltips that open help videos (F-25), held in `master_template` |
 | `events`, `event_registrations` | Events management is out of scope (concept section 14); a class or workshop is a group session (`group_sessions`, F-11) and an event sign-up is an Event Registration landing page (F-08) |
 | `backups` | Backups are written to the client's own R2 bucket (F-29); no table records them |
-| `translations` | Screen text in six languages is code in `master_template` (`shared/translations/`), so every client receives new and corrected translations with each release (F-25) |
+| `translations` | Screen text in five languages is code in `master_template` (`shared/translations/`), so every client receives new and corrected translations with each release (F-25) |
 | `customers` | Every person is one row of `contacts` ([[[default:adr-global/adr-single-contacts-table\|Single Contacts Table]]](C:/dev/project-library-global/adr-global/adr-single-contacts-table.md) ADR) |
 
 ### Tables that are part of a client instance for these reasons

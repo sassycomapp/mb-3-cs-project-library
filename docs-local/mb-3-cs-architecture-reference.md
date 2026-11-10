@@ -15,7 +15,7 @@ Every feature carries the number and name it has in `mb-3-cs-concept.md` section
 |---|---|
 | Data tables and fields | `docs-standard-local/authoritative-schema.md` |
 | User flows | `docs-local/user-flows.md` |
-| Design system | `docs-local/DESIGN.md`; palette colour values in `docs-local/palette-tokens.md` |
+| Design system | `docs-local/DESIGN.md`; palette colour values in `m3-custom-theme` |
 | Custom components | `docs-standard-local/custom-component-requirements-matrix.md` |
 | AI, voice and sample data | `specifications-local/spec-ai-implementation.md` |
 | Calendar | `specifications-local/spec-calendar-feature.md` |
@@ -310,7 +310,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Packages: `landing_pages/`, `server_marketing/`.
 
 ### F-09 Visual and media presentation
-- Parallax hero, auto-rotating carousels with arrows and dot indicators.
+- Parallax hero; carousels are `m3.Carousel` in the hero layout, advanced every 6 seconds by a Timer on the host form, with a pause/play button; rotation stops when the visitor moves the carousel and never starts under reduced motion.
 - One video component for homepage, service pages and blog posts; accepts YouTube, Vimeo, Dailymotion and direct video addresses; hides itself when no address is set.
 - Packages: `components/`.
 
@@ -441,7 +441,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
   - Every fixed text has a phrase key. The Designer holds the key; each form calls `translate_form(self)` after `init_components`, and code uses `t(key, **values)`. Server functions return phrase keys with values, never finished text.
   - One phrase file per language (`en.py`, `fr.py`, `de.py`, `es.py`, `it.py`); Spanish is Spain's. Plural forms by each language's rule; dates, numbers and money through `formats.py`, on browser and server alike.
   - System emails, invoice, quote and statement PDFs, sample data and the public website's fixed text are in the app language. Client-edited email templates are stored per language (`email_templates.language`).
-  - Anvil's Users emails (password reset, email confirmation, two-factor reset) carry all six languages, English first, set once in App 3.
+  - Anvil's Users emails (password reset, email confirmation, two-factor reset) carry all five languages, English first, set once in App 3.
   - Stripe Elements and PayPal's buttons are given the app language as `locale`.
   - AI translates every key from English, applying the glossary of product terms; a language is offered when every key exists in it (test ST-14). A wrong translation reported through Help is corrected in the phrase file and released to every client.
   - No right-to-left language is offered.
@@ -471,7 +471,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 ### F-28 Accounts
 - Expenses (`expenses`, `expense_categories`): date, supplier, category, amount, tax, payment method, notes and a receipt image stored in R2 (`expenses/receipts/`).
 - Reports, computed in server code: profit and loss by month (payments less refunds, against expenses and gateway fees), outstanding invoices, tax collected (invoices) and tax paid (expenses), customer statements (PDF).
-- Export: one click produces one CSV file per record type — customers, invoices, invoice lines, payments, refunds, expenses — for a chosen period, in the import columns of Wave, Xero or QuickBooks; dates `YYYY-MM-DD`, plain decimal amounts, no currency symbols, UTF-8; the files are written to R2 (`exports/`) and downloaded.
+- Export: for a chosen period, **Download for Wave**, **Download for Xero** or **Download for QuickBooks** writes one ZIP to R2 (`exports/`) and downloads it, holding the period's customers, invoices, and payments, refunds, gateway fees and expenses as a bank statement, each in that package's own import format, with a `README.txt` naming the import screens in order (`integration-architecture.md`, Accounting Export).
 - Sample data is never exported.
 - Packages: `accounts/`, `server_accounts/`.
 
@@ -492,10 +492,10 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - UK GDPR, the client's own privacy law and PCI DSS: [[[default:specifications-global/spec-regulatory-compliance-baseline|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md). Card data never touches the instance; gateways handle it.
 
 ### F-31 Design system
-- The Anvil Material 3 theme (dependency ID `4UK6WHQ6UX7AKELK`) with the project deviations in `DESIGN.md`.
+- `m3-custom-theme` (dependency ID `7USO6DVZSIIWA5QX`), the full Material 3 theme built on Anvil's Material 3 theme, with the project deviations in `DESIGN.md`.
 - No hardcoded colours: every colour comes from the Colour Scheme, referenced as `%color:Name%` or `var(--anvil-m3-…)`; translucent colours are derived with `color-mix()`.
-- Four palettes, each a complete Anvil M3 Colour Scheme in light and dark, held in `palette-tokens.md`; the palette module sets the `--anvil-m3-*` properties at runtime, so native and custom components change together.
-- Dark mode follows the device setting on every screen ([[[default:adr-global/adr-dark-mode|Dark Mode]]](C:/dev/project-library-global/adr-global/adr-dark-mode.md) ADR); the palette module applies the palette's dark block and switches when the device setting changes.
+- Eight palettes (`default`, `professional_blue`, `warm_coral`, `calm_teal`, `sophisticated_purple`, `sky_blue`, `forest_green`, `desert_rose`), each a complete Material 3 colour scheme in light and dark, held in `m3-custom-theme`; at startup App 1 calls `m3x_theming.set_palette(business_profile.palette)`, which sets the colour properties at runtime, so native and custom components change together.
+- Dark mode follows the device setting on every screen ([[[default:adr-global/adr-dark-mode|Dark Mode]]](C:/dev/project-library-global/adr-global/adr-dark-mode.md) ADR); App 1 calls `m3x_theming.set_mode("system")` at startup, which applies the palette's dark scheme and switches when the device setting changes.
 - Status colours `status-success`, `status-pending`, `status-error` are fixed platform colours; status is always shown with its word as well as its colour.
 - Two contexts (management interface, public website) from one design system.
 
@@ -535,7 +535,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 | Layer | Technology | Notes |
 |---|---|---|
 | Platform | Anvil.works; Anvil App Server on DigitalOcean for client instances | Full-stack Python; client hosting in `spec-client-instance-hosting` |
-| UI | Material Design 3 (M3) | Dependency ID `4UK6WHQ6UX7AKELK` |
+| UI | Material Design 3 (M3), `m3-custom-theme` | Dependency ID `7USO6DVZSIIWA5QX` |
 | Public routing | Anvil Routing | Dependency ID `3PIDO5P3H4VPEMPL` |
 | Database | Anvil Data Tables | Each client instance's own database in DigitalOcean Managed PostgreSQL; schema in `authoritative-schema.md` |
 | Authentication | Anvil Users service | Role checks by custom decorators |

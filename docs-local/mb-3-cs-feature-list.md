@@ -220,7 +220,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 
 - Built-in accounts: invoices, payments, refunds and expenses in one place, with a photo of every receipt.
 - Reports: profit and loss by month, outstanding invoices, tax collected and tax paid, and customer statements.
-- One-click export to Wave, Xero or QuickBooks, or for the client's accountant.
+- One-click export to Wave, Xero or QuickBooks: one button for each, downloading the period's full books, ready to import.
 - No accounting subscription needed.
 
 ## 24. Data ownership and backups
@@ -242,7 +242,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 ## 26. Design and ease of use
 
 - Material Design 3, refined for a polished look.
-- Four brand palettes, changeable at any time.
+- Eight brand palettes, changeable at any time.
 - Dark mode on every screen.
 - Works on every screen size.
 - Every feature has a short help video, opened from its tooltip in a pop-up, shown in the language the client chose for the app.

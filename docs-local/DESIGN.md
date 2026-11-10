@@ -5,9 +5,9 @@ updated: "2026-11-10"
 ---
 # Mybizz CS — DESIGN
 
-This document is the design system of Mybizz CS. It is built on the **Anvil Material 3 theme** (dependency ID `4UK6WHQ6UX7AKELK`) and applies to every Mybizz CS screen: the public website, the admin area, the customer portal, and the Mybizz management app (App 5).
+This document is the design system of Mybizz CS. It is built on **`m3-custom-theme`** (dependency ID `7USO6DVZSIIWA5QX`), the full Material 3 theme built on Anvil's Material 3 theme, and applies to every Mybizz CS screen: the public website, the admin area, the customer portal, and the Mybizz management app (App 5).
 
-- The colour values of the four palettes live in `palette-tokens.md`; this document defines how colour is used.
+- The colour values of the eight palettes live in `m3-custom-theme`; this document defines how colour is used.
 - Generic Material 3 rules (accessibility, the `wrap_on` responsive mechanism, state-specification patterns) live in [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) and are not repeated here. This document states this project's choices and its deviations from the M3 defaults.
 - Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
 - Feature numbers (F-01 to F-36) are those of `mb-3-cs-concept.md`.
@@ -147,7 +147,7 @@ No hardcoded colour exception is approved. A colour need that the Colour Scheme 
 
 ### Palette Strategy
 
-The platform supports four preset palettes for client customisation. Every palette is a complete Anvil M3 Colour Scheme, generated from a locked source colour with the Material 3 algorithm, in light and dark. Only the palette changes; layout, typography, spacing and the interaction system remain fixed.
+The platform supports the eight palettes of `m3-custom-theme` for client customisation. Every palette is a complete Material 3 colour scheme, generated from locked source colours with the Material 3 algorithm, in light and dark, and checked to WCAG AA contrast. Only the palette changes; layout, typography, spacing and the interaction system remain fixed.
 
 ### Preset Palettes
 
@@ -157,8 +157,12 @@ The platform supports four preset palettes for client customisation. Every palet
 | Warm Coral | Salons, spas, lifestyle, beauty | Warmth, creativity, approachability |
 | Calm Teal | Fitness, wellness, physiotherapy, health services | Health, balance, growth |
 | Sophisticated Purple | Executive coaching, premium consulting, high-end services | Premium, refined, exclusive |
+| Sky Blue | IT support, online tutors, digital and remote services | Fresh, open, modern |
+| Forest Green | Gardeners, trades, outdoor and sustainability services, financial advisers | Growth, nature, dependability |
+| Desert Rose | Aestheticians, make-up artists, photographers, event planners | Elegant, warm, personal |
+| Default | Businesses that want the plain Material 3 look | Neutral, standard |
 
-Source colours, the generation method and every colour value: `palette-tokens.md`.
+The palette names stored in `business_profile.palette` are `default`, `professional_blue`, `warm_coral`, `calm_teal`, `sophisticated_purple`, `sky_blue`, `forest_green`, `desert_rose`. Source colours, the generation method and every colour value: `m3-custom-theme`, `m3-custom-theme.md` section 4.
 
 ### Palette Selector Requirements
 
@@ -175,11 +179,11 @@ Choosing a palette previews it live across the screen before it is saved.
 
 ### Palette Governance
 
-- Palette switching is token-driven: it sets the `--anvil-m3-*` properties and nothing else.
+- Palette switching is token-driven: the theme's module `m3x_theming` (`m3-custom-theme`) sets the palette on the page, which changes the `--anvil-m3-*` and `--m3x-color-*` properties and nothing else.
 - Switching a palette never requires page-specific redesign or branching CSS.
 - Every palette swap sets the full Colour Scheme — accent, surface, neutral, overlay and disabled colours.
 - The chosen palette applies to every screen of the client's instance: public website, admin area and customer portal.
-- Dark mode is applied by the same mechanism, from the palette's dark block, whenever the device prefers dark.
+- Dark mode is applied by the same mechanism, from the palette's dark scheme, whenever the device prefers dark: App 1 sets the mode `system` at start-up.
 
 ---
 
@@ -558,7 +562,7 @@ This section defines the primary implementation-facing forms and pages in the My
 **Key design rules:**
 - Header Style dropdown: Standard, Centered, Minimal.
 - Live preview of the public website header.
-- Colours come only from the four palettes (Brand Palette tab); typography is Roboto only. Free colour pickers and font choices are not offered, because they would break the palette system, contrast and the single type family.
+- Colours come only from the eight palettes (Brand Palette tab); typography is Roboto only. Free colour pickers and font choices are not offered, because they would break the palette system, contrast and the single type family.
 - RBAC: Owner, Manager.
 
 ### UserManagementForm
@@ -706,7 +710,7 @@ These are variation patterns built on the same design system, not separate site 
 All four templates draw from the same governed section inventory:
 
 1. **Hero (Parallax)** — ParallaxComponent with hero heading, subheading, and primary CTA.
-2. **Services showcase** — TimeLapseCarouselComponent + service card grid (M3 Cards).
+2. **Services showcase** — `m3.Carousel` (hero layout) + service card grid (M3 Cards). The carousel advances every 6 seconds through a Timer on the form calling `next()`, with a pause/play `m3.IconButton` beside it; rotation stops for good when the visitor moves the carousel, and does not start when the device asks for reduced motion.
 3. **Intro / About summary** — Short text section with heading + body text.
 4. **Video story** — VideoDisplayComponent, bound to `business_profile.home_video_url`, hidden when no URL configured.
 5. **Testimonials** — 2–3 testimonial cards with quote text and author details.
@@ -918,7 +922,7 @@ All styling should use:
 
 JavaScript stays minimal and is called through `anvil.js` (never `eval`). Approved uses:
 
-- Palette application and the device light/dark watch (`palette-tokens.md`).
+- Palette application and the device light/dark watch, done by the theme's module `m3x_theming` (`m3-custom-theme`).
 - Parallax scroll effects.
 - Microphone capture and browser speech synthesis for WhatsUp voice (F-27).
 - Clipboard copy and the device share menu (`navigator.share`) for social media sharing (F-21, `spec-sm-syndication.md`).
@@ -938,7 +942,7 @@ Every piece of screen text comes from a phrase key in `shared/translations/` (F-
 
 ### Storage Guidance
 
-The palette key is read from `business_profile.palette` at startup. It may be cached in the browser's session storage to avoid a flash of the default palette; the stored value is always replaced by the server value once loaded.
+At startup, App 1 calls `m3x_theming.apply_saved()`, which applies the browser's last palette at once and avoids a flash of the default palette, then `m3x_theming.set_palette(business_profile.palette)` and `m3x_theming.set_mode("system")`, so the server value always wins once loaded.
 
 ---
 
@@ -1183,7 +1187,7 @@ The booking flow uses 3 server round-trips maximum ([[[default:adr-global/adr-fo
 ## Accounts Design (F-28)
 
 - **ExpenseEditorForm:** date, supplier, category, amount, tax included, payment method, notes, and a receipt area with Take Photo (on a phone) and Upload; the receipt shows as a thumbnail.
-- **AccountsForm:** tabs Profit and Loss, Outstanding, Tax, Statements, Export; figures in tables with the period selector at the top; Export offers the period, the format (Wave, Xero, QuickBooks, CSV) and one Export button.
+- **AccountsForm:** tabs Profit and Loss, Outstanding, Tax, Statements, Export; figures in tables with the period selector at the top; Export offers one period (From and To, last month by default) and three buttons: Download for Wave, Download for Xero, Download for QuickBooks.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "globals-contract"
 doc-id: "mb-0542088e"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — globals.py Contract
 
@@ -70,9 +70,9 @@ Display only: it decides what the interface shows. Every server function checks 
 
 | Field | Value |
 |-------|-------|
-| **Type** | `str` — `professional_blue`, `warm_coral`, `calm_teal`, `sophisticated_purple` — or `None` |
+| **Type** | `str` — `default`, `professional_blue`, `warm_coral`, `calm_teal`, `sophisticated_purple`, `sky_blue`, `forest_green` or `desert_rose` — or `None` |
 | **Set by** | `LoginForm` and `PublicLayout` at startup, from `business_profile.palette`; `PaletteSettingsForm` on save |
-| **Read by** | `shared/palette_utils.py` (applies the palette and its dark block, `palette-tokens.md`) |
+| **Read by** | `m3x_theming.set_palette` (`m3-custom-theme`), which applies the palette; `m3x_theming.set_mode("system")` applies its dark scheme when the device prefers dark |
 | **When None** | Apply `professional_blue` |
 
 ### current_contact
