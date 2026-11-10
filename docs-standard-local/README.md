@@ -1,7 +1,7 @@
 ---
 title: "README"
 doc-id: "mb-73c33e9a"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # docs-standard-local
 
@@ -23,7 +23,7 @@ The standard documents every Mybizz project keeps, canonical to this project. Ea
 | `vault-implementation.md` | Where every secret is kept and who reads it |
 | `notification-system.md` | Every email and alert the application sends |
 | `observability-requirements.md` | Logging, metrics, alerts and the heartbeat to App 5 |
-| `capacity-and-plan-tiers.md` | A client's use against its Anvil plan tier |
+| `capacity-and-plan-tiers.md` | A client's use against its container's and cluster's limits |
 | `data-retention-schedule.md` | How long each kind of data is kept |
 | `backup-and-recovery.md` | Backups to the client's buckets, and restoring them |
 | `incident-response-plan.md` | Handling a security incident, and the POPIA notices it requires |

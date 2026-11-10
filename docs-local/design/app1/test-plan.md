@@ -1,7 +1,7 @@
 ---
 title: "test-plan"
 doc-id: "mb-2a09f0d3"
-updated: "2026-11-07"
+updated: "2026-11-10"
 ---
 
 # Mybizz CS — Test Plan (App 1, run app1)
@@ -120,7 +120,7 @@ No email, payment, reminder or export touches a sample record; Clear sample data
 
 ## 12. Exit export (§22 row 12)
 
-Every table in full, `encryption_key` and the decrypted Vault into the client's bucket; proven on the private test client before the first release. **Tests:** `IN-14`, `RL-08`; `offboarding-procedure.md` §4.
+Every table in full, `encryption_key` and the decrypted Vault into the client's bucket; proven on the test client instance before the first release. **Tests:** `IN-14`, `RL-08`; `offboarding-procedure.md` §4.
 
 ## 13. Structural isolation (§22 row 13)
 

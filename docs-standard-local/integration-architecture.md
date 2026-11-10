@@ -1,7 +1,7 @@
 ---
 title: "integration-architecture"
 doc-id: "mb-af335781"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Integration Architecture
 
@@ -122,7 +122,7 @@ Every email of a client instance, received and sent, goes through **Amazon SES**
 - **Cost:** Cloudflare's free allowance is 10 GB of storage, 1 million write operations and 10 million read operations a month; downloads are free. Usage above the allowance is billed by Cloudflare to the client's payment method; storage above 10 GB costs $0.015 per GB per month (concept section 9.5).
 - The bucket's access keys are in the client's Vault; they never appear in code, in Anvil Secrets or in any document.
 - `server_storage/r2_service` is the only module that reads or writes the bucket.
-- Every app runs on Python 3.14. R2 and Amazon SES are reached with `boto3`, installed from PyPI in the Python environment of App 1, App 2 and App 3 (Settings → Python versions, `requirements.txt`), so every client instance cloned from App 3 carries it. The private test instance proves both before the first release.
+- Every app runs on Python 3.14. R2 and Amazon SES are reached with `boto3`, installed from PyPI in the Python environment of App 1, App 2 and App 3 (Settings → Python versions, `requirements.txt`) and in the release image, so every client instance carries it. The test client instance proves both before the first release.
 
 | Object | Folder | Written | Kept in the tables |
 |---|---|---|---|
@@ -211,7 +211,7 @@ Times are in the business's time zone.
 
 ### Where the schedule lives
 
-Scheduled tasks belong to the app that runs them. They are set up in App 3 (`blank_client_template`), calling the background tasks in `master_template`, so that every cloned instance carries the same schedule; App 1 carries the same schedule for development. Before the scaffold plan (Step 31) relies on it, App 1 proves once that an app can schedule a background task of its dependency and serve its dependency's HTTP endpoints.
+Scheduled tasks belong to the app that runs them. They are set up in App 3 (`blank_client_template`), calling the background tasks in `master_template`, so that every client instance carries the same schedule through the release image; App 1 carries the same schedule for development. Before the scaffold plan (Step 31) relies on it, App 1 proves once that an app can schedule a background task of its dependency and serve its dependency's HTTP endpoints.
 
 ---
 
@@ -240,7 +240,7 @@ When a client leaves (step by step: `docs-standard-local/client-exit-handover.md
 1. A full export of every data table, every email, the instance's `encryption_key`, and the Vault's contents in decrypted form are written into the client's R2 bucket (`exports/`), beside the backups, history, emails and webhook payloads it already holds.
 2. The client confirms the export is in the bucket.
 3. Mybizz's Cloudflare user leaves the client's Cloudflare account, which also ends Mybizz's bucket token. The account and everything in it stay the client's.
-4. The client's domain is disconnected from the instance; App 5 removes the client's DNS records for SES at the client's request, deletes the client's SES tenant, identity, receipt rule and AWS keys, and empties the client's S3 prefix; the instance and its Anvil account are closed. App 5 keeps only the records Mybizz is legally required to keep.
+4. The client's domain is disconnected from the instance; App 5 removes the client's DNS records for SES at the client's request, deletes the client's SES tenant, identity, receipt rule and AWS keys, and empties the client's S3 prefix; App 5's Remove action deletes the instance's container and database. App 5 keeps only the records Mybizz is legally required to keep.
 
 Mybizz keeps none of the client's data after the client leaves.
 

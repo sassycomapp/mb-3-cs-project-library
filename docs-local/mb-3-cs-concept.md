@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-concept"
 doc-id: "mb-f23e1822"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Concept
 
@@ -217,7 +217,7 @@ That total does not include a team email inbox, voice access, backups, legal pag
 
 | | HoneyBook Premium | GoHighLevel Starter | **Mybizz CS** |
 |---|---|---|---|
-| Price per month | $129, plus a website at $23 | $97, plus $97 for unlimited AI | **$150** |
+| Price per month | $129, plus a website at $23 | $97, plus $97 for unlimited AI | **$99** |
 | Same price at any team size | no — 10 people maximum | yes | **yes** |
 | Payments through any gateway, no processor markup | no — 2.9% + $0.25 through HoneyBook | — | **yes** |
 | Paystack built in, for Africa | — | — | **yes** |
@@ -232,7 +232,7 @@ That total does not include a team email inbox, voice access, backups, legal pag
 
 | | Booksy | Vagaro | Mindbody | **Mybizz CS** |
 |---|---|---|---|---|
-| Base price | $29.99/mo | about $30/mo | $99–$699/mo | **$150/mo** |
+| Base price | $29.99/mo | about $30/mo | $99–$699/mo | **$99/mo** |
 | Per-staff fee | +$20/person | +$10/calendar | included | **included** |
 | Processing fee | 2.49–2.69% | 2.2–3.5% | 3.5% | **gateway rate only** |
 | Marketplace commission | up to $49.99/mo (Boost) | none | 20% new customer | **none** |
@@ -488,14 +488,14 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - A problem that stops a client's business is acknowledged within 4 business hours, and the fix reaches every client through `master_template` as soon as it is proven
 
 **F-33 Hosting**
-- Each client runs on its own Mybizz-owned Anvil Business account, in its own app with its own database, on the client's own domain
-- Each client's app has the full Business limits of its account: 1,000,000 data table rows; heavy jobs run as background tasks
+- Each client runs in its own app with its own database, on the client's own domain, hosted by Mybizz on DigitalOcean
+- Each client's app has its own memory and its own database; heavy jobs run as background tasks
 - Improvements reach every client automatically, with nothing for the client to install
 
 **F-34 Mybizz management app**
 - Built and running before the first paying client
-- Client registry and registration, provisioning of new client instances (the Anvil account, the client's R2 bucket, the client's Amazon SES identity and the client's DNS records), client reference numbers and credentials
-- Usage monitoring per client, health monitoring, billing, update distribution
+- Client registry and registration, provisioning of new client instances (the client's app and database, the client's R2 bucket, the client's Amazon SES identity and the client's DNS records), client reference numbers and credentials
+- Usage monitoring per client, health monitoring, billing, release distribution
 - At-risk alerts: Mybizz is alerted when a client has no staff sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days, so the founder can act before the client leaves
 - Support tickets and feedback (F-32)
 
@@ -516,19 +516,18 @@ Every new client starts with three months of sample data for a business in the c
 
 ### 9.1 Price
 
-**$150 per client per month.** One price for every client. Unlimited staff are included. There is no commission on bookings or payments, and no add-on: AI, voice, email, accounts and hosting are all in the price.
+**$99 per client per month.** One price for every client. Unlimited staff are included. There is no commission on bookings or payments, and no add-on: AI, voice, email, accounts and hosting are all in the price.
 
 ### 9.2 Billing model
 
-Billing is monthly, month to month, with no contract. Mybizz invoices each client at the start of each month. A client can leave at any time, taking the client's R2 bucket with every backup, email and export in it.
+Billing is monthly, in advance, month to month, with no contract. Mybizz invoices each client at the start of each month. A client can leave at any time, effective at the end of the paid month, taking the client's R2 bucket with every backup, email and export in it.
 
 There is no free trial and no money-back period. A prospective client sees the whole product before paying in the two demo apps (F-36): `demo.mybizz.live`, a working business with sample data, and `try.mybizz.live`, an empty Mybizz CS for trying setup.
 
 ### 9.3 Hosting
 
-- Mybizz owns and pays for the Anvil Business account that runs each client instance: one account per client.
-- Each client runs in its own app with its own database, on the client's own domain, with the full limits of its account.
-- Anvil's Hobby plan is not used, because Anvil licenses the Hobby plan for personal projects only.
+- Mybizz runs and pays for each client instance: its own container and its own database on DigitalOcean ([[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md)).
+- Each client runs in its own app with its own database, on the client's own domain.
 
 ### 9.4 Assisted setup
 
@@ -544,7 +543,7 @@ New costs are added to this list as they are identified.
 - **Cloudflare R2:** the client's backups and history are kept in a free Cloudflare account in the client's own name, set up at registration. Cloudflare asks for a payment method; storage above the free 10 GB a month is billed by Cloudflare to the client, at $0.015 per GB a month.
 
 **Absorbed by Mybizz:**
-- **The Anvil Business account** that runs the client's application instance.
+- **Hosting:** the container and database that run the client's application instance.
 - **Email:** every email received and sent, through Amazon SES, at $0.10 per 1,000 emails.
 - **AI voice:** speech-to-text and natural-sounding speech (Groq).
 - **AI text:** the AI writing service behind the assists (Groq).
@@ -553,9 +552,9 @@ New costs are added to this list as they are identified.
 
 | | Monthly | Yearly |
 |---|---|---|
-| Revenue at capacity (100 clients × $150) | $15,000 | $180,000 |
-| Hosting (100 Business accounts at $89, billed annually) | $8,900 | $106,800 |
-| **Gross margin before other costs** | **$6,100** | **$73,200** |
+| Revenue at capacity (100 clients × $99) | $9,900 | $118,800 |
+| Hosting at 100 clients (Client Instance Hosting section 11) | $1,796 | $21,552 |
+| **Gross margin before other costs** | **$8,104** | **$97,248** |
 
 Email and AI cost a few dollars per client per month and are recorded per client in the Mybizz management app (F-34).
 
@@ -673,7 +672,7 @@ The visual identity is the design system in F-31: the Anvil Material 3 theme wit
 *What happens to your customers when you leave? On marketplace platforms, they stay behind. On Mybizz CS your customer list is yours on day one and yours on the last day. Take it anywhere. No one else has a copy.*
 
 **On pricing:**
-*A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over $300 a month — and every staff member adds more. Mybizz CS is $150 a month for all of it and more, for your whole team, with email, accounts, AI and voice included. No contract, no add-ons.*
+*A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over $300 a month — and every staff member adds more. Mybizz CS is $99 a month for all of it and more, for your whole team, with email, accounts, AI and voice included. No contract, no add-ons.*
 
 **On simplicity:**
 *Set up your business once. Website, booking, payments, CRM, sales, email, invoicing, accounts — all connected, all working, all in one place. Then run your business.*
@@ -730,7 +729,7 @@ The following are not part of Mybizz CS:
 |---|---|
 | First clients onboarded | 10 |
 | Total clients at capacity | 100 |
-| Annual recurring revenue at capacity | $180,000 |
+| Annual recurring revenue at capacity | $118,800 |
 | Client retention (year 1 to year 2) | >90% |
 | Average onboarding-to-live time | <7 days |
 | Support tickets per client per month | <2 |
@@ -745,7 +744,7 @@ The following are not part of Mybizz CS:
 
 **Competitors copying.** Features can be copied. Mybizz CS's defence is what cannot be copied easily: the Africa and Paystack positioning, founder-direct support, and an ownership architecture that marketplace platforms cannot offer.
 
-**Cost per client.** Hosting, AI and voice have a real cost per client. The Mybizz management app records each client's hosting, email and AI usage (F-33, F-34), each client has an Anvil account of its own, and the cost per client is reviewed every month.
+**Cost per client.** Hosting, AI and voice have a real cost per client. The Mybizz management app records each client's hosting, email and AI usage (F-33, F-34), each client has its own container and database, and the cost per client is reviewed every month.
 
 **A problem with no name.** Business owners feel overwhelmed by tools and costs, but do not name the problem. Mybizz CS marketing names the problem — the five-tool problem — before it sells the features.
 

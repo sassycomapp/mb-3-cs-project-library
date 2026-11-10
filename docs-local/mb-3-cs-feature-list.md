@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-feature-list"
 doc-id: "mb-46a56ee7"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Feature List
 
@@ -9,9 +9,9 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 
 ## 1. Price and terms
 
-- $150 a month, one flat price.
+- $99 a month, one flat price.
 - Unlimited staff at no extra cost.
-- Month-to-month, with no contract.
+- Month-to-month, with no contract; cancel at any time, effective at the end of the paid month.
 - No add-ons: AI, voice, email, accounts and hosting are all included.
 - The client pays only the payment gateway's own fee on each payment. Mybizz adds no markup.
 - The client can leave at any time with all its data.
@@ -250,7 +250,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 
 ## 27. Hosting and updates
 
-- Each client runs on its own Mybizz-owned Anvil Business account.
+- Each client runs in its own app with its own database, hosted by Mybizz.
 - Improvements reach every client automatically, with nothing for the client to install.
 - Mybizz monitors each client's health around the clock.
 

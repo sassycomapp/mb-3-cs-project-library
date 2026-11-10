@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-architecture-reference"
 doc-id: "mb-7d6be180"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Architecture Reference
 
@@ -30,13 +30,13 @@ Every feature carries the number and name it has in `mb-3-cs-concept.md` section
 
 The five-app model is Mybizz-wide ([[[default:specifications-global/spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md)). This section is the Mybizz CS instance of that model.
 
-| App | Role | Anvil app and GitHub repository | Hosted on | Web address |
+| App | Role | Repository | Hosted on | Web address |
 |---|---|---|---|---|
-| App 1 | Development workspace | `mb-3-cs-app1` | Mybizz development account (Business plan) | `mb-3-cs-app1.mybizz.live` |
-| App 2 | `master_template` — the published dependency | `mb-3-cs-app2` | Mybizz development account | none |
-| App 3 | `blank_client_template` — the provisioning clone source | `mb-3-cs-app3` | Mybizz development account | none |
-| App 4 | Client instances, one per client | `[client-name]-cs` | One Mybizz-owned Anvil Business account per client | the client's own domain |
-| App 5 | Mybizz management app | `mb-3-cs-app5` | Mybizz development account | `mb-3-cs-app5.mybizz.live` |
+| App 1 | Development workspace | `mb-3-cs-app1` | Mybizz's Anvil Business account | `mb-3-cs-app1.mybizz.live` |
+| App 2 | `master_template` — the published dependency | `mb-3-cs-app2` | Mybizz's Anvil Business account | none |
+| App 3 | `blank_client_template` — the client app | `mb-3-cs-app3` | Mybizz's Anvil Business account | none |
+| App 4 | Client instances, one per client | release image defined in `mb-3-cs-app4` | DigitalOcean: one container and one database per client | the client's own domain |
+| App 5 | Mybizz management app | `mb-3-cs-app5` | Mybizz's Anvil Business account | `mb-3-cs-app5.mybizz.live` |
 
 ### App 1 — development workspace
 - All feature development happens here. Holds every data table (development and test data), every form, every server module and all application code.
@@ -47,63 +47,63 @@ The five-app model is Mybizz-wide ([[[default:specifications-global/spec-five-ap
 - The sole source of all server-side logic and all forms for every client instance.
 - Receives App 1's tagged release, pushed into its repository by the developer (Step 42).
 - Stateless: holds no client data.
-- Shared to the client hosting accounts as a dependency by its dependency ID. A client instance calling `anvil.server.call()` runs `master_template`'s server modules; a client instance showing a form shows `master_template`'s form.
+- Built into the release image with App 3. A client instance calling `anvil.server.call()` runs `master_template`'s server modules; a client instance showing a form shows `master_template`'s form.
 
 ### App 3 — `blank_client_template`
-- The only clone source for new client instances.
-- Holds the full schema (no data), one startup module, and `master_template` as a dependency. Zero server modules, zero forms.
-- Updated only when the schema changes. Anvil Secrets are left empty and set per instance at provisioning.
-- Anvil cannot create tables programmatically; cloning App 3 is how every instance gets the schema.
+- The client app every client instance runs.
+- Holds the full table definitions (no data), one startup module, the scheduled tasks and `master_template` as a dependency. Zero server modules, zero forms.
+- Updated at every release that changes the table definitions. `encryption_key` is set per instance at provisioning.
+- Each client's App Server builds the client's tables from App 3's table definitions, and adds each release's new tables and columns.
 
 ### App 4 — client instances
-- Each client instance is cloned from App 3 into the client's own Mybizz-owned hosting account.
-- Holds the schema, the startup module and an active dependency on `master_template`. Nothing else.
-- Updated automatically: server logic, forms and UI arrive through the dependency. Schema changes are applied manually.
-- Clients never have access to the Anvil editor or to any source code. Clients use their app only.
+- Each client instance runs on the Anvil App Server, as one container on DigitalOcean App Platform named `[client-name]-cs`, with its own database in Mybizz CS's DigitalOcean Managed PostgreSQL cluster ([[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md)).
+- Runs the release image: App 3 and `master_template` on the App Server version Mybizz pins. Nothing else.
+- Updated through the release image: App 5's Release action moves every client instance to each new release; new tables and columns arrive with it.
+- The test client instance is a client instance of its own, holding test data only.
+- Clients never have access to the container, the database or any source code. Clients use their app only.
 
 ### App 5 — Mybizz management app
 - Built and running before the first paying client (F-34).
 - Does not depend on client instances. Communicates with client instances through HTTP endpoints secured with a per-client Bearer token ([[[default:specifications-global/spec-api-specification|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md), [[[default:adr-global/adr-mybizz-management-visibility|Mybizz_management Visibility and Control]]](C:/dev/project-library-global/adr-global/adr-mybizz-management-visibility.md) ADR).
+- Creates, releases to and removes client instances through the DigitalOcean API.
 - Client instances expose the management endpoints from their first day.
 
 ---
 
-## 2. Rule: No Forms or Server Modules in a Client Instance
+## 2. Rule: No Forms or Server Modules in App 3
 
-A client instance inherits all logic and UI live from `master_template`. A form or server module added directly to a client instance silently and permanently overrides the dependency for that instance, with no error or warning, and that instance stops receiving updates.
+Every client instance runs App 3 on `master_template`. A form or server module added to App 3 silently overrides `master_template` for every client, and later fixes to that form or module stop reaching clients.
 
-- The startup module is the only code allowed in a client instance.
-- A change needed for one client is made in App 1, tested against a private client instance, and released into `master_template` (Step 42); every client instance then receives it.
-- Every client instance carries a README stating this rule from provisioning ([[[default:adr-global/adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]]](C:/dev/project-library-global/adr-global/adr-client-instance-readme-five-app-system.md) ADR). An agent working in a client instance without that README stops and locates it first.
+- App 3 holds only its startup module, table definitions and scheduled tasks.
+- A change needed for one client is made in App 1, tested on the test client instance, and released into `master_template` (Step 42); every client instance then receives it.
+- App 3's repository and `mb-3-cs-app4` carry a README stating this rule ([[[default:adr-global/adr-client-instance-readme-five-app-system|Mandatory README in Every Client Instance Documenting the Five-App System]]](C:/dev/project-library-global/adr-global/adr-client-instance-readme-five-app-system.md) ADR); the image build stops if App 3 holds a form or server module.
 
 ---
 
 ## 3. Data Isolation
 
-- Each client instance is a separate Anvil app with a separate database, on its own Anvil account. `app_tables` always resolves to the current client's data. Cross-client access is architecturally impossible.
-- `master_template` holds no client data. All state lives in the client's own data tables and the client's own R2 bucket.
+- Each client instance is a separate App Server with a separate database. `app_tables` always resolves to the current client's data. Cross-client access is architecturally impossible.
+- `master_template` holds no client data. All state lives in the client's own database and the client's own R2 bucket.
 - Mybizz does not copy a client's customer data into App 5. App 5 holds client-level records only: registry, usage figures, health, billing, tickets and feedback.
 
 ---
 
 ## 4. Hosting and Capacity (F-33)
 
-- **Plan:** every hosting account is an Anvil Business account owned by Mybizz. The Hobby plan is never used.
-- **One account per client:** each client instance is the only client app on its hosting account and has the account's full Business limits: 1,000,000 data table rows and 100,000 Anvil emails a month (unused: email goes through Amazon SES, F-18).
-- **Usage reporting:** each client instance reports its row count, storage, email volume, heavy-job activity, last staff sign-in and last booking date to App 5 through the management endpoints, on a schedule.
-- **Heavy jobs:** imports, exports, backups, AI generation, briefings, campaign sending and inbound email processing run as Anvil background tasks.
-- **Capacity:** a hard limit of 100 client instances for Mybizz CS.
+- **Platform:** each client instance runs in its own DigitalOcean App Platform container (1 GiB memory), with its own database in Mybizz CS's Managed PostgreSQL cluster, as [[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md) sets out. Email goes through Amazon SES (F-18).
+- **Usage reporting:** each client instance reports its memory use, storage, email volume, heavy-job activity, last staff sign-in and last booking date to App 5 through the management endpoints, on a schedule.
+- **Heavy jobs:** imports, exports, backups, AI generation, briefings, campaign sending and inbound email processing run as background tasks.
+- **Capacity:** a hard limit of 100 client instances for Mybizz CS. The cluster is sized to the client count (Client Instance Hosting section 4).
 
 ---
 
 ## 5. Provisioning and Registration (F-03, F-34)
 
 1. The client registers. App 5 creates the client record and the client reference number. As part of registration, the client opens a free Cloudflare account in the client's own name, adds a payment method, switches R2 on, adds the client's domain to Cloudflare DNS, and invites Mybizz's Cloudflare user as a member with the roles Cloudflare R2 Admin and DNS.
-2. Mybizz opens a new Anvil Business account for the client.
-3. Mybizz clones App 3 into that account as `[client-name]-cs`.
-4. Mybizz sets the instance's Anvil Secret (`encryption_key`) and the instance's Bearer token. App 5 accepts the client's Cloudflare invitation, creates the client's R2 bucket and a token for that bucket only, creates the client's Amazon SES tenant, domain identity, receipt rule, SNS topics and scoped AWS keys (`spec-team-inbox.md`), and writes every key into the instance's Vault. Anvil's Email service in the instance is set to Custom Mail Server with the SES SMTP endpoint. The Bearer token and the client's Mybizz-side credentials are stored in App 5.
-5. App 5 loads the sample data for the client's trade (section 16).
-6. The client completes the onboarding wizard in the instance (F-03); its domain step has App 5 write the client's DNS records (website, MX, DKIM, MAIL FROM, SPF, DMARC) through the Cloudflare API.
+2. App 5's New client action creates the client's database and database user, the instance's `encryption_key`, Bearer token and container keys, and the client's container `[client-name]-cs` from the current release image; the App Server builds the client's tables.
+3. App 5 accepts the client's Cloudflare invitation, creates the client's R2 bucket and a token for that bucket only, creates the client's Amazon SES tenant, domain identity, receipt rule, SNS topics and scoped AWS keys (`spec-team-inbox.md`), and writes every key into the instance's Vault. The container's SMTP settings hold the SES SMTP endpoint and the client's SES credentials. The Bearer token and the client's Mybizz-side credentials are stored in App 5.
+4. App 5 loads the sample data for the client's trade (section 16).
+5. The client completes the onboarding wizard in the instance (F-03); its domain step has App 5 add the client's domain to the container and write the client's DNS records (website, MX, DKIM, MAIL FROM, SPF, DMARC) through the Cloudflare API.
 
 Procedure detail: [[[default:specifications-global/spec-client-activation-runbook|Client Instance Activation Runbook]]](C:/dev/project-library-global/specifications-global/spec-client-activation-runbook.md).
 
@@ -511,7 +511,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 
 ### F-34 Mybizz management app
 - App 5, `mb-3-cs-app5`, built before the first paying client.
-- Functions: client registry and registration (client reference numbers, credentials), provisioning (section 5) including the Anvil account, R2 bucket, Amazon SES identity and DNS records, usage monitoring (section 4), health monitoring, billing (monthly invoices to clients), update distribution, support tickets and feedback (F-32), the AI and voice gateway (F-26, F-27), the demo apps (F-36).
+- Functions: client registry and registration (client reference numbers, credentials), provisioning (section 5) including the container and database, R2 bucket, Amazon SES identity and DNS records, usage monitoring (section 4), health monitoring, billing (monthly invoices to clients), release distribution, support tickets and feedback (F-32), the AI and voice gateway (F-26, F-27), the demo apps (F-36).
 - App 5 holds Mybizz's AWS account access (SES, S3, SNS) and Mybizz's Cloudflare user.
 - At-risk alerts: each client instance reports its last staff sign-in and last booking date with its usage report. App 5 alerts the founder when a client has no staff sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days.
 
@@ -534,15 +534,15 @@ Each feature below states its packages, data, rules and links. Tables and fields
 
 | Layer | Technology | Notes |
 |---|---|---|
-| Platform | Anvil.works | Full-stack Python, built-in hosting and HTTPS |
+| Platform | Anvil.works; Anvil App Server on DigitalOcean for client instances | Full-stack Python; client hosting in `spec-client-instance-hosting` |
 | UI | Material Design 3 (M3) | Dependency ID `4UK6WHQ6UX7AKELK` |
 | Public routing | Anvil Routing | Dependency ID `3PIDO5P3H4VPEMPL` |
-| Database | Anvil Data Tables | PostgreSQL-backed; schema in `authoritative-schema.md` |
+| Database | Anvil Data Tables | Each client instance's own database in DigitalOcean Managed PostgreSQL; schema in `authoritative-schema.md` |
 | Authentication | Anvil Users service | Role checks by custom decorators |
 | Anvil Secrets | `encryption_key` only | Used only by `vault_service.py` |
 | Storage, backups, history | Cloudflare R2 | One bucket per client |
 | Payments | Stripe, Paystack, PayPal | One gateway-agnostic service |
-| Email | Amazon SES (sending, receiving, tracking) | Mybizz's AWS account, one tenant per client; Anvil's Email service set to the SES SMTP endpoint |
+| Email | Amazon SES (sending, receiving, tracking) | Mybizz's AWS account, one tenant per client; each container's SMTP settings hold the SES SMTP endpoint |
 | AI text | Groq (provider configurable in App 5) | Called through App 5 |
 | Speech | Groq Whisper (speech-to-text); browser SpeechSynthesis and Groq TTS (text-to-speech) | Groq called through App 5 |
 | Translation | `shared/translations/` | Phrase files per language, `formats.py`, `glossary.py` ([[[default:specifications-global/spec-translation\|Translation]]](C:/dev/project-library-global/specifications-global/spec-translation.md)) |

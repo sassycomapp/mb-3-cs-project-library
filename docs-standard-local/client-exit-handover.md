@@ -1,7 +1,7 @@
 ---
 title: "client-exit-handover"
 doc-id: "mb-bbb82062"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Offboarding Procedure
 
@@ -43,7 +43,7 @@ The client's domain is also the client's own, registered by the client.
 | 4 | Mybizz's Cloudflare user leaves the client's Cloudflare account. This ends Mybizz's bucket token and its DNS access. The account and everything in it stay the client's | Mybizz |
 | 5 | App 5 removes the SES DNS records from the client's domain if the Owner asks (DKIM, MAIL FROM, SPF, DMARC, MX), before step 4; otherwise the Owner removes them | App 5 or Owner |
 | 6 | App 5 deletes the client's SES tenant, domain identity, receipt rule, SNS topics and AWS keys, and empties the client's S3 prefix | App 5 |
-| 7 | The client's domain is disconnected from the instance; the instance is deleted and its Mybizz-owned Anvil Business account is closed | Mybizz |
+| 7 | The client's domain is disconnected from the instance; App 5's Remove action deletes the instance's container, database and database user | App 5 |
 | 8 | App 5 marks the client as left and keeps only the records Mybizz must keep by law (invoices and payments from Mybizz to the client) | App 5 |
 | 9 | Mybizz emails the Owner that offboarding is complete | Mybizz |
 
@@ -52,7 +52,7 @@ The client's domain is also the client's own, registered by the client.
 - The export (step 2) is never skipped and is confirmed (step 3) before anything is deleted.
 - Mybizz keeps none of the client's data after step 8.
 - The decrypted Vault holds live credentials. The Owner is told in the step 9 email to change the gateway keys (Stripe, Paystack, PayPal) once the instance is closed.
-- The exit export is proven on the private test client before the first release.
+- The exit export is proven on the test client instance before the first release.
 
 ---
 

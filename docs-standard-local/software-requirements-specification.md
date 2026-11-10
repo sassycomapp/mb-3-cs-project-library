@@ -1,7 +1,7 @@
 ---
 title: "software-requirements-specification"
 doc-id: "mb-f157e3fc"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Software Requirements Specification (SRS)
 
@@ -32,8 +32,8 @@ Domain terms are defined in `GLOSSARY.md` once Step 16 produces it; until then, 
 
 | Term | Meaning |
 |---|---|
-| Client instance | App 4: one client's Anvil app, cloned from App 3, depending on App 2 |
-| Hosting account | A Mybizz-owned Anvil Business account holding one client instance |
+| Client instance | App 4: one client's container running the release image (App 3 on App 2, on the Anvil App Server), with its own database |
+| Release image | App 3, App 2 and `m3` on the pinned Anvil App Server, built once per release in `mb-3-cs-app4` |
 | Role decorator | The server-side check in `server_auth/rbac` that refuses a call from a role not allowed |
 | Payment hold | The 15-minute `pending` state of a booking whose online payment has not yet succeeded |
 | Heartbeat | The 15-minute report from a client instance to App 5 |
@@ -68,14 +68,14 @@ The 36 features F-01 to F-36 of `mb-3-cs-concept.md` section 7, summarised in PR
 - Users include people who rely on keyboard, screen reader or high contrast (WCAG 2.1 AA). `[CLEAR]`
 
 ### 2.4 Constraints
-Anvil's platform constraints apply by default: no programmatic Data Table schema API (schema changes are manual, per instance); no self-hosted fallback; one environment and one database per app; the Skulpt client runtime (money and date logic on the server only); no WebSocket push (client polling); lazy-loaded rows. Beyond the platform default:
-- A client instance holds no form or server module; one would silently override `master_template` (reference section 2).
-- The Hobby plan is never used; every hosting account is a Mybizz-owned Business account.
+Anvil's platform constraints apply by default: the App Server builds and extends each client's tables from App 3's table definitions, and a release only adds tables and nullable columns; one environment and one database per app; the Skulpt client runtime (money and date logic on the server only); no WebSocket push (client polling); lazy-loaded rows. Beyond the platform default:
+- App 3 holds no form or server module; one would silently override `master_template` for every client (reference section 2).
+- Every client instance runs in its own container with its own database on DigitalOcean (`spec-client-instance-hosting`).
 - The only Anvil Secret is `encryption_key`.
 - Agents never read or write `.env`, never write `anvil.yaml`, and never commit. `[CLEAR]`
 
 ### 2.5 Assumptions and Dependencies
-- Anvil permits the account structure (BRD AC-6). `[MISSING]`
+- The Anvil App Server version Mybizz pins runs every feature as Anvil's hosted service runs it; the full test suite on the release image proves it before each release. `[PARTIAL]`
 - An app can schedule its dependency's background tasks and serve its dependency's HTTP endpoints (PRD OQ-2). `[MISSING]`
 - Outside services as in `integration-architecture.md`. `[CLEAR]`
 - Amazon grants SES production access to Mybizz's AWS account (BRD AC-14). `[PARTIAL]`
@@ -156,7 +156,7 @@ Anvil's platform constraints apply by default: no programmatic Data Table schema
 | SR-49 | No card number, CVV or full card data is stored in any table or log | FR-30 | Table and log scans | [CLEAR] |
 | SR-50 | Every colour on every screen comes from the Colour Scheme; the palette module sets the `--anvil-m3-*` properties from `palette-tokens.md` and follows the device's light or dark setting | FR-31 | UI conformance scans (Step 29); visual check in light and dark | [CLEAR] |
 | SR-51 | A Help message is sent to App 5 with the Bearer token and returns a reference number; App 5's replies appear in the Help view | FR-32 | Test against App 5 | [CLEAR] |
-| SR-52 | Usage (rows, storage, email volume) is reported to App 5 daily; App 5 warns Mybizz at 80% of the account's 1,000,000 rows | FR-33 | Test against App 5 | [CLEAR] |
+| SR-52 | Usage (memory, storage, email volume) is reported to App 5 daily; App 5 warns Mybizz at 80% of a container's memory and at 80% of the cluster's client limit | FR-33 | Test against App 5 | [CLEAR] |
 | SR-53 | The heartbeat reaches App 5 every 15 minutes with release version and schema fingerprint and no customer personal data | FR-34 | Test against App 5; payload inspection | [CLEAR] |
 | SR-53a | AI and speech requests pass through App 5 without their content being stored or logged; App 5 records only each client's usage counts; Mybizz's Groq organisation has Zero Data Retention on | FR-26, FR-34 | Test against App 5: after an AI and a speech request, no App 5 table or log holds their content; Groq's Data Controls show Zero Data Retention on | [CLEAR] |
 | SR-54 | The usage report carries the last staff sign-in and last booking date, from which App 5 raises the at-risk alerts | FR-34 | Test against App 5 | [CLEAR] |
@@ -184,7 +184,7 @@ Every functional requirement FR-01 to FR-36 of the PRD appears in this table at 
 | Long operations | any operation expected to exceed 22 seconds runs as `@anvil.server.background_task` (Anvil platform constraint) | [CLEAR] |
 | Webhook handler | returns HTTP 200 before the event is applied | [CLEAR] |
 | Morning briefing | 20–30 seconds spoken | [CLEAR] |
-| Capacity per client | 1,000,000 rows on the client's own Business account | [CLEAR] |
+| Capacity per client | 1 GiB container memory and 3 database connections; about 100 MB of data a year | [CLEAR] |
 | Page response under normal load | screen usable within 3 seconds on a phone connection | [INFERRED] |
 
 ### 3.4 Design Constraints

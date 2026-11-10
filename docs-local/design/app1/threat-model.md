@@ -1,7 +1,7 @@
 ---
 title: "threat-model"
 doc-id: "mb-15e2c8aa"
-updated: "2026-11-07"
+updated: "2026-11-10"
 ---
 
 # Mybizz CS — Threat Model (App 1, run app1)
@@ -79,9 +79,10 @@ Governing: `sec-ai-agent-introduced-vulnerabilities`. Owner: **the process** —
 
 | Assumption | Why it matters | Evidence or test | Owner | Status |
 |---|---|---|---|---|
-| Anvil permits client business apps on Mybizz-owned Business accounts | the whole hosting model | written confirmation from Anvil's sales team (AC-6) | David | open |
+| The pinned Anvil App Server runs every feature as Anvil's hosted service runs it | every client instance | the full test suite on the release image before every release (AC-6) | the build | open |
+| One DigitalOcean region can be rebuilt elsewhere | every client, on a region outage or account suspension | the rebuild procedure restores the test client instance in another region before the first paying client (AC-6) | David | open |
 | An app can schedule its dependency's background task and serve its dependency's HTTP endpoints | the schedule and endpoints live in App 3/`master_template` | proved in App 1 before Step 31 relies on it (PRD OQ-2) | the build | open |
-| `boto3` runs on Anvil's server Python | every SES and R2 call | proved on the private test instance before the first release | the build | open |
+| `boto3` runs in the release image | every SES and R2 call | proved on the test client instance before the first release | the build | open |
 | Amazon grants SES production access | every email before launch | the request on file (AC-14) | David | open |
 
 ## Decisions And Follow-Up

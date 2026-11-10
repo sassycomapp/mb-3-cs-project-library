@@ -1,7 +1,7 @@
 ---
 title: "user-flows"
 doc-id: "mb-b1292280"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — User Flows
 
@@ -95,12 +95,11 @@ updated: "2026-11-06"
 
 **System (App 5):**
 4. Creates the client record and issues the client reference number.
-5. Opens a new Mybizz-owned Anvil Business account for the client.
+5. Creates the client's database and the client's app `[client-name]-cs` from the current release image, with its `encryption_key` and Bearer token; the app builds its tables.
 6. Accepts the client's Cloudflare invitation, creates the client's R2 bucket and a token that reaches that bucket only, and creates the client's Amazon SES tenant, domain identity and scoped AWS keys.
 
-**Mybizz:**
-7. Clones App 3 (`blank_client_template`) into the client's hosting account as `[client-name]-cs`.
-8. Sets the instance's `encryption_key` Anvil Secret and issues the instance's Bearer token; App 5 stores the token and the client's Mybizz-side credentials, and writes the bucket's keys and the AWS keys into the instance's Vault. Anvil's Email service is set to the SES SMTP endpoint.
+7. Stores the Bearer token and the client's Mybizz-side credentials.
+8. Writes the bucket's keys and the AWS keys into the instance's Vault, and the SES SMTP credentials into the app's SMTP settings.
 9. App 5 loads the sample data for the client's trade.
 10. Creates the Owner account in the instance with `business_profile.onboarding_status = "in_progress"`.
 

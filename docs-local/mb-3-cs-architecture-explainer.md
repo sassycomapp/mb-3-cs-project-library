@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-architecture-explainer"
 doc-id: "mb-dc62ff9a"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Architecture Explainer
 
@@ -23,23 +23,23 @@ The difficulty with "one copy per client" is keeping 100 copies up to date. Mybi
 
 **App 1 — the workshop.** All building happens here. App 1 holds every form, every piece of server code and test data. When a version is proven, it is tagged as a release. No client ever runs App 1.
 
-**App 2 — the master (`master_template`).** App 2 receives each proven release from App 1. Every client's app runs its code and screens live from App 2. Change App 2, and every client has the change at once. App 2 holds no client data.
+**App 2 — the master (`master_template`).** App 2 receives each proven release from App 1. Every client's app runs its code and screens. App 2 holds no client data.
 
-**App 3 — the blank (`blank_client_template`).** App 3 is an empty client app: the database structure with no data, one small startup module, and a link to App 2. Every new client's app is a copy of App 3. Anvil cannot build database tables by code, so copying App 3 is how each new client gets the right tables.
+**App 3 — the client app (`blank_client_template`).** App 3 is an empty client app: the database structure with no data, one small startup module, the scheduled jobs, and a link to App 2. App 3 and App 2 are packed together into one release image, which every client's app runs. The image builds each new client's tables from App 3's database structure.
 
-**App 4 — the client apps.** One per client, copied from App 3. A client app holds the client's data and nothing else; all code and screens come from App 2. The client uses the app but never sees its code or the Anvil editor.
+**App 4 — the client apps.** One per client: a container running the release image, with the client's own database. A client app holds the client's data and nothing else; all code and screens come from App 2. The client uses the app but never sees its code, its container or its database.
 
 **App 5 — the management app.** Mybizz's own control room: registering clients, setting up new client apps with their storage, email and domain, watching usage and health, billing, handling support tickets and feedback, and passing AI requests to the AI services. App 5 exists before the first paying client, because Mybizz cannot run the business without it.
 
-**Why the client apps must stay empty.** If anyone adds a screen or server code directly to a client app, that client app quietly stops taking updates from App 2 — forever, with no warning. So the rule is absolute: a client app holds data and the startup module only. Any change for one client is built in App 1 and released through App 2 to everyone. Every client app carries a README stating this rule.
+**Why App 3 must stay empty.** If anyone adds a screen or server code to App 3, it quietly overrides App 2 for every client, and later fixes to that screen or code stop reaching clients. So the rule is absolute: App 3 holds the database structure, the startup module and the scheduled jobs only, and the image build stops if it holds anything more. Any change for one client is built in App 1 and released through App 2 to everyone. App 3 carries a README stating this rule.
 
 ---
 
 ## 3. Where the Apps Live
 
-Apps 1, 2, 3 and 5 live on Mybizz's own development account, on Anvil's Business plan.
+Apps 1, 2, 3 and 5 live on Mybizz's own Anvil Business account.
 
-Each client app lives on an Anvil Business account of its own, which Mybizz owns: one account per client. A client therefore has the full power and limits of a Business account, and no client's work can slow another's. Mybizz pays for the accounts, so the client is Mybizz's client and never has to deal with Anvil. The Hobby plan is never used, because Anvil licenses it for personal projects only.
+Each client app runs on DigitalOcean, in a container of its own with its own database: the free Anvil App Server runs the release image, and DigitalOcean looks after the servers, updates, failover and database backups. A client therefore has its own memory and its own database, and no client's work can slow another's. Mybizz pays for the hosting, so the client is Mybizz's client and never has to deal with Anvil or DigitalOcean.
 
 Heavy work (imports, backups, AI, sending campaigns) runs in the background, so the client's pages stay fast, and Mybizz watches each client's usage from App 5.
 
@@ -50,9 +50,9 @@ Each client app runs on the client's own domain. The client owns the domain, and
 ## 4. How a New Client Is Set Up
 
 1. The client registers and opens a free Cloudflare account, which holds the client's storage and the client's domain settings, and invites Mybizz into it. App 5 records the client and issues the client reference number.
-2. Mybizz opens a new Anvil Business account for the client.
-3. Mybizz copies App 3 into that account, which creates the client's app with the right tables and the link to App 2.
-4. Mybizz sets the client app's secret key and gives the client app a private token for talking to App 5. App 5 creates the client's storage bucket and the client's email identity, and loads the sample data.
+2. App 5 creates the client's database and starts the client's container from the current release image, which builds the client's tables.
+3. App 5 sets the client app's secret key and gives the client app a private token for talking to App 5.
+4. App 5 creates the client's storage bucket and the client's email identity, and loads the sample data.
 5. The client works through the onboarding wizard inside their own app. The wizard's domain step points the client's domain at the client's app and at the email service, so the website and every email address work at once.
 
 ---
@@ -61,10 +61,11 @@ Each client app runs on the client's own domain. The client owns the domain, and
 
 1. An agent builds the change in the local copy of App 1; screen layout work in the Anvil designer always comes first and is pulled into the local copy before code is written.
 2. The change is tested and released from App 1.
-3. The developer pushes the release into App 2.
-4. Every client app runs the new version straight away, because every client app runs live from App 2.
+3. The developer pushes the release into App 2, and the release's database changes into App 3.
+4. App 2 and App 3 are packed into the new release image, which is checked and tested, and run first on a test client app.
+5. App 5 moves every client app to the new release image. Each client app adds the release's new tables and columns to its own database as it starts.
 
-Only a change to the database structure needs each client app updated by hand, which is why database changes are planned carefully.
+A release only ever adds tables and columns; it never removes or renames one, so no client's data is lost and a release can be rolled back.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "design-doc"
 doc-id: "mb-7868ef5e"
-updated: "2026-11-07"
+updated: "2026-11-10"
 ---
 
 # Mybizz CS — Design Doc (run app1)
@@ -48,7 +48,7 @@ From BRD §4, with what each needs:
 | The clients' customers | Book, order, pay, review, use the customer portal |
 | Visitors and campaign visitors | Find the business, enquire, become leads |
 | Prospects | Try the whole product before paying, in the two demo apps (F-36) |
-| Anvil (platform supplier) | Hosting terms for Mybizz-owned Business accounts (AC-6 open) |
+| Anvil and DigitalOcean (platform suppliers) | Anvil's Business plan terms for Apps 1, 2, 3 and 5; DigitalOcean's terms for client instances |
 | Stripe, Paystack, PayPal, Amazon Web Services, Cloudflare, Groq | Each provider's own terms and fees; SES production access (AC-14) |
 | Regulators — South Africa's Information Regulator (POPIA); GDPR authorities | Lawful processing; data-subject rights implemented |
 
@@ -59,7 +59,7 @@ The platform facts, every one of them binding:
 1. **One app and one database per client; never multi-tenant.** No `client_id`/`tenant_id` column on any table; isolation is structural (ADR `dependency-based-not-multi-tenant`; schema Rules; architecture reference §3).
 2. **The server holds authority over identity, ownership and every rule.** Every server function checks the role with the role decorators; the interface hides what a role cannot use but is never the enforcement (architecture reference §12 F-01; `spec-security`; `spec-anvil-platform-standards` §10).
 3. **All client code and `theme/assets` are public.** No credential, rule or secret in client code; secrets only in the Vault (`spec-anvil-platform-standards`; ADR `payment-security-boundary-vault`).
-4. **Every client instance runs on its own Mybizz-owned Anvil Business account.** The Hobby plan is never used (architecture reference §4; common aspects 2; BRD AC-5, AC-7, AC-8).
+4. **Every client instance runs in its own container with its own database.** The Anvil App Server runs the release image on DigitalOcean (`spec-client-instance-hosting`; architecture reference §4; common aspects 2; BRD AC-5, AC-7, AC-8).
 5. **POPIA applies:** Information Regulator registration after launch; data-subject rights of access, correction, deletion and objection (`spec-regulatory-compliance-baseline`).
 6. **GDPR applies when EU customers are served; PCI DSS when payments are taken** — SAQ A: card data never touches the instance; only the gateways' hosted fields and buttons take card details (`spec-regulatory-compliance-baseline`; `spec-integration`).
 
@@ -85,7 +85,7 @@ Each of the 14 aspects of `pol-common-aspects-for-mybizz-anvil-applications`, as
 | # | Aspect | Shared — where the architecture meets it (§23 of this document) and its ADR |
 |---|---|---|
 | 1 | The five-app structure, never multi-tenant | §23.1 (one instance, one database; no tenant column — ST-06 verifies); ADR `dependency-based-not-multi-tenant` |
-| 2 | Client Anvil accounts | §23.6 (the load counted per client account); architecture reference §4; ADR `tiers-model` |
+| 2 | Client instance hosting | §23.6 (the load counted per client container); architecture reference §4; ADR `tiers-model` |
 | 3 | Configuration, never code, in a client instance | §23.3 (settings as data); architecture reference §1–§2; ADR `client-instance-architecture` |
 | 4 | Schema designed up front, extended without breaking | §23.1 (the schema, the migration discipline, the metadata columns on the core tables); `authoritative-schema.md`; `schema-migration-log.md` |
 | 5 | Secrets in the Vault | §23.4's Vault column and §24's secrets rules (one `encryption_key` reader); `spec-vault-system`; ADR `payment-security-boundary-vault` |
@@ -93,7 +93,7 @@ Each of the 14 aspects of `pol-common-aspects-for-mybizz-anvil-applications`, as
 | 7 | Email | §23.4 (SES, one tenant per client), §23.5 (SNS-signed events); ADR `brevo-email-and-crm` |
 | 8 | Client storage and exit | §23.8 (R2 folders, index rows, retention, the exit export); ADR `client-r2-storage-and-exit-handover` |
 | 9 | Management and health | §23.7 (the six Bearer-token endpoints, the 15-minute heartbeat, App 5 never polls); ADR `mybizz-management-visibility`, ADR `observability-architecture` |
-| 10 | Background work and real-time updates | §23.6 (the schedule within the Business plan's limits; >22 s as background tasks); ADR `real-time-and-background-tasks` |
+| 10 | Background work and real-time updates | §23.6 (the schedule within each client container's memory; >22 s as background tasks); ADR `real-time-and-background-tasks` |
 | 11 | Access, currency and time | §23.1 (server-side money and dates, transactions), §24 (sign-in and second factors, the five roles); ADRs `system-currency-selection-and-immutability`, `timezone-utc-storage-display-conversion` |
 | 12 | Compliance | §23.9 (AI pass-through, ZDR), §24 (the cookie and consent surface), threat-model §B12; `spec-regulatory-compliance-baseline` |
 | 13 | User interface | §23.2's display rules by reference to `DESIGN.md`; ADR `material-3-theme-component-scope`, ADR `anvil-extras-exclusion`, ADR `htmltemplate-use` |
@@ -130,7 +130,8 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 
 | Risk | Likelihood | Impact | Response |
 |---|---|---|---|
-| Anvil does not permit client business apps on Mybizz-owned Business accounts (BRD AC-6, PRD OQ-1) | Low | High | Written question to Anvil's sales team before the first paying client; the answer kept on file |
+| A DigitalOcean region outage or account suspension stops every client (BRD risks) | Low | High | Standby database node; nightly R2 copies; the rebuild procedure tested before the first paying client (BRD AC-6) |
+| The Anvil App Server behaves differently from Anvil's hosted service (BRD risks) | Medium | High | One pinned App Server version; the full test suite on the release image before every release (BRD AC-6) |
 | The Mybizz development account fails or is compromised; every client depends on App 2 there, and the two demo apps share the account, so a suspension stops sign-ups as well as service | Low | High | `deployment-procedures.md` account-level procedures; two-factor authentication; R2 backups of every instance |
 | The schema migration (44 → 70 tables, P13 creating `cookie_policy` and `consents`) is applied by hand, by David, in App 1 | High | Medium | `schema-migration-log.md` Part A and prompts P1–P14 in order — P13 creates the two tables, P14 removes columns, last — each checked against its prompt before Resolve; Part C compares the resulting `anvil.yaml` with the schema table by table |
 | The partially built app diverges from the scaffold as features are added (naming, duplicated modules, the Brevo module) | Medium | Medium | The Step 12 decisions C1–C4 assign each correction to the build step that touches it; reviews report a common item using a trade item as a finding |
@@ -157,8 +158,8 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 | SC-1 | Every feature is built and works | Features passing their acceptance criteria | All of F-01 to F-36 | The test suite (SRS verification column; `spec-test-specification.md`), signed off at `build-verified` |
 | SC-2 | First clients onboarded | Clients live in App 5's registry | 10 | App 5 client registry count (concept §15) |
 | SC-3 | Reaching capacity does not strain the model | Paying clients | 100 (hard limit) | App 5 client registry count |
-| SC-4 | Revenue at capacity | Annual recurring revenue | $180,000 | App 5 billing |
-| SC-5 | Margin holds at capacity | Gross margin after hosting | $73,200 a year | App 5 billing less hosting cost; cost per client reviewed monthly |
+| SC-4 | Revenue at capacity | Annual recurring revenue | $118,800 | App 5 billing |
+| SC-5 | Margin holds at capacity | Gross margin after hosting | $97,248 a year | App 5 billing less hosting cost; cost per client reviewed monthly |
 | SC-6 | Clients stay | Client retention, year 1 to year 2 | Above 90% | App 5 client registry |
 | SC-7 | A client goes live without help | Average onboarding-to-live time | Under 7 days | Registration date to `business_profile.onboarding_completed_at`, read in App 5 |
 | SC-8 | Support stays founder-scale | Support tickets per client per month | Under 2 | App 5 tickets |
@@ -291,13 +292,13 @@ The architecture itself: architecture reference §0 states its authority — thi
 
 `mb-3-cs-architecture-explainer.md` explains, in plain language for the developer, how Mybizz CS is built and why it is built that way: the big picture, the five apps and why the client apps must stay empty, where the apps live, how a new client is set up, how a change reaches every client, data and backups and history, security, how the code is organised, navigation and layout, every feature F-01 to F-36 in plain language, the sample data, and working within Anvil. The build agent works from the architecture reference, which is correct where the two differ.
 
-Local ADRs (`mb-3-cs-project-library/adr-local`): `adr-blank-client-template` (App 3 as the only provisioning clone source), `adr-crm-package-replaces-marketing` (client package `crm/`, server package `server_marketing/`), `adr-schema-scope-reduction` (tables in and out).
+Local ADRs (`mb-3-cs-project-library/adr-local`): `adr-blank-client-template` (App 3 as the client app every client instance runs), `adr-crm-package-replaces-marketing` (client package `crm/`, server package `server_marketing/`), `adr-schema-scope-reduction` (tables in and out).
 
 Local policy (`mb-3-cs-project-library/policy-local`): `pol-development` (the Anvil-first mandate with its approved exceptions — the Vault, Amazon SES, Cloudflare R2, Groq through App 5; version control and backup; development tooling; enforcement severity).
 
 Global ADRs applied to this application (`project-library-global/adr-global`, all 41): `adr-anvil-extras-exclusion`; `adr-anvil-platform-constraints`; `adr-brevo-email-and-crm`; `adr-client-data-management-rights-and-mybizz-retention-boundary`; `adr-client-instance-architecture`; `adr-client-instance-readme-five-app-system`; `adr-client-r2-storage-and-exit-handover`; `adr-common-and-trade-modules`; `adr-common-architecture-across-mybizz-applications`; `adr-dark-mode`; `adr-data-access-patterns`; `adr-dependency-based-not-multi-tenant`; `adr-dependency-update-model`; `adr-design-rules`; `adr-document-frontmatter-and-identity`; `adr-form-architecture-and-state`; `adr-htmltemplate-use`; `adr-lead-capture-simultaneous-creation`; `adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture`; `adr-material-3-theme-component-scope`; `adr-mybizz-management-visibility`; `adr-navigation-lambda-link-open-form`; `adr-no-free-trial`; `adr-observability-architecture`; `adr-onboarding-data-schema-alignment`; `adr-onboarding-finality`; `adr-onboarding-resumability`; `adr-onboarding-vs-settings-boundary`; `adr-payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed`; `adr-payment-gateway-mutability`; `adr-payment-security-boundary-vault`; `adr-pdf-invoice-generation`; `adr-real-time-and-background-tasks`; `adr-responsive-behaviour-mechanism`; `adr-role-property-assignment-mechanism`; `adr-single-contacts-table`; `adr-system-currency-selection-and-immutability`; `adr-tiers-model`; `adr-timezone-utc-storage-display-conversion`; `adr-ui-customization-approach`; `adr-webhook-architecture`.
 
-Global policies (`project-library-global/policy-global`, all 6): `pol-common-aspects-for-mybizz-anvil-applications` — its 14 aspects are each shared by this application, none deviating: (1) the five-app structure, never multi-tenant; (2) client Anvil accounts, one Mybizz-owned Business account per client; (3) configuration, never code, in a client instance; (4) schema designed up front, extended without breaking; (5) secrets in the Vault; (6) payments, webhooks and outbound calls; (7) email through Amazon SES, the CRM built in; (8) client storage and exit; (9) management and health; (10) background work and real-time updates; (11) access, currency and time; (12) compliance; (13) user interface; (14) reference platforms (none is used here). Also `pol-anvil-first-development`, `pol-documentation-and-decisions`, `pol-security-and-data-governance`, `pol-testing-and-quality`, `pol-legal-documents-and-consent`.
+Global policies (`project-library-global/policy-global`, all 6): `pol-common-aspects-for-mybizz-anvil-applications` — its 14 aspects are each shared by this application, none deviating: (1) the five-app structure, never multi-tenant; (2) client instance hosting, one container and one database per client; (3) configuration, never code, in a client instance; (4) schema designed up front, extended without breaking; (5) secrets in the Vault; (6) payments, webhooks and outbound calls; (7) email through Amazon SES, the CRM built in; (8) client storage and exit; (9) management and health; (10) background work and real-time updates; (11) access, currency and time; (12) compliance; (13) user interface; (14) reference platforms (none is used here). Also `pol-anvil-first-development`, `pol-documentation-and-decisions`, `pol-security-and-data-governance`, `pol-testing-and-quality`, `pol-legal-documents-and-consent`.
 
 ### 14.5 The standards the build follows
 
@@ -307,9 +308,9 @@ From the global corpus: `spec-five-app-architecture-model`; `spec-anvil-platform
 
 ### 14.6 The business and product requirements
 
-`business-requirements-document.md`: objectives BO-1 to BO-8; requirements BR-1 to BR-26; assumptions and constraints AC-1 to AC-14 (AC-6 — Anvil's written confirmation of the account structure — and AC-14 — SES production access — are open); success criteria KPIs; risks. `product-requirements-document.md`: goals and non-goals; target users; user stories US-1 to US-41; functional requirements FR-01 to FR-36; non-functional requirements; out of scope (nothing deferred — voice tier 4 and tier 5 are built in this release); dependencies; open questions OQ-1 and OQ-2; success metrics. `software-requirements-specification.md`: specific requirements SR-01 to SR-58; external interface requirements; performance requirements; design constraints; non-functional requirements.
+`business-requirements-document.md`: objectives BO-1 to BO-8; requirements BR-1 to BR-26; assumptions and constraints AC-1 to AC-14 (AC-6 — the four hosting conditions before the first paying client — and AC-14 — SES production access — are open); success criteria KPIs; risks. `product-requirements-document.md`: goals and non-goals; target users; user stories US-1 to US-41; functional requirements FR-01 to FR-36; non-functional requirements; out of scope (nothing deferred — voice tier 4 and tier 5 are built in this release); dependencies; open question OQ-2; success metrics. `software-requirements-specification.md`: specific requirements SR-01 to SR-58; external interface requirements; performance requirements; design constraints; non-functional requirements.
 
-`mb-3-cs-concept.md`: what Mybizz CS is (§1), the problem (§2), the founder story (§3), target market (§4), what it is not (§5), competitive positioning (§6), the feature set (§7), sample data (§8), pricing (§9 — $150 a month, month to month, no trial, $200 assisted setup, costs outside the monthly price, revenue model, the client's own domain), go-to-market (§10), brand identity (§11), key messages (§12), support model (§13), what is explicitly out of scope (§14), success metrics (§15), risks (§16). `mb-3-cs-feature-list.md`: the client-facing list of every feature, §§1–28.
+`mb-3-cs-concept.md`: what Mybizz CS is (§1), the problem (§2), the founder story (§3), target market (§4), what it is not (§5), competitive positioning (§6), the feature set (§7), sample data (§8), pricing (§9 — $99 a month, month to month, no trial, $200 assisted setup, costs outside the monthly price, revenue model, the client's own domain), go-to-market (§10), brand identity (§11), key messages (§12), support model (§13), what is explicitly out of scope (§14), success metrics (§15), risks (§16). `mb-3-cs-feature-list.md`: the client-facing list of every feature, §§1–28.
 
 ### 14.7 Testing
 
@@ -434,23 +435,23 @@ What the exit export writes to the client's own bucket for this application (`ad
 - **Into `exports/`:** every data table as CSV; every email still in the instance with its attachments; the accounting export in the Wave, Xero and QuickBooks formats (F-28); the instance's `encryption_key`; the Vault's contents in decrypted form.
 - **Already in the bucket:** `backups/daily/` and `backups/weekly/` (the last 7 daily and 4 weekly), `history/{table}/`, `audit/{year}/{month}/` (the archived audit), `webhooks/{service}/{year}/{month}/` (the raw payloads), `email/messages/` and `email/attachments/`, `expenses/receipts/`.
 - **The handover:** the Owner opens the bucket in the Cloudflare dashboard and confirms by email that the export is there and opens; Mybizz's Cloudflare user then leaves the client's account, which ends Mybizz's bucket token and DNS access. Nothing is transferred — the account and the bucket were always the client's.
-- **After the handover:** App 5 deletes the client's SES tenant, domain identity, receipt rule, SNS topics and AWS keys and empties the client's S3 prefix; the domain is disconnected from the instance; the instance and its Mybizz-owned Anvil Business account are closed; App 5 marks the client as left and keeps only the records Mybizz must keep by law — Mybizz's own invoices to the client. Mybizz retains nothing else of the client's data.
+- **After the handover:** App 5 deletes the client's SES tenant, domain identity, receipt rule, SNS topics and AWS keys and empties the client's S3 prefix; the domain is disconnected from the instance; App 5's Remove action deletes the instance's container and database; App 5 marks the client as left and keeps only the records Mybizz must keep by law — Mybizz's own invoices to the client. Mybizz retains nothing else of the client's data.
 - **The decrypted Vault holds live credentials.** The step 9 email tells the Owner to change the gateway keys (Stripe, Paystack, PayPal) once the instance is closed.
-- **Proven:** the exit export is a function of every Mybizz application and is proven on the private test client before the first release (exit ADR, Consequences; `RL-08`; `client-exit-handover.md` §4).
+- **Proven:** the exit export is a function of every Mybizz application and is proven on the test client instance before the first release (exit ADR, Consequences; `RL-08`; `client-exit-handover.md` §4).
 
 ## 20. Plan Fit
 
-A typical client's use against the limits of the Anvil Business account that runs its instance (`spec-anvil-platform-standards` §5; architecture reference §4).
+A typical client's use against the limits of its client instance: its container and its share of Mybizz CS's database cluster (`spec-client-instance-hosting` sections 3 and 4; architecture reference §4).
 
-**The limits, per client account:** 1,000,000 data table rows; 100 GB of data table storage; background tasks with no timeout; scheduled tasks; a persistent server; email through Amazon SES — Anvil's own email quota is unused (F-18).
+**The limits, per client instance:** 1 GiB of container memory; 3 database connections; background tasks with no timeout; scheduled tasks; email through Amazon SES (F-18). The cluster gives 25 connections per GiB of its memory, less 3, and is moved to the next size as the client count grows.
 
 **What keeps a client small:** cold data goes to the client's own R2 bucket — backups, history, webhook payloads, audit entries older than 30 days, email bodies older than 90 days, attachments and receipts — with only index rows left in the tables; dashboards read pre-computed summary tables, never aggregate source tables on load; every search is bounded, never an iteration over a whole table; large media lives in R2 (`spec-anvil-platform-standards` §24).
 
-**A typical client's rows (an estimate, stated as one):** a busy solo or small-team practice — about 2,000 contacts with about 60,000 timeline events; about 30 bookings a day, roughly 11,000 a year; invoices, invoice lines, payments, quotes and time entries from three years of that work, roughly 130,000 rows; email index rows about 55,000 over three years; the summary tables about 15,000; the rolling 30-day audit window about 5,000; notifications, preferences and counters modest. Steady state after three years is roughly 350,000 to 450,000 rows — under half of the 1,000,000-row limit, with the growth rate bounded by the R2 offload. Storage: the transactional and text rows are small; media lives in R2 except the instance's own media (logos, provider photos, featured images, the brief and delivery files in `files`), which stays a small share of the 100 GB.
+**A typical client's rows (an estimate, stated as one):** a busy solo or small-team practice — about 2,000 contacts with about 60,000 timeline events; about 30 bookings a day, roughly 11,000 a year; invoices, invoice lines, payments, quotes and time entries from three years of that work, roughly 130,000 rows; email index rows about 55,000 over three years; the summary tables about 15,000; the rolling 30-day audit window about 5,000; notifications, preferences and counters modest. Steady state after three years is roughly 350,000 to 450,000 rows, about 100 to 150 MB of data a year, with the growth rate bounded by the R2 offload. Media lives in R2 except the instance's own media (logos, provider photos, featured images, the brief and delivery files in `files`), which stays a small share.
 
-**What shows a client nears the limits:** the daily usage report to App 5 — row count, data table storage, email volume and heavy-job activity (`SR-52`); App 5 warns Mybizz at 80% of the account's 1,000,000 rows (`FR-33`) and flags any client above 80% of its rows or storage (`RL-12`; common aspect 9); the warning-level alerts also watch a background task running over twice its usual time. A client nearing the limits is answered by checking the R2 offload is current and reviewing the media held in `files` — the usage recording and monthly review of `F-33`/`F-34` is the mechanism that makes this visible.
+**What shows a client nears the limits:** the daily usage report to App 5 — memory use, storage, email volume and heavy-job activity (`SR-52`); App 5 warns Mybizz at 80% of a container's memory and at 80% of the cluster's client limit (`FR-33`, `RL-12`; common aspect 9); the warning-level alerts also watch a background task running over twice its usual time. A client nearing its memory is answered by raising its container's size, which keeps the client in place; the business nearing the cluster's limit is answered by moving the cluster to the next size.
 
-**A cost outside the model, recorded (Step 14 finding):** the private test client instance runs on its own Mybizz-owned Business account (`deployment-procedures.md`, Deployment Model) — a 101st account beside the 100 client accounts the revenue model counts (concept §9.6), about $1,068 a year billed annually. SC-5 keeps the concept's published margin figure; this line makes the cost visible.
+**The test client instance:** a client instance of its own, holding test data only, at $12 a month; its cost is in the hosting figures of `spec-client-instance-hosting` section 11.
 
 ## 21. Scope
 
@@ -459,7 +460,7 @@ Written at Step 14 after the review, per the Step 14 configuration.
 **Goals:**
 
 - Complete Mybizz CS on the scaffold as it stands: every feature F-01 to F-36 built and passing its acceptance criteria (SC-1), on the 70-table schema of `authoritative-schema.md`, reached through the recorded migration discipline.
-- App 5 built and running before the first paying client (D6 of Step 12); every client provisioned through App 5 onto its own Mybizz-owned Anvil Business account.
+- App 5 built and running before the first paying client (D6 of Step 12); every client provisioned through App 5's New client action into its own container and database.
 - The wedge proved: ten founding clients onboarded on the full product at the standard price (SC-2), toward the hard capacity of 100 (SC-3) and the revenue and margin criteria (SC-4, SC-5).
 - One legal-documents system covering the Cookie Policy, the Privacy Policy and the Terms and Conditions, published before go-live, with consent recorded in `consents` (D8 as extended at Step 14).
 - Releases reach every client through App 2; a client can leave at any time with all of its data (the exit export of §19).
@@ -485,7 +486,7 @@ Each critical flow, role and edge case the review named, with why. The catalogue
 | 9 | Second factors and sessions: every account holder signs in with a second factor; the Owner's is FIDO2 only; high-value actions need a fresh factor; 30-minute idle ends the session and returns the user to the same place | The Owner's account is the keys to the client's business | `SC-02`, `SC-03`, `SC-04`; `ST-12` |
 | 10 | Email through SES: confirmation with calendar invite from the client's domain, DKIM-signed; desk delivery to members and no one else; suppression honoured (bounce, complaint, unsubscribe scopes); the 90-day archive to R2 | The client's email reputation is a shared asset — one tenant per client | `IN-09`; test spec 4.1–4.5 |
 | 11 | Sample data isolation: no email, payment, reminder or export ever touches a sample record; Clear sample data removes every recorded row, empties the links from real rows, recomputes the summaries, and is refused for every role but Owner | Sample data must never leak into a real business's money or mail | `SR-44a`, `SR-44b`; tests 4.10, 4.11 |
-| 12 | The exit export (§19): every table in full, the key, the decrypted Vault, the accounting exports — into the client's own bucket, proven on the test client before the first release | A client must be able to leave with everything, at any time | `IN-14`, `RL-08`; `client-exit-handover.md` §4 |
+| 12 | The exit export (§19): every table in full, the key, the decrypted Vault, the accounting exports — into the client's own bucket, proven on the test client instance before the first release | A client must be able to leave with everything, at any time | `IN-14`, `RL-08`; `client-exit-handover.md` §4 |
 | 13 | Structural isolation: two instances cannot reach each other's data; per-client tokens and keys are unique; no tenant column or filter anywhere in the code | The architecture's central promise, verified not assumed | `SC-14`, `ST-06` |
 | 14 | Data-subject rights: export, correction and erasure of one person's data, with transactions kept for the 7-year tax period; retention deletes on time (audit 30 days in-instance; email bodies 90 days; consent records per D4) | POPIA and GDPR where they apply | `IN-14` |
 | 15 | The legal-documents and consent system (D8): first visit shows the banner and sets no embedded-content cookie; Refuse all loads placeholders; Accept all loads embedded content; every choice and Load writes one `consents` row with the published version; a new policy version shows the banner again; the nightly task moves rows older than 30 days to the client's bucket and deletes cookie files older than 2 years and acceptance files older than 7 years; a `feature_key` clause is active exactly while its feature is on | Consent before optional cookies is binding policy and law for every client site | `spec-legal-documents-and-consent` §12 tests; `ST-02` on the endpoints |
@@ -592,7 +593,7 @@ One pattern at all five endpoints, in this order: verify the signature against t
 
 ### 23.6 Scheduled and background tasks
 
-The schedule is `integration-architecture.md`'s Background Tasks table — the 15-minute heartbeat, the 5-minute payment-hold expiry and webhook reconciliation, the 15-minute reminders, blog scheduling, automations and retry queue, the hourly campaigns and summaries, the nightly backup, audit, consent and email archives, invoicing, quoting and package tasks, the demo reset, and the daily reports. Any operation expected to exceed 22 seconds is a background task (`spec-anvil-platform-standards` §5). Every task fits inside the hosting plan's limits — every account is a Mybizz-owned Business account (§6 constraint 4), where background tasks have no timeout and scheduled tasks are included; the load is counted per client account, never summed across clients. Per-task failure and retry behaviour follows the `adr-real-time-and-background-tasks` table; the heartbeat degrades to every 30 minutes before anything else is skipped. **The summary tasks' writes are period-keyed upserts inside `@tables.in_transaction` (review finding R5): for each period, if the row exists it is updated with the recalculated figures, otherwise it is added — a retried or overlapping task run can never duplicate a period's row.**
+The schedule is `integration-architecture.md`'s Background Tasks table — the 15-minute heartbeat, the 5-minute payment-hold expiry and webhook reconciliation, the 15-minute reminders, blog scheduling, automations and retry queue, the hourly campaigns and summaries, the nightly backup, audit, consent and email archives, invoicing, quoting and package tasks, the demo reset, and the daily reports. Any operation expected to exceed 22 seconds is a background task (`spec-anvil-platform-standards` §5). Every task fits inside the client instance's limits — every client instance runs in its own container (§6 constraint 4), where background tasks have no timeout and scheduled tasks run inside the App Server; the load is counted per client container, never summed across clients. Per-task failure and retry behaviour follows the `adr-real-time-and-background-tasks` table; the heartbeat degrades to every 30 minutes before anything else is skipped. **The summary tasks' writes are period-keyed upserts inside `@tables.in_transaction` (review finding R5): for each period, if the row exists it is updated with the recalculated figures, otherwise it is added — a retried or overlapping task run can never duplicate a period's row.**
 
 ### 23.7 Management endpoints and heartbeat
 
@@ -628,7 +629,7 @@ Rows of `bookings`, `orders`, `invoice`, `payments`, `quotes` and `expenses` are
 
 ### 23.11 Platform fit
 
-Every decision above is checked against `spec-anvil-platform-standards` §17's constraints checklist, the Anvil references and the agent references: client-side polling, never push; money and date logic on the server only; `search()` with filters, never whole-table iteration; background tasks past 22 seconds; the content-panel and lambda navigation patterns; relative imports; `wrap_on` for responsive behaviour; `reportlab` server-side for PDFs (`adr-pdf-invoice-generation`); `boto3` for SES and R2. Two open platform unknowns are carried as scheduled proofs in the plan, not as research questions: an app scheduling its dependency's background task and serving its dependency's HTTP endpoints (PRD OQ-2 — proved in App 1 before Step 31 relies on it), and `boto3` on Anvil's server Python (proved on the private test instance before the first release). No `research` run is needed at this step (reference item 10).
+Every decision above is checked against `spec-anvil-platform-standards` §17's constraints checklist, the Anvil references and the agent references: client-side polling, never push; money and date logic on the server only; `search()` with filters, never whole-table iteration; background tasks past 22 seconds; the content-panel and lambda navigation patterns; relative imports; `wrap_on` for responsive behaviour; `reportlab` server-side for PDFs (`adr-pdf-invoice-generation`); `boto3` for SES and R2. Two open platform unknowns are carried as scheduled proofs in the plan, not as research questions: an app scheduling its dependency's background task and serving its dependency's HTTP endpoints (PRD OQ-2 — proved in App 1 before Step 31 relies on it), and `boto3` in the release image (proved on the test client instance before the first release). No `research` run is needed at this step (reference item 10).
 
 ---
 
@@ -1176,9 +1177,9 @@ POST /_/api/webhooks/{gateway} ──> verify signature ──fail──> HTTP 4
                      (unprocessed rows: the 5-minute reconciliation task, D4)
 ```
 
-**Deployment sequence** (per `deployment-procedures.md`): feature complete + signed off (`build-verified`) → release ready (suite passes, no High/Critical open) → tag → back up every instance to its R2 bucket → apply any schema change to App 3 and every instance (additive first) → push the tag into App 2 (David, Step 42) → post-deploy verification (heartbeats show the release and schema fingerprint; no new error type in the first hour) → release notes from App 5.
+**Deployment sequence** (per `deployment-procedures.md`): feature complete + signed off (`build-verified`) → release ready (suite passes, no High/Critical open) → tag → back up every instance to its R2 bucket → push the tag into App 2 and the table changes into App 3 (David, Step 42) → build, check and test the release image → test client instance on the release (Step 43) → App 5's Release action (Step 44) → post-deploy verification (heartbeats show the release and schema fingerprint; no new error type in the first hour) → release notes from App 5.
 
-**Rollback flowchart:** error rate >10%, broken sign-in/booking/payment, data corruption or a security vulnerability → re-point App 2 to the last good tag (David) → verify on the private test instance and in the heartbeats → schema rollback by hand from the pre-migration R2 backup, recorded in `schema-migration-log.md`.
+**Rollback flowchart:** error rate >10%, broken sign-in/booking/payment, data corruption or a security vulnerability → App 5 moves the client instances back to the last good release image, with `auto-migrate` off → verify on the test client instance and in the heartbeats; a release only adds tables and nullable columns, so no data is lost.
 
 ## Stale Diagram Audit
 
@@ -1200,7 +1201,7 @@ Synthesized from this review's findings at strategy depth — each names the nex
   - Surfaced by: D8/D4/D6 decisions
   - Files: `mb-3-cs-project-library` documents; `project-library-global` policy and specification
   - Verify: every carried document agrees with this design doc.
-- [ ] **T4 (P2)** — David, before the first paying client — the two written questions: AC-6 to Anvil's sales team; AC-14 to Amazon for SES production access.
+- [ ] **T4 (P2)** — David, before the first paying client — AC-14, Amazon's SES production access; AC-6, the four hosting conditions of `spec-client-instance-hosting` section 10.
   - Surfaced by: §11 risks; BRD AC-6, AC-14
   - Files: —
   - Verify: both answers on file before the first paying client is onboarded.

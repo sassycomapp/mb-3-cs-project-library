@@ -1,7 +1,7 @@
 ---
 title: "observability-requirements"
 doc-id: "mb-4a65dade"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Observability Requirements
 
@@ -106,7 +106,7 @@ App 5 shows every client instance on one dashboard: last heartbeat, release vers
 
 **Warning — watch:**
 - An instance's release version differs from `master_template`'s current release.
-- Usage above 80% of the account's 1,000,000 rows (F-33).
+- An instance above 80% of its container's memory, or Mybizz CS above 80% of its cluster's client limit (F-33).
 - A demo app's nightly reset failed (F-36).
 - A background task running longer than twice its usual time.
 

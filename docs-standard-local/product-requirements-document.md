@@ -1,7 +1,7 @@
 ---
 title: "product-requirements-document"
 doc-id: "mb-ad69f2ae"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Product Requirements Document (PRD)
 
@@ -144,8 +144,8 @@ The project has several user types and needs role-based access control (section 
 | FR-30 | F-30 Security and compliance: server-side role checks, rate limiting, encrypted credentials, audit trail, data isolation, POPIA, GDPR, PCI DSS | US-4, US-24 | No card number is stored in any table; no credential appears in any log; rate-limited sign-in refuses repeated attempts | [CLEAR] |
 | FR-31 | F-31 Design system: Anvil M3 theme with the project deviations, four palettes, dark mode following the device, status badges with words | US-34 | Changing the palette changes every screen without reload; switching the device to dark changes every screen; no hardcoded colour is found by the UI scans | [CLEAR] |
 | FR-32 | F-32 Help, tickets and feedback: Help form to App 5, replies in the Help view, response targets | US-29 | A sent message shows a reference number and appears in App 5; a reply in App 5 appears in the client's Help view and is emailed | [CLEAR] |
-| FR-33 | F-33 Hosting: one instance per Mybizz-owned Business account, usage reported | US-31 | An instance reports its usage daily; at 80% of the account's 1,000,000 rows Mybizz is warned | [CLEAR] |
-| FR-34 | F-34 Mybizz management app: registry, provisioning (Anvil account, R2, SES, DNS), usage and health monitoring, billing, update distribution, tickets, AI gateway, at-risk alerts | US-1, US-31, US-32 | App 5 raises an alert for a client with no staff sign-in for 14 days, no bookings for 30 days, or a ticket unanswered for 3 days; every instance's heartbeat shows the current release after a push into App 2 | [CLEAR] |
+| FR-33 | F-33 Hosting: one container and one database per client, usage reported | US-31 | An instance reports its usage daily; at 80% of its container's memory, or of the cluster's client limit, Mybizz is warned | [CLEAR] |
+| FR-34 | F-34 Mybizz management app: registry, provisioning (container and database, R2, SES, DNS), usage and health monitoring, billing, release distribution, tickets, AI gateway, at-risk alerts | US-1, US-31, US-32 | App 5 raises an alert for a client with no staff sign-in for 14 days, no bookings for 30 days, or a ticket unanswered for 3 days; every instance's heartbeat shows the current release after App 5's Release action | [CLEAR] |
 | FR-35 | F-35 Sales: deals pipeline with owners, companies, quotes accepted online and turned into invoices | US-37 | Accepting a quote creates its invoice and wins its deal in one call; Staff list only their own deals | [CLEAR] |
 | FR-36 | F-36 Demo apps: a sample-data demo and an empty demo, reset nightly, emails to the visitor only, payments in test mode | US-41 | After the nightly reset both demos are back to their starting state; no demo email reaches any address but the signed-in visitor's | [CLEAR] |
 
@@ -160,12 +160,12 @@ Every user story US-1 to US-41 is satisfied by at least one functional requireme
 | Performance | A user-facing flow makes the fewest server calls: the booking flow at most three round trips; dashboards read pre-computed tables; any operation over 22 seconds runs as a background task; a server call shows a progress indicator and times out after 30 seconds with a retry | [CLEAR] |
 | Security | Vault for every credential, with TOTP step-up on every view; the only Anvil Secret is `encryption_key`; role checks on the server for every function; customers filtered to their own records; Bearer token per instance for App 5; rate-limited sign-in and lockout | [CLEAR] |
 | Accessibility | WCAG 2.1 AA in every palette, light and dark; keyboard operation; visible focus; status never by colour alone; reduced motion respected | [CLEAR] |
-| Availability | Each client depends on the Mybizz development account (App 2) and its own hosting account; Anvil is a single point of failure, an accepted risk with the procedures in `deployment-procedures.md`; daily backups to the client's R2 bucket | [CLEAR] |
+| Availability | Each client instance runs in Mybizz CS's DigitalOcean cluster, with a standby database node: 99.95% monthly; one region is a single point of failure, covered by the rebuild procedure in `deployment-procedures.md`; nightly backups to the client's R2 bucket | [CLEAR] |
 | Timezone handling | UTC storage, display-time conversion, one IANA time zone per instance | [CLEAR] |
 | Currency handling | One system currency, locked after the first booking or invoice; optional display currency per service, display only | [CLEAR] |
 | Color/theming compliance | Anvil M3 theme with the project deviations of `DESIGN.md`; no hardcoded colour anywhere; four palettes and dark mode through the `--anvil-m3-*` properties | [CLEAR] |
 | Data protection | POPIA, GDPR and PCI DSS per [[[default:specifications-global/spec-regulatory-compliance-baseline\|Regulatory Compliance Baseline]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md); no customer personal data stored in App 5: the heartbeat and usage report carry none, and AI and speech requests pass through App 5 to Groq unstored, with Groq's Zero Data Retention switched on | [CLEAR] |
-| Capacity | 1,000,000 rows per client on the client's own Business account; 100 clients in total | [CLEAR] |
+| Capacity | 1 GiB container memory per client; the cluster sized to the client count; 100 clients in total | [CLEAR] |
 | Email delivery | Every email from a client's domain signed with DKIM and aligned for DMARC; bounces and complaints suppressed automatically; one SES tenant per client | [CLEAR] |
 | Language | Six app languages; no screen text typed into the Designer | [CLEAR] |
 | Support | Problem that stops a client's business acknowledged within 4 business hours; other tickets within 24 hours on business days | [CLEAR] |
@@ -180,9 +180,10 @@ No feature of Mybizz CS is deferred to a later release. Voice tier 4 (voice form
 
 ## 8. Dependencies
 
-- **Multi-instance model:** every client instance depends on `master_template` (App 2), which receives each release from App 1 (Step 42). Every later release is delivered through that dependency; schema changes are applied by hand to App 3 and every instance. `[CLEAR]`
+- **Multi-instance model:** every client instance runs the release image, built from `master_template` (App 2), which receives each release from App 1 (Step 42), and App 3. Every later release, with its new tables and columns, is delivered by App 5's Release action. `[CLEAR]`
 - **App 5** must be built and running before the first paying client: registration, provisioning, the AI and voice gateway, the Help channel and at-risk alerts depend on it. `[CLEAR]`
-- **Anvil:** Business plan accounts owned by Mybizz; custom domains; background tasks and scheduled tasks; HTTP endpoints; the Material 3 theme and Routing dependencies. Anvil's confirmation of the account structure is outstanding (BRD AC-6). `[MISSING]`
+- **Anvil:** Mybizz's Business account for Apps 1, 2, 3 and 5; the Anvil App Server for client instances; background tasks and scheduled tasks; HTTP endpoints; the Material 3 theme and Routing dependencies. `[CLEAR]`
+- **DigitalOcean:** App Platform containers, Managed PostgreSQL with a standby node, Container Registry (`spec-client-instance-hosting`). `[CLEAR]`
 - **Outside services:** Stripe, Paystack, PayPal, Amazon SES, Cloudflare R2 and DNS, Groq (`integration-architecture.md`). SES production access for Mybizz's AWS account (BRD AC-14). `[PARTIAL]`
 - **The client's own domain**, carrying the website and every email address. `[CLEAR]`
 
@@ -192,7 +193,6 @@ No feature of Mybizz CS is deferred to a later release. Voice tier 4 (voice form
 
 | # | Question | Settled at | Certainty |
 |---|---|---|---|
-| OQ-1 | Does Anvil permit client business apps on Mybizz-owned Business accounts, one per account? | Before the first paying client; David asks Anvil's sales team | [MISSING] |
 | OQ-2 | Can an app schedule a background task of its dependency and serve its dependency's HTTP endpoints? | Proved in App 1 before Step 31 | [MISSING] |
 
 ---

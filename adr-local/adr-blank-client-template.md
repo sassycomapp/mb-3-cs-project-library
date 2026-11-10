@@ -1,46 +1,40 @@
 ---
 title: "adr-blank-client-template"
 doc-id: "mb-8829bc8a"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
-# `adr-blank-client-template` ADR — App 3 as the Provisioning Clone Source
+# `adr-blank-client-template` ADR — App 3 as the Client App
 
 **Status:** Accepted
 **Date:** 2026-10-31
-**Authority:** [[[default:adr-global/adr-client-instance-architecture|Client Instance Architecture]]](C:/dev/project-library-global/adr-global/adr-client-instance-architecture.md) ADR, [[[default:adr-global/adr-dependency-update-model|Dependency Update Model]]](C:/dev/project-library-global/adr-global/adr-dependency-update-model.md) ADR, [[[default:specifications-global/spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md). Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
+**Authority:** [[[default:adr-global/adr-client-instance-architecture|Client Instance Architecture]]](C:/dev/project-library-global/adr-global/adr-client-instance-architecture.md) ADR, [[[default:adr-global/adr-dependency-update-model|Dependency Update Model]]](C:/dev/project-library-global/adr-global/adr-dependency-update-model.md) ADR, [[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md), [[[default:specifications-global/spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md). Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
 
 ---
 
 ## Context
 
-Every client instance needs the full schema of `authoritative-schema.md` before `master_template`'s server modules can work. Anvil cannot create Data Tables by code, and a new Anvil app has no tables. A client instance must also never hold its own forms or server modules: one would silently override `master_template` for that instance and stop it receiving updates (reference section 2).
-
-Three ways of giving a new instance its tables exist:
-
-1. **Clone `master_template`.** The clone gets its own copy of every form and server module, which override the dependency and break updates.
-2. **Create the tables by hand for each client.** Every table and column by hand, for every client; error-prone and not workable at 100 clients.
-3. **Clone a dedicated blank app** that holds the schema, a startup module and the dependency, and nothing else.
+Every client instance runs on the Anvil App Server, as one container with its own database ([[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md)). The container needs an app to run: one that opens `master_template`, carries the schedule, and defines the full schema of `authoritative-schema.md`, from which the App Server builds the client's tables. That app must never hold its own forms or server modules: one would silently override `master_template` for every client (reference section 2).
 
 ---
 
 ## Decision
 
-**App 3, `mb-3-cs-app3` (`blank_client_template`), is the only clone source for new client instances.** It is held on the Mybizz development account.
+**App 3, `mb-3-cs-app3` (`blank_client_template`), is the client app every client instance runs.** It is held on Mybizz's Anvil Business account and built, with `master_template` and `m3`, into the release image defined in `mb-3-cs-app4`.
 
 ### Contents of App 3
 
 | Component | Present | Notes |
 |---|---|---|
-| Every table of `authoritative-schema.md` | Yes | The released schema; no data |
+| The table definitions of `authoritative-schema.md` | Yes | The released schema; the App Server builds and extends each client's tables from them |
 | One startup module | Yes | Opens `master_template`'s startup form |
-| `master_template` (App 2) as a dependency | Yes | Inherited by every clone |
-| Scheduled tasks | Yes | The schedule of `integration-architecture.md` (Background Tasks), calling `master_template`'s background tasks; inherited by every clone |
+| `master_template` (App 2) as a dependency | Yes | Built into the release image |
+| Scheduled tasks | Yes | The schedule of `integration-architecture.md` (Background Tasks), calling `master_template`'s background tasks |
 | README stating the five-app rule | Yes | [[[default:adr-global/adr-client-instance-readme-five-app-system\|Mandatory README in Every Client Instance Documenting the Five-App System]]](C:/dev/project-library-global/adr-global/adr-client-instance-readme-five-app-system.md) ADR |
-| Server modules | No | Never added |
-| Forms | No | Forms live in `master_template` |
-| Anvil Secrets | No | `encryption_key` is set per instance at provisioning |
-| Custom domain | No | The client's own domain is connected per instance at onboarding step 8 |
-| Email service setting | No | Anvil's Email service is set to Custom Mail Server with the SES SMTP endpoint per instance at provisioning |
+| Server modules | No | Never added; the image build stops on one |
+| Forms | No | Forms live in `master_template`; the image build stops on one |
+| Anvil Secrets | No | `encryption_key` is set per instance at provisioning, as the container's encrypted setting |
+| Custom domain | No | The client's own domain is added to the client's container at onboarding |
+| Email service setting | No | Each container's SMTP settings hold the SES SMTP endpoint and the client's credentials |
 | Data | No | The sample data for the client's trade is loaded per instance at provisioning, and recorded in `sample_rows` |
 
 ### The startup module
@@ -58,24 +52,22 @@ open_form(LoginForm())
 
 ### Provisioning
 
-1. Mybizz opens a new Mybizz-owned Anvil Business account for the client.
-2. App 3 is cloned into that account and named `[client-name]-cs`.
-3. The clone has the schema, the startup module, the scheduled tasks, the README and the dependency on `master_template`.
-4. The remaining steps follow `mb-3-cs-architecture-reference.md` section 5 and the [[[default:specifications-global/spec-client-activation-runbook|Client Instance Activation Runbook]]](C:/dev/project-library-global/specifications-global/spec-client-activation-runbook.md).
+1. App 5's New client action creates the client's database and starts the client's container `[client-name]-cs` from the current release image.
+2. The App Server builds every table of App 3's table definitions in the client's empty database.
+3. The remaining steps follow `mb-3-cs-architecture-reference.md` section 5 and the [[[default:specifications-global/spec-client-activation-runbook|Client Instance Activation Runbook]]](C:/dev/project-library-global/specifications-global/spec-client-activation-runbook.md).
 
 ### Schema responsibility
 
-App 3 changes only when the schema changes. Every schema change is made in App 1, recorded in `schema-migration-log.md`, applied to App 3, and applied by hand to every existing client instance. No release that changes the schema is pushed into App 2 (Step 42) without that migration plan (`deployment-procedures.md`).
+Every schema change is made in App 1, recorded in `schema-migration-log.md`, and written into App 3's table definitions at Step 42. After the first release, a change only adds tables and nullable columns; the table-change check in `mb-3-cs-app4` stops any other. Each client's App Server adds the change when its container starts on the release (`deployment-procedures.md`).
 
 ---
 
 ## Consequences
 
 - A new client instance is correctly structured in minutes.
-- Server logic, forms and UI reach every instance through the dependency from its first day.
-- Every instance starts with the same schema and the same schedule.
-- App 3 needs schema maintenance only.
-- Schema changes to running instances are manual, which limits how freely the schema changes after launch.
+- Server logic, forms, UI and new tables and columns reach every instance through the release image.
+- Every instance runs the same schema and the same schedule.
+- After the first release, a table or column is never removed, renamed or retyped.
 
 ---
 

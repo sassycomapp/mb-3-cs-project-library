@@ -1,7 +1,7 @@
 ---
 title: "business-requirements-document"
 doc-id: "mb-c29418ec"
-updated: "2026-11-06"
+updated: "2026-11-10"
 ---
 # Mybizz CS — Business Requirements Document (BRD)
 
@@ -20,7 +20,7 @@ Why the business needs the application and what it must achieve for the business
 
 ## 1. Executive Summary
 
-Mybizz CS gives a consulting or service business one complete, private online platform — website, booking, payments, CRM with a sales pipeline, a team email inbox, email marketing, invoicing, accounts, time tracking, blog, analytics, reviews, AI assistance and voice — in its own isolated application, on its own domain, for $150 a month with unlimited staff included, month to month, with no add-ons. It replaces the five to seven separate tools such a business otherwise pays for and connects by hand. The business outcome is 100 paying clients, $180,000 a year in revenue and $73,200 a year gross margin after hosting, run by the founder with Mybizz's own management app.
+Mybizz CS gives a consulting or service business one complete, private online platform — website, booking, payments, CRM with a sales pipeline, a team email inbox, email marketing, invoicing, accounts, time tracking, blog, analytics, reviews, AI assistance and voice — in its own isolated application, on its own domain, for $99 a month with unlimited staff included, month to month, with no add-ons. It replaces the five to seven separate tools such a business otherwise pays for and connects by hand. The business outcome is 100 paying clients, $118,800 a year in revenue and $97,248 a year gross margin after hosting, run by the founder with Mybizz's own management app.
 
 ---
 
@@ -38,9 +38,9 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 
 | # | Objective | How success is measured | Certainty |
 |---|---|---|---|
-| BO-1 | Replace the separate-tool stack of a consulting or service business with one platform at one price | Every need in concept section 4.5 is met by a built feature; the price is $150 a month with no per-staff fee, no commission and no add-on | [CLEAR] |
-| BO-2 | Reach full capacity | 100 paying clients; $180,000 annual recurring revenue | [CLEAR] |
-| BO-3 | Hold the margin at capacity | Hosting at or below $106,800 a year at 100 clients; gross margin $73,200 a year; cost per client reviewed monthly in App 5 | [CLEAR] |
+| BO-1 | Replace the separate-tool stack of a consulting or service business with one platform at one price | Every need in concept section 4.5 is met by a built feature; the price is $99 a month with no per-staff fee, no commission and no add-on | [CLEAR] |
+| BO-2 | Reach full capacity | 100 paying clients; $118,800 annual recurring revenue | [CLEAR] |
+| BO-3 | Hold the margin at capacity | Hosting at or below $21,552 a year at 100 clients; gross margin $97,248 a year; cost per client reviewed monthly in App 5 | [CLEAR] |
 | BO-4 | The client owns the client's data and customers | Each client in a separate app and database; data exportable as CSV at any time; backups in the client's own R2 bucket; no marketplace or shared directory | [CLEAR] |
 | BO-5 | A client goes live without help | Average onboarding-to-live time under 7 days through the onboarding wizard | [CLEAR] |
 | BO-6 | Keep clients | Client retention from year 1 to year 2 above 90% | [CLEAR] |
@@ -59,7 +59,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 | Secondary users | The clients' customers | Book, order, pay, review, use the customer portal |
 | Visitors | Visitors to a client's public website and landing pages | Find the business, enquire, become leads |
 | Prospects | Businesses trying the demo apps | See the whole product before paying |
-| Platform supplier | Anvil | Hosting terms for Mybizz-owned Business accounts |
+| Platform suppliers | Anvil; DigitalOcean | Anvil's Business plan terms for Apps 1, 2, 3 and 5; DigitalOcean's terms for client instances |
 | Service providers | Stripe, Paystack, PayPal, Amazon Web Services (SES), Cloudflare, Groq | Each provider's own terms and fees |
 | Regulators | South Africa's Information Regulator (POPIA); data protection authorities under GDPR | Lawful processing of personal data |
 
@@ -72,7 +72,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 - A complete platform for consulting businesses and service businesses, on the ground or in the cloud or both: teams of every size, with unlimited staff, and solo practitioners (concept section 4).
 - Every way such a business delivers work: at its premises, at the customer's location, online live, as delivered work, and to groups (concept section 4.3).
 - All 36 features of concept section 7 (F-01 to F-36), including AI assistance with all ten assists, WhatsUp voice tiers 1 to 5, and the sample data of concept section 8.
-- One isolated application instance per client, on the client's own domain, on its own Mybizz-owned Anvil Business account.
+- One isolated application instance per client, on the client's own domain, in its own container with its own database.
 - Six app languages: English at launch; French, Portuguese, Spanish, German and Italian added one at a time.
 - Two demo apps for prospects (F-36).
 - The Mybizz management app (App 5), built and running before the first paying client.
@@ -113,7 +113,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 | BR-15 | Mybizz is alerted when a client is at risk: no staff sign-in for 14 days, no bookings for 30 days, a ticket unanswered for 3 days | BO-6, BO-7 | Must | [CLEAR] |
 | BR-16 | A client reaches Mybizz through a Help button; a problem that stops the client's business is acknowledged within 4 business hours, every other ticket answered within 24 hours on business days | BO-6, BO-7 | Must | [CLEAR] |
 | BR-17 | Every feature explains itself through a tooltip that opens a short help video, in the client's app language, so a client rarely needs support | BO-5, BO-7 | Must | [CLEAR] |
-| BR-18 | Each client runs on its own Mybizz-owned Anvil Business account, with the account's full limits | BO-3 | Must | [CLEAR] |
+| BR-18 | Each client runs in its own container with its own database, with its own memory and its own database connections | BO-3 | Must | [CLEAR] |
 | BR-19 | Mybizz records each client's hosting, email and AI usage so that the cost per client is known every month | BO-3 | Must | [CLEAR] |
 | BR-20 | The platform meets POPIA, GDPR and PCI DSS: card data never touches the platform, credentials are encrypted, every significant action is audited | BO-4 | Must | [CLEAR] |
 | BR-21 | A client keeps its accounts in Mybizz CS — invoices, payments, refunds and expenses with receipts — with profit and loss, tax and statement reports, and exports them to Wave, Xero or QuickBooks in one click | BO-1 | Must | [CLEAR] |
@@ -134,14 +134,14 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 | AC-1 | **Multi-instance model:** the project uses the dependency-based five-app model — App 1 development, App 2 `master_template`, App 3 `blank_client_template`, App 4 one instance per client, App 5 management (reference section 1). This governs every downstream document | [CLEAR] |
 | AC-2 | **Currency:** one system currency per instance, set at onboarding and locked once the first booking or invoice exists; an optional display currency per service, for display only | [CLEAR] |
 | AC-3 | **Time zones:** one IANA time zone per instance; UTC storage; conversion at display time | [CLEAR] |
-| AC-4 | **Platform:** Anvil.works, full-stack Python, with the Material 3 theme; no self-hosted fallback; no programmatic schema changes, so every schema change is a manual operation per instance | [CLEAR] |
-| AC-5 | **Hosting plan:** the Hobby plan is never used (Anvil licenses it for personal projects only); every hosting account is an Anvil Business account owned by Mybizz | [CLEAR] |
-| AC-6 | Anvil permits Mybizz to run each client's business app on a Mybizz-owned Business account. Written confirmation from Anvil's sales team is outstanding | [MISSING] |
-| AC-7 | One client instance per Business account has the account's full limits: 1,000,000 data table rows | [CLEAR] |
-| AC-8 | Business accounts cost $89 a month billed annually ($99 billed monthly); 100 accounts serve 100 clients | [CLEAR] |
+| AC-4 | **Platform:** Anvil.works, full-stack Python, with the Material 3 theme; client instances on the Anvil App Server, which builds and extends each client's tables from App 3's table definitions; a release only adds tables and nullable columns | [CLEAR] |
+| AC-5 | **Hosting:** Apps 1, 2, 3 and 5 on Mybizz's Anvil Business account; every client instance in its own DigitalOcean App Platform container with its own database in Mybizz CS's Managed PostgreSQL cluster (`spec-client-instance-hosting`) | [CLEAR] |
+| AC-6 | The four conditions before the first paying client of `spec-client-instance-hosting` section 10 are met: the full suite on the release image, the load measurement, the tested rebuild and the end-to-end release path | [PARTIAL] |
+| AC-7 | Each client instance has 1 GiB of container memory and 3 database connections, and stores about 100 MB of data a year | [CLEAR] |
+| AC-8 | Hosting costs $12 a month per client container, $30 to $480 a month for the cluster with its standby node, and $116 a month fixed; $1,796 a month at 100 clients (`spec-client-instance-hosting` section 11) | [CLEAR] |
 | AC-9 | Groq AI text and speech cost about $1 to $3 per client per month at heavy use, and Amazon SES $0.10 per 1,000 emails; both are absorbed within the margin; App 5 measures them | [CLEAR] |
 | AC-10 | Every client has its own domain, which carries its website and every email address | [CLEAR] |
-| AC-11 | The client pays its payment providers' fees, its domain, and Cloudflare R2 storage above the free allowance in its own Cloudflare account; Mybizz absorbs Anvil, Amazon SES and Groq costs | [CLEAR] |
+| AC-11 | The client pays its payment providers' fees, its domain, and Cloudflare R2 storage above the free allowance in its own Cloudflare account; Mybizz absorbs Anvil, DigitalOcean, Amazon SES and Groq costs | [CLEAR] |
 | AC-14 | Amazon grants Mybizz's AWS account SES production access before the first paying client | [PARTIAL] |
 | AC-12 | Capacity is a hard limit of 100 clients for Mybizz CS | [CLEAR] |
 | AC-13 | Launch with no marketing budget: founder-led, South Africa first, international through content | [CLEAR] |
@@ -154,8 +154,8 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 |---|---|---|---|
 | First clients onboarded | 10 | App 5 client registry | [CLEAR] |
 | Clients at capacity | 100 | App 5 client registry | [CLEAR] |
-| Annual recurring revenue at capacity | $180,000 | App 5 billing | [CLEAR] |
-| Gross margin at capacity | $73,200 a year | App 5 billing less hosting cost | [CLEAR] |
+| Annual recurring revenue at capacity | $118,800 | App 5 billing | [CLEAR] |
+| Gross margin at capacity | $97,248 a year | App 5 billing less hosting cost | [CLEAR] |
 | Client retention, year 1 to year 2 | above 90% | App 5 client registry | [CLEAR] |
 | Average onboarding-to-live time | under 7 days | Registration date to onboarding completion, App 5 and `business_profile.onboarding_completed_at` | [CLEAR] |
 | Support tickets per client per month | under 2 | App 5 tickets | [CLEAR] |
@@ -168,8 +168,9 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 
 | Risk | Likelihood | Impact | Mitigation | Certainty |
 |---|---|---|---|---|
-| Anvil does not permit client business apps on Mybizz-owned Business accounts | Low | High | Written question to Anvil's sales team before the first paying client (AC-6) | [MISSING] |
-| The Mybizz development account fails or is compromised; every client depends on App 2 there | Low | High | Account-level procedures in `deployment-procedures.md`; two-factor authentication; R2 backups of every instance | [CLEAR] |
+| A DigitalOcean region outage or account suspension stops every client | Low | High | Standby database node; nightly R2 copies; the rebuild procedure in `deployment-procedures.md`, tested before the first paying client (AC-6) | [CLEAR] |
+| The Anvil App Server behaves differently from Anvil's hosted service | Medium | High | One pinned App Server version; the full test suite on the release image before every release (AC-6) | [CLEAR] |
+| Mybizz's Anvil account fails or is compromised; releases and provisioning stop | Low | Medium | Client instances keep running; account-level procedures in `deployment-procedures.md`; two-factor authentication | [CLEAR] |
 | Founder capacity: every ticket lands with the founder | Medium | High | Self-service help on every screen (F-25), a target under 2 tickets per client per month, at-risk alerts (F-34) | [CLEAR] |
 | Early churn: a client who sees no value in the first weeks leaves quietly | Medium | Medium | At-risk alerts, the onboarding wizard with help videos, sample data showing every report from the first day, the demo apps before purchase | [CLEAR] |
 | Competitors copy features | Medium | Medium | The Africa and Paystack position, founder-direct support, an ownership architecture marketplaces cannot offer | [CLEAR] |
