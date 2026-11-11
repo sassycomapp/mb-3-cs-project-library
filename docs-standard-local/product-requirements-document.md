@@ -1,7 +1,7 @@
 ---
 title: "product-requirements-document"
 doc-id: "mb-ad69f2ae"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Product Requirements Document (PRD)
 
@@ -105,6 +105,8 @@ The project has several user types and needs role-based access control (section 
 | US-39 | As an Owner, I want to choose the app's language, so that my team and customers use it in theirs | UF-02 | Must | [CLEAR] |
 | US-40 | As a new Owner, I want every report working on sample data from the first day, and one button to clear it, so that I see the value at once | UF-43 | Must | [CLEAR] |
 | US-41 | As a prospect, I want to try the whole product before paying, so that I buy with confidence | UF-44 | Must | [CLEAR] |
+| US-42 | As Mybizz, I want shared resources protected by per-client limits and grown automatically, so that no client harms another and I never watch a console | UF-36 | Must | [CLEAR] |
+| US-43 | As a client, I want to be told promptly if my data is affected by a security incident, so that I can meet my own legal duties | UF-36 | Must | [CLEAR] |
 
 ---
 
@@ -144,12 +146,15 @@ The project has several user types and needs role-based access control (section 
 | FR-30 | F-30 Security and compliance: server-side role checks, rate limiting, encrypted credentials, audit trail, data isolation, UK GDPR, the client's own privacy law, PCI DSS | US-4, US-24 | No card number is stored in any table; no credential appears in any log; rate-limited sign-in refuses repeated attempts | [CLEAR] |
 | FR-31 | F-31 Design system: `m3-custom-theme` with the project deviations, eight palettes, dark mode following the device, status badges with words | US-34 | Changing the palette changes every screen without reload; switching the device to dark changes every screen; no hardcoded colour is found by the UI scans | [CLEAR] |
 | FR-32 | F-32 Help, tickets and feedback: Help form to App 5, replies in the Help view, response targets | US-29 | A sent message shows a reference number and appears in App 5; a reply in App 5 appears in the client's Help view and is emailed | [CLEAR] |
-| FR-33 | F-33 Hosting: one container and one database per client, usage reported | US-31 | An instance reports its usage daily; at 80% of its container's memory, or of the cluster's client limit, Mybizz is warned | [CLEAR] |
+| FR-33 | F-33 Hosting: one container and one database per client, usage reported, resized automatically | US-31, US-42 | An instance reports its usage daily; above 80% of its container's memory App 5 raises the container to 2 GiB and tells Mybizz; at 60 clients App 5 raises the cluster to 16 GiB in the maintenance window | [CLEAR] |
 | FR-34 | F-34 Mybizz management app: registry, provisioning (container and database, R2, SES, DNS), usage and health monitoring, billing, release distribution, tickets, AI gateway, at-risk alerts | US-1, US-31, US-32 | App 5 raises an alert for a client with no staff sign-in for 14 days, no bookings for 30 days, or a ticket unanswered for 3 days; every instance's heartbeat shows the current release after App 5's Release action | [CLEAR] |
+| FR-37 | Fair use: per-client limits on database connections, query time, idle transactions, database size, email volumes, email reputation, AI and voice spend, AI request rate and data transfer, with warnings, hard-limit actions and notices to the client and Mybizz | US-42 | At each warning level the Owner is emailed; at each hard limit the action of [[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md) happens and Mybizz is messaged; budgeted heavy use triggers no warning | [CLEAR] |
+| FR-38 | Incident handling: an incident record in App 5 with its timeline; the breach notice to affected clients | US-43 | An incident opened in App 5 records detected, contained, insurer called, ICO reported and clients notified, each with its time; the notice to clients is sent from App 5 and recorded | [CLEAR] |
+| FR-39 | Business reminders: insurance renewal, Cyber Essentials renewal, DigitalOcean key rotation and every statutory deadline, the last read from FreeAgent | US-31 | Each reminder reaches Mybizz at its lead time: insurance 30 days, Cyber Essentials 60 days, keys 14 days, statutory deadlines 30 days; App 5 makes no write to FreeAgent | [CLEAR] |
 | FR-35 | F-35 Sales: deals pipeline with owners, companies, quotes accepted online and turned into invoices | US-37 | Accepting a quote creates its invoice and wins its deal in one call; Staff list only their own deals | [CLEAR] |
 | FR-36 | F-36 Demo apps: a sample-data demo and an empty demo, reset nightly, emails to the visitor only, payments in test mode | US-41 | After the nightly reset both demos are back to their starting state; no demo email reaches any address but the signed-in visitor's | [CLEAR] |
 
-Every user story US-1 to US-41 is satisfied by at least one functional requirement; every requirement cites stories that exist.
+Every user story US-1 to US-43 is satisfied by at least one functional requirement; every requirement cites stories that exist.
 
 ---
 
@@ -165,7 +170,7 @@ Every user story US-1 to US-41 is satisfied by at least one functional requireme
 | Currency handling | One system currency, locked after the first booking or invoice; optional display currency per service, display only | [CLEAR] |
 | Color/theming compliance | Anvil M3 theme with the project deviations of `DESIGN.md`; no hardcoded colour anywhere; eight palettes and dark mode through `m3x_theming` and the theme's colour properties | [CLEAR] |
 | Data protection | UK GDPR, the client's own privacy law and PCI DSS per [[[default:specifications-global/spec-regulatory-compliance-baseline\|Regulatory Compliance Baseline]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md); no customer personal data stored in App 5: the heartbeat and usage report carry none, and AI and speech requests pass through App 5 to Groq unstored, with Groq's Zero Data Retention switched on | [CLEAR] |
-| Capacity | 1 GiB container memory per client; the cluster sized to the client count; 100 clients in total | [CLEAR] |
+| Capacity | 1 GiB container memory per client, raised to 2 GiB by App 5 above 80% use; the cluster Advanced Edition with a standby, 8 GiB to 59 clients and 16 GiB from 60; 100 clients in total; per-client fair-use limits on every shared resource | [CLEAR] |
 | Email delivery | Every email from a client's domain signed with DKIM and aligned for DMARC; bounces and complaints suppressed automatically; one SES tenant per client | [CLEAR] |
 | Language | Five app languages; no screen text typed into the Designer | [CLEAR] |
 | Support | Problem that stops a client's business acknowledged within 4 business hours; other tickets within 24 hours on business days | [CLEAR] |

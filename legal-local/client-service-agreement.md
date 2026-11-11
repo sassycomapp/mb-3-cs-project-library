@@ -1,7 +1,7 @@
 ---
 title: "client-service-agreement"
 doc-id: "mb-d77a1bda"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz Consulting Services — Client Service Agreement
 
@@ -14,14 +14,53 @@ The agreement between Mybizz and the client: the service, the fee, the client's 
 ## Fees
 
 - The subscription is £79 a month, before tax, for each client instance, charged at the fixed price for the client's currency: £79, $99, C$135, €89 or CHF 89. The client pays monthly, in advance.
-- Mybizz's order process is conducted by its online reseller, Paddle.com Market Ltd ("Paddle"), which is the Merchant of Record for every order. The client buys the subscription from Paddle. Paddle handles billing and payment, collects any VAT or sales tax due in the client's country, and issues the tax invoice for every payment.
-- By completing a purchase, the client agrees to Paddle's Terms of Use (https://paddle.com/legal/terms) and acknowledges Paddle's Privacy Policy (https://paddle.com/legal/privacy).
+- Mybizz's order process is conducted by its online reseller, Paddle.com Market Ltd ("Paddle"), which is the Merchant of Record for every order. The Paddle terms (`saas-tos-iro-paddle.md`, in this folder) form part of this agreement: Paddle's role, invoices and receipts, refunds, price changes and Paddle's buyer terms.
+- The monthly price includes every feature and unlimited staff. It includes the client's use of email, AI and voice within the fair-use limits below.
+
+## Fair Use
+
+Every client instance shares its database cluster, its email service and its AI service with other Mybizz clients. Each client's use of those shared resources is limited, so that no client's use can slow, stop or harm another client's service. The limits are far above the heavy use of a team of about six using every feature every working day.
+
+| Resource | Notice to the client at | Limit | At the limit |
+|---|---|---|---|
+| Database connections | — | 3 at a time | Further requests wait for a free connection |
+| Database query time | — | 60 seconds per query | The query is cancelled |
+| Database size | 1 GB | 2 GB | Bulk imports are switched off until the size is reduced or a larger allowance is agreed |
+| Marketing email | 20,000 a month | 25,000 a month | Marketing sends pause until the next month; booking, invoice and sign-in emails continue |
+| All email | 40,000 a month | 50,000 a month | All sending except sign-in email pauses until the next month |
+| Email reputation | The email service's warning level | The email service's pause level for bounces or complaints | The client's sending pauses until the cause is fixed |
+| AI and natural voice | £5.60 of use in a month | £16.80 of use in a month | AI and natural voice pause until the next month; the browser's built-in voice continues |
+| AI requests | — | 20 a minute | Further requests wait |
+| Data transfer | 150 GB a month | 500 GB a month | Mybizz contacts the client to agree a way forward |
+
+Mybizz tells the client by email when it reaches a notice level and when it reaches a limit.
+
+## Acceptable Use
+
+The client must not use the service, its website or its email to:
+
+- send unsolicited bulk email, or email to addresses that have not agreed to receive it;
+- impersonate anyone, collect passwords or payment details under false pretences, or spread malware;
+- publish or send anything unlawful, or anything that infringes another person's rights;
+- attack, probe or overload the service or any other system.
+
+Anyone may report misuse to `abuse@mybizz.live`, which is shown on every client website. On a confirmed breach, Mybizz may suspend the client instance at once and will tell the client why. The client's data is kept and never withheld.
 
 ## Client Responsibilities
 
 ## Support
 
 ## Data and Exit
+
+### Personal data breach
+
+If Mybizz becomes aware of a breach of security affecting the personal data held in the client's instance, Mybizz tells the client without undue delay, with what is known of the breach, its likely effects and the measures taken. The client remains responsible for any notice its own privacy law requires it to give to its supervisory authority and to the people affected; Mybizz gives the client the information it needs to do so.
+
+## Liability
+
+- Mybizz's total liability to the client, for all claims arising in connection with this agreement, is limited to the fees the client paid for the service in the 12 months before the event that gave rise to the claim.
+- Mybizz is not liable for the client's loss of profit, revenue or goodwill, or for any indirect or consequential loss.
+- Nothing in this agreement limits liability that cannot be limited by law, including liability for death or personal injury caused by negligence, or for fraud.
 
 ## Term and Termination
 

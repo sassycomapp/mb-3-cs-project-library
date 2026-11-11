@@ -93,7 +93,10 @@ Every client instance runs App 3 on `master_template`. A form or server module a
 - **Platform:** each client instance runs in its own DigitalOcean App Platform container (1 GiB memory), with its own database in Mybizz CS's Managed PostgreSQL cluster, as [[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md) sets out. Email goes through Amazon SES (F-18).
 - **Usage reporting:** each client instance reports its memory use, storage, email volume, heavy-job activity, last staff sign-in and last booking date to App 5 through the management endpoints, on a schedule.
 - **Heavy jobs:** imports, exports, backups, AI generation, briefings, campaign sending and inbound email processing run as background tasks.
-- **Capacity:** a hard limit of 100 client instances for Mybizz CS. The cluster is sized to the client count (Client Instance Hosting section 4).
+- **Capacity:** a hard limit of 100 client instances for Mybizz CS. The cluster is Advanced Edition with a standby, 8 GiB to 59 clients and 16 GiB from 60 (Client Instance Hosting section 4).
+- **Automatic resizing:** above 80% memory use, App 5 raises a client's container from 1 GiB to 2 GiB; at 60 active clients, App 5 raises the cluster to 16 GiB in the Sunday maintenance window. App 5 messages Mybizz at each resize and never reduces a size ([[[default:adr-global/adr-automatic-resizing]]](C:/dev/project-library-global/adr-global/adr-automatic-resizing.md)).
+- **Fair use:** every shared resource carries a per-client limit (database connections, query time, database size, email volumes, email reputation, AI and voice spend, AI request rate, data transfer). The database limits are held by PostgreSQL on each client's database user; App 5 measures the rest, warns the client at each warning level, acts at each hard limit, and messages Mybizz ([[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md)).
+- **Notifications:** App 5 sends Mybizz one daily summary of routine actions and an immediate message for anything that needs a decision; every action is in App 5's audit record.
 
 ---
 
@@ -478,7 +481,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 ### F-29 Data, backups and history
 - Each client has one Cloudflare R2 bucket, in a free Cloudflare account in the client's own name; Mybizz reaches it as an invited member. The bucket's access keys are held in the client's Vault. Detail: `integration-architecture.md` (Client Storage).
 - Folders of the bucket: `backups/daily/`, `backups/weekly/`, `history/{table}/`, `audit/{year}/{month}/`, `webhooks/{service}/{year}/{month}/`, `email/messages/{address}/{year}/{month}/`, `email/attachments/`, `expenses/receipts/`, `exports/`.
-- Backups: scheduled background task exports every data table to the bucket daily; the last 7 daily and 4 weekly backups are kept.
+- Backups: scheduled background task exports every data table to the bucket daily; the last 7 daily and 4 weekly backups are kept. Each copy is locked for its retention period (daily 7 days, weekly 28 days): no key, Mybizz's included, can delete or overwrite it. App 5 checks each night's copy daily, and a monthly restore drill on the test client instance proves a copy restores.
 - Webhook payloads (Stripe, PayPal, Amazon SES) are written to the bucket on receipt; the data tables keep only the current state they produce.
 - Emails: bodies older than 90 days move to the bucket nightly and the row stays as an index; attachments are always in the bucket.
 - Exit: Mybizz writes the full export, `encryption_key` and the decrypted Vault into the bucket, then leaves the client's Cloudflare account.
@@ -513,6 +516,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - App 5, `mb-3-cs-app5`, built before the first paying client.
 - Functions: client registry and registration (client reference numbers, credentials), provisioning (section 5) including the container and database, R2 bucket, Amazon SES identity and DNS records, usage monitoring (section 4), health monitoring, billing (monthly invoices to clients), release distribution, support tickets and feedback (F-32), the AI and voice gateway (F-26, F-27), the demo apps (F-36).
 - App 5 holds Mybizz's AWS account access (SES, S3, SNS) and Mybizz's Cloudflare user.
+- Operations: the container and cluster resizes, fair-use enforcement, the **Suspend** action for abuse, the **Rebuild** action, the daily backup check, the domain and certificate check, and the daily summary and immediate messages to Mybizz (section 4; [[[default:adr-global/adr-mybizz-management-visibility|Mybizz Management Visibility]]](C:/dev/project-library-global/adr-global/adr-mybizz-management-visibility.md)).
 - At-risk alerts: each client instance reports its last staff sign-in and last booking date with its usage report. App 5 alerts the founder when a client has no staff sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days.
 
 ### F-35 Sales pipeline, companies and quotes

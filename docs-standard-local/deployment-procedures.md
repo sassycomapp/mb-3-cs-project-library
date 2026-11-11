@@ -1,7 +1,7 @@
 ---
 title: "deployment-procedures"
 doc-id: "mb-f46b55a9"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Deployment Procedures
 
@@ -55,11 +55,13 @@ Every client instance
 9. **Verify** (Post-Deploy Verification).
 10. **Notify:** App 5 records the release and sends each client the release note by email. The note is informational: the update is already live.
 
-### Staged rollout (high-risk releases)
+### Staged rollout (every release)
 
-1. App 5's Release action moves a small first group of client instances to the new release image; the rest stay on the previous image.
-2. Watch the first group's heartbeats and error logs for 24 hours.
-3. App 5 moves the remaining instances to the new release image.
+1. App 5's Release action verifies the release image's signature, then moves the test client instance to the image, by its digest.
+2. Then 10% of client instances.
+3. Then every client instance.
+
+Each stage passes its health check before the next starts: every container in the stage runs the new image by its digest, sends a heartbeat within 30 minutes and shows no rise in errors. A failed health check rolls that stage back automatically, stops the release and messages Mybizz ([[[default:adr-global/adr-dependency-update-model|Dependency Update Model]]](C:/dev/project-library-global/adr-global/adr-dependency-update-model.md)).
 
 ---
 
@@ -134,6 +136,8 @@ A release only adds tables and nullable columns, so the previous release runs on
 - [ ] Every feature of the release has passed `build-verified`
 - [ ] The whole test suite passes on the release image ([[[default:security-global/requirements/sec-requirements-pre-merge-master-template|Pre-Merge Requirements for master_template]]](C:/dev/project-library-global/security-global/requirements/sec-requirements-pre-merge-master-template.md))
 - [ ] No High or Critical finding open (Step 41)
+- [ ] No High or Critical image finding older than 14 days, and no end-of-life software in the image
+- [ ] The release image is signed
 - [ ] Release note written
 - [ ] Schema change recorded and the table-change check passed, if the schema changes
 - [ ] Vault and integration changes documented, if any
@@ -167,9 +171,9 @@ The structure has two levels of risk:
 | Anvil account suspended | Email from Anvil; App 1, App 2 and App 5 unavailable | Client instances keep running; contact Anvil support at once; releases and provisioning wait | Billing kept current with a backup payment method; Anvil terms followed |
 | One client container fails | Heartbeats from its instance stop; App 5 raises a critical alert | App Platform restarts it; if it does not recover, App 5 recreates the container from the current release image | Container memory watched in App 5 (F-33) |
 | Cluster main node fails | Database errors in heartbeats | The standby node takes over automatically | Standby node from the first paying client |
-| DigitalOcean region outage or account suspension | Every client's heartbeats stop | The rebuild procedure: a new cluster and containers in another region, from the release image, each client's database loaded from its R2 copy | Nightly R2 copies; the rebuild procedure tested before the first paying client; billing kept current |
-| Mybizz's AWS account or SES sending suspended | SES errors on every send; App 5 raises a critical alert | Contact AWS support; outgoing email is queued in each instance's retry queue and sent when sending returns; senders' mail servers retry the delivery of received email for several days | Bounce and complaint rates watched per client; marketing paused for a client above the thresholds (`observability-requirements.md`); two-factor authentication on the AWS account |
-| Any account compromised | Unexpected commits in GitHub, unknown collaborators, unknown sessions | Change the account's credentials; contact the provider's support; audit Git history and revert unauthorised commits; rotate every Bearer token, container key and Vault credential that may be exposed; tell affected clients without undue delay, under the UK GDPR and the client's own privacy law | Strong unique passwords and two-factor authentication on every Anvil, DigitalOcean and GitHub account; scoped API tokens; no collaborators beyond Mybizz |
+| DigitalOcean region outage or account suspension | Every client's heartbeats stop; DigitalOcean Uptime reports App 5's status endpoint fault | App 5's **Rebuild** action: a new Advanced cluster and new containers in another region, each client restored from DigitalOcean's backups or, when those are unreachable, from its locked nightly copy ([[[default:specifications-global/spec-deployment\|Deployment Specification]]](C:/dev/project-library-global/specifications-global/spec-deployment.md) section 10) | Nightly R2 copies locked for 30 days; the rebuild tested before the first paying client; a second payment card and billing alerts on the account |
+| Mybizz's AWS account or SES sending suspended | SES errors on every send; App 5 raises a critical alert | Contact AWS support; outgoing email is queued in each instance's retry queue and sent when sending returns; senders' mail servers retry the delivery of received email for several days | Each client's SES tenant reputation policy pauses that client alone; monthly email caps per client; two CloudWatch alarms below Amazon's review levels; a hardware security key on the AWS account |
+| Any account compromised | Unexpected commits in GitHub, unknown collaborators, unknown sessions | Follow `incident-response-plan.md`: contain, call the insurer's incident line, rotate every Bearer token, container key and Vault credential that may be exposed, audit Git history and revert unauthorised commits, and tell affected clients without undue delay | A hardware security key on every supplier account; two scoped DigitalOcean keys; the cluster's trusted sources; locked nightly copies; no collaborators beyond Mybizz |
 
 Recovery expectations are stated in the client terms.
 

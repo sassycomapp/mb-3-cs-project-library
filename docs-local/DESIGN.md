@@ -716,7 +716,7 @@ All four templates draw from the same governed section inventory:
 5. **Testimonials** — 2–3 testimonial cards with quote text and author details.
 6. **Trust / proof strip** — 3–4 trust data points using M3 text and card patterns.
 7. **CTA / contact band** — Headline, explanatory text, primary button, optional secondary action.
-8. **Footer** — Shared FooterComponent across all public pages.
+8. **Footer** — Shared FooterComponent across all public pages. Besides the business's own links and the Cookie settings link, it always shows the line "Report abuse: abuse@mybizz.live", linked as an email address, in the footer's smallest text style. The line cannot be removed or edited by the client.
 
 #### Template Differentiation Matrix
 

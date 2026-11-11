@@ -1,7 +1,7 @@
 ---
 title: "integration-architecture"
 doc-id: "mb-af335781"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Integration Architecture
 
@@ -99,6 +99,8 @@ Every email of a client instance, received and sent, goes through **Amazon SES**
 - **Unsubscribe:** every marketing email carries an unsubscribe link and the `List-Unsubscribe` and `List-Unsubscribe-Post` headers, served by `/_/api/email/unsubscribe`.
 - **Demo mode:** with `config.demo_mode` on, `email_service` sends every email to the signed-in visitor's own address (F-36).
 - **Mybizz's own email:** the welcome email at registration (UF-01) and client billing are sent by App 5 from Mybizz's own domain through SES, never from a client's domain.
+- **Limits:** each client's SES tenant carries SES's standard reputation policy, which pauses that client's sending alone. Marketing email is capped at 25,000 a month and all email at 50,000 a month per client, with warnings at 20,000 and 40,000. Two CloudWatch alarms watch Mybizz's whole SES account ([[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md); [[[default:specifications-global/spec-integration|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) section 2.6).
+- **Received email files** are deleted from S3 once processed; an S3 lifecycle rule deletes any left after 7 days.
 - **Cost:** $0.10 per 1,000 emails sent or received, absorbed by Mybizz (concept section 9.5).
 
 ---
@@ -226,6 +228,7 @@ Scheduled tasks belong to the app that runs them. They are set up in App 3 (`bla
 
 - Every client instance runs on the client's own domain, which the client registers and owns; the domain carries the website and every email address of the client (concept section 9.7).
 - At onboarding step 8, App 5 writes the website `A` record and the email records in the client's Cloudflare DNS (or the Owner copies them into another domain provider), and the instance's environment is switched to the custom domain (F-06, F-18).
+- The website record is proxied through Cloudflare, with the web application firewall, DDoS protection and bot blocking switched on in the client's Cloudflare account. The email records stay unproxied.
 - `mybizz.live` is Mybizz's own website and holds the demo apps (`demo.mybizz.live`, `try.mybizz.live`). Client instances are not given `mybizz.live` subdomains.
 - Every client has unlimited email addresses on its own domain, in the Team Inbox (F-18).
 - Provisioning steps: `mb-3-cs-architecture-reference.md` section 5, UF-01, [[[default:specifications-global/spec-client-activation-runbook|Client Instance Activation Runbook]]](C:/dev/project-library-global/specifications-global/spec-client-activation-runbook.md).

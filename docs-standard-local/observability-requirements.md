@@ -1,7 +1,7 @@
 ---
 title: "observability-requirements"
 doc-id: "mb-4a65dade"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Observability Requirements
 
@@ -97,16 +97,23 @@ Dashboards and reports read summary tables, never compute on page load ([[[defau
 App 5 shows every client instance on one dashboard: last heartbeat, release version, background task health, error count and last error, usage against the account's limits, email volume, bounce and complaint rates, billing status, open tickets.
 
 **Critical — act now:**
-- No heartbeat from an instance for 45 minutes (three missed heartbeats).
+- No heartbeat from an active instance for 30 minutes (two missed heartbeats); App 5's status endpoint reports a fault, which DigitalOcean Uptime emails to Mybizz.
 - An instance's error count in one hour above its threshold.
 - A background task failing on three consecutive runs.
 - Payment failures above 10% of payment attempts in one day.
 - A support ticket of type problem that stops a client's business, unacknowledged after 4 business hours (F-32).
-- A client's SES complaint rate above 0.1% or bounce rate above 5% over the last day: the client's marketing email is paused until Mybizz reviews it.
+- A client's SES tenant paused by its reputation policy: App 5 notifies the client and Mybizz.
+- Either CloudWatch alarm on Mybizz's SES account: bounce rate above 4% or complaint rate above 0.08%.
+- A client reaching any hard limit of [[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md).
+- A container at 2 GiB above 80% of its memory.
+- A nightly copy missing, or a monthly restore drill failed.
+- A client domain not resolving or its certificate invalid.
 
 **Warning — watch:**
 - An instance's release version differs from `master_template`'s current release.
-- An instance above 80% of its container's memory, or Mybizz CS above 80% of its cluster's client limit (F-33).
+- A container resized to 2 GiB, or the cluster resized at 60 clients ([[[default:adr-global/adr-automatic-resizing]]](C:/dev/project-library-global/adr-global/adr-automatic-resizing.md)) (F-33).
+- A client reaching any warning level of [[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md).
+- A client domain's registration expiring within 30 days.
 - A demo app's nightly reset failed (F-36).
 - A background task running longer than twice its usual time.
 
@@ -118,6 +125,7 @@ App 5 shows every client instance on one dashboard: last heartbeat, release vers
 
 - Sent every 15 minutes by `server_management/heartbeat_tasks`, as an HTTP POST to App 5 with the instance's Bearer token ([[[default:specifications-global/spec-api-specification|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md)).
 - Contents: instance status, release version, schema fingerprint, background task status, error count since the last heartbeat, last error, queued retries.
+- Every heartbeat also carries the client database's size and the client's AI and voice spend for the month.
 - The daily usage report adds: row count, data table storage, emails sent and received, heavy-job activity, last staff sign-in, last booking date.
 - No customer personal data is sent to App 5. Neither the heartbeat nor the usage report contains names, emails, or the content of any record.
 - A heartbeat that cannot be delivered is written to `health_log` and sent with the next one.

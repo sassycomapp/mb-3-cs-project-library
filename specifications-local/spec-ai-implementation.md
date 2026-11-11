@@ -1,7 +1,7 @@
 ---
 title: "spec-ai-implementation"
 doc-id: "mb-c145dbbc"
-updated: "2026-11-06"
+updated: "2026-11-11"
 ---
 # Mybizz AI Implementation Specification
 
@@ -457,6 +457,17 @@ Generated content does not remain isolated in the helper. It transfers easily in
 | Website text and social captions | LLM | Mybizz | Short prompts, a few per published page or post |
 
 No additional cost passes to the client for any AI or voice feature.
+
+### Usage limits
+
+Each client's AI and natural voice use is metered and limited ([[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md)):
+
+- **Budget:** £5.60 a month per client, covering AI writing and insight, speech to text and natural voice.
+- **Metering:** the shared service layer records the cost of every AI and voice request in the instance, and the heartbeat reports the month's total to App 5.
+- **Warning at £5.60** a month: the Owner and Mybizz are emailed.
+- **Stop at £16.80** a month: AI and natural voice pause until the next month. Voice input falls back to typing and spoken answers to the browser's built-in voice, so every screen keeps working.
+- **Rate:** at most 20 AI requests a minute per instance; further requests wait.
+- **Shared limit:** the Groq organisation carries a spend limit of £1,700 a month with alerts at 50%, 75% and 90%, which covers every client at its stop at 100 clients.
 
 ---
 

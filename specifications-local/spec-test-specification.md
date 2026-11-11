@@ -1,7 +1,7 @@
 ---
 title: "spec-test-specification"
 doc-id: "mb-d8dcf41a"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Test Specification (Canonical)
 
@@ -305,6 +305,23 @@ Each test runs against App 1 with the test suite's mail catcher in place of Amaz
 | 4.19 | F-02 Vault reset | As Owner, Reset Vault code and follow the emailed link | The next Vault open asks for enrolment; no stored secret changed; the reset is in `activity_log` |
 | 4.20 | F-15 PayPal | In PayPal's sandbox: pay a booking; alter the amount in the browser; capture twice; close the browser after approval | The server's amount is charged; one payment row with `gateway_fee`; the closed-browser order is captured by the webhook |
 | 4.21 | F-15 PayPal | Set the system currency to ISK | PayPal shows as unavailable in Settings and at checkout |
+
+---
+
+## 5. Operations and Business Safeguard Tests
+
+Each test runs against App 5 with simulated suppliers (DigitalOcean API, SES, Groq, FreeAgent sandbox), or on the test client instance where it says so. The catalogue IDs are in [[[default:test-suite/ts-catalogue|Test Suite — Catalogue]]](C:/dev/project-library-global/test-suite/ts-catalogue.md).
+
+| # | Requirement | Test | Expected | Catalogue |
+|---|---|---|---|---|
+| 5.1 | SR-52 | Send a memory alert at 81% for a 1 GiB container, then again for the same container at 2 GiB | The first raises the container to 2 GiB and messages Mybizz; the second raises nothing and messages Mybizz | RL-13 |
+| 5.2 | SR-52 | Register the 60th active client | The cluster raise to 16 GiB is scheduled for the next Sunday 06:00 UK window and recorded in the audit record | RL-13 |
+| 5.3 | SR-59 | Read each client database user's settings in the cluster | Connection limit 3, statement timeout 60 s, idle-in-transaction timeout 120 s on every user | RL-16 |
+| 5.4 | SR-60 | Send heartbeats with a database size of 1.1 GiB, then 2.1 GiB, and AI spend of £5.70, then £16.90 | The Owner is warned at 1.1 GiB and £5.70; bulk imports switch off at 2.1 GiB; AI and natural voice pause at £16.90; Mybizz is messaged at each hard limit | RL-14 |
+| 5.5 | SR-61 | Make 21 AI requests within one minute; then pause AI and open a voice form | The 21st waits; with AI paused the form works with typing and the built-in voice | RL-14 |
+| 5.6 | SR-62 | Simulate 25,000 marketing sends, then 50,000 sends in one month | Marketing pauses at 25,000 while bookings and invoices send; everything but sign-in pauses at 50,000; both resume on the first of the next month | RL-14 |
+| 5.7 | SR-63 | On the test client instance, open a simulated incident and walk the incident response plan | Every step is in App 5's incident record with its time; the client notice is sent and recorded | RL-22 |
+| 5.8 | SR-64 | Move a simulated clock past each reminder's lead time; stop Wise transactions for 7 days | Each reminder is sent once at its lead time; the bank feed message is sent on day 7; App 5's request log to FreeAgent holds read requests only | RL-20, RL-21 |
 
 ---
 

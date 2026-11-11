@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-architecture-explainer"
 doc-id: "mb-dc62ff9a"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Architecture Explainer
 
@@ -76,6 +76,8 @@ The client app's database holds what the business is working with now: current b
 Keeping history out of the app does three things. It keeps each client well inside the account's limits. It means each client's history is held in storage that belongs to that client. And it means a client can leave with all of their data at any time.
 
 The last 30 days of the audit trail stay in the app, so the owner can check recent activity quickly. Anything in the bucket can be brought back into the app, either to restore it or simply to look at it.
+
+Each backup in the bucket is locked for as long as it is kept, so nobody, not even someone who has stolen Mybizz's keys, can delete or scramble it. App 5 checks every day that each client's backup arrived, and once a month a backup is restored on the test client app to prove it works.
 
 ---
 
@@ -196,6 +198,8 @@ Step-by-step processes, such as onboarding and booking, show their steps in a si
 **F-33 Hosting.** Section 3.
 
 **F-34 Mybizz management app.** Section 2. App 5 is where Mybizz runs Mybizz CS as a business: clients, setup, usage, health, billing, updates, support, and the AI gateway. Each client app regularly reports simple signs of life — when staff last signed in, when the last booking was made — and App 5 raises an alert when a client goes quiet or a ticket waits too long. That gives the founder the chance to step in before a client leaves.
+
+App 5 also looks after the shared resources without the founder watching. When a client app is running short of memory, App 5 gives it more; when the business reaches 60 clients, App 5 enlarges the shared database. Every client has fair-use limits on the shared database, email and AI, set far above heavy use, so one busy or misused client can never slow down or cost the others. App 5 warns the client before a limit, acts at the limit, and tells the founder in one daily summary, with an immediate message only when a decision is needed.
 
 **F-36 Demo apps.** A prospective client tries Mybizz CS before paying, in two apps on Mybizz's own account: one running a business full of sample data, one empty for trying setup. Both reset every night, so a visitor can change anything. Emails really go out, but only to the visitor's own address, and payments run in the gateways' test modes, so the visitor sees everything a customer would and no real money moves.
 

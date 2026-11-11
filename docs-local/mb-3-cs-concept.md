@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-concept"
 doc-id: "mb-f23e1822"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Concept
 
@@ -543,13 +543,18 @@ New costs are added to this list as they are identified.
 
 ### 9.6 Revenue model
 
-| | Monthly | Yearly |
-|---|---|---|
-| Revenue at capacity (100 clients × £79) | £7,900 | £94,800 |
-| Hosting at 100 clients (Client Instance Hosting section 11) | £1,347 | £16,164 |
-| **Gross margin before other costs** | **£6,553** | **£78,636** |
+| | 1 client | 9 clients | 50 clients | 100 clients |
+|---|---|---|---|---|
+| Revenue at £79 | £79.00 | £711.00 | £3,950.00 | £7,900.00 |
+| Client-related costs: containers, database cluster, email, AI and voice, data transfer, Paddle's fee | £215.93 | £383.37 | £1,241.50 | £2,483.00 |
+| Mybizz's fixed costs | £303.16 | £303.16 | £303.16 | £303.16 |
+| **Net profit, monthly** | **−£440.09** | **£24.47** | **£2,405.34** | **£5,113.84** |
 
-Email and AI cost a few pounds per client per month and are recorded per client in the Mybizz management app (F-34).
+- **Break-even is 9 clients.**
+- Each client is budgeted at medium-to-heavy use: email, AI and voice cost £7.60 a month per client, recorded per client in the Mybizz management app (F-34).
+- The database cluster runs with a standby from the first client, at £195 a month, and rises to about £390 at 60 clients.
+- Mybizz's fixed costs include the Anvil account, the test client instance, Cyber Essentials certification, business insurance, the company's statutory fees and its accounting software. The full figures are in [[[default:specifications-global/spec-client-billing|Client Billing]]](C:/dev/project-library-global/specifications-global/spec-client-billing.md) section 6.
+- Every shared resource carries a fair-use limit per client, so the highest cost of one client is £52.98 a month, well inside its £79.
 
 ### 9.7 Domain
 
