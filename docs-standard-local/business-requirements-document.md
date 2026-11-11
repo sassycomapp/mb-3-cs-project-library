@@ -40,7 +40,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 |---|---|---|---|
 | BO-1 | Replace the separate-tool stack of a consulting or service business with one platform at one price | Every need in concept section 4.5 is met by a built feature; the price is £79 a month, or the fixed price in the client's currency, with no per-staff fee, no commission and no add-on | [CLEAR] |
 | BO-2 | Reach full capacity | 100 paying clients; $118,800 annual recurring revenue | [CLEAR] |
-| BO-3 | Hold the margin | Break-even at 9 clients; net profit of £5,113.84 a month at 100 clients after every client-related and fixed cost; the highest cost of any one client held below its £79 by fair-use limits; cost per client reviewed monthly in App 5 | [CLEAR] |
+| BO-3 | Hold the margin | Break-even at 7 clients; net profit of £5,013.84 a month at 100 clients after every client-related and fixed cost; the highest cost of any one client held below its £79 by fair-use limits; cost per client reviewed monthly in App 5 | [CLEAR] |
 | BO-4 | The client owns the client's data and customers | Each client in a separate app and database; data exportable as CSV at any time; backups in the client's own R2 bucket; no marketplace or shared directory | [CLEAR] |
 | BO-5 | A client goes live without help | Average onboarding-to-live time under 7 days through the onboarding wizard | [CLEAR] |
 | BO-6 | Keep clients | Client retention from year 1 to year 2 above 90% | [CLEAR] |
@@ -141,7 +141,7 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 | AC-5 | **Hosting:** Apps 1, 2, 3 and 5 on Mybizz's Anvil Business account; every client instance in its own DigitalOcean App Platform container with its own database in Mybizz CS's Managed PostgreSQL cluster (`spec-client-instance-hosting`) | [CLEAR] |
 | AC-6 | The four conditions before the first paying client of `spec-client-instance-hosting` section 10 are met: the full suite on the release image, the load measurement, the tested rebuild and the end-to-end release path | [PARTIAL] |
 | AC-7 | Each client instance has 1 GiB of container memory and 3 database connections, and stores about 100 MB of data a year | [CLEAR] |
-| AC-8 | Hosting costs $12 a month per client container, $30 to $480 a month for the cluster with its standby node, and $116 a month fixed; $1,796 a month at 100 clients (`spec-client-instance-hosting` section 11) | [CLEAR] |
+| AC-8 | Hosting costs $12 a month per client container, $30 to about $520 a month for the cluster by stage (no standby to client 24, a standby from client 25), and $116 a month fixed; about $1,836 a month at 100 clients (`spec-client-instance-hosting` section 11) | [CLEAR] |
 | AC-9 | Groq AI text and speech cost about $1 to $3 per client per month at heavy use, and Amazon SES $0.10 per 1,000 emails; both are absorbed within the margin; App 5 measures them | [CLEAR] |
 | AC-10 | Every client has its own domain, which carries its website and every email address | [CLEAR] |
 | AC-11 | The client pays its payment providers' fees, its domain, and Cloudflare R2 storage above the free allowance in its own Cloudflare account; Mybizz absorbs Anvil, DigitalOcean, Amazon SES and Groq costs | [CLEAR] |
@@ -158,8 +158,8 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 | First clients onboarded | 10 | App 5 client registry | [CLEAR] |
 | Clients at capacity | 100 | App 5 client registry | [CLEAR] |
 | Monthly revenue at capacity | £7,900 | App 5 billing | [CLEAR] |
-| Net profit at capacity | £5,113.84 a month | FreeAgent, read by App 5 | [CLEAR] |
-| Break-even | 9 clients | App 5 client registry and FreeAgent | [CLEAR] |
+| Net profit at capacity | £5,013.84 a month | FreeAgent, read by App 5 | [CLEAR] |
+| Break-even | 7 clients | App 5 client registry and FreeAgent | [CLEAR] |
 | Client retention, year 1 to year 2 | above 90% | App 5 client registry | [CLEAR] |
 | Average onboarding-to-live time | under 7 days | Registration date to onboarding completion, App 5 and `business_profile.onboarding_completed_at` | [CLEAR] |
 | Support tickets per client per month | under 2 | App 5 tickets | [CLEAR] |
@@ -172,7 +172,7 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 
 | Risk | Likelihood | Impact | Mitigation | Certainty |
 |---|---|---|---|---|
-| A DigitalOcean region outage or account suspension stops every client | Low | High | Standby database node; nightly R2 copies; the rebuild procedure in `deployment-procedures.md`, tested before the first paying client (AC-6) | [CLEAR] |
+| A DigitalOcean region outage or account suspension stops every client | Low | High | Standby database node from 25 clients; nightly R2 copies; the rebuild procedure in `deployment-procedures.md`, tested before the first paying client (AC-6) | [CLEAR] |
 | The Anvil App Server behaves differently from Anvil's hosted service | Medium | High | One pinned App Server version; the full test suite on the release image before every release (AC-6) | [CLEAR] |
 | Mybizz's Anvil account fails or is compromised; releases and provisioning stop | Low | Medium | Client instances keep running; account-level procedures in `deployment-procedures.md`; two-factor authentication | [CLEAR] |
 | Founder capacity: every ticket lands with the founder | Medium | High | Self-service help on every screen (F-25), a target under 2 tickets per client per month, at-risk alerts (F-34) | [CLEAR] |

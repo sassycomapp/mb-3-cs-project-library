@@ -1,7 +1,7 @@
 ---
 title: "design-doc"
 doc-id: "mb-7868ef5e"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 
 # Mybizz CS — Design Doc (run app1)
@@ -130,7 +130,7 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 
 | Risk | Likelihood | Impact | Response |
 |---|---|---|---|
-| A DigitalOcean region outage or account suspension stops every client (BRD risks) | Low | High | Standby database node; nightly R2 copies; the rebuild procedure tested before the first paying client (BRD AC-6) |
+| A DigitalOcean region outage or account suspension stops every client (BRD risks) | Low | High | Standby database node from 25 clients; nightly R2 copies; the rebuild procedure tested before the first paying client (BRD AC-6) |
 | The Anvil App Server behaves differently from Anvil's hosted service (BRD risks) | Medium | High | One pinned App Server version; the full test suite on the release image before every release (BRD AC-6) |
 | The Mybizz development account fails or is compromised; every client depends on App 2 there, and the two demo apps share the account, so a suspension stops sign-ups as well as service | Low | High | `deployment-procedures.md` account-level procedures; two-factor authentication; R2 backups of every instance |
 | The schema migration (44 → 70 tables, P13 creating `cookie_policy` and `consents`) is applied by hand, by David, in App 1 | High | Medium | `schema-migration-log.md` Part A and prompts P1–P14 in order — P13 creates the two tables, P14 removes columns, last — each checked against its prompt before Resolve; Part C compares the resulting `anvil.yaml` with the schema table by table |
