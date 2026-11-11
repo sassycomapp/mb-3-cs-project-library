@@ -1,11 +1,11 @@
 ---
 title: "DESIGN"
 doc-id: "mb-190df6bf"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — DESIGN
 
-This document is the design system of Mybizz CS. It is built on **`m3-custom-theme`** (dependency ID `7USO6DVZSIIWA5QX`), the full Material 3 theme built on Anvil's Material 3 theme, and applies to every Mybizz CS screen: the public website, the admin area, the customer portal, and the Mybizz management app (App 5).
+This document is the design system of Mybizz CS. It is built on **`m3-custom-theme`** (dependency ID `UGGJBAZUZ74XZ7VU`), the full Material 3 theme built on Anvil's Material 3 theme, and applies to every Mybizz CS screen: the public website, the admin area, the customer portal, and the Mybizz management app (App 5).
 
 - The colour values of the eight palettes live in `m3-custom-theme`; this document defines how colour is used.
 - Generic Material 3 rules (accessibility, the `wrap_on` responsive mechanism, state-specification patterns) live in [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) and are not repeated here. This document states this project's choices and its deviations from the M3 defaults.

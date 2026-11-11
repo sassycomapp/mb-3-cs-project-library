@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-architecture-reference"
 doc-id: "mb-7d6be180"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Architecture Reference
 
@@ -492,7 +492,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - UK GDPR, the client's own privacy law and PCI DSS: [[[default:specifications-global/spec-regulatory-compliance-baseline|Regulatory Compliance Baseline (Specification)]]](C:/dev/project-library-global/specifications-global/spec-regulatory-compliance-baseline.md). Card data never touches the instance; gateways handle it.
 
 ### F-31 Design system
-- `m3-custom-theme` (dependency ID `7USO6DVZSIIWA5QX`), the full Material 3 theme built on Anvil's Material 3 theme, with the project deviations in `DESIGN.md`.
+- `m3-custom-theme` (dependency ID `UGGJBAZUZ74XZ7VU`), the full Material 3 theme built on Anvil's Material 3 theme, with the project deviations in `DESIGN.md`.
 - No hardcoded colours: every colour comes from the Colour Scheme, referenced as `%color:Name%` or `var(--anvil-m3-…)`; translucent colours are derived with `color-mix()`.
 - Eight palettes (`default`, `professional_blue`, `warm_coral`, `calm_teal`, `sophisticated_purple`, `sky_blue`, `forest_green`, `desert_rose`), each a complete Material 3 colour scheme in light and dark, held in `m3-custom-theme`; at startup App 1 calls `m3x_theming.set_palette(business_profile.palette)`, which sets the colour properties at runtime, so native and custom components change together.
 - Dark mode follows the device setting on every screen ([[[default:adr-global/adr-dark-mode|Dark Mode]]](C:/dev/project-library-global/adr-global/adr-dark-mode.md) ADR); App 1 calls `m3x_theming.set_mode("system")` at startup, which applies the palette's dark scheme and switches when the device setting changes.
@@ -535,7 +535,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 | Layer | Technology | Notes |
 |---|---|---|
 | Platform | Anvil.works; Anvil App Server on DigitalOcean for client instances | Full-stack Python; client hosting in `spec-client-instance-hosting` |
-| UI | Material Design 3 (M3), `m3-custom-theme` | Dependency ID `7USO6DVZSIIWA5QX` |
+| UI | Material Design 3 (M3), `m3-custom-theme` | Dependency ID `UGGJBAZUZ74XZ7VU` |
 | Public routing | Anvil Routing | Dependency ID `3PIDO5P3H4VPEMPL` |
 | Database | Anvil Data Tables | Each client instance's own database in DigitalOcean Managed PostgreSQL; schema in `authoritative-schema.md` |
 | Authentication | Anvil Users service | Role checks by custom decorators |

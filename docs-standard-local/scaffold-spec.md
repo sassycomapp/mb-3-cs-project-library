@@ -1,7 +1,7 @@
 ---
 title: "scaffold-spec"
 doc-id: "mb-be462593"
-updated: "2026-11-10"
+updated: "2026-11-11"
 ---
 # Mybizz CS — Scaffold Specification
 
@@ -446,10 +446,10 @@ At startup App 1 calls `m3x_theming.apply_saved()`, then `m3x_theming.set_palett
 
 | Dependency | Dependency ID | Version | Package name |
 |---|---|---|---|
-| m3-custom-theme | `7USO6DVZSIIWA5QX` | `v2.0.0` | `m3` |
+| m3-custom-theme | `UGGJBAZUZ74XZ7VU` | `master` | `m3` |
 | Routing | `3PIDO5P3H4VPEMPL` | `v0.6.1` | `routing` |
 
-- Versions are pinned. A version change is a release with its own tests.
+- Routing is pinned to its version. `m3-custom-theme` is followed on its `master` branch, which holds only the released theme. A routing version change is a release with its own tests.
 - App 3 and every client instance depend on `master_template` (App 2), as `mb-3-cs-architecture-reference.md` section 1 sets out.
 - **Anvil Secret:** `encryption_key` only, used only by `vault_service`. Set once per instance at provisioning and never changed.
 - **Native libraries:** `anvil.yaml` loads `@floating-ui/dom@1` from `cdn.jsdelivr.net` in `head_html`. Its purpose is not recorded. It is checked against the M3 theme's own requirements, then kept with its reason recorded here, or removed. No other external script is loaded.
