@@ -1,0 +1,38 @@
+{
+  "subject": "mb-3-cs-b16-app1-domain-map",
+  "intent": "Show Mybizz CS's domain - the glossary's entities and their relationships - so a reader trusts that every entity has one owner and one place in the data design, and that the trade/common marking holds. Load-bearing claim: the contact is the spine every trade record links to - the one direction the rule allows - and Mybizz's own billing (plan summary, referrals) is written only from the App 5 and Paddle side, never becoming a money record of the client's business. Audience: David at the gate, then Step 17, which builds the tables from this vocabulary.",
+  "type": "architecture",
+  "type_reason": "Entities and their ownership and relationships; the default for everything that exists and connects; not a flow or a state picture.",
+  "quality_profile": "standard",
+  "nodes": ["client-business", "contact", "provider", "service", "booking", "order", "quote", "invoice", "payment", "crm-outreach", "mybizz-billing"],
+  "node_roles": {
+    "client-business": "common - the subscribing business, owner of every record below it",
+    "contact": "common - the customer as one person; the spine every trade record links to",
+    "provider": "common - the user who delivers services",
+    "service": "trade - the catalogue offering, bookable or unit-priced",
+    "booking": "trade - of a service or package; sessions drawn down",
+    "order": "trade - delivered work, with its brief and delivery",
+    "quote": "trade - the offer whose acceptance creates the invoice",
+    "invoice": "trade - the money claim, with its lines and tax",
+    "payment": "trade - money taken or refunded, by gateway or by hand",
+    "crm-outreach": "common - one node for the cluster: leads, enquiries, segments, campaigns, tasks, email; deals stay trade, deferred to a card",
+    "mybizz-billing": "common - plan, subscription, referral, plan summary, written from the App 5 and Paddle side"
+  },
+  "main_path": ["contact", "booking", "invoice", "payment"],
+  "deferred_to_cards": [
+    "Customer package - the card states that a booking draws down one session of a customer package",
+    "Resource", "Group session and Place", "Recurring series", "Availability rules and exceptions, Slot",
+    "Meeting type", "Intake", "Time entry", "Deposit, Tax", "Expense and Expense category",
+    "Company and Deal (deal trade)", "Contact event and Timeline", "Automation rule and run", "Enrolment",
+    "Email address and Desk", "Suppression", "Review and Testimonial",
+    "the public-website cluster (Page, Blog post, Landing page, Media file)",
+    "the legal cluster (Legal document, Consent record)",
+    "the platform cluster (Client instance, Release image, Vault, Notification)"
+  ],
+  "stages_or_lanes": ["owner band (client-business)", "feeding row (service, provider, order, quote)", "trade spine (contact, booking, invoice, payment)", "Mybizz side (mybizz-billing)"],
+  "expected_corridors": [["provider", "booking", "under-spine band, x 540-730"], ["quote", "invoice", "under-spine band, x 955-1130"], ["service", "booking", "above-spine band, x 335-540"], ["order", "invoice", "straight vertical, x 955"], ["crm-outreach", "contact", "straight vertical, x 180"], ["mybizz-billing", "client-business", "above the feeding row"]],
+  "layout_budget_read": "renderers/architecture/ - no README with a layout budget for this type; free-form grid.mjs",
+  "quality_gate": "showcase accepted only at 9 artifact checks, 0 composition errors, 0 warnings",
+  "abort_conditions": ["node overlap surviving the repair order", "an edge through a node surviving the repair order", "an ambiguous shared corridor surviving the repair order"],
+  "status": "approved"
+}

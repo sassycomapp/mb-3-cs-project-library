@@ -3,7 +3,7 @@ title: "mb-3-cs-b11-app1-receipt"
 document: Step 11 Receipt — mb-3-cs b11 app1
 state: Generated from ledger steps row id 5; snapshot 2026-10-31
 doc-id: "mb-93e783f5"
-updated: "2026-10-31"
+updated: "2026-11-12"
 ---
 
 # Step Receipt — Step 11, Init (run app1, route application)
@@ -30,6 +30,12 @@ updated: "2026-10-31"
 - **Context locked read-only**: `mb-3-cs-project-context` linked, federated, on both commit tools; the library was empty before the template copy.
 
 ## Tests (b11-test-spec) — evidence in `pdlf-outputs\b11\`
+
+| File | Passed | Failed | Review | Skipped | Errors |
+|---|---|---|---|---|---|
+| mb-3-cs-b11-app1-checks.xml | 7 | 0 | 0 | 0 | 0 |
+| mb-3-cs-b11-app1-pr09.xml | 4 | 0 | 0 | 0 | 0 |
+| **Total** | **11** | **0** | **0** | **0** | **0** |
 
 | Test | Result | Evidence |
 |---|---|---|

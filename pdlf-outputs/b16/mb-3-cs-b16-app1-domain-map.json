@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Mybizz CS — Domain Map",
+    "quality_profile": "standard"
+  },
+  "components": [
+    { "id": "client-business", "type": "external", "label": "The client's business", "sublabel": "common · the subscribing business", "tag": "common", "pos": [620, 36], "size": [230, 66] },
+    { "id": "mybizz-billing", "type": "external", "label": "Mybizz's billing", "sublabel": "common · App 5 and Paddle", "tag": "common", "pos": [1500, 44], "size": [200, 78] },
+    { "id": "service", "type": "database", "label": "Service", "sublabel": "trade · bookable or unit", "tag": "trade", "pos": [260, 150], "size": [150, 64] },
+    { "id": "order", "type": "database", "label": "Order", "sublabel": "trade · delivered work", "tag": "trade", "pos": [880, 150], "size": [150, 64] },
+    { "id": "contact", "type": "database", "label": "Contact", "sublabel": "common · the customer as one person", "tag": "common", "pos": [80, 320], "size": [200, 72] },
+    { "id": "booking", "type": "database", "label": "Booking", "sublabel": "trade · of a service or package; sessions drawn down", "tag": "trade", "pos": [440, 320], "size": [200, 72] },
+    { "id": "invoice", "type": "database", "label": "Invoice", "sublabel": "trade · lines and tax", "tag": "trade", "pos": [870, 320], "size": [170, 72] },
+    { "id": "payment", "type": "database", "label": "Payment", "sublabel": "trade · taken or refunded", "tag": "trade", "pos": [1270, 320], "size": [170, 72] },
+    { "id": "provider", "type": "database", "label": "Provider", "sublabel": "common · a user who delivers", "tag": "common", "pos": [465, 480], "size": [150, 64] },
+    { "id": "quote", "type": "database", "label": "Quote", "sublabel": "trade · the offer", "tag": "trade", "pos": [880, 480], "size": [150, 64] },
+    { "id": "crm-outreach", "type": "database", "label": "Relationships and outreach", "sublabel": "common · leads, enquiries, segments, campaigns, tasks, email", "tag": "common", "pos": [60, 480], "size": [240, 76] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "The client's business — every record the instance holds", "wraps": ["client-business", "contact", "provider", "service", "booking", "order", "quote", "invoice", "payment", "crm-outreach"] },
+    { "kind": "region", "label": "Mybizz's side", "wraps": ["mybizz-billing"] }
+  ],
+  "connections": [
+    { "id": "contact-books", "from": "contact", "to": "booking", "label": "books", "variant": "emphasis" },
+    { "id": "booking-billed", "from": "booking", "to": "invoice", "label": "billed as" },
+    { "id": "invoice-settled", "from": "invoice", "to": "payment", "label": "settled by" },
+    { "id": "service-booked", "from": "service", "to": "booking", "label": "booked as", "fromSide": "bottom", "toSide": "top", "via": [[335, 267], [540, 267]] },
+    { "id": "provider-delivers", "from": "provider", "to": "booking", "label": "delivers", "fromSide": "top", "toSide": "bottom" },
+    { "id": "order-invoiced", "from": "order", "to": "invoice", "label": "invoiced", "labelAt": [955, 240] },
+    { "id": "quote-accepted", "from": "quote", "to": "invoice", "label": "accepted, becomes", "fromSide": "top", "toSide": "bottom" },
+    { "id": "crm-feeds", "from": "crm-outreach", "to": "contact", "label": "captures and nurtures" },
+    { "id": "billing-faces-client", "from": "mybizz-billing", "to": "client-business", "label": "plan summary and referrals", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Booked with the service (trade)", "items": ["Customer package — a booking draws down one session of a customer package; the package is the offering, the customer package the purchase", "Resource — a bookable room or piece of equipment", "Group session and Place; Recurring series", "Availability rules and exceptions; Slot; Meeting type; Intake; Payment hold"] },
+    { "dot": "emerald", "title": "Money around the invoice (trade)", "items": ["Deposit; Payment option; Payment terms", "Tax — the rate, label and registration, fixed at issue", "Time entry — a billable entry becomes one invoice line", "Refund — of one succeeded payment, never above it"] },
+    { "dot": "rose", "title": "Relationships and outreach (common; deals and reviews trade)", "items": ["Company; Deal — the pipeline opportunity", "Contact event and Timeline; Task; Automation rule and run", "Campaign and Enrolment; Email address and Desk; Suppression", "Lead capture and Event registration; Review and Testimonial"] },
+    { "dot": "emerald", "title": "Mybizz's billing and the platform (common)", "items": ["Plan — monthly or annual; Subscription; Renewal; Assisted setup", "Referral — pending, confirmed, used, void; Referral credit; Reserve", "Referral kit; Plan summary — display text, not money records; Mock-up invoice", "Client instance; Release image; Vault; Notification; Client storage; Retention; Summary"] }
+  ]
+}

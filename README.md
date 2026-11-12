@@ -1,7 +1,7 @@
 ---
 title: "README"
 doc-id: "mb-4aef6c9c"
-updated: "2026-10-30"
+updated: "2026-11-12"
 ---
 # Mybizz Consulting Services — Project Library
 
@@ -47,3 +47,9 @@ The repository is public. No secret, key or client data is ever committed to it.
 ## How this library is worked on
 
 Agents follow `AGENTS.md`. PDLF runs from `C:\pdlf` and writes here only what belongs to this business. Only David commits, with `commit-all`.
+
+## Required reading
+
+- [[[mb-3-cs-project-library:mb-3-cs-config]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/mb-3-cs-config.md) — the state of the project and this repository
+- [[[mb-3-cs-project-library:agents]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/AGENTS.md) — the rules every agent follows here
+- [[[mb-3-cs-project-library:mb-3-cs-explainer]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/mb-3-cs-explainer.md) — what the library is and why it is built this way

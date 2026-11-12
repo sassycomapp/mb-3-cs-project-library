@@ -183,8 +183,21 @@ server_functions:
     scope: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
     returns: []
     step_up: false
+  # — Plan and billing (F-37) —
+  get_plan_summary:
+    module: server_code/server_settings/plan_service.py
+    source: design-doc.md F-37; spec-client-billing.md §4.1; spec-api-specification /management/plan-summary
+    scope: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: [plan, renews_on, currency, lines, total, pending, reserve, referral_link]
+    step_up: false
+  update_referral_kit:
+    module: server_code/server_settings/plan_service.py
+    source: design-doc.md F-37; concept §9.2; authoritative-schema.md business_profile.referral_*
+    scope: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+    returns: []
+    step_up: false
   # — http endpoints (Bearer or signature; not role-decorated) —
-  # /management/{health,status,suspend,unsuspend,push-notification,push-update-alert}:
+  # /management/{health,status,suspend,unsuspend,push-notification,push-update-alert,plan-summary}:
   #     Bearer token, HTTP 403 without a valid token (sec-management-service-authentication)
   # /_/api/webhooks/{stripe,paypal}: gateway signature, HTTP 400 on failure
   # /_/api/email/{inbound,events}: SNS signature + own-topic confirmation; /unsubscribe: signed link
@@ -298,6 +311,7 @@ settings_tabs:
   FeatureSwitches: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
   LegalPages: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
   Data: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  PlanAndBilling: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
 
 # Fields each role may change, where it differs by role (IN-04, ASVS 8.2.3).
 writable_fields:

@@ -1,7 +1,7 @@
 ---
 title: "AGENTS"
 doc-id: "mb-2d2c3f8f"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 # AGENTS.md — mb-3-cs project library
 
@@ -33,6 +33,14 @@ The business has five apps (`spec-five-app-architecture-model.md` in `project-li
 9. **Every document goes in its folder.** Each folder's `README.md` says what belongs in it. A document with no folder goes in `wip\` until it has one.
 10. **A skill's output goes to the skill's own place.** Inside a PDLF step, a copy also goes to `pdlf-outputs\{step}\`. Outside a PDLF step, a skill's report goes to `reports-local\{family}\`.
 11. **Reference material is never committed.** A reference platform's source and reference material stay in `reference-platform-local\`, which git and GBrain ignore.
+
+## Vocabulary
+
+- Use every domain term exactly as `docs-local\GLOSSARY.md` defines it, never a synonym.
+- The client's own document is the Terms and Conditions; never "Terms of Service". Mybizz's own terms with its clients are the Client service agreement.
+- "Team member" for the whole team; Staff is one role. "User" names a signed-in person; name the role where one role is meant.
+- "Meeting type" (not "delivery mode"); "broadcast" (not "newsletter").
+- Mybizz's billing terms: plan (monthly or annual), subscription, referral and its four states, referral credit, reserve, plan summary — display text, not money records.
 
 ## Where things go
 

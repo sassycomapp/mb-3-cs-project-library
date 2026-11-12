@@ -162,6 +162,25 @@ A summary task run twice for the same period leaves **exactly one row per period
 
 Each lifecycle's allowed and forbidden transitions, tested by state-transition tests: booking (`DESIGN.md`, Booking Status Lifecycle — the D5 `cancelled → confirmed` path only through the transactional reinstatement); payment hold (15 minutes); invoice (draft → sent → paid / overdue → cancelled); order (ordered → in progress → delivered; cancelled); quote (draft → sent → accepted/declined; expired nightly); customer package (active → used/expired/cancelled); lead (new → converted/archived); review (requested → awaiting_approval → approved/declined); campaign and enrolment; group session and series; email message folders (Trash deleted after 30 days). Rows of `bookings`, `orders`, `invoice`, `payments`, `quotes` and `expenses` are never deleted.
 
-## 20. Conformance checks that apply (DC-08)
+## 20. Plan and billing and the referral kit (F-37; UF-45, UF-46)
+
+**Preconditions:** `plan_summary` present, written by App 5 through `POST /management/plan-summary` daily and after every change; a client on the annual plan with at least one confirmed and one pending referral; a second client on the monthly plan.
+
+| Step | Action | Expected result |
+|---|---|---|
+| 1 | The Owner opens Settings → Plan and billing | the client's plan and next renewal date, from `plan_summary` |
+| 2 | On the annual plan: read the mock-up invoice | 12 months at the plan price, the annual saving of 2 months, one month off per confirmed referral (at most 5), then the total as Paddle previews it, before tax |
+| 3 | Below the total | each pending referral by the referred business's name, the confirmed referrals in reserve, and the client's referral link |
+| 4 | On the monthly plan | the tab shows the annual plan's offer and the move to it through Paddle's customer portal |
+| 5 | Open the referral kit | copy the referral link; each ready-made post (LinkedIn, Facebook, X, WhatsApp) carries the client's own referral link and the line that the client gains a discount |
+| 6 | Switch the email banner, the website badge and the pop-up on, then off | the badge and pop-up appear on the public website only while switched on; the banner is added to campaign emails (sequences and broadcasts) only while switched on |
+| 7 | Open a registration through the referral link | the code is filled in; the registration appears as pending on the referrer's mock-up invoice; the referred client's first annual payment confirms it |
+| 8 | A Manager, Admin, Staff member or Customer opens the tab or calls `get_plan_summary` / `update_referral_kit` | refused — the tab and both functions are Owner only; a refused call writes nothing |
+
+**Data checks:** `plan_summary` matches Paddle's next-transaction preview; its amounts are display text in the subscription's currency as Paddle states them — not money records of the client's business; no business money rule (whole cents, system currency) applies to them.
+
+**Tests:** `IN-02` (Owner only), `ST-02`; `BR-10` (the referral kit works); FR-40, SR-65, SR-66; `RL-23` at App 5 and ledger level (the referral credit states `pending` / `confirmed` / `used` / `void`, the reserve of at most 5, and the plan-summary match are proven against Paddle's test environment).
+
+## 21. Conformance checks that apply (DC-08)
 
 Selected from `ts-conformance-checks` for this plan: five-app structure and never multi-tenant (ST-06, SC-14); client-instance contents (ST-10, RL-10); Anvil-first (DC-03, DC-07); table access and data-table creation (ST-07, DC-05, IN-02); schema up front and retention (ST-07, DC-14, RL-03); row ids and `created_at`/`updated_at` (ST-07); bounded searches and pre-computed aggregates (ST-09, IN-05, IN-17); one `contacts` table and lead creation (IN-05); UTC, currency, cents (ST-08, LG-04, LG-05); retention defaults (IN-14); access rules and least privilege (ST-02, IN-02, SC-13); server-side authority (IN-03, IN-06, SC-05); no over-broad returns (IN-04); sessions and passwords (SC-04, SC-01, ST-12); rate limits (ST-02, IN-16); responsibility assignment (DC-06); injection and races (ST-04, SC-06, SC-11); expensive functions bounded (DC-07); secrets and Vault (ST-03, IN-13, DC-07, RL-11); payments (IN-02, SC-12, IN-06, SC-10); webhooks and integrations (ST-09, IN-07, IN-08); SES everywhere (IN-09); invoice PDFs (IN-03); R2 and exit (IN-10, IN-14, SC-14, RL-08, RL-02); management (IN-12, RL-05, SC-14, RL-10); logs (ST-07, IN-15); background work (IN-11, DC-07); code rules (ST-05, ST-10, LG-06); forms and anvil.yaml through Anvil's skills (ST-01); M3 and interface rules (ST-11, DC-12, DC-13, BR-03); translation (ST-14); onboarding rules (BR-01); release requirements (RL-01, RL-09); testing discipline (SC-15, SC-18, LG-07).
