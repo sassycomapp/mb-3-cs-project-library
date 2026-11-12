@@ -14,7 +14,7 @@ The project library of Mybizz Consulting Services: every document, decision and 
 - Fix the business's vocabulary in one place (`docs-local/GLOSSARY.md`), so a term means the same thing in every later step and every app.
 - Hold the business's own decisions (`adr-local/`) beside the global ones it inherits by reference.
 - Keep each PDLF run's working documents (design doc, test plan, access matrix, threat model) in `docs-local/design/{run}/`, and every step's evidence in `pdlf-outputs/{step}/`.
-- Hold the standard documents every Mybizz project keeps (`docs-standard-local/`), the tickets, the wireframes and screens, the sessions record, and the Archify Scope Cards and run learnings.
+- Hold the standard documents every Mybizz project keeps (`docs-standard-local/`), the tickets, the screen requirements, the sessions record, and the Archify Scope Cards and run learnings.
 
 ## Suitability
 

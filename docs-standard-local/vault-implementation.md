@@ -1,7 +1,7 @@
 ---
 title: "vault-implementation"
 doc-id: "mb-fc24acf4"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Vault Implementation
 
@@ -33,7 +33,7 @@ Standalone form accessed from Settings, visible to Owner only:
 - Stored Secrets list — name, last updated date, usage context. View (masked reveal) and Delete actions per item.
 - Add New Secret form — name + password input (`hide_text=True`) at the bottom. Value never displayed again after saving.
 
-Visual references: `wireframes/wireframe-settings-VaultForm.html`, `screens/screen-settings-VaultForm.html`.
+Screen requirement: `ui/settings/VaultForm/VaultForm-requirement.md`.
 
 ## 3. Build Sequence
 

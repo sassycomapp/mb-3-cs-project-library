@@ -25,8 +25,7 @@ The repository is public. No secret, key or client data is ever committed to it.
 | `assets-local\` | The source files of the brand: logos, images and fonts. |
 | `prompts-local\` | Prompts that belong to this business only. |
 | `templates-local\` | Templates that belong to this business only. |
-| `ui\` | The screens, one folder per Anvil package and one per form. |
-| `wireframe\` | The wireframes, in the wireframe skill's own place. |
+| `ui\` | The screen requirements, one folder per Anvil package and one per form. |
 | `docs\` | Folders owned by skills: `docs\agents\` for the Matt Pocock skills. |
 | `pdlf-tickets\` | The feature tickets, one markdown file each. |
 | `pdlf-outputs\` | One folder per PDLF step (`a01` to `f46`): the Step Receipt, the test evidence and a copy of every output. |
