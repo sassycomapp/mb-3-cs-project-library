@@ -1,7 +1,7 @@
 ---
 title: "spec-test-specification"
 doc-id: "mb-d8dcf41a"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Test Specification (Canonical)
 
@@ -322,6 +322,7 @@ Each test runs against App 5 with simulated suppliers (DigitalOcean API, SES, Gr
 | 5.6 | SR-62 | Simulate 25,000 marketing sends, then 50,000 sends in one month | Marketing pauses at 25,000 while bookings and invoices send; everything but sign-in pauses at 50,000; both resume on the first of the next month | RL-14 |
 | 5.7 | SR-63 | On the test client instance, open a simulated incident and walk the incident response plan | Every step is in App 5's incident record with its time; the client notice is sent and recorded | RL-22 |
 | 5.8 | SR-64 | Move a simulated clock past each reminder's lead time; stop Wise transactions for 7 days | Each reminder is sent once at its lead time; the bank feed message is sent on day 7; App 5's request log to FreeAgent holds read requests only | RL-20, RL-21 |
+| 5.9 | SR-65 | In Paddle's test environment: an annual client refers 6 new clients that buy the annual plan, one of which is then refunded; a monthly client refers one more | The referring client holds 5 credits applied and its next renewal is discounted by 5 months' price; the refund removed one credit; the monthly referral added none; after the renewal is paid the credits are zero | RL-23 |
 
 ---
 

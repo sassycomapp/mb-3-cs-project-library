@@ -1,7 +1,7 @@
 ---
 title: "client-exit-handover"
 doc-id: "mb-bbb82062"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Offboarding Procedure
 
@@ -13,7 +13,7 @@ How a client leaves Mybizz with all of its data, and how Mybizz removes everythi
 
 ## 1. When it applies
 
-- The subscription is month to month with no contract. A client can leave at any time; the subscription ends at the end of the month already paid.
+- The monthly plan runs month to month with no contract, and the annual plan runs for the year paid. A client can leave at any time; the subscription ends at the end of the month or year already paid.
 - The Owner asks to leave by a support ticket (F-32) or by email to Mybizz. Only the Owner can ask.
 - Mybizz confirms the request with the Owner by email before any step below.
 

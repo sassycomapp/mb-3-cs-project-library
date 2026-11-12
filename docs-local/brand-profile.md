@@ -1,6 +1,6 @@
 ---
 title: "brand-profile"
-updated: "2026-11-10"
+updated: "2026-11-12"
 doc-id: "mb-d8899450"
 ---
 # Mybizz CS — Brand Profile
@@ -25,7 +25,7 @@ The brand profile represents the business and the product in one place: who Mybi
 | Markets | The United States, Canada, the United Kingdom, the European Union, the European Economic Area (Norway, Iceland and Liechtenstein) and Switzerland. Registration and checkout are open only to businesses in these countries. |
 | App languages | English (the default), French, German, Spanish and Italian. English at launch; the other languages are added one at a time. |
 | Customer payments | Stripe for card payments, and PayPal for customers who prefer it |
-| Price | £79 a month per client, before tax, charged in the client's own currency at a fixed price |
+| Price | £119 a month per client, or £1,190 a year on the annual plan, before tax, charged in the client's own currency at a fixed price |
 | Business model | Subscription SaaS: one monthly price, unlimited staff, no commission, no add-on, no contract and no markup on payment processing |
 | Commercial objective | 100 paying clients, reached in three phases: the first 10 clients, clients 11 to 50, and clients 51 to 100 |
 | Corporate colour | Professional Blue |
@@ -192,7 +192,7 @@ Run the whole business from one platform.
 - The platform includes the website, booking, payments, CRM, email, invoicing, accounts, blog, analytics, AI and voice.
 - Each client's data is isolated in the client's own application instance and database.
 - Clients export their data and keep their backups in their own storage.
-- Billing is month to month, with no contract.
+- The monthly plan runs month to month, with no contract; the annual plan gives 12 months for the price of 10.
 - Support comes from the founder, with stated response targets.
 - Two demo apps let a prospective client explore the product before paying.
 
@@ -219,7 +219,7 @@ Mybizz CS is not a marketplace. It does not list a client beside its competitors
 
 ### The cost comparison
 
-A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month, and every member of staff adds more. Mybizz CS is £79 a month for all of it, for the whole team.
+A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month, and every member of staff adds more. Mybizz CS is £119 a month for all of it, for the whole team.
 
 ---
 
@@ -330,7 +330,7 @@ Mybizz CS speaks directly, honestly and with empathy.
 
 **On leaving.** On a marketplace, your customers stay behind when you leave. On Mybizz CS your customer list is yours on the first day and on the last. Take it anywhere; no one else has a copy.
 
-**On pricing.** A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month, and every member of staff adds more. Mybizz CS is £79 a month for all of it and more, for the whole team, with email, accounts, AI and voice included. No contract, no add-ons.
+**On pricing.** A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month, and every member of staff adds more. Mybizz CS is £119 a month for all of it and more, for the whole team, with email, accounts, AI and voice included. No contract, no add-ons.
 
 **On simplicity.** Set up your business once. Website, booking, payments, CRM, sales, email, invoicing and accounts, all connected and working in one place. Then run your business.
 
@@ -644,15 +644,15 @@ A client's Owner:
 
 ### Price
 
-**£79 per client per month**, before tax. GBP is Mybizz's reference currency. Each client is charged in its own currency at a fixed local price:
+**£119 per client per month**, or **£1,190 a year** on the annual plan, before tax. GBP is Mybizz's reference currency. Each client is charged in its own currency at a fixed local price:
 
-| Currency | Where | Monthly price |
-|---|---|---|
-| GBP | United Kingdom | £79 |
-| USD | United States | $99 |
-| CAD | Canada | C$135 |
-| EUR | European Union, Norway, Iceland | €89 |
-| CHF | Switzerland, Liechtenstein | CHF 89 |
+| Currency | Where | Monthly price | Annual price |
+|---|---|---|---|
+| GBP | United Kingdom | £119 | £1,190 |
+| USD | United States | $149 | $1,490 |
+| CAD | Canada | C$199 | C$1,990 |
+| EUR | European Union, Norway, Iceland | €139 | €1,390 |
+| CHF | Switzerland, Liechtenstein | CHF 139 | CHF 1,390 |
 
 One price for every client. Tax is added at checkout according to where the client is.
 
@@ -662,13 +662,13 @@ Unlimited staff, the website, bookings, payments, CRM, sales pipeline, email, em
 
 ### Billing model
 
-- Monthly, in advance, month to month
-- No contract
+- In advance, on the monthly plan (month to month, no contract) or the annual plan (12 months for the price of 10)
+- Referral credit: an annual client that refers a new annual client gets one month off its next renewal, up to 5 months
 - No commission
 - No add-on
 - No markup on payment processing: the client pays Stripe's and PayPal's own fees
 - Paddle, Mybizz's Merchant of Record, bills each client, collects the tax and issues the tax invoice
-- A client may leave at any time, effective at the end of the paid month, taking its data, emails and backups
+- A client may leave at any time, effective at the end of the paid month or year, taking its data, emails and backups
 
 ### Setup
 
@@ -890,9 +890,9 @@ Together these requirements carry the central promise: Mybizz CS gives a service
 - Mybizz CS is a complete online business platform for consulting and service businesses.
 - It combines the website, booking, payments, CRM, email, invoicing, accounts, content, analytics, AI and voice in one platform.
 - It serves solo practitioners and teams, with unlimited staff included.
-- It has one monthly price, £79 or the fixed local price, with no commission, contract, add-on or markup on payment processing.
+- It has one price, £119 a month or £1,190 a year, or the fixed local price, with no commission, add-on or markup on payment processing.
 - Each client's data is isolated and exportable, with backups in the client's own storage.
-- Billing is month to month, and a client leaves with its data.
+- The monthly plan runs month to month, and a client leaves with its data.
 - It provides guided onboarding, help in every screen, AI assistance and voice access.
 - It works in English, French, German, Spanish and Italian.
 - It serves businesses in the United States, Canada, the United Kingdom, the European Union, the European Economic Area and Switzerland.

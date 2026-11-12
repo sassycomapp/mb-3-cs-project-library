@@ -1,7 +1,7 @@
 ---
 title: "user-flows"
 doc-id: "mb-b1292280"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 # Mybizz CS — User Flows
 
@@ -92,19 +92,20 @@ updated: "2026-11-10"
 1. Registers on the Mybizz website: business name, trade, owner name, owner email, the client's own domain.
 2. Receives a confirmation email from Mybizz and confirms the email address.
 3. Sets up the client's storage and domain settings, guided step by step on the registration page with a short video: opens a free Cloudflare account on the client's own email address, adds a payment method, switches R2 on, adds the client's domain to Cloudflare, and invites Mybizz's Cloudflare user as a member with the roles Cloudflare R2 Admin and DNS. The account is the client's and stays the client's.
+4. Chooses the monthly plan or the annual plan, enters the referral code of the annual client that referred it, if any, adds assisted setup if wanted, and pays the first month or the first year in Paddle's checkout.
 
 **System (App 5):**
-4. Creates the client record and issues the client reference number.
-5. Creates the client's database and the client's app `[client-name]-cs` from the current release image, with its `encryption_key` and Bearer token; the app builds its tables.
-6. Accepts the client's Cloudflare invitation, creates the client's R2 bucket and a token that reaches that bucket only, and creates the client's Amazon SES tenant, domain identity and scoped AWS keys.
+5. Creates the client record and issues the client reference number.
+6. Creates the client's database and the client's app `[client-name]-cs` from the current release image, with its `encryption_key` and Bearer token; the app builds its tables.
+7. Accepts the client's Cloudflare invitation, creates the client's R2 bucket and a token that reaches that bucket only, and creates the client's Amazon SES tenant, domain identity and scoped AWS keys.
 
-7. Stores the Bearer token and the client's Mybizz-side credentials.
-8. Writes the bucket's keys and the AWS keys into the instance's Vault, and the SES SMTP credentials into the app's SMTP settings.
-9. App 5 loads the sample data for the client's trade.
-10. Creates the Owner account in the instance with `business_profile.onboarding_status = "in_progress"`.
+8. Stores the Bearer token and the client's Mybizz-side credentials.
+9. Writes the bucket's keys and the AWS keys into the instance's Vault, and the SES SMTP credentials into the app's SMTP settings.
+10. App 5 loads the sample data for the client's trade.
+11. Creates the Owner account in the instance with `business_profile.onboarding_status = "in_progress"`.
 
 **System:**
-11. Sends the Owner a welcome email from Mybizz's own address with a link to set a password. No password is ever sent by email.
+12. Sends the Owner a welcome email from Mybizz's own address with a link to set a password. No password is ever sent by email.
 
 ---
 

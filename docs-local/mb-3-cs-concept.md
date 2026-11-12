@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-concept"
 doc-id: "mb-f23e1822"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Concept
 
@@ -33,7 +33,7 @@ Mybizz CS is not a booking app, not a CRM and not a website builder. It is all o
 **Web addresses:** the Mybizz company website is at mybizz.live. Each client's application instance runs on the client's own domain.
 **Platform:** Anvil.works (full-stack Python, hosted)
 **UI theme:** Material Design 3
-**Capacity:** a hard limit of 100 clients for Mybizz CS. Each Mybizz business has its own hard limit of 100 clients.
+**Capacity:** no fixed client limit. The database cluster's stages hold 265 clients for each Mybizz business; beyond that, Mybizz decides the next step.
 
 ---
 
@@ -215,21 +215,21 @@ That total does not include a team email inbox, voice access, backups, legal pag
 
 | | HoneyBook Premium | GoHighLevel Starter | **Mybizz CS** |
 |---|---|---|---|
-| Price per month | $129, plus a website at $23 | $97, plus $97 for unlimited AI | **$99 (£79 in the UK)** |
+| Price per month | $129, plus a website at $23 | $97, plus $97 for unlimited AI | **$149 (£119 in the UK)** |
 | Same price at any team size | no — 10 people maximum | yes | **yes** |
 | Payments through any gateway, no processor markup | no — 2.9% + $0.25 through HoneyBook | — | **yes** |
 | No usage billing (SMS, calls, AI) | — | no — billed per use | **yes** |
 | Voice assistant and spoken morning briefing | no | no | **yes** |
 | Backups in the client's own storage | no | no | **yes** |
 | Leave at any time with all data and backups | — | — | **yes** |
-| Month-to-month, no contract | — | — | **yes** |
+| Month-to-month plan, no contract | — | — | **yes** |
 | Support straight from the founder | no | no | **yes** |
 
 **Booking platforms with a marketplace:**
 
 | | Booksy | Vagaro | Mindbody | **Mybizz CS** |
 |---|---|---|---|---|
-| Base price | $29.99/mo | about $30/mo | $99–$699/mo | **$99/mo (£79 in the UK)** |
+| Base price | $29.99/mo | about $30/mo | $99–$699/mo | **$149/mo (£119 in the UK)** |
 | Per-staff fee | +$20/person | +$10/calendar | included | **included** |
 | Processing fee | 2.49–2.69% | 2.2–3.5% | 3.5% | **gateway rate only** |
 | Marketplace commission | up to $49.99/mo (Boost) | none | 20% new customer | **none** |
@@ -249,7 +249,7 @@ On any marketplace platform, the business's customers are the platform's custome
 
 On Mybizz CS, the client's customer database is structurally isolated. It exists only in the client's application instance. No other business can access it. No algorithm affects the client's visibility. The client's customers are the client's customers on day one and remain the client's permanently.
 
-Every client's data is also backed up to the client's own Cloudflare R2 bucket, and can be exported as CSV at any time. There is no contract: billing is month to month, and the client can take the client's data, emails and backups and leave at any time.
+Every client's data is also backed up to the client's own Cloudflare R2 bucket, and can be exported as CSV at any time. There is no lock-in: the monthly plan runs month to month, and the client can take the client's data, emails and backups and leave at any time.
 
 ### 6.4 The simplicity advantage
 
@@ -509,11 +509,11 @@ Every new client starts with three months of sample data for a business in the c
 
 ### 9.1 Price
 
-**£79 per client per month**, before tax, charged in the client's own currency at a fixed price: £79, $99, C$135, €89 or CHF 89 ([[[default:adr-global/adr-tiers-model|Tiers Model]]](C:/dev/project-library-global/adr-global/adr-tiers-model.md)). One price for every client. Unlimited staff are included. There is no commission on bookings or payments, and no add-on: AI, voice, email, accounts and hosting are all in the price.
+**£119 per client per month**, or **£1,190 a year** on the annual plan, before tax, charged in the client's own currency at a fixed price: £119, $149, C$199, €139 or CHF 139 a month, and 10 times that for a year ([[[default:adr-global/adr-tiers-model|Tiers Model]]](C:/dev/project-library-global/adr-global/adr-tiers-model.md)). One price for every client. Unlimited staff are included. There is no commission on bookings or payments, and no add-on: AI, voice, email, accounts and hosting are all in the price.
 
 ### 9.2 Billing model
 
-Billing is monthly, in advance, month to month, with no contract. Paddle, Mybizz's Merchant of Record, bills each client at the start of each month and issues its tax invoice ([[[default:specifications-global/spec-client-billing|Client Billing]]](C:/dev/project-library-global/specifications-global/spec-client-billing.md)). A client can leave at any time, effective at the end of the paid month, taking the client's R2 bucket with every backup, email and export in it.
+Billing is in advance, on the monthly or the annual plan. The monthly plan runs month to month, with no contract. The annual plan gives 12 months for the price of 10. Paddle, Mybizz's Merchant of Record, bills each client at the start of each month or year and issues its tax invoice ([[[default:specifications-global/spec-client-billing|Client Billing]]](C:/dev/project-library-global/specifications-global/spec-client-billing.md)). A client can leave at any time, effective at the end of the paid month or year, taking the client's R2 bucket with every backup, email and export in it.
 
 There is no free trial and no money-back period. A prospective client sees the whole product before paying in the two demo apps (F-36): `demo.mybizz.live`, a working business with sample data, and `try.mybizz.live`, an empty Mybizz CS for trying setup.
 
@@ -524,7 +524,7 @@ There is no free trial and no money-back period. A prospective client sees the w
 
 ### 9.4 Assisted setup
 
-The onboarding wizard (F-03) takes a client from registration to a working business without help, with a help video on every step. A client who wants Mybizz to do the setup pays **one month's subscription, once,** for assisted setup.
+The onboarding wizard (F-03) takes a client from registration to a working business without help, with a help video on every step. A client who wants Mybizz to do the setup pays **one month's subscription, once,** for assisted setup: £119.
 
 ### 9.5 Costs outside the monthly price
 
@@ -543,18 +543,18 @@ New costs are added to this list as they are identified.
 
 ### 9.6 Revenue model
 
-| | 1 client | 7 clients | 25 clients | 50 clients | 100 clients |
+| | 1 client | 9 clients | 25 clients | 50 clients | 100 clients |
 |---|---|---|---|---|---|
-| Revenue at £79 | £79.00 | £553.00 | £1,975.00 | £3,950.00 | £7,900.00 |
-| Client-related costs: containers, database cluster, email, AI and voice, data transfer, Paddle's fee | £43.43 | £169.01 | £718.25 | £1,241.50 | £2,483.00 |
-| Mybizz's fixed costs | £336.49 | £336.49 | £403.16 | £403.16 | £403.16 |
-| **Net profit, monthly** | **−£300.92** | **£47.50** | **£853.59** | **£2,305.34** | **£5,013.84** |
+| Revenue at £119 | £119.00 | £1,071.00 | £2,975.00 | £5,950.00 | £11,900.00 |
+| Client-related costs: containers, database cluster, email, AI and voice, data transfer, Paddle's fee | £217.93 | £401.37 | £768.25 | £1,341.50 | £2,683.00 |
+| Mybizz's fixed costs, with part-time support from 20 clients | £586.49 | £586.49 | £1,653.16 | £1,653.16 | £1,653.16 |
+| **Net profit, monthly** | **−£685.42** | **£83.14** | **£553.59** | **£2,955.34** | **£7,563.84** |
 
-- **Break-even is 7 clients.**
+- **Break-even is 9 clients.** Revenue is shown on the monthly plan.
 - Each client is budgeted at medium-to-heavy use: email, AI and voice cost £7.60 a month per client, recorded per client in the Mybizz management app (F-34).
-- The database cluster starts small and grows with the client count: £22.50 a month to 11 clients, £45 from 12, an Advanced cluster with a standby at £195 from 25, and about £390 from 60. The business insurance starts at covers fit for a few clients and is raised at 25 clients.
-- Mybizz's fixed costs include the Anvil account, the test client instance, Cyber Essentials certification, business insurance, the company's statutory fees, its accounting software and £100 a month for marketing. The full figures are in [[[default:specifications-global/spec-client-billing|Client Billing]]](C:/dev/project-library-global/specifications-global/spec-client-billing.md) section 6.
-- Every shared resource carries a fair-use limit per client, so the highest cost of one client is £52.98 a month, well inside its £79.
+- The database cluster runs with a standby from the first client, so a server failure stops clients for minutes rather than hours: £195 a month to 59 clients, about £390 from 60 and about £780 from 130. The business insurance starts at covers fit for a few clients and is raised at 25 clients. Part-time support, at £1,000 a month, starts at 20 clients.
+- Mybizz's fixed costs include the Anvil account, the test client instance, Cyber Essentials certification, business insurance, the company's statutory fees, its accounting software and a marketing allowance of £350 a month. The full figures are in [[[default:specifications-global/spec-client-billing|Client Billing]]](C:/dev/project-library-global/specifications-global/spec-client-billing.md) section 6.
+- Every shared resource carries a fair-use limit per client, so the highest cost of one client is £54.78 a month, well inside its £119.
 
 ### 9.7 Domain
 
@@ -595,7 +595,7 @@ With 10 clients using the platform, the narrative shifts from "founding member" 
 - Case studies from the first clients: one or two detailed write-ups of how a real business uses Mybizz CS (with client permission)
 - LinkedIn content: founder posts sharing lessons, client results and product updates — consistent, weekly
 - SEO content: blog posts targeting high-intent searches such as "how to set up online booking for a physiotherapy practice" or "best booking system for personal trainers UK"
-- Referral programme: a client who refers a paying client receives one month free
+- Referral programme: a client on the annual plan who refers a new client that buys the annual plan receives one month off its next annual renewal, up to 5 months per renewal; a credit is never paid in cash
 - Industry-specific outreach: identify professional associations and communities for target industries (consulting, beauty, wellness, trades) and engage authentically — not as a sponsor, but as a member
 
 ### 10.4 Phase 3 — Full capacity (clients 51 to 100)
@@ -668,7 +668,7 @@ The visual identity is the design system in F-31: the Anvil Material 3 theme wit
 *What happens to your customers when you leave? On marketplace platforms, they stay behind. On Mybizz CS your customer list is yours on day one and yours on the last day. Take it anywhere. No one else has a copy.*
 
 **On pricing:**
-*A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month — and every staff member adds more. Mybizz CS is £79 a month for all of it and more, for your whole team, with email, accounts, AI and voice included. No contract, no add-ons.*
+*A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month — and every staff member adds more. Mybizz CS is £119 a month for all of it and more, for your whole team, with email, accounts, AI and voice included. No contract, no add-ons.*
 
 **On simplicity:**
 *Set up your business once. Website, booking, payments, CRM, sales, email, invoicing, accounts — all connected, all working, all in one place. Then run your business.*

@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-feature-list"
 doc-id: "mb-46a56ee7"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Feature List
 
@@ -9,7 +9,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 
 ## 1. Price and terms
 
-- £79 a month, one flat price, charged in the client's own currency: £79, $99, C$135, €89 or CHF 89.
+- £119 a month, or £1,190 a year on the annual plan, one flat price, charged in the client's own currency: £119, $149, C$199, €139 or CHF 139 a month.
 - Unlimited staff at no extra cost.
 - Month-to-month, with no contract; cancel at any time, effective at the end of the paid month.
 - No add-ons: AI, voice, email, accounts and hosting are all included.

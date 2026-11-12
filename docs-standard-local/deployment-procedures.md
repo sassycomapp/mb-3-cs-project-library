@@ -1,7 +1,7 @@
 ---
 title: "deployment-procedures"
 doc-id: "mb-f46b55a9"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Deployment Procedures
 
@@ -170,7 +170,7 @@ The structure has two levels of risk:
 |---|---|---|---|
 | Anvil account suspended | Email from Anvil; App 1, App 2 and App 5 unavailable | Client instances keep running; contact Anvil support at once; releases and provisioning wait | Billing kept current with a backup payment method; Anvil terms followed |
 | One client container fails | Heartbeats from its instance stop; App 5 raises a critical alert | App Platform restarts it; if it does not recover, App 5 recreates the container from the current release image | Container memory watched in App 5 (F-33) |
-| Cluster main node fails | Database errors in heartbeats | From 25 clients, the standby node takes over automatically. Before 25 clients, DigitalOcean restores the Standard cluster from its backups; clients may be offline for up to a few hours | Standby node from 25 clients |
+| Cluster main node fails | Database errors in heartbeats | The standby node takes over automatically; clients are back within minutes | Standby node from the first client |
 | DigitalOcean region outage or account suspension | Every client's heartbeats stop; DigitalOcean Uptime reports App 5's status endpoint fault | App 5's **Rebuild** action: a new Advanced cluster and new containers in another region, each client restored from DigitalOcean's backups or, when those are unreachable, from its locked nightly copy ([[[default:specifications-global/spec-deployment\|Deployment Specification]]](C:/dev/project-library-global/specifications-global/spec-deployment.md) section 10) | Nightly R2 copies locked for 30 days; the rebuild tested before the first paying client; a second payment card and billing alerts on the account |
 | Mybizz's AWS account or SES sending suspended | SES errors on every send; App 5 raises a critical alert | Contact AWS support; outgoing email is queued in each instance's retry queue and sent when sending returns; senders' mail servers retry the delivery of received email for several days | Each client's SES tenant reputation policy pauses that client alone; monthly email caps per client; two CloudWatch alarms below Amazon's review levels; a hardware security key on the AWS account |
 | Any account compromised | Unexpected commits in GitHub, unknown collaborators, unknown sessions | Follow `incident-response-plan.md`: contain, call the insurer's incident line, rotate every Bearer token, container key and Vault credential that may be exposed, audit Git history and revert unauthorised commits, and tell affected clients without undue delay | A hardware security key on every supplier account; two scoped DigitalOcean keys; the cluster's trusted sources; locked nightly copies; no collaborators beyond Mybizz |

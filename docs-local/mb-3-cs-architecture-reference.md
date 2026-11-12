@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-architecture-reference"
 doc-id: "mb-7d6be180"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Architecture Reference
 
@@ -93,8 +93,8 @@ Every client instance runs App 3 on `master_template`. A form or server module a
 - **Platform:** each client instance runs in its own DigitalOcean App Platform container (1 GiB memory), with its own database in Mybizz CS's Managed PostgreSQL cluster, as [[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md) sets out. Email goes through Amazon SES (F-18).
 - **Usage reporting:** each client instance reports its memory use, storage, email volume, heavy-job activity, last staff sign-in and last booking date to App 5 through the management endpoints, on a schedule.
 - **Heavy jobs:** imports, exports, backups, AI generation, briefings, campaign sending and inbound email processing run as background tasks.
-- **Capacity:** a hard limit of 100 client instances for Mybizz CS. The cluster grows in stages: Standard Edition 2 GiB to client 11, 4 GiB from client 12, Advanced Edition with a standby at 8 GiB from client 25 and 16 GiB from client 60 (Client Instance Hosting section 4).
-- **Automatic resizing:** above 80% memory use, App 5 raises a client's container from 1 GiB to 2 GiB; App 5 moves the cluster to each stage in the Sunday maintenance window, the move into the Advanced cluster at 25 clients once Mybizz approves. App 5 messages Mybizz at each resize and never reduces a size ([[[default:adr-global/adr-automatic-resizing]]](C:/dev/project-library-global/adr-global/adr-automatic-resizing.md)).
+- **Capacity:** no fixed client limit. The cluster is Advanced Edition with a standby from the first client and grows in stages: 8 GiB to client 59, 16 GiB from client 60 and 32 GiB from client 130, which holds 265 clients (Client Instance Hosting section 4).
+- **Automatic resizing:** above 80% memory use, App 5 raises a client's container from 1 GiB to 2 GiB; App 5 raises the cluster to each stage in the Sunday maintenance window, with no client moved. App 5 messages Mybizz at each resize and never reduces a size ([[[default:adr-global/adr-automatic-resizing]]](C:/dev/project-library-global/adr-global/adr-automatic-resizing.md)).
 - **Fair use:** every shared resource carries a per-client limit (database connections, query time, database size, email volumes, email reputation, AI and voice spend, AI request rate, data transfer). The database limits are held by PostgreSQL on each client's database user; App 5 measures the rest, warns the client at each warning level, acts at each hard limit, and messages Mybizz ([[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md)).
 - **Notifications:** App 5 sends Mybizz one daily summary of routine actions and an immediate message for anything that needs a decision; every action is in App 5's audit record.
 
