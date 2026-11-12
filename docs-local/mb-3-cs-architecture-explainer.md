@@ -107,7 +107,7 @@ Staff use the admin area, with a side menu grouped the way a business owner thin
 
 The public website uses proper web addresses for every page, so pages can be found by search engines and shared as links, with a proper preview of each page when it is shared. The admin area does not need public addresses, so it uses simpler screen switching, which is faster.
 
-When anyone opens the app, the app checks who they are before showing anything: staff go to the dashboard, customers go to their portal, and everyone else sees the sign-in page.
+When anyone opens the app, the app checks who they are before showing anything: team members go to the dashboard, customers go to their portal, and everyone else sees the sign-in page.
 
 Step-by-step processes, such as onboarding and booking, show their steps in a side panel and save everything to the server in one go at the end, which keeps them fast and avoids half-finished records.
 
@@ -159,7 +159,7 @@ Step-by-step processes, such as onboarding and booking, show their steps in a si
 
 **F-17 CRM and contacts.** Every person who deals with the business has one record with their full history, including every email, created automatically from bookings, forms and emails. A contact can belong to a company. Ready-made groupings and a builder for custom groupings let the business target the right people. The whole list can be imported and exported.
 
-**F-18 Email.** Every email of the business, in and out, travels through one email service, Amazon SES, paid by Mybizz. The client creates as many addresses on the client's domain as the business needs — a personal address for each person, and desk addresses such as help@ or accounts@ shared by a team — and every email to them arrives in the Team Inbox inside the app, where each person sees their own address and their desks, and works it like a full mail program. Emails from known contacts appear on their timelines. The same service sends the business's confirmations, reminders and invoices, and its newsletters and campaigns, all from the client's own domain and signed so that they reach the inbox. Using one service means one set of domain settings, one place for bounces and unsubscribes, and no email account or bill for the client. Detail: `spec-team-inbox.md`.
+**F-18 Email.** Every email of the business, in and out, travels through one email service, Amazon SES, paid by Mybizz. The client creates as many addresses on the client's domain as the business needs — a personal address for each person, and desk addresses such as help@ or accounts@ shared by a team — and every email to them arrives in the Team Inbox inside the app, where each person sees their own address and their desks, and works it like a full mail program. Emails from known contacts appear on their timelines. The same service sends the business's confirmations, reminders and invoices, and its campaigns, all from the client's own domain and signed so that they reach the inbox. Using one service means one set of domain settings, one place for bounces and unsubscribes, and no email account or bill for the client. Detail: `spec-team-inbox.md`.
 
 **F-19 Lead capture and marketing funnel.** A blog post leads to a landing page, which leads to a booking. A form on the landing page creates the lead and the contact together, so nothing needs converting by hand, and every step records where the person came from.
 
@@ -197,7 +197,7 @@ Step-by-step processes, such as onboarding and booking, show their steps in a si
 
 **F-33 Hosting.** Section 3.
 
-**F-34 Mybizz management app.** Section 2. App 5 is where Mybizz runs Mybizz CS as a business: clients, setup, usage, health, billing, updates, support, and the AI gateway. Each client app regularly reports simple signs of life — when staff last signed in, when the last booking was made — and App 5 raises an alert when a client goes quiet or a ticket waits too long. That gives the founder the chance to step in before a client leaves.
+**F-34 Mybizz management app.** Section 2. App 5 is where Mybizz runs Mybizz CS as a business: clients, setup, usage, health, billing, updates, support, and the AI gateway. Each client app regularly reports simple signs of life — when a team member last signed in, when the last booking was made — and App 5 raises an alert when a client goes quiet or a ticket waits too long. That gives the founder the chance to step in before a client leaves.
 
 App 5 also looks after the shared resources without the founder watching. When a client app is running short of memory, App 5 gives it more; when the business reaches 60 clients, App 5 enlarges the shared database. Every client has fair-use limits on the shared database, email and AI, set far above heavy use, so one busy or misused client can never slow down or cost the others. App 5 warns the client before a limit, acts at the limit, and tells the founder in one daily summary, with an immediate message only when a decision is needed.
 

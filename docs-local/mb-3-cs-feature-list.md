@@ -10,7 +10,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 ## 1. Price and terms
 
 - £119 a month, or £1,190 a year on the annual plan, one flat price, charged in the client's own currency: £119, $149, C$199, €139 or CHF 139 a month.
-- Unlimited staff at no extra cost.
+- Unlimited team members at no extra cost.
 - Month-to-month, with no contract; cancel at any time, effective at the end of the paid month.
 - No add-ons: AI, voice, email, accounts and hosting are all included.
 - The client pays only the payment gateway's own fee on each payment. Mybizz adds no markup.
@@ -44,7 +44,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 
 ## 4. Team, roles and access
 
-- Unlimited staff logins.
+- Unlimited team member logins.
 - Five roles: Owner, Manager, Admin, Staff and Customer. Each role sees only what it is allowed to see.
 - Every permission is enforced on the server, so a user can't get around it by tampering with the browser.
 - Sign-in with email and password, password reset, rate-limited sign-in and account lockout.
@@ -80,7 +80,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 ## 8. Services
 
 - Time-based pricing (a 60-minute session) and deliverable pricing (a logo design).
-- Each service carries: category, duration, delivery mode, provider, images, video, meeting types, intake form and active status.
+- Each service carries: category, duration, provider, images, video, meeting types, intake form and active status.
 
 ## 9. Bookings and scheduling
 
@@ -130,14 +130,14 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 ## 14. Email
 
 - Unlimited email addresses on the client's own domain: personal (`john@abc.com`) and desk (`help@`, `marketing@`, `accounts@`).
-- A Team Inbox inside Mybizz: each staff member sees their own address and their team's desks.
+- A Team Inbox inside Mybizz: each team member sees their own address and their team's desks.
 - Each person's inbox works like a full mail program: Inbox, Drafts, Sent, Archive, Spam and Trash; reply, reply all and forward; sort, filter and search; star and mark as unread; and act on many emails at once.
 - Conversations grouped, and an AI-drafted reply on request.
 - Every email from a known contact appears on that contact's timeline. An unknown sender becomes a lead in one click.
 - Spam and virus filtering on every incoming email.
 - The Team Inbox works in the phone browser, from the same home-screen shortcut as voice.
 - Confirmations, reminders, invoices and receipts sent from the client's own domain.
-- Newsletters, campaigns and ready-made sequences, sent to segments, with open and click tracking.
+- Broadcasts and ready-made sequences, sent to segments, with open and click tracking.
 - One-click unsubscribe, with bounces and complaints blocked automatically.
 - Every email signed (DKIM) so it reaches the inbox, not spam. Mybizz sets up the domain automatically.
 - Old emails kept in the client's own storage, searchable, and part of the client's data on exit.
@@ -259,7 +259,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 - A Help button in every app sends a ticket or feedback straight to Mybizz.
 - Response within 24 hours on business days.
 - A problem that stops the business is acknowledged within 4 business hours.
-- Mybizz is alerted when a client goes quiet (14 days with no staff sign-in, or 30 days with no bookings), so the founder can step in.
+- Mybizz is alerted when a client goes quiet (14 days with no team-member sign-in, or 30 days with no bookings), so the founder can step in.
 
 ## 29. Plan, billing and referrals
 

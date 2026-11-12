@@ -523,7 +523,7 @@ This section defines the primary implementation-facing forms and pages in the My
 
 **Key design rules:**
 - Address list: address, kind badge (personal or desk, outlined pill with the word), display name, members, status.
-- Add Address: the part before the `@` with the domain shown after it, kind, display name, members (multi-select of staff), signature (rich text), auto-reply text with start and end dates.
+- Add Address: the part before the `@` with the domain shown after it, kind, display name, members (multi-select of team members), signature (rich text), auto-reply text with start and end dates.
 - Default sender selector for confirmations, reminders, invoices and receipts.
 - RBAC: Owner, Manager.
 

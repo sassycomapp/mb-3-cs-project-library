@@ -20,7 +20,7 @@ Why the business needs the application and what it must achieve for the business
 
 ## 1. Executive Summary
 
-Mybizz CS gives a consulting or service business one complete, private online platform — website, booking, payments, CRM with a sales pipeline, a team email inbox, email marketing, invoicing, accounts, time tracking, blog, analytics, reviews, AI assistance and voice — in its own isolated application, on its own domain, for £119 a month or £1,190 a year (or the fixed price in the client's currency) with unlimited staff included, month to month, with no add-ons. It replaces the five to seven separate tools such a business otherwise pays for and connects by hand. The business outcome is 100 paying clients, $118,800 a year in revenue and $97,248 a year gross margin after hosting, run by the founder with Mybizz's own management app.
+Mybizz CS gives a consulting or service business one complete, private online platform — website, booking, payments, CRM with a sales pipeline, a team email inbox, email marketing, invoicing, accounts, time tracking, blog, analytics, reviews, AI assistance and voice — in its own isolated application, on its own domain, for £119 a month or £1,190 a year (or the fixed price in the client's currency) with unlimited team members included, on the monthly or the annual plan, with no add-ons. It replaces the five to seven separate tools such a business otherwise pays for and connects by hand. The business outcome is 100 paying clients, $118,800 a year in revenue and $97,248 a year gross margin after hosting, run by the founder with Mybizz's own management app.
 
 ---
 
@@ -38,7 +38,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 
 | # | Objective | How success is measured | Certainty |
 |---|---|---|---|
-| BO-1 | Replace the separate-tool stack of a consulting or service business with one platform at one price | Every need in concept section 4.5 is met by a built feature; the price is £119 a month or £1,190 a year, or the fixed price in the client's currency, with no per-staff fee, no commission and no add-on | [CLEAR] |
+| BO-1 | Replace the separate-tool stack of a consulting or service business with one platform at one price | Every need in concept section 4.5 is met by a built feature; the price is £119 a month or £1,190 a year, or the fixed price in the client's currency, with no per-team-member fee, no commission and no add-on | [CLEAR] |
 | BO-2 | Reach 100 clients | 100 paying clients; $178,800 annual recurring revenue on the monthly plan | [CLEAR] |
 | BO-3 | Hold the margin | Break-even at 9 clients; net profit of £7,563.84 a month at 100 clients after every client-related and fixed cost; the highest cost of any one client held below its £119 by fair-use limits; a referring client's renewal never below its yearly cost; cost per client reviewed monthly in App 5 | [CLEAR] |
 | BO-4 | The client owns the client's data and customers | Each client in a separate app and database; data exportable as CSV at any time; backups in the client's own R2 bucket; no marketplace or shared directory | [CLEAR] |
@@ -55,7 +55,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 |---|---|---|
 | Sponsor and operator | The Mybizz founder | Product, revenue, margin, support load; operates App 5 |
 | Primary users | Client Owners | Run the business on Mybizz CS; configure it; own its data |
-| Primary users | Client staff: Managers, Admins, Staff (providers and salespeople) | Daily operation: bookings, customers, deals, email, invoices, time |
+| Primary users | Team members: Managers, Admins, Staff (providers and salespeople) | Daily operation: bookings, customers, deals, email, invoices, time |
 | Secondary users | The clients' customers | Book, order, pay, review, use the customer portal |
 | Visitors | Visitors to a client's public website and landing pages | Find the business, enquire, become leads |
 | Prospects | Businesses trying the demo apps | See the whole product before paying |
@@ -69,7 +69,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 
 ### In Scope
 
-- A complete platform for consulting businesses and service businesses, on the ground or in the cloud or both: teams of every size, with unlimited staff, and solo practitioners (concept section 4).
+- A complete platform for consulting businesses and service businesses, on the ground or in the cloud or both: teams of every size, with unlimited team members, and solo practitioners (concept section 4).
 - Every way such a business delivers work: at its premises, at the customer's location, online live, as delivered work, and to groups (concept section 4.3).
 - All 37 features of concept section 7 (F-01 to F-37), including AI assistance with all ten assists, WhatsUp voice tiers 1 to 5, and the sample data of concept section 8.
 - One isolated application instance per client, on the client's own domain, in its own container with its own database.
@@ -96,21 +96,21 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 
 | # | Requirement | Satisfies Objective | Priority | Certainty |
 |---|---|---|---|---|
-| BR-1 | A client's customers can book every delivery mode online — at the business, at the customer's location, video or phone call, group session, with a room or equipment where needed — without phoning | BO-1 | Must | [CLEAR] |
+| BR-1 | A client's customers can book every meeting type online — at the business, at the customer's location, video or phone call — and group sessions, with a room or equipment where needed — without phoning | BO-1 | Must | [CLEAR] |
 | BR-2 | A client can sell fixed-price delivered work and session packages online | BO-1 | Must | [CLEAR] |
 | BR-3 | A client gets paid by the payment option set per service — in full, deposit, on the day, or invoice with payment terms — through Stripe, with PayPal as an option | BO-1, BO-8 | Must | [CLEAR] |
 | BR-4 | A client issues professional invoices with payment terms and its own tax setting, automatically on completion, from time worked, and manually | BO-1 | Must | [CLEAR] |
 | BR-5 | A client has a professional website on its own domain, with homepage templates, a blog, landing pages and legal pages, edited on the page itself without a web designer, and shares every blog post to social media in one tap | BO-1 | Must | [CLEAR] |
 | BR-6 | A client keeps one record per customer, created automatically from bookings, orders, enquiries, captures and emails, with companies, segments and CSV import and export | BO-1, BO-4 | Must | [CLEAR] |
-| BR-7 | A client has unlimited email addresses on its own domain, a Team Inbox for every staff member, and transactional and marketing email from its own domain, with no email account or bill of its own | BO-1 | Must | [CLEAR] |
+| BR-7 | A client has unlimited email addresses on its own domain, a Team Inbox for every team member, and transactional and marketing email from its own domain, with no email account or bill of its own | BO-1 | Must | [CLEAR] |
 | BR-8 | A client sees how the business performs: revenue, bookings, customers, marketing return, per service and per provider | BO-1 | Must | [CLEAR] |
 | BR-9 | A client gets AI help with its writing and its data, and can run the business by voice from a phone, at no extra charge | BO-1 | Must | [CLEAR] |
-| BR-10 | Every staff member of a client is included in the one price, with no limit, each with an access level that the server enforces | BO-1, BO-2 | Must | [CLEAR] |
+| BR-10 | Every team member of a client is included in the one price, with no limit, each with an access level that the server enforces | BO-1, BO-2 | Must | [CLEAR] |
 | BR-11 | Each client runs in its own application and database; no client can reach another's data; Mybizz never takes a client's customer data for its own use | BO-4 | Must | [CLEAR] |
 | BR-12 | A client can export all of its data at any time and has its backups and history in its own R2 bucket | BO-4 | Must | [CLEAR] |
 | BR-13 | A client registers and sets up its instance itself through a resumable onboarding wizard with a help video on every step, including connecting its domain and importing its existing contacts; assisted setup is offered at one month's subscription, once | BO-5 | Must | [CLEAR] |
 | BR-14 | Mybizz provisions, monitors, bills and updates every client from one management app, and every release reaches every client through `master_template` | BO-2, BO-3, BO-7 | Must | [CLEAR] |
-| BR-15 | Mybizz is alerted when a client is at risk: no staff sign-in for 14 days, no bookings for 30 days, a ticket unanswered for 3 days | BO-6, BO-7 | Must | [CLEAR] |
+| BR-15 | Mybizz is alerted when a client is at risk: no team-member sign-in for 14 days, no bookings for 30 days, a ticket unanswered for 3 days | BO-6, BO-7 | Must | [CLEAR] |
 | BR-16 | A client reaches Mybizz through a Help button; a problem that stops the client's business is acknowledged within 4 business hours, every other ticket answered within 24 hours on business days | BO-6, BO-7 | Must | [CLEAR] |
 | BR-17 | Every feature explains itself through a tooltip that opens a short help video, in the client's app language, so a client rarely needs support | BO-5, BO-7 | Must | [CLEAR] |
 | BR-18 | Each client runs in its own container with its own database, with its own memory and its own database connections | BO-3 | Must | [CLEAR] |

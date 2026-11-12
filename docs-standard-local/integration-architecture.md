@@ -1,7 +1,7 @@
 ---
 title: "integration-architecture"
 doc-id: "mb-af335781"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Integration Architecture
 
@@ -90,7 +90,7 @@ Every email of a client instance, received and sent, goes through **Amazon SES**
 | Received, to any address on the client's domain | MX → SES → S3 (client prefix) → SNS → `/_/api/email/inbound` → `inbound_tasks` → `email_messages` | — |
 | Team Inbox email: new, reply, forward | `server_shared/email_service` → SES API | The user's address or desk on the client's domain |
 | Transactional: booking confirmations with calendar invite, reminders, invoices, quotes, receipts, order updates, review requests, contact form auto-replies, Vault access notices | `server_shared/email_service` → SES API | `email_config.default_from_address_id` |
-| Marketing: sequences, broadcasts, newsletters | `server_shared/email_service` → SES API, in batches within the SES sending rate | The campaign's sender address |
+| Marketing: sequences and broadcasts | `server_shared/email_service` → SES API, in batches within the SES sending rate | The campaign's sender address |
 | System: sign-in, email confirmation, password reset, set-password links | Anvil Users service → Anvil Email service, Custom Mail Server = SES SMTP (`email-smtp.eu-west-1.amazonaws.com`, port 587, STARTTLS) | The default sender address |
 
 - **Domain:** App 5 writes the client domain's MX, three DKIM CNAMEs, the MAIL FROM MX, SPF and DMARC records in the client's Cloudflare DNS at onboarding step 8 (`spec-team-inbox.md` section 3). Every email is DKIM-signed and aligned for DMARC.
@@ -171,7 +171,7 @@ Any operation expected to run longer than 22 seconds is an `@anvil.server.backgr
 | Task | Module | Schedule | Purpose |
 |---|---|---|---|
 | Heartbeat to App 5 | `server_management/heartbeat_tasks` | Every 15 minutes | Health, release version, schema fingerprint, task status (`observability-requirements.md`) |
-| Usage report to App 5 | `server_management/heartbeat_tasks` | Daily | Row count, storage, email volume, heavy-job activity, last staff sign-in, last booking date (F-33, F-34) |
+| Usage report to App 5 | `server_management/heartbeat_tasks` | Daily | Row count, storage, email volume, heavy-job activity, last team-member sign-in, last booking date (F-33, F-34) |
 | Payment hold expiry | `server_bookings/booking_tasks` | Every 5 minutes | Release `pending` bookings older than 15 minutes, with their slot and resource |
 | Webhook reconciliation | `server_payments/webhook_tasks` | Every 5 minutes | Retry `webhook_log` rows not yet processed; a late payment for a released booking follows the late-payment rule (`DESIGN.md`, Booking Status Lifecycle) |
 | Appointment reminders | `server_bookings/booking_tasks` | Every 15 minutes | Send the 24-hour and 1-hour reminders that fall due, each once |

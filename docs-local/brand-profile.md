@@ -26,7 +26,7 @@ The brand profile represents the business and the product in one place: who Mybi
 | App languages | English (the default), French, German, Spanish and Italian. English at launch; the other languages are added one at a time. |
 | Customer payments | Stripe for card payments, and PayPal for customers who prefer it |
 | Price | £119 a month per client, or £1,190 a year on the annual plan, before tax, charged in the client's own currency at a fixed price |
-| Business model | Subscription SaaS: one monthly price, unlimited staff, no commission, no add-on, no contract and no markup on payment processing |
+| Business model | Subscription SaaS: one monthly price, unlimited team members, no commission, no add-on, no contract and no markup on payment processing |
 | Commercial objective | 100 paying clients, reached in three phases: the first 10 clients, clients 11 to 50, and clients 51 to 100 |
 | Corporate colour | Professional Blue |
 
@@ -69,7 +69,7 @@ A small consulting or service business that wants to operate professionally onli
 
 The problem has five compounding parts:
 
-1. **Money.** Several subscriptions and setup costs, with more added for every member of staff.
+1. **Money.** Several subscriptions and setup costs, with more added for every team member.
 2. **Integration.** The tools do not share customer, booking, payment or invoice data, so the owner re-types data between them.
 3. **Technical burden.** The owner learns and runs several systems and becomes a part-time IT administrator.
 4. **Data.** Client records are spread over three or four systems, and there is no reliable view of the business.
@@ -123,7 +123,7 @@ The ideal client:
 
 ### Business size
 
-Mybizz CS supports solo practitioners, small teams and growing service businesses, with Owners, Managers, Admins, Providers and Salespeople. Staff are unlimited, with no per-person cost.
+Mybizz CS supports solo practitioners, small teams and growing service businesses, with Owners, Managers, Admins, Providers and Salespeople. Team members are unlimited, with no per-person cost.
 
 ### Where the client is
 
@@ -180,7 +180,7 @@ Run the whole business from one platform.
 - One setup instead of several tools
 - One predictable monthly price
 - No commission on bookings or payments
-- No per-staff fee
+- No per-team-member fee
 - No add-on charge for any core capability
 - Full ownership of customer data and backups
 - Month-to-month billing with no contract
@@ -219,7 +219,7 @@ Mybizz CS is not a marketplace. It does not list a client beside its competitors
 
 ### The cost comparison
 
-A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month, and every member of staff adds more. Mybizz CS is £119 a month for all of it, for the whole team.
+A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month, and every team member adds more. Mybizz CS is £119 a month for all of it, for the whole team.
 
 ---
 
@@ -330,7 +330,7 @@ Mybizz CS speaks directly, honestly and with empathy.
 
 **On leaving.** On a marketplace, your customers stay behind when you leave. On Mybizz CS your customer list is yours on the first day and on the last. Take it anywhere; no one else has a copy.
 
-**On pricing.** A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month, and every member of staff adds more. Mybizz CS is £119 a month for all of it and more, for the whole team, with email, accounts, AI and voice included. No contract, no add-ons.
+**On pricing.** A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month, and every team member adds more. Mybizz CS is £119 a month for all of it and more, for the whole team, with email, accounts, AI and voice included. No contract, no add-ons.
 
 **On simplicity.** Set up your business once. Website, booking, payments, CRM, sales, email, invoicing and accounts, all connected and working in one place. Then run your business.
 
@@ -658,7 +658,7 @@ One price for every client. Tax is added at checkout according to where the clie
 
 ### What the price includes
 
-Unlimited staff, the website, bookings, payments, CRM, sales pipeline, email, email marketing, invoicing, accounts, time tracking, blog, analytics, reviews, the customer portal, AI assistance, voice access and hosting.
+Unlimited team members, the website, bookings, payments, CRM, sales pipeline, email, email marketing, invoicing, accounts, time tracking, blog, analytics, reviews, the customer portal, AI assistance, voice access and hosting.
 
 ### Billing model
 
@@ -839,7 +839,7 @@ Mybizz CS is not a collection of features; it is a complete, dependable environm
 
 | Requirement | Brand meaning |
 |---|---|
-| Clients book every delivery mode online | Convenience, control and a professional customer experience |
+| Customers book every meeting type online | Convenience, control and a professional customer experience |
 | Clients sell delivered work and packages | Flexibility for different service-business models |
 | Clients take payments by card through Stripe and through PayPal | A professional payment experience |
 | Clients issue invoices and keep accounts | Financial credibility and operational completeness |
@@ -889,7 +889,7 @@ Together these requirements carry the central promise: Mybizz CS gives a service
 
 - Mybizz CS is a complete online business platform for consulting and service businesses.
 - It combines the website, booking, payments, CRM, email, invoicing, accounts, content, analytics, AI and voice in one platform.
-- It serves solo practitioners and teams, with unlimited staff included.
+- It serves solo practitioners and teams, with unlimited team members included.
 - It has one price, £119 a month or £1,190 a year, or the fixed local price, with no commission, add-on or markup on payment processing.
 - Each client's data is isolated and exportable, with backups in the client's own storage.
 - The monthly plan runs month to month, and a client leaves with its data.

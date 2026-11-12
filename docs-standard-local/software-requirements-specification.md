@@ -62,7 +62,7 @@ Mybizz CS is a dependent-instance application of the five-app model ([[[default:
 The 37 features F-01 to F-37 of `mb-3-cs-concept.md` section 7, summarised in PRD section 5. `[CLEAR]`
 
 ### 2.3 User Characteristics
-- Owners and staff are business people, not technical users; every screen must be usable without training, with tooltips that open help videos (F-25), in the app language.
+- Team members are business people, not technical users; every screen must be usable without training, with tooltips that open help videos (F-25), in the app language.
 - Staff use the admin area on desktop and phone; WhatsUp is used on a phone, often on the move.
 - Customers and visitors use the public website and portal on any device, mostly phones.
 - Users include people who rely on keyboard, screen reader or high contrast (WCAG 2.1 AA). `[CLEAR]`
@@ -131,7 +131,7 @@ Anvil's platform constraints apply by default: the App Server builds and extends
 | SR-34 | Every outgoing email is sent by `server_shared/email_service` through SES from an address on the client's domain, DKIM-signed, in the client's tenant; no email is sent to an address in `email_suppressions` within its scope | FR-18 | Test with the mail catcher; SES sandbox test of DKIM | [CLEAR] |
 | SR-35 | A one-click unsubscribe stops all marketing email to that contact and nothing else; a hard bounce or complaint suppresses every email to that address | FR-18 | Test | [CLEAR] |
 | SR-35a | A received email is stored once per `Message-ID`, filed to its address or to Unassigned, linked to the contact with the sender's address, its attachments in R2; a failed virus verdict stores nothing; a failed spam or DMARC verdict files it in Spam | FR-18 | Test with recorded SES notifications | [CLEAR] |
-| SR-35b | A staff member's Team Inbox calls return only the addresses the staff member belongs to; an Owner's return every address | FR-18 | Access test | [CLEAR] |
+| SR-35b | A team member's Team Inbox calls return only the addresses the team member belongs to; an Owner's return every address | FR-18 | Access test | [CLEAR] |
 | SR-35c | Email bodies older than 90 days are moved to R2 nightly and the row kept as an index; Trash older than 30 days is deleted | FR-18, FR-29 | Test with the clock advanced | [CLEAR] |
 | SR-36 | Each automation run is recorded in `automation_runs`; an automation runs once per triggering event | FR-20 | Test | [CLEAR] |
 | SR-37 | A blog post with `scheduled_at` in the past is published by the next run of the 15-minute task | FR-21 | Test | [CLEAR] |
@@ -159,7 +159,7 @@ Anvil's platform constraints apply by default: the App Server builds and extends
 | SR-52 | Usage (memory, storage, email volume) is reported to App 5 daily; above 80% of a container's memory App 5 raises it to 2 GiB once, and raises the Advanced cluster to 16 GiB at 60 active clients and to 32 GiB at 130, each in the next maintenance window; App 5 never reduces a size and messages Mybizz at each resize | FR-33 | Test against a simulated DigitalOcean API (RL-13) | [CLEAR] |
 | SR-53 | The heartbeat reaches App 5 every 15 minutes with release version and schema fingerprint and no customer personal data | FR-34 | Test against App 5; payload inspection | [CLEAR] |
 | SR-53a | AI and speech requests pass through App 5 without their content being stored or logged; App 5 records only each client's usage counts; Mybizz's Groq organisation has Zero Data Retention on | FR-26, FR-34 | Test against App 5: after an AI and a speech request, no App 5 table or log holds their content; Groq's Data Controls show Zero Data Retention on | [CLEAR] |
-| SR-54 | The usage report carries the last staff sign-in and last booking date, from which App 5 raises the at-risk alerts | FR-34 | Test against App 5 | [CLEAR] |
+| SR-54 | The usage report carries the last team-member sign-in and last booking date, from which App 5 raises the at-risk alerts | FR-34 | Test against App 5 | [CLEAR] |
 | SR-55 | A service with pricing model `duration` offers time slots sized by its duration; a service with `unit` offers Order and no slot; only active services appear publicly | FR-10 | Test both pricing models and an inactive service | [CLEAR] |
 | SR-56 | Quote numbers are `QT-{year}-{sequence}` with no gap or repeat; accepting a quote at `/quote/{token}` creates its invoice, links it and moves a linked deal to `won` in one transaction; a second acceptance changes nothing; a quote past `valid_until` is `expired` the next morning | FR-35 | Concurrency and state tests | [CLEAR] |
 | SR-57 | Staff list and change only the deals they own | FR-35 | Access test | [CLEAR] |

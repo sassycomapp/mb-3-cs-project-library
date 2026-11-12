@@ -19,7 +19,7 @@ The agreement between Mybizz and the client: the service, the fee, the client's 
 - A client on the annual plan earns one month's price off its next annual renewal for each new client that joins on the annual plan through its referral, up to 5 months per renewal. Further confirmed referrals are kept in reserve and carried to the next renewal. A refund of a referred client's first annual payment cancels the month it earned. A client that leaves, or moves to the monthly plan, loses its credits, and a credit is never paid in cash.
 - The referral kit that Mybizz supplies must be used as supplied, with its statement that the client gains a discount when someone joins.
 - Mybizz's order process is conducted by its online reseller, Paddle.com Market Ltd ("Paddle"), which is the Merchant of Record for every order. The Paddle terms (`saas-tos-iro-paddle.md`, in this folder) form part of this agreement: Paddle's role, invoices and receipts, refunds, price changes and Paddle's buyer terms.
-- The price includes every feature and unlimited staff. It includes the client's use of email, AI and voice within the fair-use limits below.
+- The price includes every feature and unlimited team members. It includes the client's use of email, AI and voice within the fair-use limits below.
 
 ## Fair Use
 

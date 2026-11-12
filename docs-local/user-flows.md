@@ -73,7 +73,7 @@ updated: "2026-11-12"
 | UF-32 | Expenses, accounts reports and export | F-28 | Owner, Manager | Finance & Reports → Expenses, Accounts |
 | UF-33 | Restoring or viewing data from R2 | F-29 | Owner, Mybizz | Settings → Data |
 | UF-34 | Help: support tickets and feedback | F-32 | Owner, Manager, Admin, Staff, Mybizz | Help |
-| UF-35 | Team Inbox: reading, replying and managing email | F-18 | Every staff role | Inbox |
+| UF-35 | Team Inbox: reading, replying and managing email | F-18 | Every team member | Inbox |
 | UF-36 | Mybizz acts on an at-risk alert | F-34 | Mybizz | App 5 → Alerts |
 | UF-37 | Release reaches every client | F-34 | Mybizz | App 1 release |
 | UF-38 | Error recovery | F-11, F-15, F-01 | All users | Inline |
@@ -155,7 +155,7 @@ Onboarding is a resumable wizard, separate from Settings, with a progress indica
 **Entry:** `/services`
 
 1. Browse service categories.
-2. Select a service — description, duration, price (in the display currency if set), providers, delivery mode.
+2. Select a service — description, duration, price (in the display currency if set), providers, meeting types.
 3. Select a provider (a specific provider, or "any available") — photo, specialisations, availability.
 4. Select date and time — calendar showing only available slots.
 5. Select meeting type — at the business, video call or phone call (UF-06 covers the customer's location). A video call link is generated automatically.
@@ -591,7 +591,7 @@ Assists 9 (client sentiment summary) and 10 (booking and availability insights) 
 
 ## UF-35 Team Inbox: reading, replying and managing email (F-18)
 
-**Entry:** Inbox. Each staff member sees their own address and the desks the staff member belongs to; Owners see every address. Build detail: `spec-team-inbox.md`.
+**Entry:** Inbox. Each team member sees their own address and the desks the team member belongs to; Owners see every address. Build detail: `spec-team-inbox.md`.
 
 **Reading:**
 1. Choose an address on the left and a folder: Inbox, Drafts, Sent, Archive, Spam or Trash.
@@ -614,7 +614,7 @@ Assists 9 (client sentiment summary) and 10 (booking and availability insights) 
 
 **Entry:** App 5 → Alerts
 
-1. App 5 raises an alert when a client has no staff sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days.
+1. App 5 raises an alert when a client has no team-member sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days.
 2. Mybizz opens the alert and sees the client's usage history.
 3. Mybizz contacts the Owner (email or call) and records the action and outcome on the client record.
 4. The alert closes when the condition clears.
@@ -654,7 +654,7 @@ Assists 9 (client sentiment summary) and 10 (booking and availability insights) 
 **Entry:** Settings → Email (Owner, Manager)
 
 1. Add an address: the part before the `@`, personal or desk, display name, members, signature.
-2. A personal address is created for each staff member on invitation (UF-03); its member is that staff member.
+2. A personal address is created for each team member on invitation (UF-03); its member is that team member.
 3. A desk address (for example `help@`, `accounts@`) has several members, who share its read and unread state.
 4. Set an auto-reply with a start and end date, or deactivate an address.
 5. The Domain tab shows whether every DNS record is live.
@@ -730,7 +730,7 @@ Assists 9 (client sentiment summary) and 10 (booking and availability insights) 
 **Entry:** Settings → Plan and billing → Referral kit (Owner, annual plan)
 
 1. Copy the referral link, or tap LinkedIn, Facebook, X or WhatsApp: the ready-made post is copied and the platform's own share window opens with the link.
-2. Switch on the email banner to add it to marketing emails and newsletters.
+2. Switch on the email banner to add it to campaign emails, sequences and broadcasts.
 3. Switch on the website badge, the pop-up, or both; each appears on the public website at once and goes when switched off.
 4. A business that registers through the link appears as pending on the mock-up invoice, and as confirmed once its first annual payment completes.
 

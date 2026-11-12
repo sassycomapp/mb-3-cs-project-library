@@ -113,7 +113,7 @@ Either kind may work on the ground, in person, or in the cloud, online — or bo
 ### 4.2 Business size
 
 Mybizz CS is built for:
-- Teams of every size, with unlimited staff at no extra cost: owners, managers, administrators, providers and salespeople
+- Teams of every size, with unlimited team members at no extra cost: owners, managers, administrators, providers and salespeople
 - Solo practitioners, who receive the full platform at the same price
 
 Each team member gets their own sign-in, access level and email address; each provider gets their own calendar and services; each salesperson works their own deals. A team grows without the price changing.
@@ -209,7 +209,7 @@ Mybizz CS replaces a set of separate tools. The fair comparison is the full set 
 | AI writing assistant | Jasper Pro, 1 seat | $69 |
 | **Total** | | **$324** |
 
-That total does not include a team email inbox, voice access, backups, legal pages, reviews, a customer portal, accounts, or the cost of having it all set up, and every further staff member adds more per-seat fees.
+That total does not include a team email inbox, voice access, backups, legal pages, reviews, a customer portal, accounts, or the cost of having it all set up, and every further team member adds more per-seat fees.
 
 **All-in-one platforms, for the same team of six:**
 
@@ -230,7 +230,7 @@ That total does not include a team email inbox, voice access, backups, legal pag
 | | Booksy | Vagaro | Mindbody | **Mybizz CS** |
 |---|---|---|---|---|
 | Base price | $29.99/mo | about $30/mo | $99–$699/mo | **$149/mo (£119 in the UK)** |
-| Per-staff fee | +$20/person | +$10/calendar | included | **included** |
+| Per-team-member fee | +$20/person | +$10/calendar | included | **included** |
 | Processing fee | 2.49–2.69% | 2.2–3.5% | 3.5% | **gateway rate only** |
 | Marketplace commission | up to $49.99/mo (Boost) | none | 20% new customer | **none** |
 | Add-ons required | none listed | forms, SMS, storage | many | **none** |
@@ -241,7 +241,7 @@ That total does not include a team email inbox, voice access, backups, legal pag
 | Client owns data | no | no | no | **yes** |
 | Competitors on the business's page | yes | yes | yes | **no** |
 
-Mybizz CS costs less than half of the separate tools it replaces for a team of six, and the gap grows with every staff member, because Mybizz CS charges no per-staff fee.
+Mybizz CS costs less than half of the separate tools it replaces for a team of six, and the gap grows with every team member, because Mybizz CS charges no per-team-member fee.
 
 ### 6.3 The ownership argument
 
@@ -315,7 +315,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 
 **F-10 Service catalogue**
 - Time-based pricing (a 60-minute session at R450) and deliverable pricing (a logo design at R3,500)
-- Per service: name, description, category, pricing model, price, duration, delivery mode, provider assignment, images, video, meeting types, intake form, active status
+- Per service: name, description, category, pricing model, price, duration, provider assignment, images, video, meeting types, intake form, active status
 
 **F-11 Bookings and scheduling**
 - One continuous booking flow: service → provider → date and time → meeting type → intake form → payment → confirmation
@@ -370,11 +370,11 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 
 **F-18 Email**
 - Unlimited email addresses on the client's own domain: personal (`john@abc.com`) and desk (`help@`, `marketing@`, `accounts@`)
-- A Team Inbox inside Mybizz CS: each staff member sees their own address and the desks the staff member belongs to; Inbox, Drafts, Sent, Archive, Spam and Trash; reply, reply all and forward; sort, filter and search; star and mark as unread; act on many emails at once; conversations grouped; an AI-drafted reply on request; works in the phone browser
+- A Team Inbox inside Mybizz CS: each team member sees their own address and the desks the team member belongs to; Inbox, Drafts, Sent, Archive, Spam and Trash; reply, reply all and forward; sort, filter and search; star and mark as unread; act on many emails at once; conversations grouped; an AI-drafted reply on request; works in the phone browser
 - Every email from a known contact appears on the contact's timeline; an unknown sender becomes a lead in one click
 - Spam and virus filtering on every incoming email
 - Confirmations, reminders, invoices, receipts, sign-in and password emails sent from the client's own domain
-- Marketing email: sequences (New Client Welcome, Appointment Follow-Up, Re-engagement, Referral Request), broadcasts and newsletters, segment targeting, open and click tracking, campaign metrics, one-click unsubscribe, bounces and complaints blocked automatically
+- Marketing email: sequences (New Client Welcome, Appointment Follow-Up, Re-engagement, Referral Request), broadcasts, segment targeting, open and click tracking, campaign metrics, one-click unsubscribe, bounces and complaints blocked automatically
 - Every email signed with DKIM; Mybizz sets up the client's domain automatically
 - Emails older than 90 days kept in the client's own storage, searchable, and part of the client's data at exit
 - No email account to set up and no email bill: every email travels through Amazon SES, paid by Mybizz (`spec-team-inbox.md`)
@@ -489,7 +489,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - Built and running before the first paying client
 - Client registry and registration, provisioning of new client instances (the client's app and database, the client's R2 bucket, the client's Amazon SES identity and the client's DNS records), client reference numbers and credentials
 - Usage monitoring per client, health monitoring, billing, release distribution
-- At-risk alerts: Mybizz is alerted when a client has no staff sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days, so the founder can act before the client leaves
+- At-risk alerts: Mybizz is alerted when a client has no team-member sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days, so the founder can act before the client leaves
 - Support tickets and feedback (F-32)
 
 **F-36 Demo apps**
@@ -499,7 +499,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 
 **F-37 Plan, billing and referrals**
 - A Plan and billing tab in Settings, for the Owner only: the client's plan, its next renewal date and a mock-up of its next annual invoice, with each confirmed referral taken off as one month and each pending referral listed below the total
-- A referral kit for clients on the annual plan, supplied by Mybizz: the client's referral link, ready-made posts for LinkedIn, Facebook, X and WhatsApp, an email banner for the client's marketing emails and newsletters, and a badge and a pop-up for the client's public website. The client chooses which to use; the badge and pop-up are off until the client switches them on
+- A referral kit for clients on the annual plan, supplied by Mybizz: the client's referral link, ready-made posts for LinkedIn, Facebook, X and WhatsApp, an email banner for the client's campaign emails, and a badge and a pop-up for the client's public website. The client chooses which to use; the badge and pop-up are off until the client switches them on
 - The kit's message: buy Mybizz CS for a year and get 2 months free at once; refer 5 businesses that do the same and the next year costs 5 months, up to 7 months off the full year. Every kit item says that the client gains a discount when someone joins
 
 ---
@@ -514,7 +514,7 @@ Every new client starts with three months of sample data for a business in the c
 
 ### 9.1 Price
 
-**£119 per client per month**, or **£1,190 a year** on the annual plan, before tax, charged in the client's own currency at a fixed price: £119, $149, C$199, €139 or CHF 139 a month, and 10 times that for a year ([[[default:adr-global/adr-tiers-model|Tiers Model]]](C:/dev/project-library-global/adr-global/adr-tiers-model.md)). One price for every client. Unlimited staff are included. There is no commission on bookings or payments, and no add-on: AI, voice, email, accounts and hosting are all in the price.
+**£119 per client per month**, or **£1,190 a year** on the annual plan, before tax, charged in the client's own currency at a fixed price: £119, $149, C$199, €139 or CHF 139 a month, and 10 times that for a year ([[[default:adr-global/adr-tiers-model|Tiers Model]]](C:/dev/project-library-global/adr-global/adr-tiers-model.md)). One price for every client. Unlimited team members are included. There is no commission on bookings or payments, and no add-on: AI, voice, email, accounts and hosting are all in the price.
 
 ### 9.2 Billing model
 
@@ -673,7 +673,7 @@ The visual identity is the design system in F-31: the Anvil Material 3 theme wit
 *What happens to your customers when you leave? On marketplace platforms, they stay behind. On Mybizz CS your customer list is yours on day one and yours on the last day. Take it anywhere. No one else has a copy.*
 
 **On pricing:**
-*A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month — and every staff member adds more. Mybizz CS is £119 a month for all of it and more, for your whole team, with email, accounts, AI and voice included. No contract, no add-ons.*
+*A website, a booking system, a CRM, email marketing, invoicing and an AI writer, bought separately for a team of six, cost over £240 a month — and every team member adds more. Mybizz CS is £119 a month for all of it and more, for your whole team, with email, accounts, AI and voice included. No contract, no add-ons.*
 
 **On simplicity:**
 *Set up your business once. Website, booking, payments, CRM, sales, email, invoicing, accounts — all connected, all working, all in one place. Then run your business.*

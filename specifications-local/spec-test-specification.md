@@ -69,7 +69,7 @@ Same as happy path, but the contact email matches an existing `contacts` row.
 2. Select a provider
 3. Select a date where the provider has no availability
 
-**Expected:** "No available time slots" message. User can select a different date or provider.
+**Expected:** "No available time slots" message. The customer can select a different date or provider.
 
 ### Edge Case: Double-Booking Prevention
 
@@ -97,11 +97,11 @@ tests"
 3. Submit payment
 
 **Expected:**
-- User sees "Payment failed" error with retry option
+- The customer sees "Payment failed" error with retry option
 - `bookings` row created with status `pending` (not `confirmed`)
 - `webhook_log` row has `processed=True` and no `error_message`: the failure is the payment's outcome, not a processing error
 - No invoice generated
-- User can retry payment without re-entering booking details
+- The customer can retry payment without re-entering booking details
 
 ### 2.2 Webhook Signature Failure
 
@@ -182,9 +182,9 @@ tests"
 3. Server call times out
 
 **Expected:**
-- User sees "Connection timed out. Please try again." with retry button
+- The customer sees "Connection timed out. Please try again." with retry button
 - No partial booking data persisted
-- `globals.booking_flow_state` preserved — user can retry without starting over
+- `globals.booking_flow_state` preserved — the customer can retry without starting over
 
 ---
 

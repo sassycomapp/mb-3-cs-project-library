@@ -1,13 +1,13 @@
 ---
 title: "spec-team-inbox"
 doc-id: "mb-17a38acb"
-updated: "2026-11-06"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Team Inbox and Email Specification
 
 ## 1. What the Team Inbox is
 
-The Team Inbox gives every client of Mybizz CS email on the client's own domain, inside the client's Mybizz app. The Owner creates as many addresses as the business needs: personal addresses (`john@abc.com`) and desk addresses (`help@abc.com`, `marketing@abc.com`, `accounts@abc.com`). Every email to any of those addresses arrives in the Team Inbox; every email the business sends, from a one-to-one reply to a newsletter, leaves through the same email service under the client's own domain.
+The Team Inbox gives every client of Mybizz CS email on the client's own domain, inside the client's Mybizz app. The Owner creates as many addresses as the business needs: personal addresses (`john@abc.com`) and desk addresses (`help@abc.com`, `marketing@abc.com`, `accounts@abc.com`). Every email to any of those addresses arrives in the Team Inbox; every email the business sends, from a one-to-one reply to a broadcast, leaves through the same email service under the client's own domain.
 
 There is no limit on the number of addresses, no mailbox to buy and no email bill for the client. The client's email stays inside the client's own app, linked to the client's CRM, and leaves with the client's data at exit.
 
@@ -20,7 +20,7 @@ Every email of Mybizz CS, received or sent, goes through Amazon SES (Simple Emai
 | Received, to any address on the client's domain | SES receives it, scans it for spam and viruses, and passes it to the client's instance |
 | One-to-one emails and replies from the Team Inbox | SES, through the instance's email service |
 | Confirmations, reminders, invoices, receipts | SES, through the instance's email service |
-| Newsletters, campaigns and sequences | SES, through the instance's email service |
+| Campaigns: sequences and broadcasts | SES, through the instance's email service |
 | Sign-in, confirmation and password-reset emails of Anvil's Users service | SES, through Anvil's Email service set to Custom Mail Server with the SES SMTP endpoint |
 
 One service for every email means one sending reputation to look after, one set of DNS records per domain and one place where bounces, complaints, opens and clicks are reported. Anvil's own email service is not used to send, and Anvil's email quota does not apply.
@@ -53,13 +53,13 @@ Owners and Managers create and manage addresses in Settings → Email.
 | Field | Meaning |
 |---|---|
 | Address | The part before the `@`, on the client's domain |
-| Kind | `personal` (one staff member) or `desk` (shared by a team) |
+| Kind | `personal` (one team member) or `desk` (shared by a team) |
 | Display name | The sender name shown to recipients: "John Smith", "ABC Help Desk" |
-| Members | The staff members who read and send from the address; a personal address has one |
+| Members | The team members who read and send from the address; a personal address has one |
 | Signature | Added to every email sent from the address |
 | Auto-reply | Optional, with a start and end date |
 
-Every staff member sees the addresses of which the staff member is a member, and nothing else. Owners see every address. Customers have no Team Inbox.
+Every team member sees the addresses of which the team member is a member, and nothing else. Owners see every address. Customers have no Team Inbox.
 
 An email to an address on the domain that does not exist lands in **Unassigned**, which Owners and Managers see. From there it is moved to an address, deleted, or the address is created.
 
@@ -99,7 +99,7 @@ Every email is sent by `email_service` in `server_shared/` through the SES API, 
 
 SES reports every bounce, complaint, delivery, open and click to the instance's endpoint `/_/api/email/events`. A hard bounce or a complaint puts the address on `email_suppressions`, and no email of any kind is sent to a suppressed address again; a contact who unsubscribes is suppressed for marketing email only.
 
-## 8. Newsletters and campaigns
+## 8. Campaigns
 
 Campaigns, broadcasts and sequences (F-18) are written in the email editor and sent through SES like every other email:
 

@@ -23,7 +23,7 @@ Every table and column of a Mybizz CS client instance: name, type and allowed va
 - **Never deleted.** Rows of `bookings`, `orders`, `invoice`, `payments`, `quotes` and `expenses` are never deleted; their status changes.
 - **History outside the tables.** Backups, history, webhook payloads, audit entries older than 30 days, email bodies older than 90 days, email attachments and expense receipts are kept in the client's R2 bucket (F-29).
 - **Credentials only in the Vault**, encrypted.
-- **Names** follow [[[default:specifications-global/spec-nomenclature|Nomenclature]]](C:/dev/project-library-global/specifications-global/spec-nomenclature.md). A link column is named `{target}_id`, or in the plural for a multiple link. A link to a provider (a staff user who delivers services) is always `provider_id`. A link to a bookable room or piece of equipment is always `resource_id`.
+- **Names** follow [[[default:specifications-global/spec-nomenclature|Nomenclature]]](C:/dev/project-library-global/specifications-global/spec-nomenclature.md). A link column is named `{target}_id`, or in the plural for a multiple link. A link to a provider (a team member who delivers services) is always `provider_id`. A link to a bookable room or piece of equipment is always `resource_id`.
 - **Allowed values** are lowercase strings, written in this document as `value1` / `value2`. Code compares against these exact strings.
 - **Standard columns.** Every table has `created_at`. Every table whose rows are edited after creation has `updated_at`. Every core table (one holding a business record a client works with) has `metadata`, a simpleObject for client-level attributes; `bookings.metadata` holds the client-defined intake answers.
 
@@ -123,7 +123,7 @@ One row: the client's business.
 | `onboarding_completed` | bool | |
 | `onboarding_completed_at` | datetime | |
 | `legal_compliance_enabled` | bool | Legal Compliances switch; cannot be switched off once on |
-| `referral_banner_in_emails` | bool | The referral kit's email banner is added to the client's marketing emails and newsletters (F-37); default False |
+| `referral_banner_in_emails` | bool | The referral kit's email banner is added to the client's campaign emails, sequences and broadcasts (F-37); default False |
 | `referral_badge_on` | bool | The referral kit's badge shows in the public website's footer (F-37); default False |
 | `referral_popup_on` | bool | The referral kit's pop-up shows on the public website (F-37); default False |
 | `legal_compliance_enabled_at` | datetime | |
@@ -167,7 +167,7 @@ Key–value settings.
 Sequence keys are read and incremented inside a transaction, so that no number repeats or is skipped.
 
 ### 1.4 `email_config`
-One row: the client's email domain (F-18, `spec-team-inbox.md`).
+One row: the email settings of the client's domain (F-18, `spec-team-inbox.md`).
 
 | Column | Type | Notes |
 |---|---|---|
@@ -242,7 +242,7 @@ One row: the public website's header style (Settings → Theme). Colours come fr
 | `created_at` | datetime | When the row was created |
 
 ### 1.10 `users`
-Every person who signs in: Owner, staff and customers. Extends the Anvil Users service.
+Every user: team members and customers. Extends the Anvil Users service.
 
 | Column | Type | Notes |
 |---|---|---|
@@ -697,7 +697,7 @@ The contact timeline.
 | `created_at` | datetime | When the row was created |
 
 ### 5.4 `contact_submissions`
-Contact form messages (F-06, UF-19).
+Enquiries: messages sent through the contact form (F-06, UF-19).
 
 | Column | Type | Notes |
 |---|---|---|
@@ -941,7 +941,7 @@ Quote lines.
 ## 7. Email and Webhooks
 
 ### 7.1 `email_templates`
-Transactional email templates.
+Email templates: the ready-made emails of the client's business, one per language.
 
 | Column | Type | Notes |
 |---|---|---|
@@ -996,7 +996,7 @@ The client's email addresses (F-18, `spec-team-inbox.md`).
 | `address` | string | Unique; the part before the `@` |
 | `kind` | string | `personal` / `desk` |
 | `display_name` | string | Sender name shown to recipients |
-| `member_ids` | links → users | Staff who read and send from the address |
+| `member_ids` | links → users | Team members who read and send from the address |
 | `signature` | string | |
 | `auto_reply_text` | string | Empty = no auto-reply |
 | `auto_reply_from` | datetime | |

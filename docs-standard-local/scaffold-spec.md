@@ -45,7 +45,7 @@ client_code/
 │   ├── LoginForm/                 startup form; routes by role (section Startup Configuration)
 │   ├── PasswordResetForm/         request a reset link
 │   ├── TwoFactorForm/             enrol a second factor; enter the code or use the security key at sign-in
-│   └── SetPasswordForm/           set a password from an emailed link (new Owner, staff, customer, reset)
+│   └── SetPasswordForm/           set a password from an emailed link (new team member, customer, reset)
 │
 ├── onboarding/                    F-03
 │   ├── OnboardingForm/            10 steps, resumable (DESIGN.md OnboardingForm)
@@ -341,36 +341,36 @@ The tables, their columns, types and allowed values are in `authoritative-schema
 
 | Menu item | Form | Shown to |
 |---|---|---|
-| Dashboard | `dashboard.DashboardForm` | all staff roles |
-| Inbox | `inbox.TeamInboxForm` | all staff roles |
-| Sales & Operations → Bookings | `bookings.BookingListForm` (Calendar: `bookings.BookingCalendarForm`) | all staff roles |
-| Sales & Operations → Services | `services.ServicesForm` | all staff roles |
-| Sales & Operations → Orders | `orders.OrderListForm` | all staff roles |
-| Sales & Operations → Packages | `packages.PackageListForm` | all staff roles |
-| Sales & Operations → Deals | `sales.DealBoardForm` | all staff roles |
+| Dashboard | `dashboard.DashboardForm` | every team member |
+| Inbox | `inbox.TeamInboxForm` | every team member |
+| Sales & Operations → Bookings | `bookings.BookingListForm` (Calendar: `bookings.BookingCalendarForm`) | every team member |
+| Sales & Operations → Services | `services.ServicesForm` | every team member |
+| Sales & Operations → Orders | `orders.OrderListForm` | every team member |
+| Sales & Operations → Packages | `packages.PackageListForm` | every team member |
+| Sales & Operations → Deals | `sales.DealBoardForm` | every team member |
 | Sales & Operations → Quotes | `sales.QuoteListForm` | Owner, Manager, Admin |
-| Customers & Marketing → Contacts | `crm.ContactListForm` | all staff roles |
+| Customers & Marketing → Contacts | `crm.ContactListForm` | every team member |
 | Customers & Marketing → Companies | `crm.CompanyListForm` | Owner, Manager, Admin |
 | Customers & Marketing → Campaigns | `crm.EmailCampaignListForm` | when `marketing_enabled` |
 | Customers & Marketing → Broadcasts | `crm.EmailBroadcastForm` | when `marketing_enabled` |
 | Customers & Marketing → Segments | `crm.SegmentManagerForm` | when `marketing_enabled` |
-| Customers & Marketing → Tasks | `crm.TaskListForm` | all staff roles |
+| Customers & Marketing → Tasks | `crm.TaskListForm` | every team member |
 | Customers & Marketing → Automations | `crm.AutomationListForm` | when `marketing_enabled` |
-| Customers & Marketing → Reviews | `reviews.ReviewListForm` | all staff roles |
+| Customers & Marketing → Reviews | `reviews.ReviewListForm` | every team member |
 | Content & Website → Blog | `blog.BlogAdminListForm` | when `blog_enabled` |
-| Content & Website → Pages | `public_pages.PageListForm` | all staff roles |
-| Content & Website → Landing Pages | `landing_pages.LandingPageListForm` | all staff roles |
-| Content & Website → Media | `public_pages.MediaLibraryForm` | all staff roles |
-| Finance & Reports → Invoices | `invoices.InvoiceListForm` | all staff roles |
-| Finance & Reports → Payments | `invoices.PaymentListForm` | all staff roles |
+| Content & Website → Pages | `public_pages.PageListForm` | every team member |
+| Content & Website → Landing Pages | `landing_pages.LandingPageListForm` | every team member |
+| Content & Website → Media | `public_pages.MediaLibraryForm` | every team member |
+| Finance & Reports → Invoices | `invoices.InvoiceListForm` | every team member |
+| Finance & Reports → Payments | `invoices.PaymentListForm` | every team member |
 | Finance & Reports → Expenses | `accounts.ExpenseListForm` | Owner, Manager |
 | Finance & Reports → Accounts | `accounts.AccountsForm` | Owner, Manager |
-| Finance & Reports → Time Entries | `time_tracking.TimeEntryListForm` | all staff roles |
-| Finance & Reports → Reports | `analytics.RevenueReportForm` | all staff roles |
-| Finance & Reports → Analytics | `analytics.DashboardAnalyticsForm` | all staff roles |
+| Finance & Reports → Time Entries | `time_tracking.TimeEntryListForm` | every team member |
+| Finance & Reports → Reports | `analytics.RevenueReportForm` | every team member |
+| Finance & Reports → Analytics | `analytics.DashboardAnalyticsForm` | every team member |
 | Settings | `settings.SettingsForm` | Owner, Manager |
 | Vault | `settings.VaultForm` | Owner |
-| Help | `support.HelpForm` | all staff roles |
+| Help | `support.HelpForm` | every team member |
 | Sign out | — | all roles |
 
 Within each item, what a role may see or do is enforced by the server (F-01).
@@ -407,7 +407,7 @@ Within each item, what a role may see or do is enforced by the server (F-01).
 | `/landing/:slug` | `landing_pages.LandingPage` |
 | `/review/:token` | `reviews.ReviewSubmitForm` |
 | `/quote/:token` | `sales.QuoteAcceptPage` |
-| `/whatsup` | `ai.WhatsUpForm` (signed-in staff only) |
+| `/whatsup` | `ai.WhatsUpForm` (signed-in team members only) |
 
 Every public route sets its title, description and Open Graph tags in `Route.meta` (`spec-sm-syndication.md`). The HTTP endpoints `/_/api/email/inbound`, `/_/api/email/events`, `/_/api/email/unsubscribe` and `/_/api/blog-image/{slug}` are served by the server modules above.
 
@@ -429,7 +429,7 @@ At startup App 1 calls `m3x_theming.apply_saved()`, then `m3x_theming.set_palett
 | Setting | Value | Reason |
 |---|---|---|
 | Sign-in method | Email and password | F-01 |
-| Sign-up | Off | Owners are created at provisioning, staff by invitation, customers by their first booking |
+| Sign-up | Off | Owners are created at provisioning, other team members by invitation, customers by their first booking |
 | Confirm email | On | F-01 |
 | Remember me | 30 minutes | Matches the 30-minute session rule (F-01, UF-38) |
 | Require 2-factor authentication | On (`require_mfa: true`); authenticator apps and security keys (FIDO2) allowed; "Allow 2-factor reset by email" on | Every account holder signs in with a second factor, the Owner with FIDO2 (F-01); the Vault's own TOTP is in addition (F-02) |

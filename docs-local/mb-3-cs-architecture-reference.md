@@ -91,7 +91,7 @@ Every client instance runs App 3 on `master_template`. A form or server module a
 ## 4. Hosting and Capacity (F-33)
 
 - **Platform:** each client instance runs in its own DigitalOcean App Platform container (1 GiB memory), with its own database in Mybizz CS's Managed PostgreSQL cluster, as [[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md) sets out. Email goes through Amazon SES (F-18).
-- **Usage reporting:** each client instance reports its memory use, storage, email volume, heavy-job activity, last staff sign-in and last booking date to App 5 through the management endpoints, on a schedule.
+- **Usage reporting:** each client instance reports its memory use, storage, email volume, heavy-job activity, last team-member sign-in and last booking date to App 5 through the management endpoints, on a schedule.
 - **Heavy jobs:** imports, exports, backups, AI generation, briefings, campaign sending and inbound email processing run as background tasks.
 - **Capacity:** no fixed client limit. The cluster is Advanced Edition with a standby from the first client and grows in stages: 8 GiB to client 59, 16 GiB from client 60 and 32 GiB from client 130, which holds 265 clients (Client Instance Hosting section 4).
 - **Automatic resizing:** above 80% memory use, App 5 raises a client's container from 1 GiB to 2 GiB; App 5 raises the cluster to each stage in the Sunday maintenance window, with no client moved. App 5 messages Mybizz at each resize and never reduces a size ([[[default:adr-global/adr-automatic-resizing]]](C:/dev/project-library-global/adr-global/adr-automatic-resizing.md)).
@@ -179,7 +179,7 @@ General navigation patterns: [[[default:specifications-global/spec-ui-standards|
 ### AdminLayout navigation
 ```
 Dashboard                          (always)
-Inbox                              (every staff role; unread count)
+Inbox                              (every team member; unread count)
 ▼ Sales & Operations
   Bookings                         (always)
   Services                         (always)
@@ -211,7 +211,7 @@ Inbox                              (every staff role; unread count)
   Analytics                        (always)
 Settings                           (Owner / Manager only)
 Vault                              (Owner only)
-Help                               (all staff roles)
+Help                               (every team member)
 [Sign out — bottom of sidebar, all roles]
 ```
 
@@ -257,7 +257,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Anvil Users service, email and password; email confirmation required; password reset by email.
 - Every account holder signs in with a second factor (authenticator app or security key), customers with a portal account included; the Owner uses FIDO2 (a security key or the device's passkey). Guests book and pay without an account. A lost second factor is reset by the user through Anvil's reset by email ([[[default:specifications-global/spec-security|Security Specification]]](C:/dev/project-library-global/specifications-global/spec-security.md)).
 - Sign-in, sign-up and two-factor screens are the app's own (`auth/`), so they show the app language; Anvil's built-in forms are not used.
-- New users (Owner, staff, customers) set their own password from an emailed link; no password is ever sent by email.
+- New users (team members and customers) set their own password from an emailed link; no password is ever sent by email.
 - Sessions end after 30 minutes without activity; the user signs in again and returns to the same place.
 - Five roles: Owner, Manager, Admin, Staff, Customer, held in the user's `role` field.
 - Every server function checks the role with the custom role decorators; the interface hides what a role cannot use, but the server is the enforcement.
@@ -319,8 +319,8 @@ Each feature below states its packages, data, rules and links. Tables and fields
 
 ### F-10 Service catalogue
 - Pricing model `duration` (price per time block; drives slot calculation) or `unit` (price per deliverable; no slot).
-- Per service: name, description, category, pricing model, price, duration, delivery mode, providers, images, video, meeting types, intake form, display currency, active status.
-- Delivery modes: at the business, at the customer's location, online live, delivered work, group.
+- Per service: name, description, category, pricing model, price, duration, providers, images, video, meeting types, intake form, display currency, active status.
+- A service is booked by meeting type (at the business, at the customer's location, by video or by phone), booked as places in a group session, or ordered as delivered work (pricing model `unit`).
 - Packages: `services/`, `server_services/`.
 
 ### F-11 Bookings and scheduling
@@ -385,9 +385,9 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Build detail: `spec-team-inbox.md`.
 - Every email received and sent goes through Amazon SES in Mybizz's AWS account (`eu-west-1`), one SES tenant per client. Anvil's own email quota is not used.
 - Receiving: the client domain's MX record points to SES; SES scans each email, stores it in S3 and notifies the instance's endpoint `/_/api/email/inbound`; a background task stores it in `email_messages`, moves attachments to R2 and links it to a contact.
-- Team Inbox (`inbox/TeamInboxForm`): unlimited personal and desk addresses (`email_addresses`); each staff member sees the addresses the staff member belongs to; Inbox, Drafts, Sent, Archive, Spam, Trash; reply, reply all, forward; sort, filter, search; star, mark as unread; bulk actions; conversations by `Message-ID`; Add as lead; AI assist 6 drafts replies.
+- Team Inbox (`inbox/TeamInboxForm`): unlimited personal and desk addresses (`email_addresses`); each team member sees the addresses the team member belongs to; Inbox, Drafts, Sent, Archive, Spam, Trash; reply, reply all, forward; sort, filter, search; star, mark as unread; bulk actions; conversations by `Message-ID`; Add as lead; AI assist 6 drafts replies.
 - Sending: `server_shared/email_service` sends every email through the SES API from the client's domain, DKIM-signed: Team Inbox email, transactional email (confirmations, reminders, invoices, receipts) and marketing email. Anvil's Users service email goes through Anvil's Email service set to Custom Mail Server with the SES SMTP endpoint.
-- Marketing email: sequences, broadcasts and newsletters, segment targeting, SES open and click tracking, one-click unsubscribe (`List-Unsubscribe` and `List-Unsubscribe-Post`), suppression of bounces and complaints (`email_suppressions`), sending in batches within the SES rate.
+- Marketing email: sequences and broadcasts, segment targeting, SES open and click tracking, one-click unsubscribe (`List-Unsubscribe` and `List-Unsubscribe-Post`), suppression of bounces and complaints (`email_suppressions`), sending in batches within the SES rate.
 - SES events and inbound notifications are recorded in `webhook_log` (`gateway` = `ses`) with their payloads in R2 (F-29).
 - Packages: `inbox/`, `crm/`, `server_inbox/`, `server_marketing/`, `server_shared/`.
 
@@ -517,7 +517,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Functions: client registry and registration (client reference numbers, credentials), provisioning (section 5) including the container and database, R2 bucket, Amazon SES identity and DNS records, usage monitoring (section 4), health monitoring, billing (monthly invoices to clients), release distribution, support tickets and feedback (F-32), the AI and voice gateway (F-26, F-27), the demo apps (F-36).
 - App 5 holds Mybizz's AWS account access (SES, S3, SNS) and Mybizz's Cloudflare user.
 - Operations: the container and cluster resizes, fair-use enforcement, the **Suspend** action for abuse, the **Rebuild** action, the daily backup check, the domain and certificate check, and the daily summary and immediate messages to Mybizz (section 4; [[[default:adr-global/adr-mybizz-management-visibility|Mybizz Management Visibility]]](C:/dev/project-library-global/adr-global/adr-mybizz-management-visibility.md)).
-- At-risk alerts: each client instance reports its last staff sign-in and last booking date with its usage report. App 5 alerts the founder when a client has no staff sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days.
+- At-risk alerts: each client instance reports its last team-member sign-in and last booking date with its usage report. App 5 alerts the founder when a client has no team-member sign-in for 14 days, no bookings for 30 days, or a support ticket unanswered for 3 days.
 
 ### F-35 Sales pipeline, companies and quotes
 - Companies (`companies`): a business customer; contacts link to it through `contacts.company_id`.
@@ -536,7 +536,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - App 5 holds the plan, the referral codes and every referral, and applies the referral credits through Paddle ([[[default:specifications-global/spec-client-billing|Client Billing]]](C:/dev/project-library-global/specifications-global/spec-client-billing.md) section 4.1). The instance never calls Paddle.
 - App 5 writes the one `plan_summary` row through `/management/plan-summary`, daily and after every change: the plan, the renewal date, the mock-up invoice's lines and total as Paddle previews them, the pending referrals by business name, the reserve and the referral link. The amounts are display text in the subscription's currency.
 - The Plan and billing tab of SettingsForm (Owner only) shows the mock-up invoice from `plan_summary`; below the total it lists the pending referrals and the reserve. On the monthly plan it shows the annual plan's offer instead of the referral kit.
-- The referral kit, on the same tab, for the annual plan only: the referral link with a copy button; a social post per platform (LinkedIn, Facebook, X, WhatsApp), shared through the platform's own share window as the blog's Share panel does (F-21, `spec-sm-syndication.md`); and three switches in `business_profile`: `referral_banner_in_emails` adds the email banner to marketing emails and newsletters (F-18), `referral_badge_on` shows the badge in the public website's footer (F-06), and `referral_popup_on` shows the pop-up once per visit on the public website, remembered for the visit only in the browser's session storage, so no cookie is set. All three are False by default.
+- The referral kit, on the same tab, for the annual plan only: the referral link with a copy button; a social post per platform (LinkedIn, Facebook, X, WhatsApp), shared through the platform's own share window as the blog's Share panel does (F-21, `spec-sm-syndication.md`); and three switches in `business_profile`: `referral_banner_in_emails` adds the email banner to campaign emails, sequences and broadcasts (F-18), `referral_badge_on` shows the badge in the public website's footer (F-06), and `referral_popup_on` shows the pop-up once per visit on the public website, remembered for the visit only in the browser's session storage, so no cookie is set. All three are False by default.
 - Every kit item carries the referral link and the line that the client gains a discount when someone joins. The posts, banner, badge and pop-up are supplied by Mybizz in the release and are placeholders until Mybizz's marketing design sets them.
 - Packages: `settings/`, `server_settings/`.
 

@@ -1,7 +1,7 @@
 ---
 title: "observability-requirements"
 doc-id: "mb-4a65dade"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Observability Requirements
 
@@ -117,7 +117,7 @@ App 5 shows every client instance on one dashboard: last heartbeat, release vers
 - A demo app's nightly reset failed (F-36).
 - A background task running longer than twice its usual time.
 
-**At-risk (F-34):** no staff sign-in for 14 days; no bookings for 30 days; a support ticket unanswered for 3 days.
+**At-risk (F-34):** no team-member sign-in for 14 days; no bookings for 30 days; a support ticket unanswered for 3 days.
 
 ---
 
@@ -126,7 +126,7 @@ App 5 shows every client instance on one dashboard: last heartbeat, release vers
 - Sent every 15 minutes by `server_management/heartbeat_tasks`, as an HTTP POST to App 5 with the instance's Bearer token ([[[default:specifications-global/spec-api-specification|API Specification (HTTP Endpoints)]]](C:/dev/project-library-global/specifications-global/spec-api-specification.md)).
 - Contents: instance status, release version, schema fingerprint, background task status, error count since the last heartbeat, last error, queued retries.
 - Every heartbeat also carries the client database's size and the client's AI and voice spend for the month.
-- The daily usage report adds: row count, data table storage, emails sent and received, heavy-job activity, last staff sign-in, last booking date.
+- The daily usage report adds: row count, data table storage, emails sent and received, heavy-job activity, last team-member sign-in, last booking date.
 - No customer personal data is sent to App 5. Neither the heartbeat nor the usage report contains names, emails, or the content of any record.
 - A heartbeat that cannot be delivered is written to `health_log` and sent with the next one.
 
