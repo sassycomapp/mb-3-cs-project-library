@@ -663,7 +663,7 @@ Unlimited staff, the website, bookings, payments, CRM, sales pipeline, email, em
 ### Billing model
 
 - In advance, on the monthly plan (month to month, no contract) or the annual plan (12 months for the price of 10)
-- Referral credit: an annual client that refers a new annual client gets one month off its next renewal, up to 5 months
+- Referral credit: an annual client earns one month off its next renewal for each new client that joins on the annual plan through its referral, up to 5 months, and shares Mybizz with the referral kit
 - No commission
 - No add-on
 - No markup on payment processing: the client pays Stripe's and PayPal's own fees

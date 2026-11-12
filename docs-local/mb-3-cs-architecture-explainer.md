@@ -1,13 +1,13 @@
 ---
 title: "mb-3-cs-architecture-explainer"
 doc-id: "mb-dc62ff9a"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Architecture Explainer
 
 This document explains, in plain language, how Mybizz CS is built and why it is built that way. It is written for the developer, not for the build agent. The build agent works from `mb-3-cs-architecture-reference.md`, which holds every technical fact; where the two documents ever differ, the reference is correct.
 
-Every feature carries the same number and name as in `mb-3-cs-concept.md` and in the reference (F-01 to F-36).
+Every feature carries the same number and name as in `mb-3-cs-concept.md` and in the reference (F-01 to F-37).
 
 ---
 
@@ -202,6 +202,8 @@ Step-by-step processes, such as onboarding and booking, show their steps in a si
 App 5 also looks after the shared resources without the founder watching. When a client app is running short of memory, App 5 gives it more; when the business reaches 60 clients, App 5 enlarges the shared database. Every client has fair-use limits on the shared database, email and AI, set far above heavy use, so one busy or misused client can never slow down or cost the others. App 5 warns the client before a limit, acts at the limit, and tells the founder in one daily summary, with an immediate message only when a decision is needed.
 
 **F-36 Demo apps.** A prospective client tries Mybizz CS before paying, in two apps on Mybizz's own account: one running a business full of sample data, one empty for trying setup. Both reset every night, so a visitor can change anything. Emails really go out, but only to the visitor's own address, and payments run in the gateways' test modes, so the visitor sees everything a customer would and no real money moves.
+
+**F-37 Plan, billing and referrals.** The Owner sees the business's own subscription in Settings: the plan, the renewal date and a mock-up of the next annual invoice. App 5 sends these figures to the client's app, because only App 5 talks to Paddle, and the total on the mock-up is Paddle's own preview of the renewal. On the annual plan, every business that joins on the annual plan through the client's referral link takes one month off the client's next renewal, up to 5 months, so the client can see each referral turn from pending to confirmed on its own invoice. Mybizz supplies a referral kit (posts, an email banner, a website badge and a pop-up), so satisfied clients can spread the word in a few clicks. Each kit item says the client gains a discount, because advertising rules require it, and the website badge and pop-up stay off until the client switches them on, because the client's website belongs to the client.
 
 ---
 

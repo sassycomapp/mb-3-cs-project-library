@@ -9,7 +9,7 @@ updated: "2026-11-12"
 
 This document is the build standard for the architecture of Mybizz CS. Agents build from this document. Where `mb-3-cs-concept.md` or `mb-3-cs-architecture-explainer.md` differs from this document on a technical fact, this document is correct.
 
-Every feature carries the number and name it has in `mb-3-cs-concept.md` section 7 (F-01 to F-36); the client-facing list of every feature is `mb-3-cs-feature-list.md`. Detail that has its own home is linked, not repeated:
+Every feature carries the number and name it has in `mb-3-cs-concept.md` section 7 (F-01 to F-37); the client-facing list of every feature is `mb-3-cs-feature-list.md`. Detail that has its own home is linked, not repeated:
 
 | Subject | Home |
 |---|---|
@@ -288,7 +288,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Packages: `dashboard/`, `analytics/`, `server_dashboard/`, `server_analytics/`.
 
 ### F-05 Settings Hub
-- One tabbed form; tabs: Business Profile (including the app language), Brand Palette, System Currency (read-only), Display Currency, Legal Acknowledgement (read-only), Payment Gateways (test/live), Invoicing (default payment terms, numbering, quote validity), Users and Permissions, Email (addresses, desks, members, signatures, auto-replies), Domain (DNS record status), Theme, Feature Switches (`marketing_enabled`, `blog_enabled`, comments), Legal Pages (Clause Builder, F-22), Data (history view, export, sample data, F-29). The Invoicing tab also holds the tax rate (default 0), tax label and tax registration number; the Theme tab holds the public website header style only.
+- One tabbed form; tabs: Business Profile (including the app language), Brand Palette, System Currency (read-only), Display Currency, Legal Acknowledgement (read-only), Payment Gateways (test/live), Invoicing (default payment terms, numbering, quote validity), Users and Permissions, Email (addresses, desks, members, signatures, auto-replies), Domain (DNS record status), Theme, Feature Switches (`marketing_enabled`, `blog_enabled`, comments), Legal Pages (Clause Builder, F-22), Data (history view, export, sample data, F-29), Plan and billing (F-37, Owner only). The Invoicing tab also holds the tax rate (default 0), tax label and tax registration number; the Theme tab holds the public website header style only.
 - Tabs are shown per role: Owner sees all; Manager sees operational tabs, not financial or security tabs.
 - Packages: `settings/`, `server_settings/`.
 
@@ -531,6 +531,14 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - A scheduled task resets both instances every night: every table is emptied, and the demo instance's sample data is loaded again.
 - In demo mode, `email_service` sends every email to the signed-in visitor's own address, whatever its recipient; payments use each gateway's test keys and test cards; the Vault, Users and Permissions and Domain tabs are read-only.
 - Visitors register for a demo sign-in with their email address; demo sign-ins are removed at the nightly reset.
+
+### F-37 Plan, billing and referrals
+- App 5 holds the plan, the referral codes and every referral, and applies the referral credits through Paddle ([[[default:specifications-global/spec-client-billing|Client Billing]]](C:/dev/project-library-global/specifications-global/spec-client-billing.md) section 4.1). The instance never calls Paddle.
+- App 5 writes the one `plan_summary` row through `/management/plan-summary`, daily and after every change: the plan, the renewal date, the mock-up invoice's lines and total as Paddle previews them, the pending referrals by business name, the reserve and the referral link. The amounts are display text in the subscription's currency.
+- The Plan and billing tab of SettingsForm (Owner only) shows the mock-up invoice from `plan_summary`; below the total it lists the pending referrals and the reserve. On the monthly plan it shows the annual plan's offer instead of the referral kit.
+- The referral kit, on the same tab, for the annual plan only: the referral link with a copy button; a social post per platform (LinkedIn, Facebook, X, WhatsApp), shared through the platform's own share window as the blog's Share panel does (F-21, `spec-sm-syndication.md`); and three switches in `business_profile`: `referral_banner_in_emails` adds the email banner to marketing emails and newsletters (F-18), `referral_badge_on` shows the badge in the public website's footer (F-06), and `referral_popup_on` shows the pop-up once per visit on the public website, remembered for the visit only in the browser's session storage, so no cookie is set. All three are False by default.
+- Every kit item carries the referral link and the line that the client gains a discount when someone joins. The posts, banner, badge and pop-up are supplied by Mybizz in the release and are placeholders until Mybizz's marketing design sets them.
+- Packages: `settings/`, `server_settings/`.
 
 ---
 

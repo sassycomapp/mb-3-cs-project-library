@@ -1,7 +1,7 @@
 ---
 title: "test-plan"
 doc-id: "mb-2a09f0d3"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 
 # Mybizz CS — Test Plan (App 1, run app1)
@@ -10,7 +10,7 @@ Written at Step 15 in the shape of `spec-testing-methodology-standards` §6, fro
 
 ## 1. E2E booking flow (§22 row 1; UF-05–UF-08)
 
-**Preconditions:** instance provisioned with all 70 tables; a `duration` service with a provider and availability rules; a gateway in test mode with its keys in the Vault; `business_profile` complete.
+**Preconditions:** instance provisioned with all 71 tables; a `duration` service with a provider and availability rules; a gateway in test mode with its keys in the Vault; `business_profile` complete.
 
 | Step | Action | Expected result |
 |---|---|---|

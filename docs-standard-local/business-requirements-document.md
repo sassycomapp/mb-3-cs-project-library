@@ -12,7 +12,7 @@ Why the business needs the application and what it must achieve for the business
 **Status:** Draft
 **Date:** 2026-10-31
 **Author:** Mybizz founder
-**Derived from:** `mb-3-cs-concept.md` (the concept) and `mb-3-cs-architecture-reference.md`. Where this document and the concept differ on a business decision, the concept is correct. Feature numbers F-01 to F-36 are those of the concept; the client-facing feature list is `mb-3-cs-feature-list.md`.
+**Derived from:** `mb-3-cs-concept.md` (the concept) and `mb-3-cs-architecture-reference.md`. Where this document and the concept differ on a business decision, the concept is correct. Feature numbers F-01 to F-37 are those of the concept; the client-facing feature list is `mb-3-cs-feature-list.md`.
 
 **Certainty tags:** `[CLEAR]` stated explicitly; `[PARTIAL]` direction set, specifics not; `[INFERRED]` judgment, not yet confirmed; `[MISSING]` a known gap.
 
@@ -71,7 +71,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 
 - A complete platform for consulting businesses and service businesses, on the ground or in the cloud or both: teams of every size, with unlimited staff, and solo practitioners (concept section 4).
 - Every way such a business delivers work: at its premises, at the customer's location, online live, as delivered work, and to groups (concept section 4.3).
-- All 36 features of concept section 7 (F-01 to F-36), including AI assistance with all ten assists, WhatsUp voice tiers 1 to 5, and the sample data of concept section 8.
+- All 37 features of concept section 7 (F-01 to F-37), including AI assistance with all ten assists, WhatsUp voice tiers 1 to 5, and the sample data of concept section 8.
 - One isolated application instance per client, on the client's own domain, in its own container with its own database.
 - Five app languages: English at launch; French, German, Spanish and Italian added one at a time.
 - Two demo apps for prospects (F-36).
@@ -125,7 +125,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 | BR-27 | No client's heavy or abusive use can slow, stop or cost money for another client: every shared resource carries a per-client fair-use limit, and the platform grows each client's container and the shared database without the founder acting, telling the founder each time | BO-3, BO-7 | Must | [CLEAR] |
 | BR-28 | A security incident is handled under Mybizz's insurance and the law: recorded with its timeline, the insurer called before any outside supplier, affected clients told without undue delay, and the Information Commissioner's Office told within 72 hours of a breach of personal data Mybizz controls | BO-4, BO-6 | Must | [CLEAR] |
 | BR-29 | Mybizz never lets its insurance, its Cyber Essentials certificate or a statutory filing lapse: each is reminded to the founder before its deadline | BO-7 | Must | [CLEAR] |
-| BR-30 | A client chooses the monthly plan or the annual plan (12 months for the price of 10) and may buy assisted setup for one month's price; an annual client that refers a new annual client earns one month off its next renewal, up to 5 months, never paid in cash | BO-2, BO-3 | Must | [CLEAR] |
+| BR-30 | A client chooses the monthly plan or the annual plan (12 months for the price of 10) and may buy assisted setup for one month's price; an annual client earns one month off its next renewal for each new client that joins on the annual plan through its referral, up to 5 months per renewal, with further confirmed referrals kept in reserve, never paid in cash; the Owner sees the next renewal as a mock-up invoice with pending and confirmed referrals; Mybizz supplies each annual client a referral kit that says the client gains a discount | BO-2, BO-3 | Must | [CLEAR] |
 
 Every objective BO-1 to BO-8 is satisfied by at least one requirement; every requirement cites an objective that exists.
 

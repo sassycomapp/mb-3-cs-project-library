@@ -1,7 +1,7 @@
 ---
 title: "adr-schema-scope-reduction"
 doc-id: "mb-d146fc2b"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 # Schema Scope — Tables In and Out of a Mybizz CS Client Instance
 
@@ -12,7 +12,7 @@ updated: "2026-11-10"
 
 ## Context
 
-A Mybizz CS client instance holds only the tables its features need (F-01 to F-36 of `mb-3-cs-concept.md`). Every table is a maintenance cost: Anvil cannot change a schema by code, so each table and column has to be kept by hand in App 1, App 3 and every client instance (`deployment-procedures.md`, Schema Migration). Some data a business might hold is either out of the product's scope or kept elsewhere: in App 5, in the client's R2 bucket, or in an existing table.
+A Mybizz CS client instance holds only the tables its features need (F-01 to F-37 of `mb-3-cs-concept.md`). Every table is a maintenance cost: Anvil cannot change a schema by code, so each table and column has to be kept by hand in App 1, App 3 and every client instance (`deployment-procedures.md`, Schema Migration). Some data a business might hold is either out of the product's scope or kept elsewhere: in App 5, in the client's R2 bucket, or in an existing table.
 
 ---
 
@@ -52,7 +52,7 @@ A table is added to a client instance only when a feature in `mb-3-cs-concept.md
 
 ## Consequences
 
-- The schema holds 70 tables, each traceable to a feature.
+- The schema holds 71 tables, each traceable to a feature.
 - Support data never enters a client's database, and a client's customer data never enters App 5 (reference section 3).
 - Adding a table is a deliberate schema change with a migration plan, applied by hand to App 1, App 3 and every client instance.
 

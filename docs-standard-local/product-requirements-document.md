@@ -12,7 +12,7 @@ What the product does, for whom, and how its success is measured.
 **Status:** Draft
 **Date:** 2026-10-31
 **Author:** Mybizz founder
-**Derived from:** `business-requirements-document.md`. The features are those of `mb-3-cs-concept.md` section 7 (F-01 to F-36); the flows are those of `user-flows.md` (UF-01 to UF-44); the technical specification of each feature is `mb-3-cs-architecture-reference.md` section 12. Where this document differs from those, they are correct.
+**Derived from:** `business-requirements-document.md`. The features are those of `mb-3-cs-concept.md` section 7 (F-01 to F-37); the flows are those of `user-flows.md` (UF-01 to UF-46); the technical specification of each feature is `mb-3-cs-architecture-reference.md` section 12. Where this document differs from those, they are correct.
 
 **Certainty tags:** `[CLEAR]` / `[PARTIAL]` / `[INFERRED]` / `[MISSING]`, as in the BRD.
 
@@ -32,7 +32,7 @@ Mybizz CS is an online business platform for consulting businesses and service b
 - A client goes from registration to a working business without help (BR-13, BR-17, BR-25). `[CLEAR]`
 - A prospect sees the whole product before paying (BR-26). `[CLEAR]`
 - Mybizz operates every client from App 5, built before the first paying client (BR-14 to BR-19). `[CLEAR]`
-- A client chooses the monthly or the annual plan, and annual clients earn renewal credit by referral (BR-30). `[CLEAR]`
+- A client chooses the monthly or the annual plan, and annual clients earn renewal credit by referral, shared through the referral kit (BR-30). `[CLEAR]`
 
 ### Non-Goals
 - A marketplace, directory or any shared discovery between clients. `[CLEAR]`
@@ -108,7 +108,8 @@ The project has several user types and needs role-based access control (section 
 | US-41 | As a prospect, I want to try the whole product before paying, so that I buy with confidence | UF-44 | Must | [CLEAR] |
 | US-42 | As Mybizz, I want shared resources protected by per-client limits and grown automatically, so that no client harms another and I never watch a console | UF-36 | Must | [CLEAR] |
 | US-43 | As a client, I want to be told promptly if my data is affected by a security incident, so that I can meet my own legal duties | UF-36 | Must | [CLEAR] |
-| US-44 | As a client, I want to choose the monthly or the annual plan, buy assisted setup, and earn renewal credit by referring other annual clients, so that I pay less for committing and for recommending Mybizz CS | UF-01 | Must | [CLEAR] |
+| US-44 | As a client, I want to choose the monthly or the annual plan and see my next renewal as a mock-up invoice, with each referral shown as pending or confirmed, so that I know exactly what I will pay | UF-01, UF-45 | Must | [CLEAR] |
+| US-45 | As an annual client, I want ready-made material to share my referral link, so that I earn months off my renewal with little effort | UF-46 | Must | [CLEAR] |
 
 ---
 
@@ -120,7 +121,7 @@ The project has several user types and needs role-based access control (section 
 | FR-02 | F-02 The Vault: every credential encrypted; Owner only; TOTP on every view; email on every access; 15-minute lock after 5 wrong codes | US-4 | Opening the Vault twice in a row asks for a code twice; each opening emails the Owner; the sixth attempt after 5 wrong codes is refused for 15 minutes | [CLEAR] |
 | FR-03 | F-03 Registration and onboarding: registration in App 5 issues the client reference; a 10-step resumable wizard with a help video per step: language, profile, palette, currency, legal acknowledgement, gateway, domain, contact import | US-1, US-2, US-39 | A registered client has a reference number and an instance on its domain; an Owner who leaves at step 6 returns to step 6; Continue at steps 5 and 6 stays disabled until confirmed; a HubSpot export imports with no manual mapping and creates no duplicate contact | [CLEAR] |
 | FR-04 | F-04 Dashboard and analytics: metric cards, trends, activity feed, period comparison, revenue by service and provider, marketing return, PDF and CSV export, scheduled reports, the sample data banner | US-20, US-40 | Dashboard figures match the summary tables; an export opens as PDF and as CSV; a scheduled report arrives by email | [CLEAR] |
-| FR-05 | F-05 Settings Hub: one form, 14 tabs, shown per role | US-2, US-3 | A Manager sees no financial or security tab; the Owner sees all 14 | [CLEAR] |
+| FR-05 | F-05 Settings Hub: one form, 15 tabs, shown per role | US-2, US-3 | A Manager sees no financial or security tab; the Owner sees all 15 | [CLEAR] |
 | FR-06 | F-06 Public website on the client's domain: Home, About, Contact, Services, Blog, Privacy Policy, Terms and Conditions, Cookie Policy, footer, optional map; edit mode for Owner and Manager | US-14, US-17 | Every public page loads on the client's domain at its clean address, works at compact and expanded widths, and carries its title, description and Open Graph tags in the first response; a Manager's edit is published on Save; an Admin sees no Edit button | [CLEAR] |
 | FR-07 | F-07 Homepage templates: Classic, Services, Booking, Minimalist and further layouts from one section set | US-15 | Switching the layout changes section order and visibility only; an optional section with no content does not render | [CLEAR] |
 | FR-08 | F-08 Landing pages: Lead Capture, Event Registration, Video Sales Letter, on a blank layout, with views and conversions counted | US-16 | A published landing page has no site header or footer; each visit and each submission increments its counters | [CLEAR] |
@@ -152,12 +153,12 @@ The project has several user types and needs role-based access control (section 
 | FR-34 | F-34 Mybizz management app: registry, provisioning (container and database, R2, SES, DNS), usage and health monitoring, billing, release distribution, tickets, AI gateway, at-risk alerts | US-1, US-31, US-32 | App 5 raises an alert for a client with no staff sign-in for 14 days, no bookings for 30 days, or a ticket unanswered for 3 days; every instance's heartbeat shows the current release after App 5's Release action | [CLEAR] |
 | FR-37 | Fair use: per-client limits on database connections, query time, idle transactions, database size, email volumes, email reputation, AI and voice spend, AI request rate and data transfer, with warnings, hard-limit actions and notices to the client and Mybizz | US-42 | At each warning level the Owner is emailed; at each hard limit the action of [[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md) happens and Mybizz is messaged; budgeted heavy use triggers no warning | [CLEAR] |
 | FR-38 | Incident handling: an incident record in App 5 with its timeline; the breach notice to affected clients | US-43 | An incident opened in App 5 records detected, contained, insurer called, ICO reported and clients notified, each with its time; the notice to clients is sent from App 5 and recorded | [CLEAR] |
-| FR-40 | Plans and referral credits: the monthly and annual plans, assisted setup as a one-off price, and the referral credit of `spec-client-billing` section 4.1 | US-44 | A client pays the first month or year in Paddle's checkout on its chosen plan; a referred client's first annual payment adds one credit to the referring annual client; the referring client's next renewal is discounted by one month's price per credit, never more than 5 | [CLEAR] |
+| FR-40 | F-37 Plan, billing and referrals: the monthly and annual plans, assisted setup as a one-off price, the referral credit of `spec-client-billing` section 4.1, the Plan and billing tab with its mock-up invoice, and the referral kit | US-44, US-45 | A client pays the first month or year in Paddle's checkout on its chosen plan; the Plan and billing tab shows the total Paddle previews for the next renewal, each confirmed referral as one month off (at most 5) and each pending referral below the total; every kit item carries the client's referral link and the line that the client gains a discount; the website badge and pop-up show only when switched on | [CLEAR] |
 | FR-39 | Business reminders: insurance renewal, Cyber Essentials renewal, DigitalOcean key rotation and every statutory deadline, the last read from FreeAgent | US-31 | Each reminder reaches Mybizz at its lead time: insurance 30 days, Cyber Essentials 60 days, keys 14 days, statutory deadlines 30 days; App 5 makes no write to FreeAgent | [CLEAR] |
 | FR-35 | F-35 Sales: deals pipeline with owners, companies, quotes accepted online and turned into invoices | US-37 | Accepting a quote creates its invoice and wins its deal in one call; Staff list only their own deals | [CLEAR] |
 | FR-36 | F-36 Demo apps: a sample-data demo and an empty demo, reset nightly, emails to the visitor only, payments in test mode | US-41 | After the nightly reset both demos are back to their starting state; no demo email reaches any address but the signed-in visitor's | [CLEAR] |
 
-Every user story US-1 to US-44 is satisfied by at least one functional requirement; every requirement cites stories that exist.
+Every user story US-1 to US-45 is satisfied by at least one functional requirement; every requirement cites stories that exist.
 
 ---
 
@@ -211,7 +212,7 @@ The BRD's KPIs (section 8) apply. For this release in particular:
 
 | Metric | Target | Certainty |
 |---|---|---|
-| Features built and passing their acceptance criteria | F-01 to F-36, all | [CLEAR] |
+| Features built and passing their acceptance criteria | F-01 to F-37, all | [CLEAR] |
 | First clients live | 10 | [CLEAR] |
 | Average onboarding-to-live time | under 7 days | [CLEAR] |
 | Support tickets per client per month in the first 3 months | under 2 | [CLEAR] |

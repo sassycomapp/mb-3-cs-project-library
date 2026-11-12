@@ -67,7 +67,7 @@ Constraints particular to this run:
 
 - The five-app model and the rule that no form or server module is ever added to a client instance (architecture reference §§1–2; ADR `client-instance-architecture`).
 - Anvil's platform constraints (architecture reference §14): Skulpt client runtime — money and date logic in server modules only; no native URL routing — the Routing dependency for public pages, lambda/Link/`open_form` for the admin area and portal; lazy-loaded rows; server-call latency; no WebSocket push — client-side polling.
-- The schema is designed up front: 70 tables in `authoritative-schema.md`, including `cookie_policy` and `consents`; App 1 presently holds 44 tables, and the recorded migration (`schema-migration-log.md`, Part A and prompts P1–P14 — P13 creates the two tables, P14 removes columns, last) brings it to the schema, applied by David in the Anvil editor through Resolve.
+- The schema is designed up front: 71 tables in `authoritative-schema.md`, including `cookie_policy` and `consents`; App 1 presently holds 44 tables, and the recorded migration (`schema-migration-log.md`, Part A and prompts P1–P14 — P13 creates the two tables, P14 removes columns, last) brings it to the schema, applied by David in the Anvil editor through Resolve.
 - The application is partially built outside PDLF: 16 client packages with 91 form folders and 11 server packages with 49 server modules exist; the packages and forms the scaffold specifies but the app lacks are listed in the Specification and the Step Receipt. Existing packages are never renamed or merged during active development (scaffold-spec Rules); a module is renamed only at the build step that touches it (Step 12 decisions C1–C4).
 - Money is stored as whole cents of the system currency; the system currency is locked once the first booking or invoice exists; the display currency is display-only (schema Rules; F-16; decision D3).
 - Every `datetime` is stored in UTC and shown in `business_profile.timezone`; one IANA time zone per instance (ADR `timezone-utc-storage-display-conversion`).
@@ -137,7 +137,7 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 | The partially built app diverges from the scaffold as features are added (naming, duplicated modules, the Brevo module) | Medium | Medium | The Step 12 decisions C1–C4 assign each correction to the build step that touches it; reviews report a common item using a trade item as a finding |
 | An app cannot schedule its dependency's background task or serve its dependency's HTTP endpoints (PRD OQ-2) | Unknown | High | Proved in App 1 before Step 31 relies on it; if it fails, the schedule and endpoints move into each instance's own code by ADR |
 | Amazon does not grant SES production access (BRD AC-14) | Medium | High | Requested before launch; until then the mail catcher covers tests and no client is onboarded |
-| Founder capacity: every ticket lands with the founder (concept §16) | Medium | High | Self-service help on every screen (F-25), under 2 tickets per client per month, at-risk alerts (F-34) |
+| Founder capacity: every ticket lands with the founder (concept §16) | Medium | High | Self-service help on every screen (F-25), under 2 tickets per client per month, at-risk alerts (F-34); part-time support from 20 clients |
 | Early churn: a client who sees no value in the first weeks leaves quietly | Medium | Medium | At-risk alerts, the onboarding wizard with help videos, sample data from the first day, the demo apps before purchase |
 | Competitors copy features | Medium | Medium | One price for the whole team in each market's own currency, founder-direct support, the ownership architecture |
 | Cost per client rises (hosting, email, AI, voice) | Medium | Medium | Usage recorded in App 5 (F-33, F-34); monthly review |
@@ -155,11 +155,11 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 
 | # | Criterion | Metric | Threshold | Method |
 |---|---|---|---|---|
-| SC-1 | Every feature is built and works | Features passing their acceptance criteria | All of F-01 to F-36 | The test suite (SRS verification column; `spec-test-specification.md`), signed off at `build-verified` |
+| SC-1 | Every feature is built and works | Features passing their acceptance criteria | All of F-01 to F-37 | The test suite (SRS verification column; `spec-test-specification.md`), signed off at `build-verified` |
 | SC-2 | First clients onboarded | Clients live in App 5's registry | 10 | App 5 client registry count (concept §15) |
 | SC-3 | Reaching 100 clients does not strain the model | Paying clients | 100 | App 5 client registry count |
-| SC-4 | Revenue at capacity | Annual recurring revenue | $118,800 | App 5 billing |
-| SC-5 | Margin holds at capacity | Gross margin after hosting | $97,248 a year | App 5 billing less hosting cost; cost per client reviewed monthly |
+| SC-4 | Revenue at 100 clients | Annual recurring revenue on the monthly plan | $178,800 | App 5 billing |
+| SC-5 | Margin holds at 100 clients | Gross margin after hosting | $156,768 a year | App 5 billing less hosting cost; cost per client reviewed monthly |
 | SC-6 | Clients stay | Client retention, year 1 to year 2 | Above 90% | App 5 client registry |
 | SC-7 | A client goes live without help | Average onboarding-to-live time | Under 7 days | Registration date to `business_profile.onboarding_completed_at`, read in App 5 |
 | SC-8 | Support stays founder-scale | Support tickets per client per month | Under 2 | App 5 tickets |
@@ -170,7 +170,7 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 
 Every feature, rule and decision of the project's documents, named with the document and section that states it. The documents are the authority; this section never restates them. The project's documents are `mb-3-cs-project-library`; the global corpus is `project-library-global`. Amounts are stored as whole cents of the system currency (the schema's Money in cents rule; Step 12 decision D1).
 
-### 14.1 The features (F-01 to F-36)
+### 14.1 The features (F-01 to F-37)
 
 | Feature | Requirements live in |
 |---|---|
@@ -210,6 +210,7 @@ Every feature, rule and decision of the project's documents, named with the docu
 | F-34 Mybizz management app | concept §7; architecture reference §1 (App 5), §12 F-34; UF-36, UF-37; ADR `mybizz-management-visibility`; `spec-api-specification` (management endpoints: health, status, suspend, unsuspend, push-notification, push-update-alert); FR-34; SR-53, SR-53a, SR-54 |
 | F-35 Sales pipeline, companies and quotes | concept §7; architecture reference §12 F-35; UF-40, UF-41; schema `companies`, `deals`, `quotes`, `quote_items`; DESIGN.md Sales Design (DealBoardForm, QuoteEditorForm, QuoteAcceptPage, quote status badges); FR-35; SR-56, SR-57 |
 | F-36 Demo apps | concept §7; architecture reference §12 F-36; UF-44; ADR `no-free-trial`; FR-36; SR-58 |
+| F-37 Plan, billing and referrals | concept §7, §9.2; architecture reference §12 F-37; UF-45, UF-46; ADR `tiers-model`; `spec-client-billing` section 4.1; `spec-api-specification` (`/management/plan-summary`); schema `plan_summary`, `business_profile.referral_*`; FR-40; SR-65, SR-66 |
 
 ### 14.2 The flows
 
@@ -261,12 +262,14 @@ Every flow of `user-flows.md`, by number, name and feature, from its Flow Index.
 | UF-42 | Sharing a blog post | F-21 |
 | UF-43 | Clearing the sample data | F-04, F-26 |
 | UF-44 | Trying the demo apps | F-36 |
+| UF-45 | Plan and billing: the mock-up invoice | F-37 |
+| UF-46 | Sharing the referral kit | F-37 |
 
 Flow design principles: `user-flows.md`, Flow Design Principles (progressive disclosure; clear calls to action with progress indication; real-time input validation; a recovery path for every error; automatic progress saving; email confirmation for every transaction; fewest possible server calls).
 
 ### 14.3 The data
 
-All 70 tables of `authoritative-schema.md`, by name, from its Table Groups:
+All 71 tables of `authoritative-schema.md`, by name, from its Table Groups:
 
 - Core and configuration (11): `activity_log`, `business_profile`, `config`, `email_config`, `files`, `payment_config`, `rate_limits`, `sample_rows`, `theme_config`, `users`, `vault`
 - Services and bookings (8): `services`, `resources`, `group_sessions`, `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `bookings`, `recurring_series`
@@ -277,12 +280,12 @@ All 70 tables of `authoritative-schema.md`, by name, from its Table Groups:
 - Email and webhooks (6): `email_templates`, `email_log`, `webhook_log`, `email_addresses`, `email_messages`, `email_suppressions`
 - Content and policy (9): `blog_categories`, `blog_posts`, `blog_comments`, `landing_pages`, `pages`, `privacy_policy`, `t_and_c`, `cookie_policy`, `consents` — one legal-documents system for the three documents, with the consent record in `consents`
 - Reviews (2): `reviews`, `testimonials`
-- Summary and health (6): `daily_summary`, `service_performance`, `provider_performance`, `campaign_metrics`, `health_log`, `error_log`
+- Summary and health (7): `daily_summary`, `service_performance`, `provider_performance`, `campaign_metrics`, `health_log`, `error_log`, `plan_summary`
 - Notifications (3): `notifications`, `user_preferences`, `delivery_logs`
 
 Rules of the schema: `authoritative-schema.md`, Rules — one instance, one client (no client or instance column on any table; isolation comes from the instance); every `datetime` stored in UTC and shown in `business_profile.timezone`; every amount in `business_profile.system_currency`; **money in cents** — every amount is stored as a whole number of cents of the system currency, as `spec-anvil-platform-standards` requires (Anvil's `number` column is floating-point, so decimal amounts would round wrongly), and amounts are converted to the currency's units only for display; rows of `bookings`, `orders`, `invoice`, `payments`, `quotes` and `expenses` are never deleted, their status changes; history outside the tables (backups, history, webhook payloads, audit entries older than 30 days, email bodies older than 90 days, email attachments and expense receipts in the client's R2 bucket); credentials only in the Vault, encrypted; names follow `spec-nomenclature` (link column `{target}_id`, plural for a multiple link, `provider_id` for a provider, `resource_id` for a bookable room or piece of equipment); allowed values are lowercase strings; column types `string`, `number`, `bool`, `date`, `datetime`, `media`, `simpleObject`, `link → table`, `links → table`. Every table has `client: none` and `server: full`.
 
-Scope of the schema: `adr-schema-scope-reduction` ADR — the instance holds exactly these tables and no others, with the reason for each table in and out (`tickets`/`ticket_messages`, `kb_articles`/`kb_categories`, `events`/`event_registrations`, `backups`, `translations`, `customers` are out; `reviews`, `testimonials`, `resources`, `expenses`, `expense_categories`, `companies`, `deals`, `quotes`, `quote_items`, `email_addresses`, `email_messages`, `email_suppressions`, `sample_rows` are in). Changes to the schema: `schema-migration-log.md` — the recorded migration from App 1's present 44 tables to the 70-table schema: Part A, the renames by hand (`error_log.timestamp`, `blog_comments.comment_text`, `provider_id` in `availability_rules`, `availability_exceptions`, `bookings` and `time_entries`); prompts P1–P5 (11 new tables: `resources`, `group_sessions`, `recurring_series`, `packages`, `customer_packages`, `orders`, `payments`, `automation_rules`, `automation_runs`, `reviews`, `testimonials`); P6 and P7 (new columns); P8–P10 (10 new tables: `companies`, `quotes`, `quote_items`, `deals`, `expense_categories`, `expenses`, `sample_rows`, `email_addresses`, `email_messages`, `email_suppressions`); P11 (new columns for the new features); P12 (3 new notification tables: `notifications`, `user_preferences`, `delivery_logs`); P13 (`cookie_policy` and `consents`); P14 last (the column removals, including the Brevo columns of `email_config`); Part C, the check against `authoritative-schema.md`.
+Scope of the schema: `adr-schema-scope-reduction` ADR — the instance holds exactly these tables and no others, with the reason for each table in and out (`tickets`/`ticket_messages`, `kb_articles`/`kb_categories`, `events`/`event_registrations`, `backups`, `translations`, `customers` are out; `reviews`, `testimonials`, `resources`, `expenses`, `expense_categories`, `companies`, `deals`, `quotes`, `quote_items`, `email_addresses`, `email_messages`, `email_suppressions`, `sample_rows` are in). Changes to the schema: `schema-migration-log.md` — the recorded migration from App 1's present 44 tables to the 71-table schema: Part A, the renames by hand (`error_log.timestamp`, `blog_comments.comment_text`, `provider_id` in `availability_rules`, `availability_exceptions`, `bookings` and `time_entries`); prompts P1–P5 (11 new tables: `resources`, `group_sessions`, `recurring_series`, `packages`, `customer_packages`, `orders`, `payments`, `automation_rules`, `automation_runs`, `reviews`, `testimonials`); P6 and P7 (new columns); P8–P10 (10 new tables: `companies`, `quotes`, `quote_items`, `deals`, `expense_categories`, `expenses`, `sample_rows`, `email_addresses`, `email_messages`, `email_suppressions`); P11 (new columns for the new features); P12 (3 new notification tables: `notifications`, `user_preferences`, `delivery_logs`); P13 (`cookie_policy` and `consents`); P14 last (the column removals, including the Brevo columns of `email_config`); Part C, the check against `authoritative-schema.md`.
 
 Step 12 decision D2 is carried out in those documents: the Notifications group is in the schema and prompt P12 is in the migration log.
 
@@ -350,7 +353,7 @@ Every canonical file read, with what this design doc takes from it.
 
 **`mb-3-cs-project-library/adr-local`** — `adr-blank-client-template.md`: App 3's contents and the schema responsibility. `adr-crm-package-replaces-marketing.md`: the client package is `crm/`, the server package `server_marketing/`. `adr-schema-scope-reduction.md`: which tables are in and out, and why.
 
-**`mb-3-cs-project-library`** — `authoritative-schema.md`: all 70 tables, including `cookie_policy` and `consents`, the Rules (including money in cents), column types, and the Notifications group. `schema-migration-log.md`: Part A renames, prompts P1–P14, the Part C check. `mb-3-cs-concept.md`: sections 1–16 — the problem, market, positioning, every feature, pricing, go-to-market, brand, support, out-of-scope, metrics, risks. `mb-3-cs-feature-list.md`: the client-facing feature list, §§1–28. `mb-3-cs-architecture-reference.md`: §§0–16, the build standard and every feature's architecture. `mb-3-cs-architecture-explainer.md`: the plain-language account of the same architecture. `user-flows.md`: the 44 flows, actors, terms and flow design principles. `DESIGN.md`: the design system, tokens, palettes governance, forms and pages, templates, deviations, status badges, empty states. `custom-component-requirements-matrix.md`: the 11 shared components, 1 local, the not-built list. `spec-calendar-feature.md`: the booking calendar's forms, views, data and rules. `spec-ai-implementation.md`: the AI helper, the ten assists, voice tiers 1–5, sample data, costs and guardrails. `spec-team-inbox.md`: SES, the domain records, addresses, receiving, the Team Inbox screen, sending, storage. `spec-sm-syndication.md`: the share panel, AI captions, previews, `?ref=` tracking. `vault-implementation.md`: what the Vault stores, the VaultForm, the build sequence. `sop-vault-recovery.md`: both recovery paths. `client-exit-handover.md`: the exit steps and rules. `spec-test-specification.md`: the E2E spec, error paths, RBAC matrices, feature tests.
+**`mb-3-cs-project-library`** — `authoritative-schema.md`: all 71 tables, including `cookie_policy` and `consents`, the Rules (including money in cents), column types, and the Notifications group. `schema-migration-log.md`: Part A renames, prompts P1–P14, the Part C check. `mb-3-cs-concept.md`: sections 1–16 — the problem, market, positioning, every feature, pricing, go-to-market, brand, support, out-of-scope, metrics, risks. `mb-3-cs-feature-list.md`: the client-facing feature list, §§1–28. `mb-3-cs-architecture-reference.md`: §§0–16, the build standard and every feature's architecture. `mb-3-cs-architecture-explainer.md`: the plain-language account of the same architecture. `user-flows.md`: the 44 flows, actors, terms and flow design principles. `DESIGN.md`: the design system, tokens, palettes governance, forms and pages, templates, deviations, status badges, empty states. `custom-component-requirements-matrix.md`: the 11 shared components, 1 local, the not-built list. `spec-calendar-feature.md`: the booking calendar's forms, views, data and rules. `spec-ai-implementation.md`: the AI helper, the ten assists, voice tiers 1–5, sample data, costs and guardrails. `spec-team-inbox.md`: SES, the domain records, addresses, receiving, the Team Inbox screen, sending, storage. `spec-sm-syndication.md`: the share panel, AI captions, previews, `?ref=` tracking. `vault-implementation.md`: what the Vault stores, the VaultForm, the build sequence. `sop-vault-recovery.md`: both recovery paths. `client-exit-handover.md`: the exit steps and rules. `spec-test-specification.md`: the E2E spec, error paths, RBAC matrices, feature tests.
 
 **`mb-3-cs-project-library/docs-standard-local`** — `anvil-ui-build-standard.md`: the hard prohibitions, tokens, naming, mapping, writeback, build process. `business-requirements-document.md`: BO-1–8, BR-1–26, AC-1–14, KPIs, risks. `deployment-procedures.md`: the release flow, migration types, rollback and triggers. `globals-contract.md`: every shared state variable and the defensive pattern. `integration-architecture.md`: every outside service, the task schedule, timezones, domain, offboarding. `observability-requirements.md`: logging, metrics, alerts, heartbeat, retention. `product-requirements-document.md`: US-1–41, FR-01–36, NFRs, OQ-1–2. `scaffold-spec.md`: packages, forms, server modules, navigation, startup, dependencies. `software-requirements-specification.md`: SR-01–58, interfaces, performance, constraints.
 
@@ -459,9 +462,9 @@ Written at Step 14 after the review, per the Step 14 configuration.
 
 **Goals:**
 
-- Complete Mybizz CS on the scaffold as it stands: every feature F-01 to F-36 built and passing its acceptance criteria (SC-1), on the 70-table schema of `authoritative-schema.md`, reached through the recorded migration discipline.
+- Complete Mybizz CS on the scaffold as it stands: every feature F-01 to F-37 built and passing its acceptance criteria (SC-1), on the 71-table schema of `authoritative-schema.md`, reached through the recorded migration discipline.
 - App 5 built and running before the first paying client (D6 of Step 12); every client provisioned through App 5's New client action into its own container and database.
-- The wedge proved: ten founding clients onboarded on the full product at the standard price (SC-2), toward the hard capacity of 100 (SC-3) and the revenue and margin criteria (SC-4, SC-5).
+- The wedge proved: ten founding clients onboarded on the full product at the standard price (SC-2), toward 100 clients (SC-3) and the revenue and margin criteria (SC-4, SC-5).
 - One legal-documents system covering the Cookie Policy, the Privacy Policy and the Terms and Conditions, published before go-live, with consent recorded in `consents` (D8 as extended at Step 14).
 - Releases reach every client through App 2; a client can leave at any time with all of its data (the exit export of §19).
 
@@ -504,7 +507,7 @@ Written at Step 15 by `data-models` (steps 1 to 4, with the configuration's defa
 
 ### 23.1 Data design
 
-**Tables and ownership.** All 70 tables of `authoritative-schema.md`, in its 11 groups, live in the instance's own database — one app, one database, no tenant column anywhere (§6 constraint 1). Every table is `client: none` and `server: full`; data reaches client code only through server functions. Table access for each table is decided before its first server function is written (`sec-requirements-data-table-creation`).
+**Tables and ownership.** All 71 tables of `authoritative-schema.md`, in its 11 groups, live in the instance's own database — one app, one database, no tenant column anywhere (§6 constraint 1). Every table is `client: none` and `server: full`; data reaches client code only through server functions. Table access for each table is decided before its first server function is written (`sec-requirements-data-table-creation`).
 
 **Data shape** (data-models steps 3–4; the configuration's defaults apply — client access to tables none, data rules never in forms, steps 1–4 only):
 
@@ -921,7 +924,7 @@ CRITICAL PATHS (per §22 What Must Be Tested)                PLANNED COVERAGE
       period with the recalculated figures)
 
 USER FLOWS crossing the paths (planned): sign-in and 2FA (UF-03/UF-04), booking (UF-05–UF-08), order
-(UF-09), package (UF-10), portal (UF-29), quote acceptance (UF-41), Team Inbox (UF-35), demo (UF-44) —
+(UF-09), package (UF-10), portal (UF-29), quote acceptance (UF-41), Team Inbox (UF-35), demo (UF-44), Plan and billing (UF-45), referral kit (UF-46) —
 each carried by its §22 row's tests and by the access matrix's generated IN-02 runs.
 LLM/eval scope: the AI assists' prompt quality is guarded by the AI implementation spec's guardrails and
 tests 4.8–4.9; no eval suite is proposed beyond them (the assists are build-stage scope).

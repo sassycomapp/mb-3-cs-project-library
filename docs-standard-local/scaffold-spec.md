@@ -1,7 +1,7 @@
 ---
 title: "scaffold-spec"
 doc-id: "mb-be462593"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Scaffold Specification
 
@@ -9,7 +9,7 @@ The structure of App 1: its packages, forms, modules, navigation and startup.
 
 **Standard:** [[[default:specifications-global/spec-anvil-platform-standards]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md)
 
-**Authority:** where this document differs from `mb-3-cs-architecture-reference.md` on a technical fact, the architecture reference is correct. Feature numbers (F-01 to F-36) are those of `mb-3-cs-concept.md`. Detail that has its own home is linked, not repeated:
+**Authority:** where this document differs from `mb-3-cs-architecture-reference.md` on a technical fact, the architecture reference is correct. Feature numbers (F-01 to F-37) are those of `mb-3-cs-concept.md`. Detail that has its own home is linked, not repeated:
 
 | Subject | Home |
 |---|---|
@@ -62,14 +62,15 @@ client_code/
 │   ├── MarketingDashboardForm/    marketing metrics, return on investment, alerts (UF-25)
 │   └── RevenueReportForm/         reports, PDF and CSV export, scheduled reports
 │
-├── settings/                      F-02, F-05, F-22
-│   ├── SettingsForm/              14 tabs (DESIGN.md SettingsForm)
+├── settings/                      F-02, F-05, F-22, F-37
+│   ├── SettingsForm/              15 tabs (DESIGN.md SettingsForm)
 │   │   ├── PaletteSettingsForm/   (local) Brand Palette tab
 │   │   ├── BusinessProfileTab/    (local) including the app language
 │   │   ├── CurrencyTab/           (local) system currency (read-only), display currency
 │   │   ├── InvoicingTab/          (local) payment terms, tax, numbering, quote validity
 │   │   ├── FeatureSwitchesTab/    (local)
-│   │   └── DataTab/               (local) history from R2, export as CSV, Clear sample data
+│   │   ├── DataTab/               (local) history from R2, export as CSV, Clear sample data
+│   │   └── PlanBillingTab/        (local) plan, mock-up invoice, referral kit (F-37)
 │   ├── VaultForm/                 Owner only, TOTP on every open
 │   ├── EmailSettingsForm/         Email tab: addresses, desks, signatures, auto-replies
 │   ├── DomainSettingsForm/        Domain tab: DNS record status
@@ -299,7 +300,7 @@ A custom component is a reusable element that the Anvil Material 3 theme does no
 
 ## Database Schema
 
-The tables, their columns, types and allowed values are in `authoritative-schema.md`: 70 tables. The changes that bring App 1's tables to that schema, and the prompts that apply them, are in `schema-migration-log.md`. Every schema change is made in App 1, recorded in `schema-migration-log.md`, and applied to App 3.
+The tables, their columns, types and allowed values are in `authoritative-schema.md`: 71 tables. The changes that bring App 1's tables to that schema, and the prompts that apply them, are in `schema-migration-log.md`. Every schema change is made in App 1, recorded in `schema-migration-log.md`, and applied to App 3.
 
 ### Rules
 

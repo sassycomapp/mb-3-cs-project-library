@@ -5,7 +5,7 @@ updated: "2026-11-12"
 ---
 # Mybizz CS — User Flows
 
-**Authority:** Reference — defines the intended behaviour of every user flow in Mybizz CS. Each flow carries the feature number it belongs to (F-01 to F-36, as in `mb-3-cs-concept.md`). Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
+**Authority:** Reference — defines the intended behaviour of every user flow in Mybizz CS. Each flow carries the feature number it belongs to (F-01 to F-37, as in `mb-3-cs-concept.md`). Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
 **Related ADRs:** [[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR, [[[default:adr-global/adr-webhook-architecture|Webhook Architecture]]](C:/dev/project-library-global/adr-global/adr-webhook-architecture.md) ADR
 
 ---
@@ -92,7 +92,7 @@ updated: "2026-11-12"
 1. Registers on the Mybizz website: business name, trade, owner name, owner email, the client's own domain.
 2. Receives a confirmation email from Mybizz and confirms the email address.
 3. Sets up the client's storage and domain settings, guided step by step on the registration page with a short video: opens a free Cloudflare account on the client's own email address, adds a payment method, switches R2 on, adds the client's domain to Cloudflare, and invites Mybizz's Cloudflare user as a member with the roles Cloudflare R2 Admin and DNS. The account is the client's and stays the client's.
-4. Chooses the monthly plan or the annual plan, enters the referral code of the annual client that referred it, if any, adds assisted setup if wanted, and pays the first month or the first year in Paddle's checkout.
+4. Chooses the monthly plan or the annual plan, adds assisted setup if wanted, and pays the first month or the first year in Paddle's checkout. A client that arrived through a referral link finds the referral code filled in, and may type one otherwise; the form tells it that the referring client will see its business name and whether it has subscribed.
 
 **System (App 5):**
 5. Creates the client record and issues the client reference number.
@@ -711,6 +711,28 @@ Assists 9 (client sentiment summary) and 10 (booking and availability insights) 
 2. The prospect uses every feature. Every email the app sends goes to the prospect's own address; payments run in test mode with the test card shown on screen.
 3. Every night both apps are reset and every demo sign-in is removed.
 4. The prospect registers from the demo's Register button (UF-01).
+
+---
+
+## UF-45 Plan and billing: the mock-up invoice (F-37)
+
+**Entry:** Settings → Plan and billing (Owner)
+
+1. The tab shows the plan and the next renewal date.
+2. On the annual plan, the mock-up of the next renewal invoice lists 12 months, the annual plan saving of 2 months, and one month off for each confirmed referral, at most 5, then the total as Paddle previews it, before tax.
+3. Below the total: each pending referral by business name, the confirmed referrals in reserve for the next renewal, and the referral link.
+4. On the monthly plan, the tab shows the annual plan's offer and how to move to it through Paddle's customer portal.
+
+---
+
+## UF-46 Sharing the referral kit (F-37)
+
+**Entry:** Settings → Plan and billing → Referral kit (Owner, annual plan)
+
+1. Copy the referral link, or tap LinkedIn, Facebook, X or WhatsApp: the ready-made post is copied and the platform's own share window opens with the link.
+2. Switch on the email banner to add it to marketing emails and newsletters.
+3. Switch on the website badge, the pop-up, or both; each appears on the public website at once and goes when switched off.
+4. A business that registers through the link appears as pending on the mock-up invoice, and as confirmed once its first annual payment completes.
 
 ---
 

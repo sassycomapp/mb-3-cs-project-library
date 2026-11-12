@@ -1,7 +1,7 @@
 ---
 title: "schema-migration-log"
 doc-id: "mb-dde289cd"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 # Schema Migration Log
 
@@ -25,6 +25,7 @@ Every schema change, recorded at Step 17 and read at Steps 41 and 42. The schema
 | pre-release | 2026-11-01 | `email_config` | Breaking: the Brevo columns `from_email`, `from_name`, `configured`, `configured_at`, `sender_domain_verified` removed | App 1 only, prompt P14, last |
 | pre-release | 2026-11-06 | 35 core tables (through the P1–P3, P5–P13 amendments below); and every table that lacked `created_at`: `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `invoice_items`, `quote_items`, `expense_categories`, `user_preferences`, `customer_packages`, `automation_runs`, `reviews`, `email_messages`, `blog_categories`, `config`, `contact_campaigns`, `contact_counter`, `contact_events`, `contact_submissions`, `email_config`, `email_log`, `email_templates`, `lead_captures`, `leads`, `payment_config`, `rate_limits`, `theme_config`, `webhook_log` | Additive: a nullable `metadata` (simpleObject) column added to the 35 core tables other than `bookings`, which already carries `metadata` as its client-defined intake answers (common aspect 4; Step 15 decision D3); a nullable `created_at` added to every table that lacked it, core and non-core (spec-anvil-platform-standards §13; Step 15 decisions D2 and D3 follow-up); on `email_campaigns` and `segments` `created_date` is replaced by `created_at`: `created_at` added and `created_date` removed in the same prompt (P7); nothing reads `created_date`; a nullable `updated_at` added to every mutable table that lacked it — 43 tables (28 in the live schema, 15 created by the prompts), each named in its prompt below; the summary tables `daily_summary`, `service_performance`, `provider_performance` and `campaign_metrics` are mutable because the summary tasks' period-keyed upserts update their rows (Step 15 decision D3 follow-up, review finding R5); the append-only tables carry none: `activity_log`, `contact_events`, `health_log`, `automation_runs`, `consents`, `email_suppressions`, `sample_rows` (§13's mutable-row rule; Step 15 decision D3 follow-up) | App 1 only, folded into prompts P1–P13 below (P14 unchanged) |
 | pre-release | 2026-11-10 | `payment_config` | Breaking: `active_gateway`, `paystack_connected` and `paystack_connected_at` deleted | App 1 only, by hand (Part A) |
+| pre-release | 2026-11-12 | 1 new table: `plan_summary`; `business_profile` | Additive: table created; columns `referral_banner_in_emails`, `referral_badge_on`, `referral_popup_on` added | App 1 only, prompt P13a |
 
 ---
 
@@ -47,7 +48,7 @@ Delete, from `payment_config`: `active_gateway`, `paystack_connected` and `payst
 
 ### Part B — one prompt per conversation (Anvil editor → Agent chat)
 
-For each prompt, in order P1 to P14:
+For each prompt, in order P1 to P13, then P13a, then P14:
 
 1. Start a new conversation in the Agent chat.
 2. Paste the prompt.
@@ -244,6 +245,18 @@ Create these new Data Tables in this app, in this order, with exactly these colu
 
 - Table `cookie_policy`: `category` (string), `title` (string), `clause` (string), `sort_order` (number), `is_seeded` (bool), `is_active` (bool), `feature_key` (string), `created_at` (datetime), `updated_at` (datetime), `metadata` (simpleObject)
 - Table `consents`: `consent_id` (string), `document` (string), `choice` (string), `policy_version` (number), `contact_id` (link to one row of `contacts`), `created_at` (datetime)
+
+Change only the Data Tables schema. Do not change any form, module, server module, theme, CSS, dependency or service. Do not change or delete any data. For every table you create, set access to "No access" for forms and "Full access" for server code. Before making any change, list exactly what you will create or change and wait for my confirmation.
+```
+
+**P13a — plan summary and referral kit**
+
+```text
+Create this new Data Table in this app, with exactly these columns and types:
+
+- Table `plan_summary`: `plan` (string), `renews_on` (date), `currency` (string), `lines` (simpleObject), `total` (string), `pending` (simpleObject), `reserve` (number), `referral_link` (string), `created_at` (datetime), `updated_at` (datetime)
+
+Add these columns to the existing Data Table `business_profile`: `referral_banner_in_emails` (bool), `referral_badge_on` (bool), `referral_popup_on` (bool).
 
 Change only the Data Tables schema. Do not change any form, module, server module, theme, CSS, dependency or service. Do not change or delete any data. For every table you create, set access to "No access" for forms and "Full access" for server code. Before making any change, list exactly what you will create or change and wait for my confirmation.
 ```

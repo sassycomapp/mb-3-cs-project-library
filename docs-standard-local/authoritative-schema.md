@@ -1,15 +1,15 @@
 ---
 title: "authoritative-schema"
 doc-id: "mb-8b83e940"
-updated: "2026-11-10"
+updated: "2026-11-12"
 ---
 # Mybizz CS — Authoritative Database Schema
 
 Every table and column of a Mybizz CS client instance: name, type and allowed values.
 
-**Authority:** this document is the single home of the schema. Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct. Feature numbers (F-01 to F-36) are those of `mb-3-cs-concept.md`. The changes that bring App 1's tables to this schema are in `schema-migration-log.md`.
+**Authority:** this document is the single home of the schema. Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct. Feature numbers (F-01 to F-37) are those of `mb-3-cs-concept.md`. The changes that bring App 1's tables to this schema are in `schema-migration-log.md`.
 
-**Total tables:** 70
+**Total tables:** 71
 **Platform:** Anvil Data Tables. Every table has `client: none` and `server: full`: the browser never reads a table directly; server functions return rows and results.
 
 ---
@@ -56,9 +56,9 @@ Every table and column of a Mybizz CS client instance: name, type and allowed va
 | Email and webhooks | `email_templates`, `email_log`, `webhook_log`, `email_addresses`, `email_messages`, `email_suppressions` | 6 |
 | Content and policy | `blog_categories`, `blog_posts`, `blog_comments`, `landing_pages`, `pages`, `privacy_policy`, `t_and_c`, `cookie_policy`, `consents` | 9 |
 | Reviews | `reviews`, `testimonials` | 2 |
-| Summary and health | `daily_summary`, `service_performance`, `provider_performance`, `campaign_metrics`, `health_log`, `error_log` | 6 |
+| Summary and health | `daily_summary`, `service_performance`, `provider_performance`, `campaign_metrics`, `health_log`, `error_log`, `plan_summary` | 7 |
 | Notifications | `notifications`, `user_preferences`, `delivery_logs` | 3 |
-| **Total** | | **70** |
+| **Total** | | **71** |
 
 ---
 
@@ -123,6 +123,9 @@ One row: the client's business.
 | `onboarding_completed` | bool | |
 | `onboarding_completed_at` | datetime | |
 | `legal_compliance_enabled` | bool | Legal Compliances switch; cannot be switched off once on |
+| `referral_banner_in_emails` | bool | The referral kit's email banner is added to the client's marketing emails and newsletters (F-37); default False |
+| `referral_badge_on` | bool | The referral kit's badge shows in the public website's footer (F-37); default False |
+| `referral_popup_on` | bool | The referral kit's pop-up shows on the public website (F-37); default False |
 | `legal_compliance_enabled_at` | datetime | |
 | `legal_ack_accepted` | bool | Recorded once, cannot be reversed |
 | `legal_ack_accepted_at` | datetime | |
@@ -1288,6 +1291,22 @@ Kept 90 days.
 | `created_at` | datetime | |
 | `updated_at` | datetime | When the row was last changed |
 
+### 10.7 `plan_summary`
+One row, written only by App 5 through `/management/plan-summary` (`spec-api-specification`), daily and after every change; read by the Owner's Plan and billing page (F-37). Its amounts are display text in the subscription's currency, as Paddle states them, and are not money records of the client's business.
+
+| Column | Type | Notes |
+|---|---|---|
+| `plan` | string | `monthly` / `annual` |
+| `renews_on` | date | The next renewal date |
+| `currency` | string | The subscription's currency, such as `GBP` |
+| `lines` | simpleObject | The mock-up invoice's lines: label and amount text, in order |
+| `total` | string | The next renewal total, before tax, as Paddle previews it |
+| `pending` | simpleObject | The business names of pending referrals |
+| `reserve` | number | Confirmed referral credits in reserve |
+| `referral_link` | string | `https://mybizz.live/r/{code}`; empty on the monthly plan |
+| `created_at` | datetime | |
+| `updated_at` | datetime | When the row was last changed |
+
 ---
 
 ## 11. Notifications
@@ -1341,4 +1360,4 @@ One row per user, channel and type; the server keeps the combination unique.
 
 ---
 
-*End of file — authoritative-schema.md (70 tables)*
+*End of file — authoritative-schema.md (71 tables)*

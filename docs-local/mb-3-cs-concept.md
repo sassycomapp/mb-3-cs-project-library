@@ -497,6 +497,11 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - Both apps reset every night, so visitors can change or break anything
 - Every email the demo apps send goes to the visitor's own email address; payments run in the gateways' test mode with test cards, so no real money moves
 
+**F-37 Plan, billing and referrals**
+- A Plan and billing tab in Settings, for the Owner only: the client's plan, its next renewal date and a mock-up of its next annual invoice, with each confirmed referral taken off as one month and each pending referral listed below the total
+- A referral kit for clients on the annual plan, supplied by Mybizz: the client's referral link, ready-made posts for LinkedIn, Facebook, X and WhatsApp, an email banner for the client's marketing emails and newsletters, and a badge and a pop-up for the client's public website. The client chooses which to use; the badge and pop-up are off until the client switches them on
+- The kit's message: buy Mybizz CS for a year and get 2 months free at once; refer 5 businesses that do the same and the next year costs 5 months, up to 7 months off the full year. Every kit item says that the client gains a discount when someone joins
+
 ---
 
 ## 8. Sample Data
@@ -595,7 +600,7 @@ With 10 clients using the platform, the narrative shifts from "founding member" 
 - Case studies from the first clients: one or two detailed write-ups of how a real business uses Mybizz CS (with client permission)
 - LinkedIn content: founder posts sharing lessons, client results and product updates — consistent, weekly
 - SEO content: blog posts targeting high-intent searches such as "how to set up online booking for a physiotherapy practice" or "best booking system for personal trainers UK"
-- Referral programme: a client on the annual plan who refers a new client that buys the annual plan receives one month off its next annual renewal, up to 5 months per renewal; a credit is never paid in cash
+- Referral programme: a client on the annual plan earns one month off its next annual renewal for every new client that joins on the annual plan through its referral link, up to 5 months per renewal, with any further confirmed referrals kept in reserve for the next renewal; a credit is never paid in cash. Each annual client shares Mybizz with the referral kit (F-37), which turns every satisfied client into a marketing channel at no cost to Mybizz
 - Industry-specific outreach: identify professional associations and communities for target industries (consulting, beauty, wellness, trades) and engage authentically — not as a sponsor, but as a member
 
 ### 10.4 Phase 3 — Full capacity (clients 51 to 100)

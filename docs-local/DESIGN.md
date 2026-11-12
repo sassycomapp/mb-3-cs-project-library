@@ -1,7 +1,7 @@
 ---
 title: "DESIGN"
 doc-id: "mb-190df6bf"
-updated: "2026-11-11"
+updated: "2026-11-12"
 ---
 # Mybizz CS — DESIGN
 
@@ -10,7 +10,7 @@ This document is the design system of Mybizz CS. It is built on **`m3-custom-the
 - The colour values of the eight palettes live in `m3-custom-theme`; this document defines how colour is used.
 - Generic Material 3 rules (accessibility, the `wrap_on` responsive mechanism, state-specification patterns) live in [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) and are not repeated here. This document states this project's choices and its deviations from the M3 defaults.
 - Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
-- Feature numbers (F-01 to F-36) are those of `mb-3-cs-concept.md`.
+- Feature numbers (F-01 to F-37) are those of `mb-3-cs-concept.md`.
 
 ---
 
@@ -470,6 +470,7 @@ This section defines the primary implementation-facing forms and pages in the My
 | Feature Switches | `marketing_enabled`, `blog_enabled`, blog comments | Owner |
 | Legal Pages | PolicyEditorForm (Clause Builder) | Owner |
 | Data | History view from R2, export all data as CSV, Clear sample data | Owner |
+| Plan and billing | PlanBillingTab: the plan, the next renewal date, the mock-up of the next annual invoice with confirmed referrals deducted and pending referrals listed; on the annual plan, the referral kit (link, social posts, email banner, website badge and pop-up switches) (F-37) | Owner |
 
 **Key design rules:**
 - Tab visibility is RBAC-governed; different roles see different tabs.

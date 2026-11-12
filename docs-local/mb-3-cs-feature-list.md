@@ -260,3 +260,9 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 - Response within 24 hours on business days.
 - A problem that stops the business is acknowledged within 4 business hours.
 - Mybizz is alerted when a client goes quiet (14 days with no staff sign-in, or 30 days with no bookings), so the founder can step in.
+
+## 29. Plan, billing and referrals
+
+- A Plan and billing tab in Settings shows the plan, the next renewal date and a mock-up of the next annual invoice.
+- On the annual plan, every business that joins on the annual plan through the client's referral link takes one month off the client's next renewal, up to 5 months. Further referrals are kept for the renewal after.
+- A ready-made referral kit: social posts for LinkedIn, Facebook, X and WhatsApp, an email banner, and a website badge and pop-up the client can switch on.

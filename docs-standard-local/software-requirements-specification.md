@@ -59,7 +59,7 @@ Domain terms are defined in `GLOSSARY.md` once Step 16 produces it; until then, 
 Mybizz CS is a dependent-instance application of the five-app model ([[[default:specifications-global/spec-five-app-architecture-model|Five-App Architecture Model (Specification)]]](C:/dev/project-library-global/specifications-global/spec-five-app-architecture-model.md)). App 1 is developed; each release is pushed into App 2; every client instance depends on App 2 and holds only the schema, the startup module and its data. App 5, the Mybizz management app, is a separate application that the instances call through HTTP endpoints. `[CLEAR]`
 
 ### 2.2 Product Functions
-The 36 features F-01 to F-36 of `mb-3-cs-concept.md` section 7, summarised in PRD section 5. `[CLEAR]`
+The 37 features F-01 to F-37 of `mb-3-cs-concept.md` section 7, summarised in PRD section 5. `[CLEAR]`
 
 ### 2.3 User Characteristics
 - Owners and staff are business people, not technical users; every screen must be usable without training, with tooltips that open help videos (F-25), in the app language.
@@ -170,7 +170,8 @@ Anvil's platform constraints apply by default: the App Server builds and extends
 | SR-62 | App 5 pauses a client's marketing email at 25,000 sent in a month and all email except sign-in at 50,000, resuming on the first of the next month; a paused SES tenant is reported to the Owner and Mybizz | FR-37 | Test against simulated SES (RL-14) | [CLEAR] |
 | SR-63 | An incident record in App 5 holds the times of detection, containment, the insurer's call, the ICO report and each client notice; a client notice is sent from App 5 and recorded | FR-38 | Incident drill on the test client instance (RL-22) | [CLEAR] |
 | SR-64 | App 5 sends each business reminder at its lead time, reads statutory deadlines from FreeAgent with read requests only, and messages Mybizz when no Wise transaction has reached FreeAgent for 7 days | FR-39 | Simulated clock and FreeAgent sandbox (RL-20, RL-21) | [CLEAR] |
-| SR-65 | App 5 records `plan`, `assisted_setup`, `referral_code`, `referred_by` and `referral_credits` in the client registry; a referred client's first annual payment adds one credit to the referring annual client and a refund of it removes the credit; App 5 sets the referring client's Paddle discount for its next billing period to one month's price per credit, at most 5, and sets the credits to zero once the renewal is paid | FR-40 | Paddle test environment (RL-23) | [CLEAR] |
+| SR-65 | App 5 records every referral in its `referrals` table as `pending`, `confirmed`, `used` or `void`; a referred client's first annual payment confirms its referral and a refund of it returns it to pending; App 5 sets on the referring client's Paddle subscription one flat discount for the next billing period of one month's price per confirmed credit, at most 5, keeps further confirmed credits in reserve and carries them forward, and marks the credits taken as used once the renewal is paid | FR-40 | Paddle test environment (RL-23) | [CLEAR] |
+| SR-66 | App 5 writes `plan_summary` through `/management/plan-summary` daily and after every change, its total equal to Paddle's next-transaction preview; the Plan and billing tab is shown to the Owner only; every referral kit item carries `plan_summary.referral_link` and the discount line; the badge and pop-up appear on the public website only when `business_profile.referral_badge_on` or `referral_popup_on` is True, and the pop-up sets no cookie | FR-40 | Test client instance (RL-23, BR-10) | [CLEAR] |
 
 Every functional requirement FR-01 to FR-40 of the PRD appears in this table at least once.
 

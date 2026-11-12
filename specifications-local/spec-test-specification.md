@@ -305,6 +305,7 @@ Each test runs against App 1 with the test suite's mail catcher in place of Amaz
 | 4.19 | F-02 Vault reset | As Owner, Reset Vault code and follow the emailed link | The next Vault open asks for enrolment; no stored secret changed; the reset is in `activity_log` |
 | 4.20 | F-15 PayPal | In PayPal's sandbox: pay a booking; alter the amount in the browser; capture twice; close the browser after approval | The server's amount is charged; one payment row with `gateway_fee`; the closed-browser order is captured by the webhook |
 | 4.21 | F-15 PayPal | Set the system currency to ISK | PayPal shows as unavailable in Settings and at checkout |
+| 4.22 | F-37 referral kit | As Owner on the annual plan, open Settings → Plan and billing; share the LinkedIn post; switch on the badge and the pop-up; open the public website twice in one visit | The tab shows the mock-up invoice from `plan_summary`; the post carries the referral link and the discount line; the badge shows in the footer; the pop-up shows once in the visit and sets no cookie; a Manager does not see the tab | BR-10 |
 
 ---
 
@@ -322,7 +323,7 @@ Each test runs against App 5 with simulated suppliers (DigitalOcean API, SES, Gr
 | 5.6 | SR-62 | Simulate 25,000 marketing sends, then 50,000 sends in one month | Marketing pauses at 25,000 while bookings and invoices send; everything but sign-in pauses at 50,000; both resume on the first of the next month | RL-14 |
 | 5.7 | SR-63 | On the test client instance, open a simulated incident and walk the incident response plan | Every step is in App 5's incident record with its time; the client notice is sent and recorded | RL-22 |
 | 5.8 | SR-64 | Move a simulated clock past each reminder's lead time; stop Wise transactions for 7 days | Each reminder is sent once at its lead time; the bank feed message is sent on day 7; App 5's request log to FreeAgent holds read requests only | RL-20, RL-21 |
-| 5.9 | SR-65 | In Paddle's test environment: an annual client refers 6 new clients that buy the annual plan, one of which is then refunded; a monthly client refers one more | The referring client holds 5 credits applied and its next renewal is discounted by 5 months' price; the refund removed one credit; the monthly referral added none; after the renewal is paid the credits are zero | RL-23 |
+| 5.9 | SR-65, SR-66 | In Paddle's test environment: an annual client refers 7 new clients through its link; 6 buy the annual plan and one stays on the monthly plan; one annual payment is then refunded | 5 credits are applied to the next renewal as one flat discount and 0 stand in reserve after the refund (1 before it); the monthly referral stays pending; `plan_summary` shows Paddle's previewed total and lists the pending referrals; after the renewal is paid the 5 credits are used | RL-23 |
 
 ---
 
