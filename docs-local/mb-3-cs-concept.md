@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-concept"
 doc-id: "mb-f23e1822"
-updated: "2026-11-12"
+updated: "2026-11-16"
 ---
 # Mybizz CS — Concept
 
@@ -601,6 +601,7 @@ With 10 clients using the platform, the narrative shifts from "founding member" 
 - LinkedIn content: founder posts sharing lessons, client results and product updates — consistent, weekly
 - SEO content: blog posts targeting high-intent searches such as "how to set up online booking for a physiotherapy practice" or "best booking system for personal trainers UK"
 - Referral programme: a client on the annual plan earns one month off its next annual renewal for every new client that joins on the annual plan through its referral link, up to 5 months per renewal, with any further confirmed referrals kept in reserve for the next renewal; a credit is never paid in cash. Each annual client shares Mybizz with the referral kit (F-37), which turns every satisfied client into a marketing channel at no cost to Mybizz
+- Comparison content: posts and short videos that set the separate-tool stack beside Mybizz CS, using the cost comparison in section 6.2
 - Industry-specific outreach: identify professional associations and communities for target industries (consulting, beauty, wellness, trades) and engage authentically — not as a sponsor, but as a member
 
 ### 10.4 Phase 3 — Full capacity (clients 51 to 100)
@@ -610,6 +611,8 @@ By this stage, Mybizz CS has 50 real clients, documented case studies, visible r
 **Tactics:**
 - Targeted LinkedIn and Facebook advertising to consulting and service business owners in the United Kingdom and Mybizz's other markets
 - Google Search advertising targeting booking software and business management keywords
+- Retargeting advertising to visitors of mybizz.live who did not sign up
+- Micro-influencers: about 20 small creators who speak to consulting and service business owners
 - Partnership outreach: complementary providers (accountants, business coaches, web designers) who serve the same businesses and can refer
 - Content marketing: continued SEO blog content now supported by a track record
 
