@@ -1,0 +1,238 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "User flow map \u2014 CRM and marketing (UF-19\u2013UF-27, UF-35, UF-39)",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "visitor",
+      "label": "Visitor"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "crm",
+      "label": "CRM (team)"
+    },
+    {
+      "id": "inbox",
+      "label": "Inbox (team)"
+    }
+  ],
+  "phases": [
+    {
+      "id": "capture",
+      "label": "Capture",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "nurture",
+      "label": "Nurture",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "converse",
+      "label": "Converse",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "landing",
+    "capture",
+    "welcome",
+    "campaign"
+  ],
+  "nodes": [
+    {
+      "id": "contactform",
+      "lane": "visitor",
+      "col": 0,
+      "type": "frontend",
+      "label": "Contact form",
+      "sublabel": "\u2264 1,000 chars",
+      "width": 102
+    },
+    {
+      "id": "landing",
+      "lane": "visitor",
+      "col": 1,
+      "type": "frontend",
+      "label": "Landing page",
+      "sublabel": "capture form",
+      "width": 102
+    },
+    {
+      "id": "enquiry",
+      "lane": "server",
+      "col": 1,
+      "type": "backend",
+      "label": "Enquiry",
+      "sublabel": "contact + task",
+      "width": 103
+    },
+    {
+      "id": "capture",
+      "lane": "server",
+      "col": 2,
+      "type": "security",
+      "label": "Lead capture",
+      "sublabel": "one call",
+      "width": 102
+    },
+    {
+      "id": "welcome",
+      "lane": "server",
+      "col": 3,
+      "type": "messagebus",
+      "label": "Welcome sequence",
+      "sublabel": "enrolled",
+      "width": 132
+    },
+    {
+      "id": "addlead",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Add as lead",
+      "sublabel": "unknown sender",
+      "width": 103
+    },
+    {
+      "id": "contacts",
+      "lane": "crm",
+      "col": 2,
+      "type": "frontend",
+      "label": "Contacts",
+      "sublabel": "timeline"
+    },
+    {
+      "id": "segments",
+      "lane": "crm",
+      "col": 3,
+      "type": "frontend",
+      "label": "Segments",
+      "sublabel": "rules"
+    },
+    {
+      "id": "campaign",
+      "lane": "crm",
+      "col": 4,
+      "type": "backend",
+      "label": "Campaign",
+      "sublabel": "through SES"
+    },
+    {
+      "id": "reviews",
+      "lane": "crm",
+      "col": 5,
+      "type": "frontend",
+      "label": "Reviews",
+      "sublabel": "approve"
+    },
+    {
+      "id": "inbox",
+      "lane": "inbox",
+      "col": 4,
+      "type": "frontend",
+      "label": "Team Inbox",
+      "sublabel": "addresses"
+    },
+    {
+      "id": "reply",
+      "lane": "inbox",
+      "col": 5,
+      "type": "frontend",
+      "label": "Reply",
+      "sublabel": "AI draft"
+    }
+  ],
+  "edges": [
+    {
+      "id": "contactform-enquiry",
+      "from": "contactform",
+      "to": "enquiry",
+      "variant": "default"
+    },
+    {
+      "id": "landing-capture",
+      "from": "landing",
+      "to": "capture",
+      "label": "form submitted",
+      "variant": "emphasis"
+    },
+    {
+      "id": "capture-welcome",
+      "from": "capture",
+      "to": "welcome",
+      "label": "enrolled at once",
+      "variant": "emphasis"
+    },
+    {
+      "id": "welcome-campaign",
+      "from": "welcome",
+      "to": "campaign",
+      "label": "sequences run hourly",
+      "variant": "emphasis"
+    },
+    {
+      "id": "enquiry-contacts",
+      "from": "enquiry",
+      "to": "contacts",
+      "label": "timeline event",
+      "variant": "dashed"
+    },
+    {
+      "id": "contacts-segments",
+      "from": "contacts",
+      "to": "segments",
+      "label": "rules",
+      "variant": "default"
+    },
+    {
+      "id": "segments-campaign",
+      "from": "segments",
+      "to": "campaign",
+      "label": "recipients",
+      "variant": "default"
+    },
+    {
+      "id": "inbox-reply",
+      "from": "inbox",
+      "to": "reply",
+      "variant": "emphasis"
+    },
+    {
+      "id": "inbox-addlead",
+      "from": "inbox",
+      "to": "addlead",
+      "label": "unknown sender",
+      "variant": "dashed"
+    },
+    {
+      "id": "campaign-reviews",
+      "from": "campaign",
+      "to": "reviews",
+      "label": "review request",
+      "variant": "default"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One contact, one tenant",
+      "items": [
+        "Every person is one row of contacts",
+        "A lead and its contact are created together",
+        "One SES tenant per client carries every email"
+      ]
+    }
+  ]
+}

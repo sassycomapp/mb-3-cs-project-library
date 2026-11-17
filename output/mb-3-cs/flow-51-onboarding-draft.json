@@ -1,0 +1,250 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 51, onboarding",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "setup",
+      "label": "Owner \u2014 setup"
+    },
+    {
+      "id": "decide",
+      "label": "Owner \u2014 choices"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "settings",
+      "label": "Settings"
+    }
+  ],
+  "phases": [
+    {
+      "id": "setup",
+      "label": "Steps 1\u20135",
+      "fromCol": 0,
+      "toCol": 1,
+      "variant": "emphasis"
+    },
+    {
+      "id": "decide",
+      "label": "Steps 6\u20138",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "security"
+    },
+    {
+      "id": "finish",
+      "label": "Steps 9\u201310",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "password",
+    "language",
+    "profile",
+    "palette",
+    "currency",
+    "legal",
+    "gateway",
+    "domain",
+    "import",
+    "complete"
+  ],
+  "nodes": [
+    {
+      "id": "password",
+      "lane": "setup",
+      "col": 0,
+      "type": "security",
+      "label": "1 Password",
+      "sublabel": "FIDO2 enrol"
+    },
+    {
+      "id": "profile",
+      "lane": "setup",
+      "col": 1,
+      "type": "frontend",
+      "label": "3 Profile",
+      "sublabel": "+ AI first text",
+      "width": 110
+    },
+    {
+      "id": "currency",
+      "lane": "setup",
+      "col": 2,
+      "type": "frontend",
+      "label": "5 Currency",
+      "sublabel": "locked later"
+    },
+    {
+      "id": "gateway",
+      "lane": "setup",
+      "col": 3,
+      "type": "frontend",
+      "label": "7 Gateway",
+      "sublabel": "keys to Vault"
+    },
+    {
+      "id": "import",
+      "lane": "setup",
+      "col": 4,
+      "type": "frontend",
+      "label": "9 Import",
+      "sublabel": "CSV, skippable",
+      "width": 103
+    },
+    {
+      "id": "language",
+      "lane": "decide",
+      "col": 0,
+      "type": "frontend",
+      "label": "2 Language",
+      "sublabel": "five languages",
+      "width": 103
+    },
+    {
+      "id": "palette",
+      "lane": "decide",
+      "col": 1,
+      "type": "frontend",
+      "label": "4 Palette",
+      "sublabel": "live preview"
+    },
+    {
+      "id": "legal",
+      "lane": "decide",
+      "col": 2,
+      "type": "security",
+      "label": "6 Legal ack",
+      "sublabel": "recorded once"
+    },
+    {
+      "id": "domain",
+      "lane": "decide",
+      "col": 3,
+      "type": "backend",
+      "label": "8 Domain",
+      "sublabel": "records live"
+    },
+    {
+      "id": "complete",
+      "lane": "decide",
+      "col": 4,
+      "type": "frontend",
+      "label": "10 Complete",
+      "sublabel": "dashboard"
+    },
+    {
+      "id": "resume",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "Resume",
+      "sublabel": "next unfinished",
+      "width": 110
+    },
+    {
+      "id": "return",
+      "lane": "settings",
+      "col": 5,
+      "type": "frontend",
+      "label": "Return link",
+      "sublabel": "while in progress",
+      "width": 123
+    }
+  ],
+  "edges": [
+    {
+      "id": "password-language",
+      "from": "password",
+      "to": "language",
+      "variant": "emphasis"
+    },
+    {
+      "id": "language-profile",
+      "from": "language",
+      "to": "profile",
+      "variant": "emphasis"
+    },
+    {
+      "id": "profile-palette",
+      "from": "profile",
+      "to": "palette",
+      "label": "step 4",
+      "variant": "emphasis"
+    },
+    {
+      "id": "palette-currency",
+      "from": "palette",
+      "to": "currency",
+      "label": "step 5",
+      "variant": "emphasis"
+    },
+    {
+      "id": "currency-legal",
+      "from": "currency",
+      "to": "legal",
+      "label": "the excerpt read",
+      "variant": "emphasis"
+    },
+    {
+      "id": "legal-gateway",
+      "from": "legal",
+      "to": "gateway",
+      "label": "test mode first",
+      "variant": "emphasis"
+    },
+    {
+      "id": "gateway-domain",
+      "from": "gateway",
+      "to": "domain",
+      "label": "records checked",
+      "variant": "emphasis"
+    },
+    {
+      "id": "domain-import",
+      "from": "domain",
+      "to": "import",
+      "label": "or skip",
+      "variant": "emphasis"
+    },
+    {
+      "id": "import-complete",
+      "from": "import",
+      "to": "complete",
+      "variant": "emphasis"
+    },
+    {
+      "id": "resume-password",
+      "from": "resume",
+      "to": "password",
+      "label": "returns here",
+      "variant": "dashed"
+    },
+    {
+      "id": "complete-return",
+      "from": "complete",
+      "to": "return",
+      "label": "until finished",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Resumable and final",
+      "items": [
+        "Each step saves when completed",
+        "Resume at the next unfinished step",
+        "The legal acknowledgement cannot be reversed"
+      ]
+    }
+  ]
+}

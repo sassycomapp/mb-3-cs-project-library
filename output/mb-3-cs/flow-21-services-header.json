@@ -1,0 +1,61 @@
+{
+  "subject": "flow-21-services",
+  "intent": "How a client's team publishes what it sells: bookable time or delivered work, with providers, resources, group sessions and intake forms. Load-bearing claim: the pricing model decides the whole booking shape \u2014 duration takes slots, unit takes orders.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "list",
+    "editor",
+    "duration",
+    "unit",
+    "resources",
+    "groups",
+    "intake",
+    "images",
+    "active",
+    "categories"
+  ],
+  "node_roles": {
+    "list": "Services list",
+    "editor": "pricing model first",
+    "duration": "slots + providers",
+    "unit": "ordered work",
+    "resources": "rooms + equipment",
+    "groups": "places + limit",
+    "intake": "client-defined questions",
+    "images": "public presentation",
+    "active": "only active are public",
+    "categories": "filing"
+  },
+  "main_path": [
+    "list",
+    "editor",
+    "duration",
+    "intake",
+    "active"
+  ],
+  "deferred_to_cards": [
+    "The eight palettes' fit to services imagery",
+    "Deposit and payment-terms defaults"
+  ],
+  "stages_or_lanes": [
+    "Owner / Manager",
+    "Server",
+    "Data"
+  ],
+  "expected_corridors": [
+    [
+      "list",
+      "active",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

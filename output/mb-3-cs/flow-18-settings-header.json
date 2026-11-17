@@ -1,0 +1,64 @@
+{
+  "subject": "flow-18-settings",
+  "intent": "How the Owner and Manager configure the business through one tabbed hub where every difference between clients is a row, never code. Load-bearing claim: tab visibility is the interface; the server functions enforce.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "open",
+    "tabs",
+    "profile",
+    "users",
+    "data",
+    "plan",
+    "palette",
+    "invoicing",
+    "features",
+    "rows"
+  ],
+  "node_roles": {
+    "open": "Owner, Manager",
+    "tabs": "role visibility",
+    "profile": "language, tax",
+    "users": "invite, roles",
+    "data": "history, export",
+    "plan": "Owner only",
+    "palette": "live preview",
+    "invoicing": "terms, tax",
+    "features": "marketing, blog",
+    "rows": "never code"
+  },
+  "main_path": [
+    "open",
+    "tabs",
+    "profile",
+    "invoicing",
+    "features",
+    "rows"
+  ],
+  "deferred_to_cards": [
+    "The full 15-tab list (DESIGN.md)",
+    "The four tabs built with their features (tickets 23, 29, 33, 40)"
+  ],
+  "stages_or_lanes": [
+    "Owner / Manager",
+    "Hub",
+    "Owner tabs",
+    "Manager tabs",
+    "Settings as data"
+  ],
+  "expected_corridors": [
+    [
+      "open",
+      "rows",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

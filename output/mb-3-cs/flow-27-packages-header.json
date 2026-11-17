@@ -1,0 +1,53 @@
+{
+  "subject": "flow-27-packages",
+  "intent": "How a customer buys a bundle of sessions and spends it across bookings. Load-bearing claim: draw-down and return happen inside the same transaction as the booking or cancellation they belong to.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "define",
+    "buy",
+    "use",
+    "drawdown",
+    "cancel",
+    "expiry"
+  ],
+  "node_roles": {
+    "define": "sessions + price",
+    "buy": "balance appears",
+    "use": "at booking",
+    "drawdown": "same transaction",
+    "cancel": "inside the window",
+    "expiry": "notice, then lapse"
+  },
+  "main_path": [
+    "define",
+    "buy",
+    "use",
+    "drawdown",
+    "cancel"
+  ],
+  "deferred_to_cards": [
+    "The expiry-notice lead time",
+    "Package display in the portal (ticket 26's drawing)"
+  ],
+  "stages_or_lanes": [
+    "Customer",
+    "Server",
+    "Data"
+  ],
+  "expected_corridors": [
+    [
+      "define",
+      "cancel",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

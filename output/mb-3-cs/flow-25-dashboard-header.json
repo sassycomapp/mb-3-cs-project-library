@@ -1,0 +1,57 @@
+{
+  "subject": "flow-25-dashboard",
+  "intent": "How the team reads its day and its numbers, and how the summary tasks keep the figures honest. Load-bearing claim: dashboards read pre-computed summary tables and never aggregate source tables on load.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "dash",
+    "calendar",
+    "analytics",
+    "drill",
+    "summary",
+    "rows",
+    "banner",
+    "clear"
+  ],
+  "node_roles": {
+    "dash": "metrics",
+    "calendar": "Today's calendar",
+    "analytics": "revenue + marketing",
+    "drill": "PDF",
+    "summary": "period-keyed upsert",
+    "rows": "re-run replaces",
+    "banner": "Owner clears",
+    "clear": "Owner only, audited"
+  },
+  "main_path": [
+    "dash",
+    "analytics",
+    "drill",
+    "summary",
+    "rows"
+  ],
+  "deferred_to_cards": [
+    "The at-risk alert thresholds (App 5's side)",
+    "Marketing metric formulas"
+  ],
+  "stages_or_lanes": [
+    "Team",
+    "Summary tasks",
+    "Summaries"
+  ],
+  "expected_corridors": [
+    [
+      "dash",
+      "rows",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

@@ -1,0 +1,62 @@
+{
+  "subject": "flow-39-portal",
+  "intent": "How a customer signs in and reaches every own record: bookings, packages, quotes, invoices, reviews and account. Load-bearing claim: every view derives the customer from the signed-in user \u2014 never from a client-supplied id.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "signin",
+    "dash",
+    "bookings",
+    "packages",
+    "quotes",
+    "invoices",
+    "reviews",
+    "account",
+    "own",
+    "pay"
+  ],
+  "node_roles": {
+    "signin": "password",
+    "dash": "upcoming",
+    "bookings": "reschedule",
+    "packages": "balance",
+    "quotes": "accept",
+    "invoices": "PDF, pay",
+    "reviews": "My Reviews",
+    "account": "profile, briefing",
+    "own": "derived from the user",
+    "pay": "hosted gateway"
+  },
+  "main_path": [
+    "signin",
+    "dash",
+    "bookings",
+    "quotes",
+    "own"
+  ],
+  "deferred_to_cards": [
+    "The portal menu's labels",
+    "The morning-briefing switch's detail (ticket 31's drawing)"
+  ],
+  "stages_or_lanes": [
+    "Customer",
+    "Views",
+    "More views",
+    "Server"
+  ],
+  "expected_corridors": [
+    [
+      "signin",
+      "own",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

@@ -1,0 +1,62 @@
+{
+  "subject": "flow-23-invoicing",
+  "intent": "How an invoice is created, issued, paid and refunded, and how the gateways' word reaches the books. Load-bearing claim: every amount is the server's; a webhook is verified, idempotent and applied once; card data never touches the instance.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "new",
+    "tax",
+    "send",
+    "gateways",
+    "linkpay",
+    "webhook",
+    "apply",
+    "record",
+    "refund",
+    "overdue"
+  ],
+  "node_roles": {
+    "new": "lines: manual",
+    "tax": "rate + label fixed",
+    "send": "PDF + payment link",
+    "gateways": "keys to the Vault",
+    "linkpay": "card data never here",
+    "webhook": "verified once",
+    "apply": "booking or invoice paid",
+    "record": "cash / transfer",
+    "refund": "step-up",
+    "overdue": "nightly + reminder"
+  },
+  "main_path": [
+    "new",
+    "tax",
+    "send",
+    "linkpay",
+    "webhook",
+    "apply"
+  ],
+  "deferred_to_cards": [
+    "The invoice status lifecycle's full table",
+    "Sequence-key transaction detail"
+  ],
+  "stages_or_lanes": [
+    "Owner / Manager",
+    "Server",
+    "Money"
+  ],
+  "expected_corridors": [
+    [
+      "new",
+      "apply",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

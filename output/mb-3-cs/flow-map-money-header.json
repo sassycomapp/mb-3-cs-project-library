@@ -1,0 +1,64 @@
+{
+  "subject": "flow-map-money",
+  "intent": "How recorded hours become invoice lines, how invoices are issued and paid, and how webhooks carry the gateway's word. Load-bearing claim: every amount is the server's; a webhook is verified, idempotent, and applied exactly once.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "timer",
+    "billable",
+    "create",
+    "manual",
+    "send",
+    "webhook",
+    "applied",
+    "recordpay",
+    "refund",
+    "overdue"
+  ],
+  "node_roles": {
+    "timer": "timer or hand",
+    "billable": "uninvoiced only",
+    "create": "from entries",
+    "manual": "manual lines",
+    "send": "PDF + link",
+    "webhook": "verified once",
+    "applied": "background",
+    "recordpay": "cash/transfer",
+    "refund": "step-up",
+    "overdue": "nightly"
+  },
+  "main_path": [
+    "timer",
+    "billable",
+    "create",
+    "send",
+    "webhook",
+    "applied"
+  ],
+  "deferred_to_cards": [
+    "Gateway API detail",
+    "R2 key layout",
+    "The D5 reinstatement (ticket 13's drawing)"
+  ],
+  "stages_or_lanes": [
+    "Staff",
+    "Finance",
+    "Server",
+    "Money path"
+  ],
+  "expected_corridors": [
+    [
+      "timer",
+      "applied",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

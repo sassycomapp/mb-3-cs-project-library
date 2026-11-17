@@ -1,0 +1,62 @@
+{
+  "subject": "flow-20-crm",
+  "intent": "How a client's team manages every person it knows as one contact record, grouped by company, filed by segment. Load-bearing claim: contacts are created or matched, never duplicated, and internal notes are projected only to the roles allowed.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "list",
+    "viewer",
+    "editor",
+    "import",
+    "match",
+    "companies",
+    "segments",
+    "count",
+    "events",
+    "counter"
+  ],
+  "node_roles": {
+    "list": "search",
+    "viewer": "timeline, stats",
+    "editor": "add or edit",
+    "import": "column mapping",
+    "match": "never duplicate",
+    "companies": "grouped",
+    "segments": "all/any rules",
+    "count": "recalculated",
+    "events": "every touch",
+    "counter": "in transaction"
+  },
+  "main_path": [
+    "list",
+    "viewer",
+    "editor",
+    "match",
+    "events"
+  ],
+  "deferred_to_cards": [
+    "The prebuilt segments",
+    "The writable-fields table per role"
+  ],
+  "stages_or_lanes": [
+    "Contacts (team)",
+    "Sales (team)",
+    "Server",
+    "Data"
+  ],
+  "expected_corridors": [
+    [
+      "list",
+      "events",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

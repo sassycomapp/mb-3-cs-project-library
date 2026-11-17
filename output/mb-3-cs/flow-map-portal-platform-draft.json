@@ -1,0 +1,246 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "User flow map \u2014 portal and platform (UF-29\u2013UF-34, UF-36\u2013UF-38, UF-40\u2013UF-46)",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "customer",
+      "label": "Customer"
+    },
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "store",
+      "label": "Client storage"
+    },
+    {
+      "id": "mybizz",
+      "label": "Mybizz (App 5)"
+    },
+    {
+      "id": "system",
+      "label": "System"
+    }
+  ],
+  "phases": [
+    {
+      "id": "self",
+      "label": "Self-service",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "operate",
+      "label": "Operate",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "platform",
+      "label": "Platform",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "signin",
+    "portal",
+    "quote",
+    "help",
+    "alerts"
+  ],
+  "nodes": [
+    {
+      "id": "signin",
+      "lane": "customer",
+      "col": 0,
+      "type": "security",
+      "label": "Customer sign-in",
+      "sublabel": "2nd factor",
+      "width": 132
+    },
+    {
+      "id": "portal",
+      "lane": "customer",
+      "col": 1,
+      "type": "frontend",
+      "label": "Portal",
+      "sublabel": "7 views"
+    },
+    {
+      "id": "quote",
+      "lane": "customer",
+      "col": 2,
+      "type": "frontend",
+      "label": "Quote accept",
+      "sublabel": "one invoice",
+      "width": 102
+    },
+    {
+      "id": "ai",
+      "lane": "team",
+      "col": 2,
+      "type": "frontend",
+      "label": "AI + WhatsUp",
+      "sublabel": "through App 5",
+      "width": 102
+    },
+    {
+      "id": "accounts",
+      "lane": "team",
+      "col": 3,
+      "type": "frontend",
+      "label": "Expenses + accounts",
+      "sublabel": "Wave/Xero/QuickBooks",
+      "width": 132
+    },
+    {
+      "id": "data",
+      "lane": "store",
+      "col": 3,
+      "type": "database",
+      "label": "R2 data",
+      "sublabel": "history+restore",
+      "width": 110
+    },
+    {
+      "id": "help",
+      "lane": "team",
+      "col": 4,
+      "type": "frontend",
+      "label": "Help",
+      "sublabel": "to App 5"
+    },
+    {
+      "id": "alerts",
+      "lane": "mybizz",
+      "col": 4,
+      "type": "backend",
+      "label": "At-risk alerts",
+      "sublabel": "usage + inactivity",
+      "width": 130
+    },
+    {
+      "id": "release",
+      "lane": "mybizz",
+      "col": 5,
+      "type": "cloud",
+      "label": "Release",
+      "sublabel": "reaches every client"
+    },
+    {
+      "id": "demo",
+      "lane": "system",
+      "col": 5,
+      "type": "frontend",
+      "label": "Demo apps",
+      "sublabel": "nightly reset"
+    },
+    {
+      "id": "plan",
+      "lane": "customer",
+      "col": 4,
+      "type": "frontend",
+      "label": "Plan + billing",
+      "sublabel": "mock-up invoice",
+      "width": 117
+    },
+    {
+      "id": "referral",
+      "lane": "customer",
+      "col": 5,
+      "type": "frontend",
+      "label": "Referral kit",
+      "sublabel": "share + credits",
+      "width": 102
+    }
+  ],
+  "edges": [
+    {
+      "id": "signin-portal",
+      "from": "signin",
+      "to": "portal",
+      "variant": "default"
+    },
+    {
+      "id": "portal-quote",
+      "from": "portal",
+      "to": "quote",
+      "label": "My Quotes",
+      "variant": "emphasis"
+    },
+    {
+      "id": "quote-help",
+      "from": "quote",
+      "to": "help",
+      "label": "...every feature one click away",
+      "variant": "dashed"
+    },
+    {
+      "id": "help-alerts",
+      "from": "help",
+      "to": "alerts",
+      "label": "tickets + alerts",
+      "variant": "emphasis"
+    },
+    {
+      "id": "alerts-release",
+      "from": "alerts",
+      "to": "release",
+      "label": "fixes ship",
+      "variant": "emphasis"
+    },
+    {
+      "id": "portal-plan",
+      "from": "portal",
+      "to": "plan",
+      "label": "Owner's tab",
+      "variant": "default"
+    },
+    {
+      "id": "plan-referral",
+      "from": "plan",
+      "to": "referral",
+      "label": "annual plan",
+      "variant": "default"
+    },
+    {
+      "id": "ai-data",
+      "from": "ai",
+      "to": "data",
+      "label": "assist on the data",
+      "variant": "dashed"
+    },
+    {
+      "id": "accounts-data",
+      "from": "accounts",
+      "to": "data",
+      "label": "exports kept",
+      "variant": "dashed"
+    },
+    {
+      "id": "release-demo",
+      "from": "release",
+      "to": "demo",
+      "label": "demo apps follow",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Bounded reach",
+      "items": [
+        "A customer sees only their own records",
+        "Mybizz reaches an instance only through its token",
+        "A client leaves with all of its data"
+      ]
+    }
+  ]
+}

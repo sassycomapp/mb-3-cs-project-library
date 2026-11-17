@@ -1,0 +1,72 @@
+{
+  "subject": "flow-map-onboarding-access",
+  "intent": "How a new client registers, is provisioned by App 5, and reaches the Owner's working instance; how team members and the Vault are reached. Load-bearing claim: every account reaches the instance through sign-in with a second factor, and no password is ever emailed.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "register",
+    "confirm",
+    "cloudflare",
+    "paddle",
+    "provision",
+    "welcome",
+    "setpass",
+    "onboard",
+    "invite",
+    "signin",
+    "vault",
+    "settings"
+  ],
+  "node_roles": {
+    "register": "business",
+    "confirm": "Confirm email",
+    "cloudflare": "R2",
+    "paddle": "first payment",
+    "provision": "instance",
+    "welcome": "no password sent",
+    "setpass": "FIDO2 for Owner",
+    "onboard": "10 steps, resumable",
+    "invite": "role + addresses",
+    "signin": "every role",
+    "vault": "TOTP step-up",
+    "settings": "ongoing config"
+  },
+  "main_path": [
+    "register",
+    "confirm",
+    "cloudflare",
+    "paddle",
+    "provision",
+    "welcome",
+    "setpass",
+    "onboard"
+  ],
+  "deferred_to_cards": [
+    "App 5's provisioning internals (the runbook's steps 5\u201311)",
+    "The ten wizard steps' detail (ticket 28's own drawing)",
+    "Suppression and domain records"
+  ],
+  "stages_or_lanes": [
+    "New client",
+    "Mybizz (App 5)",
+    "Owner",
+    "Team",
+    "Vault (Owner)",
+    "Settings (Owner)"
+  ],
+  "expected_corridors": [
+    [
+      "register",
+      "onboard",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

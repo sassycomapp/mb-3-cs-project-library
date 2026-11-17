@@ -1,0 +1,159 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 34, homepage templates",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "owner",
+      "label": "Owner"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "visitor",
+      "label": "Visitor"
+    }
+  ],
+  "phases": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "store",
+      "label": "Store",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "show",
+      "label": "Show",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "editor",
+    "autosave",
+    "config",
+    "template",
+    "live"
+  ],
+  "nodes": [
+    {
+      "id": "editor",
+      "lane": "owner",
+      "col": 0,
+      "type": "frontend",
+      "label": "Homepage editor",
+      "sublabel": "8 steps of UF-17",
+      "width": 125
+    },
+    {
+      "id": "autosave",
+      "lane": "owner",
+      "col": 1,
+      "type": "frontend",
+      "label": "Auto-save",
+      "sublabel": "every 30 seconds",
+      "width": 117
+    },
+    {
+      "id": "config",
+      "lane": "server",
+      "col": 2,
+      "type": "database",
+      "label": "home_config",
+      "sublabel": "one row"
+    },
+    {
+      "id": "template",
+      "lane": "server",
+      "col": 3,
+      "type": "backend",
+      "label": "Template chosen",
+      "sublabel": "classic",
+      "width": 125
+    },
+    {
+      "id": "testimonials",
+      "lane": "owner",
+      "col": 4,
+      "type": "frontend",
+      "label": "Testimonials",
+      "sublabel": "approved reviews or typed",
+      "width": 102
+    },
+    {
+      "id": "live",
+      "lane": "visitor",
+      "col": 5,
+      "type": "frontend",
+      "label": "Live home page",
+      "sublabel": "sections render or hide",
+      "width": 117
+    }
+  ],
+  "edges": [
+    {
+      "id": "editor-autosave",
+      "from": "editor",
+      "to": "autosave",
+      "label": "30 s",
+      "variant": "emphasis"
+    },
+    {
+      "id": "autosave-config",
+      "from": "autosave",
+      "to": "config",
+      "variant": "emphasis"
+    },
+    {
+      "id": "config-template",
+      "from": "config",
+      "to": "template",
+      "label": "business_profile.homepage_template",
+      "variant": "emphasis"
+    },
+    {
+      "id": "template-live",
+      "from": "template",
+      "to": "live",
+      "label": "sections render",
+      "variant": "emphasis"
+    },
+    {
+      "id": "template-testimonials",
+      "from": "template",
+      "to": "testimonials",
+      "label": "up to 10 shown",
+      "variant": "default"
+    },
+    {
+      "id": "testimonials-live",
+      "from": "testimonials",
+      "to": "live",
+      "label": "featured",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One row, four shapes",
+      "items": [
+        "home_config is data, never code",
+        "An empty video or map section hides",
+        "At most 10 reviews + testimonials featured"
+      ]
+    }
+  ]
+}

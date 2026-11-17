@@ -1,0 +1,66 @@
+{
+  "subject": "flow-map-crm-marketing",
+  "intent": "How enquiries and captures become contacts and leads, how campaigns and broadcasts go out through SES, and how the Team Inbox reads and replies. Load-bearing claim: a lead and its contact are created together in one step, and one SES tenant carries every email.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "contactform",
+    "landing",
+    "enquiry",
+    "capture",
+    "welcome",
+    "addlead",
+    "contacts",
+    "segments",
+    "campaign",
+    "reviews",
+    "inbox",
+    "reply"
+  ],
+  "node_roles": {
+    "contactform": "\u2264 1,000 chars",
+    "landing": "capture form",
+    "enquiry": "contact + task",
+    "capture": "one call",
+    "welcome": "enrolled",
+    "addlead": "unknown sender",
+    "contacts": "timeline",
+    "segments": "rules",
+    "campaign": "through SES",
+    "reviews": "approve",
+    "inbox": "addresses",
+    "reply": "AI draft"
+  },
+  "main_path": [
+    "landing",
+    "capture",
+    "welcome",
+    "campaign"
+  ],
+  "deferred_to_cards": [
+    "Suppression scope detail",
+    "Automation rules (ticket 20's drawing)",
+    "Review lifecycle detail"
+  ],
+  "stages_or_lanes": [
+    "Visitor",
+    "Server",
+    "CRM (team)",
+    "Inbox (team)"
+  ],
+  "expected_corridors": [
+    [
+      "landing",
+      "campaign",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

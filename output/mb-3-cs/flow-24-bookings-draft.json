@@ -1,0 +1,232 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 24, bookings and scheduling",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "customer",
+      "label": "Customer"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "team",
+      "label": "Team"
+    }
+  ],
+  "phases": [
+    {
+      "id": "choose",
+      "label": "Choose",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "confirm",
+      "label": "Confirm",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "after",
+      "label": "After",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "context",
+    "slots",
+    "intake",
+    "confirmb",
+    "paid"
+  ],
+  "nodes": [
+    {
+      "id": "context",
+      "lane": "customer",
+      "col": 0,
+      "type": "frontend",
+      "label": "Booking flow",
+      "sublabel": "service \u2192 provider",
+      "width": 130
+    },
+    {
+      "id": "slots",
+      "lane": "customer",
+      "col": 1,
+      "type": "frontend",
+      "label": "Slots",
+      "sublabel": "call 2"
+    },
+    {
+      "id": "intake",
+      "lane": "customer",
+      "col": 2,
+      "type": "frontend",
+      "label": "Meeting + intake",
+      "sublabel": "no server call",
+      "width": 132
+    },
+    {
+      "id": "confirmb",
+      "lane": "server",
+      "col": 3,
+      "type": "security",
+      "label": "confirm_booking",
+      "sublabel": "one transaction",
+      "width": 125
+    },
+    {
+      "id": "paid",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Confirmed",
+      "sublabel": "invoice + reminders",
+      "width": 132
+    },
+    {
+      "id": "hold",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "Payment hold",
+      "sublabel": "15 minutes",
+      "width": 102
+    },
+    {
+      "id": "late",
+      "lane": "server",
+      "col": 2,
+      "type": "security",
+      "label": "D5 late webhook",
+      "sublabel": "reinstate or refund",
+      "width": 132
+    },
+    {
+      "id": "calendar",
+      "lane": "team",
+      "col": 4,
+      "type": "frontend",
+      "label": "Calendar",
+      "sublabel": "open"
+    },
+    {
+      "id": "noshow",
+      "lane": "team",
+      "col": 5,
+      "type": "frontend",
+      "label": "Complete / no-show",
+      "sublabel": "invoice",
+      "width": 132
+    },
+    {
+      "id": "recurring",
+      "lane": "customer",
+      "col": 5,
+      "type": "frontend",
+      "label": "Recurring offer",
+      "sublabel": "weekly",
+      "width": 125
+    }
+  ],
+  "edges": [
+    {
+      "id": "context-slots",
+      "from": "context",
+      "to": "slots",
+      "label": "call 2",
+      "variant": "emphasis"
+    },
+    {
+      "id": "slots-intake",
+      "from": "slots",
+      "to": "intake",
+      "label": "cached context",
+      "variant": "default"
+    },
+    {
+      "id": "intake-confirmb",
+      "from": "intake",
+      "to": "confirmb",
+      "label": "call 3",
+      "variant": "emphasis"
+    },
+    {
+      "id": "confirmb-paid",
+      "from": "confirmb",
+      "to": "paid",
+      "label": "slot re-checked",
+      "variant": "emphasis"
+    },
+    {
+      "id": "paid-hold",
+      "from": "paid",
+      "to": "hold",
+      "label": "if unpaid",
+      "variant": "dashed"
+    },
+    {
+      "id": "hold-late",
+      "from": "hold",
+      "to": "late",
+      "label": "webhook arrives late",
+      "variant": "security"
+    },
+    {
+      "id": "paid-calendar",
+      "from": "paid",
+      "to": "calendar",
+      "label": "appears",
+      "variant": "emphasis"
+    },
+    {
+      "id": "calendar-noshow",
+      "from": "calendar",
+      "to": "noshow",
+      "label": "close the day",
+      "variant": "default"
+    },
+    {
+      "id": "paid-recurring",
+      "from": "paid",
+      "to": "recurring",
+      "label": "offer",
+      "variant": "default"
+    },
+    {
+      "id": "calendar-confirmb",
+      "from": "calendar",
+      "to": "confirmb",
+      "label": "empty slot starts here",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "One transaction decides",
+      "items": [
+        "Two customers, one slot: exactly one wins",
+        "Hold expiry frees slot and resource",
+        "D5: reinstate inside the transaction, or refund in full"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Never deleted",
+      "items": [
+        "A booking ends in its status",
+        "cancelled_at is set, the row stays",
+        "The customer and Owner are told either way"
+      ]
+    }
+  ]
+}

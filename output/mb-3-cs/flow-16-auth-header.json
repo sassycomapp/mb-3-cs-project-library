@@ -1,0 +1,57 @@
+{
+  "subject": "flow-16-auth",
+  "intent": "How every account holder signs in with a second factor, how team members are invited and set passwords, and how sessions and resets behave. Load-bearing claim: the Owner's factor is FIDO2 only, and high-value actions need a factor given in the last five minutes.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "signin",
+    "twofa",
+    "route",
+    "invite",
+    "setpass",
+    "reset",
+    "idle",
+    "endsess",
+    "stepup"
+  ],
+  "node_roles": {
+    "signin": "email + password",
+    "twofa": "app or security key",
+    "route": "Route by role",
+    "invite": "Owner or Manager",
+    "setpass": "emailed link",
+    "reset": "10-minute link",
+    "idle": "re-sign-in",
+    "endsess": "any user",
+    "stepup": "factor < 5 min old"
+  },
+  "main_path": [
+    "signin",
+    "twofa",
+    "route"
+  ],
+  "deferred_to_cards": [
+    "Users service settings (Anvil editor)",
+    "The role table's scopes (the access matrix)"
+  ],
+  "stages_or_lanes": [
+    "People",
+    "Auth server",
+    "Guards"
+  ],
+  "expected_corridors": [
+    [
+      "signin",
+      "route",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

@@ -1,0 +1,64 @@
+{
+  "subject": "flow-01-layouts",
+  "intent": "How any user lands in the application and reaches every page through its layout: role routing, the menus, and the three always-available controls. Load-bearing claim: the interface hides what a role cannot use and is never the enforcement.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "login",
+    "route",
+    "admin",
+    "controls",
+    "banner",
+    "customer",
+    "public",
+    "blank",
+    "error",
+    "page"
+  ],
+  "node_roles": {
+    "login": "password+2FA",
+    "route": "before init",
+    "admin": "rail+menu",
+    "controls": "3 controls",
+    "banner": "until cleared",
+    "customer": "drawer",
+    "public": "header",
+    "blank": "no chrome",
+    "error": "404/403/500",
+    "page": "on its layout"
+  },
+  "main_path": [
+    "login",
+    "route",
+    "admin",
+    "controls",
+    "page"
+  ],
+  "deferred_to_cards": [
+    "Menu item list (architecture reference \u00a79)",
+    "Palette application detail"
+  ],
+  "stages_or_lanes": [
+    "Any user",
+    "Routing",
+    "Team shell",
+    "Customer shell",
+    "Public shells",
+    "Pages"
+  ],
+  "expected_corridors": [
+    [
+      "login",
+      "page",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

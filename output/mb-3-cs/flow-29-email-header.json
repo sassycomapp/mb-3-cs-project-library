@@ -1,0 +1,62 @@
+{
+  "subject": "flow-29-email",
+  "intent": "How the team reads, replies and organises email on its own domain, and how SES carries every message in and out. Load-bearing claim: the trust boundary is Amazon SES with SNS-signed events \u2014 never Brevo \u2014 and each member sees only their own address and desks.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "inbox",
+    "conversation",
+    "compose",
+    "addresses",
+    "organise",
+    "unassigned",
+    "send",
+    "receive",
+    "archive",
+    "suppress"
+  ],
+  "node_roles": {
+    "inbox": "address+folder",
+    "conversation": "contact linked",
+    "compose": "AI draft",
+    "addresses": "desks, signatures",
+    "organise": "Trash 30 d",
+    "unassigned": "Owner moves",
+    "send": "client domain",
+    "receive": "SNS signature",
+    "archive": "bodies to R2",
+    "suppress": "bounce/opt-out"
+  },
+  "main_path": [
+    "inbox",
+    "conversation",
+    "compose",
+    "send",
+    "organise"
+  ],
+  "deferred_to_cards": [
+    "The domain records' detail",
+    "The unsubscribe endpoint's link rules"
+  ],
+  "stages_or_lanes": [
+    "Team",
+    "Outbound (SES)",
+    "Inbound (SES)",
+    "Data"
+  ],
+  "expected_corridors": [
+    [
+      "inbox",
+      "organise",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

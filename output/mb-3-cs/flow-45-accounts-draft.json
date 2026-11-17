@@ -1,0 +1,150 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 45, accounts",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "finance",
+      "label": "Owner / Manager"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "data",
+      "label": "Data"
+    }
+  ],
+  "phases": [
+    {
+      "id": "record",
+      "label": "Record",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "report",
+      "label": "Report",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "export",
+      "label": "Export",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "expense",
+    "receipt",
+    "void",
+    "reports",
+    "export"
+  ],
+  "nodes": [
+    {
+      "id": "expense",
+      "lane": "finance",
+      "col": 0,
+      "type": "frontend",
+      "label": "New expense",
+      "sublabel": "supplier"
+    },
+    {
+      "id": "receipt",
+      "lane": "finance",
+      "col": 1,
+      "type": "cloud",
+      "label": "Receipt photo",
+      "sublabel": "to R2",
+      "width": 109
+    },
+    {
+      "id": "void",
+      "lane": "finance",
+      "col": 2,
+      "type": "frontend",
+      "label": "Void",
+      "sublabel": "never deleted"
+    },
+    {
+      "id": "reports",
+      "lane": "finance",
+      "col": 3,
+      "type": "frontend",
+      "label": "Reports",
+      "sublabel": "P&L"
+    },
+    {
+      "id": "export",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Export",
+      "sublabel": "3 formats",
+      "width": 110
+    },
+    {
+      "id": "zip",
+      "lane": "data",
+      "col": 5,
+      "type": "database",
+      "label": "exports/",
+      "sublabel": "one ZIP of the period"
+    }
+  ],
+  "edges": [
+    {
+      "id": "expense-receipt",
+      "from": "expense",
+      "to": "receipt",
+      "label": "image stored",
+      "variant": "emphasis"
+    },
+    {
+      "id": "receipt-void",
+      "from": "receipt",
+      "to": "void",
+      "label": "if entered in error",
+      "variant": "emphasis"
+    },
+    {
+      "id": "void-reports",
+      "from": "void",
+      "to": "reports",
+      "label": "left out",
+      "variant": "emphasis"
+    },
+    {
+      "id": "reports-export",
+      "from": "reports",
+      "to": "export",
+      "label": "choose the period",
+      "variant": "emphasis"
+    },
+    {
+      "id": "export-zip",
+      "from": "export",
+      "to": "zip",
+      "label": "kept in the bucket",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Void, never delete",
+      "items": [
+        "An error is voided, not deleted",
+        "Every export writes an audit row",
+        "Receipts live in the client's own bucket"
+      ]
+    }
+  ]
+}

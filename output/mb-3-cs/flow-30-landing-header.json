@@ -1,0 +1,53 @@
+{
+  "subject": "flow-30-landing",
+  "intent": "How the Owner builds a campaign page in one of three templates and publishes it to a shareable address. Load-bearing claim: a landing page is outside the public website's own pages, and its only job is to capture a lead.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "list",
+    "editor",
+    "editmode",
+    "publish",
+    "visit",
+    "analytics"
+  ],
+  "node_roles": {
+    "list": "Landing list",
+    "editor": "3 templates",
+    "editmode": "on the page",
+    "publish": "validated + address",
+    "visit": "blank layout",
+    "analytics": "views + conversions"
+  },
+  "main_path": [
+    "list",
+    "editor",
+    "editmode",
+    "publish",
+    "visit"
+  ],
+  "deferred_to_cards": [
+    "Template content schemas",
+    "The share targets (email, social, embed)"
+  ],
+  "stages_or_lanes": [
+    "Owner / Manager",
+    "Server",
+    "Campaign visitor"
+  ],
+  "expected_corridors": [
+    [
+      "list",
+      "visit",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

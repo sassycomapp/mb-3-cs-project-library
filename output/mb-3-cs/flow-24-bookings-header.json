@@ -1,0 +1,62 @@
+{
+  "subject": "flow-24-bookings",
+  "intent": "The product's core: how a customer books through three server calls, how the team runs the calendar, and how contention, holds and late payments are decided. Load-bearing claim: confirm_booking re-checks slot, resource and places inside the same transaction that confirms \u2014 and a late payment either reinstates inside that discipline or refunds in full.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "context",
+    "slots",
+    "intake",
+    "confirmb",
+    "paid",
+    "hold",
+    "late",
+    "calendar",
+    "noshow",
+    "recurring"
+  ],
+  "node_roles": {
+    "context": "service \u2192 provider",
+    "slots": "call 2",
+    "intake": "no server call",
+    "confirmb": "one transaction",
+    "paid": "invoice + reminders",
+    "hold": "15 minutes",
+    "late": "reinstate or refund",
+    "calendar": "open",
+    "noshow": "invoice",
+    "recurring": "weekly"
+  },
+  "main_path": [
+    "context",
+    "slots",
+    "intake",
+    "confirmb",
+    "paid"
+  ],
+  "deferred_to_cards": [
+    "The 3-second performance budget's page detail",
+    "Availability rule maths",
+    "Travel-buffer computation"
+  ],
+  "stages_or_lanes": [
+    "Customer",
+    "Server",
+    "Team"
+  ],
+  "expected_corridors": [
+    [
+      "context",
+      "paid",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

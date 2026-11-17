@@ -1,0 +1,213 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 21, the service catalogue",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "team",
+      "label": "Owner / Manager"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "data",
+      "label": "Data"
+    }
+  ],
+  "phases": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "detail",
+      "label": "Detail",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "offer",
+      "label": "Offer",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "list",
+    "editor",
+    "duration",
+    "intake",
+    "active"
+  ],
+  "nodes": [
+    {
+      "id": "list",
+      "lane": "team",
+      "col": 0,
+      "type": "frontend",
+      "label": "Services list",
+      "width": 109
+    },
+    {
+      "id": "editor",
+      "lane": "team",
+      "col": 1,
+      "type": "frontend",
+      "label": "Service editor",
+      "sublabel": "pricing model first",
+      "width": 132
+    },
+    {
+      "id": "duration",
+      "lane": "server",
+      "col": 2,
+      "type": "backend",
+      "label": "Duration",
+      "sublabel": "slots + providers",
+      "width": 123
+    },
+    {
+      "id": "unit",
+      "lane": "server",
+      "col": 3,
+      "type": "backend",
+      "label": "Unit",
+      "sublabel": "ordered work"
+    },
+    {
+      "id": "resources",
+      "lane": "team",
+      "col": 3,
+      "type": "frontend",
+      "label": "Resources",
+      "sublabel": "rooms + equipment",
+      "width": 123
+    },
+    {
+      "id": "groups",
+      "lane": "team",
+      "col": 4,
+      "type": "frontend",
+      "label": "Group sessions",
+      "sublabel": "places + limit",
+      "width": 117
+    },
+    {
+      "id": "intake",
+      "lane": "team",
+      "col": 5,
+      "type": "frontend",
+      "label": "Intake schema",
+      "sublabel": "client-defined questions",
+      "width": 109
+    },
+    {
+      "id": "images",
+      "lane": "team",
+      "col": 2,
+      "type": "frontend",
+      "label": "Images + video",
+      "sublabel": "public presentation",
+      "width": 132
+    },
+    {
+      "id": "active",
+      "lane": "data",
+      "col": 5,
+      "type": "database",
+      "label": "is_active",
+      "sublabel": "only active are public"
+    },
+    {
+      "id": "categories",
+      "lane": "data",
+      "col": 4,
+      "type": "database",
+      "label": "Categories",
+      "sublabel": "filing"
+    }
+  ],
+  "edges": [
+    {
+      "id": "list-editor",
+      "from": "list",
+      "to": "editor",
+      "variant": "default"
+    },
+    {
+      "id": "editor-duration",
+      "from": "editor",
+      "to": "duration",
+      "label": "pricing model",
+      "variant": "emphasis"
+    },
+    {
+      "id": "editor-unit",
+      "from": "editor",
+      "to": "unit",
+      "label": "the other model",
+      "variant": "default"
+    },
+    {
+      "id": "duration-resources",
+      "from": "duration",
+      "to": "resources",
+      "label": "required resources",
+      "variant": "default"
+    },
+    {
+      "id": "duration-groups",
+      "from": "duration",
+      "to": "groups",
+      "label": "is_group",
+      "variant": "default"
+    },
+    {
+      "id": "duration-intake",
+      "from": "duration",
+      "to": "intake",
+      "label": "booking questions",
+      "variant": "emphasis"
+    },
+    {
+      "id": "editor-images",
+      "from": "editor",
+      "to": "images",
+      "label": "presentation",
+      "variant": "default"
+    },
+    {
+      "id": "intake-active",
+      "from": "intake",
+      "to": "active",
+      "label": "publish",
+      "variant": "emphasis"
+    },
+    {
+      "id": "editor-categories",
+      "from": "editor",
+      "to": "categories",
+      "label": "filed",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "The model decides",
+      "items": [
+        "duration services book slots",
+        "unit services take orders",
+        "only active services are public"
+      ]
+    }
+  ]
+}

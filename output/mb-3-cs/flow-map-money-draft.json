@@ -1,0 +1,215 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "User flow map \u2014 money (UF-13\u2013UF-15)",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "staff",
+      "label": "Staff"
+    },
+    {
+      "id": "finance",
+      "label": "Finance"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "money",
+      "label": "Money path"
+    }
+  ],
+  "phases": [
+    {
+      "id": "record",
+      "label": "Record",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "issue",
+      "label": "Issue",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "settle",
+      "label": "Settle",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "timer",
+    "billable",
+    "create",
+    "send",
+    "webhook",
+    "applied"
+  ],
+  "nodes": [
+    {
+      "id": "timer",
+      "lane": "staff",
+      "col": 0,
+      "type": "frontend",
+      "label": "Time entries",
+      "sublabel": "timer or hand",
+      "width": 102
+    },
+    {
+      "id": "billable",
+      "lane": "staff",
+      "col": 1,
+      "type": "frontend",
+      "label": "Billable",
+      "sublabel": "uninvoiced only",
+      "width": 110
+    },
+    {
+      "id": "create",
+      "lane": "finance",
+      "col": 2,
+      "type": "backend",
+      "label": "Create invoice",
+      "sublabel": "from entries",
+      "width": 117
+    },
+    {
+      "id": "manual",
+      "lane": "finance",
+      "col": 1,
+      "type": "frontend",
+      "label": "New invoice",
+      "sublabel": "manual lines"
+    },
+    {
+      "id": "send",
+      "lane": "finance",
+      "col": 3,
+      "type": "backend",
+      "label": "Send",
+      "sublabel": "PDF + link"
+    },
+    {
+      "id": "webhook",
+      "lane": "money",
+      "col": 4,
+      "type": "security",
+      "label": "Webhook",
+      "sublabel": "verified once"
+    },
+    {
+      "id": "applied",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "Applied once",
+      "sublabel": "background",
+      "width": 102
+    },
+    {
+      "id": "recordpay",
+      "lane": "finance",
+      "col": 4,
+      "type": "frontend",
+      "label": "Record pay",
+      "sublabel": "cash/transfer"
+    },
+    {
+      "id": "refund",
+      "lane": "finance",
+      "col": 5,
+      "type": "security",
+      "label": "Refund",
+      "sublabel": "step-up"
+    },
+    {
+      "id": "overdue",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Overdue",
+      "sublabel": "nightly"
+    }
+  ],
+  "edges": [
+    {
+      "id": "timer-billable",
+      "from": "timer",
+      "to": "billable",
+      "variant": "default"
+    },
+    {
+      "id": "billable-create",
+      "from": "billable",
+      "to": "create",
+      "label": "entries marked invoiced",
+      "variant": "emphasis"
+    },
+    {
+      "id": "manual-create",
+      "from": "manual",
+      "to": "create",
+      "label": "or from scratch",
+      "variant": "default"
+    },
+    {
+      "id": "create-send",
+      "from": "create",
+      "to": "send",
+      "variant": "emphasis"
+    },
+    {
+      "id": "send-webhook",
+      "from": "send",
+      "to": "webhook",
+      "label": "gateway calls back",
+      "variant": "emphasis"
+    },
+    {
+      "id": "webhook-applied",
+      "from": "webhook",
+      "to": "applied",
+      "label": "applied once",
+      "variant": "emphasis"
+    },
+    {
+      "id": "send-recordpay",
+      "from": "send",
+      "to": "recordpay",
+      "label": "non-gateway methods",
+      "variant": "default"
+    },
+    {
+      "id": "send-refund",
+      "from": "send",
+      "to": "refund",
+      "label": "full or part",
+      "variant": "security"
+    },
+    {
+      "id": "send-overdue",
+      "from": "send",
+      "to": "overdue",
+      "label": "past due",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "The server's word",
+      "items": [
+        "Amounts are read from the database, never the browser",
+        "A forged or replayed webhook changes nothing",
+        "Rows of invoice and payments are never deleted"
+      ]
+    }
+  ]
+}

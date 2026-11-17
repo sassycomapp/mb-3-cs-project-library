@@ -1,0 +1,53 @@
+{
+  "subject": "flow-26-orders",
+  "intent": "How a customer orders delivered work with a brief, and how the team takes the order to delivered. Load-bearing claim: the order submits once and is never deleted \u2014 it moves through its status.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "brief",
+    "pay",
+    "ordered",
+    "progress",
+    "deliver",
+    "balance"
+  ],
+  "node_roles": {
+    "brief": "brief + attachments",
+    "pay": "full",
+    "ordered": "contact matched",
+    "progress": "customer emailed",
+    "deliver": "files + message",
+    "balance": "where owed"
+  },
+  "main_path": [
+    "brief",
+    "pay",
+    "ordered",
+    "progress",
+    "deliver"
+  ],
+  "deferred_to_cards": [
+    "Brief attachment size rules",
+    "The delivery email's template"
+  ],
+  "stages_or_lanes": [
+    "Customer",
+    "Server",
+    "Team"
+  ],
+  "expected_corridors": [
+    [
+      "brief",
+      "deliver",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

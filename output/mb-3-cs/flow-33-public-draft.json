@@ -1,0 +1,214 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 33, the public website",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "visitor",
+      "label": "Visitor"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "owner",
+      "label": "Owner / Manager"
+    }
+  ],
+  "phases": [
+    {
+      "id": "arrive",
+      "label": "Arrive",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "engage",
+      "label": "Engage",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "manage",
+      "label": "Manage",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "home",
+    "detail",
+    "contact",
+    "enquiry",
+    "legal"
+  ],
+  "nodes": [
+    {
+      "id": "home",
+      "lane": "visitor",
+      "col": 0,
+      "type": "frontend",
+      "label": "Public pages",
+      "sublabel": "home",
+      "width": 102
+    },
+    {
+      "id": "detail",
+      "lane": "visitor",
+      "col": 1,
+      "type": "frontend",
+      "label": "Service detail",
+      "sublabel": "start of booking",
+      "width": 117
+    },
+    {
+      "id": "contact",
+      "lane": "visitor",
+      "col": 2,
+      "type": "frontend",
+      "label": "Contact form",
+      "sublabel": "\u2264 1,000 chars",
+      "width": 102
+    },
+    {
+      "id": "enquiry",
+      "lane": "server",
+      "col": 3,
+      "type": "backend",
+      "label": "Enquiry",
+      "sublabel": "contact"
+    },
+    {
+      "id": "editmode",
+      "lane": "owner",
+      "col": 2,
+      "type": "frontend",
+      "label": "Edit mode",
+      "sublabel": "Owner / Manager",
+      "width": 110
+    },
+    {
+      "id": "save",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Save once",
+      "sublabel": "audited"
+    },
+    {
+      "id": "media",
+      "lane": "owner",
+      "col": 4,
+      "type": "frontend",
+      "label": "Media library",
+      "sublabel": "images + files",
+      "width": 109
+    },
+    {
+      "id": "pages",
+      "lane": "owner",
+      "col": 5,
+      "type": "frontend",
+      "label": "Pages list",
+      "sublabel": "name, SEO, address",
+      "width": 130
+    },
+    {
+      "id": "legal",
+      "lane": "visitor",
+      "col": 4,
+      "type": "frontend",
+      "label": "Legal pages",
+      "sublabel": "published versions",
+      "width": 130
+    },
+    {
+      "id": "seo",
+      "lane": "server",
+      "col": 5,
+      "type": "database",
+      "label": "Route.meta",
+      "sublabel": "title"
+    }
+  ],
+  "edges": [
+    {
+      "id": "home-detail",
+      "from": "home",
+      "to": "detail",
+      "variant": "emphasis"
+    },
+    {
+      "id": "detail-contact",
+      "from": "detail",
+      "to": "contact",
+      "label": "or book",
+      "variant": "default"
+    },
+    {
+      "id": "contact-enquiry",
+      "from": "contact",
+      "to": "enquiry",
+      "label": "one contact",
+      "variant": "emphasis"
+    },
+    {
+      "id": "enquiry-legal",
+      "from": "enquiry",
+      "to": "legal",
+      "label": "links to the policies",
+      "variant": "dashed"
+    },
+    {
+      "id": "home-editmode",
+      "from": "home",
+      "to": "editmode",
+      "label": "signed in",
+      "variant": "dashed"
+    },
+    {
+      "id": "editmode-save",
+      "from": "editmode",
+      "to": "save",
+      "label": "publishes at once",
+      "variant": "emphasis"
+    },
+    {
+      "id": "save-media",
+      "from": "save",
+      "to": "media",
+      "label": "images from the library",
+      "variant": "default"
+    },
+    {
+      "id": "pages-editmode",
+      "from": "pages",
+      "to": "editmode",
+      "label": "open any page",
+      "variant": "dashed"
+    },
+    {
+      "id": "save-seo",
+      "from": "save",
+      "to": "seo",
+      "label": "routes carry tags",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Public by design",
+      "items": [
+        "Public readers return the public subset only",
+        "Every edit is audited",
+        "An enquiry never duplicates a contact"
+      ]
+    }
+  ]
+}

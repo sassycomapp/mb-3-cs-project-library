@@ -1,0 +1,208 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 39, the customer portal",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "customer",
+      "label": "Customer"
+    },
+    {
+      "id": "views",
+      "label": "Views"
+    },
+    {
+      "id": "moreviews",
+      "label": "More views"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    }
+  ],
+  "phases": [
+    {
+      "id": "signin",
+      "label": "Sign in",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "views",
+      "label": "Views",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "moreviews",
+      "label": "More views",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "signin",
+    "dash",
+    "bookings",
+    "quotes",
+    "own"
+  ],
+  "nodes": [
+    {
+      "id": "signin",
+      "lane": "customer",
+      "col": 0,
+      "type": "security",
+      "label": "Customer sign-in",
+      "sublabel": "password",
+      "width": 132
+    },
+    {
+      "id": "dash",
+      "lane": "customer",
+      "col": 1,
+      "type": "frontend",
+      "label": "My Dashboard",
+      "sublabel": "upcoming",
+      "width": 102
+    },
+    {
+      "id": "bookings",
+      "lane": "views",
+      "col": 2,
+      "type": "frontend",
+      "label": "My Bookings",
+      "sublabel": "reschedule"
+    },
+    {
+      "id": "packages",
+      "lane": "views",
+      "col": 3,
+      "type": "frontend",
+      "label": "My Packages",
+      "sublabel": "balance"
+    },
+    {
+      "id": "quotes",
+      "lane": "views",
+      "col": 4,
+      "type": "frontend",
+      "label": "My Quotes",
+      "sublabel": "accept"
+    },
+    {
+      "id": "invoices",
+      "lane": "views",
+      "col": 5,
+      "type": "frontend",
+      "label": "My Invoices",
+      "sublabel": "PDF, pay"
+    },
+    {
+      "id": "reviews",
+      "lane": "moreviews",
+      "col": 4,
+      "type": "frontend",
+      "label": "My Reviews"
+    },
+    {
+      "id": "account",
+      "lane": "moreviews",
+      "col": 5,
+      "type": "frontend",
+      "label": "Account",
+      "sublabel": "profile, briefing",
+      "width": 123
+    },
+    {
+      "id": "own",
+      "lane": "server",
+      "col": 5,
+      "type": "security",
+      "label": "Own records only",
+      "sublabel": "derived from the user",
+      "width": 132
+    },
+    {
+      "id": "pay",
+      "lane": "customer",
+      "col": 5,
+      "type": "external",
+      "label": "Pay online",
+      "sublabel": "hosted gateway",
+      "width": 103
+    }
+  ],
+  "edges": [
+    {
+      "id": "signin-dash",
+      "from": "signin",
+      "to": "dash",
+      "variant": "emphasis"
+    },
+    {
+      "id": "dash-bookings",
+      "from": "dash",
+      "to": "bookings",
+      "label": "a view",
+      "variant": "emphasis"
+    },
+    {
+      "id": "dash-packages",
+      "from": "dash",
+      "to": "packages",
+      "label": "another view",
+      "variant": "default"
+    },
+    {
+      "id": "bookings-quotes",
+      "from": "bookings",
+      "to": "quotes",
+      "label": "next view",
+      "variant": "default"
+    },
+    {
+      "id": "quotes-own",
+      "from": "quotes",
+      "to": "own",
+      "label": "accept creates the invoice",
+      "variant": "emphasis"
+    },
+    {
+      "id": "invoices-pay",
+      "from": "invoices",
+      "to": "pay",
+      "label": "hosted page",
+      "variant": "emphasis"
+    },
+    {
+      "id": "dash-reviews",
+      "from": "dash",
+      "to": "reviews",
+      "label": "and account",
+      "variant": "default"
+    },
+    {
+      "id": "invoices-own",
+      "from": "invoices",
+      "to": "own",
+      "label": "every query scoped",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Own records only",
+      "items": [
+        "The customer is derived from the signed-in user",
+        "A Customer cannot call any back-office function",
+        "Every view shows only their own rows"
+      ]
+    }
+  ]
+}

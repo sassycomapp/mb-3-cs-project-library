@@ -1,0 +1,66 @@
+{
+  "subject": "flow-map-content",
+  "intent": "How the Owner edits the public website in place, configures the homepage, publishes landing pages and legal documents, and shares posts. Load-bearing claim: every edit saves in one server call and is audited; a legal publish raises the version and keeps its copy in R2.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "editmode",
+    "pages",
+    "homepage",
+    "landing",
+    "clause",
+    "blog",
+    "share",
+    "save",
+    "homeconfig",
+    "publishlegal",
+    "live"
+  ],
+  "node_roles": {
+    "editmode": "in place",
+    "pages": "SEO + address",
+    "homepage": "auto-save",
+    "landing": "3 templates",
+    "clause": "3 documents",
+    "blog": "schedule",
+    "share": "AI captions",
+    "save": "audited",
+    "homeconfig": "one row",
+    "publishlegal": "copy to R2",
+    "live": "visitors see it"
+  },
+  "main_path": [
+    "editmode",
+    "save",
+    "homepage",
+    "homeconfig",
+    "live"
+  ],
+  "deferred_to_cards": [
+    "The 12 page templates' inventory (DESIGN.md)",
+    "Consent interplay with embeds",
+    "Syndication `?ref=` detail"
+  ],
+  "stages_or_lanes": [
+    "Editors",
+    "Legal",
+    "Blog",
+    "Server",
+    "Visitor"
+  ],
+  "expected_corridors": [
+    [
+      "editmode",
+      "live",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

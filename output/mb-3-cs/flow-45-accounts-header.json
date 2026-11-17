@@ -1,0 +1,53 @@
+{
+  "subject": "flow-45-accounts",
+  "intent": "How the client records expenses with their receipts and produces the accounts reports and the package exports. Load-bearing claim: a void expense is left out of every report and export, and every export writes an audit row.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "expense",
+    "receipt",
+    "void",
+    "reports",
+    "export",
+    "zip"
+  ],
+  "node_roles": {
+    "expense": "supplier",
+    "receipt": "to R2",
+    "void": "never deleted",
+    "reports": "P&L",
+    "export": "3 formats",
+    "zip": "one ZIP of the period"
+  },
+  "main_path": [
+    "expense",
+    "receipt",
+    "void",
+    "reports",
+    "export"
+  ],
+  "deferred_to_cards": [
+    "The three export formats' column maps",
+    "Customer statements' PDF layout"
+  ],
+  "stages_or_lanes": [
+    "Owner / Manager",
+    "Server",
+    "Data"
+  ],
+  "expected_corridors": [
+    [
+      "expense",
+      "export",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 32, tasks and automation",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "engine",
+      "label": "Automation engine"
+    },
+    {
+      "id": "data",
+      "label": "Data"
+    }
+  ],
+  "phases": [
+    {
+      "id": "track",
+      "label": "Track",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "automate",
+      "label": "Automate",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "record",
+      "label": "Record",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "list",
+    "complete",
+    "newrule",
+    "actions",
+    "evaluates"
+  ],
+  "nodes": [
+    {
+      "id": "list",
+      "lane": "team",
+      "col": 0,
+      "type": "frontend",
+      "label": "Tasks",
+      "sublabel": "by due date"
+    },
+    {
+      "id": "complete",
+      "lane": "team",
+      "col": 1,
+      "type": "frontend",
+      "label": "Complete",
+      "sublabel": "timestamped"
+    },
+    {
+      "id": "newrule",
+      "lane": "team",
+      "col": 2,
+      "type": "frontend",
+      "label": "New automation",
+      "sublabel": "trigger",
+      "width": 117
+    },
+    {
+      "id": "actions",
+      "lane": "team",
+      "col": 3,
+      "type": "frontend",
+      "label": "Actions",
+      "sublabel": "4 action kinds",
+      "width": 103
+    },
+    {
+      "id": "evaluates",
+      "lane": "engine",
+      "col": 4,
+      "type": "backend",
+      "label": "Evaluation",
+      "sublabel": "background task",
+      "width": 110
+    },
+    {
+      "id": "runs",
+      "lane": "data",
+      "col": 5,
+      "type": "database",
+      "label": "automation_runs",
+      "sublabel": "one per rule",
+      "width": 125
+    }
+  ],
+  "edges": [
+    {
+      "id": "list-complete",
+      "from": "list",
+      "to": "complete",
+      "variant": "emphasis"
+    },
+    {
+      "id": "complete-newrule",
+      "from": "complete",
+      "to": "newrule",
+      "label": "or automate it",
+      "variant": "emphasis"
+    },
+    {
+      "id": "newrule-actions",
+      "from": "newrule",
+      "to": "actions",
+      "label": "what to do",
+      "variant": "emphasis"
+    },
+    {
+      "id": "actions-evaluates",
+      "from": "actions",
+      "to": "evaluates",
+      "label": "switched on",
+      "variant": "emphasis"
+    },
+    {
+      "id": "evaluates-runs",
+      "from": "evaluates",
+      "to": "runs",
+      "label": "recorded",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Recorded, once",
+      "items": [
+        "One run per rule and trigger reference",
+        "Staff see and complete their own tasks",
+        "The completion carries its timestamp"
+      ]
+    }
+  ]
+}

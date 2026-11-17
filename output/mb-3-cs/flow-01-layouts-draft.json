@@ -1,0 +1,224 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 01, the layouts",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "user",
+      "label": "Any user"
+    },
+    {
+      "id": "routing",
+      "label": "Routing"
+    },
+    {
+      "id": "teamshell",
+      "label": "Team shell"
+    },
+    {
+      "id": "custshell",
+      "label": "Customer shell"
+    },
+    {
+      "id": "pubshell",
+      "label": "Public shells"
+    },
+    {
+      "id": "pages",
+      "label": "Pages"
+    }
+  ],
+  "phases": [
+    {
+      "id": "arrive",
+      "label": "Arrive",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "route",
+      "label": "Route",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "work",
+      "label": "Work",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "login",
+    "route",
+    "admin",
+    "controls",
+    "page"
+  ],
+  "nodes": [
+    {
+      "id": "login",
+      "lane": "user",
+      "col": 0,
+      "type": "security",
+      "label": "Sign-in",
+      "sublabel": "password+2FA"
+    },
+    {
+      "id": "route",
+      "lane": "routing",
+      "col": 1,
+      "type": "backend",
+      "label": "Route by role",
+      "sublabel": "before init",
+      "width": 109
+    },
+    {
+      "id": "admin",
+      "lane": "teamshell",
+      "col": 2,
+      "type": "frontend",
+      "label": "AdminLayout",
+      "sublabel": "rail+menu"
+    },
+    {
+      "id": "controls",
+      "lane": "teamshell",
+      "col": 4,
+      "type": "backend",
+      "label": "Always there",
+      "sublabel": "3 controls",
+      "width": 102
+    },
+    {
+      "id": "banner",
+      "lane": "teamshell",
+      "col": 5,
+      "type": "frontend",
+      "label": "Sample banner",
+      "sublabel": "until cleared",
+      "width": 109
+    },
+    {
+      "id": "customer",
+      "lane": "custshell",
+      "col": 3,
+      "type": "frontend",
+      "label": "CustomerLayout",
+      "sublabel": "drawer",
+      "width": 117
+    },
+    {
+      "id": "public",
+      "lane": "pubshell",
+      "col": 4,
+      "type": "frontend",
+      "label": "PublicLayout",
+      "sublabel": "header",
+      "width": 102
+    },
+    {
+      "id": "blank",
+      "lane": "pubshell",
+      "col": 3,
+      "type": "frontend",
+      "label": "BlankLayout",
+      "sublabel": "no chrome"
+    },
+    {
+      "id": "error",
+      "lane": "pubshell",
+      "col": 5,
+      "type": "security",
+      "label": "ErrorLayout",
+      "sublabel": "404/403/500"
+    },
+    {
+      "id": "page",
+      "lane": "pages",
+      "col": 5,
+      "type": "frontend",
+      "label": "Page form",
+      "sublabel": "on its layout"
+    }
+  ],
+  "edges": [
+    {
+      "id": "login-route",
+      "from": "login",
+      "to": "route",
+      "variant": "default"
+    },
+    {
+      "id": "route-admin",
+      "from": "route",
+      "to": "admin",
+      "label": "team roles",
+      "variant": "emphasis"
+    },
+    {
+      "id": "route-customer",
+      "from": "route",
+      "to": "customer",
+      "label": "customer role",
+      "variant": "default"
+    },
+    {
+      "id": "route-public",
+      "from": "route",
+      "to": "public",
+      "label": "public address",
+      "variant": "default"
+    },
+    {
+      "id": "route-blank",
+      "from": "route",
+      "to": "blank",
+      "label": "signed out",
+      "variant": "default"
+    },
+    {
+      "id": "admin-controls",
+      "from": "admin",
+      "to": "controls",
+      "label": "every page",
+      "variant": "emphasis"
+    },
+    {
+      "id": "controls-page",
+      "from": "controls",
+      "to": "page",
+      "label": "open_form",
+      "variant": "emphasis"
+    },
+    {
+      "id": "admin-banner",
+      "from": "admin",
+      "to": "banner",
+      "label": "sample data present",
+      "variant": "dashed"
+    },
+    {
+      "id": "route-error",
+      "from": "route",
+      "to": "error",
+      "label": "unknown or refused",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Hide, never protect",
+      "items": [
+        "Menus show what the role may use",
+        "The server refuses what the interface hides",
+        "Every page carries the three controls"
+      ]
+    }
+  ]
+}

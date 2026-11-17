@@ -1,0 +1,184 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 25, dashboard and analytics",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "tasks",
+      "label": "Summary tasks"
+    },
+    {
+      "id": "data",
+      "label": "Summaries"
+    }
+  ],
+  "phases": [
+    {
+      "id": "open",
+      "label": "Open",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "read",
+      "label": "Read",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "trust",
+      "label": "Trust",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "dash",
+    "analytics",
+    "drill",
+    "summary",
+    "rows"
+  ],
+  "nodes": [
+    {
+      "id": "dash",
+      "lane": "team",
+      "col": 0,
+      "type": "frontend",
+      "label": "Dashboard",
+      "sublabel": "metrics"
+    },
+    {
+      "id": "calendar",
+      "lane": "team",
+      "col": 1,
+      "type": "frontend",
+      "label": "Today's calendar",
+      "width": 132
+    },
+    {
+      "id": "analytics",
+      "lane": "team",
+      "col": 2,
+      "type": "frontend",
+      "label": "Analytics",
+      "sublabel": "revenue + marketing",
+      "width": 132
+    },
+    {
+      "id": "drill",
+      "lane": "team",
+      "col": 3,
+      "type": "frontend",
+      "label": "Drill + export",
+      "sublabel": "PDF",
+      "width": 117
+    },
+    {
+      "id": "summary",
+      "lane": "tasks",
+      "col": 4,
+      "type": "backend",
+      "label": "Summary tasks",
+      "sublabel": "period-keyed upsert",
+      "width": 132
+    },
+    {
+      "id": "rows",
+      "lane": "data",
+      "col": 5,
+      "type": "database",
+      "label": "One row/period",
+      "sublabel": "re-run replaces",
+      "width": 117
+    },
+    {
+      "id": "banner",
+      "lane": "team",
+      "col": 4,
+      "type": "frontend",
+      "label": "Sample banner",
+      "sublabel": "Owner clears",
+      "width": 109
+    },
+    {
+      "id": "clear",
+      "lane": "tasks",
+      "col": 5,
+      "type": "backend",
+      "label": "Clear sample",
+      "sublabel": "Owner only, audited",
+      "width": 132
+    }
+  ],
+  "edges": [
+    {
+      "id": "dash-calendar",
+      "from": "dash",
+      "to": "calendar",
+      "label": "the day",
+      "variant": "emphasis"
+    },
+    {
+      "id": "dash-analytics",
+      "from": "dash",
+      "to": "analytics",
+      "label": "the numbers",
+      "variant": "emphasis"
+    },
+    {
+      "id": "analytics-drill",
+      "from": "analytics",
+      "to": "drill",
+      "label": "act on a metric",
+      "variant": "default"
+    },
+    {
+      "id": "drill-summary",
+      "from": "drill",
+      "to": "summary",
+      "label": "figures come from",
+      "variant": "emphasis"
+    },
+    {
+      "id": "summary-rows",
+      "from": "summary",
+      "to": "rows",
+      "label": "upsert per period",
+      "variant": "emphasis"
+    },
+    {
+      "id": "dash-banner",
+      "from": "dash",
+      "to": "banner",
+      "label": "until cleared",
+      "variant": "dashed"
+    },
+    {
+      "id": "banner-clear",
+      "from": "banner",
+      "to": "clear",
+      "label": "removes every sample row",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Pre-computed, never on load",
+      "items": [
+        "Dashboards read summaries only",
+        "A task run twice leaves one row per period",
+        "Sample data never leaks into real figures"
+      ]
+    }
+  ]
+}

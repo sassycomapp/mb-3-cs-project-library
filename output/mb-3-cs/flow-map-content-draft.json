@@ -1,0 +1,236 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "User flow map \u2014 content (UF-16\u2013UF-18, UF-28, UF-42)",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "editor",
+      "label": "Editors"
+    },
+    {
+      "id": "legal",
+      "label": "Legal"
+    },
+    {
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "visitor",
+      "label": "Visitor"
+    }
+  ],
+  "phases": [
+    {
+      "id": "edit",
+      "label": "Edit",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "publish",
+      "label": "Publish",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "read",
+      "label": "Read",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "editmode",
+    "save",
+    "homepage",
+    "homeconfig",
+    "live"
+  ],
+  "nodes": [
+    {
+      "id": "editmode",
+      "lane": "editor",
+      "col": 0,
+      "type": "frontend",
+      "label": "Edit mode",
+      "sublabel": "in place"
+    },
+    {
+      "id": "pages",
+      "lane": "editor",
+      "col": 1,
+      "type": "frontend",
+      "label": "Pages list",
+      "sublabel": "SEO + address"
+    },
+    {
+      "id": "homepage",
+      "lane": "editor",
+      "col": 2,
+      "type": "frontend",
+      "label": "Homepage editor",
+      "sublabel": "auto-save",
+      "width": 125
+    },
+    {
+      "id": "landing",
+      "lane": "editor",
+      "col": 3,
+      "type": "frontend",
+      "label": "Landing page",
+      "sublabel": "3 templates",
+      "width": 102
+    },
+    {
+      "id": "clause",
+      "lane": "legal",
+      "col": 3,
+      "type": "frontend",
+      "label": "Clause Builder",
+      "sublabel": "3 documents",
+      "width": 117
+    },
+    {
+      "id": "blog",
+      "lane": "blog",
+      "col": 4,
+      "type": "frontend",
+      "label": "Blog editor",
+      "sublabel": "schedule"
+    },
+    {
+      "id": "share",
+      "lane": "blog",
+      "col": 5,
+      "type": "backend",
+      "label": "Share panel",
+      "sublabel": "AI captions"
+    },
+    {
+      "id": "save",
+      "lane": "server",
+      "col": 1,
+      "type": "backend",
+      "label": "Save once",
+      "sublabel": "audited"
+    },
+    {
+      "id": "homeconfig",
+      "lane": "server",
+      "col": 3,
+      "type": "database",
+      "label": "home_config",
+      "sublabel": "one row"
+    },
+    {
+      "id": "publishlegal",
+      "lane": "server",
+      "col": 4,
+      "type": "cloud",
+      "label": "Publish+version",
+      "sublabel": "copy to R2",
+      "width": 125
+    },
+    {
+      "id": "live",
+      "lane": "visitor",
+      "col": 5,
+      "type": "frontend",
+      "label": "Public page",
+      "sublabel": "visitors see it",
+      "width": 110
+    }
+  ],
+  "edges": [
+    {
+      "id": "editmode-save",
+      "from": "editmode",
+      "to": "save",
+      "label": "one call",
+      "variant": "emphasis"
+    },
+    {
+      "id": "pages-editmode",
+      "from": "pages",
+      "to": "editmode",
+      "label": "open a page",
+      "variant": "default"
+    },
+    {
+      "id": "save-homepage",
+      "from": "save",
+      "to": "homepage",
+      "label": "homepage uses edit mode",
+      "variant": "default"
+    },
+    {
+      "id": "homepage-homeconfig",
+      "from": "homepage",
+      "to": "homeconfig",
+      "label": "auto-saved",
+      "variant": "emphasis"
+    },
+    {
+      "id": "homeconfig-live",
+      "from": "homeconfig",
+      "to": "live",
+      "label": "template chosen",
+      "variant": "emphasis"
+    },
+    {
+      "id": "landing-live",
+      "from": "landing",
+      "to": "live",
+      "label": "shareable address",
+      "variant": "dashed"
+    },
+    {
+      "id": "clause-publishlegal",
+      "from": "clause",
+      "to": "publishlegal",
+      "label": "version rises",
+      "variant": "emphasis"
+    },
+    {
+      "id": "publishlegal-live",
+      "from": "publishlegal",
+      "to": "live",
+      "label": "page updates at once",
+      "variant": "default"
+    },
+    {
+      "id": "blog-share",
+      "from": "blog",
+      "to": "share",
+      "label": "on publish",
+      "variant": "default"
+    },
+    {
+      "id": "blog-live",
+      "from": "blog",
+      "to": "live",
+      "label": "scheduled or now",
+      "variant": "default"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Edit once, publish everywhere",
+      "items": [
+        "Every save is one server call, audited",
+        "A legal publish raises the version and keeps the copy",
+        "Visitors never see a draft"
+      ]
+    }
+  ]
+}

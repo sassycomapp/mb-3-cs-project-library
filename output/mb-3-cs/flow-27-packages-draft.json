@@ -1,0 +1,153 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 27, session packages",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "customer",
+      "label": "Customer"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "data",
+      "label": "Data"
+    }
+  ],
+  "phases": [
+    {
+      "id": "sell",
+      "label": "Sell",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "spend",
+      "label": "Spend",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "lapse",
+      "label": "Lapse",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "define",
+    "buy",
+    "use",
+    "drawdown",
+    "cancel"
+  ],
+  "nodes": [
+    {
+      "id": "define",
+      "lane": "customer",
+      "col": 0,
+      "type": "frontend",
+      "label": "Package editor",
+      "sublabel": "sessions + price",
+      "width": 117
+    },
+    {
+      "id": "buy",
+      "lane": "customer",
+      "col": 1,
+      "type": "external",
+      "label": "Buy",
+      "sublabel": "balance appears",
+      "width": 110
+    },
+    {
+      "id": "use",
+      "lane": "customer",
+      "col": 2,
+      "type": "frontend",
+      "label": "Use a session",
+      "sublabel": "at booking",
+      "width": 109
+    },
+    {
+      "id": "drawdown",
+      "lane": "server",
+      "col": 3,
+      "type": "security",
+      "label": "Draw-down",
+      "sublabel": "same transaction",
+      "width": 117
+    },
+    {
+      "id": "cancel",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Return",
+      "sublabel": "inside the window",
+      "width": 123
+    },
+    {
+      "id": "expiry",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "Expiry",
+      "sublabel": "notice, then lapse",
+      "width": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "define-buy",
+      "from": "define",
+      "to": "buy",
+      "variant": "emphasis"
+    },
+    {
+      "id": "buy-use",
+      "from": "buy",
+      "to": "use",
+      "label": "balance in portal",
+      "variant": "emphasis"
+    },
+    {
+      "id": "use-drawdown",
+      "from": "use",
+      "to": "drawdown",
+      "label": "one session",
+      "variant": "emphasis"
+    },
+    {
+      "id": "drawdown-cancel",
+      "from": "drawdown",
+      "to": "cancel",
+      "label": "cancel returns it",
+      "variant": "emphasis"
+    },
+    {
+      "id": "cancel-expiry",
+      "from": "cancel",
+      "to": "expiry",
+      "label": "until it lapses",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Same-transaction money",
+      "items": [
+        "A booking and its draw-down cannot half-land",
+        "A cancellation inside the window returns the session",
+        "Unused sessions lapse with notice"
+      ]
+    }
+  ]
+}

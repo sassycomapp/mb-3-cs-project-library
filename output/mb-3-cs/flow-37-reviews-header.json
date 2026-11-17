@@ -1,0 +1,53 @@
+{
+  "subject": "flow-37-reviews",
+  "intent": "How a completed appointment asks for a review, how the customer gives it, and how the Owner approves it public. Load-bearing claim: only an approved review can ever show publicly.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "completed",
+    "email",
+    "submit",
+    "awaiting",
+    "decide",
+    "public"
+  ],
+  "node_roles": {
+    "completed": "request sent + task",
+    "email": "token link",
+    "submit": "stars + comment",
+    "awaiting": "not public",
+    "decide": "Approve / decline",
+    "public": "approved only"
+  },
+  "main_path": [
+    "completed",
+    "email",
+    "submit",
+    "awaiting",
+    "decide"
+  ],
+  "deferred_to_cards": [
+    "Testimonials typed in by the business",
+    "The portal's My Reviews view (ticket 26's drawing)"
+  ],
+  "stages_or_lanes": [
+    "Customer",
+    "Server",
+    "Owner"
+  ],
+  "expected_corridors": [
+    [
+      "completed",
+      "decide",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

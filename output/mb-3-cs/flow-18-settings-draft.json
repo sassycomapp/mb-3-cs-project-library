@@ -1,0 +1,220 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 18, the Settings Hub",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "user",
+      "label": "Owner / Manager"
+    },
+    {
+      "id": "hub",
+      "label": "Hub"
+    },
+    {
+      "id": "ownertab",
+      "label": "Owner tabs"
+    },
+    {
+      "id": "mgrtab",
+      "label": "Manager tabs"
+    },
+    {
+      "id": "data",
+      "label": "Settings as data"
+    }
+  ],
+  "phases": [
+    {
+      "id": "open",
+      "label": "Open",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "configure",
+      "label": "Configure",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "persist",
+      "label": "Persist",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "open",
+    "tabs",
+    "profile",
+    "invoicing",
+    "features",
+    "rows"
+  ],
+  "nodes": [
+    {
+      "id": "open",
+      "lane": "user",
+      "col": 0,
+      "type": "frontend",
+      "label": "Settings",
+      "sublabel": "Owner, Manager",
+      "width": 103
+    },
+    {
+      "id": "tabs",
+      "lane": "hub",
+      "col": 1,
+      "type": "frontend",
+      "label": "15 tabs",
+      "sublabel": "role visibility",
+      "width": 110
+    },
+    {
+      "id": "profile",
+      "lane": "ownertab",
+      "col": 2,
+      "type": "frontend",
+      "label": "Business profile",
+      "sublabel": "language, tax",
+      "width": 132
+    },
+    {
+      "id": "users",
+      "lane": "ownertab",
+      "col": 3,
+      "type": "frontend",
+      "label": "Users",
+      "sublabel": "invite, roles"
+    },
+    {
+      "id": "data",
+      "lane": "ownertab",
+      "col": 4,
+      "type": "frontend",
+      "label": "Data",
+      "sublabel": "history, export",
+      "width": 110
+    },
+    {
+      "id": "plan",
+      "lane": "ownertab",
+      "col": 5,
+      "type": "frontend",
+      "label": "Plan",
+      "sublabel": "Owner only"
+    },
+    {
+      "id": "palette",
+      "lane": "mgrtab",
+      "col": 2,
+      "type": "frontend",
+      "label": "Palette",
+      "sublabel": "live preview"
+    },
+    {
+      "id": "invoicing",
+      "lane": "mgrtab",
+      "col": 3,
+      "type": "frontend",
+      "label": "Invoicing",
+      "sublabel": "terms, tax"
+    },
+    {
+      "id": "features",
+      "lane": "mgrtab",
+      "col": 4,
+      "type": "frontend",
+      "label": "Switches",
+      "sublabel": "marketing, blog",
+      "width": 110
+    },
+    {
+      "id": "rows",
+      "lane": "data",
+      "col": 5,
+      "type": "database",
+      "label": "Rows",
+      "sublabel": "never code"
+    }
+  ],
+  "edges": [
+    {
+      "id": "open-tabs",
+      "from": "open",
+      "to": "tabs",
+      "variant": "default"
+    },
+    {
+      "id": "tabs-profile",
+      "from": "tabs",
+      "to": "profile",
+      "label": "tab 1",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tabs-users",
+      "from": "tabs",
+      "to": "users",
+      "label": "Owner-only tabs",
+      "variant": "default"
+    },
+    {
+      "id": "profile-invoicing",
+      "from": "profile",
+      "to": "invoicing",
+      "label": "next tab",
+      "variant": "default"
+    },
+    {
+      "id": "invoicing-features",
+      "from": "invoicing",
+      "to": "features",
+      "variant": "emphasis"
+    },
+    {
+      "id": "features-rows",
+      "from": "features",
+      "to": "rows",
+      "label": "saved as rows",
+      "variant": "emphasis"
+    },
+    {
+      "id": "tabs-palette",
+      "from": "tabs",
+      "to": "palette",
+      "label": "live preview",
+      "variant": "default"
+    },
+    {
+      "id": "tabs-data",
+      "from": "tabs",
+      "to": "data",
+      "label": "Owner only",
+      "variant": "default"
+    },
+    {
+      "id": "data-plan",
+      "from": "data",
+      "to": "plan",
+      "label": "Owner only",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Configuration, never code",
+      "items": [
+        "Every client difference is a row",
+        "Owner-only tabs refuse Manager",
+        "A settings form reads and writes through its own server calls"
+      ]
+    }
+  ]
+}

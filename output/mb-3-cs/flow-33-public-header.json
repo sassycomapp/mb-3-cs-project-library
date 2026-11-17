@@ -1,0 +1,61 @@
+{
+  "subject": "flow-33-public",
+  "intent": "How a visitor reads the client's public pages, how the Owner edits them in place, and how an enquiry becomes a contact. Load-bearing claim: every public route carries its SEO tags, and an enquiry creates or updates exactly one contact.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "home",
+    "detail",
+    "contact",
+    "enquiry",
+    "editmode",
+    "save",
+    "media",
+    "pages",
+    "legal",
+    "seo"
+  ],
+  "node_roles": {
+    "home": "home",
+    "detail": "start of booking",
+    "contact": "\u2264 1,000 chars",
+    "enquiry": "contact",
+    "editmode": "Owner / Manager",
+    "save": "audited",
+    "media": "images + files",
+    "pages": "name, SEO, address",
+    "legal": "published versions",
+    "seo": "title"
+  },
+  "main_path": [
+    "home",
+    "detail",
+    "contact",
+    "enquiry",
+    "legal"
+  ],
+  "deferred_to_cards": [
+    "The cookie banner's placement (ticket 28's ticket \u2014 41)",
+    "Edit-mode element registration"
+  ],
+  "stages_or_lanes": [
+    "Visitor",
+    "Server",
+    "Owner / Manager"
+  ],
+  "expected_corridors": [
+    [
+      "home",
+      "legal",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

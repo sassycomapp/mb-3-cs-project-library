@@ -1,0 +1,198 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 38, sales pipeline, companies and quotes",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "customer",
+      "label": "Customer"
+    }
+  ],
+  "phases": [
+    {
+      "id": "pipeline",
+      "label": "Pipeline",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "quote",
+      "label": "Quote",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "accept",
+      "label": "Accept",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "board",
+    "newdeal",
+    "move",
+    "sendquote",
+    "accept"
+  ],
+  "nodes": [
+    {
+      "id": "board",
+      "lane": "team",
+      "col": 0,
+      "type": "frontend",
+      "label": "Deals board",
+      "sublabel": "stages; Staff own",
+      "width": 123
+    },
+    {
+      "id": "newdeal",
+      "lane": "team",
+      "col": 1,
+      "type": "frontend",
+      "label": "New deal",
+      "sublabel": "lead stage"
+    },
+    {
+      "id": "move",
+      "lane": "team",
+      "col": 2,
+      "type": "frontend",
+      "label": "Move / won / lost",
+      "sublabel": "reason on loss",
+      "width": 132
+    },
+    {
+      "id": "quoteedit",
+      "lane": "team",
+      "col": 3,
+      "type": "frontend",
+      "label": "Quote editor",
+      "sublabel": "lines",
+      "width": 102
+    },
+    {
+      "id": "sendquote",
+      "lane": "server",
+      "col": 3,
+      "type": "backend",
+      "label": "Send",
+      "sublabel": "PDF + accept link",
+      "width": 123
+    },
+    {
+      "id": "accept",
+      "lane": "customer",
+      "col": 4,
+      "type": "frontend",
+      "label": "/quote/:token",
+      "sublabel": "accept or decline",
+      "width": 123
+    },
+    {
+      "id": "invoice",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "One invoice",
+      "sublabel": "deal \u2192 won"
+    },
+    {
+      "id": "decline",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Declined",
+      "sublabel": "deal stays open",
+      "width": 110
+    },
+    {
+      "id": "expiry",
+      "lane": "server",
+      "col": 2,
+      "type": "backend",
+      "label": "Expiry",
+      "sublabel": "nightly"
+    }
+  ],
+  "edges": [
+    {
+      "id": "board-newdeal",
+      "from": "board",
+      "to": "newdeal",
+      "variant": "emphasis"
+    },
+    {
+      "id": "newdeal-move",
+      "from": "newdeal",
+      "to": "move",
+      "label": "through the stages",
+      "variant": "emphasis"
+    },
+    {
+      "id": "move-sendquote",
+      "from": "move",
+      "to": "sendquote",
+      "label": "quote on a deal",
+      "variant": "emphasis"
+    },
+    {
+      "id": "sendquote-accept",
+      "from": "sendquote",
+      "to": "accept",
+      "label": "the customer decides",
+      "variant": "emphasis"
+    },
+    {
+      "id": "accept-invoice",
+      "from": "accept",
+      "to": "invoice",
+      "label": "exactly one",
+      "variant": "emphasis"
+    },
+    {
+      "id": "accept-decline",
+      "from": "accept",
+      "to": "decline",
+      "label": "the other path",
+      "variant": "security"
+    },
+    {
+      "id": "sendquote-expiry",
+      "from": "sendquote",
+      "to": "expiry",
+      "label": "past valid-until",
+      "variant": "dashed"
+    },
+    {
+      "id": "board-quoteedit",
+      "from": "board",
+      "to": "quoteedit",
+      "label": "or from scratch",
+      "variant": "default"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One acceptance, one invoice",
+      "items": [
+        "Idempotent by the quote's acceptance",
+        "Staff own deals only",
+        "A quote expires nightly past its validity"
+      ]
+    }
+  ]
+}

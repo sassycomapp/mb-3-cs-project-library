@@ -1,0 +1,59 @@
+{
+  "subject": "flow-36-blog",
+  "intent": "How the client publishes posts, takes comments, and shares them with AI captions. Load-bearing claim: only approved comments are public, and every share carries the `?ref=` source.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "admin",
+    "editor",
+    "publish",
+    "sharepanel",
+    "read",
+    "comment",
+    "moderate",
+    "ref",
+    "image"
+  ],
+  "node_roles": {
+    "admin": "the list",
+    "editor": "layouts",
+    "publish": "captions written",
+    "sharepanel": "4 platforms",
+    "read": "2 list",
+    "comment": "awaiting approval",
+    "moderate": "approve",
+    "ref": "visits + contacts",
+    "image": "published posts only"
+  },
+  "main_path": [
+    "admin",
+    "editor",
+    "publish",
+    "sharepanel",
+    "read"
+  ],
+  "deferred_to_cards": [
+    "The three post templates' layouts",
+    "AI caption regeneration rules"
+  ],
+  "stages_or_lanes": [
+    "Owner / Manager",
+    "Server",
+    "Visitor"
+  ],
+  "expected_corridors": [
+    [
+      "admin",
+      "read",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

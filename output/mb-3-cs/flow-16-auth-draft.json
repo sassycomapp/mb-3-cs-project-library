@@ -1,0 +1,198 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 16, accounts, roles and access",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "people",
+      "label": "People"
+    },
+    {
+      "id": "auth",
+      "label": "Auth server"
+    },
+    {
+      "id": "guard",
+      "label": "Guards"
+    }
+  ],
+  "phases": [
+    {
+      "id": "enter",
+      "label": "Enter",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "prove",
+      "label": "Prove",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "hold",
+      "label": "Hold",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "signin",
+    "twofa",
+    "route"
+  ],
+  "nodes": [
+    {
+      "id": "signin",
+      "lane": "people",
+      "col": 0,
+      "type": "frontend",
+      "label": "Sign-in",
+      "sublabel": "email + password",
+      "width": 117
+    },
+    {
+      "id": "twofa",
+      "lane": "auth",
+      "col": 1,
+      "type": "security",
+      "label": "Second factor",
+      "sublabel": "app or security key",
+      "width": 132
+    },
+    {
+      "id": "route",
+      "lane": "auth",
+      "col": 2,
+      "type": "backend",
+      "label": "Route by role",
+      "width": 109
+    },
+    {
+      "id": "invite",
+      "lane": "people",
+      "col": 2,
+      "type": "frontend",
+      "label": "Invite",
+      "sublabel": "Owner or Manager",
+      "width": 117
+    },
+    {
+      "id": "setpass",
+      "lane": "people",
+      "col": 3,
+      "type": "frontend",
+      "label": "Set password",
+      "sublabel": "emailed link",
+      "width": 102
+    },
+    {
+      "id": "reset",
+      "lane": "people",
+      "col": 4,
+      "type": "frontend",
+      "label": "Password reset",
+      "sublabel": "10-minute link",
+      "width": 117
+    },
+    {
+      "id": "idle",
+      "lane": "guard",
+      "col": 4,
+      "type": "security",
+      "label": "30-minute idle",
+      "sublabel": "re-sign-in",
+      "width": 117
+    },
+    {
+      "id": "endsess",
+      "lane": "guard",
+      "col": 5,
+      "type": "security",
+      "label": "Owner ends sessions",
+      "sublabel": "any user",
+      "width": 132
+    },
+    {
+      "id": "stepup",
+      "lane": "guard",
+      "col": 3,
+      "type": "security",
+      "label": "Step-up",
+      "sublabel": "factor < 5 min old",
+      "width": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "signin-twofa",
+      "from": "signin",
+      "to": "twofa",
+      "label": "required for every role",
+      "variant": "emphasis"
+    },
+    {
+      "id": "twofa-route",
+      "from": "twofa",
+      "to": "route",
+      "variant": "emphasis"
+    },
+    {
+      "id": "route-setpass",
+      "from": "route",
+      "to": "setpass",
+      "label": "new team member",
+      "variant": "default"
+    },
+    {
+      "id": "invite-setpass",
+      "from": "invite",
+      "to": "setpass",
+      "label": "link emailed",
+      "variant": "emphasis"
+    },
+    {
+      "id": "route-reset",
+      "from": "route",
+      "to": "reset",
+      "label": "forgotten password",
+      "variant": "default"
+    },
+    {
+      "id": "reset-idle",
+      "from": "reset",
+      "to": "idle",
+      "label": "returns signed-out",
+      "variant": "dashed"
+    },
+    {
+      "id": "route-stepup",
+      "from": "route",
+      "to": "stepup",
+      "label": "high-value actions",
+      "variant": "security"
+    },
+    {
+      "id": "route-endsess",
+      "from": "route",
+      "to": "endsess",
+      "label": "Owner's control",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Factors and sessions",
+      "items": [
+        "No second factor, no sign-in",
+        "The Owner refuses while a non-FIDO2 factor is enrolled",
+        "Identical wording for unknown email and wrong password"
+      ]
+    }
+  ]
+}

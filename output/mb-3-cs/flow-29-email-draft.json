@@ -1,0 +1,216 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 29, email and the Team Inbox",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "outbound",
+      "label": "Outbound (SES)"
+    },
+    {
+      "id": "inbound",
+      "label": "Inbound (SES)"
+    },
+    {
+      "id": "data",
+      "label": "Data"
+    }
+  ],
+  "phases": [
+    {
+      "id": "read",
+      "label": "Read",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "send",
+      "label": "Send",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "keep",
+      "label": "Keep",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "inbox",
+    "conversation",
+    "compose",
+    "send",
+    "organise"
+  ],
+  "nodes": [
+    {
+      "id": "inbox",
+      "lane": "team",
+      "col": 0,
+      "type": "frontend",
+      "label": "Team Inbox",
+      "sublabel": "address+folder",
+      "width": 103
+    },
+    {
+      "id": "conversation",
+      "lane": "team",
+      "col": 1,
+      "type": "frontend",
+      "label": "Conversation",
+      "sublabel": "contact linked",
+      "width": 102
+    },
+    {
+      "id": "compose",
+      "lane": "team",
+      "col": 2,
+      "type": "frontend",
+      "label": "Reply",
+      "sublabel": "AI draft"
+    },
+    {
+      "id": "addresses",
+      "lane": "team",
+      "col": 3,
+      "type": "frontend",
+      "label": "Addresses",
+      "sublabel": "desks, signatures",
+      "width": 123
+    },
+    {
+      "id": "organise",
+      "lane": "team",
+      "col": 4,
+      "type": "frontend",
+      "label": "Organise",
+      "sublabel": "Trash 30 d"
+    },
+    {
+      "id": "unassigned",
+      "lane": "team",
+      "col": 5,
+      "type": "frontend",
+      "label": "Unassigned",
+      "sublabel": "Owner moves"
+    },
+    {
+      "id": "send",
+      "lane": "outbound",
+      "col": 3,
+      "type": "cloud",
+      "label": "Send",
+      "sublabel": "client domain"
+    },
+    {
+      "id": "receive",
+      "lane": "inbound",
+      "col": 0,
+      "type": "security",
+      "label": "Receive",
+      "sublabel": "SNS signature"
+    },
+    {
+      "id": "archive",
+      "lane": "data",
+      "col": 4,
+      "type": "database",
+      "label": "90-day archive",
+      "sublabel": "bodies to R2",
+      "width": 117
+    },
+    {
+      "id": "suppress",
+      "lane": "data",
+      "col": 5,
+      "type": "database",
+      "label": "Suppress",
+      "sublabel": "bounce/opt-out",
+      "width": 103
+    }
+  ],
+  "edges": [
+    {
+      "id": "inbox-conversation",
+      "from": "inbox",
+      "to": "conversation",
+      "variant": "emphasis"
+    },
+    {
+      "id": "conversation-compose",
+      "from": "conversation",
+      "to": "compose",
+      "label": "reply",
+      "variant": "emphasis"
+    },
+    {
+      "id": "compose-send",
+      "from": "compose",
+      "to": "send",
+      "label": "DKIM-signed",
+      "variant": "emphasis"
+    },
+    {
+      "id": "send-organise",
+      "from": "send",
+      "to": "organise",
+      "label": "saved in Sent",
+      "variant": "emphasis"
+    },
+    {
+      "id": "receive-inbox",
+      "from": "receive",
+      "to": "inbox",
+      "label": "into folders",
+      "variant": "emphasis"
+    },
+    {
+      "id": "send-archive",
+      "from": "send",
+      "to": "archive",
+      "label": "bodies age out",
+      "variant": "dashed"
+    },
+    {
+      "id": "receive-suppress",
+      "from": "receive",
+      "to": "suppress",
+      "label": "a bounce suppresses",
+      "variant": "security"
+    },
+    {
+      "id": "addresses-unassigned",
+      "from": "addresses",
+      "to": "unassigned",
+      "label": "unknown address",
+      "variant": "default"
+    },
+    {
+      "id": "addresses-inbox",
+      "from": "addresses",
+      "to": "inbox",
+      "label": "who sends",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One tenant, own addresses",
+      "items": [
+        "One SES tenant per client",
+        "A member sees own address + desks; Owner sees all",
+        "Trash keeps 30 days, then deletes for good"
+      ]
+    }
+  ]
+}

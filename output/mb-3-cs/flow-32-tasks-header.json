@@ -1,0 +1,53 @@
+{
+  "subject": "flow-32-tasks",
+  "intent": "How work for a contact is tracked by hand or created by an automation, and how every automation run is recorded. Load-bearing claim: one run per rule and triggering event \u2014 recorded as success, skipped or failed.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "list",
+    "complete",
+    "newrule",
+    "actions",
+    "evaluates",
+    "runs"
+  ],
+  "node_roles": {
+    "list": "by due date",
+    "complete": "timestamped",
+    "newrule": "trigger",
+    "actions": "4 action kinds",
+    "evaluates": "background task",
+    "runs": "one per rule"
+  },
+  "main_path": [
+    "list",
+    "complete",
+    "newrule",
+    "actions",
+    "evaluates"
+  ],
+  "deferred_to_cards": [
+    "The five trigger events' detail",
+    "Condition evaluation order"
+  ],
+  "stages_or_lanes": [
+    "Team",
+    "Automation engine",
+    "Data"
+  ],
+  "expected_corridors": [
+    [
+      "list",
+      "evaluates",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

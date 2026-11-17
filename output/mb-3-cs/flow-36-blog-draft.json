@@ -1,0 +1,197 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 36, blog and content",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "owner",
+      "label": "Owner / Manager"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "visitor",
+      "label": "Visitor"
+    }
+  ],
+  "phases": [
+    {
+      "id": "write",
+      "label": "Write",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "publish",
+      "label": "Publish",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "share",
+      "label": "Share",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "admin",
+    "editor",
+    "publish",
+    "sharepanel",
+    "read"
+  ],
+  "nodes": [
+    {
+      "id": "admin",
+      "lane": "owner",
+      "col": 0,
+      "type": "frontend",
+      "label": "Blog admin",
+      "sublabel": "the list"
+    },
+    {
+      "id": "editor",
+      "lane": "owner",
+      "col": 1,
+      "type": "frontend",
+      "label": "Editor",
+      "sublabel": "layouts"
+    },
+    {
+      "id": "publish",
+      "lane": "server",
+      "col": 2,
+      "type": "backend",
+      "label": "Publish",
+      "sublabel": "captions written",
+      "width": 117
+    },
+    {
+      "id": "sharepanel",
+      "lane": "owner",
+      "col": 3,
+      "type": "frontend",
+      "label": "Share panel",
+      "sublabel": "4 platforms"
+    },
+    {
+      "id": "read",
+      "lane": "visitor",
+      "col": 4,
+      "type": "frontend",
+      "label": "Read",
+      "sublabel": "2 list"
+    },
+    {
+      "id": "comment",
+      "lane": "visitor",
+      "col": 5,
+      "type": "frontend",
+      "label": "Comment",
+      "sublabel": "awaiting approval",
+      "width": 123
+    },
+    {
+      "id": "moderate",
+      "lane": "owner",
+      "col": 5,
+      "type": "frontend",
+      "label": "Moderate",
+      "sublabel": "approve"
+    },
+    {
+      "id": "ref",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "?ref= tracking",
+      "sublabel": "visits + contacts",
+      "width": 117
+    },
+    {
+      "id": "image",
+      "lane": "server",
+      "col": 4,
+      "type": "cloud",
+      "label": "blog-image endpoint",
+      "sublabel": "published posts only",
+      "width": 132
+    }
+  ],
+  "edges": [
+    {
+      "id": "admin-editor",
+      "from": "admin",
+      "to": "editor",
+      "label": "new post",
+      "variant": "emphasis"
+    },
+    {
+      "id": "editor-publish",
+      "from": "editor",
+      "to": "publish",
+      "label": "now or scheduled",
+      "variant": "emphasis"
+    },
+    {
+      "id": "publish-sharepanel",
+      "from": "publish",
+      "to": "sharepanel",
+      "label": "Share appears",
+      "variant": "emphasis"
+    },
+    {
+      "id": "sharepanel-read",
+      "from": "sharepanel",
+      "to": "read",
+      "label": "the post is live",
+      "variant": "emphasis"
+    },
+    {
+      "id": "read-comment",
+      "from": "read",
+      "to": "comment",
+      "label": "where enabled",
+      "variant": "default"
+    },
+    {
+      "id": "comment-moderate",
+      "from": "comment",
+      "to": "moderate",
+      "label": "queue",
+      "variant": "dashed"
+    },
+    {
+      "id": "read-ref",
+      "from": "read",
+      "to": "ref",
+      "label": "?ref= carried",
+      "variant": "dashed"
+    },
+    {
+      "id": "read-image",
+      "from": "read",
+      "to": "image",
+      "label": "featured image served",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Approved only",
+      "items": [
+        "Only approved comments show",
+        "Every share link carries ?ref=",
+        "The image endpoint serves published posts only"
+      ]
+    }
+  ]
+}

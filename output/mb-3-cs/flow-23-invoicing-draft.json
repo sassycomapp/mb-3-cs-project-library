@@ -1,0 +1,215 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 23, invoicing and payments",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "finance",
+      "label": "Owner / Manager"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "money",
+      "label": "Money"
+    }
+  ],
+  "phases": [
+    {
+      "id": "create",
+      "label": "Create",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "issue",
+      "label": "Issue",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "settle",
+      "label": "Settle",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "new",
+    "tax",
+    "send",
+    "linkpay",
+    "webhook",
+    "apply"
+  ],
+  "nodes": [
+    {
+      "id": "new",
+      "lane": "finance",
+      "col": 0,
+      "type": "frontend",
+      "label": "New invoice",
+      "sublabel": "lines: manual"
+    },
+    {
+      "id": "tax",
+      "lane": "server",
+      "col": 1,
+      "type": "backend",
+      "label": "Tax at issue",
+      "sublabel": "rate + label fixed",
+      "width": 130
+    },
+    {
+      "id": "send",
+      "lane": "finance",
+      "col": 2,
+      "type": "frontend",
+      "label": "Send",
+      "sublabel": "PDF + payment link",
+      "width": 130
+    },
+    {
+      "id": "gateways",
+      "lane": "finance",
+      "col": 3,
+      "type": "frontend",
+      "label": "Payment gateways",
+      "sublabel": "keys to the Vault",
+      "width": 132
+    },
+    {
+      "id": "linkpay",
+      "lane": "money",
+      "col": 3,
+      "type": "external",
+      "label": "Hosted payment",
+      "sublabel": "card data never here",
+      "width": 117
+    },
+    {
+      "id": "webhook",
+      "lane": "money",
+      "col": 4,
+      "type": "security",
+      "label": "Webhook",
+      "sublabel": "verified once",
+      "width": 110
+    },
+    {
+      "id": "apply",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "Applied once",
+      "sublabel": "booking or invoice paid",
+      "width": 102
+    },
+    {
+      "id": "record",
+      "lane": "finance",
+      "col": 4,
+      "type": "frontend",
+      "label": "Record payment",
+      "sublabel": "cash / transfer",
+      "width": 117
+    },
+    {
+      "id": "refund",
+      "lane": "finance",
+      "col": 5,
+      "type": "security",
+      "label": "Refund",
+      "sublabel": "step-up"
+    },
+    {
+      "id": "overdue",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Overdue",
+      "sublabel": "nightly + reminder",
+      "width": 130
+    }
+  ],
+  "edges": [
+    {
+      "id": "new-tax",
+      "from": "new",
+      "to": "tax",
+      "variant": "default"
+    },
+    {
+      "id": "tax-send",
+      "from": "tax",
+      "to": "send",
+      "variant": "emphasis"
+    },
+    {
+      "id": "send-linkpay",
+      "from": "send",
+      "to": "linkpay",
+      "label": "the customer pays",
+      "variant": "emphasis"
+    },
+    {
+      "id": "linkpay-webhook",
+      "from": "linkpay",
+      "to": "webhook",
+      "label": "gateway calls back",
+      "variant": "emphasis"
+    },
+    {
+      "id": "webhook-apply",
+      "from": "webhook",
+      "to": "apply",
+      "label": "exactly once",
+      "variant": "emphasis"
+    },
+    {
+      "id": "gateways-send",
+      "from": "gateways",
+      "to": "send",
+      "label": "test mode first",
+      "variant": "dashed"
+    },
+    {
+      "id": "send-record",
+      "from": "send",
+      "to": "record",
+      "label": "manual methods",
+      "variant": "default"
+    },
+    {
+      "id": "apply-refund",
+      "from": "apply",
+      "to": "refund",
+      "label": "on a paid invoice",
+      "variant": "security"
+    },
+    {
+      "id": "send-overdue",
+      "from": "send",
+      "to": "overdue",
+      "label": "past due",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "SAQ A by construction",
+      "items": [
+        "Card details live only on the gateway's page",
+        "A repeated capture records one payment",
+        "Refunds above the limit need a fresh factor"
+      ]
+    }
+  ]
+}

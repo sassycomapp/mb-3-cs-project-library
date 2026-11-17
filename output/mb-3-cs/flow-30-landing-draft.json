@@ -1,0 +1,150 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 30, landing pages",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "owner",
+      "label": "Owner / Manager"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "visitor",
+      "label": "Campaign visitor"
+    }
+  ],
+  "phases": [
+    {
+      "id": "build",
+      "label": "Build",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "publish",
+      "label": "Publish",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "measure",
+      "label": "Measure",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "list",
+    "editor",
+    "editmode",
+    "publish",
+    "visit"
+  ],
+  "nodes": [
+    {
+      "id": "list",
+      "lane": "owner",
+      "col": 0,
+      "type": "frontend",
+      "label": "Landing list",
+      "width": 102
+    },
+    {
+      "id": "editor",
+      "lane": "owner",
+      "col": 1,
+      "type": "frontend",
+      "label": "Editor",
+      "sublabel": "3 templates"
+    },
+    {
+      "id": "editmode",
+      "lane": "owner",
+      "col": 2,
+      "type": "frontend",
+      "label": "Edit mode",
+      "sublabel": "on the page"
+    },
+    {
+      "id": "publish",
+      "lane": "server",
+      "col": 3,
+      "type": "backend",
+      "label": "Publish",
+      "sublabel": "validated + address",
+      "width": 132
+    },
+    {
+      "id": "visit",
+      "lane": "visitor",
+      "col": 4,
+      "type": "frontend",
+      "label": "/landing/:slug",
+      "sublabel": "blank layout",
+      "width": 117
+    },
+    {
+      "id": "analytics",
+      "lane": "owner",
+      "col": 5,
+      "type": "frontend",
+      "label": "Analytics",
+      "sublabel": "views + conversions",
+      "width": 132
+    }
+  ],
+  "edges": [
+    {
+      "id": "list-editor",
+      "from": "list",
+      "to": "editor",
+      "variant": "default"
+    },
+    {
+      "id": "editor-editmode",
+      "from": "editor",
+      "to": "editmode",
+      "label": "or edit in place",
+      "variant": "emphasis"
+    },
+    {
+      "id": "editmode-publish",
+      "from": "editmode",
+      "to": "publish",
+      "label": "validated",
+      "variant": "emphasis"
+    },
+    {
+      "id": "publish-visit",
+      "from": "publish",
+      "to": "visit",
+      "label": "shareable address",
+      "variant": "emphasis"
+    },
+    {
+      "id": "visit-analytics",
+      "from": "visit",
+      "to": "analytics",
+      "label": "counts recorded",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Built to capture",
+      "items": [
+        "Three templates: lead form, event registration, VSL",
+        "Preview sits on the blank layout",
+        "The address is generated and unique"
+      ]
+    }
+  ]
+}

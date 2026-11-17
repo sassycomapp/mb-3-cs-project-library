@@ -1,0 +1,53 @@
+{
+  "subject": "flow-28-time",
+  "intent": "How providers record time and how billable hours become invoice lines exactly once. Load-bearing claim: an entry is marked invoiced in the same call that creates its invoice line, so it can never be invoiced twice.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "timer",
+    "manual",
+    "filter",
+    "invoice",
+    "reports",
+    "entries"
+  ],
+  "node_roles": {
+    "timer": "start / stop",
+    "manual": "rate from the service",
+    "filter": "uninvoiced",
+    "invoice": "lines + marked",
+    "reports": "per provider",
+    "entries": "duration"
+  },
+  "main_path": [
+    "timer",
+    "manual",
+    "filter",
+    "invoice",
+    "reports"
+  ],
+  "deferred_to_cards": [
+    "The timer's rounding rule",
+    "Non-billable entries' reporting"
+  ],
+  "stages_or_lanes": [
+    "Staff",
+    "Server",
+    "Invoice"
+  ],
+  "expected_corridors": [
+    [
+      "timer",
+      "reports",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

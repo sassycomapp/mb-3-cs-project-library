@@ -1,0 +1,53 @@
+{
+  "subject": "flow-34-homepage",
+  "intent": "How the Owner shapes the public home page from four ready-made templates and a section editor. Load-bearing claim: the configuration is one `home_config` row \u2014 the template renders it, and an empty section hides.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "editor",
+    "autosave",
+    "config",
+    "template",
+    "testimonials",
+    "live"
+  ],
+  "node_roles": {
+    "editor": "8 steps of UF-17",
+    "autosave": "every 30 seconds",
+    "config": "one row",
+    "template": "classic",
+    "testimonials": "approved reviews or typed",
+    "live": "sections render or hide"
+  },
+  "main_path": [
+    "editor",
+    "autosave",
+    "config",
+    "template",
+    "live"
+  ],
+  "deferred_to_cards": [
+    "The shared section inventory (DESIGN.md)",
+    "The differentiation matrix"
+  ],
+  "stages_or_lanes": [
+    "Owner",
+    "Server",
+    "Visitor"
+  ],
+  "expected_corridors": [
+    [
+      "editor",
+      "live",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

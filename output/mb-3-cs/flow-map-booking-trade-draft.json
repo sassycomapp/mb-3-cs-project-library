@@ -1,0 +1,213 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "User flow map \u2014 booking and trade (UF-05\u2013UF-12)",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "customer",
+      "label": "Customer"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "team",
+      "label": "Team"
+    }
+  ],
+  "phases": [
+    {
+      "id": "choose",
+      "label": "Choose",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "transact",
+      "label": "Transact",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "run",
+      "label": "Run the day",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "services",
+    "detail",
+    "bookingflow",
+    "payopts",
+    "confirmb",
+    "confirmed"
+  ],
+  "nodes": [
+    {
+      "id": "services",
+      "lane": "customer",
+      "col": 0,
+      "type": "frontend",
+      "label": "/services",
+      "sublabel": "categories"
+    },
+    {
+      "id": "detail",
+      "lane": "customer",
+      "col": 1,
+      "type": "frontend",
+      "label": "Service detail",
+      "sublabel": "provider + slots",
+      "width": 117
+    },
+    {
+      "id": "bookingflow",
+      "lane": "customer",
+      "col": 2,
+      "type": "frontend",
+      "label": "Booking flow",
+      "sublabel": "7 steps, one submit",
+      "width": 132
+    },
+    {
+      "id": "payopts",
+      "lane": "customer",
+      "col": 3,
+      "type": "external",
+      "label": "Payment options",
+      "sublabel": "full",
+      "width": 125
+    },
+    {
+      "id": "confirmed",
+      "lane": "server",
+      "col": 4,
+      "type": "backend",
+      "label": "Confirmed",
+      "sublabel": "invoice"
+    },
+    {
+      "id": "group",
+      "lane": "customer",
+      "col": 4,
+      "type": "frontend",
+      "label": "Group session",
+      "sublabel": "places left",
+      "width": 109
+    },
+    {
+      "id": "orderflow",
+      "lane": "customer",
+      "col": 5,
+      "type": "frontend",
+      "label": "Order flow",
+      "sublabel": "brief + files"
+    },
+    {
+      "id": "ordermgmt",
+      "lane": "team",
+      "col": 5,
+      "type": "frontend",
+      "label": "Manage order",
+      "sublabel": "in progress \u2192 delivered",
+      "width": 102
+    },
+    {
+      "id": "calendar",
+      "lane": "team",
+      "col": 4,
+      "type": "backend",
+      "label": "Calendar",
+      "sublabel": "month / week / day",
+      "width": 130
+    },
+    {
+      "id": "confirmb",
+      "lane": "server",
+      "col": 3,
+      "type": "security",
+      "label": "confirm_booking",
+      "sublabel": "one transaction",
+      "width": 125
+    }
+  ],
+  "edges": [
+    {
+      "id": "services-detail",
+      "from": "services",
+      "to": "detail",
+      "variant": "default"
+    },
+    {
+      "id": "detail-bookingflow",
+      "from": "detail",
+      "to": "bookingflow",
+      "variant": "default"
+    },
+    {
+      "id": "bookingflow-payopts",
+      "from": "bookingflow",
+      "to": "payopts",
+      "variant": "default"
+    },
+    {
+      "id": "payopts-confirmb",
+      "from": "payopts",
+      "to": "confirmb",
+      "label": "amounts server-side",
+      "variant": "emphasis"
+    },
+    {
+      "id": "confirmb-confirmed",
+      "from": "confirmb",
+      "to": "confirmed",
+      "label": "slot re-checked",
+      "variant": "emphasis"
+    },
+    {
+      "id": "bookingflow-group",
+      "from": "bookingflow",
+      "to": "group",
+      "label": "group service",
+      "variant": "default"
+    },
+    {
+      "id": "detail-orderflow",
+      "from": "detail",
+      "to": "orderflow",
+      "label": "unit service",
+      "variant": "default"
+    },
+    {
+      "id": "orderflow-ordermgmt",
+      "from": "orderflow",
+      "to": "ordermgmt",
+      "label": "brief to the team",
+      "variant": "default"
+    },
+    {
+      "id": "confirmed-calendar",
+      "from": "confirmed",
+      "to": "calendar",
+      "label": "appears for the provider",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One transaction",
+      "items": [
+        "Two customers, one slot: exactly one succeeds",
+        "The loser sees the nearest free slots",
+        "A package session returns inside the cancellation window"
+      ]
+    }
+  ]
+}

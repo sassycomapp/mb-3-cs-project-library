@@ -1,0 +1,255 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "User flow map \u2014 onboarding and access (UF-01\u2013UF-04)",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "visitor",
+      "label": "New client"
+    },
+    {
+      "id": "mybizz",
+      "label": "Mybizz (App 5)"
+    },
+    {
+      "id": "owner",
+      "label": "Owner"
+    },
+    {
+      "id": "team",
+      "label": "Team"
+    },
+    {
+      "id": "vault",
+      "label": "Vault (Owner)"
+    },
+    {
+      "id": "settings",
+      "label": "Settings (Owner)"
+    }
+  ],
+  "phases": [
+    {
+      "id": "reach",
+      "label": "Reach",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "provision",
+      "label": "Provision",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "work",
+      "label": "Work",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "register",
+    "confirm",
+    "cloudflare",
+    "paddle",
+    "provision",
+    "welcome",
+    "setpass",
+    "onboard"
+  ],
+  "nodes": [
+    {
+      "id": "register",
+      "lane": "visitor",
+      "col": 0,
+      "type": "external",
+      "label": "Register",
+      "sublabel": "business"
+    },
+    {
+      "id": "confirm",
+      "lane": "visitor",
+      "col": 1,
+      "type": "messagebus",
+      "label": "Confirm email",
+      "width": 109
+    },
+    {
+      "id": "cloudflare",
+      "lane": "visitor",
+      "col": 2,
+      "type": "cloud",
+      "label": "Cloudflare setup",
+      "sublabel": "R2",
+      "width": 132
+    },
+    {
+      "id": "paddle",
+      "lane": "visitor",
+      "col": 3,
+      "type": "external",
+      "label": "Plan + Paddle",
+      "sublabel": "first payment",
+      "width": 109
+    },
+    {
+      "id": "provision",
+      "lane": "mybizz",
+      "col": 3,
+      "type": "backend",
+      "label": "Provision",
+      "sublabel": "instance"
+    },
+    {
+      "id": "welcome",
+      "lane": "mybizz",
+      "col": 4,
+      "type": "messagebus",
+      "label": "Welcome email",
+      "sublabel": "no password sent",
+      "width": 109
+    },
+    {
+      "id": "setpass",
+      "lane": "owner",
+      "col": 4,
+      "type": "security",
+      "label": "Set password + 2FA",
+      "sublabel": "FIDO2 for Owner",
+      "width": 132
+    },
+    {
+      "id": "onboard",
+      "lane": "owner",
+      "col": 5,
+      "type": "frontend",
+      "label": "Onboarding wizard",
+      "sublabel": "10 steps, resumable",
+      "width": 132
+    },
+    {
+      "id": "invite",
+      "lane": "team",
+      "col": 5,
+      "type": "frontend",
+      "label": "Staff invite",
+      "sublabel": "role + addresses",
+      "tag": "UF-03",
+      "width": 117
+    },
+    {
+      "id": "signin",
+      "lane": "team",
+      "col": 4,
+      "type": "security",
+      "label": "Sign-in + 2FA",
+      "sublabel": "every role",
+      "width": 109
+    },
+    {
+      "id": "vault",
+      "lane": "vault",
+      "col": 5,
+      "type": "security",
+      "label": "Vault open",
+      "sublabel": "TOTP step-up"
+    },
+    {
+      "id": "settings",
+      "lane": "settings",
+      "col": 5,
+      "type": "frontend",
+      "label": "Settings handover",
+      "sublabel": "ongoing config",
+      "width": 132
+    }
+  ],
+  "edges": [
+    {
+      "id": "register-confirm",
+      "from": "register",
+      "to": "confirm",
+      "variant": "default"
+    },
+    {
+      "id": "confirm-cloudflare",
+      "from": "confirm",
+      "to": "cloudflare",
+      "variant": "default"
+    },
+    {
+      "id": "cloudflare-paddle",
+      "from": "cloudflare",
+      "to": "paddle",
+      "variant": "default"
+    },
+    {
+      "id": "paddle-provision",
+      "from": "paddle",
+      "to": "provision",
+      "variant": "emphasis"
+    },
+    {
+      "id": "provision-welcome",
+      "from": "provision",
+      "to": "welcome",
+      "variant": "emphasis"
+    },
+    {
+      "id": "welcome-setpass",
+      "from": "welcome",
+      "to": "setpass",
+      "label": "set-password link",
+      "variant": "emphasis"
+    },
+    {
+      "id": "setpass-onboard",
+      "from": "setpass",
+      "to": "onboard",
+      "variant": "emphasis"
+    },
+    {
+      "id": "onboard-invite",
+      "from": "onboard",
+      "to": "invite",
+      "variant": "emphasis"
+    },
+    {
+      "id": "invite-signin",
+      "from": "invite",
+      "to": "signin",
+      "label": "invitee signs in",
+      "variant": "default",
+      "role": "branch"
+    },
+    {
+      "id": "onboard-settings",
+      "from": "onboard",
+      "to": "settings",
+      "variant": "emphasis"
+    },
+    {
+      "id": "onboard-vault",
+      "from": "onboard",
+      "to": "vault",
+      "label": "credentials live here",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One account, one factor",
+      "items": [
+        "Every account holder signs in with a second factor",
+        "The Owner's factor is FIDO2 only",
+        "No password is ever sent by email"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 28, time tracking",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "staff",
+      "label": "Staff"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "money",
+      "label": "Invoice"
+    }
+  ],
+  "phases": [
+    {
+      "id": "record",
+      "label": "Record",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "bill",
+      "label": "Bill",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "report",
+      "label": "Report",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "timer",
+    "manual",
+    "filter",
+    "invoice",
+    "reports"
+  ],
+  "nodes": [
+    {
+      "id": "timer",
+      "lane": "staff",
+      "col": 0,
+      "type": "frontend",
+      "label": "Timer",
+      "sublabel": "start / stop"
+    },
+    {
+      "id": "manual",
+      "lane": "staff",
+      "col": 1,
+      "type": "frontend",
+      "label": "Manual entry",
+      "sublabel": "rate from the service",
+      "width": 102
+    },
+    {
+      "id": "filter",
+      "lane": "staff",
+      "col": 2,
+      "type": "frontend",
+      "label": "Billable",
+      "sublabel": "uninvoiced"
+    },
+    {
+      "id": "invoice",
+      "lane": "server",
+      "col": 3,
+      "type": "security",
+      "label": "Create invoice",
+      "sublabel": "lines + marked",
+      "width": 117
+    },
+    {
+      "id": "reports",
+      "lane": "staff",
+      "col": 4,
+      "type": "frontend",
+      "label": "Reports",
+      "sublabel": "per provider"
+    },
+    {
+      "id": "entries",
+      "lane": "server",
+      "col": 5,
+      "type": "database",
+      "label": "time_entries",
+      "sublabel": "duration",
+      "width": 102
+    }
+  ],
+  "edges": [
+    {
+      "id": "timer-manual",
+      "from": "timer",
+      "to": "manual",
+      "label": "or by hand",
+      "variant": "emphasis"
+    },
+    {
+      "id": "manual-filter",
+      "from": "manual",
+      "to": "filter",
+      "label": "billable flag",
+      "variant": "emphasis"
+    },
+    {
+      "id": "filter-invoice",
+      "from": "filter",
+      "to": "invoice",
+      "label": "select + create",
+      "variant": "emphasis"
+    },
+    {
+      "id": "invoice-reports",
+      "from": "invoice",
+      "to": "reports",
+      "label": "hours and value",
+      "variant": "emphasis"
+    },
+    {
+      "id": "timer-entries",
+      "from": "timer",
+      "to": "entries",
+      "label": "saved",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Invoiced exactly once",
+      "items": [
+        "The same call creates the line and marks the entry",
+        "Staff see and edit only their own entries",
+        "The hourly rate comes from the service"
+      ]
+    }
+  ]
+}

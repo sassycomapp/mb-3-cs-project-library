@@ -1,0 +1,72 @@
+{
+  "subject": "flow-51-onboarding",
+  "intent": "The Owner's resumable ten-step wizard from first sign-in to the dashboard. Load-bearing claim: each step saves when completed, the wizard resumes at the next unfinished step, and the legal acknowledgement is recorded once and cannot be reversed.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "password",
+    "profile",
+    "currency",
+    "gateway",
+    "import",
+    "language",
+    "palette",
+    "legal",
+    "domain",
+    "complete",
+    "resume",
+    "return"
+  ],
+  "node_roles": {
+    "password": "FIDO2 enrol",
+    "profile": "+ AI first text",
+    "currency": "locked later",
+    "gateway": "keys to Vault",
+    "import": "CSV, skippable",
+    "language": "five languages",
+    "palette": "live preview",
+    "legal": "recorded once",
+    "domain": "records live",
+    "complete": "dashboard",
+    "resume": "next unfinished",
+    "return": "while in progress"
+  },
+  "main_path": [
+    "password",
+    "language",
+    "profile",
+    "palette",
+    "currency",
+    "legal",
+    "gateway",
+    "domain",
+    "import",
+    "complete"
+  ],
+  "deferred_to_cards": [
+    "App 5's provisioning steps (UF-01's system side)",
+    "Each step's help video",
+    "The assisted-setup request"
+  ],
+  "stages_or_lanes": [
+    "Owner \u2014 setup",
+    "Owner \u2014 choices",
+    "Server",
+    "Settings"
+  ],
+  "expected_corridors": [
+    [
+      "password",
+      "complete",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

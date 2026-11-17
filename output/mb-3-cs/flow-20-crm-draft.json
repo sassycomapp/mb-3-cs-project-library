@@ -1,0 +1,224 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 20, CRM and contacts",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "contacts",
+      "label": "Contacts (team)"
+    },
+    {
+      "id": "sales",
+      "label": "Sales (team)"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "data",
+      "label": "Data"
+    }
+  ],
+  "phases": [
+    {
+      "id": "find",
+      "label": "Find",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "act",
+      "label": "Act",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "keep",
+      "label": "Keep",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "list",
+    "viewer",
+    "editor",
+    "match",
+    "events"
+  ],
+  "nodes": [
+    {
+      "id": "list",
+      "lane": "contacts",
+      "col": 0,
+      "type": "frontend",
+      "label": "Contacts list",
+      "sublabel": "search",
+      "width": 109
+    },
+    {
+      "id": "viewer",
+      "lane": "contacts",
+      "col": 1,
+      "type": "frontend",
+      "label": "Viewer",
+      "sublabel": "timeline, stats",
+      "width": 110
+    },
+    {
+      "id": "editor",
+      "lane": "contacts",
+      "col": 2,
+      "type": "frontend",
+      "label": "Editor",
+      "sublabel": "add or edit"
+    },
+    {
+      "id": "import",
+      "lane": "contacts",
+      "col": 3,
+      "type": "frontend",
+      "label": "CSV import",
+      "sublabel": "column mapping",
+      "width": 103
+    },
+    {
+      "id": "match",
+      "lane": "server",
+      "col": 3,
+      "type": "backend",
+      "label": "Match email",
+      "sublabel": "never duplicate",
+      "width": 110
+    },
+    {
+      "id": "companies",
+      "lane": "sales",
+      "col": 4,
+      "type": "frontend",
+      "label": "Companies",
+      "sublabel": "grouped"
+    },
+    {
+      "id": "segments",
+      "lane": "sales",
+      "col": 5,
+      "type": "frontend",
+      "label": "Segments",
+      "sublabel": "all/any rules"
+    },
+    {
+      "id": "count",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "Nightly count",
+      "sublabel": "recalculated",
+      "width": 109
+    },
+    {
+      "id": "events",
+      "lane": "data",
+      "col": 4,
+      "type": "database",
+      "label": "Timeline",
+      "sublabel": "every touch"
+    },
+    {
+      "id": "counter",
+      "lane": "data",
+      "col": 5,
+      "type": "database",
+      "label": "Counter",
+      "sublabel": "in transaction",
+      "width": 103
+    }
+  ],
+  "edges": [
+    {
+      "id": "list-viewer",
+      "from": "list",
+      "to": "viewer",
+      "variant": "default"
+    },
+    {
+      "id": "viewer-editor",
+      "from": "viewer",
+      "to": "editor",
+      "label": "open",
+      "variant": "emphasis"
+    },
+    {
+      "id": "editor-match",
+      "from": "editor",
+      "to": "match",
+      "label": "create or update",
+      "variant": "emphasis"
+    },
+    {
+      "id": "match-events",
+      "from": "match",
+      "to": "events",
+      "label": "timeline written",
+      "variant": "emphasis"
+    },
+    {
+      "id": "list-import",
+      "from": "list",
+      "to": "import",
+      "label": "bulk",
+      "variant": "default"
+    },
+    {
+      "id": "import-match",
+      "from": "import",
+      "to": "match",
+      "label": "same mapping as onboarding",
+      "variant": "default"
+    },
+    {
+      "id": "viewer-companies",
+      "from": "viewer",
+      "to": "companies",
+      "label": "employer",
+      "variant": "default"
+    },
+    {
+      "id": "list-segments",
+      "from": "list",
+      "to": "segments",
+      "label": "build a segment",
+      "variant": "default"
+    },
+    {
+      "id": "segments-count",
+      "from": "segments",
+      "to": "count",
+      "label": "nightly",
+      "variant": "dashed"
+    },
+    {
+      "id": "match-counter",
+      "from": "match",
+      "to": "counter",
+      "label": "number issued",
+      "variant": "security"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One person, one row",
+      "items": [
+        "Every person is one contact",
+        "Existing emails update, never duplicate",
+        "internal_notes reach only the allowed roles"
+      ]
+    }
+  ]
+}

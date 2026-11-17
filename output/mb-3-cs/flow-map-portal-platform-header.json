@@ -1,0 +1,68 @@
+{
+  "subject": "flow-map-portal-platform",
+  "intent": "How customers use their portal, how teams use AI, accounts, data and help, and how Mybizz operates the platform: alerts, releases, demos and plan billing. Load-bearing claim: a customer sees only their own records, and Mybizz reaches an instance only through its Bearer-token endpoints.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "signin",
+    "portal",
+    "quote",
+    "ai",
+    "accounts",
+    "data",
+    "help",
+    "alerts",
+    "release",
+    "demo",
+    "plan",
+    "referral"
+  ],
+  "node_roles": {
+    "signin": "2nd factor",
+    "portal": "7 views",
+    "quote": "one invoice",
+    "ai": "through App 5",
+    "accounts": "Wave/Xero/QuickBooks",
+    "data": "history+restore",
+    "help": "to App 5",
+    "alerts": "usage + inactivity",
+    "release": "reaches every client",
+    "demo": "nightly reset",
+    "plan": "mock-up invoice",
+    "referral": "share + credits"
+  },
+  "main_path": [
+    "signin",
+    "portal",
+    "quote",
+    "help",
+    "alerts"
+  ],
+  "deferred_to_cards": [
+    "Each platform flow's detail (their feature tickets' drawings)",
+    "The exit handover's steps",
+    "UF-37's schema-migration discipline"
+  ],
+  "stages_or_lanes": [
+    "Customer",
+    "Team",
+    "Client storage",
+    "Mybizz (App 5)",
+    "System"
+  ],
+  "expected_corridors": [
+    [
+      "signin",
+      "alerts",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

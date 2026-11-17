@@ -1,0 +1,63 @@
+{
+  "subject": "flow-map-booking-trade",
+  "intent": "How a customer books (all four meeting types), orders delivered work, and buys and uses packages; how the team runs the day. Load-bearing claim: the server confirms every booking inside one transaction \u2014 exactly one customer wins a contested slot.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "services",
+    "detail",
+    "bookingflow",
+    "payopts",
+    "confirmed",
+    "group",
+    "orderflow",
+    "ordermgmt",
+    "calendar",
+    "confirmb"
+  ],
+  "node_roles": {
+    "services": "categories",
+    "detail": "provider + slots",
+    "bookingflow": "7 steps, one submit",
+    "payopts": "full",
+    "confirmed": "invoice",
+    "group": "places left",
+    "orderflow": "brief + files",
+    "ordermgmt": "in progress \u2192 delivered",
+    "calendar": "month / week / day",
+    "confirmb": "one transaction"
+  },
+  "main_path": [
+    "services",
+    "detail",
+    "bookingflow",
+    "payopts",
+    "confirmb",
+    "confirmed"
+  ],
+  "deferred_to_cards": [
+    "Availability maths (the pure module)",
+    "The D5 late-payment shadow (ticket 13's drawing)",
+    "Travel-time detail for at-my-location"
+  ],
+  "stages_or_lanes": [
+    "Customer",
+    "Server",
+    "Team"
+  ],
+  "expected_corridors": [
+    [
+      "services",
+      "confirmed",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}

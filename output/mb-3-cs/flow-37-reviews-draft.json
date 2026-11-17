@@ -1,0 +1,148 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Feature flow \u2014 ticket 37, reviews and testimonials",
+    "quality_profile": "standard"
+  },
+  "lanes": [
+    {
+      "id": "customer",
+      "label": "Customer"
+    },
+    {
+      "id": "server",
+      "label": "Server"
+    },
+    {
+      "id": "owner",
+      "label": "Owner"
+    }
+  ],
+  "phases": [
+    {
+      "id": "ask",
+      "label": "Ask",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "give",
+      "label": "Give",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "approve",
+      "label": "Approve",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "completed",
+    "email",
+    "submit",
+    "awaiting",
+    "decide"
+  ],
+  "nodes": [
+    {
+      "id": "completed",
+      "lane": "server",
+      "col": 0,
+      "type": "backend",
+      "label": "Completed",
+      "sublabel": "request sent + task",
+      "width": 132
+    },
+    {
+      "id": "email",
+      "lane": "customer",
+      "col": 1,
+      "type": "messagebus",
+      "label": "Request email",
+      "sublabel": "token link",
+      "width": 109
+    },
+    {
+      "id": "submit",
+      "lane": "customer",
+      "col": 2,
+      "type": "frontend",
+      "label": "/review/:token",
+      "sublabel": "stars + comment",
+      "width": 117
+    },
+    {
+      "id": "awaiting",
+      "lane": "server",
+      "col": 3,
+      "type": "backend",
+      "label": "Awaiting",
+      "sublabel": "not public"
+    },
+    {
+      "id": "decide",
+      "lane": "owner",
+      "col": 4,
+      "type": "frontend",
+      "label": "Approve / decline",
+      "width": 132
+    },
+    {
+      "id": "public",
+      "lane": "server",
+      "col": 5,
+      "type": "backend",
+      "label": "Public",
+      "sublabel": "approved only"
+    }
+  ],
+  "edges": [
+    {
+      "id": "completed-email",
+      "from": "completed",
+      "to": "email",
+      "variant": "emphasis"
+    },
+    {
+      "id": "email-submit",
+      "from": "email",
+      "to": "submit",
+      "label": "token link",
+      "variant": "emphasis"
+    },
+    {
+      "id": "submit-awaiting",
+      "from": "submit",
+      "to": "awaiting",
+      "variant": "emphasis"
+    },
+    {
+      "id": "awaiting-decide",
+      "from": "awaiting",
+      "to": "decide",
+      "variant": "emphasis"
+    },
+    {
+      "id": "decide-public",
+      "from": "decide",
+      "to": "public",
+      "label": "approved only",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Approved, then public",
+      "items": [
+        "Only approved reviews are public",
+        "At most 10 featured with testimonials",
+        "The token page is the only public write"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "subject": "flow-38-sales",
+  "intent": "How a deal moves through its pipeline and how a quote becomes exactly one invoice on acceptance. Load-bearing claim: acceptance creates one invoice however often it is asked, and Staff see and move only their own deals.",
+  "type": "workflow",
+  "type_reason": "User and system paths through forms, gates and lanes; ordered story beats.",
+  "quality_profile": "standard",
+  "nodes": [
+    "board",
+    "newdeal",
+    "move",
+    "quoteedit",
+    "sendquote",
+    "accept",
+    "invoice",
+    "decline",
+    "expiry"
+  ],
+  "node_roles": {
+    "board": "stages; Staff own",
+    "newdeal": "lead stage",
+    "move": "reason on loss",
+    "quoteedit": "lines",
+    "sendquote": "PDF + accept link",
+    "accept": "accept or decline",
+    "invoice": "deal \u2192 won",
+    "decline": "deal stays open",
+    "expiry": "nightly"
+  },
+  "main_path": [
+    "board",
+    "newdeal",
+    "move",
+    "sendquote",
+    "accept"
+  ],
+  "deferred_to_cards": [
+    "The stage list's badges (DESIGN.md)",
+    "Company grouping's detail (ticket 7's drawing)"
+  ],
+  "stages_or_lanes": [
+    "Team",
+    "Server",
+    "Customer"
+  ],
+  "expected_corridors": [
+    [
+      "board",
+      "accept",
+      "empty bands as in the corridor plan"
+    ]
+  ],
+  "layout_budget_read": "renderers/workflow/README.md",
+  "quality_gate": "standard accepted at the artifact checks with 0 composition errors",
+  "abort_conditions": [
+    "probe fails after one geometry repair",
+    "node inventory exceeds 12"
+  ],
+  "status": "approved"
+}
