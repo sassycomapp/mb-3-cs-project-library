@@ -1,7 +1,7 @@
 ---
 title: "observability-requirements"
 doc-id: "mb-4a65dade"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 # Mybizz CS — Observability Requirements
 
@@ -97,7 +97,7 @@ Dashboards and reports read summary tables, never compute on page load ([[[defau
 App 5 shows every client instance on one dashboard: last heartbeat, release version, background task health, error count and last error, usage against the account's limits, email volume, bounce and complaint rates, billing status, open tickets.
 
 **Critical — act now:**
-- No heartbeat from an active instance for 30 minutes (two missed heartbeats); App 5's status endpoint reports a fault, which DigitalOcean Uptime emails to Mybizz.
+- No heartbeat from an active instance for 30 minutes (two missed heartbeats); App 5's status endpoint reports a fault, which UptimeRobot emails to Mybizz.
 - An instance's error count in one hour above its threshold.
 - A background task failing on three consecutive runs.
 - Payment failures above 10% of payment attempts in one day.
@@ -111,7 +111,7 @@ App 5 shows every client instance on one dashboard: last heartbeat, release vers
 
 **Warning — watch:**
 - An instance's release version differs from `master_template`'s current release.
-- A container resized to 2 GiB, or the cluster resized at 60 clients ([[[default:adr-global/adr-automatic-resizing]]](C:/dev/project-library-global/adr-global/adr-automatic-resizing.md)) (F-33).
+- A container resized to 2 GiB, or the database service resized at 60 clients ([[[default:adr-global/adr-automatic-resizing]]](C:/dev/project-library-global/adr-global/adr-automatic-resizing.md)) (F-33).
 - A client reaching any warning level of [[[default:adr-global/adr-fair-use-limits]]](C:/dev/project-library-global/adr-global/adr-fair-use-limits.md).
 - A client domain's registration expiring within 30 days.
 - A demo app's nightly reset failed (F-36).

@@ -18,7 +18,7 @@ The business has five apps (`spec-five-app-architecture-model.md` in `project-li
 - `mb-3-cs-app3`, App 3, `blank_client_template`, the client app every client instance runs.
 - `mb-3-cs-app4`, the release image definition. A GitHub repository only, never an Anvil app.
 - `mb-3-cs-app5`, App 5, the management app.
-- App 4, each client's own instance: a container running the release image, with its own database, on DigitalOcean.
+- App 4, each client's own instance: a container running the release image, on a Mybizz Hetzner application server, with its own database in Mybizz's Ubicloud service.
 
 ## Rules
 

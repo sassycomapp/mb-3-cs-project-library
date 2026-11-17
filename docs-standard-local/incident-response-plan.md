@@ -1,7 +1,7 @@
 ---
 title: "incident-response-plan"
 doc-id: "mb-aafcc135"
-updated: "2026-11-11"
+updated: "2026-11-17"
 ---
 # Mybizz Consulting Services — Incident Response Plan
 
@@ -19,7 +19,7 @@ How a security incident is found, contained and resolved, and the notices the cl
 An incident is any event that may expose, change or destroy data, or stop a client's service, through a security cause. It is detected by:
 
 - an App 5 alert: a heartbeat lost, an error spike, an unexpected change in a client's container or database, a failed restore drill;
-- a supplier's security notice (DigitalOcean, Anvil, AWS, Cloudflare, Paddle, GitHub, Groq);
+- a supplier's security notice (Hetzner, Ubicloud, Anvil, AWS, Cloudflare, Paddle, GitHub, Groq);
 - a report to `abuse@mybizz.live`, or from a client or a member of the public;
 - a sign-in alert from a supplier account.
 
@@ -45,7 +45,7 @@ Each notice is recorded in the incident record with its time.
 
 ## Recovery
 
-- Restore affected data from DigitalOcean's backups or from the client's locked nightly copy in its own R2 bucket ([[[default:security-global/infrastructure/sec-backup-recovery-integrity|Backup and Recovery Integrity]]](C:/dev/project-library-global/security-global/infrastructure/sec-backup-recovery-integrity.md)).
+- Restore affected data from Ubicloud's backups or from the client's locked nightly copy in its own R2 bucket ([[[default:security-global/infrastructure/sec-backup-recovery-integrity|Backup and Recovery Integrity]]](C:/dev/project-library-global/security-global/infrastructure/sec-backup-recovery-integrity.md)).
 - Where the whole platform is affected, run App 5's **Rebuild** action ([[[default:specifications-global/spec-deployment|Deployment Specification]]](C:/dev/project-library-global/specifications-global/spec-deployment.md) section 10).
 - Release a fixed image through the normal staged release.
 - Return each suspended client instance to service once it is clean, and tell the client.

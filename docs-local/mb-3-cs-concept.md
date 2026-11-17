@@ -30,7 +30,7 @@ Mybizz CS is not a booking app, not a CRM and not a website builder. It is all o
 **Web addresses:** the Mybizz company website is at mybizz.live. Each client's application instance runs on the client's own domain.
 **Platform:** Anvil.works (full-stack Python, hosted)
 **UI theme:** Material Design 3
-**Capacity:** no fixed client limit. The database cluster's stages hold 265 clients for each Mybizz business; beyond that, Mybizz decides the next step.
+**Capacity:** no fixed client limit. Application servers are added 12 places at a time, and the shared database service grows in stages.
 
 ---
 
@@ -478,7 +478,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - A problem that stops a client's business is acknowledged within 4 business hours, and the fix reaches every client through `master_template` as soon as it is proven
 
 **F-33 Hosting**
-- Each client runs in its own app with its own database, on the client's own domain, hosted by Mybizz on DigitalOcean
+- Each client runs in its own app with its own database, on the client's own domain, hosted by Mybizz on its own Hetzner servers, with the database in Mybizz's Ubicloud service
 - Each client's app has its own memory and its own database; heavy jobs run as background tasks
 - Improvements reach every client automatically, with nothing for the client to install
 
@@ -521,7 +521,7 @@ There is no free trial and no money-back period. A prospective client sees the w
 
 ### 9.3 Hosting
 
-- Mybizz runs and pays for each client instance: its own container and its own database on DigitalOcean ([[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md)).
+- Mybizz runs and pays for each client instance: its own container on a Mybizz Hetzner server and its own database in Mybizz's Ubicloud service ([[[default:specifications-global/spec-client-instance-hosting|Client Instance Hosting]]](C:/dev/project-library-global/specifications-global/spec-client-instance-hosting.md)).
 - Each client runs in its own app with its own database, on the client's own domain.
 
 ### 9.4 Assisted setup

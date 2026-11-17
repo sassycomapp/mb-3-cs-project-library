@@ -1,7 +1,7 @@
 ---
 title: "business-requirements-document"
 doc-id: "mb-c29418ec"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 # Mybizz CS — Business Requirements Document (BRD)
 
@@ -59,7 +59,7 @@ Mybizz CS gives a consulting or service business one complete, private online pl
 | Secondary users | The clients' customers | Book, order, pay, review, use the customer portal |
 | Visitors | Visitors to a client's public website and landing pages | Find the business, enquire, become leads |
 | Prospects | Businesses trying the demo apps | See the whole product before paying |
-| Platform suppliers | Anvil; DigitalOcean | Anvil's Business plan terms for Apps 1, 2, 3 and 5; DigitalOcean's terms for client instances |
+| Platform suppliers | Anvil; Hetzner; Ubicloud | Anvil's Business plan terms for Apps 1, 2, 3 and 5; Hetzner's and Ubicloud's terms for client instances |
 | Service providers | Stripe, PayPal, Paddle, Amazon Web Services (SES), Cloudflare, Groq | Each provider's own terms and fees |
 | Regulators | The Information Commissioner's Office (UK GDPR); each client's own data protection authority | Lawful processing of personal data |
 
@@ -139,15 +139,15 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 | AC-2 | **Currency:** one system currency per instance, set at onboarding and locked once the first booking or invoice exists; an optional display currency per service, for display only | [CLEAR] |
 | AC-3 | **Time zones:** one IANA time zone per instance; UTC storage; conversion at display time | [CLEAR] |
 | AC-4 | **Platform:** Anvil.works, full-stack Python, with the Material 3 theme; client instances on the Anvil App Server, which builds and extends each client's tables from App 3's table definitions; a release only adds tables and nullable columns | [CLEAR] |
-| AC-5 | **Hosting:** Apps 1, 2, 3 and 5 on Mybizz's Anvil Business account; every client instance in its own DigitalOcean App Platform container with its own database in Mybizz CS's Managed PostgreSQL cluster (`spec-client-instance-hosting`) | [CLEAR] |
+| AC-5 | **Hosting:** Apps 1, 2, 3 and 5 on Mybizz's Anvil Business account; every client instance in its own container on a Mybizz Hetzner application server, with its own database in Mybizz's Ubicloud managed PostgreSQL service (`spec-client-instance-hosting`) | [CLEAR] |
 | AC-6 | The four conditions before the first paying client of `spec-client-instance-hosting` section 10 are met: the full suite on the release image, the load measurement, the tested rebuild and the end-to-end release path | [PARTIAL] |
 | AC-7 | Each client instance has 1 GiB of container memory and 3 database connections, and stores about 100 MB of data a year | [CLEAR] |
-| AC-8 | Hosting costs $12 a month per client container, $260 to about $1,040 a month for the cluster by stage, with a standby throughout, and $116 a month fixed; about $1,836 a month at 100 clients (`spec-client-instance-hosting` section 11) | [CLEAR] |
+| AC-8 | Hosting costs £69.96 a month per application server of 12 places, and £116.22 to £466.37 a month for the shared database service by stage, with a standby throughout; about £862 a month at 100 clients (`spec-client-instance-hosting` section 11) | [CLEAR] |
 | AC-9 | Groq AI text and speech cost about $1 to $3 per client per month at heavy use, and Amazon SES $0.10 per 1,000 emails; both are absorbed within the margin; App 5 measures them | [CLEAR] |
 | AC-10 | Every client has its own domain, which carries its website and every email address | [CLEAR] |
-| AC-11 | The client pays its payment providers' fees, its domain, and Cloudflare R2 storage above the free allowance in its own Cloudflare account; Mybizz absorbs Anvil, DigitalOcean, Amazon SES and Groq costs | [CLEAR] |
+| AC-11 | The client pays its payment providers' fees, its domain, and Cloudflare R2 storage above the free allowance in its own Cloudflare account; Mybizz absorbs Anvil, Hetzner, Ubicloud, Amazon SES and Groq costs | [CLEAR] |
 | AC-14 | Amazon grants Mybizz's AWS account SES production access before the first paying client | [PARTIAL] |
-| AC-12 | Capacity has no fixed client limit; the cluster's stages hold 265 clients | [CLEAR] |
+| AC-12 | Capacity has no fixed client limit; servers are added 12 places at a time and the database service grows by stage | [CLEAR] |
 | AC-13 | Launch with no marketing budget: founder-led, the United Kingdom first, the other markets through content | [CLEAR] |
 
 ---
@@ -173,7 +173,7 @@ Every objective BO-1 to BO-8 is satisfied by at least one requirement; every req
 
 | Risk | Likelihood | Impact | Mitigation | Certainty |
 |---|---|---|---|---|
-| A DigitalOcean region outage or account suspension stops every client | Low | High | Standby database node from the first client; nightly R2 copies; the rebuild procedure in `deployment-procedures.md`, tested before the first paying client (AC-6) | [CLEAR] |
+| A Hetzner server or location failure, or a lost Ubicloud service, stops clients | Low | High | Standby database from the first client; **Rebuild server**; nightly R2 copies; the rebuild procedure in `deployment-procedures.md`, tested before the first paying client (AC-6) | [CLEAR] |
 | The Anvil App Server behaves differently from Anvil's hosted service | Medium | High | One pinned App Server version; the full test suite on the release image before every release (AC-6) | [CLEAR] |
 | Mybizz's Anvil account fails or is compromised; releases and provisioning stop | Low | Medium | Client instances keep running; account-level procedures in `deployment-procedures.md`; two-factor authentication | [CLEAR] |
 | Founder capacity: every ticket lands with the founder | Medium | High | Self-service help on every screen (F-25), a target under 2 tickets per client per month, at-risk alerts (F-34) | [CLEAR] |

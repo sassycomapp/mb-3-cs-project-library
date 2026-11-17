@@ -1,7 +1,7 @@
 ---
 title: "deployment-procedures"
 doc-id: "mb-f46b55a9"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 # Mybizz CS — Deployment Procedures
 
@@ -20,9 +20,9 @@ How a release moves from App 1 through App 2 and the release image to the client
 | App 1 — `mb-3-cs-app1` | Development and testing; each release is tagged here (`vMAJOR.MINOR.PATCH`) | Mybizz's Anvil Business account |
 | App 2 — `mb-3-cs-app2`, `master_template` | The release: holds exactly App 1's latest released tag | Mybizz's Anvil Business account |
 | App 3 — `mb-3-cs-app3`, `blank_client_template` | The client app: the released table definitions, the startup module and the scheduled tasks | Mybizz's Anvil Business account |
-| Release image — `mb-3-cs-app4` | App 3, App 2 and `m3` on the pinned Anvil App Server, built once per release, stored under the release tag | DigitalOcean Container Registry |
-| App 4 — `[client-name]-cs` | Each client instance: one container running the release image, with its own database | DigitalOcean App Platform and Managed PostgreSQL |
-| Test client instance | A client instance of its own, holding test data only | DigitalOcean App Platform and Managed PostgreSQL |
+| Release image — `mb-3-cs-app4` | App 3, App 2 and `m3` on the pinned Anvil App Server, built once per release, stored under the release tag | GitHub's container registry |
+| App 4 — `[client-name]-cs` | Each client instance: one container running the release image, with its own database | A Mybizz Hetzner application server and Mybizz's Ubicloud database service |
+| Test client instance | A client instance of its own, holding test data only | A Mybizz Hetzner application server and Mybizz's Ubicloud database service |
 | Demo apps — `demo.mybizz.live`, `try.mybizz.live` | Two instances of the release for prospects (F-36), reset nightly | Mybizz's Anvil Business account |
 | App 5 — `mb-3-cs-app5` | Receives heartbeats and usage reports; runs the New client, Release and Remove actions; sends release notes | Mybizz's Anvil Business account |
 
@@ -164,16 +164,18 @@ A release only adds tables and nullable columns, so the previous release runs on
 The structure has two levels of risk:
 
 - **Mybizz's Anvil account** holds App 1, App 2, App 3, App 5 and the demo apps. Client instances keep running without it; releases and provisioning wait until it is back.
-- **Mybizz CS's DigitalOcean project** holds the cluster, the test client instance and every client instance. A DigitalOcean failure in `LON1`, or a suspension of Mybizz's DigitalOcean account, stops every client.
+- **Mybizz CS's Hetzner project** holds its application servers, the test client instance and every client instance. **Mybizz's Ubicloud service** holds every client database. A failed server stops the up to 12 clients on it until **Rebuild server** replaces it; a lost database service stops every client until **Rebuild** restores it.
 
 | Scenario | Detection | Recovery | Prevention |
 |---|---|---|---|
 | Anvil account suspended | Email from Anvil; App 1, App 2 and App 5 unavailable | Client instances keep running; contact Anvil support at once; releases and provisioning wait | Billing kept current with a backup payment method; Anvil terms followed |
-| One client container fails | Heartbeats from its instance stop; App 5 raises a critical alert | App Platform restarts it; if it does not recover, App 5 recreates the container from the current release image | Container memory watched in App 5 (F-33) |
-| Cluster main node fails | Database errors in heartbeats | The standby node takes over automatically; clients are back within minutes | Standby node from the first client |
-| DigitalOcean region outage or account suspension | Every client's heartbeats stop; DigitalOcean Uptime reports App 5's status endpoint fault | App 5's **Rebuild** action: a new Advanced cluster and new containers in another region, each client restored from DigitalOcean's backups or, when those are unreachable, from its locked nightly copy ([[[default:specifications-global/spec-deployment\|Deployment Specification]]](C:/dev/project-library-global/specifications-global/spec-deployment.md) section 10) | Nightly R2 copies locked for 30 days; the rebuild tested before the first paying client; a second payment card and billing alerts on the account |
+| One client container fails | Heartbeats from its instance stop; App 5 raises a critical alert | Docker restarts it; if it does not recover, App 5 recreates the container from the current release image | Container memory watched in App 5 (F-33) |
+| Database primary fails | Database errors in heartbeats | Ubicloud promotes the standby automatically; clients are back within minutes | Standby from the first client |
+| One application server fails | The heartbeats of every client on that server stop | App 5's **Rebuild server** action: a new server, and each client's container recreated from the release image; no data lost | Two free places kept on the servers; Hetzner server backups |
+| Hetzner location outage | Every client's heartbeats stop; UptimeRobot reports App 5's status endpoint fault | **Rebuild server** for each server in Falkenstein | Release images in GitHub's registry; settings and keys in App 5's Vault |
+| Ubicloud service lost or account suspended | Database errors in every heartbeat | App 5's **Rebuild** action: a new database service, each client restored from its locked nightly copy ([[[default:specifications-global/spec-deployment\|Deployment Specification]]](C:/dev/project-library-global/specifications-global/spec-deployment.md) section 10) | Nightly R2 copies locked for 30 days; the rebuild tested before the first paying client; a second payment card and billing alerts on the account |
 | Mybizz's AWS account or SES sending suspended | SES errors on every send; App 5 raises a critical alert | Contact AWS support; outgoing email is queued in each instance's retry queue and sent when sending returns; senders' mail servers retry the delivery of received email for several days | Each client's SES tenant reputation policy pauses that client alone; monthly email caps per client; two CloudWatch alarms below Amazon's review levels; a hardware security key on the AWS account |
-| Any account compromised | Unexpected commits in GitHub, unknown collaborators, unknown sessions | Follow `incident-response-plan.md`: contain, call the insurer's incident line, rotate every Bearer token, container key and Vault credential that may be exposed, audit Git history and revert unauthorised commits, and tell affected clients without undue delay | A hardware security key on every supplier account; two scoped DigitalOcean keys; the cluster's trusted sources; locked nightly copies; no collaborators beyond Mybizz |
+| Any account compromised | Unexpected commits in GitHub, unknown collaborators, unknown sessions | Follow `incident-response-plan.md`: contain, call the insurer's incident line, rotate every Bearer token, container key and Vault credential that may be exposed, audit Git history and revert unauthorised commits, and tell affected clients without undue delay | A hardware security key on every supplier account; scoped Hetzner and Ubicloud keys; the database firewall; locked nightly copies; no collaborators beyond Mybizz |
 
 Recovery expectations are stated in the client terms.
 

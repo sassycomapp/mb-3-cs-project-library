@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-architecture-explainer"
 doc-id: "mb-dc62ff9a"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 # Mybizz CS — Architecture Explainer
 
@@ -39,7 +39,7 @@ The difficulty with "one copy per client" is keeping 100 copies up to date. Mybi
 
 Apps 1, 2, 3 and 5 live on Mybizz's own Anvil Business account.
 
-Each client app runs on DigitalOcean, in a container of its own with its own database: the free Anvil App Server runs the release image, and DigitalOcean looks after the servers, updates, failover and database backups. A client therefore has its own memory and its own database, and no client's work can slow another's. Mybizz pays for the hosting, so the client is Mybizz's client and never has to deal with Anvil or DigitalOcean.
+Each client app runs in a container of its own on a Mybizz Hetzner server, with its own database in Mybizz's Ubicloud service: the free Anvil App Server runs the release image, Ubicloud looks after the database's updates, failover and backups, and a failed server is rebuilt from the release image. A client therefore has its own memory and its own database, and no client's work can slow another's. Mybizz pays for the hosting, so the client is Mybizz's client and never has to deal with Anvil, Hetzner or Ubicloud.
 
 Heavy work (imports, backups, AI, sending campaigns) runs in the background, so the client's pages stay fast, and Mybizz watches each client's usage from App 5.
 

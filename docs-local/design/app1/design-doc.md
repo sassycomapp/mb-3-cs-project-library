@@ -1,7 +1,7 @@
 ---
 title: "design-doc"
 doc-id: "mb-7868ef5e"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 
 # Mybizz CS — Design Doc (run app1)
@@ -48,7 +48,7 @@ From BRD §4, with what each needs:
 | The clients' customers | Book, order, pay, review, use the customer portal |
 | Visitors and campaign visitors | Find the business, enquire, become leads |
 | Prospects | Try the whole product before paying, in the two demo apps (F-36) |
-| Anvil and DigitalOcean (platform suppliers) | Anvil's Business plan terms for Apps 1, 2, 3 and 5; DigitalOcean's terms for client instances |
+| Anvil, Hetzner and Ubicloud (platform suppliers) | Anvil's Business plan terms for Apps 1, 2, 3 and 5; Hetzner's and Ubicloud's terms for client instances |
 | Stripe, PayPal, Amazon Web Services, Cloudflare, Groq | Each provider's own terms and fees; SES production access (AC-14) |
 | Regulators — the Information Commissioner's Office (UK GDPR); each client's own data protection authority | Lawful processing; data-subject rights implemented |
 
@@ -59,7 +59,7 @@ The platform facts, every one of them binding:
 1. **One app and one database per client; never multi-tenant.** No `client_id`/`tenant_id` column on any table; isolation is structural (ADR `dependency-based-not-multi-tenant`; schema Rules; architecture reference §3).
 2. **The server holds authority over identity, ownership and every rule.** Every server function checks the role with the role decorators; the interface hides what a role cannot use but is never the enforcement (architecture reference §12 F-01; `spec-security`; `spec-anvil-platform-standards` §10).
 3. **All client code and `theme/assets` are public.** No credential, rule or secret in client code; secrets only in the Vault (`spec-anvil-platform-standards`; ADR `payment-security-boundary-vault`).
-4. **Every client instance runs in its own container with its own database.** The Anvil App Server runs the release image on DigitalOcean (`spec-client-instance-hosting`; architecture reference §4; common aspects 2; BRD AC-5, AC-7, AC-8).
+4. **Every client instance runs in its own container with its own database.** The Anvil App Server runs the release image on a Mybizz Hetzner application server, with the client's database in Mybizz's Ubicloud service (`spec-client-instance-hosting`; architecture reference §4; common aspects 2; BRD AC-5, AC-7, AC-8).
 5. **The UK GDPR applies:** ICO registration before launch; data-subject rights of access, rectification, erasure, restriction, objection and portability (`spec-regulatory-compliance-baseline`).
 6. **GDPR applies when EU customers are served; PCI DSS when payments are taken** — SAQ A: card data never touches the instance; only the gateways' hosted fields and buttons take card details (`spec-regulatory-compliance-baseline`; `spec-integration`).
 
@@ -130,7 +130,7 @@ Five approaches, each on Anvil — three from this design (A, B, C) and two from
 
 | Risk | Likelihood | Impact | Response |
 |---|---|---|---|
-| A DigitalOcean region outage or account suspension stops every client (BRD risks) | Low | High | Standby database node from the first client; nightly R2 copies; the rebuild procedure tested before the first paying client (BRD AC-6) |
+| A Hetzner server or location failure, or a lost Ubicloud service, stops clients (BRD risks) | Low | High | Standby database from the first client; **Rebuild server**; nightly R2 copies; the rebuild procedure tested before the first paying client (BRD AC-6) |
 | The Anvil App Server behaves differently from Anvil's hosted service (BRD risks) | Medium | High | One pinned App Server version; the full test suite on the release image before every release (BRD AC-6) |
 | The Mybizz development account fails or is compromised; every client depends on App 2 there, and the two demo apps share the account, so a suspension stops sign-ups as well as service | Low | High | `deployment-procedures.md` account-level procedures; two-factor authentication; R2 backups of every instance |
 | The schema migration (44 → 70 tables, P13 creating `cookie_policy` and `consents`) is applied by hand, by David, in App 1 | High | Medium | `schema-migration-log.md` Part A and prompts P1–P14 in order — P13 creates the two tables, P14 removes columns, last — each checked against its prompt before Resolve; Part C compares the resulting `anvil.yaml` with the schema table by table |
@@ -441,17 +441,17 @@ What the exit export writes to the client's own bucket for this application (`ad
 
 ## 20. Plan Fit
 
-A typical client's use against the limits of its client instance: its container and its share of Mybizz CS's database cluster (`spec-client-instance-hosting` sections 3 and 4; architecture reference §4).
+A typical client's use against the limits of its client instance: its container, its place on an application server and its share of Mybizz's database service (`spec-client-instance-hosting` sections 3 and 4; architecture reference §4).
 
-**The limits, per client instance:** 1 GiB of container memory; 3 database connections; background tasks with no timeout; scheduled tasks; email through Amazon SES (F-18). The cluster gives 25 connections per GiB of its memory, less 3, and is moved to the next size as the client count grows.
+**The limits, per client instance:** 1 GiB of container memory; 3 database connections; background tasks with no timeout; scheduled tasks; email through Amazon SES (F-18). The database service runs Ubicloud's connection pooler and is moved to the next size as the client count grows.
 
 **What keeps a client small:** cold data goes to the client's own R2 bucket — backups, history, webhook payloads, audit entries older than 30 days, email bodies older than 90 days, attachments and receipts — with only index rows left in the tables; dashboards read pre-computed summary tables, never aggregate source tables on load; every search is bounded, never an iteration over a whole table; large media lives in R2 (`spec-anvil-platform-standards` §24).
 
 **A typical client's rows (an estimate, stated as one):** a busy solo or small-team practice — about 2,000 contacts with about 60,000 timeline events; about 30 bookings a day, roughly 11,000 a year; invoices, invoice lines, payments, quotes and time entries from three years of that work, roughly 130,000 rows; email index rows about 55,000 over three years; the summary tables about 15,000; the rolling 30-day audit window about 5,000; notifications, preferences and counters modest. Steady state after three years is roughly 350,000 to 450,000 rows, about 100 to 150 MB of data a year, with the growth rate bounded by the R2 offload. Media lives in R2 except the instance's own media (logos, provider photos, featured images, the brief and delivery files in `files`), which stays a small share.
 
-**What shows a client nears the limits:** the daily usage report to App 5 — memory use, storage, email volume and heavy-job activity (`SR-52`); App 5 warns Mybizz at 80% of a container's memory and at 80% of the cluster's client limit (`FR-33`, `RL-12`; common aspect 9); the warning-level alerts also watch a background task running over twice its usual time. A client nearing its memory is answered by raising its container's size, which keeps the client in place; the business nearing the cluster's limit is answered by moving the cluster to the next size.
+**What shows a client nears the limits:** the daily usage report to App 5 — memory use, storage, email volume and heavy-job activity (`SR-52`); App 5 warns Mybizz at 80% of a container's memory and when the database service nears its next stage (`FR-33`, `RL-12`; common aspect 9); the warning-level alerts also watch a background task running over twice its usual time. A client nearing its memory is answered by raising its container's size, which keeps the client in place; the business nearing its servers' last places is answered by **Add server**, and Mybizz nearing the next database stage by moving the service to the next size.
 
-**The test client instance:** a client instance of its own, holding test data only, at $12 a month; its cost is in the hosting figures of `spec-client-instance-hosting` section 11.
+**The test client instance:** a client instance of its own, holding test data only, in one place on an application server; its cost is in the hosting figures of `spec-client-instance-hosting` section 11.
 
 ## 21. Scope
 

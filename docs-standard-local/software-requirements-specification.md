@@ -1,7 +1,7 @@
 ---
 title: "software-requirements-specification"
 doc-id: "mb-f157e3fc"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 # Mybizz CS — Software Requirements Specification (SRS)
 
@@ -70,7 +70,7 @@ The 37 features F-01 to F-37 of `mb-3-cs-concept.md` section 7, summarised in PR
 ### 2.4 Constraints
 Anvil's platform constraints apply by default: the App Server builds and extends each client's tables from App 3's table definitions, and a release only adds tables and nullable columns; one environment and one database per app; the Skulpt client runtime (money and date logic on the server only); no WebSocket push (client polling); lazy-loaded rows. Beyond the platform default:
 - App 3 holds no form or server module; one would silently override `master_template` for every client (reference section 2).
-- Every client instance runs in its own container with its own database on DigitalOcean (`spec-client-instance-hosting`).
+- Every client instance runs in its own container with its own database, on Mybizz's Hetzner application servers and Ubicloud database service (`spec-client-instance-hosting`).
 - The only Anvil Secret is `encryption_key`.
 - Agents never read or write `.env`, never write `anvil.yaml`, and never commit. `[CLEAR]`
 
@@ -156,7 +156,7 @@ Anvil's platform constraints apply by default: the App Server builds and extends
 | SR-49 | No card number, CVV or full card data is stored in any table or log | FR-30 | Table and log scans | [CLEAR] |
 | SR-50 | Every colour on every screen comes from the Colour Scheme; `m3x_theming` (`m3-custom-theme`) sets the palette from `business_profile.palette` and follows the device's light or dark setting | FR-31 | UI conformance scans (Step 29); visual check in light and dark | [CLEAR] |
 | SR-51 | A Help message is sent to App 5 with the Bearer token and returns a reference number; App 5's replies appear in the Help view | FR-32 | Test against App 5 | [CLEAR] |
-| SR-52 | Usage (memory, storage, email volume) is reported to App 5 daily; above 80% of a container's memory App 5 raises it to 2 GiB once, and raises the Advanced cluster to 16 GiB at 60 active clients and to 32 GiB at 130, each in the next maintenance window; App 5 never reduces a size and messages Mybizz at each resize | FR-33 | Test against a simulated DigitalOcean API (RL-13) | [CLEAR] |
+| SR-52 | Usage (memory, storage, email volume) is reported to App 5 daily; above 80% of a container's memory App 5 raises it to 2 GiB once, and raises the database service to `standard-4` at 60 active clients and to `standard-8` at 130, counting every Mybizz business, each in the next maintenance window; App 5 never reduces a size and messages Mybizz at each resize | FR-33 | Test against a simulated runner and Ubicloud API (RL-13) | [CLEAR] |
 | SR-53 | The heartbeat reaches App 5 every 15 minutes with release version and schema fingerprint and no customer personal data | FR-34 | Test against App 5; payload inspection | [CLEAR] |
 | SR-53a | AI and speech requests pass through App 5 without their content being stored or logged; App 5 records only each client's usage counts; Mybizz's Groq organisation has Zero Data Retention on | FR-26, FR-34 | Test against App 5: after an AI and a speech request, no App 5 table or log holds their content; Groq's Data Controls show Zero Data Retention on | [CLEAR] |
 | SR-54 | The usage report carries the last team-member sign-in and last booking date, from which App 5 raises the at-risk alerts | FR-34 | Test against App 5 | [CLEAR] |
@@ -164,7 +164,7 @@ Anvil's platform constraints apply by default: the App Server builds and extends
 | SR-56 | Quote numbers are `QT-{year}-{sequence}` with no gap or repeat; accepting a quote at `/quote/{token}` creates its invoice, links it and moves a linked deal to `won` in one transaction; a second acceptance changes nothing; a quote past `valid_until` is `expired` the next morning | FR-35 | Concurrency and state tests | [CLEAR] |
 | SR-57 | Staff list and change only the deals they own | FR-35 | Access test | [CLEAR] |
 | SR-58 | With `config.demo_mode` on, `email_service` delivers every email to the signed-in visitor's own address only, payments use test keys, and the nightly reset returns the demo to its starting state and removes demo sign-ins | FR-36 | Test in a demo instance | [CLEAR] |
-| SR-59 | Each client database user is created with a connection limit of 3, a statement timeout of 60 seconds and an idle-in-transaction timeout of 120 seconds | FR-37 | Cluster check (RL-16) | [CLEAR] |
+| SR-59 | Each client database user is created with a connection limit of 3, a statement timeout of 60 seconds and an idle-in-transaction timeout of 120 seconds | FR-37 | Database service check (RL-16) | [CLEAR] |
 | SR-60 | The heartbeat carries the client database's size and the month's AI and voice spend; App 5 warns the Owner at 1 GiB and £5.60, and at 2 GiB switches off bulk imports and at £16.80 pauses AI and natural voice until the next month | FR-37 | Test against App 5 with simulated heartbeats (RL-14) | [CLEAR] |
 | SR-61 | The instance refuses a 21st AI request within a minute and makes it wait; with AI paused, voice falls back to typing and the browser's built-in voice and every form keeps working | FR-37 | Test in App 1 (RL-14) | [CLEAR] |
 | SR-62 | App 5 pauses a client's marketing email at 25,000 sent in a month and all email except sign-in at 50,000, resuming on the first of the next month; a paused SES tenant is reported to the Owner and Mybizz | FR-37 | Test against simulated SES (RL-14) | [CLEAR] |
