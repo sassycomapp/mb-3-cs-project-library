@@ -177,7 +177,7 @@ Every functional requirement FR-01 to FR-40 of the PRD appears in this table at 
 
 ### 3.2 External Interface Requirements
 
-- **User interfaces:** the Anvil Material 3 theme with the project deviations (`DESIGN.md`); screens built to `spec-ui-standards` (project-library-global); the admin area, customer portal and public website as in `scaffold-spec.md` (Navigation Architecture); WhatsUp on the phone's browser.
+- **User interfaces:** Material 3 exactly as `m3-custom-theme` defines it, with no departure (`DESIGN.md` names the choices); screens built to `spec-ui-standards` (project-library-global); the admin area, customer portal and public website as in `scaffold-spec.md` (Navigation Architecture); WhatsUp on the phone's browser.
 - **Hardware interfaces:** the device microphone for WhatsUp, through `anvil.js`, and the device camera for expense receipts, through the file upload, each with the user's permission.
 - **Software interfaces:** Stripe, PayPal, Amazon SES, SNS and S3, Cloudflare R2, and App 5 (for Groq, management, DNS and SES provisioning), as `integration-architecture.md` sets out.
 - **Communication interfaces:** HTTPS only. Inbound HTTP endpoints: one webhook endpoint per gateway; `/_/api/email/inbound`, `/_/api/email/events`, `/_/api/email/unsubscribe` for SES; `/_/api/blog-image/{slug}`; the management endpoints for App 5, with the instance's Bearer token. Outbound: HTTPS to SES and every other service; SMTP with STARTTLS to the SES SMTP endpoint for Anvil's Users service email.

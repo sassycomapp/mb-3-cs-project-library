@@ -1,7 +1,7 @@
 ---
 title: "scaffold-spec"
 doc-id: "mb-be462593"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 # Mybizz CS — Scaffold Specification
 
@@ -289,7 +289,7 @@ server_code/
 
 ## Custom Component Conventions
 
-A custom component is a reusable element that the Anvil Material 3 theme does not provide and that is used in more than one place. An element used in one place only is a local form in its parent's folder.
+A custom component is a reusable element that `m3-custom-theme` does not provide and that is used in more than one place. An element used in one place only is a local form in its parent's folder.
 
 - The eleven shared custom components, where each is used and its implementation notes: `custom-component-requirements-matrix.md`.
 - Every shared custom component lives in `client_code/components/`, takes its settings as properties set by the host form, and uses only the tokens, typography, spacing and roles in `DESIGN.md`.
