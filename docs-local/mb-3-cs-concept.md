@@ -464,7 +464,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - Complete data isolation between clients, built into the structure of the platform
 
 **F-31 Design system**
-- Material Design 3 with refinements: softer shadows, tighter corners, stronger headings, subtle dividers, distinct surfaces, consistent hover and press states
+- Material Design 3 exactly as `m3-custom-theme` defines it: every colour, type size, spacing, shape and elevation comes from the theme, and nothing departs from it
 - Two contexts from one design system: the management interface (clear, compact, fast) and the public website (warm, generous, trustworthy)
 - Eight brand palettes chosen at onboarding and changeable at any time: Default, Professional Blue, Warm Coral, Calm Teal, Sophisticated Purple, Sky Blue, Forest Green, Desert Rose
 - Dark mode on every screen, following the device's light or dark setting
@@ -589,7 +589,7 @@ That story — "I built what I needed" — is the brand's most durable asset. It
 
 ### 11.5 Visual identity
 
-The visual identity is the design system in F-31: the Anvil Material 3 theme with refinements, two contexts, eight brand palettes, dark mode following the device, and Roboto typography. Mybizz's own brand colour is Professional Blue.
+The visual identity is the design system in F-31: Material 3 exactly as `m3-custom-theme` defines it, two contexts, eight brand palettes, dark mode following the device, and Roboto typography. Mybizz's own brand colour is Professional Blue.
 
 ---
 

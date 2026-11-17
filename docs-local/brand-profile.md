@@ -344,7 +344,7 @@ Mybizz CS speaks directly, honestly and with empathy.
 
 ### Direction
 
-Mybizz CS uses a clean, professional, business-focused design system built on the Anvil Material 3 theme with a small set of refinements, in two contexts (management and public), with dark mode following the device and Roboto typography.
+Mybizz CS uses a clean, professional, business-focused design system built on Material 3 exactly as `m3-custom-theme` defines it, in two contexts (management and public), with dark mode following the device and Roboto typography.
 
 The design communicates clarity, efficiency, trust, professional polish, calm confidence and modern reliability.
 
@@ -452,22 +452,11 @@ Sophisticated Purple is the strongest alternative for premium positioning: execu
 
 ## 15. Layout and Density
 
-**Source:** `DESIGN.md` Spacing, Radius, Elevation, and Density
+**Source:** `DESIGN.md` Spacing, Radius, Elevation, and Density; `m3-custom-theme`
 
 ### Spacing
 
-The interface follows a mandatory 4px rhythm.
-
-| Step | Value | Typical use |
-|---|---:|---|
-| 1 | 4px | Tight gaps |
-| 2 | 8px | Component padding |
-| 3 | 12px | Standard spacing |
-| 4 | 16px | Card padding |
-| 6 | 24px | Section gaps |
-| 8 | 32px | Major layout spacing |
-
-Public pages may feel looser than management screens, but use the same rhythm.
+Spacing comes from `m3-custom-theme`'s spacing tokens. Public pages may feel looser than management screens, using the same tokens.
 
 ### Density
 
@@ -479,14 +468,7 @@ Public pages may feel looser than management screens, but use the same rhythm.
 
 ### Shape
 
-| Element | Shape |
-|---|---|
-| Buttons | Pill |
-| Cards | Controlled rounded corners (8px) |
-| Dialogs | More rounded, for modal emphasis |
-| Inputs | Subtle, functional rounding |
-| Navigation items | Pill |
-| Data grids | Rounded container |
+Shape and elevation come from `m3-custom-theme`: buttons and navigation items are pill-shaped, and every other corner radius and shadow is the theme's own.
 
 ---
 
