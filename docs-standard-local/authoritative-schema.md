@@ -1,7 +1,7 @@
 ---
 title: "authoritative-schema"
 doc-id: "mb-8b83e940"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 # Mybizz CS — Authoritative Database Schema
 
@@ -143,6 +143,7 @@ Key–value settings.
 | `key` | string | Unique |
 | `value` | simpleObject | |
 | `category` | string | `features` / `content` / `sequence` / `integration` |
+| `created_at` | datetime | When the row was created |
 | `updated_at` | datetime | |
 | `updated_by` | link → users | |
 
@@ -162,7 +163,6 @@ Key–value settings.
 | `ses` | integration | SES region, tenant name, configuration set and the S3 prefix for received email; the keys are in the Vault |
 | `demo_mode` | features | bool; True only in the demo apps (F-36) |
 | `legal_versions` | content | The published version of each legal document: `{"privacy_policy": 3, "t_and_c": 2, "cookie_policy": 1}`; raised by one at each publish (F-22) |
-| `created_at` | datetime | When the row was created |
 
 Sequence keys are read and incremented inside a transaction, so that no number repeats or is skipped.
 
