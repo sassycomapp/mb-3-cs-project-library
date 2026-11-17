@@ -1,0 +1,20 @@
+Step 18 (run app1) — expected-change check: db_schema equals the authoritative schema — 2026-11-17T13:06:52Z
+
+1. db_schema extracted from the local anvil.yaml (lines 2-3866, 3865 lines) diffed against the
+   Step 17 verified copy pdlf-outputs/c17/mb-3-cs-c17-app1-anvil-db-schema.yaml:
+   RESULT: byte-identical (0 differences).
+
+2. The Step 17 verified copy was verified equal to the authoritative schema at Step 17
+   (receipt: 71 tables both sides, 0 differences of every kind).
+
+3. docs-standard-local/authoritative-schema.md diffed against the Step 17 snapshot
+   pdlf-outputs/c17/mb-3-cs-c17-app1-authoritative-schema.md:
+3c3
+< doc-id: "mb-8b83e940"
+---
+> doc-id: "mb-5a12f60b"
+   RESULT: only the frontmatter doc-id differs (mb-8b83e940 vs mb-5a12f60b) — rewritten by the
+   documentation commit hook; the schema content (all 71 tables) is unchanged since Step 17's
+   verification. The law has not moved.
+
+CONCLUSION: db_schema in anvil.yaml equals the authoritative schema. Check 3 PASSES.

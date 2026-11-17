@@ -1,0 +1,24 @@
+Step 18 (run app1) — raw check outputs — FINAL re-run after David's commit — 2026-11-17T13:12:12Z
+
+First run 13:06 UTC: check 1 (Clean) failed on the uncommitted mb-3-cs-config.md state
+update. David identified it as the Step 17 close-out's approved config update and committed
+and pushed it himself (commit 81343a9 'Update'). No deviation recorded. All checks re-run:
+
+=== Check 1: Clean — git status --short ===
+(nothing above = clean)
+
+=== Check 2: Level — git rev-parse master / origin/master ===
+81343a938929458dbc2576529906d680b0c29f8f
+81343a938929458dbc2576529906d680b0c29f8f
+
+=== Check 4: Nothing else — git diff --name-only 1c40fc3..master (Step 17 receipt's recorded commit) ===
+theme/assets/docs/app1/mb-3-cs-config.md
+The one file listed is David's own commit 81343a9 — the Step 17 close-out's approved
+mb-3-cs-config.md state update (5 insertions, 6 deletions, documentation only). Identified
+by David as expected; no Anvil-side change outside the recorded ones.
+
+=== Check 3: Expected change ===
+db_schema on the new master diffed against pdlf-outputs/c17/mb-3-cs-c17-app1-anvil-db-schema.yaml:
+byte-identical (0 differences)
+authoritative-schema.md unchanged since Step 17's verification (only the commit hook's
+frontmatter doc-id rewrite) — see mb-3-cs-c18-app1-schema-match.txt for the full chain.

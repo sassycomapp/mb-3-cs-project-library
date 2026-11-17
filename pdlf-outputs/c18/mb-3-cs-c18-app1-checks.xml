@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mb-3-cs-c18-app1-checks" tests="2" failures="0" errors="0" skipped="0" timestamp="2026-11-17T13:12:00Z">
+  <testcase classname="pdlf.mb-3-cs-c18-app1" name="PR-01">
+    <output>Entry record (Step 03, run app1) complete; Step 17 complete; every dependency of Step 18 (Step 17) complete; gate domain-locked passed 2026-11-12 for run app1 (gates row read, passed=true).</output>
+  </testcase>
+  <testcase classname="pdlf.mb-3-cs-c18-app1" name="PR-10">
+    <output>First run 13:06 UTC failed the Clean check on the uncommitted theme/assets/docs/app1/mb-3-cs-config.md state update; David identified it as the Step 17 close-out's approved config update and committed and pushed it himself (commit 81343a9). No deviation. Re-run, all five checks pass: Clean (empty status), Level (master == origin/master == 81343a9), Expected change (db_schema on the new master byte-identical to the Step 17 verified copy, which Step 17 verified equal to the authoritative schema; the authoritative schema unchanged since its verification), Nothing else (git diff 1c40fc3..master lists only mb-3-cs-config.md, David's own approved commit), Validates (anvil --json validate . success:true, valid:true, 251 files). Evidence: mb-3-cs-c18-app1-pull-checks.txt; mb-3-cs-c18-app1-schema-match.txt; mb-3-cs-c18-app1-st01-validate.json</output>
+  </testcase>
+</testsuite>
