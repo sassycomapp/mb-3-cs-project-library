@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="ts_scan mb-3-cs-app1" tests="45" failures="3" skipped="5" errors="0" time="3.84"><testcase classname="ts_scan" name="ST-02 Every server function carries its access rule" /><testcase classname="ts_scan" name="ST-03 Only the vault service reads Anvil Secrets"><system-out>0 call site(s)</system-out></testcase><testcase classname="ts_scan" name="ST-03 No secret is in the code (patterns; gitleaks covers history)" /><testcase classname="ts_scan" name="ST-03 Nothing secret is in client code or theme" /><testcase classname="ts_scan" name="ST-04 No dangerous construct is used" /><testcase classname="ts_scan" name="ST-05 Server code logs, never prints" /><testcase classname="ts_scan" name="ST-05 No error is swallowed" /><testcase classname="ts_scan" name="ST-05 Errors reach the client only as plain messages" /><testcase classname="ts_scan" name="ST-10 Public functions are documented and typed" /><testcase classname="ts_scan" name="ST-10 No address or magic value is hard-coded" /><testcase classname="ts_scan" name="ST-06 No code separates clients" /><testcase classname="ts_scan" name="ST-10 A client instance holds no code of its own"><skipped message="applies to App 3 and client instances" /></testcase><testcase classname="ts_scan" name="ST-10 Only approved dependency apps are used" /><testcase classname="ts_scan" name="ST-10 Nothing test-only is in the application" /><testcase classname="ts_scan" name="ST-10 The repository keeps out what it must" /><testcase classname="ts_scan" name="ST-08 Times are made in UTC on the server" /><testcase classname="ts_scan" name="ST-08 Money is never a floating-point sum" /><testcase classname="ts_scan" name="ST-09 Outbound calls go through the shared caller" /><testcase classname="ts_scan" name="ST-09 Webhook handlers verify, log, hand off and return"><skipped message="no webhook paths listed in ts-config.yaml" /></testcase><testcase classname="ts_scan" name="ST-09 No search is read without a bound" /><testcase classname="ts_scan" name="ST-02 Every entry point is rate-limited" /><testcase classname="ts_scan" name="ST-09 Every export is audited" /><testcase classname="ts_scan" name="ST-10 Anvil's structural rules hold" /><testcase classname="ts_scan" name="ST-10 Pure modules are pure"><skipped message="no pure modules listed in ts-config.yaml" /></testcase><testcase classname="ts_scan" name="ST-04 Email headers cannot be injected" /><testcase classname="ts_scan" name="ST-04 Random values that guard access are unguessable" /><testcase classname="ts_scan" name="ST-12 The Users service and app settings are as required" /><testcase classname="ts_scan" name="ST-07 Every table refuses client access" /><testcase classname="ts_scan" name="ST-07 Core tables can grow without schema changes"><skipped message="no core tables listed in ts-config.yaml" /></testcase><testcase classname="ts_scan" name="ST-07 Every table has its timestamps" /><testcase classname="ts_scan" name="ST-06 No column separates clients" /><testcase classname="ts_scan" name="ST-07 No column holds a secret"><failure type="review" message="2 finding(s) (review)">anvil.yaml:0: column 'quotes.accept_token' (string)
+anvil.yaml:0: column 'reviews.request_token' (string)</failure></testcase><testcase classname="ts_scan" name="ST-07 The standard log and control tables exist" /><testcase classname="ts_scan" name="ST-07 Times are datetimes in UTC"><failure type="review" message="6 finding(s) (review)">anvil.yaml:0: column 'availability_exceptions.start_time' is string
+anvil.yaml:0: column 'availability_exceptions.end_time' is string
+anvil.yaml:0: column 'availability_rules.start_time' is string
+anvil.yaml:0: column 'availability_rules.end_time' is string
+anvil.yaml:0: column 'business_profile.referral_badge_on' is bool
+anvil.yaml:0: column 'business_profile.referral_popup_on' is bool</failure></testcase><testcase classname="ts_scan" name="ST-11 Forms use only theme components or approved Anvil components" /><testcase classname="ts_scan" name="ST-11 No banned component appears" /><testcase classname="ts_scan" name="ST-11 No colour is hard-coded" /><testcase classname="ts_scan" name="ST-11 Every property and event exists on its theme component" /><testcase classname="ts_scan" name="ST-11 Writeback is used only on properties that support it" /><testcase classname="ts_scan" name="ST-11 Forms are well-formed HTML templates"><failure type="failed" message="91 finding(s)">client_code/analytics/DashboardAnalyticsForm/RowTemplate5/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/analytics/DashboardAnalyticsForm/RowTemplate6/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/analytics/DashboardAnalyticsForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/analytics/RevenueReportForm/RowTemplate1/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/analytics/RevenueReportForm/RowTemplate7/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/analytics/RevenueReportForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/auth/LoginForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/auth/PasswordResetCompleteForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/auth/PasswordResetForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/auth/SignupForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogEditorForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogListForm/BlogListListTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogListForm/BlogListTiledTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogListForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/BlogPostClassicTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/BlogPostFullWidthTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostCategoriesTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/BlogPostTwoColumnTemplate/BlogPostRelatedPostsTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/BlogPostTwoColumnTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/CategoriesTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/CommentsTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/RelatedPostsTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/BlogPostForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/CategoryManagementForm/CategoryManagementTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/CategoryManagementForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/CommentModerationForm/CommentModerationTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/blog/CommentModerationForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/AvailabilitySettingsForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/BookingCalendarForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/BookingCalendarForm/tmpl_day_event/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/BookingCalendarForm/tmpl_month_day_cell/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/BookingCalendarForm/tmpl_week_event/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/BookingCalendarForm/tmpl_week_timeslot/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/BookingEditorForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/BookingListForm/RowTemplate4/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/bookings/BookingListForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/components/ClauseBuilder/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/components/FooterComponent/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/components/ParallaxComponent/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/components/TimeLapseCarouselComponent/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/components/VideoDisplayComponent/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/ContactEditorForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/ContactListForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/ContactViewerForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/EmailBroadcastForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/EmailCampaignEditorForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/EmailCampaignListForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/LeadCaptureForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/SegmentManagerForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/crm/TaskListForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/dashboard/ActivityFeed/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/dashboard/DashboardForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/dashboard/MetricCard/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/invoices/InvoiceEditorForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/invoices/InvoiceListForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/invoices/InvoiceViewerForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/landing_pages/LandingPage/EventRegistrationTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/landing_pages/LandingPage/LeadCaptureTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/landing_pages/LandingPage/VslTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/landing_pages/LandingPage/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/landing_pages/LandingPageEditorForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/landing_pages/LandingPageListForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/layouts/AdminLayout/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/layouts/BlankLayout/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/layouts/CustomerLayout/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/layouts/ErrorLayout/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/onboarding/OnboardingForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/AboutPage/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/ContactPage/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/HomePage/HomePageBookingTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/HomePage/HomePageClassicTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/HomePage/HomePageMinimalistTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/HomePage/HomePageServicesTemplate/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/HomePage/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/PrivacyPolicyPage/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/public_pages/TermsConditionsPage/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/services/ServiceCategoriesForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/services/ServiceEditorForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/services/ServiceViewerForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/services/ServicesForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/settings/EmailSetupForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/settings/PaymentGatewayForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/settings/PolicyEditorForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/settings/SettingsForm/PaletteSettingsForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/settings/SettingsForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/settings/ThemeConfigForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/settings/UserManagementForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/settings/VaultForm/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/shared/formatting_utils/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/shared/navigation_helpers/form_template.yaml:0: form template is YAML; forms are built as HTML
+client_code/shared/validation_utils/form_template.yaml:0: form template is YAML; forms are built as HTML</failure></testcase><testcase classname="ts_scan" name="ST-11 Responsiveness uses wrap_on (no pixel media queries)" /><testcase classname="ts_scan" name="ST-11 Loop handlers capture their variables" /><testcase classname="ts_scan" name="ST-11 navigate_to is not used" /><testcase classname="ts_scan" name="ST-11 No server call inside a loop" /><testcase classname="ts_scan" name="ST-14 Every visible text is a phrase key that exists in every language"><skipped message="no client_code/shared/translations module" /></testcase></testsuite>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="mb-3-cs-c17-app1" tests="8" failures="0" errors="0" skipped="0">
+  <testsuite name="Step 17 - Create Anvil data tables (run app1)" tests="8" failures="0" errors="0" skipped="0" timestamp="2026-11-17T12:00:00Z">
+    <testcase name="PR-01" classname="pdlf.process">
+      <system-out>The entry record is complete (steps row id 1, entry 03 new-app-with-context, run app1, route application); Step 16 is complete (steps row id 9, completed 2026-11-12 10:00:10+00, synthesized false); the gate domain-locked is passed for run app1 (gates row id 1, approved 2026-11-12 09:58:27.878332+00, written by David's pdlf-gate.sh). Evidence: the pdlf ledger.</system-out>
+    </testcase>
+    <testcase name="Theme-copies-current" classname="pdlf.process">
+      <system-out>The app's tests/component-inventory.yaml is byte-identical to the theme library's docs/component-inventory.yaml (verified with cmp; source pulled by David 2026-11-17). The theme keys of tests/ts-config.yaml equal the template's (project-library-global/test-suite/templates/ts-config.yaml), verified by PyYAML comparison: component_inventory=tests/component-inventory.yaml, theme_app_id=UGGJBAZUZ74XZ7VU, theme_package=m3, approved_components=[ColumnPanel, FlowPanel, LinearPanel, RepeatingPanel, DataGrid, DataRowPanel, GridPanel, Image, Spacer, Timer, Plot] (FileLoader, DatePicker, Link removed to match). dependency_sources preserved. Evidence: mb-3-cs-app1/tests/ (the files themselves).</system-out>
+    </testcase>
+    <testcase name="ST-01" classname="scanner">
+      <system-out>anvil --json validate anvil.yaml reports valid (run three times during the step: after the first write, after the config.created_at re-write, and for this evidence file). Evidence: mb-3-cs-c17-app1-st01-validate.json.</system-out>
+    </testcase>
+    <testcase name="ST-06" classname="scanner">
+      <system-out>ST-06 passed twice in the scanner report: no table or column separates clients (no tenant/client_id/org_id/instance_id column on any of the 71 tables) and no code separates clients. Evidence: mb-3-cs-c17-app1-ts-scan.xml.</system-out>
+    </testcase>
+    <testcase name="ST-07" classname="scanner">
+      <system-out>ST-07 passed: every table refuses client access (DD-02, client none on all 71); every table has a datetime created_at (DD-05, including config after the authoritative schema 1.3 correction David made); the five log and control tables exist (DD-13 with activity_log, per David's scanner correction of 2026-11-17); no column holds a secret beyond the confirmed items; times are datetimes beyond the confirmed items. DD-04 (core tables carry metadata) is skipped while ts-config core_tables is empty - filled at Step 31/32; the authoritative schema's own rules and the section-2 review verified metadata on the core tables. Review note (David, 2026-11-17): the eight flagged lines are confirmed correctly shaped - quotes.accept_token and reviews.request_token are public page tokens, not secrets; availability_rules/availability_exceptions start_time and end_time are HH:MM strings in the business time zone per the schema's own notes; business_profile.referral_badge_on and referral_popup_on are the referral kit's on/off switches per F-37. Evidence: mb-3-cs-c17-app1-ts-scan.xml.</system-out>
+    </testcase>
+    <testcase name="Schema-match" classname="pdlf.process">
+      <system-out>db_schema in anvil.yaml equals the authoritative schema, table by table and column by column: the comparison after reference item 14 is empty (71 tables both sides; 0 added/removed tables, 0 added/removed columns, 0 renames, 0 type changes, 0 unexplained pairs), re-run after the config.created_at correction. Evidence: the empty comparison (re-runnable from the two sources) and the pre-application difference list mb-3-cs-c17-app1-schema-diff.md (234 differences, every one logged in the migration log).</system-out>
+    </testcase>
+    <testcase name="Applied" classname="pdlf.process">
+      <system-out>David confirms the Data Tables view reports no schema mismatch after Resolve (applied with Anvil's "the schema of the source code is correct" option). Every removal on the difference list was checked by name AFTER application, not before - a deviation from reference item 16, David's decision, recorded in the ledger deviations table (row id 4) - and verified after the fact: the committed db_schema equals the authoritative schema; the pre-write (5924469) to committed (1c40fc3) column diff is exactly the 37 removals, name by name, with the 164 column additions all on the difference list; a removal outside the list would have left the live tables missing a column db_schema holds and Anvil would report a mismatch - it reports none. No type change exists on the list. Evidence: mb-3-cs-c17-app1-instructions.md (Part B execution record), deviations row id 4, the git history of mb-3-cs-app1.</system-out>
+    </testcase>
+    <testcase name="PR-04" classname="pdlf.process">
+      <system-out>Sentinel ran at High scrutiny (the step-intensity table's value for Step 17) on the authoritative schema and db_schema, against sec-requirements-data-table-creation.md and sec-payment-manipulation.md, both read in full. Outcome: CLEAR - no Flag or Escalate, so no developer decision is due. The triage_findings row exists: id 14, finding_id sentinel-17-app1, source_step 17, triage_label clear, resolved_at set. Evidence: the pdlf ledger, triage_findings row id 14.</system-out>
+    </testcase>
+  </testsuite>
+</testsuites>
