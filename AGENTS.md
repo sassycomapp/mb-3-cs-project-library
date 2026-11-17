@@ -1,7 +1,7 @@
 ---
 title: "AGENTS"
 doc-id: "mb-2d2c3f8f"
-updated: "2026-11-12"
+updated: "2026-11-17"
 ---
 # AGENTS.md — mb-3-cs project library
 
@@ -33,6 +33,7 @@ The business has five apps (`spec-five-app-architecture-model.md` in `project-li
 9. **Every document goes in its folder.** Each folder's `README.md` says what belongs in it. A document with no folder goes in `wip\` until it has one.
 10. **A skill's output goes to the skill's own place.** Inside a PDLF step, a copy also goes to `pdlf-outputs\{step}\`. Outside a PDLF step, a skill's report goes to `reports-local\{family}\`.
 11. **Reference material is never committed.** A reference platform's source and reference material stay in `reference-platform-local\`, which git and GBrain ignore.
+12. **One home for every fact.** Product, brand and build facts live only in this library. Business and marketing documents live only in `data-mybizz-mgt`, in `business\` and `marketing\`. A document that needs a fact from the other side links to the fact's source document as `[[source-id:page-name]]` and never restates it. Finished marketing material, such as a post or an outreach message, is the one exception: it is written from the source when it is made and is never used as a source.
 
 ## Vocabulary
 

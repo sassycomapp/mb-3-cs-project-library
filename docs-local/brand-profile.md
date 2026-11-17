@@ -1,6 +1,6 @@
 ---
 title: "brand-profile"
-updated: "2026-11-12"
+updated: "2026-11-17"
 doc-id: "mb-d8899450"
 ---
 # Mybizz CS — Brand Profile
@@ -11,7 +11,7 @@ The brand profile represents the business and the product in one place: who Mybi
 
 ## 1. Brand Snapshot
 
-**Source:** `mb-3-cs-concept.md` §1, §4.4, §9.1, §10, §11.1; [[[default:specifications-global/spec-nomenclature|Nomenclature]]](C:/dev/project-library-global/specifications-global/spec-nomenclature.md) §1.5
+**Source:** `mb-3-cs-concept.md` §1, §4.4, §9.1, §11.1; [[[data-mybizz-mgt:marketing/mybizz-cs-marketing-plan]]](C:/data-mybizz-mgt/marketing/mybizz-cs-marketing-plan.md) section 1; [[[default:specifications-global/spec-nomenclature|Nomenclature]]](C:/dev/project-library-global/specifications-global/spec-nomenclature.md) §1.5
 
 | Item | Value |
 |---|---|
@@ -313,8 +313,6 @@ Mybizz CS speaks directly, honestly and with empathy.
 ---
 
 ## 11. Key Messages
-
-**Source:** `mb-3-cs-concept.md` §12
 
 ### Primary message
 

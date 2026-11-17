@@ -545,7 +545,7 @@ New costs are added to this list as they are identified.
 
 ### 9.6 Revenue model
 
-The revenue model and the cost per client are in `C:\data-mybizz-mgt\business\mybizz-cs\mybizz-cs-business-plan.md`.
+The revenue model and the cost per client are in [[[data-mybizz-mgt:business/mybizz-cs/mybizz-cs-business-plan]]](C:/data-mybizz-mgt/business/mybizz-cs/mybizz-cs-business-plan.md).
 
 ### 9.7 Domain
 
@@ -555,7 +555,7 @@ Every client's application instance runs on the client's own domain, and every e
 
 ## 10. Go-to-Market Strategy
 
-The go-to-market plan is in `C:\data-mybizz-mgt\marketing\mybizz-cs-marketing-plan.md`.
+The go-to-market plan is in [[[data-mybizz-mgt:marketing/mybizz-cs-marketing-plan]]](C:/data-mybizz-mgt/marketing/mybizz-cs-marketing-plan.md).
 
 ---
 
@@ -595,7 +595,7 @@ The visual identity is the design system in F-31: the Anvil Material 3 theme wit
 
 ## 12. Key Messages
 
-The key messages are in `C:\data-mybizz-mgt\marketing\mybizz-cs-marketing-plan.md`.
+The key messages are in [[[mb-3-cs-project-library:docs-local/brand-profile]]](C:/dev/dev-mb-3-cs/mb-3-cs-project-library/docs-local/brand-profile.md) section 11.
 
 ---
 
