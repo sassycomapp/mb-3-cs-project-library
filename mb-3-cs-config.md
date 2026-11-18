@@ -1,7 +1,7 @@
 ---
 title: "mb-3-cs-config"
 doc-id: "mb-00ff9b58"
-updated: "2026-11-12"
+updated: "2026-11-18"
 ---
 # mb-3-cs-config — state
 
@@ -10,7 +10,7 @@ updated: "2026-11-12"
 | Issuer | MyBizz |
 | Project | Mybizz Consulting Services (`mb-3-cs`) |
 | Repository type | Documentation (the business's project library) |
-| Status | PDLF Phase B closed; `domain-locked` passed 2026-11-12; run `app1` paused before Phase C (Steps 17–46 not built) |
+| Status | PDLF run `app1` in Phase C: Steps 17–20 complete; `domain-locked` passed 2026-11-12; next Step 21 (concept lock) |
 
 ## Repositories
 
@@ -42,7 +42,8 @@ The one table of every repository, local path, GitHub repository, GBrain source 
 | `docs-local/design/app1/` | `design-doc.md`, `test-plan.md`, `access-matrix.yaml`, `threat-model.md` — current through Step 16 |
 | `docs-standard-local/authoritative-schema.md` | 71 tables, current (mirrors the 2026-11-06 amendment and F-37's `plan_summary`) |
 | `docs-local/schema-migration-log.md` | prompts P1–P14 recorded; unapplied (App 1 holds 44 tables); applied by David through Resolve |
-| `pdlf-outputs/` | `a01`–`b16` hold this run's outputs; `b13` holds no `app1` rows (the step is not used) |
+| `pdlf-outputs/` | `a01`–`c20` hold this run's outputs; `b13` holds no `app1` rows (the step is not used) |
+| `docs-local/DESIGN.md` | the design system, written at Step 20 under the theme law (`m3-custom-theme` rules every value) |
 | `output/mb-3-cs/` | the Archify Scope Cards, machine headers, candidate specs and run learnings |
 
 ## Open items

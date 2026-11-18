@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mb-3-cs-c20-app1-checks" tests="2" failures="0" errors="0" skipped="0" timestamp="2026-11-17T00:00:00Z">
+  <testcase name="PR-01" classname="mb-3-cs-c20-app1" status="passed">
+    <system-out>The entry record is complete (steps row 03, inputs_used holds entry_point 03, route application, app_number 1, run app1). Step 19 is complete for run app1 (steps row 19, status complete, synthesized false, artifact_path pdlf-tickets/app1). Evidence: pdlf ledger, steps table.</system-out>
+  </testcase>
+  <testcase name="DC-12" classname="mb-3-cs-c20-app1" status="passed">
+    <system-out>Palette: professional_blue (starting and default), mode system at start-up, both recorded in docs-local/DESIGN.md Palette System. Contrast: the chosen palette reaches WCAG 2.2 AA in light and dark mode by the theme's own palette build — m3-custom-theme-project-library/tools/build_palettes.py checks every text and control colour against every background to the WCAG AA minimum (4.5:1 for text, 3:1 for outlines) for every palette in light and dark and stops on any failure; m3-custom-theme.md line 41 states the same. Excluded components are named in DESIGN.md law item 7: Label, HtmlTemplate, HtmlPanel, Anvil Extras, and any component outside the theme and approved_components. Value scan of docs-local/DESIGN.md on 2026-11-17: zero matches for hex/rgb/rgba/hsl colour values, zero for px lengths, zero for font-size, zero for type weights or named spacing values; every appearance fact is named as a theme token, colour role or type role. Evidence: the scan output is reproduced in the Step Receipt; the contrast guarantee is in the theme repository, not authored by this step.</system-out>
+  </testcase>
+</testsuite>

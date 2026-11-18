@@ -1,16 +1,26 @@
 ---
 title: "DESIGN"
 doc-id: "mb-190df6bf"
-updated: "2026-11-12"
+updated: "2026-11-18"
 ---
 # Mybizz CS — DESIGN
 
-This document is the design system of Mybizz CS. It is built on **`m3-custom-theme`** (dependency ID `UGGJBAZUZ74XZ7VU`), the full Material 3 theme built on Anvil's Material 3 theme, and applies to every Mybizz CS screen: the public website, the admin area, the customer portal, and the Mybizz management app (App 5).
+This document is the design system of Mybizz CS. It is built on **`m3-custom-theme`** (dependency ID `UGGJBAZUZ74XZ7VU`, branch `master`, package name `m3`), the full Material 3 theme built on Anvil's Material 3 theme, and applies to every Mybizz CS screen: the public website, the admin area, the customer portal, and the Mybizz management app (App 5).
 
-- The colour values of the eight palettes live in `m3-custom-theme`; this document defines how colour is used.
-- Generic Material 3 rules (accessibility, the `wrap_on` responsive mechanism, state-specification patterns) live in [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) and are not repeated here. This document states this project's choices and its deviations from the M3 defaults.
-- Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
-- Feature numbers (F-01 to F-37) are those of `mb-3-cs-concept.md`.
+## The law of this document
+
+1. **Nothing departs from `m3-custom-theme`.** The theme rules appearance: colours, fonts, spacing, shapes, elevation, state layers, motion and its own components.
+2. **This document records choices, never values.** Every colour, font, size, spacing, shape, elevation and motion value lives in the theme, exposed as the `--m3x-*` design tokens and the theme's colour roles and type roles. Where this document names a look, it names the role or token; it never states a number or a colour value. A colour, font, size or style value of Mybizz's own that the theme does not define is the only kind of departure there is, and none are allowed.
+3. **Anvil canonical built-in components are not departures.** Wherever the theme provides a component, the theme's component is used. Wherever it does not, Anvil's canonical built-in component is used — for example `ColumnPanel`, `FlowPanel`, `GridPanel`, `LinearPanel`, `DataGrid`, `RepeatingPanel`, `RepeatingPanel` item templates, `Timer`, `Spacer` — and `m3-custom-theme` styles it. Using them is never recorded as a departure, deviation or exception, here or anywhere else.
+4. **Roboto stays.** Roboto is Material 3's standard typeface and the theme's type family; it is Mybizz CS's type family by that fact, and it is not a project choice.
+5. Every form meets [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md).
+6. Every element uses the theme component that serves it best, chosen from the whole inventory ([[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) section 3).
+7. Not used: `Label`, `HtmlTemplate`, `HtmlPanel`, Anvil Extras, and any component outside the theme and `approved_components` ([[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) section 3).
+8. Generic Material 3 rules (accessibility, the `wrap_on` responsive mechanism, state-specification patterns) live in [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) and are not repeated here.
+9. Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct.
+10. Feature numbers (F-01 to F-37) are those of `mb-3-cs-concept.md`.
+
+The theme's component facts come from its own documentation in `m3-custom-theme-project-library/docs/` — `base-inventory.md`, `component-inventory.yaml` and `docs/components/<Component>.md` — and from nowhere else. A component property that is not in that documentation does not exist.
 
 ---
 
@@ -42,11 +52,11 @@ The intended character is:
 
 - Material 3 color roles and token-based hierarchy.
 - Card-based content organization.
-- Clear typography scale with predictable hierarchy.
-- 4px spacing rhythm.
+- Clear typographic hierarchy through the theme's type roles.
+- The theme's spacing rhythm.
 - Filled primary actions, outlined secondary actions, text-based tertiary actions.
 - Left navigation rail on desktop and mobile-safe navigation patterns.
-- Rounded but controlled corners.
+- The theme's shape scale.
 - Elevated cards only where emphasis is needed.
 
 ### Do Not Emulate
@@ -56,7 +66,7 @@ The intended character is:
 - Designing in dark mode first. Light mode is the design baseline; dark mode follows the device setting on every screen ([[[default:adr-global/adr-dark-mode|Dark Mode]]](C:/dev/project-library-global/adr-global/adr-dark-mode.md) ADR).
 - Heavy animation, glassmorphism, or neumorphism.
 - Complex charts or visual systems beyond what is operationally useful.
-- Template-specific CSS divergence that breaks the shared design system.
+- Any value, role, colour, font or shape that is not the theme's.
 
 ---
 
@@ -95,9 +105,9 @@ Characteristics:
 
 These two contexts must use the same underlying design system:
 
-- Same typography family and scale.
+- Same typography family and type roles.
 - Same spacing rhythm.
-- Same border radius rules.
+- Same shape rules.
 - Same token structure.
 - Same core components.
 - Same role naming logic.
@@ -106,24 +116,16 @@ These two contexts must use the same underlying design system:
 
 ## Design Tokens
 
+All colour, type, shape, elevation, state-layer, motion and spacing values come from `m3-custom-theme`'s design tokens: the CSS custom properties named `--m3x-*`, defined in the theme's `theme/assets/m3x/tokens.css` and taken from Google's Jetpack Compose Material 3 token files. The theme's demo form shows every token. A Role or custom CSS in the app uses the same variables, so it follows the palette and the light or dark mode.
+
 ### Color System
 
-All colour comes from the Anvil M3 theme's Colour Scheme. **No hardcoded colour values, anywhere, without exception.**
+All colour comes from the theme's colour roles. **No hardcoded colour values, anywhere, without exception.**
 
-- In the Designer and in CSS, colours are referenced by Colour Scheme name: `%color:Primary%`.
-- At runtime, the Anvil M3 theme exposes every Colour Scheme colour as a CSS custom property on `:root`: `--anvil-m3-` followed by the colour name in lower case with hyphens (`--anvil-m3-primary-container`). The project's own roles in `theme.css` use `var(--anvil-m3-…)`, so that palette switching and dark mode reach every component, native or custom.
-- A translucent colour is made from a token with `color-mix()`, for example `color-mix(in srgb, var(--anvil-m3-on-surface) 7%, transparent)`, never with a typed colour value.
+- In the Designer and in CSS, colours are referenced by colour role name: `%color:Primary%` in the Designer, `--m3x-*` and the theme's colour roles in CSS.
+- A translucent colour is made from a token, never with a typed colour value.
 
-The Colour Scheme holds the 46 colours of the Anvil M3 theme:
-
-| Group | Colours |
-|---|---|
-| Primary | Primary, On Primary, Primary Container, On Primary Container |
-| Secondary | Secondary, On Secondary, Secondary Container, On Secondary Container |
-| Tertiary | Tertiary, On Tertiary, Tertiary Container, On Tertiary Container |
-| Error | Error, On Error, On Error Container |
-| Surface and neutral | Background, On Background, Surface, On Surface, Surface Variant, On Surface Variant, Surface Container Low, Surface Container, Surface Container High, Surface Container Highest, Outline, Outline Variant, Inverse Surface, Inverse On Surface |
-| Overlays and disabled | Primary Overlay 1–3, Light Overlay 1–2, Dark Overlay 1–3, Error Overlay 1–2, On Surface Variant Overlay 1–2, Inverse On Surface Overlay 1–2, On Disabled, Disabled Container, Disabled Container 2 |
+The theme's Colour Scheme holds the complete Material 3 set of colour roles — the primary, secondary, tertiary and error roles with their on-colours and containers, the surface and neutral roles, the outline roles, the inverse roles, the overlay roles and the disabled roles — in light and dark for every palette. The full list is the theme's; this document names roles, never values.
 
 #### Status Colors
 
@@ -135,25 +137,36 @@ Material 3 provides no success or pending colour. The platform fixes three statu
 | `status-pending` | Pending, awaiting action |
 | `status-error` | Failure, overdue, no-show |
 
+Their values are fixed in [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) section 7, not here.
+
 Status is never shown by colour alone: every status badge also carries its status word (section "Status Badges").
 
 #### Hardcoded Exception Policy
 
-No hardcoded colour exception is approved. A colour need that the Colour Scheme cannot meet is resolved by deriving the colour from a token with `color-mix()`.
+No hardcoded colour exception is approved. A colour need that the colour roles cannot meet is resolved by deriving the colour from a token, never with a typed colour value.
 
 ---
 
 ## Palette System
 
-### Palette Strategy
+### The choices
 
-The platform supports the eight palettes of `m3-custom-theme` for client customisation. Every palette is a complete Material 3 colour scheme, generated from locked source colours with the Material 3 algorithm, in light and dark, and checked to WCAG AA contrast. Only the palette changes; layout, typography, spacing and the interaction system remain fixed.
+| Choice | Value |
+|---|---|
+| Starting palette | `professional_blue` — Mybizz's corporate colour (brand profile §13) |
+| Starting mode | `system` — dark mode follows the device setting ([[[default:adr-global/adr-dark-mode\|Dark Mode]]](C:/dev/project-library-global/adr-global/adr-dark-mode.md) ADR) |
+| User choice | Yes: each client chooses its own palette at onboarding (Settings → Brand Palette) and may change it at any time; the palette choice is per client instance. Dark mode has no user setting: it always follows the device. |
+| Menu style | `baseline` — the theme's default menu style, set once at start-up. (Flagged for David's approval with this document.) |
+| Logo and imagery | No brand asset files exist in `assets-local/` yet. When the logo and brand imagery are added there, the served copies are placed in App 1's `theme/assets/`; no file in `assets-local/` holds client data. |
+| Tone of text | Direct, honest, empathetic, confident but not arrogant, human, practical; the next action is always obvious (brand profile §10). English phrase texts follow that voice. |
 
 ### Preset Palettes
 
+The platform supports the eight palettes of `m3-custom-theme` for client customisation. Every palette is a complete Material 3 colour scheme, generated from locked source colours with the Material 3 algorithm, in light and dark, and checked to WCAG AA contrast by the theme. Only the palette changes; layout, typography, spacing and the interaction system remain fixed.
+
 | Palette | Best for | Intended effect |
 |---|---|---|
-| Professional Blue (default) | Consultants, clinics, therapists | Trust, professionalism, stability |
+| Professional Blue (starting and default) | Consultants, clinics, therapists | Trust, professionalism, stability |
 | Warm Coral | Salons, spas, lifestyle, beauty | Warmth, creativity, approachability |
 | Calm Teal | Fitness, wellness, physiotherapy, health services | Health, balance, growth |
 | Sophisticated Purple | Executive coaching, premium consulting, high-end services | Premium, refined, exclusive |
@@ -162,7 +175,7 @@ The platform supports the eight palettes of `m3-custom-theme` for client customi
 | Desert Rose | Aestheticians, make-up artists, photographers, event planners | Elegant, warm, personal |
 | Default | Businesses that want the plain Material 3 look | Neutral, standard |
 
-The palette names stored in `business_profile.palette` are `default`, `professional_blue`, `warm_coral`, `calm_teal`, `sophisticated_purple`, `sky_blue`, `forest_green`, `desert_rose`. Source colours, the generation method and every colour value: `m3-custom-theme`, `m3-custom-theme.md` section 4.
+The palette names stored in `business_profile.palette` are `default`, `professional_blue`, `warm_coral`, `calm_teal`, `sophisticated_purple`, `sky_blue`, `forest_green`, `desert_rose`. Source colours, the generation method and every colour value live in the theme (`m3-custom-theme.md` section 4), not here.
 
 ### Palette Selector Requirements
 
@@ -179,7 +192,7 @@ Choosing a palette previews it live across the screen before it is saved.
 
 ### Palette Governance
 
-- Palette switching is token-driven: the theme's module `m3x_theming` (`m3-custom-theme`) sets the palette on the page, which changes the `--anvil-m3-*` and `--m3x-color-*` properties and nothing else.
+- Palette switching is token-driven: the theme's module `m3x_theming` (`m3-custom-theme`) sets the palette on the page, which changes the `--m3x-*` properties and nothing else.
 - Switching a palette never requires page-specific redesign or branching CSS.
 - Every palette swap sets the full Colour Scheme — accent, surface, neutral, overlay and disabled colours.
 - The chosen palette applies to every screen of the client's instance: public website, admin area and customer portal.
@@ -191,123 +204,78 @@ Choosing a palette previews it live across the screen before it is saved.
 
 ### Font Family
 
-Primary family: Roboto  
-Fallbacks: Noto Sans, Arial, sans-serif
+Roboto — Material 3's standard typeface and the theme's type family. It is used consistently across public and management surfaces. There is no font choice and no custom font value; the fallbacks and the family come from the theme.
 
-### Type Scale
+### Type Roles
 
-The type scale of `m3-custom-theme` with this project's heading weight:
+The theme's type roles are used, by role name. The scale values, line heights and weights are the theme's; this document maps each role to its use:
 
-| Scale | Size | Line Height | Weight | Use Case |
-|---|---:|---:|---:|---|
-| Display | 57px | 64px | 400 | Rare hero headlines, error codes |
-| Headline Large | 32px | 40px | 600 | Page titles |
-| Headline Small | 22px | 28px | 600 | Section headers |
-| Title | 18px | 24px | 500 | Card titles |
-| Body Large | 16px | 24px | 400 | Larger body copy, public pages |
-| Body | 14px | 20px | 400 | Standard body text |
-| Button | 14px | 14px | 500 | Button labels |
-| Label | 12px | 16px | 500 | Form labels |
-| Caption | 12px | 16px | 400 | Helper text and captions |
+| Role (theme) | Use Case |
+|---|---|
+| `display` | Rare hero headlines, error codes |
+| `headline-large` | Page titles |
+| `headline-small` | Section headers |
+| `title-medium` | Card titles and emphasized local headings |
+| `body-large` | Larger body copy, public pages |
+| `body-medium` | Standard body text |
+| `body-small` | Helper text and captions |
+| Field labels | The input components' own labels |
 
 ### Typography Rules
 
-- Use Roboto consistently across public and management surfaces.
-- Preserve hierarchy through scale and weight, not decorative typography.
-- Page titles should use Headline Large.
-- Section headings should use Headline Small.
-- Card titles and emphasized local headings should use Title.
-- Body text should remain compact, readable, and operationally efficient.
-- Labels and captions should never become the dominant visual element.
+- Hierarchy comes from the type roles — scale and weight — never from decorative typography or a custom size.
+- Page titles use `headline-large`; section headings use `headline-small`; card titles use `title-medium`; body text uses the body roles.
+- Labels and captions never become the dominant visual element.
+- No custom font size, weight or family is set on any component; the type roles decide.
 
 ---
 
-## Spacing, Radius, Elevation, and Density
+## Spacing, Shape, Elevation, Density and Motion
 
-### Spacing Scale
+Every value in these areas is the theme's, read from its `--m3x-*` tokens and its component specifications. This document records only the choices:
 
-| Token | Value | Use Case |
-|---|---:|---|
-| `--space-1` | 4px | Tiny spacing, tight gaps |
-| `--space-2` | 8px | Small spacing, padding |
-| `--space-3` | 12px | Medium spacing |
-| `--space-4` | 16px | Large spacing, card padding |
-| `--space-6` | 24px | Section gaps |
-| `--space-8` | 32px | Large layout spacing |
-
-Rules:
-
-- The 4px rhythm is mandatory.
-- Padding, gaps, and section spacing should resolve through this scale.
-- Public pages may feel looser than management screens, but must still use the same underlying rhythm.
-
-### Border Radius Rules
-
-| Element | Radius | Notes |
-|---|---:|---|
-| Buttons | 100px | Pill shape |
-| Cards | 8px | Standard card shape (project deviation from the M3 default of 12px) |
-| Dialogs | 28px | Modal/dialog treatment |
-| Inputs (Outlined) | 4px | Text boxes and dropdowns |
-| Inputs (Filled) | 0px | Bottom-border-only pattern |
-| Chips/Badges | 8px | Tags and chips |
-| Navigation Items | 100px | Pill treatment |
-| Data Grid | 24px | Header and container |
-
-### Elevation Rules
-
-| Element | Elevation | Notes |
-|---|---:|---|
-| Surface | 0dp | Flat base |
-| Card (Elevated) | soft dual-layer shadow | Emphasized content (see "Project Deviations from M3 Defaults") |
-| Card (Tonal) | 0dp | Tonal separation only |
-| Dialog | 24dp | Modal emphasis |
-| Navigation Rail | 0dp | Border-only structure |
-| App Bar | 0dp | Border-only structure |
-
-### Density Guidance
-
-| Density | Row Height | Padding | Gap | Use Case |
-|---|---:|---:|---|---|
-| Compact | 40px | 8px | 4px to 8px | Data-heavy screens |
-| Default | 48px | 12px | 8px to 16px | Standard forms and lists |
-| Comfortable | 56px | 16px | 12px to 24px | Read-only and public screens |
+| Area | Choice |
+|---|---|
+| Spacing | The theme's spacing rhythm, used for padding, gaps and section spacing throughout. Public pages may feel looser than management screens, but use the same rhythm. |
+| Shape | The theme's shape scale as each component defines it. No element sets a custom radius. |
+| Elevation | The theme's elevation levels as each component defines them: flat surfaces at the base level, elevated cards only for emphasized content, dialogs at the theme's dialog emphasis. Navigation rail and app bar are border-only structure, not shadowed. |
+| Density | Three working densities by screen kind — compact for data-heavy screens, the default for forms and lists, comfortable for read-only and public screens — all within the theme's component sizes. |
+| Motion | The theme's motion scheme, `standard` (calm), set once at start-up; the theme removes its motion when the device asks for reduced motion. Motion guidance: section "Motion and Interaction Guidance". |
 
 ---
 
 ## Input and State Rules
 
-### Input States
+States are the theme's component states, used as the components define them:
 
-| State | Border Color | Background | Text Color | Notes |
-|---|---|---|---|---|
-| Default | Outline | Surface Variant | On Surface | Normal state |
-| Focused | Primary | Surface Variant | On Surface | Active/focused |
-| Error | Error | Surface Variant | Error | Validation failure |
-| Disabled | On Disabled | Dark Overlay 1% | On Disabled | Reduced emphasis |
-| Read-only | Outline | Surface | On Surface Variant | Non-editable display |
+| State | Notes |
+|---|---|
+| Default | The component's normal state, in the theme's colours. |
+| Focused | Focus state must be obvious and consistent; the theme's focus treatment is used, never a custom one. |
+| Error | The component's own error state, with the message in its supporting text ([[[default:specifications-global/spec-ui-standards\|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) §8). |
+| Disabled | The theme's disabled state; it must clearly communicate non-interactivity. |
+| Read-only | Shown so it is never confused with the disabled state. |
 
-### State Rules
-
-- Focus state must be obvious and consistent.
-- Error state must be visible without becoming visually noisy.
-- Disabled state must clearly communicate non-interactivity.
-- Read-only state must not be confused with disabled state.
-- Inputs across all templates must follow the same state logic.
+- Inputs across all templates follow the same state logic.
+- Text inputs, dropdowns and date pickers use the outlined appearance ([[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) §8).
 
 ---
 
 ## Component and Role Map
 
+Roles are names, not styles. Every role's appearance is defined in the theme's tokens and the theme's components; a custom Role in the app is written only where the theme has no role for the purpose, and is itself token-driven, holding no colour, size or spacing value of its own.
+
 ### Buttons
 
-| Role Name | Appearance | Use Case | Min Height |
-|---|---|---|---:|
-| `primary-button` | Filled | Primary actions | 40px |
-| `secondary-button` | Outlined | Secondary actions | 40px |
-| `tertiary-button` | Text | Low-emphasis actions | 40px |
-| `icon-button` | Icon only | Utility actions | 36px |
-| `fab-button` | Filled circular | Create-new action | 56px |
+| Role Name | Appearance | Use Case |
+|---|---|---|
+| `primary-button` | Filled | Primary actions |
+| `secondary-button` | Outlined | Secondary actions |
+| `tertiary-button` | Text | Low-emphasis actions |
+| `icon-button` | Icon only | Utility actions |
+| `fab-button` | The theme's FloatingActionButton | Create-new action |
+
+A screen has at most one filled button ([[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) §8).
 
 ### Cards
 
@@ -329,21 +297,23 @@ Rules:
 | `card-container` | Card collections |
 | `grid-container` | Responsive grids |
 
+Where the theme has no container component for a purpose, Anvil's canonical built-in containers are used (`ColumnPanel`, `FlowPanel`, `GridPanel`, `LinearPanel`) and are styled by the theme's tokens (rule 3 of the law).
+
 ### Headings
 
-| Role Name | Size | Use Case |
+| Role Name | Type Role (theme) | Use Case |
 |---|---|---|
-| `page-title` | Headline Large | Page headings |
-| `section-title` | Headline Small | Section headings |
-| `card-title` | Title | Card headings |
-| `label-title` | Body Large | Form labels |
+| `page-title` | `headline-large` | Page headings |
+| `section-title` | `headline-small` | Section headings |
+| `card-title` | `title-medium` | Card headings |
+| `label-title` | `body-large` | Form labels |
 
 ### Navigation
 
 | Role Name | Use Case |
 |---|---|
 | `nav-item` | Standard navigation item |
-| `nav-item-selected` | Active navigation item |
+| `nav-item-selected` | Active navigation item (the theme's selected treatment) |
 | `app-bar-link` | App bar navigation |
 | `breadcrumb-item` | Breadcrumb navigation |
 
@@ -351,18 +321,18 @@ Rules:
 
 | Role Name | Input Type | Use Case |
 |---|---|---|
-| `outlined-input` | TextBox, TextArea | Standard text input |
-| `outlined-select` | DropdownMenu | Select input |
-| `outlined-date` | DatePicker | Date selection |
+| `outlined-input` | The theme's TextBox, TextArea | Standard text input |
+| `outlined-select` | The theme's DropdownMenu | Select input |
+| `outlined-date` | The theme's DatePicker | Date selection |
 | `input-error` | All inputs | Error state |
 | `input-disabled` | All inputs | Disabled state |
 | `input-readonly` | All inputs | Read-only state |
 
 ### Status Badges
 
-A status badge is an outlined pill: a small dot in the status colour, followed by the status word in On Surface. The word carries the meaning; the colour supports it. This keeps every badge readable in every palette and in dark mode.
+A status badge is an outlined pill: a small dot in the status colour, followed by the status word in the on-surface colour. The word carries the meaning; the colour supports it. This keeps every badge readable in every palette and in dark mode.
 
-| Status | Dot colour |
+| Status | Dot colour (role) |
 |---|---|
 | Confirmed, paid, delivered, approved | `status-success` |
 | Pending, awaiting approval, in progress, sent | `status-pending` |
@@ -377,29 +347,9 @@ Template variation is allowed through arrangement, visibility, and composition, 
 
 ---
 
-## Project Deviations from M3 Defaults
-
-Where this project's values differ from the Anvil M3 theme defaults, the deviation is stated here so it is never silently inherited. These deviations give Mybizz CS its refined "MUI-inspired" look, taken from the MUI dashboard reference.
-
-| Element | M3 default | Mybizz CS value |
-|---|---|---|
-| Card corner radius | 12px | 8px |
-| Headline weight (Headline Large, Headline Small) | 400 | 600 |
-| Card shadow (elevated) | M3 elevation level 1 | Soft dual layer: `0 4px 16px 0 color-mix(in srgb, var(--anvil-m3-on-surface) 7%, transparent), 0 8px 16px -5px color-mix(in srgb, var(--anvil-m3-on-surface) 7%, transparent)` |
-| Dividers | Outline Variant | Outline Variant at 40% opacity (hairline) |
-| Surface distinction | Single surface | Two levels: Background for the page, Surface Container Low for panels and navigation |
-| App bar | Surface Container | Surface, hairline bottom border, no gradient |
-| Navigation rail / drawer | Surface Container | Surface Container Low, hairline right border |
-| State layer — hover | 8% | 8% (unchanged) |
-| State layer — pressed / focused | 10–12% | 12% |
-
-Unchanged from M3: button radius 100px (pill), dialog radius 28px, outlined input radius 4px, navigation item radius 100px, Roboto, the 4px spacing grid, and the M3 colour role structure. All deviations are implemented in `theme.css` through `--anvil-m3-*` properties and Anvil roles.
-
----
-
 ## Forms and Pages
 
-This section defines the primary implementation-facing forms and pages in the Mybizz CS application. Each entry states its purpose, architectural boundary, and key design constraints.
+This section defines the primary implementation-facing forms and pages in the Mybizz CS application. Each entry states its purpose, architectural boundary, and key design constraints. Widths and patterns for each screen type are set once in [[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) section 7, not here.
 
 ### OnboardingForm
 
@@ -420,7 +370,7 @@ This section defines the primary implementation-facing forms and pages in the My
 10. Completion — onboarding complete.
 
 **Key design rules:**
-- Progress indicator visible throughout.
+- Progress indicator visible throughout (the theme's progress indicators).
 - Back and forward navigation between steps.
 - "Go to Settings" links open the Settings tab and return to onboarding when done.
 - Legal acknowledgement is a required action in onboarding, not a Settings configuration.
@@ -450,7 +400,7 @@ This section defines the primary implementation-facing forms and pages in the My
 ### SettingsForm
 
 **Purpose:** Single tabbed form for all configuration after onboarding (F-05).
-**Architecture:** One form with tab-based navigation using M3 buttons. The tab list is the one in `mb-3-cs-architecture-reference.md` F-05.
+**Architecture:** One form with tab-based navigation using the theme's Tabs. The tab list is the one in `mb-3-cs-architecture-reference.md` F-05.
 
 **Tab structure:**
 
@@ -484,8 +434,8 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### VaultForm
 
-**Purpose:** Owner-only Vault UI for managing encrypted API keys and credentials.  
-**Architecture:** Standalone form accessed from Settings. Requires TOTP step-up on every open.  
+**Purpose:** Owner-only Vault UI for managing encrypted API keys and credentials.
+**Architecture:** Standalone form accessed from Settings. Requires TOTP step-up on every open.
 **Completion criteria (Stage 1.5):** TOTP required each time, no grace period, email notification on every access, secrets stored encrypted in `vault` table.
 
 **Key design rules:**
@@ -498,10 +448,10 @@ This section defines the primary implementation-facing forms and pages in the My
 
 **TOTP entry screen:**
 - Displayed before the vault content is visible. Full-screen overlay or prominent card at top of form.
-- Shows: "TOTP Verification Required" heading, instruction text ("Enter the code from your authenticator app"), 6-digit input field, "Verify" button.
+- Shows: "TOTP Verification Required" heading, instruction text ("Enter the code from your authenticator app"), six-digit input field, "Verify" button.
 - On success: TOTP overlay dismissed, vault content (secrets list + add form) becomes visible.
-- On failure: Error message "Invalid code. Please try again." with the input field cleared. After 5 failed codes the Vault locks for 15 minutes and the Owner is emailed, because a six-digit code must not be open to unlimited guessing.
-- No grace period: TOTP is required on every VaultForm open, even if the user just verified 30 seconds ago.
+- On failure: Error message "Invalid code. Please try again." with the input field cleared. After five failed codes the Vault locks and the Owner is emailed, because a six-digit code must not be open to unlimited guessing.
+- No grace period: TOTP is required on every VaultForm open, even if the user just verified within the same code window.
 
 **Vault empty state (no secrets stored):**
 - Displayed when the `vault` table has zero rows for this client instance.
@@ -512,9 +462,9 @@ This section defines the primary implementation-facing forms and pages in the My
 - If the encryption key is missing from Anvil Secrets: show critical error "Vault is not configured. Contact Mybizz support." — this is a provisioning error, not a user error.
 
 **Vault loading state (encryption/decryption in progress):**
-- When adding a new secret: "Add Secret" button shows spinner, text changes to "Encrypting...".
-- When viewing a secret (masked reveal): the eye icon shows a small spinner while the server decrypts and returns the value.
-- When deleting a secret: the delete icon shows a spinner, the row fades slightly until deletion is confirmed.
+- When adding a new secret: "Add Secret" button shows its loading state.
+- When viewing a secret (masked reveal): the reveal action shows the theme's loading indicator while the server decrypts and returns the value.
+- When deleting a secret: the row's removal is confirmed with the theme's feedback, and the row fades until deletion is confirmed.
 
 ### EmailSettingsForm
 
@@ -568,7 +518,7 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### UserManagementForm
 
-**Purpose:** Invite team members, assign roles, and manage user access.  
+**Purpose:** Invite team members, assign roles, and manage user access.
 **Architecture:** Standalone form. Users stored in `users` table with role, permissions, account_status fields.
 
 **Key design rules:**
@@ -582,8 +532,8 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### PolicyEditorForm
 
-**Purpose:** Settings → Legal Pages: editing the Privacy Policy, the Terms & Conditions and the Cookie Policy with the ClauseBuilder component (F-22).  
-**Architecture:** Hosted in the Legal Pages tab of Settings. Uses ClauseBuilder as a shared custom component.  
+**Purpose:** Settings → Legal Pages: editing the Privacy Policy, the Terms & Conditions and the Cookie Policy with the ClauseBuilder component (F-22).
+**Architecture:** Hosted in the Legal Pages tab of Settings. Uses ClauseBuilder as a shared custom component.
 **Wireframe:** `wireframe-settings-PolicyEditorForm.html` (created).
 
 **Key design rules:**
@@ -594,15 +544,14 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### ClauseBuilder (Shared Custom Component)
 
-**Purpose:** Standalone reusable clause editor for legal policy documents.  
-**Architecture:** Shared custom component used by the Privacy Policy, Terms & Conditions and Cookie Policy editing flows.  
+**Purpose:** Standalone reusable clause editor for legal policy documents.
+**Architecture:** Shared custom component used by the Privacy Policy, Terms & Conditions and Cookie Policy editing flows.
 **Wireframe:** `wireframe-custom-component-ClauseBuilder.html` (created).
 
 **Key design rules:**
 - Parameterized by document type (`privacy_policy`, `t_and_c` or `cookie_policy`).
 - Category dropdown selector for clause grouping.
-- Seeded clauses from master template (green border, editable text, not deletable).
-- Custom clauses added by Owner (blue border, editable and deletable).
+- Seeded clauses from master template (editable text, not deletable); custom clauses added by Owner (editable and deletable).
 - "+ Add Custom Clause" button reveals add form.
 - "Edit" link on each clause reveals edit form.
 - "Save" button writes changes to datatable and publishes to public page.
@@ -611,8 +560,8 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### PrivacyPolicyPage
 
-**Purpose:** Public-facing page that renders the Owner's privacy policy.  
-**Architecture:** Reads from `privacy_policy` table. Renders clauses grouped by category.  
+**Purpose:** Public-facing page that renders the Owner's privacy policy.
+**Architecture:** Reads from `privacy_policy` table. Renders clauses grouped by category.
 **Wireframe:** To be created.
 
 **Key design rules:**
@@ -623,8 +572,8 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### TermsConditionsPage
 
-**Purpose:** Public-facing page that renders the Owner's terms and conditions.  
-**Architecture:** Reads from `t_and_c` table. Renders clauses grouped by category.  
+**Purpose:** Public-facing page that renders the Owner's terms and conditions.
+**Architecture:** Reads from `t_and_c` table. Renders clauses grouped by category.
 **Wireframe:** To be created.
 
 **Key design rules:**
@@ -635,8 +584,8 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### CookiePolicyPage
 
-**Purpose:** Public-facing page that renders the Owner's cookie policy.  
-**Architecture:** Reads from `cookie_policy` table. Renders clauses grouped by category.  
+**Purpose:** Public-facing page that renders the Owner's cookie policy.
+**Architecture:** Reads from `cookie_policy` table. Renders clauses grouped by category.
 **Wireframe:** To be created.
 
 **Key design rules:**
@@ -645,8 +594,8 @@ This section defines the primary implementation-facing forms and pages in the My
 
 ### Cookie Banner
 
-**Purpose:** Asks each visitor for their cookie choice before any embedded map or video sets its cookies ([[[default:specifications-global/spec-legal-documents-and-consent|Legal Documents and Consent]]](C:/dev/project-library-global/specifications-global/spec-legal-documents-and-consent.md), sections 6 to 8).  
-**Architecture:** Part of the public page layout; shown on the first visit and whenever the `mb_consent` cookie is missing, older than 12 months or older than the published Cookie Policy version.  
+**Purpose:** Asks each visitor for their cookie choice before any embedded map or video sets its cookies ([[[default:specifications-global/spec-legal-documents-and-consent|Legal Documents and Consent]]](C:/dev/project-library-global/specifications-global/spec-legal-documents-and-consent.md), sections 6 to 8).
+**Architecture:** Part of the public page layout; shown on the first visit and whenever the `mb_consent` cookie is missing, older than 12 months or older than the published Cookie Policy version.
 **Wireframe:** To be created.
 
 **Key design rules:**
@@ -711,11 +660,11 @@ These are variation patterns built on the same design system, not separate site 
 All four templates draw from the same governed section inventory:
 
 1. **Hero (Parallax)** — ParallaxComponent with hero heading, subheading, and primary CTA.
-2. **Services showcase** — `m3.Carousel` (hero layout) + service card grid (M3 Cards). The carousel advances every 6 seconds through a Timer on the form calling `next()`, with a pause/play `m3.IconButton` beside it; rotation stops for good when the visitor moves the carousel, and does not start when the device asks for reduced motion.
+2. **Services showcase** — the theme's `Carousel` (hero layout) + service card grid (theme Cards). The carousel advances on a Timer on the form calling `next()`, with a pause/play theme IconButton beside it; rotation stops for good when the visitor moves the carousel, and does not start when the device asks for reduced motion.
 3. **Intro / About summary** — Short text section with heading + body text.
 4. **Video story** — VideoDisplayComponent, bound to `business_profile.home_video_url`, hidden when no URL configured.
-5. **Testimonials** — 2–3 testimonial cards with quote text and author details.
-6. **Trust / proof strip** — 3–4 trust data points using M3 text and card patterns.
+5. **Testimonials** — testimonial cards with quote text and author details.
+6. **Trust / proof strip** — trust data points using theme text and card patterns.
 7. **CTA / contact band** — Headline, explanatory text, primary button, optional secondary action.
 8. **Footer** — Shared FooterComponent across all public pages. Besides the business's own links and the Cookie settings link, it always shows the line "Report abuse: abuse@mybizz.live", linked as an email address, in the footer's smallest text style. The line cannot be removed or edited by the client.
 
@@ -747,21 +696,21 @@ Hides: carousel, full services grid, full testimonials, video. Uses fewer text b
 **Structure:**
 ```text
 ErrorLayout (BlankLayout)
-└── col_error (ColumnPanel) — max-width: 480px, centred
-    ├── hdg_error_code (Heading) — Display scale (57px), colour Primary
-    ├── hdg_error_title (Heading) — Headline Large (32px)
-    ├── text_error_message (Text) — Body Large (16px), colour On Surface Variant
+└── col_error (ColumnPanel) — centred
+    ├── hdg_error_code (Heading) — display role, colour the primary role
+    ├── hdg_error_title (Heading) — headline-large role
+    ├── text_error_message (Text) — body-large role, colour the on-surface-variant role
     └── btn_go_home (Button) — filled, "Go Home"
 ```
 
 **Key design rules:**
 - All four elements (error code, heading, message, button text) are set programmatically based on error type.
-- Error code uses the Display scale (`57px/64px 400`), colour `var(--anvil-m3-primary)`.
-- Heading uses Headline Large (`32px/40px 600`), colour `var(--anvil-m3-on-surface)`.
-- Message uses Body Large (`16px/24px 400`), colour `var(--anvil-m3-on-surface-variant)`, max-width: 480px.
-- "Go Home" button: filled primary, pill radius. Navigates to homepage (unauthenticated) or Dashboard (authenticated).
+- Error code uses the display type role, in the primary colour role.
+- Heading uses `headline-large`, in the on-surface role.
+- Message uses `body-large`, in the on-surface-variant role.
+- "Go Home" button: filled primary. Navigates to homepage (unauthenticated) or Dashboard (authenticated).
 - Container is centred vertically and horizontally. No sidebar, no app bar.
-- Responsive: 480px max-width container works at all breakpoints. No sidebar to collapse.
+- Responsive at every width; no sidebar to collapse.
 
 **Supported error types:**
 
@@ -773,14 +722,14 @@ ErrorLayout (BlankLayout)
 
 ### AdminLayout
 
-**Purpose:** Admin panel shell — native M3 `NavigationRailLayout` with sidebar navigation.
-**Architecture:** native M3 `NavigationRailLayout`; each admin page form names AdminLayout as its layout in the Designer. Uses the layout's NavigationLink components with lambda click handlers ([[[default:adr-global/adr-navigation-lambda-link-open-form|Navigation Standard: Lambda/Link/open_form]]](C:/dev/project-library-global/adr-global/adr-navigation-lambda-link-open-form.md) ADR). HTMLTemplate is banned per the [[[default:adr-global/adr-htmltemplate-use|HTMLTemplate Use]]](C:/dev/project-library-global/adr-global/adr-htmltemplate-use.md) ADR.
+**Purpose:** Admin panel shell — the theme's `NavigationRailLayout` with sidebar navigation.
+**Architecture:** the theme's `NavigationRailLayout`; each admin page form names AdminLayout as its layout in the Designer. Uses the layout's NavigationLink components with lambda click handlers ([[[default:adr-global/adr-navigation-lambda-link-open-form|Navigation Standard: Lambda/Link/open_form]]](C:/dev/project-library-global/adr-global/adr-navigation-lambda-link-open-form.md) ADR). HTMLTemplate is banned per the [[[default:adr-global/adr-htmltemplate-use|HTMLTemplate Use]]](C:/dev/project-library-global/adr-global/adr-htmltemplate-use.md) ADR.
 
 **Structure:**
 ```text
 AdminLayout (NavigationRailLayout)
 ├── app_bar (Container) — "Mybizz CS" title, notifications icon, user menu icon
-├── sidebar (ColumnPanel) — 260px fixed width, navigation groups below
+├── sidebar (ColumnPanel) — navigation groups below
 └── content slot — the page form opened with open_form() fills it; the layout stays
 ```
 
@@ -788,17 +737,17 @@ AdminLayout (NavigationRailLayout)
 
 **Key design rules:**
 - Sidebar uses NavigationLink components with lambda click handlers that capture their loop variables. `navigate_to` is never used.
-- The Inbox item shows the user's unread count.
-- Sidebar width: 260px on desktop (>=998px). Collapses to hamburger drawer overlay on mobile (<998px).
-- Active link highlighting via M3 primary-container background.
+- The Inbox item shows the user's unread count (the theme's Badge).
+- Sidebar uses the theme's expressive rail treatment (`rail_style="expressive"`), expanded on wide windows (`rail_adaptive`); the rail's widths and behaviour are the theme's.
+- Active link highlighting via the theme's selected treatment.
 - Sign Out is always visible at sidebar bottom for all roles.
 - Vault link is Owner-only. Settings link is Owner/Manager only.
 - Navigation is `open_form('package.FormName')`: the page form opens in AdminLayout's content slot and the layout stays (`scaffold-spec.md`, Navigation Architecture).
 - App bar shows notifications icon and user menu icon (both icon-only buttons).
 
 **Responsive behavior:**
-- Desktop (>=998px): Fixed sidebar (260px) + content fills remainder.
-- Mobile (<998px): Sidebar collapses to hamburger drawer overlay. Content is full-width.
+- Desktop: fixed sidebar + content fills remainder.
+- Mobile: sidebar collapses per the layout's collapse behaviour; content is full-width.
 
 ### Page Templates (12)
 
@@ -875,7 +824,7 @@ Blog settings should support:
 
 ## Custom Components
 
-Every custom component, where it is used and why it is needed is listed in `custom-component-requirements-matrix.md`, the single home of the component list. Every custom component uses the tokens, typography, spacing and roles defined in this document.
+Every custom component, where it is used and why it is needed is listed in `custom-component-requirements-matrix.md`, the single home of the component list. Every custom component is built from theme components and uses the tokens, typography, spacing and roles defined in this document.
 
 ---
 
@@ -883,6 +832,7 @@ Every custom component, where it is used and why it is needed is listed in `cust
 
 Motion remains subtle and functional.
 It should support clarity and polish, not spectacle.
+The theme's motion scheme is `standard` (calm); the theme removes its motion when the device asks for reduced motion, and app animations run through the theme's motion module (`m3x_motion`).
 
 Rules:
 
@@ -905,6 +855,7 @@ Examples to avoid:
 - Large animated gradients.
 - Heavy page-load effects.
 - Motion that interferes with speed or focus.
+- Any motion value, easing or duration that is not the theme's.
 
 ---
 
@@ -914,10 +865,10 @@ Examples to avoid:
 
 All styling should use:
 
-- Anvil M3 theme tokens.
-- Built-in M3 component properties.
-- Anvil roles for semantic styling.
-- CSS custom properties defined in `theme.css` where needed.
+- The theme's `--m3x-*` design tokens and colour roles.
+- Built-in theme component properties.
+- Anvil roles for semantic styling, written token-driven.
+- No custom CSS that states a colour, font, size or spacing value.
 
 ### JavaScript Usage
 
@@ -939,11 +890,11 @@ JavaScript stays minimal and is called through `anvil.js` (never `eval`). Approv
 
 ### Text and Language
 
-Every piece of screen text comes from a phrase key in `shared/translations/` (F-25, [[[default:specifications-global/spec-translation|Translation]]](C:/dev/project-library-global/specifications-global/spec-translation.md)); the Designer holds the key, never the words. Layouts allow for text up to 40% longer than the English, because French, German, Spanish and Italian run longer: buttons and labels wrap or grow, never cut text off.
+Every piece of screen text comes from a phrase key in `shared/translations/` (F-25, [[[default:specifications-global/spec-translation|Translation]]](C:/dev/project-library-global/specifications-global/spec-translation.md)); the Designer holds the key, never the words. Layouts allow for translated text up to 40% longer than the English, because French, German, Spanish and Italian run longer: buttons and labels wrap or grow, never cut text off.
 
 ### Storage Guidance
 
-At startup, App 1 calls `m3x_theming.apply_saved()`, which applies the browser's last palette at once and avoids a flash of the default palette, then `m3x_theming.set_palette(business_profile.palette)` and `m3x_theming.set_mode("system")`, so the server value always wins once loaded.
+At startup, App 1 calls `m3x_theming.apply_saved()`, which applies the browser's last palette at once and avoids a flash of the default palette, then `m3x_theming.set_palette(business_profile.palette)` and `m3x_theming.set_mode("system")`, so the server value always wins once loaded. The menu style is set once at start-up (`m3x_theming.set_menu_style("baseline")`), as is the motion scheme (`m3x_motion.set_scheme("standard")`).
 
 ---
 
@@ -989,7 +940,7 @@ The Mybizz management app (App 5, F-34) is built before launch and uses this des
 
 Tax is set per client in Settings → Invoicing:
 
-- `business_profile.tax_rate` — a percentage, default **0** (no tax).
+- `business_profile.tax_rate` — a percentage, default 0 (no tax).
 - `business_profile.tax_label` — the name shown on invoices, for example VAT, GST or Sales Tax.
 - `business_profile.tax_registration_number` — shown on invoices when set.
 
@@ -1099,20 +1050,20 @@ The booking calendar is specified in full in `spec-calendar-feature.md`.
 
 ### 7-Step Booking Flow Per-Step UI Layout
 
-The booking flow uses 3 server round-trips maximum ([[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR). Each step has a defined UI:
+The booking flow uses three server round-trips maximum ([[[default:adr-global/adr-form-architecture-and-state|Form Architecture and State Management]]](C:/dev/project-library-global/adr-global/adr-form-architecture-and-state.md) ADR). Each step has a defined UI:
 
 **Round-trip 1: `get_booking_context(service_id)`**
 
 | Step | UI Elements | Server Call |
 |------|-------------|-------------|
-| 1. Select Service | Service cards (image, name, price, duration), search/filter. Selected card highlights with primary-container border. | Part of RT1 (pre-loaded) |
+| 1. Select Service | Service cards (image, name, price, duration), search/filter. Selected card highlights with the primary-container treatment. | Part of RT1 (pre-loaded) |
 | 2. Select Provider | Provider cards (avatar, name, specialty). Available providers from RT1 response. Selected card highlights. | Client-side from RT1 cache |
 
 **Round-trip 2: `get_available_slots(provider_id, date_range)`**
 
 | Step | UI Elements | Server Call |
 |------|-------------|-------------|
-| 3. Select Date/Time | Date picker (month calendar) + time slot grid. Available slots from RT2. Selected slot highlights with primary background. Unavailable slots greyed out. | RT2 |
+| 3. Select Date/Time | The theme's DatePicker (month calendar) + time slot grid. Available slots from RT2. Selected slot highlights with the primary treatment. Unavailable slots shown disabled. | RT2 |
 
 **Client-side (no server call):**
 
@@ -1125,14 +1076,14 @@ The booking flow uses 3 server round-trips maximum ([[[default:adr-global/adr-fo
 
 | Step | UI Elements | Server Call |
 |------|-------------|-------------|
-| 6. Payment | Order summary card (service, provider, date, time, meeting type, address, amount). The service's payment option: pay in full, pay a deposit, pay on the day, invoice with payment terms, or use a package session. Button text follows the option ("Confirm & Pay", "Confirm Booking"). Processing spinner during RT3. | RT3 |
+| 6. Payment | Order summary card (service, provider, date, time, meeting type, address, amount). The service's payment option: pay in full, pay a deposit, pay on the day, invoice with payment terms, or use a package session. Button text follows the option ("Confirm & Pay", "Confirm Booking"). The theme's loading indicator during RT3. | RT3 |
 | 7. Confirmation | Success card with check icon, booking ID, details summary. "View Booking" and "Book Another" buttons. | None — client-side |
 
 **Global booking flow rules:**
 - globals.py `booking_flow_state` preserves selections across steps (see [[[default:docs-standard-global/docstd-globals-contract|globals.py Contract]]](C:/dev/project-library-global/docs-standard-global/docstd-globals-contract.md)).
 - Back navigation preserves state — no re-fetch if data is cached in `booking_flow_state.cached_context`.
-- Step transitions show a brief loading indicator (LinearProgressIndicator or spinner) during server calls.
-- 30-second timeout on any server call — shows "Connection timed out. Please try again." with retry button.
+- Step transitions show the theme's loading indicator during server calls.
+- Server calls time out with a retry message, per the platform's server-call standard.
 - Mid-payment navigation: booking holds for 15 minutes, then expires.
 
 ### BookingListForm Columns
@@ -1144,7 +1095,7 @@ The booking flow uses 3 server round-trips maximum ([[[default:adr-global/adr-fo
 | Service | Service name | From services table |
 | Date | Booking date | Formatted per client timezone |
 | Time | Start time | Formatted per client timezone |
-| Status | Status badge | Color-coded per status lifecycle |
+| Status | Status badge | Per the status lifecycle |
 | Actions | View, Edit, Cancel | Icon buttons; Edit only for Pending; bookings are cancelled, never deleted |
 
 **Primary actions:** "+ Add Booking" (filled), "Calendar View" (outlined — opens BookingCalendarForm).
@@ -1154,27 +1105,27 @@ The booking flow uses 3 server round-trips maximum ([[[default:adr-global/adr-fo
 
 ## Edit Mode (F-06, F-08, F-21)
 
-- For an Owner or Manager signed in, every public page, landing page and published blog post shows a floating **Edit** button (filled tonal, bottom right).
+- For an Owner or Manager signed in, every public page, landing page and published blog post shows a floating **Edit** button (the theme's FloatingActionButton, bottom right).
 - In edit mode, every editable text, image and video element gets a dashed `outline` border and a small edit icon on hover and focus; a slim top bar shows "Editing — changes are not live until you save" with **Save** (filled) and **Cancel** (outlined).
 - Selecting a text element opens it in place for typing, with the AI helper button beside it; selecting an image opens an upload dialog; selecting a video opens its address field.
-- Save publishes at once and shows a confirmation snackbar; Cancel discards every change.
+- Save publishes at once and shows the theme's snackbar confirmation; Cancel discards every change.
 
 ## Sample Data Banner
 
 - A full-width banner at the top of every admin screen while sample data exists: info icon, "You are viewing sample data.", and a **Clear sample data** button (Owner only; other roles see the message without the button).
-- Colours: `secondary-container` background, `on-secondary-container` text. The banner cannot be dismissed while sample data exists.
+- Colours: the `secondary-container` and `on-secondary-container` roles. The banner cannot be dismissed while sample data exists.
 
 ## Share Panel (F-21)
 
 - A side sheet opened by **Share** on a published post: the post preview card (featured image, title, excerpt), then one card per platform — Facebook, LinkedIn, WhatsApp, Instagram — each with its editable caption, a **Regenerate** text button and the platform's share button.
-- Tapping a platform shows a snackbar: "Caption copied — paste it into your post."
+- Tapping a platform shows the theme's snackbar: "Caption copied — paste it into your post."
 - Reader share buttons on the public post: icon buttons for Facebook, LinkedIn, WhatsApp and Copy link, below the post title and at the end of the post.
 
 ## Team Inbox Design (F-18)
 
-- **TeamInboxForm** in AdminLayout, three panes on desktop: addresses and folders (left, 240px), message list (middle), message and conversation (right). On a phone, one pane at a time with a back button.
+- **TeamInboxForm** in AdminLayout, three panes on desktop: addresses and folders (left), message list (middle), message and conversation (right). On a phone, one pane at a time with a back button.
 - Message list rows: sender or recipient, subject, first line, date; unread rows in title weight; star and attachment icons; a checkbox per row for bulk actions, with a bulk action bar that replaces the list header when rows are selected.
-- List header: sort selector, filter chips row built from outlined buttons (Unread, Starred, Attachments, Date, Sender) and a search box.
+- List header: sort selector, filter chips row built from the theme's Chips (Unread, Starred, Attachments, Date, Sender) and a search box.
 - Compose opens as a side sheet on desktop and full screen on a phone: From selector, To, Cc, Bcc, subject, rich text body, attachments, signature, AI draft button, Send (filled) and Discard (text).
 - Every received email is shown as plain text or as sanitised HTML with remote images blocked until the user selects "Show images".
 
@@ -1194,7 +1145,7 @@ The booking flow uses 3 server round-trips maximum ([[[default:adr-global/adr-fo
 
 ## Empty States
 
-Every data-driven screen must define an empty state. The empty state pattern has three elements: a warm message, a primary action button, and a brief explanation of what will appear here.
+Every data-driven screen must define an empty state. The empty state pattern has three elements: a warm message, a primary action button, and a brief explanation of what will appear here. Every empty state is exactly four components: an icon, a heading, a body text and a primary action button ([[[default:specifications-global/spec-ui-standards|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) §10).
 
 **General pattern:**
 ```text
@@ -1235,4 +1186,4 @@ Every data-driven screen must define an empty state. The empty state pattern has
 | Specification | Relevance |
 |---|---|
 | [[[default:specifications-global/spec-component-properties\|Component Properties Specification]]](C:/dev/project-library-global/specifications-global/spec-component-properties.md) | Component property standards, Designer vs Code classification |
-| [[[default:specifications-global/spec-ui-standards\|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) | UI standards, component naming, form types |
+| [[[default:specifications-global/spec-ui-standards\|UI Standards]]](C:/dev/project-library-global/specifications-global/spec-ui-standards.md) | UI standards, screen widths and patterns, component naming, form types |

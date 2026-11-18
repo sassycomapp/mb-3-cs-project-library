@@ -1,7 +1,7 @@
 ---
 title: "README"
 doc-id: "mb-4aef6c9c"
-updated: "2026-11-12"
+updated: "2026-11-18"
 ---
 # Mybizz Consulting Services — Project Library
 
@@ -41,7 +41,7 @@ The repository is public. No secret, key or client data is ever committed to it.
 |---|---|
 | `AGENTS.md` | The rules every agent follows in this library. |
 | `opencode.json` | OpenCode's permissions for this library. |
-| `DESIGN.md` | The application's design system, written at Step 20 by GStack `/design-consultation`, in its own place. Not present until then. |
+| `DESIGN.md` | The application's design system, at `docs-local\DESIGN.md`, written at Step 20: choices only, every value in `m3-custom-theme`. |
 
 ## How this library is worked on
 

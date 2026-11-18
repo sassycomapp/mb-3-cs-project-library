@@ -1,7 +1,7 @@
 ---
 title: "AGENTS"
 doc-id: "mb-2d2c3f8f"
-updated: "2026-11-17"
+updated: "2026-11-18"
 ---
 # AGENTS.md — mb-3-cs project library
 
@@ -34,6 +34,7 @@ The business has five apps (`spec-five-app-architecture-model.md` in `project-li
 10. **A skill's output goes to the skill's own place.** Inside a PDLF step, a copy also goes to `pdlf-outputs\{step}\`. Outside a PDLF step, a skill's report goes to `reports-local\{family}\`.
 11. **Reference material is never committed.** A reference platform's source and reference material stay in `reference-platform-local\`, which git and GBrain ignore.
 12. **One home for every fact.** Product, brand and build facts live only in this library. Business and marketing documents live only in `data-mybizz-mgt`, in `business\` and `marketing\`. A document that needs a fact from the other side links to the fact's source document as `[[source-id:page-name]]` and never restates it. Finished marketing material, such as a post or an outreach message, is the one exception: it is written from the source when it is made and is never used as a source.
+13. **The design system records choices, never values.** Every colour, font, size, spacing, shape and motion value lives in `m3-custom-theme` (`--m3x-*` tokens, colour roles, type roles). `docs-local\DESIGN.md` names choices with the theme's tokens; it never states a value. Using an Anvil canonical built-in component (`ColumnPanel`, `FlowPanel`, `GridPanel`, `LinearPanel`, `DataGrid`, `RepeatingPanel`, `Timer`, `Spacer`) where the theme has no component is not a departure and is never recorded as one.
 
 ## Vocabulary
 
@@ -55,7 +56,7 @@ The business has five apps (`spec-five-app-architecture-model.md` in `project-li
 | Feature tickets | `pdlf-tickets\{run}\{ticket-slug}.md` |
 | Everything a PDLF step produces | `pdlf-outputs\{step}\`, named `mb-3-cs-{step}-{run}-{name}` |
 | Reports from skills outside PDLF | `reports-local\{family}\{skill}-{topic}-{yyyy-mm-dd}.md` |
-| The design system | `DESIGN.md` |
+| The design system | `docs-local\DESIGN.md` |
 | Screen requirements | `ui\{package}\{FormName}\{FormName}-requirement.md` |
 
 ## Agent skills
