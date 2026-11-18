@@ -1,7 +1,7 @@
 ---
 title: "design-doc"
 doc-id: "mb-7868ef5e"
-updated: "2026-11-17"
+updated: "2026-11-18"
 ---
 
 # Mybizz CS — Design Doc (run app1)
@@ -175,7 +175,7 @@ Every feature, rule and decision of the project's documents, named with the docu
 | F-02 The Vault | concept §7; architecture reference §12 F-02; UF-04; schema `vault`; `vault-implementation.md`; `sop-vault-recovery.md`; `spec-vault-system`; ADR `payment-security-boundary-vault`; SR-06, SR-07; FR-02 |
 | F-03 Registration, onboarding and setup | concept §7; architecture reference §5, §12 F-03; UF-01, UF-02; schema `business_profile` onboarding fields; `spec-client-activation-runbook`; `spec-onboarding-implementation-plan` (the project's 10-step wizard governs — the architecture reference is the standard); FR-03; SR-08, SR-08a, SR-08b, SR-09 |
 | F-04 Dashboard and analytics | concept §7; architecture reference §12 F-04; UF-11, UF-25, UF-43; schema `daily_summary`, `service_performance`, `provider_performance`, `campaign_metrics`, `sample_rows`; FR-04; SR-10; test specification §4.10, §4.11 |
-| F-05 Settings Hub | concept §7; architecture reference §12 F-05; DESIGN.md SettingsForm (14 tabs, RBAC visibility); scaffold-spec settings package; FR-05; SR-11 |
+| F-05 Settings Hub | concept §7; architecture reference §12 F-05; DESIGN.md SettingsForm (15 tabs, RBAC visibility); scaffold-spec settings package; FR-05; SR-11 |
 | F-06 Public website | concept §7; architecture reference §12 F-06; UF-16, UF-19; schema `pages`, `files`; `spec-sm-syndication.md` (Route.meta tags); FR-06; SR-12, SR-12a |
 | F-07 Homepage templates | concept §7; architecture reference §12 F-07; UF-17; DESIGN.md Homepage Template Variants (shared section inventory, differentiation matrix, video visibility rule); schema `config` key `home_config`, `business_profile.homepage_template`; FR-07; SR-13 |
 | F-08 Landing pages | concept §7; architecture reference §12 F-08; UF-18, UF-20; schema `landing_pages`, `lead_captures`, `leads`; FR-08; SR-14 |
@@ -204,7 +204,7 @@ Every feature, rule and decision of the project's documents, named with the docu
 | F-31 Design system | concept §7; architecture reference §12 F-31; DESIGN.md in full; `m3-custom-theme.md` section 4 and the theme's usage guide; `anvil-ui-build-standard.md` in full; ADRs `dark-mode`, `design-rules`, `responsive-behaviour-mechanism`, `role-property-assignment-mechanism`, `ui-customization-approach`, `material-3-theme-component-scope`, `anvil-extras-exclusion`; FR-31; SR-50 |
 | F-32 Help, support tickets and feedback | concept §7; architecture reference §12 F-32; UF-34; FR-32; SR-51 |
 | F-33 Hosting | concept §7; architecture reference §4, §12 F-33; `pol-common-aspects-for-mybizz-anvil-applications` aspects 2 and 10; BRD AC-5, AC-6, AC-7, AC-8, AC-12; ADR `tiers-model`; FR-33; SR-52 |
-| F-34 Mybizz management app | concept §7; architecture reference §1 (App 5), §12 F-34; UF-36, UF-37; ADR `mybizz-management-visibility`; `spec-api-specification` (management endpoints: health, status, suspend, unsuspend, push-notification, push-update-alert); FR-34; SR-53, SR-53a, SR-54 |
+| F-34 Mybizz management app | concept §7; architecture reference §1 (App 5), §12 F-34; UF-36, UF-37; ADR `mybizz-management-visibility`; `spec-api-specification` (management endpoints: health, status, suspend, unsuspend, push-notification, push-update-alert, plan-summary); FR-34; SR-53, SR-53a, SR-54 |
 | F-35 Sales pipeline, companies and quotes | concept §7; architecture reference §12 F-35; UF-40, UF-41; schema `companies`, `deals`, `quotes`, `quote_items`; DESIGN.md Sales Design (DealBoardForm, QuoteEditorForm, QuoteAcceptPage, quote status badges); FR-35; SR-56, SR-57 |
 | F-36 Demo apps | concept §7; architecture reference §12 F-36; UF-44; ADR `no-free-trial`; FR-36; SR-58 |
 | F-37 Plan, billing and referrals | concept §7, §9.2; architecture reference §12 F-37; UF-45, UF-46; ADR `tiers-model`; `spec-client-billing` section 4.1; `spec-api-specification` (`/management/plan-summary`); schema `plan_summary`, `business_profile.referral_*`; FR-40; SR-65, SR-66 |
@@ -334,7 +334,7 @@ From the global corpus: `spec-five-app-architecture-model`; `spec-anvil-platform
 
 ### 14.9 Common and trade
 
-Every feature, table and decision marked `common` or `trade`, per ADR `common-and-trade-modules`. The marking is derived mechanically from the ADR's rule — the trade part may use the common part; the common part never uses the trade part; no common table holds a link to a trade table — applied to the schema's typed links.
+Every feature, table and decision marked `common` or `trade`, per ADR `common-and-trade-modules`. The marking follows the ADR's rule — the trade part may use the common part; the common part never uses the trade part; no common table holds a link to a trade table. A table of a trade feature is trade by domain even when it holds no link into another trade table (three of them: `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`); every other trade table holds a typed link into a trade table.
 
 **Features.** Trade: F-10 (service catalogue), F-11 (bookings and scheduling), F-12 (orders for delivered work), F-13 (session packages), F-14 (time tracking), F-15 (invoicing and payments — the billing of this trade's work; the gateway service layer itself is common aspect 6), F-23 (reviews and testimonials — the review of a booking), F-35 (sales pipeline, companies and quotes — quotes become invoices of this trade's work). Common: F-01 to F-09, F-16 to F-22, F-24 to F-34, F-36, F-37 (plan, billing and referrals — Mybizz's own billing of the client).
 

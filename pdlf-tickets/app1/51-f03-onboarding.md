@@ -4,7 +4,7 @@ status: open
 labels: [ready-for-agent]
 created: 2026-11-17
 doc-id: "mb-86b0678c"
-updated: "2026-11-17"
+updated: "2026-11-18"
 ---
 
 ## Description
@@ -37,6 +37,6 @@ updated: "2026-11-17"
 
 - B1 — Owner only (the wizard's scope in the access matrix)
 - B10 — the gateway step writes secret keys only into the Vault, masked, never round-tripped (AC-S4)
-- AC-S5 pattern — the FIDO2 enrolment at step 1 is the Owner's second factor (ticket 16)
+- AC-S5 pattern — the Owner's FIDO2 second factor is enrolled at first sign-in, before the wizard (ticket 16); onboarding step 1 is Welcome and orientation
 
 ## Comments

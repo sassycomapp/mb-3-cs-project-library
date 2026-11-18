@@ -492,7 +492,7 @@ This section defines the primary implementation-facing forms and pages in the My
 **Purpose:** Configure the card gateway (Stripe) and the optional PayPal gateway (F-15).
 **Architecture:** Standalone form opened from Settings → Payment Gateways. One active card gateway per client instance ([[[default:adr-global/adr-payment-gateway-mutability|Payment Gateway Mutability]]](C:/dev/project-library-global/adr-global/adr-payment-gateway-mutability.md) ADR); PayPal can be enabled alongside it. Publishable keys are stored in `payment_config`; secret keys only in the Vault.
 
-**Schema fields (`payment_config`):** `stripe_publishable_key`, `stripe_connected`, `stripe_connected_at`, `paypal_enabled`, `paypal_connected_at`, `test_mode`, `configured_at`.
+**Schema fields (`payment_config`):** `stripe_publishable_key`, `stripe_connected`, `stripe_connected_at`, `paypal_client_id`, `paypal_test_mode`, `paypal_connected`, `paypal_connected_at`, `test_mode`, `configured_at`.
 
 **Key design rules:**
 - Stripe connection card: publishable key, connection status and test/live mode.

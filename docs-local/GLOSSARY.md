@@ -1,7 +1,7 @@
 ---
 title: "GLOSSARY"
 doc-id: "mb-614e0345"
-updated: "2026-11-12"
+updated: "2026-11-18"
 ---
 # Mybizz Consulting Services
 
@@ -165,6 +165,14 @@ _Avoid_: timesheet, hours log.
 
 ### Money
 
+**System currency** *(common)*:
+The currency every stored amount of the client's business is held in, chosen at onboarding and locked once the first booking or invoice exists (F-16).
+_Avoid_: base currency, default currency, account currency.
+
+**Display currency** *(common)*:
+The optional per-service currency prices are shown in, display-only; every stored amount stays in the system currency (F-16).
+_Avoid_: conversion currency, second currency, local currency.
+
 **Invoice** *(trade)*:
 A request for payment a client's business issues to a contact — for a booking, an order, a package, or recorded time — never deleted. Its lines make its subtotal, tax is fixed at issue, and the amount paid is the succeeded payments less refunds. Draft, sent, paid; sent or overdue may be cancelled; overdue is set nightly, with the reminder; the PDF is kept in the client's storage.
 _Avoid_: bill, statement.
@@ -194,7 +202,7 @@ The part of a service's price paid at booking, with the rest paid on the day or 
 _Avoid_: down payment, part payment.
 
 **Payment option** *(trade)*:
-What a service or order offers the customer for paying: pay in full, deposit, pay on the day, invoiced, or from a customer package.
+What a service or order offers the customer for paying: pay in full, deposit, pay on the day, or invoiced. At booking the customer may also pay from a customer package.
 _Avoid_: payment method (the method is card, PayPal, cash and the like), payment plan.
 
 **Expense** *(common)*:
@@ -266,6 +274,10 @@ _Avoid_: inbox (alone, for the Team Inbox), shared inbox.
 **Email message** *(common)*:
 One email the instance holds — received, sent or drafted — with folders inbox, drafts, sent, archive, spam and trash; Trash is deleted for good after 30 days; a body older than 90 days moves to the client's storage with its row kept as an index.
 _Avoid_: email (when the record is meant), thread (a conversation groups messages; the record is the message).
+
+**Unassigned** *(common)*:
+The state of an email message that belongs to no address yet; the Owner moves it to an address or a desk.
+_Avoid_: orphan, no mailbox.
 
 **Suppression** *(common)*:
 An email address blocked from further mail, in scope: a hard bounce or a complaint suppresses every email; an unsubscribe suppresses marketing email only.
@@ -528,6 +540,10 @@ _Avoid_: do-not-disturb, schedule.
 **Delivery log** *(common)*:
 The record of every notification attempt: channel, status, tries, error.
 _Avoid_: email log (that is sent email's own record), audit.
+
+**Morning briefing** *(common)*:
+The user's optional spoken morning summary — today's bookings, outstanding invoices, overdue tasks, new leads, flagged items — switched on or off per user (F-27).
+_Avoid_: daily digest, wake-up call.
 
 **At-risk alert** *(common)*:
 The warning the management app raises when a client's usage or inactivity suggests it may leave — so Mybizz can reach the client before it does.

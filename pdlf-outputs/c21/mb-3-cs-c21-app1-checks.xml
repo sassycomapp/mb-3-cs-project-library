@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="mb-3-cs-c21-app1" tests="2" failures="0" errors="0" skipped="0">
+  <testsuite name="c21" tests="2" failures="0" errors="0" skipped="0">
+    <testcase name="DC-11" classname="pdlf.c21.app1" status="passed">
+      <output>Every pair of concept documents was checked (36 pairs, each named in the report) and every fixed check passed; no contradiction remains. Evidence: pdlf-outputs/c21/mb-3-cs-c21-app1-concept-check.md (36 pairs, 12 contradictions C1-C12 corrected at source with David's decisions and each pair re-checked; observations O1, O2 fixed at his direction; fixed checks Tables/Access/Terms/Tests/Decisions/Receipts all PASS; verdict PASS).</output>
+    </testcase>
+    <testcase name="PR-05" classname="pdlf.c21.app1" status="passed">
+      <output>The receipts of Steps 17 to 20 match their evidence with ts_report.py --check. Evidence: pdlf-outputs/c21/mb-3-cs-c21-app1-pr05-receipts-check.txt (four runs, each "PR-05 pass: the receipt matches the evidence" for c17, c18, c19, c20; Step 20 was not skipped).</output>
+    </testcase>
+  </testsuite>
+</testsuites>

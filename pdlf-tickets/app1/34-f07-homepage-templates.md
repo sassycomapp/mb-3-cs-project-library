@@ -4,7 +4,7 @@ status: open
 labels: [ready-for-agent]
 created: 2026-11-17
 doc-id: "mb-08fa1142"
-updated: "2026-11-17"
+updated: "2026-11-18"
 ---
 
 ## Description
@@ -15,7 +15,7 @@ updated: "2026-11-17"
 ### Forms
 
 - `public_pages.HomePageClassicTemplate`, `public_pages.HomePageServicesTemplate`, `public_pages.HomePageBookingTemplate`, `public_pages.HomePageMinimalistTemplate` — local templates loaded by `business_profile.homepage_template`
-- `public_pages.HomepageEditorForm` — layout selection, hero, features (up to 5), services showcase, testimonials, video section, final call to action; auto-save every 30 seconds
+- `public_pages.HomepageEditorForm` — layout selection, hero, intro, services showcase, video section, testimonials, trust strip, final call to action (DESIGN.md's shared section inventory; no Features element); auto-save every 30 seconds
 
 ### Server functions
 

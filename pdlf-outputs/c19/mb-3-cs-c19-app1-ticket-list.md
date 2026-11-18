@@ -3,7 +3,7 @@ title: "mb-3-cs-c19-app1-ticket-list"
 document: Step 19 ticket list — mb-3-cs c19 app1
 state: The approved ticket breakdown, in build order, after David's three corrections
 doc-id: "mb-dee4d4b1"
-updated: "2026-11-17"
+updated: "2026-11-18"
 ---
 
 # Step 19 — Ticket List (run app1, route Application)
@@ -67,6 +67,6 @@ The order is the plan's sequence; a ticket starts when its blockers are complete
 | 51 | `51-f03-onboarding` | F-03 | onboarding.OnboardingForm (+DomainStep, ImportStep) | 17, 18, 19, 20, 22, 23, 29, 33, 40, 42, 43 |
 | 52 | `52-f33-hosting` | F-33 | none (plan-fit proofs) | 47 |
 
-Divergence assignments carried by the tickets: C2 (SignupForm deleted) → 16; the six `service.py` renames → 16 (auth_service), 20's neighbours n/a, 21 (catalogue_service), 23/24 (booking_service), 25 (dashboard_service), 18 (settings_service); `EmailSetupForm` → `EmailSettingsForm` → 29; Brevo module deleted (C1) → 29; Vault duplicates consolidated (C3) → 3/17; `stripe_service` → `stripe_gateway` → 4/23; `task_service` → `server_automation/` → 32; `metadata_service` → `intake_service` → 24; `policy_service` to `server_settings/` → 12.
+Divergence assignments carried by the tickets: C2 (SignupForm deleted) → 16; the six `service.py` renames → 16 (auth_service), 36 (blog_service), 21 (catalogue_service), 23/24 (booking_service), 25 (dashboard_service), 18 (settings_service); `EmailSetupForm` → `EmailSettingsForm` → 29; Brevo module deleted (C1) → 29; Vault duplicates consolidated (C3) → 3/17; `stripe_service` → `stripe_gateway` → 4/23; `task_service` → `server_automation/` → 32; `metadata_service` → `intake_service` → 24; `policy_service` to `server_settings/` → 12.
 
 Existing forms are rebuilt as HTML templates at the same module path inside their feature's ticket (the 91 pre-PDLF YAML forms; ST-11).

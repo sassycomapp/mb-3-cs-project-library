@@ -1,0 +1,46 @@
+=== c17 ===
+Test evidence in `pdlf-outputs/c17`
+
+| File | Passed | Failed | Review | Skipped | Errors |
+|---|---|---|---|---|---|
+| mb-3-cs-c17-app1-checks.xml | 8 | 0 | 0 | 0 | 0 |
+| mb-3-cs-c17-app1-ts-scan.xml | 37 | 1 | 2 | 5 | 0 |
+| **Total** | **45** | **1** | **2** | **5** | **0** |
+
+Not passed:
+- REVIEW ts_scan::ST-07 No column holds a secret
+- REVIEW ts_scan::ST-07 Times are datetimes in UTC
+- FAIL ts_scan::ST-11 Forms are well-formed HTML templates
+
+PR-05 pass: the receipt matches the evidence
+exit: 0
+=== c18 ===
+Test evidence in `pdlf-outputs/c18`
+
+| File | Passed | Failed | Review | Skipped | Errors |
+|---|---|---|---|---|---|
+| mb-3-cs-c18-app1-checks.xml | 2 | 0 | 0 | 0 | 0 |
+| **Total** | **2** | **0** | **0** | **0** | **0** |
+
+PR-05 pass: the receipt matches the evidence
+exit: 0
+=== c19 ===
+Test evidence in `pdlf-outputs/c19`
+
+| File | Passed | Failed | Review | Skipped | Errors |
+|---|---|---|---|---|---|
+| mb-3-cs-c19-app1-checks.xml | 3 | 0 | 0 | 0 | 0 |
+| **Total** | **3** | **0** | **0** | **0** | **0** |
+
+PR-05 pass: the receipt matches the evidence
+exit: 0
+=== c20 ===
+Test evidence in `pdlf-outputs/c20`
+
+| File | Passed | Failed | Review | Skipped | Errors |
+|---|---|---|---|---|---|
+| mb-3-cs-c20-app1-checks.xml | 2 | 0 | 0 | 0 | 0 |
+| **Total** | **2** | **0** | **0** | **0** | **0** |
+
+PR-05 pass: the receipt matches the evidence
+exit: 0

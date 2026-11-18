@@ -4,7 +4,7 @@ status: open
 labels: [ready-for-agent]
 created: 2026-11-17
 doc-id: "mb-926ed6a9"
-updated: "2026-11-17"
+updated: "2026-11-18"
 ---
 
 ## Description
@@ -22,7 +22,7 @@ updated: "2026-11-17"
 
 ### Tables
 
-- `business_profile` (`system_currency`, `display currency` fields), `services.display_currency`, `config`
+- `business_profile.system_currency`, `services.display_currency`, `config`
 
 ### Acceptance tests
 

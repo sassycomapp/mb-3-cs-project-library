@@ -1,7 +1,7 @@
 ---
 title: "adr-crm-package-replaces-marketing"
 doc-id: "mb-6bc802c4"
-updated: "2026-11-06"
+updated: "2026-11-18"
 ---
 # Package Name: crm/ for CRM and Marketing Forms
 
@@ -22,6 +22,7 @@ In Mybizz CS, CRM and marketing are one concern: contacts, companies, segments, 
 
 - The admin menu group is labelled **Customers & Marketing**. The label is what users see; the package name is what code uses. They differ by design.
 - The server-side package is `server_marketing/`. The two names are not interchangeable: `crm/` is client code, `server_marketing/` is server code.
+- The contacts, companies and segments services live in the scaffold's separate `server_customers/` package (scaffold-spec Package Structure); `server_marketing/` holds the campaign, broadcast, lead-capture and landing-page services.
 - The forms in `crm/` are listed in `scaffold-spec.md` (Package Structure).
 - Companies are in `crm/` with the contacts they group; deals and quotes are in `sales/` (client) and `server_sales/` (server); the Team Inbox is in `inbox/` and `server_inbox/`.
 

@@ -10,7 +10,7 @@ updated: "2026-11-18"
 | Issuer | MyBizz |
 | Project | Mybizz Consulting Services (`mb-3-cs`) |
 | Repository type | Documentation (the business's project library) |
-| Status | PDLF run `app1` in Phase C: Steps 17–20 complete; `domain-locked` passed 2026-11-12; next Step 21 (concept lock) |
+| Status | PDLF run `app1` in Phase C: Steps 17–21 complete; `domain-locked` passed 2026-11-12 and `concept-locked` passed 2026-11-18; next Step 22 (screen requirements) |
 
 ## Repositories
 
@@ -37,12 +37,12 @@ The one table of every repository, local path, GitHub repository, GBrain source 
 
 | Document | State |
 |---|---|
-| `docs-local/GLOSSARY.md` | the business's glossary: 127 terms, written at Step 16, marked common/trade |
+| `docs-local/GLOSSARY.md` | the business's glossary: 131 terms, written at Step 16, marked common/trade |
 | `adr-local/` | five accepted ADRs — `adr-blank-client-template`, `adr-crm-package-replaces-marketing`, `adr-schema-scope-reduction`, `adr-common-feature-reads-trade-data`, `adr-plan-summary-display-text` (the last two from Step 16) |
-| `docs-local/design/app1/` | `design-doc.md`, `test-plan.md`, `access-matrix.yaml`, `threat-model.md` — current through Step 16 |
+| `docs-local/design/app1/` | `design-doc.md`, `test-plan.md`, `access-matrix.yaml`, `threat-model.md` — current through Step 21 |
 | `docs-standard-local/authoritative-schema.md` | 71 tables, current (mirrors the 2026-11-06 amendment and F-37's `plan_summary`) |
 | `docs-local/schema-migration-log.md` | prompts P1–P14 recorded; unapplied (App 1 holds 44 tables); applied by David through Resolve |
-| `pdlf-outputs/` | `a01`–`c20` hold this run's outputs; `b13` holds no `app1` rows (the step is not used) |
+| `pdlf-outputs/` | `a01`–`c21` hold this run's outputs; `b13` holds no `app1` rows (the step is not used) |
 | `docs-local/DESIGN.md` | the design system, written at Step 20 under the theme law (`m3-custom-theme` rules every value) |
 | `output/mb-3-cs/` | the Archify Scope Cards, machine headers, candidate specs and run learnings |
 
@@ -52,3 +52,4 @@ The one table of every repository, local path, GitHub repository, GBrain source 
 - The three proving-run findings on the b16 receipt — PDLF improvements, not app work.
 - The other-document alignments David makes outside the run: "delivery mode" → meeting type; "staff"/"user" wording; "newsletter" → broadcast; three schema descriptions.
 - The schema migration prompts are recorded and unapplied; David applies them through Resolve when the build needs them.
+- The flow-51 card's step-1 label ("Password / FIDO2 enrol") is corrected at Step 22 when the flows are next touched (Step 21's deferred item).

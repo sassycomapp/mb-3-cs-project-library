@@ -4,7 +4,7 @@ status: open
 labels: [ready-for-agent]
 created: 2026-11-17
 doc-id: "mb-0f97960f"
-updated: "2026-11-17"
+updated: "2026-11-18"
 ---
 
 ## Description
@@ -18,7 +18,7 @@ updated: "2026-11-17"
 
 ### Server functions / modules
 
-- `server_shared/email_service` — `send(template, recipients, attachments)`; Amazon SES is the only adapter; tests replace it with the mail catcher; demo mode redirects at this seam. (The Brevo module `server_marketing/brevo_campaigns_integration.py` is deleted at ticket 28, the build step that touches marketing email — C1.)
+- `server_shared/email_service` — `send(template, recipients, attachments)`; Amazon SES is the only adapter; tests replace it with the mail catcher; demo mode redirects at this seam. (The Brevo module `server_marketing/brevo_campaigns_integration.py` is deleted at ticket 29, the build step that touches marketing email — C1.)
 - `server_storage/r2_service` — `put/get/delete` per key; the only module that touches the client's bucket; the retry queue sits behind it
 - `server_payments/payment_service` — create/verify/refund per record, gateway-agnostic; the single gateway-agnostic payment service (common aspect 6)
 - `server_payments/stripe_gateway` — the Stripe adapter (renamed from `stripe_service` at this step, per the divergence inventory — this is the payments seam step)
