@@ -117,7 +117,7 @@ Onboarding is a resumable wizard, separate from Settings, with a progress indica
 2. **App language** — choose English, French, German, Spanish or Italian (the languages whose translation is complete); every later step and video follows the choice.
 3. **Business profile** — link to Settings → Business Profile tab; the AI helper offers the first website text from the profile.
 4. **Brand palette** — link to Settings → Brand Palette tab, with live preview.
-5. **System currency** — select from the list and confirm; locked once the first booking or invoice exists.
+5. **System currency** — select from the list and confirm; fixed once confirmed.
 6. **Legal acknowledgement** — read the critical excerpts, tick, confirm; recorded with a timestamp in the instance and in App 5.
 7. **Payment gateway** — link to Settings → Payment Gateways: connect Stripe, optionally PayPal; secret keys go into the Vault; test mode on.
 8. **Connect the domain** — the wizard shows the website and email records; App 5 writes them in the client's Cloudflare DNS (or the Owner copies them into another domain provider) and the wizard checks them until every one is live. Where the domain already receives email elsewhere, the wizard says that switching moves all the domain's email into the Team Inbox and asks the Owner to confirm. The Owner's personal address and the default sender address are created.
@@ -155,7 +155,7 @@ Onboarding is a resumable wizard, separate from Settings, with a progress indica
 **Entry:** `/services`
 
 1. Browse service categories.
-2. Select a service — description, duration, price (in the display currency if set), providers, meeting types.
+2. Select a service — description, duration, price (in the customer's currency: the local price where the client has turned on a local currency for the customer's market, otherwise the system currency), providers, meeting types.
 3. Select a provider (a specific provider, or "any available") — photo, specialisations, availability.
 4. Select date and time — calendar showing only available slots.
 5. Select meeting type — at the business, video call or phone call (UF-06 covers the customer's location). A video call link is generated automatically.

@@ -34,7 +34,7 @@ Every credential a client instance uses is encrypted in the client's Vault (F-02
 ### Gateways
 
 - The card gateway of every instance is **Stripe**.
-- **PayPal** is an optional second method beside the card gateway, offered only when the system currency is one of PayPal's supported currencies (not ISK); Settings shows PayPal as unavailable otherwise.
+- **PayPal** is an optional second method beside the card gateway, offered in a market only when the customer's currency there is one of PayPal's supported currencies (not ISK); otherwise that market offers card payment only and Settings shows PayPal as unavailable for that currency.
 - Configured in Settings → Payment Gateways (Owner only); secret keys are entered in the Vault; each gateway has test and live modes (`payment_config.test_mode`).
 
 ### One payment service
@@ -61,7 +61,7 @@ A booking whose online payment has not yet succeeded is held as `pending` for 15
 PayPal's standard checkout, as the [[[default:specifications-global/spec-integration|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md) sets out in section 5:
 
 1. **Setup:** the Owner enters the PayPal client ID in Settings and the secret in the Vault. The instance registers its webhook with PayPal (`/_/api/webhooks/paypal`) and stores the webhook ID in the Vault.
-2. **Buttons:** `PayPalButtonComponent` (in `components/`) loads PayPal's JavaScript SDK with the client ID, the system currency and the app language, on the booking flow, order flow and pay page.
+2. **Buttons:** `PayPalButtonComponent` (in `components/`) loads PayPal's JavaScript SDK with the client ID, the customer's currency and the app language, on the booking flow, order flow and pay page.
 3. **Create:** the button calls `server_payments/paypal_gateway`, which reads the amount of the booking, order, invoice or package from the database and creates the order (`POST /v2/checkout/orders`, `invoice_id` = the record's identity).
 4. **Capture:** after the buyer approves, the server captures the order with a `PayPal-Request-Id` header, and the payment service records the payment and PayPal's fee.
 5. **Cancel or error:** the record stays unpaid; a pending booking keeps its 15-minute hold.
@@ -77,7 +77,7 @@ PayPal's standard checkout, as the [[[default:specifications-global/spec-integra
 
 ### Currency
 
-The system currency is set at onboarding and locked once the first booking or invoice exists. A display currency per service is shown to customers only; every stored amount is in the system currency (F-16).
+The rule (F-16): one system currency, set at onboarding, for books, reports and tax returns; the client prices every service and package in the system currency; the client sells in the system currency or, market by market on the Settings page, in a customer's local currency; for a local currency the client sets the local price, the website shows that price and Stripe or PayPal charges that price; each sale is recorded at the system-currency amount Stripe or PayPal pays in; refunds are paid in the currency the customer paid in ([[[default:adr-global/adr-system-currency-selection-and-immutability|System Currency and Local Currencies]]](C:/dev/project-library-global/adr-global/adr-system-currency-selection-and-immutability.md)). Every payment is charged in the customer's currency. Each payment row records `amount` and `currency` (what the customer paid) and `system_amount` (what the gateway paid into the client's account in the system currency): Stripe's balance transaction, PayPal's `seller_receivable_breakdown`. A refund is made in the payment's currency, for the same amount, with the refund's own `system_amount` from the gateway's report; the difference is an exchange gain or loss in the accounts. The accounts export uses `system_amount`.
 
 ---
 

@@ -362,7 +362,7 @@ This section defines the primary implementation-facing forms and pages in the My
 2. App Language — choice of the languages whose translation is complete. Every later step follows it.
 3. Business Profile — links to Settings → Business Profile; the AI helper offers the first website text.
 4. Brand Palette — links to Settings → Brand Palette.
-5. System Currency — dropdown plus confirm button. Required. Locked once the first booking or invoice exists. See [[[default:adr-global/adr-system-currency-selection-and-immutability|System Currency, Display Currency, and Immutability]]](C:/dev/project-library-global/adr-global/adr-system-currency-selection-and-immutability.md) ADR.
+5. System Currency — dropdown plus confirm button. Required. Fixed once confirmed. See [[[default:adr-global/adr-system-currency-selection-and-immutability|System Currency and Local Currencies]]](C:/dev/project-library-global/adr-global/adr-system-currency-selection-and-immutability.md) ADR.
 6. Legal Acknowledgement — two checkboxes plus confirm button. Required. Recorded with a timestamp in the instance and in the Mybizz management app. See [[[default:adr-global/adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture|Legal Policy Responsibility Acknowledgement and Clause-Builder Architecture]]](C:/dev/project-library-global/adr-global/adr-legal-policy-responsibility-acknowledgement-and-clause-builder-architecture.md) ADR.
 7. Payment Gateway — links to Settings → Payment Gateways. See [[[default:adr-global/adr-payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed|Payment Gateway Configuration Is a Settings Function and Is RBAC-Governed]]](C:/dev/project-library-global/adr-global/adr-payment-gateway-configuration-is-a-settings-function-and-is-rbac-governed.md) ADR.
 8. Connect the Domain — the list of website and email DNS records with a live status per record; App 5 writes them in the client's Cloudflare DNS, or the Owner copies them into another provider. A confirmation dialog appears before the MX record moves the domain's email into the Team Inbox.
@@ -408,8 +408,8 @@ This section defines the primary implementation-facing forms and pages in the My
 |---|---|---|
 | Business Profile | Name, description, email, phone, address, timezone, app language, entity type, logo, social links, accreditations, home and services video addresses | Owner, Manager |
 | Brand Palette | Palette selection (PaletteSettingsForm — local component) | Owner, Manager |
-| System Currency | Currency display (read-only, locked after first transaction) | Owner |
-| Display Currency | Optional per-service display currency | Owner, Manager |
+| System Currency | Currency display (read-only, fixed once confirmed in onboarding) | Owner |
+| Local Currencies | Turn a local currency on or off for a market; the client's rate and rounding; local prices per service and package | Owner, Manager |
 | Legal Acknowledgement | Read-only acknowledgement history | Owner |
 | Payment Gateways | Card gateway (Stripe), optional PayPal, test/live mode (secret keys in the Vault) | Owner |
 | Invoicing | Default payment terms, tax rate and tax label, tax registration number, invoice numbering, default quote validity | Owner |

@@ -288,7 +288,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Packages: `dashboard/`, `analytics/`, `server_dashboard/`, `server_analytics/`.
 
 ### F-05 Settings Hub
-- One tabbed form; tabs: Business Profile (including the app language), Brand Palette, System Currency (read-only), Display Currency, Legal Acknowledgement (read-only), Payment Gateways (test/live), Invoicing (default payment terms, numbering, quote validity), Users and Permissions, Email (addresses, desks, members, signatures, auto-replies), Domain (DNS record status), Theme, Feature Switches (`marketing_enabled`, `blog_enabled`, comments), Legal Pages (Clause Builder, F-22), Data (history view, export, sample data, F-29), Plan and billing (F-37, Owner only). The Invoicing tab also holds the tax rate (default 0), tax label and tax registration number; the Theme tab holds the public website header style only.
+- One tabbed form; tabs: Business Profile (including the app language), Brand Palette, System Currency (read-only), Local Currencies, Legal Acknowledgement (read-only), Payment Gateways (test/live), Invoicing (default payment terms, numbering, quote validity), Users and Permissions, Email (addresses, desks, members, signatures, auto-replies), Domain (DNS record status), Theme, Feature Switches (`marketing_enabled`, `blog_enabled`, comments), Legal Pages (Clause Builder, F-22), Data (history view, export, sample data, F-29), Plan and billing (F-37, Owner only). The Invoicing tab also holds the tax rate (default 0), tax label and tax registration number; the Theme tab holds the public website header style only.
 - Tabs are shown per role: Owner sees all; Manager sees operational tabs, not financial or security tabs.
 - Packages: `settings/`, `server_settings/`.
 
@@ -319,7 +319,7 @@ Each feature below states its packages, data, rules and links. Tables and fields
 
 ### F-10 Service catalogue
 - Pricing model `duration` (price per time block; drives slot calculation) or `unit` (price per deliverable; no slot).
-- Per service: name, description, category, pricing model, price, duration, providers, images, video, meeting types, intake form, display currency, active status.
+- Per service: name, description, category, pricing model, price, duration, providers, images, video, meeting types, intake form, local prices, active status.
 - A service is booked by meeting type (at the business, at the customer's location, by video or by phone), booked as places in a group session, or ordered as delivered work (pricing model `unit`).
 - Packages: `services/`, `server_services/`.
 
@@ -364,15 +364,18 @@ Each feature below states its packages, data, rules and links. Tables and fields
 - Payments received outside the gateways (cash, bank transfer) are recorded manually; refunds are full or partial, through the original gateway or recorded manually.
 - PDF generation, email delivery, payment recording, refunds.
 - Gateways: Stripe as the card gateway, plus PayPal as an option. One gateway-agnostic payment service (`server_payments/`) sits behind all three; switching gateways does not change services or bookings.
-- PayPal: offered only when the system currency is one PayPal supports (not ISK). PayPal's buttons (`PayPalButtonComponent`) take the buyer's approval; the server creates and captures the order through PayPal's Orders API with amounts from the database. Detail: `integration-architecture.md` (PayPal).
+- PayPal: offered in a market only when the customer's currency there is one PayPal supports (not ISK). PayPal's buttons (`PayPalButtonComponent`) take the buyer's approval; the server creates and captures the order through PayPal's Orders API with amounts from the database. Detail: `integration-architecture.md` (PayPal).
 - Every payment and refund, by any gateway or by hand, is a `payments` row; the gateway's fee is recorded on it (`gateway_fee`) and shown in the accounts as an expense (F-28).
 - Gateway webhooks are received by HTTP endpoints, verified, applied, and their payloads written to R2 (F-29).
 - Test and live modes per gateway. Money logic runs in server modules only.
 - Packages: `invoices/`, `server_payments/`. Integration patterns: [[[default:specifications-global/spec-integration|Integration Specification]]](C:/dev/project-library-global/specifications-global/spec-integration.md).
 
-### F-16 Dual currency
-- System currency set at onboarding; locked once the first booking or invoice exists.
-- Display currency optional per service; display only. All stored amounts, totals and reports are in the system currency.
+### F-16 System and local currencies
+- The rule: one system currency, set at onboarding, for books, reports and tax returns; the client prices every service and package in the system currency; the client sells in the system currency or, market by market on the Settings page, in a customer's local currency; for a local currency the client sets the local price, the website shows that price and Stripe or PayPal charges that price; each sale is recorded at the system-currency amount Stripe or PayPal pays in; refunds are paid in the currency the customer paid in ([[[default:adr-global/adr-system-currency-selection-and-immutability|System Currency and Local Currencies]]](C:/dev/project-library-global/adr-global/adr-system-currency-selection-and-immutability.md)).
+- Settings → Local Currencies (Owner, Manager): turn a local currency on or off for a market (currency and countries), with the client's own rate and rounding; local prices per service and package (`service_local_prices`, `package_local_prices`); where no local price is typed, the system price at the rate, rounded.
+- The customer's country sets the customer's currency; the public website has a country selector. Bookings, orders, quotes, invoices and payments carry the customer's `currency`.
+- Each payment and invoice holds `system_amount`, from Stripe's balance transaction or PayPal's `seller_receivable_breakdown`, or entered by the team member for a manual payment; accounts, reports, the dashboard and contact totals use `system_amount` only.
+- The system currency is fixed once confirmed in onboarding.
 
 ### F-17 CRM and contacts
 - One `contacts` record per person with status Lead, Customer or Inactive, optionally linked to a company (F-35); activity timeline from bookings, emails (received and sent, F-18), quotes, deals, notes, forms.

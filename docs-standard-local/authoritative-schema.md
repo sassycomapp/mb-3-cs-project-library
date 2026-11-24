@@ -1,7 +1,7 @@
 ---
 title: "authoritative-schema"
 doc-id: "mb-8b83e940"
-updated: "2026-11-17"
+updated: "2026-11-24"
 ---
 # Mybizz CS — Authoritative Database Schema
 
@@ -9,7 +9,7 @@ Every table and column of a Mybizz CS client instance: name, type and allowed va
 
 **Authority:** this document is the single home of the schema. Where a technical fact here differs from `mb-3-cs-architecture-reference.md`, the architecture reference is correct. Feature numbers (F-01 to F-37) are those of `mb-3-cs-concept.md`. The changes that bring App 1's tables to this schema are in `schema-migration-log.md`.
 
-**Total tables:** 71
+**Total tables:** 74
 **Platform:** Anvil Data Tables. Every table has `client: none` and `server: full`: the browser never reads a table directly; server functions return rows and results.
 
 ---
@@ -18,8 +18,8 @@ Every table and column of a Mybizz CS client instance: name, type and allowed va
 
 - **One instance, one client.** No table carries a client or instance column; isolation comes from the instance (reference section 3).
 - **UTC.** Every `datetime` is stored in UTC and shown in `business_profile.timezone` (an IANA time zone).
-- **One currency.** Every amount is in `business_profile.system_currency` (F-16).
-- **Money in cents.** Every amount is stored as a whole number of cents of the system currency, as [[[default:specifications-global/spec-anvil-platform-standards|Anvil Platform Standards]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md) requires: Anvil's `number` column is floating-point, so decimal amounts would round wrongly. Amounts are converted to the currency's units only for display.
+- **Currencies (F-16).** One system currency (`business_profile.system_currency`), set at onboarding, for books, reports and tax returns. The client prices every service and package in the system currency, and sells in the system currency or, market by market, in a customer's local currency at a local price the client sets (`local_currencies`, `service_local_prices`, `package_local_prices`). The customer's records (`bookings`, `orders`, `quotes`, `invoice`, `payments`) carry the customer's currency in `currency`, and the amounts of those records are in that currency. Each payment and invoice also carries `system_amount`: the system-currency amount Stripe or PayPal paid in. Books, accounts, reports, the dashboard and the contact totals use `system_amount` only. Refunds are paid in the currency the customer paid in. [[[default:adr-global/adr-system-currency-selection-and-immutability|System Currency and Local Currencies]]](C:/dev/project-library-global/adr-global/adr-system-currency-selection-and-immutability.md).
+- **Money in cents.** Every amount is stored as a whole number of cents of the currency named on the record (the system currency where no currency is named), as [[[default:specifications-global/spec-anvil-platform-standards|Anvil Platform Standards]]](C:/dev/project-library-global/specifications-global/spec-anvil-platform-standards.md) requires: Anvil's `number` column is floating-point, so decimal amounts would round wrongly. Amounts are converted to the currency's units only for display.
 - **Never deleted.** Rows of `bookings`, `orders`, `invoice`, `payments`, `quotes` and `expenses` are never deleted; their status changes.
 - **History outside the tables.** Backups, history, webhook payloads, audit entries older than 30 days, email bodies older than 90 days, email attachments and expense receipts are kept in the client's R2 bucket (F-29).
 - **Credentials only in the Vault**, encrypted.
@@ -47,9 +47,9 @@ Every table and column of a Mybizz CS client instance: name, type and allowed va
 
 | Group | Tables | Count |
 |---|---|---|
-| Core and configuration | `activity_log`, `business_profile`, `config`, `email_config`, `files`, `payment_config`, `rate_limits`, `sample_rows`, `theme_config`, `users`, `vault` | 11 |
-| Services and bookings | `services`, `resources`, `group_sessions`, `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `bookings`, `recurring_series` | 8 |
-| Orders and packages | `orders`, `packages`, `customer_packages` | 3 |
+| Core and configuration | `activity_log`, `business_profile`, `config`, `email_config`, `files`, `local_currencies`, `payment_config`, `rate_limits`, `sample_rows`, `theme_config`, `users`, `vault` | 12 |
+| Services and bookings | `services`, `service_local_prices`, `resources`, `group_sessions`, `availability_rules`, `availability_exceptions`, `booking_metadata_schemas`, `bookings`, `recurring_series` | 9 |
+| Orders and packages | `orders`, `packages`, `package_local_prices`, `customer_packages` | 4 |
 | Finance | `invoice`, `invoice_items`, `payments`, `time_entries`, `expenses`, `expense_categories` | 6 |
 | CRM and marketing | `contacts`, `contact_counter`, `contact_events`, `contact_submissions`, `segments`, `tasks`, `leads`, `lead_captures`, `email_campaigns`, `contact_campaigns`, `automation_rules`, `automation_runs` | 12 |
 | Sales | `companies`, `deals`, `quotes`, `quote_items` | 4 |
@@ -58,7 +58,7 @@ Every table and column of a Mybizz CS client instance: name, type and allowed va
 | Reviews | `reviews`, `testimonials` | 2 |
 | Summary and health | `daily_summary`, `service_performance`, `provider_performance`, `campaign_metrics`, `health_log`, `error_log`, `plan_summary` | 7 |
 | Notifications | `notifications`, `user_preferences`, `delivery_logs` | 3 |
-| **Total** | | **71** |
+| **Total** | | **74** |
 
 ---
 
@@ -95,7 +95,7 @@ One row: the client's business.
 | `country` | string | |
 | `postal_code` | string | |
 | `timezone` | string | IANA time zone, e.g. `Europe/London` |
-| `system_currency` | string | ISO 4217; set at onboarding; locked once a booking or invoice exists |
+| `system_currency` | string | ISO 4217; set at onboarding; fixed once confirmed (F-16) |
 | `app_language` | string | `en` / `fr` / `pt` / `es` / `de` / `it`; default `en`; set in onboarding step 1 (F-25) |
 | `trade` | string | The client's trade, chosen at registration; selects the sample data set |
 | `entity_type` | string | `individual` / `business` |
@@ -193,6 +193,19 @@ Files held by the instance: the media library, order briefs and deliveries.
 | `created_at` | datetime | |
 | `updated_at` | datetime | When the row was last changed |
 | `metadata` | simpleObject | Client-level attributes (common aspect 4) |
+
+### 1.5a `local_currencies`
+The local currencies the client turns on, market by market, on the Settings page (F-16). A country with no row pays in the system currency.
+
+| Column | Type | Notes |
+|---|---|---|
+| `currency` | string | ISO 4217; never the system currency |
+| `country_codes` | simpleObject | List of ISO 3166-1 alpha-2 codes; each country in at most one row |
+| `rate` | number | Units of the local currency per 1 unit of the system currency, the client's own pricing rate; used where no local price is typed |
+| `rounding` | string | `none` / `whole` / `ninety_nine` |
+| `enabled` | bool | |
+| `created_at` | datetime | |
+| `updated_at` | datetime | |
 
 ### 1.6 `payment_config`
 One row: payment gateways (F-15). Secret keys are in the Vault.
@@ -299,17 +312,16 @@ The service catalogue (F-10).
 | `description` | string | |
 | `category` | string | |
 | `pricing_model` | string | `duration` (time slots) / `unit` (delivered work, ordered, no slot) |
-| `price` | number | |
+| `price` | number | In the system currency; local prices are in `service_local_prices` |
 | `duration_minutes` | number | For `duration` services |
-| `hourly_rate` | number | Default rate for time entries |
-| `display_currency` | string | ISO 4217; empty = none |
+| `hourly_rate` | number | Default rate for time entries, in the system currency |
 | `providers` | links → users | Providers who deliver the service |
 | `meeting_types` | simpleObject | List of `at_business` / `at_customer` / `video` / `phone` |
 | `travel_buffer_minutes` | number | Before and after a booking at the customer's location |
 | `is_group` | bool | Booked by places in a group session |
 | `required_resources` | links → resources | A booking needs one of these free; empty = none needed |
 | `payment_option` | string | `full` / `deposit` / `on_the_day` / `invoice` |
-| `deposit_amount` | number | For `deposit` |
+| `deposit_amount` | number | For `deposit`, in the system currency |
 | `payment_terms_days` | number | For `invoice`; empty = `business_profile.default_payment_terms_days` |
 | `intake_schema_id` | link → booking_metadata_schemas | Intake form; empty = none |
 | `images` | simpleObject | List of image addresses |
@@ -319,6 +331,18 @@ The service catalogue (F-10).
 | `created_at` | datetime | |
 | `updated_at` | datetime | When the row was last changed |
 | `metadata` | simpleObject | Client-level attributes (common aspect 4) |
+
+### 2.1a `service_local_prices`
+A local price the client types for one service in one local currency (F-16). Where no row exists, the price is the system price at the local currency's `rate`, rounded.
+
+| Column | Type | Notes |
+|---|---|---|
+| `service_id` | link → services | |
+| `currency` | string | A `local_currencies.currency` |
+| `price` | number | In cents of `currency` |
+| `deposit_amount` | number | For `deposit`, in cents of `currency` |
+| `created_at` | datetime | |
+| `updated_at` | datetime | |
 
 ### 2.2 `resources`
 Rooms and equipment that can be booked (F-11).
@@ -415,9 +439,10 @@ Appointments and group places (F-11).
 | `end_datetime` | datetime | |
 | `travel_before_minutes` | number | For `at_customer` |
 | `travel_after_minutes` | number | For `at_customer` |
-| `total_price` | number | |
+| `currency` | string | The customer's currency: the system currency, or the local currency of the customer's market |
+| `total_price` | number | In `currency` |
 | `payment_option` | string | `full` / `deposit` / `on_the_day` / `invoice` / `package` |
-| `deposit_amount` | number | For `deposit` |
+| `deposit_amount` | number | For `deposit`, in `currency` |
 | `payment_status` | string | `unpaid` / `deposit_paid` / `paid` / `pay_on_day` / `invoiced` / `package` / `refunded` |
 | `hold_expires_at` | datetime | For `pending`: 15 minutes after creation |
 | `special_requests` | string | |
@@ -463,7 +488,8 @@ Orders for delivered work (F-12).
 | `brief` | string | |
 | `brief_files` | links → files | Customer's attachments |
 | `status` | string | `ordered` / `in_progress` / `delivered` / `cancelled` |
-| `total_price` | number | |
+| `currency` | string | The customer's currency: the system currency, or the local currency of the customer's market |
+| `total_price` | number | In `currency` |
 | `payment_option` | string | `full` / `deposit` / `invoice` |
 | `payment_status` | string | `unpaid` / `deposit_paid` / `paid` / `invoiced` / `refunded` |
 | `delivery_message` | string | |
@@ -484,12 +510,23 @@ Package definitions (F-13).
 | `description` | string | |
 | `service_id` | link → services | |
 | `session_count` | number | |
-| `price` | number | |
+| `price` | number | In the system currency; local prices are in `package_local_prices` |
 | `expiry_days` | number | Days from purchase |
 | `is_active` | bool | |
 | `created_at` | datetime | |
 | `updated_at` | datetime | When the row was last changed |
 | `metadata` | simpleObject | Client-level attributes (common aspect 4) |
+
+### 3.2a `package_local_prices`
+A local price the client types for one package in one local currency (F-16). Where no row exists, the price is the system price at the local currency's `rate`, rounded.
+
+| Column | Type | Notes |
+|---|---|---|
+| `package_id` | link → packages | |
+| `currency` | string | A `local_currencies.currency` |
+| `price` | number | In cents of `currency` |
+| `created_at` | datetime | |
+| `updated_at` | datetime | |
 
 ### 3.3 `customer_packages`
 A customer's purchased package (F-13).
@@ -530,8 +567,10 @@ Invoices (F-15).
 | `tax_rate` | number | The rate at issue |
 | `tax_amount` | number | `subtotal` × `tax_rate` |
 | `total_amount` | number | `subtotal` + `tax_amount` |
-| `amount_paid` | number | Sum of succeeded payments less refunds |
-| `currency` | string | The system currency |
+| `amount_paid` | number | Sum of succeeded payments less refunds, in `currency` |
+| `currency` | string | The customer's currency; every amount of the invoice is in this currency |
+| `system_amount` | number | In the system currency: the sum of the `system_amount` of the invoice's payments less refunds |
+| `tax_amount_system` | number | For an invoice in a local currency: the tax total in the system currency, at the client's rate on the invoice date, shown on the invoice |
 | `status` | string | `draft` / `sent` / `paid` / `overdue` / `cancelled` |
 | `sent_at` | datetime | |
 | `paid_at` | datetime | |
@@ -572,11 +611,12 @@ Every payment and refund (F-15).
 | `customer_package_id` | link → customer_packages | |
 | `contact_id` | link → contacts | |
 | `method` | string | `stripe` / `paypal` / `cash` / `bank_transfer` / `other` |
-| `amount` | number | |
-| `currency` | string | The system currency |
+| `amount` | number | In `currency`: what the customer paid, or what the customer received back |
+| `currency` | string | The customer's currency |
+| `system_amount` | number | In the system currency: what Stripe or PayPal paid into, or took from, the client's account, from the gateway's report; entered by the team member for a manual payment |
 | `status` | string | `pending` / `succeeded` / `failed` |
 | `gateway_reference` | string | The gateway's transaction id; empty for manual |
-| `gateway_fee` | number | The gateway's fee for this payment, from the gateway's response; empty for manual (F-28) |
+| `gateway_fee` | number | In the system currency: the gateway's fee for this payment, from the gateway's response; empty for manual (F-28) |
 | `refund_of` | link → payments | For a refund: the payment refunded |
 | `recorded_by` | link → users | For a manual payment or refund |
 | `received_at` | datetime | |
@@ -661,7 +701,7 @@ One record per person (F-17).
 | `lifecycle_stage` | string | `new` / `active` / `at_risk` / `lost`; recalculated nightly |
 | `source` | string | `booking` / `order` / `enquiry` / `landing_page` / `social` / `email` / `import` / `manual` |
 | `tags` | simpleObject | List of tags |
-| `total_spent` | number | Updated with each payment |
+| `total_spent` | number | In the system currency, from `payments.system_amount`; updated with each payment |
 | `total_transactions` | number | |
 | `average_order_value` | number | |
 | `last_contact_date` | datetime | |
@@ -908,7 +948,7 @@ Quotes (F-35).
 | `tax_rate` | number | The rate at issue |
 | `tax_amount` | number | |
 | `total_amount` | number | |
-| `currency` | string | The system currency |
+| `currency` | string | The customer's currency; every amount of the quote is in this currency |
 | `status` | string | `draft` / `sent` / `accepted` / `declined` / `expired` |
 | `accept_token` | string | Unique; public address `/quote/{token}` |
 | `accepted_at` | datetime | |

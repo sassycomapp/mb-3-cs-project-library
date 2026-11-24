@@ -7,7 +7,7 @@ updated: "2026-11-12"
 ---
 # The plan summary's amounts are display text
 
-Every amount in a client instance is stored as whole cents of the system currency, because Anvil's number column is floating-point and decimal amounts would round wrongly. The plan summary is the one exception: its amounts are display text in the subscription's currency, exactly as Paddle states them, written only by App 5 through the plan-summary management endpoint. We decided this so the Owner sees precisely what Paddle will charge — the mock-up invoice must match Paddle's next-transaction preview — and because the plan summary is not a money record of the client's business: the money rules (whole cents, the system currency) govern the trade tables, not this display. Reversing it would mean a schema change and a writer change in App 5 and every client instance.
+Every money record of the client's business is stored as whole cents of the currency named on the record, because Anvil's number column is floating-point and decimal amounts would round wrongly. The plan summary is the one exception: its amounts are display text in the subscription's currency, exactly as Paddle states them, written only by App 5 through the plan-summary management endpoint. We decided this so the Owner sees precisely what Paddle will charge — the mock-up invoice must match Paddle's next-transaction preview — and because the plan summary is not a money record of the client's business: the money rules (whole cents, the currency rule of F-16) govern the trade tables, not this display. Reversing it would mean a schema change and a writer change in App 5 and every client instance.
 
 Marked **common**.
 

@@ -1,7 +1,7 @@
 ---
 title: "schema-migration-log"
 doc-id: "mb-dde289cd"
-updated: "2026-11-17"
+updated: "2026-11-24"
 ---
 # Schema Migration Log
 
@@ -27,6 +27,7 @@ Every schema change, recorded at Step 17 and read at Steps 41 and 42. The schema
 | pre-release | 2026-11-10 | `payment_config` | Breaking: `active_gateway`, `paystack_connected` and `paystack_connected_at` deleted | App 1 only, by hand (Part A) |
 | pre-release | 2026-11-12 | 1 new table: `plan_summary`; `business_profile` | Additive: table created; columns `referral_banner_in_emails`, `referral_badge_on`, `referral_popup_on` added | App 1 only, prompt P13a |
 | pre-release | 2026-11-17 | the whole schema — 27 new tables; 164 columns added to existing tables (including `config.created_at`, from the §1.3 correction); 37 columns removed (every one named in `pdlf-outputs/c17/mb-3-cs-c17-app1-schema-diff.md`); the Part A renames and the `payment_config` deletions applied by hand before it | Step 17 (run app1): the whole authoritative schema written into `anvil.yaml` through the `anvil-yaml` skill and applied through one Resolve pass (Anvil's "the schema of the source code is correct"). The removals were checked by name against the difference list after application, not before (David's decision; deviations row id 4), and verified after the fact: the committed `db_schema` equals the authoritative schema, the pre-write-to-committed column diff is exactly the 37 removals, and the live tables match the schema — the Data Tables view reports no schema mismatch. The prompts P1–P14 and P13a above are superseded as the application method by this row | App 1 only, by David in the Anvil editor through Resolve |
+| pre-release | 2026-11-24 | 3 new tables: `local_currencies`, `service_local_prices`, `package_local_prices`; `bookings`, `orders`, `quotes`, `invoice`, `payments`, `services` | Additive: tables created; `currency` (string) added to `bookings` and `orders`; `system_amount` (number) added to `invoice` and `payments`; `tax_amount_system` (number) added to `invoice` (`quotes`, `invoice` and `payments` already carry `currency`, which now holds the customer's currency). Breaking: `services.display_currency` removed (F-16; [[[default:adr-global/adr-system-currency-selection-and-immutability\|System Currency and Local Currencies]]](C:/dev/project-library-global/adr-global/adr-system-currency-selection-and-immutability.md)) | App 1 only: written into `anvil.yaml` through the `anvil-yaml` skill and applied by David through one Resolve pass, as the 2026-11-17 row; App 1 holds development data only, so the removed column's data is not needed |
 
 ---
 

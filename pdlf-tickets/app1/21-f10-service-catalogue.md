@@ -15,7 +15,7 @@ updated: "2026-11-17"
 ### Forms
 
 - `services.ServicesForm` — the admin service list
-- `services.ServiceEditorForm` — pricing model (`duration`/`unit`), price, duration, hourly rate, display currency, providers, meeting types, travel buffer, group flag, required resources, payment option, deposit, payment terms, intake schema, images, video, active flag
+- `services.ServiceEditorForm` — pricing model (`duration`/`unit`), price (in the system currency), local prices (one per local currency, `service_local_prices`), duration, hourly rate, providers, meeting types, travel buffer, group flag, required resources, payment option, deposit, payment terms, intake schema, images, video, active flag
 - `services.ServiceViewerForm`
 - `services.ServiceCategoriesForm`
 - `services.ResourceListForm` — rooms and equipment (Services → Resources)

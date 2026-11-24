@@ -52,7 +52,7 @@ service selection to payment confirmation"
 
 **Data validation:**
 - Booking amount matches service price
-- Currency matches `business_profile.system_currency`
+- Currency matches the customer's currency (the local currency of the customer's market, otherwise `business_profile.system_currency`); `system_amount` matches the gateway's pay-in amount
 - Timezone conversion is correct (stored UTC, displayed in client timezone)
 - Contact has correct email, phone, name from intake form
 
@@ -243,7 +243,7 @@ forms/tabs"
 | Palette | ✅ | ✅ | ❌ | ❌ |
 | System Currency | ✅ | ❌ | ❌ | ❌ |
 | Legal Acknowledgement | ✅ | ❌ | ❌ | ❌ |
-| Display Currency | ✅ | ✅ | ❌ | ❌ |
+| Local Currencies | ✅ | ✅ | ❌ | ❌ |
 | Payment Gateway | ✅ | ❌ | ❌ | ❌ |
 | Services | ✅ | ✅ | ❌ | ❌ |
 | Users & Permissions | ✅ | ❌ | ❌ | ❌ |
@@ -304,7 +304,7 @@ Each test runs against App 1 with the test suite's mail catcher in place of Amaz
 | 4.18 | F-01 two-factor | Sign in as each role without a second factor | Sign-in is refused; with the second factor it succeeds; the Owner with only an authenticator app enrolled is refused the Vault and refunds |
 | 4.19 | F-02 Vault reset | As Owner, Reset Vault code and follow the emailed link | The next Vault open asks for enrolment; no stored secret changed; the reset is in `activity_log` |
 | 4.20 | F-15 PayPal | In PayPal's sandbox: pay a booking; alter the amount in the browser; capture twice; close the browser after approval | The server's amount is charged; one payment row with `gateway_fee`; the closed-browser order is captured by the webhook |
-| 4.21 | F-15 PayPal | Set the system currency to ISK | PayPal shows as unavailable in Settings and at checkout |
+| 4.21 | F-15 PayPal | Turn on ISK as a local currency for Iceland | PayPal shows as unavailable for ISK in Settings, and checkout for Iceland offers card payment only |
 | 4.22 | F-37 referral kit | As Owner on the annual plan, open Settings → Plan and billing; share the LinkedIn post; switch on the badge and the pop-up; open the public website twice in one visit | The tab shows the mock-up invoice from `plan_summary`; the post carries the referral link and the discount line; the badge shows in the footer; the pop-up shows once in the visit and sets no cookie; a Manager does not see the tab | BR-10 |
 
 ---

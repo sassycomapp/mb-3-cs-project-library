@@ -34,7 +34,7 @@ updated: "2026-11-03"
 |---|---|
 | D1 | Every amount is stored as a whole number of cents of the system currency; the concept's figures are display wording; no override recorded |
 | D2 | Carried out in the documents: the Notifications group is in `authoritative-schema.md` (68 tables) and prompt P12 is in the migration log |
-| D3 | Display currency is display-only; the global ADR's conversion columns are not built for this app |
+| D3 | The currency rule of F-16: one system currency for the books; local currencies market by market at local prices the client sets; `system_amount` from the gateway; refunds in the customer's currency |
 | D4 | `spec-security` governs passwords: no composition rules; breached passwords and context words refused |
 | D5 | The navigation ADR governs; the spec-table's navigation rows follow it |
 | D6 | App 5 is built before the first paying client, in every application |

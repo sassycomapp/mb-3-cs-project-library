@@ -15,7 +15,7 @@ updated: "2026-11-17"
 ### Forms
 
 - `settings.SettingsForm` — the 15-tab hub, tabs shown by role per the access matrix `settings_tabs`
-- Local tabs (in SettingsForm's folder): `PaletteSettingsForm` (Brand Palette, F-31), `BusinessProfileTab` (incl. app language), `CurrencyTab` (system currency read-only, display currency — completed at ticket 22), `InvoicingTab` (payment terms, tax, numbering, quote validity), `FeatureSwitchesTab`, `DataTab` (placeholder — completed at ticket 46), `PlanBillingTab` (placeholder — completed at ticket 48)
+- Local tabs (in SettingsForm's folder): `PaletteSettingsForm` (Brand Palette, F-31), `BusinessProfileTab` (incl. app language), `CurrencyTab` (system currency read-only, local currencies — completed at ticket 22), `InvoicingTab` (payment terms, tax, numbering, quote validity), `FeatureSwitchesTab`, `DataTab` (placeholder — completed at ticket 46), `PlanBillingTab` (placeholder — completed at ticket 48)
 - `settings.UserManagementForm` — Users and Permissions: invite, role change, deactivate/reactivate (UF-03)
 - `settings.ThemeConfigForm`, `settings.EmailSettingsForm`, `settings.DomainSettingsForm`, `settings.PaymentGatewayForm`, `settings.PolicyEditorForm` are built with their features (tickets 33, 29, 29, 23, 40); this ticket creates the tab hosts that open them
 

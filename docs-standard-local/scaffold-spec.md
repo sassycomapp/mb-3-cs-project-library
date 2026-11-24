@@ -66,7 +66,7 @@ client_code/
 │   ├── SettingsForm/              15 tabs (DESIGN.md SettingsForm)
 │   │   ├── PaletteSettingsForm/   (local) Brand Palette tab
 │   │   ├── BusinessProfileTab/    (local) including the app language
-│   │   ├── CurrencyTab/           (local) system currency (read-only), display currency
+│   │   ├── CurrencyTab/           (local) system currency (read-only), local currencies
 │   │   ├── InvoicingTab/          (local) payment terms, tax, numbering, quote validity
 │   │   ├── FeatureSwitchesTab/    (local)
 │   │   ├── DataTab/               (local) history from R2, export as CSV, Clear sample data
@@ -306,7 +306,7 @@ The tables, their columns, types and allowed values are in `authoritative-schema
 
 - One client instance has one database. No table carries a client or instance column; isolation comes from the instance (reference section 3).
 - All datetimes are stored in UTC and shown in the business's IANA time zone (`business_profile.timezone`).
-- Amounts are stored in the system currency (F-16).
+- Amounts are stored in the currency named on the record; books and reports use `system_amount`, in the system currency (F-16).
 - Bookings, invoices, orders, payments, quotes and expenses are never deleted; their status changes.
 - History, backups, webhook payloads, old email bodies, attachments and receipts are kept in the client's R2 bucket, not in the tables (F-29).
 - Credentials are kept only in `vault`, encrypted.

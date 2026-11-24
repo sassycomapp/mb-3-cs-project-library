@@ -25,7 +25,7 @@ Written at Step 15 in the shape of `spec-testing-methodology-standards` §6, fro
 | 9 | Confirmation screen | booking id, date, time, service, provider; calendar invite attached to the email |
 
 **Performance gate:** steps 1–9 under 3 seconds on a standard connection.
-**Data checks:** amount = the service's price in whole cents; currency = `business_profile.system_currency`; times stored UTC, displayed in the client's IANA zone; the contact created or matched, never duplicated.
+**Data checks:** amount = the service's price in the customer's currency, in whole cents; currency = the customer's currency (the local currency of the customer's market, otherwise `business_profile.system_currency`); `system_amount` = the gateway's pay-in amount; times stored UTC, displayed in the client's IANA zone; the contact created or matched, never duplicated.
 
 **Edge cases:** existing contact books (no duplicate); provider unavailable (clear message, alternatives); double-booking and the payment hold have their own sections (§2 and §3); a full group session; a resource clash.
 

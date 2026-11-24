@@ -166,12 +166,12 @@ _Avoid_: timesheet, hours log.
 ### Money
 
 **System currency** *(common)*:
-The currency every stored amount of the client's business is held in, chosen at onboarding and locked once the first booking or invoice exists (F-16).
+The client's one currency for books, reports and tax returns, chosen at onboarding and fixed once confirmed; every price is set in the system currency (F-16).
 _Avoid_: base currency, default currency, account currency.
 
-**Display currency** *(common)*:
-The optional per-service currency prices are shown in, display-only; every stored amount stays in the system currency (F-16).
-_Avoid_: conversion currency, second currency, local currency.
+**Local currency** *(common)*:
+A currency the client turns on for one market on the Settings page; customers in that market see, pay and are refunded in the local currency, at a local price the client sets; each sale enters the books at the system-currency amount Stripe or PayPal pays in (F-16).
+_Avoid_: display currency, conversion currency, second currency.
 
 **Invoice** *(trade)*:
 A request for payment a client's business issues to a contact — for a booking, an order, a package, or recorded time — never deleted. Its lines make its subtotal, tax is fixed at issue, and the amount paid is the succeeded payments less refunds. Draft, sent, paid; sent or overdue may be cancelled; overdue is set nightly, with the reminder; the PDF is kept in the client's storage.

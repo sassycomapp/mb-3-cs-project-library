@@ -131,7 +131,7 @@ Work billed by the hour is recorded with time tracking (F-14) and invoiced from 
 
 Mybizz CS serves businesses in the United States, Canada, the United Kingdom, the European Union, the European Economic Area and Switzerland:
 - Stripe for card payments, and PayPal for customers who prefer it
-- Two currencies: a system currency for all accounting, and an optional display currency per service
+- One system currency for the books, and local currencies the client turns on market by market
 - UTC storage with display in each user's time zone
 - Five app languages: English, French, German, Spanish and Italian, chosen by each client; English at launch, the other languages added one at a time
 
@@ -283,7 +283,7 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - While sample data is present, a banner on every screen says so, with the Owner's **Clear sample data** button (section 8)
 
 **F-05 Settings Hub**
-- One tabbed control panel: business profile (including the app language), brand palette, system currency (view), display currency, legal acknowledgement (view), payment gateways with test and live modes, invoicing defaults, users and permissions, email (addresses, desks and signatures), domain, theme, feature switches, legal pages, data
+- One tabbed control panel: business profile (including the app language), brand palette, system currency (view), local currencies, legal acknowledgement (view), payment gateways with test and live modes, invoicing defaults, users and permissions, email (addresses, desks and signatures), domain, theme, feature switches, legal pages, data
 - Each role sees only the tabs its role allows
 
 ### The client's public presence
@@ -346,9 +346,13 @@ Mybizz CS is built with every feature below. Each feature carries the same numbe
 - PDF invoices, email delivery, payment recording, refunds
 - Stripe as the card gateway, plus PayPal as an option; test and live modes; one payment service behind all gateways
 
-**F-16 Dual currency**
-- A system currency set at onboarding, used for all accounting and fixed once the first transaction exists
-- An optional display currency per service, shown to customers while all accounting stays in the system currency
+**F-16 System and local currencies**
+- One system currency, set at onboarding, for books, reports and tax returns
+- The client prices every service and package in the system currency
+- The client sells in the system currency, or in a customer's local currency, market by market, switched on the Settings page
+- For a local currency, the client sets the local price; the website shows that price; Stripe or PayPal charges that price
+- Each sale is recorded at the system-currency amount Stripe or PayPal pays in
+- Refunds are paid in the currency the customer paid in
 
 **F-28 Accounts**
 - Built-in accounts: invoices, payments, refunds and expenses in one place, with a photo of every receipt

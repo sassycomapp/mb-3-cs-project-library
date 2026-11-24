@@ -117,7 +117,7 @@ Every feature a client of Mybizz CS receives, by category. This list is the sing
 - PDF invoices, sent by email.
 - Payment recording and refunds.
 - Gateways: Stripe for cards and PayPal, each with test and live modes.
-- A system currency for accounting, plus an optional display currency per service.
+- One system currency for the books, reports and tax returns; customers in any market the client chooses see, pay and are refunded in the customer's local currency, at local prices the client sets.
 
 ## 13. CRM and contacts
 
