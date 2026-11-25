@@ -204,11 +204,43 @@ server_functions:
   # /_/api/blog-image/{slug}: published-post featured image only, else 404
 
 forms:
+  # — layouts (the shells; Step 22) —
+  layouts.AdminLayout: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  layouts.CustomerLayout: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: all, SignedOut: none}
+  layouts.PublicLayout: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  layouts.BlankLayout: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  layouts.ErrorLayout: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  # — shared custom components (Step 22) —
+  components.FooterComponent: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  components.VideoDisplayComponent: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  components.ParallaxComponent: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  components.StarRatingComponent: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  components.AIHelperComponent: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  components.HelpTooltipComponent: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  components.EditModeComponent: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  components.ClauseBuilder: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  components.SharePanelComponent: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  components.ReaderShareComponent: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  components.PayPalButtonComponent: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   # — admin area (module path keyed) —
   dashboard.DashboardForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  dashboard.DashboardForm.MetricCard: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # local of DashboardForm (moved from dashboard.MetricCard at its build)
+  dashboard.DashboardForm.ActivityFeed: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # local of DashboardForm (moved from dashboard.ActivityFeed at its build)
+  analytics.DashboardAnalyticsForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  analytics.MarketingDashboardForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  analytics.RevenueReportForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
   inbox.TeamInboxForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # Staff/Admin see their own addresses and desks only
+  inbox.ComposeForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # the compose side sheet of the Team Inbox
   bookings.BookingListForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # Staff own only
   bookings.BookingCalendarForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
+  bookings.BookingCalendarForm.BookingCalendarMonthForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # calendar view, opened inside the calendar
+  bookings.BookingCalendarForm.BookingCalendarWeekForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  bookings.BookingCalendarForm.BookingCalendarDayForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  bookings.BookingCalendarForm.tmpl_month_day_cell: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}   # item templates of the views
+  bookings.BookingCalendarForm.tmpl_week_day_column: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  bookings.BookingCalendarForm.tmpl_week_event: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  bookings.BookingCalendarForm.tmpl_week_timeslot: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
+  bookings.BookingCalendarForm.tmpl_day_event: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
   bookings.BookingEditorForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
   bookings.BookingViewerForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
   bookings.AvailabilitySettingsForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
@@ -225,7 +257,9 @@ forms:
   crm.ContactListForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
   crm.ContactEditorForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
   crm.ContactViewerForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  crm.ContactImportForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
   crm.CompanyListForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
+  crm.CompanyViewerForm: {Owner: all, Manager: all, Admin: all, Staff: none, Customer: none, SignedOut: none}
   crm.SegmentManagerForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
   crm.TaskListForm: {Owner: all, Manager: all, Admin: all, Staff: own, Customer: none, SignedOut: none}
   crm.AutomationListForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
@@ -261,14 +295,29 @@ forms:
   ai.WhatsUpForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
   support.HelpForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: none, SignedOut: none}
   settings.VaultForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  settings.SettingsForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}   # the hub; each tab's scope is the settings_tabs row of its name
+  settings.SettingsForm.PaletteSettingsForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local tab
+  settings.SettingsForm.BusinessProfileTab: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local tab
+  settings.SettingsForm.CurrencyTab: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local tab
+  settings.SettingsForm.InvoicingTab: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local tab
+  settings.SettingsForm.FeatureSwitchesTab: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local tab
+  settings.SettingsForm.DataTab: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local tab
+  settings.SettingsForm.PlanBillingTab: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local tab
+  settings.PolicyEditorForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
   settings.UserManagementForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
   settings.EmailSettingsForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
   settings.DomainSettingsForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
   settings.PaymentGatewayForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
   settings.ThemeConfigForm: {Owner: all, Manager: all, Admin: none, Staff: none, Customer: none, SignedOut: none}
   onboarding.OnboardingForm: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}
+  onboarding.OnboardingForm.DomainStep: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local step of the wizard
+  onboarding.OnboardingForm.ImportStep: {Owner: all, Manager: none, Admin: none, Staff: none, Customer: none, SignedOut: none}   # local step of the wizard
   # — public (SignedOut reachable) —
   public_pages.HomePage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.HomePage.HomePageClassicTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}   # local templates of the home page
+  public_pages.HomePage.HomePageServicesTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.HomePage.HomePageBookingTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  public_pages.HomePage.HomePageMinimalistTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   public_pages.AboutPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   public_pages.ContactPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   public_pages.ServicesPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
@@ -278,9 +327,17 @@ forms:
   public_pages.CookiePolicyPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   blog.BlogListForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   blog.BlogPostForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  blog.BlogListForm.BlogListTiledTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}   # local templates of the listing and the post
+  blog.BlogListForm.BlogListListTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  blog.BlogPostForm.BlogPostClassicTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  blog.BlogPostForm.BlogPostTwoColumnTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  blog.BlogPostForm.BlogPostFullWidthTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   bookings.BookingFlowForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   orders.OrderFlowForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   landing_pages.LandingPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  landing_pages.LandingPage.LeadCaptureTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}   # local templates of the landing page
+  landing_pages.LandingPage.EventRegistrationTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
+  landing_pages.LandingPage.VslTemplate: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   reviews.ReviewSubmitForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   sales.QuoteAcceptPage: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}
   auth.LoginForm: {Owner: all, Manager: all, Admin: all, Staff: all, Customer: all, SignedOut: all}

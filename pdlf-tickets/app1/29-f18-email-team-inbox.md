@@ -4,7 +4,7 @@ status: open
 labels: [ready-for-agent]
 created: 2026-11-17
 doc-id: "mb-13b0b9f6"
-updated: "2026-11-17"
+updated: "2026-11-25"
 ---
 
 ## Description
@@ -16,6 +16,7 @@ updated: "2026-11-17"
 
 - `inbox.TeamInboxForm` — addresses and folders, message list, conversation (DESIGN.md Team Inbox Design); each member sees their own address and desks, Owners see every address
 - `inbox.ComposeForm` — new email, reply, forward; drafts saved automatically; AI draft reply in the app language
+- `crm.EmailCampaignListForm`, `crm.EmailCampaignEditorForm`, `crm.EmailBroadcastForm` — campaigns and broadcasts (UF-23, UF-24; the access matrix lists all three): the campaigns dashboard, the campaign editor (type, trigger, sequence preview, activate) and the broadcast editor (recipients, sender, editor, schedule). Added at Step 22 by David's decision — the approved ticket list had no campaign ticket while the flows and the access matrix require the forms
 - `settings.EmailSettingsForm` (renamed from `EmailSetupForm` at this step, per the divergence inventory) — the Email tab: addresses, desks, signatures, auto-replies
 - `settings.DomainSettingsForm` — the Domain tab: DNS record status; `domain_service`
 

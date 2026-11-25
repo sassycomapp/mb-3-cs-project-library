@@ -1,0 +1,14 @@
+Ticket cross-check (forms named in tickets vs the requirement index)
+Raw matcher: 130 dotted tokens, 117 direct matches. The 13 unmatched tokens resolve as:
+ - 11 are not forms: anvil.js, m3.Carousel, m3.IconButton, m3.RichTooltip,
+   navigator.clipboard.writeText, navigator.share (component/browser tokens);
+   blog_posts.template, business_profile.blog_list_view,
+   business_profile.homepage_template, config.demo_mode,
+   users.preferences.tooltips (schema column references).
+ - auth.SignupForm: named by ticket 16 for DELETION (C2). Covered by the index's
+   deletion note; gets no screen requirement (mo-ui-production 5.4).
+ - settings.ThemeConfigForm: assigned to ticket 33 by ticket 18's note; added to
+   ticket 33 and the ticket list at Step 22; requirement written at
+   ui/settings/ThemeConfigForm/ThemeConfigForm-requirement.md; index row 143.
+Resolved verdict: every form the tickets name has its screen requirement (143 files,
+SignupForm excepted as deleted-by-ticket).

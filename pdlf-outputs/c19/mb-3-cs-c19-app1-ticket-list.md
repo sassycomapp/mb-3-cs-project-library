@@ -3,7 +3,7 @@ title: "mb-3-cs-c19-app1-ticket-list"
 document: Step 19 ticket list — mb-3-cs c19 app1
 state: The approved ticket breakdown, in build order, after David's three corrections
 doc-id: "mb-dee4d4b1"
-updated: "2026-11-18"
+updated: "2026-11-25"
 ---
 
 # Step 19 — Ticket List (run app1, route Application)
@@ -42,11 +42,11 @@ The order is the plan's sequence; a ticket starts when its blockers are complete
 | 26 | `26-f12-orders` | F-12 | orders.OrderFlowForm, OrderListForm, OrderViewerForm | 15, 20, 21, 23 |
 | 27 | `27-f13-session-packages` | F-13 | packages.PackageListForm, PackageEditorForm | 15, 20, 21, 23 |
 | 28 | `28-f14-time-tracking` | F-14 | time_tracking.TimeEntryListForm, TimeEntryEditorForm | 16, 21, 23 |
-| 29 | `29-f18-email-team-inbox` | F-18 | inbox.TeamInboxForm, ComposeForm; settings.EmailSettingsForm, DomainSettingsForm | 4, 16, 20 |
+| 29 | `29-f18-email-team-inbox` | F-18 | inbox.TeamInboxForm, ComposeForm, crm.EmailCampaignListForm, EmailCampaignEditorForm, EmailBroadcastForm; settings.EmailSettingsForm, DomainSettingsForm | 4, 16, 20 |
 | 30 | `30-f08-landing-pages` | F-08 | landing_pages.LandingPageListForm, LandingPageEditorForm, LandingPage (+3 local templates) | 2, 11, 20 |
 | 31 | `31-f19-lead-capture` | F-19 | crm.LeadCaptureForm | 20, 29, 30 |
 | 32 | `32-f20-tasks-automation` | F-20 | crm.TaskListForm, AutomationListForm, AutomationEditorForm | 20, 23, 29 |
-| 33 | `33-f06-public-website` | F-06 | public_pages.HomePage, AboutPage, ContactPage, ServicesPage, ServiceDetailPage, PrivacyPolicyPage, TermsConditionsPage, CookiePolicyPage, PageListForm, MediaLibraryForm | 1, 2, 5, 11, 20 |
+| 33 | `33-f06-public-website` | F-06 | public_pages.HomePage, AboutPage, ContactPage, ServicesPage, ServiceDetailPage, PrivacyPolicyPage, TermsConditionsPage, CookiePolicyPage, PageListForm, MediaLibraryForm; settings.ThemeConfigForm (per ticket 18) | 1, 2, 5, 11, 20 |
 | 34 | `34-f07-homepage-templates` | F-07 | public_pages.HomePageClassicTemplate, HomePageServicesTemplate, HomePageBookingTemplate, HomePageMinimalistTemplate, HomepageEditorForm | 6, 7, 8, 33 |
 | 35 | `35-f09-visual-media` | F-09 | none new (carousel hero, media rules) | 6, 7 |
 | 36 | `36-f21-blog-content` | F-21 | blog.BlogListForm (+2 local), BlogPostForm (+3 local), BlogAdminListForm, BlogEditorForm, CategoryManagementForm, CommentModerationForm | 9, 13, 14, 33 |

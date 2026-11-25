@@ -4,7 +4,7 @@ status: open
 labels: [ready-for-agent]
 created: 2026-11-17
 doc-id: "mb-d21be74d"
-updated: "2026-11-17"
+updated: "2026-11-25"
 ---
 
 ## Description
@@ -16,6 +16,7 @@ updated: "2026-11-17"
 
 - `public_pages.HomePage` (the form; its four templates are ticket 34), `public_pages.AboutPage`, `public_pages.ContactPage`, `public_pages.ServicesPage`, `public_pages.ServiceDetailPage`, `public_pages.PrivacyPolicyPage`, `public_pages.TermsConditionsPage`, `public_pages.CookiePolicyPage`
 - `public_pages.PageListForm` — admin: name, SEO title, address, published
+- `settings.ThemeConfigForm` — the Theme tab: the public website's header style (assigned to this feature by ticket 18's note; added to this ticket's Forms section at Step 22 so the ticket list and ticket 18 agree)
 - `public_pages.MediaLibraryForm` — admin: Content & Website → Media
 
 ### Server functions

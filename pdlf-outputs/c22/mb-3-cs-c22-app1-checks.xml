@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite name="mb-3-cs-c22-app1" tests="3" failures="0" errors="0" skipped="0">
+    <testcase name="PR-01" classname="pdlf-process" status="passed">
+      <output>evidence: pdlf-outputs/c22/mb-3-cs-c22-app1-dc16-dc05-check.txt; ledger steps rows: entry 03 complete, Step 21 complete (id 14), gate concept-locked passed (gates row id 2); Step 22's row opened in_progress before the work</output>
+    </testcase>
+    <testcase name="DC-16" classname="document-check" status="passed">
+      <output>evidence: pdl-outputs/c22/mb-3-cs-c22-app1-dc16-dc05-check.txt and mb-3-cs-c22-app1-ticket-cross-check.txt; 143 screen requirements checked (index rows 1-143 incl. settings.ThemeConfigForm, ticket 33 per ticket 18): every ticket-named form has its requirement (SignupForm deleted at ticket 16); all nine sections filled in every file; every element names a theme inventory component (m3._Components.* verified against tests/component-inventory.yaml), an approved Anvil component, a documented code-created theme class (m3.Snackbar, m3.RichTooltip) or a matrix custom component, with its reason; data columns verified against authoritative-schema.md tables; phrase keys lowercase dotted; all six roles scoped in every requirement</output>
+    </testcase>
+    <testcase name="DC-05" classname="document-check" status="passed">
+      <output>evidence: pdlf-outputs/c22/mb-3-cs-c22-app1-dc16-dc05-check.txt; access-matrix.yaml parses (PyYAML); forms map holds 143 rows, one per requirement module (auth.SignupForm absent as deleted at ticket 16); every row carries exactly the six roles with all/own/none scopes; 55 rows added at Step 22 keyed by module path</output>
+    </testcase>
+  </testsuite>
+</testsuites>
